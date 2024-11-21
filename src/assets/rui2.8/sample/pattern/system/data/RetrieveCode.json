@@ -1,8 +1,0 @@
-[{
-    "metaData": {
-        "datasetId":"dataSet"
-    },
-    "records": [
-        { "code": "G001", "value": "그룹1" }
-    ]
-}]
