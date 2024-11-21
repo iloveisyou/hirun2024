@@ -1,0 +1,16 @@
+.L-grid-row-expandable {
+    display: none;
+}
+
+.L-expand {
+    display: block;
+}
+
+.L-grid-row-expandable td {
+    border-right: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.L-grid-col-expandable {
+    padding-left: 80px;
+}

@@ -1,0 +1,33 @@
+/*wrapper of all elements*/
+div.L-datebox {
+    white-space: nowrap;
+    height: 21px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    width: 146px;
+}
+
+/*text input*/
+.L-datebox input {
+    margin: 0 0 0 0;
+    font:normal 12px tahoma, arial, helvetica, sans-serif;
+    /* background:#ffffff url(text-bg.gif) repeat-x 0 0; */
+    border:1px solid #B5B8C8;
+    height: 18px;
+    vertical-align:middle; 
+    left: 0px;
+    top: 0px; 
+    width: 129px;  
+    padding:1px 3px;
+}
+
+/*icon*/
+.L-datebox div.icon {
+    width:18px;
+    height:21px;
+    border: 0;
+    background:transparent url(./images/calendar/calbtn.gif) no-repeat 0 0;
+    cursor:pointer;
+    top:0px;
+}

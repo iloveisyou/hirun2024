@@ -1,0 +1,33 @@
+/* LSlideMenu
+------------------------------*/
+.L-ul-slidemenu ul {
+    margin: 0;
+}
+.L-ul-slidemenu .L-ul-depth-0 {
+    border: 1px solid #cdcdcd;
+}
+.L-ul-slidemenu .L-ul-node {
+    padding: 0px 0px 0px 20px;
+    border-top: 1px solid #cdcdcd;
+    line-height:25px !important;
+    height: 25px;
+}
+.L-ul-slidemenu .L-ul-li-first .L-ul-li-div-depth-0 {
+    border-top: 0;
+}
+.L-ul-slidemenu .L-ul-li-depth-1 .L-ul-focus-node {
+    text-decoration: underline;
+}
+.L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-0 {
+    padding-left: 18px;
+    background: url("./../../resources/images/menu/slide/menu_closed.png") no-repeat 6px center;
+    background-color: #dcdcdc;
+}
+.L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-0.L-ul-has-child-open-mid, .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-0.L-ul-has-child-open-last {
+    background: url("./../../resources/images/menu/slide/menu_open.png") no-repeat 6px center;
+    background-color: #dcdcdc;
+}
+.L-ul-slidemenu li.L-node-state-D .L-ul-node {
+    background: url(./../../resources/images/grid/skin_red/delete_icon.png) no-repeat 6px center rgba(0, 0, 0, 0);
+    background-color: #dcdcdc;
+}

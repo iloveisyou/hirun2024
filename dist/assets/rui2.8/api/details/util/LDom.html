@@ -1,0 +1,114 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+DOM element들을 위해 도움을 주는 method들을 제공한다.
+모든 메소드 static이다.
+샘플 경로 :
+<a href="./../sample/general/util/domselectorFilterSample.html">/rui/sample/general/util/domselectorFilterSample.html</a>
+<a href="./../sample/general/util/domselectorQuerySample.html">/rui/sample/general/util/domselectorQuerySample.html</a>
+<a href="./../sample/general/util/domselectorSelectSample.html">/rui/sample/general/util/domselectorSelectSample.html</a>
+</div>
+</div>
+<!-- method 시작 -->
+<div class="method_getStyle">
+<div class="L-description">
+Dom에 style을 가져오는 메소드
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체를 style의 display를 비교한다. 
+<div class="L-code">
+var dom = document.getElementById('col1');
+if(Rui.util.LDom.getStyle(dom, 'display') == 'none') {
+...........
+}
+</div> 
+</div>
+</div>
+
+<div class="method_setStyle">
+<div class="L-description">
+Dom에 style을 주는 메소드
+직접적인 style의 디자인을 적용하는것보다 css로 적용하는게 차후 더 유연하다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체를 style의 display로 숨긴다. 
+<div class="L-code">
+var dom = document.getElementById('col1');
+Rui.util.LDom.setStyle(dom, 'display', 'none');
+</div> 
+</div>
+</div>
+
+<div class="method_hasClass">
+<div class="L-description">
+Dom에 css가 존재하는지 여부를 리턴한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 L-text라는 css가 적용되었느지 여부를 체크한 후 메시지를 출력한다. 
+<div class="L-code">
+var dom = document.getElementById('col1');
+if(Rui.util.LDom.hasClass(dom, 'L-text') == true) {
+    alert('L-text css가 적용되었습니다.');
+}
+</div> 
+</div>
+</div>
+
+<div class="method_addClass">
+<div class="L-description">
+Dom에 css를 추가한다. 
+같은 css는 무시된다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 L-text라는 css를 추가한다. 
+<div class="L-code">
+var dom = document.getElementById('col1');
+Rui.util.LDom.addClass(dom, 'L-text');
+</div> 
+</div>
+</div>
+
+<div class="method_removeClass">
+<div class="L-description">
+Dom에 적용된 css를 삭제한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 L-text라는 css를 삭제한다. 
+<div class="L-code">
+var dom = document.getElementById('col1');
+Rui.util.LDom.removeClass(dom, 'L-text');
+</div> 
+</div>
+</div>
+
+<div class="method_getValues">
+<div class="L-description">
+범위 객체안에 입력 field의 value값들을 object형으로 만들어서 리턴한다.
+</div>
+<div class="L-sample">
+sample: LBlockDetail객체 하위에 input, select 태그를 찾아 그 값들을 json object로 만들어 리턴한다. 
+<div class="L-code">
+var obj = Rui.util.LDom.getValues('input, select', 'LBlockDetail');
+alert(obj.col1);
+</div> 
+</div>
+</div>
+
+<div class="method_getFormValues">
+<div class="L-description">
+범위 객체안에 입력 form field의 value값들을 object형으로 만들어서 리턴한다.
+</div>
+<div class="L-sample">
+sample: LBlockDetail객체 하위에 아래의 css selector를 이용하여 태그를 찾아 그 값들을 json object로 만들어 리턴한다.
+input[type=text], input[type=password], input[type=hidden], textarea, input:checked, select:selected 
+<div class="L-code">
+var params = Rui.util.LDom.getFormValues('LBlockDetail');
+dataSet.load({
+    url: 'test.rui',
+    params: params
+});
+</div> 
+</div>
+</div>
+
+</div>

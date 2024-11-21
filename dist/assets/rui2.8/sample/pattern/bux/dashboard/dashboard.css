@@ -1,0 +1,204 @@
+
+#grid1 .L-grid-row .L-grid-cell-inner {
+    padding: 3px 11px 3px 11px;
+}
+
+#grid1 .L-grid-row .L-grid-col-selection {
+    padding: 3px 3px 3px 5px;
+}
+
+#grid1 .L-grid-row .L-grid-tree-column .L-grid-cell-inner {
+    padding-left: 7px;
+}
+
+.L-grid-tree-col-depth-0 .L-grid-tree-col-space {
+    *width: 0px;
+}
+
+.L-grid-tree-col-depth-1 .L-grid-tree-col-space {
+    *width: 20px;
+}
+
+.grid-bar-blue {
+    height: 15px;
+    background: url(./assets/bar-blue.jpg) repeat-x bottom !important;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+}
+
+.grid-bar-red {
+    height: 15px;
+    background: url(./assets/bar-red.jpg) repeat-x bottom !important;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+}
+
+.grid-bar-green {
+    height: 15px;
+    background: url(./assets/bar-green.jpg) repeat-x bottom !important;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+}
+
+.grid-updownbar-up {
+    height: 9px;
+    width: 9px;
+    background: url(./../images/up.png) repeat-x bottom !important;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+}
+
+.grid-updownbar-down {
+    height: 9px;
+    width: 9px;
+    background: url(./../images/down.png) repeat-x bottom !important;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+}
+
+.grid-levelbar-10 {
+    height: 12px;
+    width: 7px;
+    background: url(./../images/bullet_green.png) repeat-x center !important;
+    margin-right: 5px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.grid-levelbar-20 {
+    height: 15px;
+    width: 15px;
+    background: url(./assets/circle20.jpg) repeat-x bottom !important;
+    margin-right: 5px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.grid-levelbar-30 {
+    height: 15px;
+    width: 15px;
+    background: url(./assets/circle30.jpg) repeat-x bottom !important;
+    display: inline-block;
+    margin-right: 5px;
+    *display: inline;
+    *zoom: 1;
+}
+
+.L-gallery {
+    width: 100%;
+    height: 189px;
+    position: relative;
+    overflow: hidden;
+}
+
+.L-gallery-view {
+    width: 100%;
+    overflow: hidden;
+    margin-left: 30px;
+    padding: 0 24px;
+}
+
+.L-gallery-scroll {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    height: 110%;
+}
+
+.L-gallery-panel {
+    float: left;
+    margin: 26px;
+    width: 137px;
+    height: 137px;
+    overflow: hidden;
+}
+
+.L-gallery-left, .L-gallery-right, .L-gallery-view {
+    display: inline-block;
+    *display: inline;
+    *zoome: 100%;
+}
+
+.L-gallery-left, .L-gallery-right {
+    position: absolute;
+    top: 70px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.L-gallery-left {
+    left: 0px;
+    background: url(./../images/left.png) no-repeat center;
+}
+
+.L-gallery-right {
+    right: 0px;
+    background: url(./../images/right.png) no-repeat center;
+}
+
+.L-gallery-detail-panel {
+    position: absolute;
+    border: 2px solid #ccc;
+    width: 350px;
+    height: 250px;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 15px;
+    z-index: 100;
+    -moz-box-shadow: 3px 6px 6px 3px #ccc;
+    -webkit-box-shadow: 3px 6px 6px 3px #ccc;
+    box-shadow: 3px 6px 6px 3px #ccc;
+    overflow: hidden;
+}
+
+.L-gallery-detail-panel img {
+    margin: 0 auto;
+    max-height: 220px;
+}
+
+.L-gallery-detail-panel h3 {
+    display: block;
+}
+
+.grid1-title-buttons, .gallery-title-buttons {
+    right: 0px;
+    width: 50px;
+    float: right;
+    text-align: right;
+}
+
+.grid1-title-buttons a, .gallery-title-buttons a {
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+}
+
+.ux-grid-wrap {
+    clear: both;
+}
+
+#grid3, #grid4 {
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+}
+
+#layout-grid2 {
+    height: 256px;
+    position: relative;
+}
+
+#layout-grid2 .ux-grid-table {
+    max-width: 1024px;
+}
+
+.ux-gallery {
+    border-bottom: 2px solid #dddddd;
+}

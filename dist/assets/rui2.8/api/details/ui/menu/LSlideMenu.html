@@ -1,0 +1,38 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+마우스 클릭시 아래로 슬라이딩 하며 펼쳐저 나열되는 모양의 menu를 생성한다.
+
+샘플 경로 :
+<a href="./../sample/general/ui/menu/slideMenuSample.html" target="_new">/rui/sample/general/ui/menu/slideMenuSample.html</a>
+</div>
+
+<div class="L-sample">
+sample: 기본적인 형태의 메뉴구성 샘플
+<div class="L-code">
+var menu = new Rui.ui.menu.LSlideMenu({
+    onlyOneTopOpen : false,
+    dataSet: dataSet,
+    fields: {
+        rootValue: null
+        , parentId: 'parentMenuId'
+        , id: 'menuId'
+        , label: 'name'
+        , order:'seq'
+    }
+});  
+
+menu.on("nodeClick", function(e) {
+    var url = e.node.getRecord().get('url');
+    var depth = e.node.getDepth();
+    var hasChild = e.node.hasChild();
+    console.log('url : ' + url + ', depth : ' + depth + ', hasChild? : ' + hasChild);
+});
+
+menu.render("menuDiv");
+</div>
+</div>
+
+</div>
+
+</div>

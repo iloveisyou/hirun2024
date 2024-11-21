@@ -1,0 +1,18 @@
+/* LDateTimeBox
+------------------------------*/
+div.L-datetimebox {
+    white-space: nowrap;
+    border: 0;
+}
+.L-datetimebox.L-invalid {
+    border: 0;
+}
+.L-datetimebox.L-invalid .L-datebox {
+    border: 1px solid #dd7870;
+}
+.L-datetimebox.L-invalid .L-timebox {
+    border: 1px solid #dd7870;
+}
+.L-grid-panel .L-datetimebox {
+	overflow: hidden;
+}

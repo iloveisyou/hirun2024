@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>TabView Basic</title>
+    <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+    <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    <script type='text/javascript' src='./../../../../plugins/ui/tab/rui_tab.js'></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/tab/rui_tab.css" />
+    <script type='text/javascript' src='./../../../../plugins/ui/tree/rui_tree.js'></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/tree/rui_tree.css" />
+    <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+    <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+    <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+    <style>
+    </style>
+    <script type="text/javascript" class="script-code">
+        //************ Dom ready ***********
+        var tabView = null;
+        var dataSet = null;
+        var dataSetTree = null;
+        var grid = null;
+        var columnModel = null;
+        var tree = null;
+        
+        $C(function() {
+            $C('!config').set('$.core.logger.show', [true]);
+            /*<b>*/
+            
+            debugger; 
+            tabView = $C.tabview({
+                tabs : [
+                {
+                    label: 'lorem',
+                    content: '<div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</div>',
+                    active: true
+                }
+               ,
+                
+                {
+                    id:"div-content-test",
+                    //label: '<img src="../../../resources/images/tab/leaf.gif" style="border:0;" onclick="tabIconClick(1);"/>Dom & TreeView'
+                    label: 'Dom & TreeView'
+                },
+           
+                {   
+                    label: 'gridview',
+                    content:'<div id="defaultGrid"></div>'
+                },
+                {   
+                    label: 'grid pager',
+                    content:'<div id="defaultGrid2"></div>'
+                }
+                
+                
+                ]
+            });            
+            
+            debugger; 
+            tabView.render("tab-container");
+            /*</b>*/
+                 
+            /*************dataset*********/            
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'date1', type: 'date' }
+            ]
+            });
+            
+            dataSetTree = $C.dataSet({
+            id: 'dataSet'
+            , fields: [
+                { id: 'menuId', type: 'number'}
+                , { id: 'seq', type: 'number'}
+                , { id: 'parentMenuId', type: 'number'}
+                , { id: 'name'}
+                , { id: 'url'}
+                ]
+            });
+            /**********treeview************/
+            tree = $C('#treeDiv1').tree({
+                width:200,
+                height:200,
+                dataSet: dataSetTree
+            });
+            
+            //tree.render("treeDiv1");
+
+            /**********gridview************/
+            columnModel = $C.columnModel({
+                columns: [
+                    $C.stateColumn(),
+                    $C.numberColumn(),
+                    { field: "col1", label: "Col1", editor: $C.textBox() },
+                    { field: "col2", sortable: false, align:'center' },
+                    { field: "col3", align: 'right', hidden:true },
+                    { field: "date1" , align:'center', renderer: function(v){
+                        return '<font color="red">' + v + '</font>';
+                    }}]
+            });
+
+            grid = $C('#defaultGrid').grid(
+            {
+                columnModel: columnModel,
+                dataSet:dataSet,      
+                autoWidth:false,
+                width:500,          
+                height:300
+            });
+            
+            //grid.render("defaultGrid");
+            
+            /*********dataSet************/
+            var dataSet2 = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'date1', type: 'date' }
+            ]
+            });            
+
+            /*********columnModel************/
+            var columnModel2 = $C.columnModel({
+                columns: [
+                    $C.stateColumn(),
+                    $C.numberColumn(),
+                    { field: "col1", label: "Col1" },
+                    { field: "col2", sortable: true, align:'center', editor: new Rui.ui.form.LTextBox() },
+                    { field: "col3", align: 'right', hidden:true },
+                    { field: "date1" , align:'center', renderer: $C.renderer.dateRenderer()}]
+            });
+            
+            /*********gridView************/
+            var grid2 = $C('#defaultGrid2').grid(
+            {
+                columnModel: columnModel2,
+                dataSet:dataSet2,                   
+                autoWidth:false,
+                width:500,          
+                height:310
+            });
+            
+            /*********pager************/
+            var pager = $C.pager({
+                gridPanel : grid2
+            });                 
+
+            pager.render();
+            
+           // grid2.render('defaultGrid2'); 
+  
+            //Rui.log("tab default grid :" + Rui.get("defaultGrid").getWidth());                      
+            /*************dataset load***************/
+            dataSetTree.load({ url: "./../../../../resources/data/menu.json", method: "get" });
+            dataSet.load({url: './../../../../resources/data/data.json',method: "get"});
+            dataSet2.load({
+                url: './../../../../resources/data/data.json',
+                method:"get"
+            });
+            
+            /******************JsUnit용 소스 시작**********************/
+            setUpPageStatus = 'complete';
+            /******************JsUnit용 소스   끝**********************/
+
+        });
+        
+        function tabIconClick(idx){
+            alert(idx + "tab index " + idx + "의 label icon clicked !");
+        }
+    </script>
+
+</head>
+<body>
+    <h1>TabView Basic</h1>
+    <h2>기본적인 LTabView 샘플</h2>
+    <div class="LblockLine"></div>
+    <div>
+        <p>기본적인 tabview의 형태입니다. LTabView 초기화시에 각 탭에 대한 속성들을 지정합니다.</p>
+        <p>각 탭의 내용은 선언시 직접 HTML 형태로 지정할 수 있으며, div를 먼저 선언 후 다른 widget을 추가로 연결할 수 있습니다.</p>
+        <p>또한 탭 헤더의 label에는 사용자 정의된 이미지를 이미지 태그를 이용하여 사용 가능합니다.</p>
+    </div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id="tab-container">
+        </div>
+        <div id="div-content-test">test용 텍스트 입니다.
+        <div id="treeDiv1"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

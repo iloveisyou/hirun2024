@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Memory leak</title>
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+    <script type="text/javascript" class="script-code">
+
+        Rui.getConfig().set('$.core.logger.show', [true]);
+        
+        Rui.onReady(function() {
+        var dataSet = null;
+        var dataSet1 = null;
+    	    Rui.log('step 3');
+            //Rui.getConfig().set('$.core.defaultLocale', ['en_KR']);
+            
+            var col1TextBox = new Rui.ui.form.LTextBox();
+
+            var col1Combo = new Rui.ui.form.LCombo({
+               listWidth:200,
+               rendererField: 'value',
+               autoMapping: true,
+               isSimpleRenderer: true, // 하위 호환성 때문에 여기에 넣음. 기본적으로는 rui_config.js의 combo 영역에 정의해야 함.
+               url:'./../../../sample/data/code.json'
+            });
+            
+            var comboDataSet = col1Combo.getDataSet();
+
+            var col2TextBox = new Rui.ui.form.LTextBox({ id: 'col2' });
+            
+            dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'col4' },
+                { id: 'col5' },
+                { id: 'col6' },
+                { id: 'col7' },
+                { id: 'col8', type: 'number' },
+                { id: 'code' },
+                { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+            
+            //opener.add(dataSet);
+        Rui.util.LEvent.addListener(document.body, 'unload', function() {
+            dataSet.destroy();
+        }, this);
+
+
+            var popuButton = new Rui.ui.LButton({
+                label:'>>'
+            });
+            
+            var col2Renderer = function(value, p, record, row, i) {
+                if (value == '7602111111113') {
+                    // 셀의 편집여부를 결정한다.
+                    p.editable = false;
+                    //p.style = 'background-color:orange;';
+                }
+                if(Rui.util.LObject.isEmpty(value) == false)
+                    value = value.substring(0, 6) + '-' + value.substring(6);
+                return value;
+            }
+            
+            /*<b>*/
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                //groupMerge: true,
+                //freezeColumnId: 'aaa',
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { id: "aaa", label: "Left id", vMerge: true, renderer: function(val, p, record){
+                        return record.id;
+                    } },
+                    { field: "col1", label: "Col1", sortable: true, editable: false, editor: col1TextBox, vMerge: true, renderer: function(val, p, record){
+                        p.editable = (record.get('col2') !== '760221111113'); 
+                        return val;
+                    } },
+                    { field: "col2", align:'center', width: 120, editor: col2TextBox, vMerge: false, renderer: col2Renderer },
+                    { field: "code", align: 'center', editor: col1Combo },
+                    { id: "bbb", label: "Right id", renderer: function(val, p, record){
+                        return record.id;
+                    } },
+                    { field: "col3", align: 'right', vMerge: false, editor: new Rui.ui.form.LRadioGroup({
+                        items:[
+                            {
+                                label : 'R1',
+                                value:'R1'
+                            },
+                            {
+                                label : 'R2',
+                                value:'R2',
+                                checked:true
+                            }
+                        ]
+                    }) },
+                    { field: "col5", align: 'center', vMerge: false,  editor: new Rui.ui.form.LCheckBox({
+                        bindValues : ['R1', '']
+                    }) },
+                    { field: "col6", label: "Col6", width: 200, editor: new Rui.ui.form.LTextArea() },
+                    { field: "col8", label: "Col8", align: 'right', sortable: true, editor: new Rui.ui.form.LNumberBox({decimalPrecision: 2, minValue: -1, maxValue: 10000 }), 
+                        renderer:Rui.util.LRenderer.moneyRenderer() },
+                    { field: "date1" , align:'center', editor: new Rui.ui.form.LDateBox(), renderer: Rui.util.LRenderer.dateRenderer() },
+                    { id:'btn', label:'Button', width: 150, renderer: function(val, p, record, row, i){
+                        return "<button type='button' class='L-grid-button'>" + record.get('col1') + "</button>";
+                    }}
+                    ]
+            });
+
+             var grid = new Rui.ui.grid.LGridPanel({
+                 columnModel: columnModel,
+                 dataSet: dataSet,
+                 autoToEdit: true,
+                 //autoWidth: true,
+                 width: 850,
+                 height:300
+             });
+            /*</b>*/
+            /*<b>*/
+            grid.render('defaultGrid');
+            /*</b>*/
+            
+           var loop = 0;
+           var isLoop = false;
+           dataSet.on('load', function(){
+               Rui.get('showData').html(loop);
+               if(isLoop == false) return;
+               if(loop++ < 1000){
+                   
+                    dataSet.load({
+                        url: './../../../sample/data/code.json',
+                        cache: false
+                    });
+               }
+           });
+           
+            var searchBtn = new Rui.ui.LButton("searchBtn");
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    //url: './../../../sample/data/data11.json'
+                    //url: './../../../sample/data/code.json'
+                    url: './../../../sample/data/large/performanceData.json'
+                });
+            });
+            
+            var setStartBtn = new Rui.ui.LButton('setStartBtn');
+            setStartBtn.on('click', function(){
+                searchBtn.click();
+                isLoop = true;
+            });
+            var laterFn;
+            var setEndBtn = new Rui.ui.LButton('setEndBtn');
+            setEndBtn.on('click', function(){
+                isLoop = false;
+            });
+            
+            Rui.log('step 4');
+            
+        });
+            
+        </script>
+
+</head>
+<body>
+    <h1>gridpanel edit sample</h1>
+    <h2>LGridPanel의 기본 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div> 편집이 가능한 그리드의 기본 형태입니다. 그리드 안에는 텍스트 에디터, radio, check, combo, popup 등이 가능하며,<br>
+    버튼을 연결할 수 있습니다. 같은 값의 셀을 합쳐서 보이게 하는 compress 기능도 제공합니다.</div>
+    <div id='bd'>
+    <div class="LblockButton" >
+        <button type="button" id="setStartBtn" >start</button>
+        <button type="button" id="setEndBtn" >end</button>
+    </div>
+    
+    <div class="LblockMarkupCode">
+        <div id='showData'>0</div>
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >Search</button>
+        </div>
+        <div id="aaa" class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+        <div id="LdetailInformation" class="LblockDetail" >
+            <input type="text" id='col1' ><br/>
+            <input type="text" id='col2' ><br/>
+            <input type='radio' name='col3' value='R1'/>RADIO1<br/>
+            <input type='radio' name='col3' value='R2'/>RADIO2<br/>
+            <input type='checkbox' id='col5' value='R1'/><br/>
+            <textarea id='col6' rows="3" cols="20" ></textarea><br/>
+            <input type="text" id='col8' ><br/>
+            <input type="text" id='date1' ><br/>
+        </div>
+    </div>
+</div>
+</body>
+</html>

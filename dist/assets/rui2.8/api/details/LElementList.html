@@ -1,0 +1,48 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+ElementList는 LElement의 복수건의 객체를 배열로 가지는 객체로서 method chain 기능을 지원한다.
+LElementList의 기능외에도 LElement의 모든 메소드를 사용할 수 있다.
+</div>
+
+<div class="L-sample"> 
+sample: select를 통해 첫번째 위치를 Element를 리턴한다.
+<div class="L-code">
+var liEl = Rui.select('.LBlockDetail li').getAt(0);
+</div> 
+</div>
+
+<div class="L-sample">
+sample: dom객체를 찾아 그 하위에 첫번째 위치를 Element를 리턴한다. 
+<div class="L-code">
+var liEl = Rui.get('LBlockDetail').select('li').getAt(0);
+</div> 
+</div>
+
+</div>
+<!-- method 시작 -->
+<div class="method_select">
+<div class="L-description">
+CSS Selector로 child 객체를 LElement객체로 만들어 Rui.LElementList로 리턴한다.
+</div>
+<div class="L-sample">
+sample: LBlockDetail id를 가지는 div 하위에 모든 input,select태그와 L-text css를 가지는 객체를 찾아서 disable 시킨다. 
+<div class="L-code">
+Rui.select('.LBlockDetail').select('input, select, L-text').disable();
+</div> 
+</div>
+</div>
+
+<div class="method_getAt">
+<div class="L-description">
+index에 해당되는 LElement객체를 리턴한다.
+</div>
+<div class="L-sample">
+sample: LBlockDetail밑에 li를 찾아 첫번째 LEelement를 얻어와 disable 시킨다. 
+<div class="L-code">
+Rui.select('.LBlockDetail li').getAt(0).disable();
+</div> 
+</div>
+</div>
+
+</div>

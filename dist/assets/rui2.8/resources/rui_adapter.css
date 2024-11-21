@@ -1,0 +1,55 @@
+/* Block : LblockBody
+---------------------------------------------------------*/
+div#LblockBody {
+    padding:10px 10px 10px 10px;
+}
+
+div#LblockMain {
+    height: 100%;
+    padding:10px 10px 10px 0px;
+}
+
+#LblockSearch .L-fixed, #LblockSearch .L-fixed div {
+    padding:0px;
+}
+
+#LblockSearch .L-datebox div.icon {
+    position:absolute;
+}
+
+#LblockSearch .L-combo div.icon {
+    position: absolute;
+}
+
+#LblockSearch div div div div.L-combo div.icon {
+    background: url("./images/combo/trigger.gif") no-repeat scroll 0 0 transparent;
+    width:17px; 
+}
+
+#LblockSearch div div.L-datebox div.icon  {
+    background:transparent url(./images/calendar/calbtn.gif) no-repeat 0 0;
+}
+
+
+.LblockListTable ul {
+    text-align: left;
+}
+
+.L-fixed table th, .L-fixed table td  {
+    border:0px none #808080;
+    height:18px;
+    padding:0px;
+    text-align:start;
+}
+
+.L-fixed .L-grid-header-cell {
+    text-align: center;
+}
+
+.L-fixed table {
+    border-collapse:separate;
+}
+
+#LblockLeftMenu.LtreeMenu ul {
+    display:block;
+}

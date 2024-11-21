@@ -1,0 +1,12 @@
+[{
+    "metaData": {
+        "datasetId":"dataSet"
+    },
+    "records": [
+        { "code": "M001", "value": "Menu1" },
+        { "code": "M002", "value": "Menu2" },
+        { "code": "M003", "value": "Menu3" },
+        { "code": "M004", "value": "Menu4" },
+        { "code": "M005", "value": "Menu5" }
+    ]
+}]

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="트리(LTreeViw), 컨텍스트메뉴(contextmenu), 노드, 자식노드, 노드편집" />
+    <title>ContextMenu Edit</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/menu/rui_menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/menu/rui_menu.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/tree/rui_tree.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/tree/rui_tree.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        #treeViewDiv  {
+            border: 1px solid #dcdcdc;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+    
+        var treeView, dataSet;
+        
+        Rui.onReady(function(){
+            
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+
+            dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'menuId', type: 'number' },
+                    { id: 'menuSeq', type: 'number' },
+                    { id: 'prntMenuId', type: 'number' },
+                    { id: 'menuName' },
+                    { id: 'menuHelpFilePath' }
+                ]
+            });
+
+            /********************
+             * 사용자 정의 함수
+             ********************/
+
+            //노드 추가 함수
+            var addNode = function(type, args, obj){
+                var e = args[0],
+                    label = window.prompt('노드를 추가합니다. 노드의 이름을 입력하세요 : ', 'noname'),
+                    row, record;
+                if(label){
+                    //부모가 id가 없으면 추가되지 않는다.
+                    row = treeView.addChildNode(label);
+                    record = dataSet.getAt(row);
+                    record.set('menuSeq','');
+                }
+            }
+
+            //노드 이름 수정 함수
+            var editNodeLabel = function(){
+                var label = window.prompt('수정할 Node Name을 입력하세요 : ', treeView.getNodeLabel());
+                if(label)
+                    treeView.setNodeLabel(label);
+            }
+
+            var cutNode = function(){
+                treeView.cutNode();
+            }
+
+            var copyNode = function(){
+                treeView.copyNode();
+            }
+
+            var copyWithChildNodes = function(){
+                //config.useTempId : true일때만 사용 가능.
+                treeView.copyNode(true);
+            }
+
+            var pasteNode = function(){
+                treeView.pasteNode();
+            }
+
+            var changeOrder = function(){
+                var order = window.prompt('order를 입력하세요 : ', ''),
+                    node, record;
+                if(order){
+                    node = treeView.getFocusNode();
+                    record = node.getRecord();
+                    record.set('menuSeq', parseInt(order));
+                }
+            }
+
+            /*<b>*/
+            var treeContextMenu = new Rui.ui.menu.LContextMenu({
+                applyTo: 'mytreecontextmenu',
+                trigger: 'treeViewDiv',
+                itemdata: [
+                    { text: 'Add Child Node', onclick: { fn: addNode } },
+                    { text: 'Edit Node Label', onclick: { fn: editNodeLabel } },
+                    { text: 'Delete Node', onclick: { fn: deleteNode } },
+                    { text: 'Copy', onclick: { fn: copyNode } },
+                    { text: 'Copy with childs', onclick: { fn: copyWithChildNodes } },
+                    { text: 'Cut', onclick: { fn: cutNode } },
+                    { text: 'Paste', onclick: { fn: pasteNode } },
+                    { text: 'Change Order', onclick: { fn: changeOrder } }
+                ]
+            });
+            /*</b>*/
+
+            treeView = new Rui.ui.tree.LTreeView({
+            	applyTo: 'treeViewDiv',
+                dataSet: dataSet,
+                useAnimation: true,
+                height: 300,
+                width: 300,
+                defaultOpenDepth: 0,
+                useTempId: true,
+                /*<b>*/
+                contextMenu: treeContextMenu,
+                /*</b>*/
+                fields: {
+                    rootValue: null,
+                    parentId: 'prntMenuId',
+                    id: 'menuId',
+                    label: 'menuName',
+                    order: 'menuSeq'
+                },
+                /*<b>*/
+                renderer : function(label, record, cssState){
+                    var trash = '';
+                    if(record.get(this.fields.parentId) !== this.fields.rootValue)
+                           trash = '<img src=\"../../../../resources/images/tree/tree_trash.png\" style=\"border:0;width:11px;height:11px;\" onclick=\"recycleBinClick(this)\">';
+                    return label + trash;
+                }
+                /*</b>*/
+            });
+
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            
+            dataSet.load({
+                url: './../../../../sample/data/treePerformance.json'
+            });
+            
+        });
+        
+        function recycleBinClick(e){
+            var node = treeView.findNodeByDom(e);
+            var message = '삭제하시겠습니까?';
+            if(node.isLeaf == false)
+                message = '자식노드가 있습니다. 정말로 ' + message;
+            if (confirm(message)) {
+                //선택한 행으로 이동후 삭제한다.
+                dataSet.setRow(node.getRow());
+                deleteNode();
+            }
+        }
+        
+        //선택한 node 삭제하기
+        function deleteNode(){
+            treeView.deleteNode();
+        }
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>TreeView Context Menu Edit</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>트리(Tree)에서 마우스(Mouse) 오른쪽 버튼을 이용한 컨텍스트메뉴(Context Menu)를 제어 하여 노드를 편집한다.</h2>
+            <div class="LblockDesc">
+		        <p>트리(Tree)에 컨텍스트메뉴(Context Menu)를 연결하여 사용합니다. 컨텍스트 메뉴 객체 생성 후 트리 생성시에 연결을 합니다.</p>
+		        <p>마우스(Mouse) 오른쪽 버튼 클릭(Click)시에 나오는 메뉴의 구성과 트리의 노드(Node)에 사용된 이미지(Image)들을 변경할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div id="mytreecontextmenu"></div>
+        <div class="LblockMarkupCode">
+            <div id="treeViewDiv"></div>
+        </div>
+    </div>
+</body>
+</html>

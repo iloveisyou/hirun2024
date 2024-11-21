@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Custom Editor</title>
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 컬럼에디터 변경(LEditor)" />
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var editorCombo = new Rui.ui.form.LCombo({
+               rendererField: 'value',
+               url: './../../../../sample/data/code.json'
+            });
+            var codeTextBox = new Rui.ui.form.LTextBox();
+
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'code' },
+                    { id: 'value' },
+                    { id: 'date1', type: 'date' }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', width: 150,sortable: true, editor: new Rui.ui.form.LTextBox() },
+                    /*<b>*/
+                    { field: 'code', sortable: false, align: 'center', width: 200, editor: codeTextBox, renderer: function(value, p){
+                        if(value == 'code6'){
+                            p.editable = false;
+                        }
+                        return value;
+                    }}
+                    /*</b>*/
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                autoToEdit: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+
+            var sm = grid.getSelectionModel();
+
+            sm.on('selectCell', function(e){
+                var column = columnModel.getColumnAt(e.col, true);
+                var colId = column.getId();
+                if (colId == 'code') {
+                    /*<b>*/
+                    if (dataSet.getAt(e.row).get(colId) == 'code4') {
+                        column.setEditor(editorCombo);
+                    }
+                    else {
+                        column.setEditor(codeTextBox);
+                    }
+                    /*</b>*/
+                }
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json'
+                });
+            });
+
+            var newBtn = new Rui.ui.LButton('newBtn');
+            newBtn.on('click', function(){
+                var row = dataSet.newRecord();
+                var record = dataSet.getAt(row);
+                record.set('col1', 'Junee');
+                record.set('col2', '(02) 6363-7009');
+                record.set('col3', 'R2');
+                record.set('date1', new Date());
+            });
+
+            var deleteBtn = new Rui.ui.LButton('deleteBtn');
+            deleteBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                	dataSet.removeMarkedRows();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Custom Editor</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid)의 편집시점에 Editor를  변경하는 샘플</h2>
+            <div class="LblockDesc">
+		        <p>그리드(Grid)의 컬럼(Column)을 값에 따라 콤보(Combo), 텍스트 에디터(TextBox) 등으로 다양하게 편집(Edit) 되도록 동적으로 설정합니다. </p>
+		        <p>그리드의 'code4' 는 다른 컬럼과 다르게 Combo Box 에디터로 동작합니다.</p>
+		        <p>또한 그리드의 'code6'은 에디터가 열리지 않습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton">
+            <button type="button" id="searchBtn" >Search</button>
+            <button type="button" id="newBtn" >NEW</button>
+            <button type="button" id="deleteBtn" >delete</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div id="defaultGrid" ></div>
+        </div>
+    </div>
+</body>
+</html>

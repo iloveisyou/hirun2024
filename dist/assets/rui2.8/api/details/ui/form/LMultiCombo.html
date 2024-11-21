@@ -1,0 +1,48 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+LMultiCombo는 각 항목당 다량의 교집합이 발생하므로 성능이 심하게 저하된다.
+
+LMultiCombo는 LCombo가 하나의 단건을 선택할 수 있는 기능을 멀티건으로 선택할 수 있게 구현한 Combo 이다.
+LMultiCombo가 여러건을 처리하기 위해서는 배열로 처리 되는게 아니라 문자열로 처리된다. 이유는 다음과 같다.
+ - LDataSet과 LBind의 값 연동시 값 type이 string, number, date 형만 존재하므로 배열로 처리할 수 없다.
+ - form submit시 서버에 request 로 전송되는 파라미터는 배열을 전송할 수 없으므로 문자열로 처리되어야 한다.
+
+
+● 규칙1
+그래서 LMultiCombo는 그리드에 editor로 올라갈 경우 rendererField를 반드시 적용해야 하며,
+    1,000건 이하에서만 사용하여야 한다.
+
+● 규칙2
+복수개의 그리드 컬럼으로 사용할 경우 모두 합산한 데이터도 1,000건 이하여야 한다.
+
+● 규칙3
+값을 셋팅할 때는 setValue 메소드로 호출되고 호출 시 인수로는 separator(',') 문자열을 구분자로 사용한다.
+값을 리턴할 때는 getValue 메소드를 호출하고 호출 된 값을 상황에 따라 배열로 변경할 경우에는 문자열의 split 메소드로 인수로는 separator(',') 문자열로 배열을 만들 수 있다.
+
+● 규칙4
+콤보에서는 setRow나 setSelectedIndex가 적용되나 LMultiCombo는 setValue와 데이터셋에 있는 setMark/setMarkAll 메소드를 통해서만 값이 적용된다.
+
+● 규칙5
+LCombo는 그리드에 해당되는 데이터를 자동으로 Combo에 있는 displayField와 맵핑해주는 autoMapping 기능이 있다. 하지만 LMultiCombo는 성능 제약으로 autoMapping을 지원하지 않는다.
+그리드 자체의 DataSet에 LMultiCombo의 value과 display값을 모두 가지고 있고 display값과 맵핑 시켜주는 rendererField 속성을 LMultiCombo에 적용해야 한다.
+
+rendererField: Grid의 DataSet이 LMultiCombo의 displayField에 해당되는 값을 미리 로딩하는 처리 방법
+
+샘플 경로 :
+<a href="./../sample/general/ui/form/comboMultiSample.html" target="_new">/rui/sample/general/ui/form/comboMultiSample.html</a>
+</div>
+<div class="L-sample">
+sample: LMultiCombo 기본 샘플이다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LMultiCombo({
+    id:'combo1',
+    applyTo:'combo1',
+    url: 'test.rui'
+});
+</div>
+</div>
+</div>
+
+
+</div>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>CheckBox</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" >
+
+        <script type='text/javascript' class="script-code">
+            var dataSet = null, bind = null;
+            $C(function(){
+            
+                dataSet = $C.dataSet({
+                    id:'dataSet',
+                    fields:[
+                        {id:'col1'},
+                        {id:'col2'},
+                        {id:'col3'},
+                        {id:'col4'},
+                        {id:'col5'},
+                        {id:'col6'},
+                        {id:'col7'},
+                        {id:'col8'},
+                        {id:'col9'},
+                        {id:'col10'},
+                        {id:'code'},
+                        {id:'value'},
+                        {id:'date1',type:"date"}
+                    ]
+                });
+                
+            
+                dataSet.on('update', function(e) {
+                    var modifiedRecords = dataSet.getModifiedRecords();
+                    if(modifiedRecords.length < 1) {
+                        $C('#showData').html('no changed');
+                        return;
+                    }
+            
+                    var data = '';
+                    modifiedRecords.each(function(id) {
+                        var record = modifiedRecords.get(id);
+                        data += $C.dump(record.getModifiedData())
+                    });
+                    $C('#showData').html(data);
+                });
+
+                /*<b>*/
+                var oneData = {
+                    code: 'code1',
+                    value: 'CODE1'
+                };
+                
+                $C('#checkbox1').checkBox({ 
+                    name: 'col4',
+                    label: 'R1',
+                    value: 'R1',
+                    bindFn: function(val){
+                        return val ? "R1":"R2";
+                    },
+                    attrs: {
+                        tabIndex: 2
+                    }
+                });
+                /*</b>*/
+                
+                $C('#checkbox1').on('changed', function(e){
+                    $C.log('dataset Value : ' + this.getValue());
+                });
+                
+                $C('#checkbox1').on('enable', function(e){
+                    $C.log('enable');
+                });
+                
+                $C('#checkbox1').on('disable', function(e){
+                    $C.log('disable');
+                });
+                
+                $C('#checkbox1').on('focus', function(e){
+                    $C.log('focus');
+                });
+                
+                $C('#checkbox1').on('blur', function(e){
+                    $C.log('blur');
+                });
+                
+                $C('#checkbox1').on('show', function(e){
+                    $C.log('show');
+                });
+                
+                $C('#checkbox1').on('hide', function(e){
+                    $C.log('hide');
+                });
+                
+                $C('#checkbox1').on('valid', function(e){
+                    $C.log('valid');
+                });
+                
+                $C('#checkbox1').on('invalid', function(e){
+                    $C.log('invalid');
+                });
+                
+
+                bind = $C.bind( 
+                {
+                    groupId:'frm',
+                    dataSet:dataSet,
+                    bind:true,
+                    bindInfo: [
+                        {id:'col4', ctrlId:'col4', value:'value'}
+                    ]
+                });
+                
+                dataSet.load({
+                    url : './../../../data/data.json'
+                });
+                
+            });
+        </script>
+        <!--*********************************JsUnit Test용 소스 시작********************************-->
+        <script type="text/javascript" src="../../../../../jsunit/app/jsUnitCore.js">
+        </script>
+        <script type='text/javascript' class="script-code">
+            //log 활성화
+            $C('!config').set('$.core.logger.show', [true]);
+            //setUpPageStatus == 'complete'가 되어야만  test function이 실행된다.
+            function setUpPage(){
+                setUpPageStatus = 'running';
+            }
+            
+            //test function이 실행되기 전에 먼저 실행된다.
+            function setUp(){
+            }
+            
+            //**************test function 시작*****************
+            
+            
+            
+            function testChecked(){
+                $C('#checkbox1').setValue(true);
+            }
+            
+            function testUnChecked(){
+                $C('#checkbox1').setValue(false);
+            }
+            
+            function testSetVisibilityMode(){
+                $C('#checkbox1').setVisibilityMode(false);
+            }
+            
+            function testValid(){
+                $C('#checkbox1').valid();
+            }
+            
+            function testInvalid(){
+                $C('#checkbox1').invalid();
+            }
+            
+            function testFocus(){
+                $C('#checkbox1').focus();
+            }
+            
+            function testBlur(){
+                $C('#checkbox1').blur();
+            }
+            
+            function testHide(){
+                $C('#checkbox1').hide();
+            }
+            
+            function testShow(){
+                $C('#checkbox1').show();
+            }
+            
+            function testEnable(){
+                $C('#checkbox1').enable();
+            }
+            
+            function testDisable(){
+                $C('#checkbox1').disable();
+            }
+            
+            function noTestDestroy(){
+                $C('#checkbox1').destroy();
+            }
+            
+            //**************test function   끝*****************
+            //모든 test function이 실행된 후 실행된다.
+            function tearDown(){
+            }
+        </script>
+        <!--*********************************JsUnit Test용 소스   끝********************************-->
+    </head>
+    <body>
+        <h1>checkbox sample</h1>
+        <h2>LCheckBox로 구현하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>LCheckBox에 대한 기본적인 형태입니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id='panel'>
+            <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                <fieldset>
+                    <label for="checkbox1">
+                        col1
+                    </label>
+                    <div id="checkbox1">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <a href='javascript:testChecked()'>Checked</a>
+    <a href='javascript:testUnChecked()'>UnChecked</a>
+    <a href='javascript:testEnable()'>Enable</a>
+    <a href='javascript:testDisable()'>Disable</a>
+    <a href='javascript:testShow()'>Show</a>
+    <a href='javascript:testHide()'>Hide</a>
+    <a href='javascript:testSetVisibilityMode()'>setVisibilityMode</a>
+    <a href='javascript:testValid()'>Valid</a>
+    <a href='javascript:testInvalid()'>Invalid</a>
+    <a href='javascript:testFocus()'>Focus</a>
+    <a href='javascript:testBlur()'>Blur</a>
+    <a href='javascript:noTestDestroy()'>Destroy</a>
+    <div id='showData'></div>
+</div>
+    </body>
+</html>

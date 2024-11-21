@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 가로 공식" />
+    <title>Column Summary</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style>
+        .grid-bg-color-sum {
+            background-color: lightyellow;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+             var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'date', type: 'date' },
+                    { id: 'monthSum', type: 'number' },
+                    { id: 'balance', type: 'number' },
+                    { id: 'assets', type: 'number' }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'date', label: 'Date', width: 80, align: 'center', renderer : 'date' },
+                    { field: 'monthSum', align: 'right', renderer : 'money', sumType: 'sum'},
+                    { field: 'balance', align: 'right', renderer : 'money', sumType: 'sum'},
+                    /*<b>*/
+                    { id: 'difference', width: 120, align: 'right', renderer : function(val, p, record, row, i){
+                            p.css.push('grid-bg-color-sum');
+                            return Rui.util.LNumber.usMoney(record.get('monthSum') - record.get('balance'));
+                        }, sumType: 'sum'},
+                    { id: 'rate', width: 60, align: 'right', renderer: function(val, p, record, row, i){
+                            p.css.push('grid-bg-color-sum');
+                            return Rui.util.LNumber.round((record.get('monthSum') - record.get('balance')) / record.get('monthSum') * 100, 2) + '%';
+                        }},
+                    /*</b>*/
+                    { field: 'assets', width: 120, align: 'right', renderer : 'money' }
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/gridColumnSummary.json'
+                });
+            });
+
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData();
+            });
+
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Column Summary</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid) column의 합계를 구현하는 샘플 (grid/가로 합계)</h2>
+            <div class="LblockDesc">
+                <p>그리드(Grid)에서 컬럼(Column)의 합계(summary)를 구할 수 있습니다. 가상의 컬럼(Column)을 생성하여 사칙연산의 결과를 표현할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >Search</button>
+            <button type="button" id="clearBtn" >clear</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+</body>
+</html>

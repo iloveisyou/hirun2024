@@ -1,0 +1,276 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+그리드에 페이지 처리를 할 수 있게 지원하는 객체
+키워드: 페이징, page, paging
+그리드는 기본적으로 모든 데이터를 서버에서 load해 가지고 있다.
+하지만 대량건 데이터의 경우에는 페이지 처리를 해야 하므로 LPager를 통해 페이지 처리를 한다.
+devon일 경우는 페이지에 관련된 파라미터를 기본으로 셋팅되어 있으므로 LPager를 연결하고
+dao에서 executePage 메소드를 호출하는것만으로 모든 페이징 처리가 바로 이루어진다. (특별한 케이스가 없으면 자동으로 처리되므로 다른 코딩이 필요 없다.)
+LPager를 연결하면 그리드 하단에 자동으로 페이지 부분이 출력되고 해당 페이지 부분의 번호를 클릭하면 LPager는 이전 파라미터와 페이징 관련 파리미터를
+모두 붙여 서버에 dataSet을 다시 load한다.
+각 서버 파라미터 정보는 rui_config.js에 정의되어 있다.
+
+pager : {
+    defaultProperties: {
+        /* DevOn 4.0 */
+        pageSizeFieldName: "devonRowSize",
+        viewPageStartRowIndexFieldName: "devonTargetRow"
+        /* DevOn 3.0
+        pageSizeFieldName: "NUMBER_OF_ROWS_OF_PAGE",
+        viewPageStartRowIndexFieldName: "targetRow"
+        */
+    }
+},
+
+※ LPager의 render순서와 LGridPanel의 render순서는 맞춰야 한다. gridpanelPagerSample.html 참조
+
+서버측이 DevOn 프레임워크가 아니면 인터페이스를 구현하여야 한다.
+
+샘플 경로 :
+<a href="./../sample/general/ui/grid/gridpanelPagerSample.html" target="_new">/rui/sample/general/ui/grid/gridpanelPagerSample.html</a>
+<a href="./../sample/general/ui/grid/gridpanelPagerSelectFirstLoadPageSample.html" target="_new">/rui/sample/general/ui/grid/gridpanelPagerSelectFirstLoadPageSample.html</a>
+</div>
+<div class="L-sample">
+sample: 그리드와 연동하는 기본 샘플
+<div class="L-code">
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    width: 600,
+    height: 340
+});
+
+var pager = new Rui.ui.LPager({
+    gridPanel: grid
+});
+
+pager.render();
+
+grid.render('defaultGrid');
+</div>
+</div>
+
+</div>
+
+<!-- config 시작 -->
+<div class="config_viewPageNumber">
+<div class="L-description">
+dataSet이 load되면 기본 출력할 현재 page number
+화면이 출력되면 데이터를 로드하고 기본 페이지를 viewPageNumber값으로 이동시킨다.
+</div>
+<div class="L-sample">
+sample: 화면이 출력된후 데이터가 load되면 5페이지로 이동한다. 
+<div class="L-code">
+grid = new Rui.ui.grid.LGridPanel(
+{
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height:300
+});
+
+var pager = new Rui.ui.grid.LPager({
+    gridPanel : grid,
+    viewPageNumber: 5
+});
+
+pager.render();
+
+grid.render('defaultGrid');
+......................
+dataSet.load({
+    url: 'test.rui',
+    params : pager.getParams(5)
+});
+</div>
+</div>
+</div>
+
+<div class="config_pageSize">
+<div class="L-description">
+한 page에 몇건의 row를 보여줄지를 정의하는 값
+페이징을 처리한 그리드의 height가 작을 경우 그리드는 자동 스크롤이 출력된다.
+이때 pageSize를 그리드의 현재 출력 row 갯수만큼을 지정하면 스크롤이 사라진다. 
+</div>
+<div class="L-sample">
+sample: 페이지 그리드의 row 출력갯수를 5로 셋팅한다. 
+<div class="L-code">
+grid = new Rui.ui.grid.LGridPanel(
+{
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height:300
+});
+
+var pager = new Rui.ui.grid.LPager({
+    gridPanel : grid,
+    pageSize: 5
+});
+
+pager.render();
+
+grid.render('defaultGrid');
+</div>
+</div>
+</div>
+
+<div class="config_pageGroupSize">
+<div class="L-description">
+페이지의 번호가 최대 몇개의 번호까지 나오게 할지 결정하는 값
+페이징을 처리한 그리드의 width가 작을 경우 페이징이 그리드보다 width가 넘어갈 경우가 발생한다.
+이때 pageGroupSize를 줄이므로써 페이지 처리부분의 width가 넘어가는걸 방지할 수 있다. 
+</div>
+<div class="L-sample">
+sample: 페이지 그리드의 페이지의 page number 출력 총 갯수를 5로 셋팅한다. 
+<div class="L-code">
+grid = new Rui.ui.grid.LGridPanel(
+{
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height:300
+});
+
+var pager = new Rui.ui.grid.LPager({
+    gridPanel : grid,
+    pageGroupSize: 5
+});
+
+pager.render();
+
+grid.render('defaultGrid');
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_setViewPageNumber">
+<div class="L-description">
+현재 페이지를 다른 페이지로 이동한다.
+이 기능을 수행하면 사용자가 페이지를 클릭한것처럼 해당 페이지로 이동한다.
+이동시에는 서버에 dataSet의 load 이벤트가 파라미터에 맞춰서 호출된다.
+onReady시에 setViewPageNumber를 호출하면 서버에 dataSet load가 두번 발생한다.
+기본 페이지 로드시 원하는 페이지로 미리 이동하려면 viewPageNumber config 속성을 이용한다.
+</div>
+<div class="L-sample">
+sample: 현재 페이지를 3페이지로 이동한다.
+<div class="L-code">
+grid = new Rui.ui.grid.LGridPanel(
+{
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height:300
+});
+
+var pager = new Rui.ui.grid.LPager({
+    gridPanel : grid
+});
+
+pager.render();
+
+grid.render('defaultGrid');
+......................
+
+pager.setViewPageNumber(3);
+</div>
+</div>
+</div>
+
+<div class="method_getParams">
+<div class="L-description">
+서버에 전송하기 위해 paging 관련 parameter 값을 얻어온다.
+이 기능은 전체 페이지가 처음 load될 경우 dataSet의 기본 load시 파라미터를 처리할 경우 사용된다.
+그외 페이지 이동은 LPager가 자동으로 해주므로 따로 처리할 필요가 없다.
+</div>
+<div class="L-sample">
+sample: 현재 페이지 정보를 얻어와 col1이라는 파라미터를 추가하고 서버에 데이터셋으로 load한다.
+<div class="L-code">
+grid = new Rui.ui.grid.LGridPanel(
+{
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height:300
+});
+
+var pager = new Rui.ui.grid.LPager({
+    gridPanel : grid
+});
+
+pager.render();
+
+grid.render('defaultGrid');
+......................
+
+var params = pager.getParams(3);
+params.col1 = '값1';
+dataSet.load({
+    url: 'test.rui',
+    params: params
+});
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_beforeChangePage">
+<div class="L-description">
+페이지가 변경 되기전에 발생하는 이벤트
+이벤트 처리후 결과값이 false이면 페이지가 바뀌지 않는다.
+</div>
+<div class="L-sample">
+sample: 페이지 이동전 dataSet에 변경된 데이터가 존재하면 메시지를 출력하고 페이지 이동을 막는다.
+<div class="L-code">
+grid = new Rui.ui.grid.LGridPanel(
+{
+    columnModel: columnModel,
+    dataSet:dataSet,
+    height:300
+});
+
+var pager = new Rui.ui.grid.LPager({
+    gridPanel : grid
+});
+
+pager.on('beforeChangePage', function(e){
+    if(dataSet.isUpdated() == true) {
+        alert('변경된 데이터가 존재하므로 페이지 이동을 할 수 없습니다. 저장후 이동하세요.');
+        return false;
+    }
+});
+
+pager.render();
+
+grid.render('defaultGrid');
+</div>
+</div>
+</div>
+
+<div class="event_changedPage">
+<div class="L-description">
+page number 선택으로 page가 변경된후 발생하는 event
+</div>
+<div class="L-sample">
+sample: 페이지 이동전 dataSet에 변경된 데이터가 존재하면 메시지를 출력하고 페이지 이동을 막는다.
+<div class="L-code">
+grid = new Rui.ui.grid.LGridPanel(
+{
+    columnModel: columnModel,
+    dataSet:dataSet,
+    height:300
+});
+
+var pager = new Rui.ui.grid.LPager({
+    gridPanel : grid
+});
+
+pager.on('changedPage', function(e){
+    alert(e.viewPageNumber + '로 이동하였습니다.');
+});
+
+pager.render();
+
+grid.render('defaultGrid');
+</div>
+</div>
+</div>
+
+</div>

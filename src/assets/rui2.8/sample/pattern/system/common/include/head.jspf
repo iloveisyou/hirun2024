@@ -1,0 +1,15 @@
+<%@ page pageEncoding="utf-8" session="false" %>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Cache-Control" content="no-cache; no-store; no-save"/>
+
+<script type="text/javascript">
+
+/*
+function handleError(err, url, line) {
+	alert('Error : ' + err + '\nURL: ' + url + '\nLine:' + line);
+	return true;
+	}
+window.onerror = handleError;
+*/
+</script>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Edit Many Column and Tab</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+    <script type='text/javascript' src='../../../../../plugins/tab/rui_tab.js'></script>
+    <style type="text/css" >
+        .L-grid-row-editable .L-grid-cell-editable {
+            background-color:#ffffe2;
+        }
+        
+        * {
+            color:#000000;
+            font-family:Verdana;
+            font-size:12px;
+        }
+        
+        #blockTabView {
+            width: 900px;
+        }
+        
+        ul {
+            list-style-type:none;
+        }
+        
+        #col1 {
+            width: 50px;
+        }
+        
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        $C(function() {
+            $C('!config').set('$.core.logger.show', [true]);
+
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+{ id: 'col1' },{ id: 'col2' },{ id: 'col3' },{ id: 'col4' },{ id: 'col5' },{ id: 'col6' },{ id: 'col7' },{ id: 'col8' },{ id: 'col9' },{ id: 'col10' },
+{ id: 'col11' },{ id: 'col12' },{ id: 'col13' },{ id: 'col14' },{ id: 'col15' },{ id: 'col16' },{ id: 'col17' },{ id: 'col18' },{ id: 'col19' },{ id: 'col20' },
+{ id: 'col21' },{ id: 'col22' },{ id: 'col23' },{ id: 'col24' },{ id: 'col25' },{ id: 'col26' },{ id: 'col27' },{ id: 'col28' },{ id: 'col29' },{ id: 'col30' },
+{ id: 'col31' },{ id: 'col32' },{ id: 'col33' },{ id: 'col34' },{ id: 'col35' },{ id: 'col36' },{ id: 'col37' },{ id: 'col38' },{ id: 'col39' },{ id: 'col40' },
+{ id: 'col41' },{ id: 'col42' },{ id: 'col43' },{ id: 'col44' },{ id: 'col45' },{ id: 'col46' },{ id: 'col47' },{ id: 'col48' },{ id: 'col49' },{ id: 'col50' },
+{ id: 'col51' },{ id: 'col52' },{ id: 'col53' },{ id: 'col54' },{ id: 'col55' },{ id: 'col56' },{ id: 'col57' },{ id: 'col58' },{ id: 'col59' },{ id: 'col60' },
+{ id: 'col61' },{ id: 'col62' },{ id: 'col63' },{ id: 'col64' },{ id: 'col65' },{ id: 'col66' },{ id: 'col67' },{ id: 'col68' },{ id: 'col69' },{ id: 'col70' },
+{ id: 'col71' },{ id: 'col72' },{ id: 'col73' },{ id: 'col74' },{ id: 'col75' },{ id: 'col76' },{ id: 'col77' },{ id: 'col78' },{ id: 'col79' },{ id: 'col80' },
+{ id: 'col81' },{ id: 'col82' },{ id: 'col83' },{ id: 'col84' },{ id: 'col85' },{ id: 'col86' },{ id: 'col87' },{ id: 'col88' },{ id: 'col89' },{ id: 'col90' },
+{ id: 'col91' },{ id: 'col92' },{ id: 'col93' },{ id: 'col94' },{ id: 'col95' },{ id: 'col96' },{ id: 'col97' },{ id: 'col98' },{ id: 'col99' },{ id: 'col100' }                
+                ]
+            });
+            
+            var tm = $C.dataSetManager();            
+            
+            tm.on('success', function(e) {
+                $C.log($C('!message').get('$.base.msg100'));
+            });
+    
+            /*<b>*/
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.selectionColumn(),
+                    $C.stateColumn(),
+                    $C.numberColumn(),
+{ field: 'col1', editor: $C.textBox() },{ field: 'col2', width:50 },{ field: 'col3', width:50 },{ field: 'col4', width:50 },{ field: 'col5', width:50 },{ field: 'col6', width:50 },{ field: 'col7', width:50 },{ field: 'col8', width:50 },{ field: 'col9', width:50 },{ field: 'col10', width:50 },
+{ field: 'col11', width:50 },{ field: 'col12', width:50 },{ field: 'col13', width:50 },{ field: 'col14', width:50 },{ field: 'col15', width:50 },{ field: 'col16', width:50 },{ field: 'col17', width:50 },{ field: 'col18', width:50 },{ field: 'col19', width:50 },{ field: 'col20', width:50 },
+{ field: 'col21', width:50 },{ field: 'col22', width:50 },{ field: 'col23', width:50 },{ field: 'col24', width:50 },{ field: 'col25', width:50 },{ field: 'col26', width:50 },{ field: 'col27', width:50 },{ field: 'col28', width:50 },{ field: 'col29', width:50 },{ field: 'col30', width:50 },
+{ field: 'col31', width:50 },{ field: 'col32', width:50 },{ field: 'col33', width:50 },{ field: 'col34', width:50 },{ field: 'col35', width:50 },{ field: 'col36', width:50 },{ field: 'col37', width:50 },{ field: 'col38', width:50 },{ field: 'col39', width:50 },{ field: 'col40', width:50 },
+{ field: 'col41', width:50 },{ field: 'col42', width:50 },{ field: 'col43', width:50 },{ field: 'col44', width:50 },{ field: 'col45', width:50 },{ field: 'col46', width:50 },{ field: 'col47', width:50 },{ field: 'col48', width:50 },{ field: 'col49', width:50 },{ field: 'col50', width:50 },
+{ field: 'col51', width:50 },{ field: 'col52', width:50 },{ field: 'col53', width:50 },{ field: 'col54', width:50 },{ field: 'col55', width:50 },{ field: 'col56', width:50 },{ field: 'col57', width:50 },{ field: 'col58', width:50 },{ field: 'col59', width:50 },{ field: 'col60', width:50 },
+{ field: 'col61', width:50 },{ field: 'col62', width:50 },{ field: 'col63', width:50 },{ field: 'col64', width:50 },{ field: 'col65', width:50 },{ field: 'col66', width:50 },{ field: 'col67', width:50 },{ field: 'col68', width:50 },{ field: 'col69', width:50 },{ field: 'col70', width:50 },
+{ field: 'col71', width:50 },{ field: 'col72', width:50 },{ field: 'col73', width:50 },{ field: 'col74', width:50 },{ field: 'col75', width:50 },{ field: 'col76', width:50 },{ field: 'col77', width:50 },{ field: 'col78', width:50 },{ field: 'col79', width:50 },{ field: 'col80', width:50 },
+{ field: 'col81', width:50 },{ field: 'col82', width:50 },{ field: 'col83', width:50 },{ field: 'col84', width:50 },{ field: 'col85', width:50 },{ field: 'col86', width:50 },{ field: 'col87', width:50 },{ field: 'col88', width:50 },{ field: 'col89', width:50 },{ field: 'col90', width:50 },
+{ field: 'col91', width:50 },{ field: 'col92', width:50 },{ field: 'col93', width:50 },{ field: 'col94', width:50 },{ field: 'col95', width:50 },{ field: 'col96', width:50 },{ field: 'col97', width:50 },{ field: 'col98', width:50 },{ field: 'col99', width:50 },{ field: 'col100', width:50 }
+                    ]
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet:dataSet,
+                height:300
+            });
+            
+            /*</b>*/
+
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                var params = $C.dom.getValues('input', 'LblockSearch');
+                dataSet.load({
+                    url: './../../../../sample/data/gridManyColumns.json',
+                    method: "get",
+                    params: params
+                });
+            });
+
+            $C('#newBtn').button();
+            $C('#newBtn').on("click", function(){
+                var row = dataSet.newRecord();
+                var record = dataSet.getAt(row);
+                record.set("col1", "Junee");
+                record.set("col3", "R2");
+            });
+
+            $C('#insertBtn').button();
+            $C('#insertBtn').on("click", function(){
+                if(dataSet.getRow() < 0) return;
+                var row = dataSet.newRecord(dataSet.getRow());
+                var record = dataSet.getAt(row);
+                record.set("col1", "Junee5");
+                record.set("col3", "R1");
+            });
+
+            $C('#updateBtn').button();
+            $C('#updateBtn').on("click", function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var record = dataSet.getAt(row);
+                record.set("col3", "R2");
+            });
+
+            $C('#undoBtn').button();
+            $C('#undoBtn').on("click", function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    for(var i = 0 ; i < dataSet.getCount() ; i++) {
+                        if(dataSet.isMarked(i))
+                            dataSet.undo(i);
+                    }
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.undo(row);
+                }
+            });
+            
+            $C('#undoAllBtn').button();
+            $C('#undoAllBtn').on("click", function(){
+                dataSet.undoAll();
+            });
+            
+            $C('#deleteBtn').button();
+            $C('#deleteBtn').on("click", function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRow();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+            
+            $C('#saveBtn').button();
+            $C('#saveBtn').on("click", function(){
+                if(dataSet.isUpdated() == false) {
+                    alert($C('!message').get('$.base.msg102'));
+                    return;
+                }
+                
+                if (validatorManager.validateGrid(grid) == false) {
+                    alert($C('!message').get('$.base.msg052') + '\r\n' + validatorManager.getMessageList().join('\r\n') );
+                    return;
+                }
+                
+                tm.updateDataSet({
+                    dataSets:[dataSet], 
+                    url:'/consoleLog.dev'    
+                });
+
+            });
+            
+            $C('#clearBtn').button();
+            $C('#clearBtn').on("click", function(){
+                dataSet.clearData();
+            });
+            
+            $C('#filterBtn').button();
+            $C('#filterBtn').on("click", function(){
+                dataSet.filter(function(id, record){
+                    return record.get("col3") == "R2"
+                });
+            });
+            
+            $C('#syncDataSetBtn').button();
+            $C('#syncDataSetBtn').on("click", function(){
+                grid.setSyncDataSet(true);
+            });
+            
+            $C('#unSyncDataSetBtn').button();
+            $C('#unSyncDataSetBtn').on("click", function(){
+                grid.setSyncDataSet(false);
+            });
+            
+            $C('#firstBtn').button();
+            $C('#firstBtn').on("click", function(){
+                dataSet.setRow(0);
+            });
+
+            $C('#previousBtn').button();
+            $C('#previousBtn').on("click", function(){
+                if(dataSet.getRow() > 0)
+                    dataSet.setRow(dataSet.getRow() - 1);
+            });
+
+            $C('#nextBtn').button();
+            $C('#nextBtn').on("click", function(){
+                if(dataSet.getCount() > dataSet.getRow())
+                    dataSet.setRow(dataSet.getRow() + 1);
+            });
+
+            $C('#lastBtn').button();
+            $C('#lastBtn').on("click", function(){
+                dataSet.setRow(dataSet.getCount() - 1);
+            });
+            
+            $C('#sortBtn').button();
+            $C('#sortBtn').on("click", function(){
+                dataSet.sortField("col1");
+            });
+            
+            $C('#columnShowBtn').button();
+            $C('#columnShowBtn').on("click", function(){
+                columnModel.getColumnById('col3').setHidden(false);
+            });
+
+            $C('#columnHideBtn').button();
+            $C('#columnHideBtn').on("click", function(){
+                columnModel.getColumnById('col3').setHidden(true);
+            });
+            
+            $C('#multiSelectBtn').button();
+            $C('#multiSelectBtn').on("click", function(){
+                if(dataSet.getCount() > 5) {
+                    dataSet.setMark(1, true);
+                    dataSet.setMark(3, true);
+                    dataSet.setMark(5, true);
+                }
+            });
+
+            /*<b>*/
+            var tabView = new Rui.ui.tab.LTabView({contentWidth:800,contentHeight:300});
+
+            tabView.addTab(new Rui.ui.tab.LTab({
+                label: 'Tab1',
+                contentEl: Rui.get("blockTab1").dom,
+                active: true,
+                tabView : tabView
+            }));
+
+            tabView.addTab(new Rui.ui.tab.LTab({
+                label: 'Tab2',
+                contentEl: Rui.get("blockTab2").dom,
+                tabView : tabView
+            }));
+
+            tabView.addTab(new Rui.ui.tab.LTab({
+                label: 'Tab3',
+                contentEl: Rui.get("blockTab3").dom,
+                tabView : tabView
+            }));
+            
+            tabView.render('blockTabView');
+            /*</b>*/
+            
+            bind = $C.bind( 
+            {
+                groupId: 'blockTabView',
+                dataSet: dataSet,
+                bind: true,
+                bindInfo: [
+                    {id:'col1', ctrlId:'col1', value:'value'},
+{id:'col2', ctrlId:'col2', value:'value'},
+{id:'col3', ctrlId:'col3', value:'value'},
+{id:'col4', ctrlId:'col4', value:'value'},
+{id:'col5', ctrlId:'col5', value:'value'},
+{id:'col6', ctrlId:'col6', value:'value'},
+{id:'col7', ctrlId:'col7', value:'value'},
+{id:'col8', ctrlId:'col8', value:'value'},
+{id:'col9', ctrlId:'col9', value:'value'},
+{id:'col10', ctrlId:'col10', value:'value'},
+{id:'col11', ctrlId:'col11', value:'value'},
+{id:'col12', ctrlId:'col12', value:'value'},
+{id:'col13', ctrlId:'col13', value:'value'},
+{id:'col14', ctrlId:'col14', value:'value'},
+{id:'col15', ctrlId:'col15', value:'value'},
+{id:'col16', ctrlId:'col16', value:'value'},
+{id:'col17', ctrlId:'col17', value:'value'},
+{id:'col18', ctrlId:'col18', value:'value'},
+{id:'col19', ctrlId:'col19', value:'value'},
+{id:'col20', ctrlId:'col20', value:'value'},
+{id:'col21', ctrlId:'col21', value:'value'},
+{id:'col22', ctrlId:'col22', value:'value'},
+{id:'col23', ctrlId:'col23', value:'value'},
+{id:'col24', ctrlId:'col24', value:'value'},
+{id:'col25', ctrlId:'col25', value:'value'},
+{id:'col26', ctrlId:'col26', value:'value'},
+{id:'col27', ctrlId:'col27', value:'value'},
+{id:'col28', ctrlId:'col28', value:'value'},
+{id:'col29', ctrlId:'col29', value:'value'},
+{id:'col30', ctrlId:'col30', value:'value'},
+{id:'col31', ctrlId:'col31', value:'value'},
+{id:'col32', ctrlId:'col32', value:'value'},
+{id:'col33', ctrlId:'col33', value:'value'},
+{id:'col34', ctrlId:'col34', value:'value'},
+{id:'col35', ctrlId:'col35', value:'value'},
+{id:'col36', ctrlId:'col36', value:'value'},
+{id:'col37', ctrlId:'col37', value:'value'},
+{id:'col38', ctrlId:'col38', value:'value'},
+{id:'col39', ctrlId:'col39', value:'value'},
+{id:'col40', ctrlId:'col40', value:'value'},
+{id:'col41', ctrlId:'col41', value:'value'},
+{id:'col42', ctrlId:'col42', value:'value'},
+{id:'col43', ctrlId:'col43', value:'value'},
+{id:'col44', ctrlId:'col44', value:'value'},
+{id:'col45', ctrlId:'col45', value:'value'},
+{id:'col46', ctrlId:'col46', value:'value'},
+{id:'col47', ctrlId:'col47', value:'value'},
+{id:'col48', ctrlId:'col48', value:'value'},
+{id:'col49', ctrlId:'col49', value:'value'},
+{id:'col50', ctrlId:'col50', value:'value'},
+{id:'col51', ctrlId:'col51', value:'value'},
+{id:'col52', ctrlId:'col52', value:'value'},
+{id:'col53', ctrlId:'col53', value:'value'},
+{id:'col54', ctrlId:'col54', value:'value'},
+{id:'col55', ctrlId:'col55', value:'value'},
+{id:'col56', ctrlId:'col56', value:'value'},
+{id:'col57', ctrlId:'col57', value:'value'},
+{id:'col58', ctrlId:'col58', value:'value'},
+{id:'col59', ctrlId:'col59', value:'value'},
+{id:'col60', ctrlId:'col60', value:'value'},
+{id:'col61', ctrlId:'col61', value:'value'},
+{id:'col62', ctrlId:'col62', value:'value'},
+{id:'col63', ctrlId:'col63', value:'value'},
+{id:'col64', ctrlId:'col64', value:'value'},
+{id:'col65', ctrlId:'col65', value:'value'},
+{id:'col66', ctrlId:'col66', value:'value'},
+{id:'col67', ctrlId:'col67', value:'value'},
+{id:'col68', ctrlId:'col68', value:'value'},
+{id:'col69', ctrlId:'col69', value:'value'},
+{id:'col70', ctrlId:'col70', value:'value'},
+{id:'col71', ctrlId:'col71', value:'value'},
+{id:'col72', ctrlId:'col72', value:'value'},
+{id:'col73', ctrlId:'col73', value:'value'},
+{id:'col74', ctrlId:'col74', value:'value'},
+{id:'col75', ctrlId:'col75', value:'value'},
+{id:'col76', ctrlId:'col76', value:'value'},
+{id:'col77', ctrlId:'col77', value:'value'},
+{id:'col78', ctrlId:'col78', value:'value'},
+{id:'col79', ctrlId:'col79', value:'value'},
+{id:'col80', ctrlId:'col80', value:'value'},
+{id:'col81', ctrlId:'col81', value:'value'},
+{id:'col82', ctrlId:'col82', value:'value'},
+{id:'col83', ctrlId:'col83', value:'value'},
+{id:'col84', ctrlId:'col84', value:'value'},
+{id:'col85', ctrlId:'col85', value:'value'},
+{id:'col86', ctrlId:'col86', value:'value'},
+{id:'col87', ctrlId:'col87', value:'value'},
+{id:'col88', ctrlId:'col88', value:'value'},
+{id:'col89', ctrlId:'col89', value:'value'},
+{id:'col90', ctrlId:'col90', value:'value'},
+{id:'col91', ctrlId:'col91', value:'value'},
+{id:'col92', ctrlId:'col92', value:'value'},
+{id:'col93', ctrlId:'col93', value:'value'},
+{id:'col94', ctrlId:'col94', value:'value'},
+{id:'col95', ctrlId:'col95', value:'value'},
+{id:'col96', ctrlId:'col96', value:'value'},
+{id:'col97', ctrlId:'col97', value:'value'},
+{id:'col98', ctrlId:'col98', value:'value'},
+{id:'col99', ctrlId:'col99', value:'value'},
+{id:'col100', ctrlId:'col100', value:'value'}
+                ]
+            });
+            //searchBtn.click();
+
+        });
+    </script>
+
+</head>
+<body>
+    <h1>gridpanel edit many columns tab sample</h1>
+    <h2>LGridPanel에서 LTabView와 연결하여 대량의 컬럼의 성능을 체크하는 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div>대량의 컬럼이 탭뷰와 연결 되었을 때의 성능을 테스트합니다. 데이터는 각 탭마다 div로 연결될 수 있습니다.</div>
+<div id='bd'>
+    <div class="LblockButton" >
+        <button type="button" id="searchBtn" >Search</button>
+        <button type="button" id="newBtn" >NEW</button>
+        <button type="button" id="insertBtn" >insert</button>
+        <button type="button" id="updateBtn" >update</button>
+        <button type="button" id="deleteBtn" >delete</button>
+        <button type="button" id="saveBtn" >save</button>
+        <button type="button" id="undoBtn" >undo</button>
+        <button type="button" id="undoAllBtn" >undoAll</button>
+        <button type="button" id="clearBtn" >clear</button>
+        <button type="button" id="filterBtn" >filter</button>
+        <button type="button" id="syncDataSetBtn" >syncDataSet</button>
+        <button type="button" id="unSyncDataSetBtn" >unSyncDataSet</button>
+        <button type="button" id="firstBtn" >first</button>
+        <button type="button" id="previousBtn" >previous</button>
+        <button type="button" id="nextBtn" >next</button>
+        <button type="button" id="lastBtn" >last</button>
+        <button type="button" id="sortBtn" >sort</button>
+        <button type="button" id="columnShowBtn" >column show</button>
+        <button type="button" id="columnHideBtn" >column hide</button>
+        <button type="button" id="multiSelectBtn" >multi selection</button>
+    </div>
+    <div class="LblockMarkupCode">
+        
+        <div class="LblockSearch" id="LblockSearch" >
+            <label for="queryCol1">Col1</label><input type="text" id="queryCol1" />
+        </div>
+        
+        <div class="LblockContent" >
+            <ul>
+                <li><div id="defaultGrid" ></div></li>
+                <li>
+                <div id="blockTabView">
+                    
+                </div>
+                </li>
+            </ul>
+        </div>
+    
+    <div id="blockTab1" >
+        <table>
+        <tr>
+            <th>col1</th>
+            <td><input type="text" id="col1" value="" /></td>
+            <th>col2</th>
+            <td><label for="col2Y">Y</label><input type="radio" id="col2Y" name="col2" value="Y" /><label for="col2N">N</label><input type="radio" id="col2N" name="col2" value="N" /></td>
+            <th>col3</th>
+            <td><label for="col3Y">Y</label><input type="radio" id="col3Y" name="col3" value="Y" /><label for="col3N">N</label><input type="radio" id="col3N" name="col3" value="N" /></td>
+            <th>col4</th>
+            <td><label for="col4Y">Y</label><input type="radio" id="col4Y" name="col4" value="Y" /><label for="col4N">N</label><input type="radio" id="col4N" name="col4" value="N" /></td>
+            <th>col5</th>
+            <td><label for="col5Y">Y</label><input type="radio" id="col5Y" name="col5" value="Y" /><label for="col5N">N</label><input type="radio" id="col5N" name="col5" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col6</th>
+            <td><label for="col6Y">Y</label><input type="radio" id="col6Y" name="col6" value="Y" /><label for="col6N">N</label><input type="radio" id="col6N" name="col6" value="N" /></td>
+            <th>col7</th>
+            <td><label for="col7Y">Y</label><input type="radio" id="col7Y" name="col7" value="Y" /><label for="col7N">N</label><input type="radio" id="col7N" name="col7" value="N" /></td>
+            <th>col8</th>
+            <td><label for="col8Y">Y</label><input type="radio" id="col8Y" name="col8" value="Y" /><label for="col8N">N</label><input type="radio" id="col8N" name="col8" value="N" /></td>
+            <th>col9</th>
+            <td><label for="col9Y">Y</label><input type="radio" id="col9Y" name="col9" value="Y" /><label for="col9N">N</label><input type="radio" id="col9N" name="col9" value="N" /></td>
+            <th>col10</th>
+            <td><label for="col10Y">Y</label><input type="radio" id="col10Y" name="col10" value="Y" /><label for="col10N">N</label><input type="radio" id="col10N" name="col10" value="N" /><br /></td>
+        </tr>
+        <tr>
+            <th>col11</th>
+            <td><label for="col11Y">Y</label><input type="radio" id="col11Y" name="col11" value="Y" /><label for="col11N">N</label><input type="radio" id="col11N" name="col11" value="N" /></td>
+            <th>col12</th>
+            <td><label for="col12Y">Y</label><input type="radio" id="col12Y" name="col12" value="Y" /><label for="col12N">N</label><input type="radio" id="col12N" name="col12" value="N" /></td>
+            <th>col13</th>
+            <td><label for="col13Y">Y</label><input type="radio" id="col13Y" name="col13" value="Y" /><label for="col13N">N</label><input type="radio" id="col13N" name="col13" value="N" /></td>
+            <th>col14</th>
+            <td><label for="col14Y">Y</label><input type="radio" id="col14Y" name="col14" value="Y" /><label for="col14N">N</label><input type="radio" id="col14N" name="col14" value="N" /></td>
+            <th>col15</th>
+            <td><label for="col15Y">Y</label><input type="radio" id="col15Y" name="col15" value="Y" /><label for="col15N">N</label><input type="radio" id="col15N" name="col15" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col16</th>
+            <td><label for="col16Y">Y</label><input type="radio" id="col16Y" name="col16" value="Y" /><label for="col16N">N</label><input type="radio" id="col16N" name="col16" value="N" /></td>
+            <th>col17</th>
+            <td><label for="col17Y">Y</label><input type="radio" id="col17Y" name="col17" value="Y" /><label for="col17N">N</label><input type="radio" id="col17N" name="col17" value="N" /></td>
+            <th>col18</th>
+            <td><label for="col18Y">Y</label><input type="radio" id="col18Y" name="col18" value="Y" /><label for="col18N">N</label><input type="radio" id="col18N" name="col18" value="N" /></td>
+            <th>col19</th>
+            <td><label for="col19Y">Y</label><input type="radio" id="col19Y" name="col19" value="Y" /><label for="col19N">N</label><input type="radio" id="col19N" name="col19" value="N" /></td>
+            <th>col20</th>
+            <td><label for="col20Y">Y</label><input type="radio" id="col20Y" name="col20" value="Y" /><label for="col20N">N</label><input type="radio" id="col20N" name="col20" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col21</th>
+            <td><label for="col21Y">Y</label><input type="radio" id="col21Y" name="col21" value="Y" /><label for="col21N">N</label><input type="radio" id="col21N" name="col21" value="N" /></td>
+            <th>col22</th>
+            <td><label for="col22Y">Y</label><input type="radio" id="col22Y" name="col22" value="Y" /><label for="col22N">N</label><input type="radio" id="col22N" name="col22" value="N" /></td>
+            <th>col23</th>
+            <td><label for="col23Y">Y</label><input type="radio" id="col23Y" name="col23" value="Y" /><label for="col23N">N</label><input type="radio" id="col23N" name="col23" value="N" /></td>
+            <th>col24</th>
+            <td><label for="col24Y">Y</label><input type="radio" id="col24Y" name="col24" value="Y" /><label for="col24N">N</label><input type="radio" id="col24N" name="col24" value="N" /></td>
+            <th>col25</th>
+            <td><label for="col25Y">Y</label><input type="radio" id="col25Y" name="col25" value="Y" /><label for="col25N">N</label><input type="radio" id="col25N" name="col25" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col26</th>
+            <td><label for="col26Y">Y</label><input type="radio" id="col26Y" name="col26" value="Y" /><label for="col26N">N</label><input type="radio" id="col26N" name="col26" value="N" /></td>
+            <th>col27</th>
+            <td><label for="col27Y">Y</label><input type="radio" id="col27Y" name="col27" value="Y" /><label for="col27N">N</label><input type="radio" id="col27N" name="col27" value="N" /></td>
+            <th>col28</th>
+            <td><label for="col28Y">Y</label><input type="radio" id="col28Y" name="col28" value="Y" /><label for="col28N">N</label><input type="radio" id="col28N" name="col28" value="N" /></td>
+            <th>col29</th>
+            <td><label for="col29Y">Y</label><input type="radio" id="col29Y" name="col29" value="Y" /><label for="col29N">N</label><input type="radio" id="col29N" name="col29" value="N" /></td>
+            <th>col30</th>
+            <td><label for="col30Y">Y</label><input type="radio" id="col30Y" name="col30" value="Y" /><label for="col30N">N</label><input type="radio" id="col30N" name="col30" value="N" /></td>
+        </tr>
+        </table>
+    </div>
+    
+    <div id="blockTab2">
+        <table>
+        <tr>
+            <th>col31</th>
+            <td><label for="col31Y">Y</label><input type="radio" id="col31Y" name="col31" value="Y" /><label for="col31N">N</label><input type="radio" id="col31N" name="col31" value="N" /></td>
+            <th>col32</th>
+            <td><label for="col32Y">Y</label><input type="radio" id="col32Y" name="col32" value="Y" /><label for="col32N">N</label><input type="radio" id="col32N" name="col32" value="N" /></td>
+            <th>col33</th>
+            <td><label for="col33Y">Y</label><input type="radio" id="col33Y" name="col33" value="Y" /><label for="col33N">N</label><input type="radio" id="col33N" name="col33" value="N" /></td>
+            <th>col34</th>
+            <td><label for="col34Y">Y</label><input type="radio" id="col34Y" name="col34" value="Y" /><label for="col34N">N</label><input type="radio" id="col34N" name="col34" value="N" /></td>
+            <th>col35</th>
+            <td><label for="col35Y">Y</label><input type="radio" id="col35Y" name="col35" value="Y" /><label for="col35N">N</label><input type="radio" id="col35N" name="col35" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col36</th>
+            <td><label for="col36Y">Y</label><input type="radio" id="col36Y" name="col36" value="Y" /><label for="col36N">N</label><input type="radio" id="col36N" name="col36" value="N" /></td>
+            <th>col37</th>
+            <td><label for="col37Y">Y</label><input type="radio" id="col37Y" name="col37" value="Y" /><label for="col37N">N</label><input type="radio" id="col37N" name="col37" value="N" /></td>
+            <th>col38</th>
+            <td><label for="col38Y">Y</label><input type="radio" id="col38Y" name="col38" value="Y" /><label for="col38N">N</label><input type="radio" id="col38N" name="col38" value="N" /></td>
+            <th>col39</th>
+            <td><label for="col39Y">Y</label><input type="radio" id="col39Y" name="col39" value="Y" /><label for="col39N">N</label><input type="radio" id="col39N" name="col39" value="N" /></td>
+            <th>col40</th>
+            <td><label for="col40Y">Y</label><input type="radio" id="col40Y" name="col40" value="Y" /><label for="col40N">N</label><input type="radio" id="col40N" name="col40" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col41</th>
+            <td><label for="col41Y">Y</label><input type="radio" id="col41Y" name="col41" value="Y" /><label for="col41N">N</label><input type="radio" id="col41N" name="col41" value="N" /></td>
+            <th>col42</th>
+            <td><label for="col42Y">Y</label><input type="radio" id="col42Y" name="col42" value="Y" /><label for="col42N">N</label><input type="radio" id="col42N" name="col42" value="N" /></td>
+            <th>col43</th>
+            <td><label for="col43Y">Y</label><input type="radio" id="col43Y" name="col43" value="Y" /><label for="col43N">N</label><input type="radio" id="col43N" name="col43" value="N" /></td>
+            <th>col44</th>
+            <td><label for="col44Y">Y</label><input type="radio" id="col44Y" name="col44" value="Y" /><label for="col44N">N</label><input type="radio" id="col44N" name="col44" value="N" /></td>
+            <th>col45</th>
+            <td><label for="col45Y">Y</label><input type="radio" id="col45Y" name="col45" value="Y" /><label for="col45N">N</label><input type="radio" id="col45N" name="col45" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col46</th>
+            <td><label for="col46Y">Y</label><input type="radio" id="col46Y" name="col46" value="Y" /><label for="col46N">N</label><input type="radio" id="col46N" name="col46" value="N" /></td>
+            <th>col47</th>
+            <td><label for="col47Y">Y</label><input type="radio" id="col47Y" name="col47" value="Y" /><label for="col47N">N</label><input type="radio" id="col47N" name="col47" value="N" /></td>
+            <th>col48</th>
+            <td><label for="col48Y">Y</label><input type="radio" id="col48Y" name="col48" value="Y" /><label for="col48N">N</label><input type="radio" id="col48N" name="col48" value="N" /></td>
+            <th>col49</th>
+            <td><label for="col49Y">Y</label><input type="radio" id="col49Y" name="col49" value="Y" /><label for="col49N">N</label><input type="radio" id="col49N" name="col49" value="N" /></td>
+            <th>col50</th>
+            <td><label for="col50Y">Y</label><input type="radio" id="col50Y" name="col50" value="Y" /><label for="col50N">N</label><input type="radio" id="col50N" name="col50" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col51</th>
+            <td><label for="col51Y">Y</label><input type="radio" id="col51Y" name="col51" value="Y" /><label for="col51N">N</label><input type="radio" id="col51N" name="col51" value="N" /></td>
+            <th>col52</th>
+            <td><label for="col52Y">Y</label><input type="radio" id="col52Y" name="col52" value="Y" /><label for="col52N">N</label><input type="radio" id="col52N" name="col52" value="N" /></td>
+            <th>col53</th>
+            <td><label for="col53Y">Y</label><input type="radio" id="col53Y" name="col53" value="Y" /><label for="col53N">N</label><input type="radio" id="col53N" name="col53" value="N" /></td>
+            <th>col54</th>
+            <td><label for="col54Y">Y</label><input type="radio" id="col54Y" name="col54" value="Y" /><label for="col54N">N</label><input type="radio" id="col54N" name="col54" value="N" /></td>
+            <th>col55</th>
+            <td><label for="col55Y">Y</label><input type="radio" id="col55Y" name="col55" value="Y" /><label for="col55N">N</label><input type="radio" id="col55N" name="col55" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col56</th>
+            <td><label for="col56Y">Y</label><input type="radio" id="col56Y" name="col56" value="Y" /><label for="col56N">N</label><input type="radio" id="col56N" name="col56" value="N" /></td>
+            <th>col57</th>
+            <td><label for="col57Y">Y</label><input type="radio" id="col57Y" name="col57" value="Y" /><label for="col57N">N</label><input type="radio" id="col57N" name="col57" value="N" /></td>
+            <th>col58</th>
+            <td><label for="col58Y">Y</label><input type="radio" id="col58Y" name="col58" value="Y" /><label for="col58N">N</label><input type="radio" id="col58N" name="col58" value="N" /></td>
+            <th>col59</th>
+            <td><label for="col59Y">Y</label><input type="radio" id="col59Y" name="col59" value="Y" /><label for="col59N">N</label><input type="radio" id="col59N" name="col59" value="N" /></td>
+            <th>col60</th>
+            <td><label for="col60Y">Y</label><input type="radio" id="col60Y" name="col60" value="Y" /><label for="col60N">N</label><input type="radio" id="col60N" name="col60" value="N" /></td></div>
+        </tr>
+        </table>
+    </div>
+    <div id="blockTab3">
+        <table>
+        <tr>
+            <th>col61</th>
+            <td><label for="col61Y">Y</label><input type="radio" id="col61Y" name="col61" value="Y" /><label for="col61N">N</label><input type="radio" id="col61N" name="col61" value="N" /></td>
+            <th>col62</th>
+            <td><label for="col62Y">Y</label><input type="radio" id="col62Y" name="col62" value="Y" /><label for="col62N">N</label><input type="radio" id="col62N" name="col62" value="N" /></td>
+            <th>col63</th>
+            <td><label for="col63Y">Y</label><input type="radio" id="col63Y" name="col63" value="Y" /><label for="col63N">N</label><input type="radio" id="col63N" name="col63" value="N" /></td>
+            <th>col64</th>
+            <td><label for="col64Y">Y</label><input type="radio" id="col64Y" name="col64" value="Y" /><label for="col64N">N</label><input type="radio" id="col64N" name="col64" value="N" /></td>
+            <th>col65</th>
+            <td><label for="col65Y">Y</label><input type="radio" id="col65Y" name="col65" value="Y" /><label for="col65N">N</label><input type="radio" id="col65N" name="col65" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col66</th>
+            <td><label for="col66Y">Y</label><input type="radio" id="col66Y" name="col66" value="Y" /><label for="col66N">N</label><input type="radio" id="col66N" name="col66" value="N" /></td>
+            <th>col67</th>
+            <td><label for="col67Y">Y</label><input type="radio" id="col67Y" name="col67" value="Y" /><label for="col67N">N</label><input type="radio" id="col67N" name="col67" value="N" /></td>
+            <th>col68</th>
+            <td><label for="col68Y">Y</label><input type="radio" id="col68Y" name="col68" value="Y" /><label for="col68N">N</label><input type="radio" id="col68N" name="col68" value="N" /></td>
+            <th>col69</th>
+            <td><label for="col69Y">Y</label><input type="radio" id="col69Y" name="col69" value="Y" /><label for="col69N">N</label><input type="radio" id="col69N" name="col69" value="N" /></td>
+            <th>col70</th>
+            <td><label for="col70Y">Y</label><input type="radio" id="col70Y" name="col70" value="Y" /><label for="col70N">N</label><input type="radio" id="col70N" name="col70" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col71</th>
+            <td><label for="col71Y">Y</label><input type="radio" id="col71Y" name="col71" value="Y" /><label for="col71N">N</label><input type="radio" id="col71N" name="col71" value="N" /></td>
+            <th>col72</th>
+            <td><label for="col72Y">Y</label><input type="radio" id="col72Y" name="col72" value="Y" /><label for="col72N">N</label><input type="radio" id="col72N" name="col72" value="N" /></td>
+            <th>col73</th>
+            <td><label for="col73Y">Y</label><input type="radio" id="col73Y" name="col73" value="Y" /><label for="col73N">N</label><input type="radio" id="col73N" name="col73" value="N" /></td>
+            <th>col74</th>
+            <td><label for="col74Y">Y</label><input type="radio" id="col74Y" name="col74" value="Y" /><label for="col74N">N</label><input type="radio" id="col74N" name="col74" value="N" /></td>
+            <th>col75</th>
+            <td><label for="col75Y">Y</label><input type="radio" id="col75Y" name="col75" value="Y" /><label for="col75N">N</label><input type="radio" id="col75N" name="col75" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col76</th>
+            <td><label for="col76Y">Y</label><input type="radio" id="col76Y" name="col76" value="Y" /><label for="col76N">N</label><input type="radio" id="col76N" name="col76" value="N" /></td>
+            <th>col77</th>
+            <td><label for="col77Y">Y</label><input type="radio" id="col77Y" name="col77" value="Y" /><label for="col77N">N</label><input type="radio" id="col77N" name="col77" value="N" /></td>
+            <th>col78</th>
+            <td><label for="col78Y">Y</label><input type="radio" id="col78Y" name="col78" value="Y" /><label for="col78N">N</label><input type="radio" id="col78N" name="col78" value="N" /></td>
+            <th>col79</th>
+            <td><label for="col79Y">Y</label><input type="radio" id="col79Y" name="col79" value="Y" /><label for="col79N">N</label><input type="radio" id="col79N" name="col79" value="N" /></td>
+            <th>col80</th>
+            <td><label for="col80Y">Y</label><input type="radio" id="col80Y" name="col80" value="Y" /><label for="col80N">N</label><input type="radio" id="col80N" name="col80" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col81</th>
+            <td><label for="col81Y">Y</label><input type="radio" id="col81Y" name="col81" value="Y" /><label for="col81N">N</label><input type="radio" id="col81N" name="col81" value="N" /></td>
+            <th>col82</th>
+            <td><label for="col82Y">Y</label><input type="radio" id="col82Y" name="col82" value="Y" /><label for="col82N">N</label><input type="radio" id="col82N" name="col82" value="N" /></td>
+            <th>col83</th>
+            <td><label for="col83Y">Y</label><input type="radio" id="col83Y" name="col83" value="Y" /><label for="col83N">N</label><input type="radio" id="col83N" name="col83" value="N" /></td>
+            <th>col84</th>
+            <td><label for="col84Y">Y</label><input type="radio" id="col84Y" name="col84" value="Y" /><label for="col84N">N</label><input type="radio" id="col84N" name="col84" value="N" /></td>
+            <th>col85</th>
+            <td><label for="col85Y">Y</label><input type="radio" id="col85Y" name="col85" value="Y" /><label for="col85N">N</label><input type="radio" id="col85N" name="col85" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col86</th>
+            <td><label for="col86Y">Y</label><input type="radio" id="col86Y" name="col86" value="Y" /><label for="col86N">N</label><input type="radio" id="col86N" name="col86" value="N" /></td>
+            <th>col87</th>
+            <td><label for="col87Y">Y</label><input type="radio" id="col87Y" name="col87" value="Y" /><label for="col87N">N</label><input type="radio" id="col87N" name="col87" value="N" /></td>
+            <th>col88</th>
+            <td><label for="col88Y">Y</label><input type="radio" id="col88Y" name="col88" value="Y" /><label for="col88N">N</label><input type="radio" id="col88N" name="col88" value="N" /></td>
+            <th>col89</th>
+            <td><label for="col89Y">Y</label><input type="radio" id="col89Y" name="col89" value="Y" /><label for="col89N">N</label><input type="radio" id="col89N" name="col89" value="N" /></td>
+            <th>col90</th>
+            <td><label for="col90Y">Y</label><input type="radio" id="col90Y" name="col90" value="Y" /><label for="col90N">N</label><input type="radio" id="col90N" name="col90" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col91</th>
+            <td><label for="col91Y">Y</label><input type="radio" id="col91Y" name="col91" value="Y" /><label for="col91N">N</label><input type="radio" id="col91N" name="col91" value="N" /></td>
+            <th>col92</th>
+            <td><label for="col92Y">Y</label><input type="radio" id="col92Y" name="col92" value="Y" /><label for="col92N">N</label><input type="radio" id="col92N" name="col92" value="N" /></td>
+            <th>col93</th>
+            <td><label for="col93Y">Y</label><input type="radio" id="col93Y" name="col93" value="Y" /><label for="col93N">N</label><input type="radio" id="col93N" name="col93" value="N" /></td>
+            <th>col94</th>
+            <td><label for="col94Y">Y</label><input type="radio" id="col94Y" name="col94" value="Y" /><label for="col94N">N</label><input type="radio" id="col94N" name="col94" value="N" /></td>
+            <th>col95</th>
+            <td><label for="col95Y">Y</label><input type="radio" id="col95Y" name="col95" value="Y" /><label for="col95N">N</label><input type="radio" id="col95N" name="col95" value="N" /></td>
+        </tr>
+        <tr>
+            <th>col96</th>
+            <td><label for="col96Y">Y</label><input type="radio" id="col96Y" name="col96" value="Y" /><label for="col96N">N</label><input type="radio" id="col96N" name="col96" value="N" /></td>
+            <th>col97</th>
+            <td><label for="col97Y">Y</label><input type="radio" id="col97Y" name="col97" value="Y" /><label for="col97N">N</label><input type="radio" id="col97N" name="col97" value="N" /></td>
+            <th>col98</th>
+            <td><label for="col98Y">Y</label><input type="radio" id="col98Y" name="col98" value="Y" /><label for="col98N">N</label><input type="radio" id="col98N" name="col98" value="N" /></td>
+            <th>col99</th>
+            <td><label for="col99Y">Y</label><input type="radio" id="col99Y" name="col99" value="Y" /><label for="col99N">N</label><input type="radio" id="col99N" name="col99" value="N" /></td>
+            <th>col100</th>
+            <td><label for="col100Y">Y</label><input type="radio" id="col100Y" name="col100" value="Y" /><label for="col100N">N</label><input type="radio" id="col100N" name="col100" value="N" /></td>
+        </tr>
+        </table>
+    </div>
+
+    </div>
+</div>
+
+</body>
+</html>

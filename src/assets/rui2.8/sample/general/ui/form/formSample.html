@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="폼(LForm), 속성" />
+    <title>Form</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui_sample_base.css" />
+
+    <style>
+        label.L-disabled {
+            color: #BCBDC0;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+
+        Rui.onReady(function(){
+            /*******************
+            * 변수 및 객체 선언
+            *******************/
+            /*<b>*/
+            var form = new Rui.ui.form.LForm('frm');
+            /*</b>*/
+            
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                remainRemoved: true,
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'value' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+            
+            /*******************
+            * 사용자 이벤트 처리
+            *******************/
+            dataSet.on('loadException', function(e){
+                alert(e.throwObject.message);
+            });
+            
+            dataSet.load({
+                url: './../../../../sample/data/data.json',
+                method: 'get'
+            });
+
+            form.on('success', function(e) {
+                console.log('200', e);
+                console.log(e.conn);
+            });
+
+            form.on('failure', function(e) {
+                console.log('fail', e);
+                console.log(e.conn);
+            });
+
+            /********************
+            * 버튼 선언 및 이벤트
+            ********************/
+            var enableBtn = new Rui.ui.LButton('enableBtn');
+            enableBtn.on('click', function(){
+                form.enable();
+                Rui.select('label[for=col4_1]').removeClass('L-disabled');
+                Rui.select('label[for=col4_2]').removeClass('L-disabled');
+                Rui.select('label[for=col5]').removeClass('L-disabled');
+            });
+
+            var disableBtn = new Rui.ui.LButton('disableBtn');
+            disableBtn.on('click', function(){
+                form.disable();
+                Rui.select('label[for=col4_1]').addClass('L-disabled');
+                Rui.select('label[for=col4_2]').addClass('L-disabled');
+                Rui.select('label[for=col5]').addClass('L-disabled');
+            });
+            
+            var invalidBtn = new Rui.ui.LButton('invalidBtn');
+            invalidBtn.on('click', function(){
+                Rui.get('col1').invalid();
+            });
+            
+            var validBtn = new Rui.ui.LButton('validBtn');
+            validBtn.on('click', function(){
+                Rui.alert("form's valid : " + form.isValid());
+            });
+
+            var clearInvalidBtn = new Rui.ui.LButton('clearInvalidBtn');
+            clearInvalidBtn.on('click', function(){
+                form.clearInvalid();
+            });
+            
+            var hideBtn = new Rui.ui.LButton('hideBtn');
+            hideBtn.on('click', function(){
+                Rui.get('col2').hide();
+            });
+
+            var showBtn = new Rui.ui.LButton('showBtn');
+            showBtn.on('click', function(){
+                Rui.get('col2').show();
+            });
+            
+            var setValuesBtn = new Rui.ui.LButton('setValuesBtn');
+            setValuesBtn.on('click', function(){
+                var obj = {
+                    col1: 'Hello RUI',
+                    col2: 'LForm Sample',
+                    col3: 'R1',
+                    col4: 'R2',
+                    col5: 'R1'
+                };
+                form.setValues(obj);
+            });
+            
+            var updateRecordBtn = new Rui.ui.LButton('updateRecordBtn');
+            updateRecordBtn.on('click', function(){
+                if (dataSet.getCount() > 0)
+                    form.updateRecord(dataSet.getAt(1));
+            });
+            
+            var getValuesBtn = new Rui.ui.LButton('getValuesBtn');
+            getValuesBtn.on('click', function(){
+                var r = dataSet.createRecord({});
+                var record = form.loadRecord(r);
+                Rui.alert(Rui.dump(record.getValues()));
+            });
+            
+            var findFieldBtn = new Rui.ui.LButton('findFieldBtn');
+            findFieldBtn.on('click', function(){
+                var field = form.findField('col2')
+                Rui.alert('col2 field tagName : ' + field.tagName + ', value : ' + field.value);
+            });
+            
+            var submitBtn = new Rui.ui.LButton('submitBtn');
+            submitBtn.on('click', function(){
+                var validatorManager = new Rui.validate.LValidatorManager({
+                    validators: [{
+                        id: 'col1',
+                        validExp: 'Col1:true:minLength=6'
+                    }, {
+                        id: 'col2',
+                        validExp: 'Col2:true:length=6'
+                    }]
+                });
+                validatorManager.add('col1', new Rui.validate.LMaxLengthValidator('col1', 8));
+                
+                form.on('beforesubmit', function(){
+                    //return validatorManager.validateGroup('frm');
+                });
+                
+                form.submit();
+            });
+            
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Form</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>LForm을 이용한 폼 제어</h2>
+            <div class="LblockDesc">
+		        <p>LForm 객체를 이용하여 form을 핸들링 할 수 있습니다.</p>
+		        <p>또한 값을 DataSet의 레코드로 만들 수 있으며, DataSet의 레코드 값을 간편하게 폼 객체 안에 넣을 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+	    <div class="LblockMarkupCode">
+	        <div id="panel">
+	            <form id="frm" name="frm" method="post" action="./../../../data/savedCallback1.json">
+	                <fieldset>
+	                <label for="col1">col1: </label><input type="text" id="col1" name="col1" />
+	                <br/>
+	                <label for="col2">col2: </label><input type="text" id="col2" name="col2" />
+	                <br/>
+	                <label for="col3">col3: </label>
+	                <select id="col3" name="col3">
+	                    <option>ALL</option>
+	                    <option>R1</option>
+	                    <option>R2</option>
+	                </select>
+	                <br/>
+	                <label>col4: </label><input type="radio" id="col4_1" name="col4" value="R1"/><label for="col4_1">RADIO1</label>
+	                <input type="radio" id="col4_2" name="col4" value="R2"/><label for="col4_2">RADIO2</label>
+	                <br/>
+	                <label>col5: </label><input type="checkbox" id="col5" name="col5" value="R1"/><label for="col5">R1</label>
+	                <br/>
+	                <label for="col6">col6: </label>
+	                <textarea id="col6" name="col6" rows="5" cols="50"></textarea>
+	                </fieldset>
+	            </form>
+	        </div>
+	    </div>
+        <div class="LblockButton" >
+            <button type="button" id="disableBtn">Disable</button>
+            <button type="button" id="enableBtn">Enable</button>
+            <button type="button" id="invalidBtn">Invalid</button>
+            <button type="button" id="validBtn">Valid</button>
+            <button type="button" id="clearInvalidBtn">Clear invalid</button>
+            <button type="button" id="hideBtn">Hide</button>
+            <button type="button" id="showBtn">Show</button>
+            <button type="button" id="setValuesBtn">Set Values</button>
+            <button type="button" id="updateRecordBtn">UpdateRecord</button>
+            <button type="button" id="getValuesBtn">Get Values</button>
+            <button type="button" id="findFieldBtn">FindField</button>
+            <button type="button" id="submitBtn">Submit</button>
+         </div>
+    </div>
+</body>
+</html>

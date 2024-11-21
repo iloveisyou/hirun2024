@@ -1,0 +1,27 @@
+.L-grid-status-bar {
+	height:15px; 
+	background-color: #f9f9f9; 
+	border-bottom: 2px solid #c5c5c5;
+	border-top: 2px solid #c5c5c5;
+	padding: 9px 0px;
+	overflow: hidden;
+	text-align: right;
+}
+
+.L-grid-status-message {
+	padding-right: 20px;
+}
+
+.L-grid-status-icon {
+    background-image: url(./../../../resources/images/grid/light_white_red.png);
+    background-repeat:no-repeat;
+    background-position: 0px center;
+    padding-left: 15px;
+}
+
+.L-grid-status-bar-warnning {
+	background-image: url(./../../../resources/images/grid/light_white_red.png);
+    background-repeat:no-repeat;
+    background-position: -25px center;
+    padding-left: 15px;
+}

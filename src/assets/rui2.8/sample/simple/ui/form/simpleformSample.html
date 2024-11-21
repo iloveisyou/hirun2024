@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Simple Form</title>
+         <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type='text/javascript' class="script-code">
+              //log 활성화
+            $C('!config').set('$.core.logger.show', [true]);
+            var form = null;
+            var dataSet = null;            
+            var col8DateBox = null;
+            $C(function(){
+                /*<b>*/
+                form = $C('#form').form();
+                /*</b>*/
+                
+                $C('#col7').combo({
+                    //applyTo: 'col7'
+                });
+                
+                var data = [
+                {code: 'code1', value: 'CODE1'}, 
+                {code: 'code2', value: 'CODE2'}, 
+                {code: 'code3', value: 'CODE3'}
+                ]
+                
+                $C('#col7').addAll(data);
+                
+                col8DateBox = $C('#col8').dateBox({
+                    //applyTo: 'col8',
+                    name: 'col8DateBox'
+                });
+                
+                dataSet = $C.dataSet({
+                    id: 'dataSet',
+                    fields: [
+                    {id: 'col1'}, 
+                    {id: 'col2'}, 
+                    {id: 'col3'}
+                    ]
+                });
+                
+                dataSet.on('loadException', function(e){
+                    alert(e.throwObject.message);
+                });
+                
+                dataSet.load({
+                    url: './../../../data/data.json',
+                    method:"get"
+                });
+                
+            });
+        </script>
+        <script type='text/javascript' class="script-code">
+            function testUpdateRecord(){
+                if (dataSet.getCount() > 0) 
+                    form.updateRecord(dataSet.getAt(0));
+            }
+            
+            function testInvalid(){
+                var el = $C('#col1');
+                var el7 = $C('#col7');
+                var el8 = col8DateBox;
+                if (el.isValid()) {
+                    el.invalid();
+                    el7.invalid();
+                    el8.invalid();
+                    $C('#invalidLink').html('Invalid');
+                }
+                else {
+                    el.valid();
+                    el7.valid();
+                    el8.valid();
+                    $C('#invalidLink').html('Valid');
+                }
+            }
+            
+            function testSetValues(){
+                var obj = {
+                    col1: 'asdfasdf',
+                    col2: 'bbb',
+                    col3: 'tes3'
+                };
+                
+                form.setValues(obj);
+            }
+            
+            function testSubmit(){
+                var validatorManager = $C.validatorManager({
+                    validators: [{
+                        id: 'col1',
+                        validExp: 'Col1:true:minLength=6'
+                    }, {
+                        id: 'col2',
+                        validExp: 'Col2:true:length=6'
+                    }, {
+                        id: 'col8',
+                        validExp: 'Col8:true'
+                    }]
+                });
+                
+                validatorManager.add('col1', $C.maxLengthValidator('col1', 8));
+                
+                form.on('beforesubmit', function(){
+                    return validatorManager.validateGroup('frm');
+                });
+                
+                form.submit();
+            }
+            
+            function testClearInvalid(){
+                form.clearInvalid();
+            }
+            
+            function testFindField(){
+                $C.log(form.findField('col2'));
+            }
+            
+            function testValid(){
+                $C.log(form.isValid());
+            }
+            
+            function testHide(){
+                var el = $C('#col1');
+                if (el.isShow()) {
+                    el.hide(true);
+                    $C('#hideLink').html('Hide');
+                }
+                else {
+                    el.show(true);
+                    $C('#hideLink').html('Show');
+                }
+            }
+            
+            function testEnableDisable(){
+            
+                if (form.isDisable()) {
+                    form.enable();
+                    $C('#enableDisableLink').html('Disable');
+                }
+                else {
+                    form.disable();
+                    $C('#enableDisableLink').html('Enable');
+                }
+            }
+            
+        </script>
+    </head>
+    <body>
+        <h1>simpleform sample</h1>
+        <h2>LForm을 구현하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>LForm 객체를 이용하여 화면의 form을 핸들링 할 수 있습니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id='panel'>
+            <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                <input type='hidden' id='test' name='test' />state:<input type='text' id='state' name='state' />
+                <br/>
+                id:<input type='text' id='id' name='id' />
+                <br/>
+                col1:<input type='text' id='col1' name='col1' />
+                <br/>
+                col2:<input type='text' id='col2' name='col2' />
+                <br/>
+                col3:
+                <select id='col3' name='col3'>
+                    <option value='all'>ALL</option>
+                    <option value='tes3'>TES3</option>
+                    <option value='tes4'>TES4</option>
+                </select>
+                <br/>
+                col4:<input type='radio' id='col4_1' name='col4' value='RADIO1'/>RADIO1
+                <br/>
+                <input type='radio' id='col4_2' name='col4' value='RADIO2'/>RADIO2
+                <br/>
+                col5:<input type='checkbox' id='col5_1' name='col5' value='CHECKBOX1'/>CHECKBOX1
+                <br/>
+                <input type='checkbox' id='col5_2' name='col5' value='CHECKBOX2'/>CHECKBOX2
+                <br/>
+                col6:
+                <textarea id='col6' name='col6' rows="10" cols="50">
+                </textarea>
+                <br/>
+                col7:
+                <div id='col7'>
+                </div>
+                <br/>
+                col8:
+                <div id='col8'>
+                </div>
+                <br/>
+            </form>
+        </div>
+    </div>
+    <a href='javascript:testEnableDisable()' id='enableDisableLink'>Disable</a>
+    <a href='javascript:testInvalid()' id='invalidLink'>Invalid</a>
+    <a href='javascript:testHide()' id='hideLink'>Hide</a>
+    <a href='javascript:testSetValues()'>SetValues</a>
+    <a href='javascript:testSubmit()'>Submit</a>
+    <a href='javascript:testClearInvalid()'>Clear invalid</a>
+    <a href='javascript:testFindField()'>FindField</a>
+    <a href='javascript:testValid()'>Valid</a>
+    <a href='javascript:testUpdateRecord()'>UpdateRecord</a>
+    <a href='javascript:testLoadRecord()'>LoadRecord</a>
+</div>
+    </body>
+</html>

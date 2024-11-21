@@ -1,0 +1,40 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+LFileUploadDialog는 LFileBox와 LDialog로 구현된 파일 업로드 다이얼로그
+
+샘플 경로 :
+<a href="./../sample/general/ui/container/fileUploadDialogSample.html" target="_new">/rui/sample/general/ui/container/fileUploadDialogSample.html</a>
+</div>
+<div class="L-sample">
+sample: 기본 샘플
+<div class="L-code">
+var fileUploadDialog = new Rui.ui.LFileUploadDialog({
+    url: 'upload.rui',
+    width: 420
+});
+
+fileUploadDialog.render(document.body);
+
+fileUploadDialog.on('validate', function(){
+    var fileBox = this.getFileBox();
+    var value = fileBox.getValue();
+    var ext = value.substring(value.lastIndexOf('.') + 1);
+    if(ext != 'xls' && ext != 'xlsx') {
+        Rui.alert('엑셀 파일만 등록 가능합니다. [xls]');
+        return false;
+    }
+    return true;
+});
+
+fileUploadDialog.on('success', function(e){
+    Rui.alert('파일을 업로드 했습니다.');
+});
+.....
+
+fileUploadDialog.show();
+</div>
+</div>
+</div>
+
+</div>

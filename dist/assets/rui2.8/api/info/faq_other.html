@@ -1,0 +1,21 @@
+<script type="text/javascript">
+$S('#faqOther .L-answer').addClass('L-hide-display');
+$S('#faqOther .L-question').on('click', function(e){
+    $E(this).parent().select('.L-answer').toggle();
+});
+</script>
+<div id="faqOther">
+<h2>Other</h2>
+<ul>
+    <li>
+        <div class="L-question">
+           날짜 포멧은 어떻게 지원하나요?
+        </div>
+        <div class="L-answer">
+<pre>다양한 포멧형식을 지원합니다. API에 LDateLocale에 포멧 형식이 정의되어 있습니다.     
+</pre>
+        </div>
+    </li>
+
+</ul>
+</div>

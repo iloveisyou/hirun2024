@@ -1,0 +1,375 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+데이터셋과 맵핑되어 있는 Combo
+
+샘플 경로 :
+<a href="./../sample/general/ui/form/comboItemsSample.html" target="_new">/rui/sample/general/ui/form/comboItemsSample.html</a>
+<a href="./../sample/general/ui/form/comboMarkupSample.html" target="_new">/rui/sample/general/ui/form/comboMarkupSample.html</a>
+<a href="./../sample/general/ui/form/comboSample.html" target="_new">/rui/sample/general/ui/form/comboSample.html</a>
+<a href="./../sample/general/ui/form/comboMultiLoadSample.html" target="_new">/rui/sample/general/ui/form/comboMultiLoadSample.html</a>
+<a href="./../sample/general/ui/form/comboMultiSample.html" target="_new">/rui/sample/general/ui/form/comboMultiSample.html</a>
+<a href="./../sample/general/ui/form/comboRendererSample.html" target="_new">/rui/sample/general/ui/form/comboRendererSample.html</a>
+<a href="./../sample/general/ui/form/comboSequancialLoadingInGridSample.html" target="_new">/rui/sample/general/ui/form/comboSequancialLoadingInGridSample.html</a>
+<a href="./../sample/general/ui/form/comboSequancialLoadingSample.html" target="_new">/rui/sample/general/ui/form/comboSequancialLoadingSample.html</a>
+</div>
+<div class="L-sample">
+sample: LCombo 기본 샘플이다.
+<div class="L-code">
+var combo = new Rui.ui.form.LCombo({
+    applyTo:'combo1',
+    url: 'test.rui'
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: LCombo를 items로 생성하는 샘플
+<div class="L-code">
+var combo = new Rui.ui.form.LCombo({
+    applyTo:'combo1',
+    items: [
+        { value: 'code1', text: '코드1'},
+        { value: 'code2', text: '코드2'},
+        { value: 'code3', text: '코드3'}
+    ]
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: LCombo에 대한 데이터를 로딩하는 샘플
+<div class="L-code">
+var combo = new Rui.ui.form.LCombo({
+    applyTo:'combo1'
+});
+
+combo.getDataSet().load({
+    url: 'test.rui'
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: LCombo에 code와 display값에 대한 필드를 선언하는 샘플
+<div class="L-code">
+var combo = new Rui.ui.form.LCombo({
+    valueField: 'code',
+    displayField: 'name',
+    applyTo:'combo1'
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: LCombo의 '선택하세요' 항목을 출력하지 않는 샘플
+<div class="L-code">
+var combo = new Rui.ui.form.LCombo({
+    useEmptyText: false,
+    applyTo:'combo1'
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: LCombo의 '선택하세요' 문자열을 '전체' 문자열로 변경하는 샘플
+<div class="L-code">
+var combo = new Rui.ui.form.LCombo({
+    emptyText: '전체',
+    applyTo:'combo1'
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: 그리드 editor에 대한 LCombo의 display값을 출력하는 샘플
+<div class="L-code">
+var combo = new Rui.ui.form.LCombo({
+    autoMapping: true,
+    applyTo:'combo1'
+});
+</div>
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_valueField">
+<div class="L-description">
+LCombo 생성시 내부의 dataSet과 맵핑할 값필드명으로 설정한다.
+</div>
+<div class="L-sample">
+sample: 내부의 dataSet과 맵핑할 값 필드를 value라는 필드명으로 생성한다.
+기본 값은 'code'이며, 이 값이 정확하지 않을 경우 선택된 항목의 값을 가져올 수 없다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LCombo({
+    id:'combo1',
+    applyTo:'combo1',
+    url: 'test.rui',
+    valueField: 'value'
+});
+</div>
+</div>
+</div>
+
+<div class="config_displayField">
+<div class="L-description">
+LCombo 생성시 내부의 dataSet과 맵핑할 출력 필드명으로 설정한다.
+</div>
+<div class="L-sample">
+sample: 내부의 dataSet과 맵핑할 출력 필드를 name라는 필드명으로 생성한다.
+기본값은 'name'이며, 이 값이 정확하지 않을 경우 목록이 나타나지 않는다.
+
+<div class="L-code">
+var textBox = new Rui.ui.form.LCombo({
+    id:'combo1',
+    applyTo:'combo1',
+    url: 'test.rui',
+    displayField: 'name'
+});
+</div>
+</div>
+</div>
+
+<div class="config_emptyTextMessageCode">
+<div class="L-description">
+기본 emptyText 메시지의 다국어 코드값
+프로젝트용으로 따로 생성할 수 있다.
+</div>
+<div class="L-sample">
+sample: emptyText를 프로젝트용 $.message.project01 메시지 코드로 설정한다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LCombo({
+    id:'combo1',
+    applyTo:'combo1',
+    url: 'test.rui',
+    emptyTextMessageCode: '$.message.project01'
+});
+</div>
+</div>
+</div>
+
+<div class="config_emptyText">
+<div class="L-description">
+값이 없을경우 '선택하세요.' 값이나 '전체' 값으로 출력할 text값
+</div>
+<div class="L-sample">
+sample: emptyText를 프로젝트용 전체($.message.alltext) 메시지를 설정한다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LCombo({
+    id:'combo1',
+    applyTo:'combo1',
+    url: 'test.rui',
+    emptyText: Rui.getMessageManager().get('$.message.alltext')
+});
+</div>
+</div>
+</div>
+
+<div class="config_useEmptyText">
+<div class="L-description">
+'선택하세요.' 항목 추가 여부
+기본값은 true로 기본 출력된다. false로 설정되면 값이 없을때 선택하면 무조건 하나는 선택되어야 한다.
+</div>
+<div class="L-sample">
+sample: emptyText를 출력하지 않는다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LCombo({
+    id:'combo1',
+    applyTo:'combo1',
+    url: 'test.rui',
+    useEmptyText: false
+});
+</div>
+</div>
+</div>
+
+<div class="config_forceSelection">
+<div class="L-description">
+선택 필수 여부
+값을 무조건 하나는 선택되게 한다. 기본값은 false인다.
+</div>
+<div class="L-sample">
+sample: emptyText를 출력하지 않는다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LCombo({
+    id:'combo1',
+    applyTo:'combo1',
+    url: 'test.rui',
+    forceSelection: true
+});
+</div>
+</div>
+</div>
+
+<div class="config_selectedIndex">
+<div class="L-description">
+데이터 로딩시 combo의 row 위치
+기본값은 -1이다. defaultValue 속성이 우선으로 적용되고 그후에 selectedIndex가 적용된다.
+</div>
+<div class="L-sample">
+sample: 데이터를 로딩한 후 기본으로 2번째 index로 셋팅한다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LCombo({
+    id:'combo1',
+    applyTo:'combo1',
+    url: 'test.rui',
+    selectedIndex: 2
+});
+</div>
+</div>
+</div>
+
+<div class="config_rendererField">
+<div class="L-description">
+bind시에 현재 combo의 displayField와 맵핑된 dataSet에 반영할 출력 필드
+combo 자체만으로 의미가 없고 bind시에만 의미가 있다.
+combo에서 값이 바뀌면 bind를 통해 code값만 반영되므로 그리드에서 출력할 display값은 변경이 안된다.
+그래서 code값이 바뀌면 combo에 해당 되는 value값을 bind된 데이터의 display값에 반영할 수 있게 지원한다.
+rendererField는 dataSet의 addTrigger 메소드를 사용해야 한다. 
+</div>
+<div class="L-sample">
+sample: 데이터를 로딩한 후 기본으로 2번째 index로 셋팅한다.
+<div class="L-code">
+var combo1 = new Rui.ui.form.LCombo({
+    id:'combo1',
+    applyTo:'combo1',
+    url: 'test.rui',
+    rendererField: 'col1Value'
+});
+
+var dataSet = new Rui.data.LJsonDataSet({
+    fields: [
+        { id: 'col1' },
+        { id: 'col1Value' },
+    ]
+});
+
+dataSet.addTrigger(combo1);
+
+var bind = new Rui.data.LBind({
+    groupId: 'detailId',
+    dataSet: dataSet,
+    bindInfo: [
+        {id:'col1', ctrlId:'combo1', value:'value'}
+    ]
+});
+</div>
+</div>
+</div>
+
+<div class="config_editable">
+<div class="L-description">
+콤보의 editable 속성을 설정한다.
+</div>
+<div class="L-sample">
+sample: 콤보 생성시 편집을 불가능하게 한다.
+<div class="L-code">
+    var combo = new Rui.ui.form.LCombo({
+        id: 'combo1',
+        applyTo: 'combo1',
+        editable: false,
+        url: './../../../../sample/data/code.json'
+    });
+</div>
+</div>
+</div>
+
+<div class="config_items">
+<div class="L-description">
+LCombo 생성시 초기 데이터를 로딩한다.
+</div>
+<div class="L-sample">
+sample: LCombo 생성시 Y, N을 선택할 수 있는 데이터를 미리 로딩한다.
+<div class="L-code">
+    var combo = new Rui.ui.form.LCombo({
+        id: 'combo1',
+        applyTo: 'combo1',
+        items: [ { code: 'Y' }, { code: 'N' } ]
+    });
+</div>
+</div>
+<div class="L-sample">
+sample: LCombo 생성시 items의 Y는 예로 표시하고 N은 아니오로 표시하는 데이터를 미리 로딩한다.
+<div class="L-code">
+    var combo = new Rui.ui.form.LCombo({
+        id: 'combo1',
+        applyTo: 'combo1',
+        items: [ { code: 'Y', value: '예' }, { code: 'N', value: '아니오' } ]
+    });
+</div>
+</div>
+<div class="L-sample">
+sample: LCombo 생성시 items의 code와 value의 필드명을 변경하여 로딩한다.
+<div class="L-code">
+    var combo = new Rui.ui.form.LCombo({
+        id: 'combo1',
+        applyTo: 'combo1',
+        valueField: 'code1',
+        displayField: 'code2',
+        items: [ { code1: 'Y', code2: '예' }, { code1: 'N', code2: '아니오' } ]
+    });
+</div>
+</div>
+</div>
+
+<div class="config_autoMapping">
+<div class="L-description">
+그리드의 데이터에는 code값만 정의되어 있고 LCombo에 display값이 있다면 code값에 대한 display값을 그리드의 셀에
+출력해야 한다. autoMapping을 적용하면 그리드의 code값에 대한 display값이 출력된다. 
+</div>
+<div class="L-sample">
+sample: autoMapping을 적용하는 기본 샘플
+<div class="L-code">
+    var combo = new Rui.ui.form.LCombo({
+        autoMapping: true,
+        applyTo: 'combo1'
+    });
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+
+<div class="method_getBindValue">
+<div class="L-description">
+현재 Combo안에 있는 DataSet의 해당 row의 fieldName에 해당되는 값을 리턴한다.
+</div>
+<div class="L-sample">
+sample: combo1에 해당되는 내부의 dataSet의 'code'필드에 해당되는 값을 메시지로 출력한다.
+<div class="L-code">
+var combo1 = new Rui.ui.form.LCombo({
+    id:'combo1',
+    url: 'test.rui',
+    applyTo:'combo1',
+    
+});
+...................
+alert(textBox.getBindValue('code'));
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_keydown">
+<div class="L-description">
+keydown 기능이 호출되면 수행하는 이벤트. 기본적인 dom 이벤트
+</div>
+<div class="L-sample">
+sample: textBox1에서 enter(13)키를 입력하면 textBox2로 이동한다.  
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id:'combo1',
+    applyTo:'combo1'
+});
+
+textBox1.on('keydown', function(e) {
+    if(e.keyCode == 13) {
+        textBox2.focus();
+    }
+});
+</div>
+</div>
+</div>
+
+<!-- property 시작 -->
+</div>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="파일 업로드 다이얼로그(LFileUploadDialog)" />
+    <title>File Upload Dialog</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LFileBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LFileBox.css" />
+    <script type="text/javascript" src="./../../../../plugins/ui/LFileUploadDialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LFileUploadDialog.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var listDataSet = new Rui.data.LJsonDataSet({
+                id: 'listDataSet',
+                fields: [
+                    { id: 'fileName' }
+                ]
+            });
+            var listColumnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'fileName', label: 'File Name', autoWidth: true }
+                ]
+            });
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: listColumnModel,
+                dataSet: listDataSet,
+                width: 600,
+                height: 100
+            });
+            grid.render('listGrid');
+            
+            /*<b>*/
+            var fileUploadDialog = new Rui.ui.LFileUploadDialog({
+                //파일을 Upload하는 Multipart Posting URL
+                url: './../../../data/data.jsp',
+                id: 'fileUpload',
+                name: 'fileBoxName',
+                width: 420
+            });
+            fileUploadDialog.render(document.body);
+            
+            fileUploadDialog.on('validate', function(){
+                var fileBox = this.getFileBox();
+                var value = fileBox.getValue();
+                var ext = value.substring(value.lastIndexOf('.') + 1);
+                if(ext != 'xls' && ext != 'xlsx') {
+                    Rui.alert('엑셀 파일만 등록 가능합니다. [xls]');
+                    return false;
+                }
+                return true;
+            });
+            
+            fileUploadDialog.on('success', function(e){
+                //upload된 파일 목록 출력
+                listDataSet.load({
+                    //Upload된 파일 목록을 가져오는 URL
+                    url: './../../../data/fileList.json'
+                });
+                Rui.alert('파일을 업로드 했습니다.');
+            });
+            /*</b>*/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var fileAddBtn = new Rui.ui.LButton('fileAdd');
+            fileAddBtn.on('click', function(){
+                fileUploadDialog.show();
+            });
+            
+        });
+    </script>
+
+</head>
+<body>
+    <div id='hd'>
+        <h1>File Upload Dialog</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>파일업로드 다이얼로드(File Upload Dialog)를 사용합니다.</h2>
+            <div class="LblockDesc">
+        <p>파일업로드(File Upload)를 위해 제공되는 LFileUploadDialog를 사용하는 예제 입니다.</p>
+        <p>LFileUploadDialog는 한번에 한개의 파일(Excel 파일)을 업로드 하며 업로드가 끝나면 이 Dialog는 닫힙니다.</p>
+            </div>
+        </div>
+    </div>
+	<div id='bd'>
+	    <div class="LblockMarkupCode">
+	        <div class="LblockGrid">
+	            <div id="listGrid"></div>
+	        </div>
+	        <div class='blockButton' >
+	            <button id='fileAdd'>Upload</button>
+	        </div>
+	    </div>
+	</div>
+</body>
+</html>

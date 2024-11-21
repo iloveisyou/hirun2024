@@ -1,0 +1,10 @@
+[{"metaData":{"fields":[{"name":"mailId"},{"name":"important"},{"name":"clip"},{"name":"sender"},{"name":"subject"},{"name":"date"},{"name":"size","dataType":"int"},{"name":"unread"}]},
+"records":[{"mailId":"50","important":"Y","clip":"N","sender":{"name":"김동균", "email":"dkkim88@test.com"},"subject":"[RE][FW]Re : 이슈 경과 지속적으로 문제 발생되고 있음","date":"2013-05-16","size":1581491, "unread": "Y"},
+{"mailId":"51","important":"N","clip":"Y","sender":{"name":"이혁창", "email":"hclee@test.com"},"subject":"주간업무","date":"2013-05-16","size":1, "unread": "Y"},
+{"mailId":"52","important":"N","clip":"N","sender":{"name":"강윤욱", "email":"yunwkang@test.com"},"subject":"[Planner:일정등록]Scala Kick-Off & Week1","date":"2013-05-16","size":10, "unread": "Y"},
+{"mailId":"53","important":"N","clip":"N","sender":{"name":"강창혁", "email":"changhkang@test.com"},"subject":"5월16일 주간보고 취합","date":"2013-05-16","size":3866624, "unread": "Y"},
+{"mailId":"54","important":"Y","clip":"N","sender":{"name":"이영건", "email":"younggun@test.com"},"subject":"[5/14 상황보고][긴급도움요청] 속도 저하 원인 및 조치 현황 공유","date":"2013-05-15","size":491, "unread": "Y"},
+{"mailId":"55","important":"Y","clip":"N","sender":{"name":"전성민", "email":"sungmin@test.com"},"subject":"[RE][RE][긴급도움요청] 속도 저하 원인 및 조치 현황 공유","date":"2013-05-15","size":1029372482, "unread": "Y"},
+{"mailId":"56","important":"Y","clip":"N","sender":{"name":"박후성", "email":"hspark@test.com"},"subject":"[RE][RE][긴급도움요청] 속도 저하 원인 및 조치 현황 공유","date":"2013-05-15","size":478, "unread": "Y"},
+{"mailId":"57","important":"Y","clip":"N","sender":{"name":"기술연구원", "email":"rnd@test.com"},"subject":"[공지] 풋살대회","date":"2013-05-15","size":242, "unread": "Y"}]
+}]

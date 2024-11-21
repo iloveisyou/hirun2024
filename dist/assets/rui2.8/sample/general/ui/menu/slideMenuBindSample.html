@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="슬라이드메뉴(LSlideMenu)" />
+    <title>Slide Menu</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/menu/rui_menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/menu/rui_menu.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #bd {
+            height: 350px;
+        }
+        h3 {
+            margin: 0px !important;
+            padding-left: 10px !important;
+        }
+        #contentWrapper, #fieldWrapper, #buttonWrapper{
+            float: left;
+        }
+        #LblockFields {
+            padding: 10px;
+        }
+        #contentWrapper {
+            width: 300px;
+        }
+        #fieldWrapper {
+            margin-left: 20px;
+            width: 300px;
+        }
+        #buttonWrapper {
+            margin-left: 20px;
+            width: 300px;
+        }
+        #divOut {
+            margin: 10px 0;
+            height: 20px;
+        }
+        li {
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .L-ul-focus-top-node {
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'menuId', type: 'number' },
+                    { id: 'seq', type: 'number' },
+                    { id: 'parentMenuId', type: 'number' },
+                    { id: 'name' },
+                    { id: 'url' }
+                ]
+            });
+            
+            /*<b>*/
+            var slide = new Rui.ui.menu.LSlideMenu({
+                onlyOneTopOpen: true,
+                useAnimation: true,
+                dataSet: dataSet,
+                fields: {
+                    rootValue: 0,
+                    parentId: 'parentMenuId',
+                    id: 'menuId',
+                    label: 'name',
+                    order: 'seq'
+                }
+            });
+            slide.render('divMenu');
+            /*</b>*/
+
+            /*<b>*/
+            new Rui.data.LBind({
+                groupId: 'LblockFields',
+                dataSet: dataSet,
+                bind: true,
+                bindInfo: [
+                    { id: 'parentMenuId', ctrlId: 'parentMenuId', value: 'value' },
+                    { id: 'menuId', ctrlId: 'menuId', value: 'value' },
+                    { id: 'name', ctrlId: 'name', value: 'value' },
+                    { id: 'url', ctrlId: 'url', value: 'value' },
+                    { id: 'seq', ctrlId: 'seq', value: 'value' }
+                ]
+            });
+            /*</b>*/
+
+            /*<b>*/
+            var validatorManager = new Rui.validate.LValidatorManager({
+                validators: [
+                    { id: 'parentMenuId', validExp: 'parentMenuId:false:number' },
+                    { id: 'menuId', validExp: 'menuId:true:number' },
+                    { id: 'name', validExp: 'Label:true:maxByteLength=20' },
+                ]
+            });
+            /*</b>*/
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+
+            /*<b>*/
+            dataSet.on('canRowPosChange', function(e){
+                if(e.oldRow < 0) return;
+                if (validatorManager.validateDataSet(dataSet, e.oldRow) !== true) {
+                    Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + validatorManager.getMessageList().join('<br>') );
+                    return false;
+                }
+                return true;
+            });
+            /*</b>*/
+
+            dataSet.load({ url: './../../../../sample/data/menuTwoDepth.json' });
+            
+
+            /*******************
+             * 버튼 및 이벤트 처리
+             *******************/
+             
+            var addBtn = new Rui.ui.LButton('addBtn');
+            addBtn.on('click', function(){
+                var record = dataSet.createRecord({
+                    parentNodeId: null,
+                    name: 'no name'
+                });
+                dataSet.add(record);
+            });
+
+            var removeBtn = new Rui.ui.LButton('removeBtn');
+            removeBtn.on('click', function(){
+                var row = dataSet.getRow();
+                if(row > -1)
+                    dataSet.removeAt(row);
+            });
+            
+        });
+    </script>
+</head>
+<body>
+    <h1>SlideMenu</h1>
+    <h2>슬라이드메뉴(SliceMenu)와 바인드(Bind)를 조합한 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>슬라이드메뉴(SliceMenu)와 바인드(Bind)를 조합하여 노드를 편집하는 샘플 입니다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="contentWrapper">
+                <div id="divMenu"></div>
+            </div>
+            <div id="fieldWrapper">
+                <h3>선택된 Node의 값 편집</h3>
+                <div id="LblockFields">
+                    <div><label id="parentMenuId">parentMenuId :</label></div>
+                    <div><input type="text" id="parentMenuId"></div>
+                    <div><label id="menuId">menuId :</label></div>
+                    <div><input type="text" id="menuId"></div>
+                    <div><label id="name">name :</label></div>
+                    <div><input type="text" id="name"></div>
+                    <div><label id="url">url :</label></div>
+                    <div><input type="text" id="url" style="width: 250px"></div>
+                    <div><label id="seq">seq :</label></div>
+                    <div><input type="text" id="seq"></div>
+                </div>
+            </div>
+            <div id="buttonWrapper">
+                <h3>Node 추가/삭제</h3>
+                <div class="LblockButton" >
+                    <button type="button" id="addBtn" >Add New</button>
+                    <button type="button" id="removeBtn" >Remove Focused</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

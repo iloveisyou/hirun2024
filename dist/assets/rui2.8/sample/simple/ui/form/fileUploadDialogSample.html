@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>File Upload Sample</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type='text/javascript' src='./../../../../plugins/ui/form/LFileBox.js'></script>
+        <script type='text/javascript' src='./../../../../plugins/ui/LCommonPanel.js'></script>
+        <script type='text/javascript' src='./../../../../plugins/ui/LFileUploadDialog.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui_skin1.css" />
+        <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LFileBox.css" />
+        <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LFileUploadDialog.css" />
+        <style type="text/css">        
+            #defaultGrid, #fileUploadGrid {
+                display: inline-block;
+                *display: inline;
+                *zoom: 100%;    
+            }
+        </style>
+        <script type="text/javascript" class="script-code">
+        
+            Rui.onReady(function(){
+                Rui.browser.msie678 = true;
+                Rui.getConfig().set('$.core.logger.show', [true]);
+                
+                // 업무 화면
+                var dataSet = new Rui.data.LJsonDataSet({
+                    id: 'dataSet',
+                    fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'fileNo' }
+                ]
+                });
+    
+                var columnModel = new Rui.ui.grid.LColumnModel({
+                    columns: [
+                        new Rui.ui.grid.LNumberColumn(),
+                        { field: "col1", label: "Col1" },
+                        { field: "col2", label: "Col2" },
+                        { field: "fileNo", label: "File No" }
+                        ]
+                });
+    
+                var grid = new Rui.ui.grid.LGridPanel(
+                {
+                    columnModel: columnModel,
+                    dataSet:dataSet,
+                    autoWidth: false,
+                    width: 500,
+                    height:300
+                });
+
+                grid.render('defaultGrid');
+                
+                /*<b>*/
+                var fileUploadDialog = new Rui.ui.LFileUploadDialog({
+                    url: '/consoleLog.dev'
+                });
+                fileUploadDialog.render(document.body);
+                
+                fileUploadDialog.on('validate', function(){
+                    var fileBox = this.getFileBox();
+                    var value = fileBox.getValue();
+                    var ext = value.substring(value.lastIndexOf('.') + 1);
+                    if(ext != 'xls') {
+                        Rui.alert('엑셀 파일만 등록 가능합니다. [xls]');
+                        return false;
+                    }
+                    return true;
+                });
+                
+                fileUploadDialog.on('success', function(e){
+                    var responseText = e.conn.responseText;
+
+                    /*
+                    var data = dataSet.getReadData(e.conn);
+                    dataSet.loadData(data);
+                    */    
+                
+                    var value = e.value;
+                    alert('파일을 업로드 했습니다. : ' + value + '\r\n' + responseText);
+                });
+                /*</b>*/
+    
+                var fileDataSet = new Rui.data.LJsonDataSet({
+                    id: 'dataSet',
+                    fields: [
+                    { id: 'fileNo' },
+                    { id: 'fileSeqNo' },
+                    { id: 'fileName' },
+                    { id: 'fileSize' }
+                ]
+                });
+                
+                var fileColumnModel = new Rui.ui.grid.LColumnModel({
+                    columns: [
+                        new Rui.ui.grid.LSelectionColumn(),
+                        { field: "fileName", label: "Name", width:200 },
+                        { field: "fileSize", label: "Size", align: 'right'}
+                        ]
+                });
+    
+                var grid = new Rui.ui.grid.LGridPanel(
+                {
+                    columnModel: fileColumnModel,
+                    dataSet: fileDataSet,
+                    autoWidth: false,
+                    width: 400,
+                    height: 200
+                });
+    
+                grid.render('fileUploadGrid');
+                
+                var fileAddBtn = new Rui.ui.LButton('fileAdd');
+                fileAddBtn.on('click', function(){
+                    fileUploadDialog.show();
+                });
+                
+                var fileDeleteBtn = new Rui.ui.LButton('fileDelete');
+                fileDeleteBtn.on('click', function(){
+                    if(fileDataSet.getMarkedCount() < 1) {
+                        alert('파일을 선택하세요.');
+                        return;
+                    }
+                    
+                    fileDataSet.removeMarkedRow();
+                });
+            });
+            
+        </script>
+
+    </head>
+    <body>
+        <h1>File Upload Sample</h1>
+        <h2>LFileBox의 file 업로드를 LDialog와 연계하여 구현한 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>파일업로드 객체를 다이얼로그에 연결하여 사용할 수 있습니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id='defaultGrid' ></div>
+        <div id='fileUploadGrid' ></div>
+        <div id='fileUploadDialog' ></div>
+        <div class='blockButton' >
+            <button id='fileAdd'>Add</button>
+            <button id='fileDelete'>Delete</button>
+        </div>
+    </div>
+</div>
+    </body>
+</html>

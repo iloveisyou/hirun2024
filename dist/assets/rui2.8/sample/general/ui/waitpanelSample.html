@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="패널(LWaitPanel), 기다리기(wait), 대기" />
+    <title>Wait Panel</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+    
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            /*<b>*/
+            var waitPanel = new Rui.ui.LWaitPanel();
+            /*</b>*/
+    
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var showBtn = new Rui.ui.LButton('showBtn');
+            showBtn.on('click', function(){
+                /*<b>*/
+                waitPanel.show();
+                /*</b>*/
+                setTimeout(function(){
+                    /*<b>*/
+                    waitPanel.hide();
+                    /*</b>*/
+                }, 2000)
+            });
+            
+        });
+    </script>
+</head>
+<body>
+    <h1>Wait Panel</h1>
+    <h2>로딩 마스크 (LWaitPanel)를 출력하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">사용자로부터 기다려야 함을 요구할 때 사용할 수 있는 로딩 마스크(waiting panel)입니다. 생성 후 show(), hide() 기능을 사용하여 제어할 수 있습니다.</div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="showBtn" >2초간 WaitPanel 보기</button>
+        </div>
+    </div>
+</body>
+</html>

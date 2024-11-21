@@ -1,18 +1,60 @@
+{% set ruiPath='/assets/rui2.8' %}
+{%- macro include(fileName) -%}
+    {%- include fileName ignore missing -%}
+{%- endmacro -%}
+{#- // 들여쓰기(Tab Indent) 조정을 위한 macro -#}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>hi run</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hi run</title>
+
+    <!-- RUI import -->
+    <!-- <script type="text/javascript" src="{{ruiPath}}/js/rui_base.js"></script>
+    <script type="text/javascript" src="{{ruiPath}}/js/rui_core.js"></script>
+    <script type="text/javascript" src="{{ruiPath}}/js/rui_ui.js"></script>
+    <script type="text/javascript" src="{{ruiPath}}/js/rui_form.js"></script>
+    <script type="text/javascript" src="{{ruiPath}}/js/rui_grid.js"></script>
+    <script type="text/javascript" src="{{ruiPath}}/resources/rui_config.js"></script>
+    <script type="text/javascript" src="{{ruiPath}}/resources/rui_license.js"></script> -->
+    <!-- <script type="text/javascript" src="{{ruiPath}}/plugins/ui/LTooltip.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ruiPath}}/plugins/ui/LTooltip.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{{ruiPath}}/resources/rui.css" /> -->
+    <script language="JavaScript" type="text/javascript" src='{{ruiPath}}/js/rui_base.js'></script>
+    <script language="JavaScript" type="text/javascript" src='{{ruiPath}}/js/rui_core.js'></script>
+    <script language="JavaScript" type="text/javascript" src='{{ruiPath}}/js/rui_ui.js'></script>
+    <script language="JavaScript" type="text/javascript" src='{{ruiPath}}/js/rui_form.js'></script>
+    <script language="JavaScript" type="text/javascript" src='{{ruiPath}}/js/rui_grid.js'></script>
+    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/ui/LLoadPage.js'></script>
+    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/resources/rui_config.js'></script>
+    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/resources/locale/lang-ko_KR.js'></script>
+    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/resources/locale/lang-en_US.js'></script>
+    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/ui/grid/LGridView.js'></script>
+    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/ui/grid/LGridPanelExt.js'></script>
+    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/ui/grid/LGridStatusBar.js'></script>
+    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/ui/grid/LTableView.js'></script>
+    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/ui/LFrameDialog.js'></script>
+    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/resources/rui_config.js'></script>
+    <link rel="stylesheet" type="text/css" href="{{ruiPath}}/resources/rui.css" />
+    <link rel="stylesheet" type="text/css" href="{{ruiPath}}/resources/rui_skin_blue.css" />
+    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/tab/rui_tab.js'></script>
+    <link rel="stylesheet" type="text/css"              href="{{ruiPath}}/plugins/tab/rui_tab.css" />
 </head>
 <body>
-  <div class="wrap">
-    {% include './header.html' %}
+
+<div class="wrap">
+    {{ include('./header.html') | tabIndent(1) }}
+
     <main>
-      {% block main %}
-      {% endblock %}
+        {% filter tabIndent(2) %}
+            {% block main %}
+            {% endblock %}
+        {% endfilter %}
     </main>
-    {% include './footer.html' %}
-  </div>
+    
+    {{ include('./footer.html') | tabIndent(1) }}
+</div>
+
 </body>
 </html>

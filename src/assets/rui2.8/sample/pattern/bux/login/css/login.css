@@ -1,0 +1,111 @@
+@charset "utf-8";
+
+* {
+    font-family: tahoma,sans-serif;
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-decoration: none;
+}
+/* login */
+.ux_area{
+    position:relative;
+    top:70px;
+    left:82px;
+    border:0px;
+    margin:0px;
+    padding:0px;
+    display: block;
+   
+}
+.ux_login_wrap {
+	position: relative;
+	margin:0 auto;
+    background-color: #FFF;
+    width: 450px;
+    padding: 20px;
+    z-index:1
+}
+.ux_login_fieldset{
+    overflow:hidden;
+    position:relative;
+    z-index:1;
+    height: 210px;
+    border:none;
+    margin: 12px 0 0 220px
+}
+.ux_login_name{
+    width:62px;
+    height:18px;
+}
+.ux_login_footer {
+    background-color: #FFF;
+    border: none;
+    width: 500px;
+    height: 18px;
+    margin: -50px auto;
+    text-align: center;
+}
+.ux_language {
+    position:absolute;
+    margin: -5px 0 0 60px   
+}
+.ux_idcheck {
+    position:absolute;
+    margin:0 120px 0 0;
+    font-family: dotum;
+    font-size: 12px;
+    font-weight: bold;
+    border:none;   
+}
+.ux_userid {
+    position:absolute;
+    margin: 20px 0 0 0;
+}
+.ux_pwd {
+    position:absolute;
+    margin: 50px 0 0 0;
+}
+.ux_btn_login {
+    position:absolute;
+    font-size: 18px;
+    top: 19px;
+    top: 20px\9;
+    left: 181px;
+    z-index:1
+}
+.ux_btn_login button {
+    width: 88px;
+    height: 57px;
+    cursor: pointer;
+    background-image: url('./../../../../../sample/pattern/bux/login/img/btn_login.png');
+}
+.ux_btn_login button:hover {
+    background-image: url('./../../../../../sample/pattern/bux/login/img/LGE_login_bg_push1.png');
+}
+.ux_dlg {
+    position:absolute;
+    margin-top: -10px    
+}
+.ux_dlg_header {
+    background-color: #C5003D;
+    height: 27px;
+}
+
+.ux_dlg_msg_title{
+    color: #fff;
+    font-family: "Dotum";
+    font-weight: bold;
+    font-size: 12px;
+    padding-top: 6px;
+}
+.ux_dlg_msg {
+    text-align: center;
+    margin: 28px;
+}
+.ux_dlg_chkmsg {
+    position:fixed;
+    text-align: left;
+    z-index:1;
+    margin: 90px 0 0 16px;
+    }

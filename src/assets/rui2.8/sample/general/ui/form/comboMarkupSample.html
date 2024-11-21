@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="콤보(LCombo), 리스트(List), 추가(Add), 삭제(Delete)" />
+    <title>Combo Markup Based</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            /*<b>*/
+            var combo = new Rui.ui.form.LCombo({
+                applyTo: 'combo1'
+            });
+            /*</b>*/
+           
+            combo.on('changed', function(e){
+                Rui.log(combo.getValue());
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var count = 6;
+            
+            var addBtn = new Rui.ui.LButton('addBtn');
+            addBtn.on('click', function(){
+                /*<b>*/
+                combo.add({
+                    value: 'code' + count,
+                    text: '코드' + count++
+                });
+                /*</b>*/
+            });
+            
+            var removeBtn = new Rui.ui.LButton('removeBtn');
+            removeBtn.on('click', function(){
+                /*<b>*/
+                if (combo.getCount() < 1) {
+                    alert('삭제하려는 데이터가 없습니다.');
+                    return;
+                }
+                combo.removeAt(0);
+                /*</b>*/
+            });
+        });
+    </script>
+   
+</head>
+<body>
+    <div id='hd'>
+        <h1>Combo Markup Based</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>콤보(Combo)를 SELECT/OPTION markup의 값을 활용하여 구현한 예제</h2>
+            <div class="LblockDesc">
+		        <p>콤보(Combo)를 구성할때 Markup을 이용할 수 있습니다.</p>
+		        <p>SELECT를 사용하여 Markup을 구성한 경우 OPTION 값을 Combo의 데이터로 전환 하여 사용할 수 있습니다.</p>
+		        <p>또한 추가 및 삭제 기능을 사용하여 Combo의 목록을 편집 할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <fieldset>
+                <label for="combo1">
+                    Combo
+                </label>
+                <select id="combo1" name="combo1">
+                    <option value="" class="empty">선택하세요.</option>
+                    <option value="code1">코드1</option>
+                    <option value="code2">코드2</option>
+                    <option value="code3" selected>코드3</option>
+                    <option value="code4">코드4</option>
+                    <option value="code5">코드5</option>
+                </select>
+            </fieldset>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="addBtn" >Add code/value</button>
+            <button type="button" id="removeBtn" >Remove At 0</button>
+        </div>
+    </div>
+</body>
+</html>

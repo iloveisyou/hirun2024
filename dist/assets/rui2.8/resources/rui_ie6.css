@@ -1,0 +1,29 @@
+.L-grid-header-row .L-grid-cell-state .L-grid-header-inner {
+    background-image: url(./images/grid/light_white_red.gif) !important;
+}
+.L-ul-treeview-node-image-mid, .L-ul-treeview-node-image-last {
+    background: url("./images/ul/tree/tree_last.gif") no-repeat scroll 50% 50% transparent !important;
+}
+
+#hd-image {
+    background: url(./images/default_screen_logo_new.gif) top left no-repeat;
+}
+.logo {
+    background: url(./images/default_screen_logo.gif) top left no-repeat;
+}
+.more {
+    background: url(./images/unfolding.gif) no-repeat center left;
+}
+.expand .more {
+    background: url(./images/folding.gif) no-repeat center left;
+}
+
+.L-ua-msie6 .L-fn-arrow {
+    background-image: url(./images/notification/fn-arrow.gif) !important;
+}
+.L-ua-msie6 .L-fn-title{
+    background-image: url(./images/notification/tutorial_title.gif) !important;
+}
+.L-ua-msie6 .L-fn-topLine {
+    margin-top: 50px !important;
+}

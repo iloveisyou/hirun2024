@@ -4,14 +4,15 @@ const uglify = require('gulp-uglify'); // 코드 최소화 및 난독화
 const sass = require('gulp-sass')(require('sass')); // sass 컴파일 기본 패키지, dark-sass 가 더 최신
 // const util = require('util');
 // const DefaultRegistry = require('undertaker-registry'); 
-const fs = require('fs'); // 파일 관리 패키지
-const del = require('del'); // 파일 삭제, del@6.0.0
+const fs = require('fs'); // 파일 관리 패키지(파일 생성,삭제, 읽기,,쓰기 등)
+const del = require('del'); // 파일 및 폴더 삭제, del@6.0.0
 const path = require('path'); // 파일과 디렉터리의 경로를 추출하는 모듈
 const rename = require('gulp-rename'); // 파일 이름 변경
-const plumber = require('gulp-plumber'); // 에러 발생시, gulp 종료 방지 및 에러 핸들링
-const cached = require('gulp-cached'); // 변경된 파일 캐시 저장
+const plumber = require('gulp-plumber'); // gulp 종료 방지 및 에러 핸들링, 스트림을 파이프로 연결해 빌드를 수행하기때문에, 에러발생시 error.log 출력 후 end 이벤트 발생시켜 현재 스트림 종류
+const cached = require('gulp-cached'); // 파일을 캐시로 저장한 다음, 수정된 파일만 감지하여 빌드 (원래 걸프는 하나 바뀌어도 모든 파일 다바꿈)
+const data = require('gulp-data'); // json, front-matter, 데이터베이스 등 다양한 소스의 데이터를 pipe에 직접 삽입하여 데이터가 적용되도록 함
 const sourcemaps = require('gulp-sourcemaps'); // 개발 모드에서 scss 디버깅을 위한 패키지
-const nunjucksRender = require('gulp-nunjucks-render'); // nunjucks (.njk) 적용
+const nunjucksRender = require('gulp-nunjucks-render'); // nunjucks (.njk), html을 편집 위한 메인 페키지
 const webserver = require('gulp-webserver'); // 서버 띄우기 위한 패키지
 const browserSync = require('browser-sync').create(); // 서버 띄우기 위한 패키지
 const connect = require('gulp-connect'); // 서버 띄우기 위한 패키지, 수정 후 자동 새로고침안됨?
@@ -26,10 +27,10 @@ const image = require('gulp-image'); // @6.2.1
 // const postcss = require('gulp-postcss'); // 고려할 브라우저 버전에 맞춰 컴파일
 // const dependents = require('gulp-dependents'); // 종속된 css 파일 감지, @import
 // // js
-// const bro = require('gulp-bro'); // browserify로 gulp에서 보다 쉽게 코드를 변환할 수 있게 해줌
-// const babelify = require('babelify'); // ES6 이상의 문법을 일반 브라우저가 코드를 이해할 수 있도록 컴파일
-// const uglifyify = require('uglifyify'); // 코드 최소화 및 난독화
-// const minify = require('gulp-minify'); // min파일로 압축
+const bro = require('gulp-bro'); // browserify로 gulp에서 보다 쉽게 코드를 변환할 수 있게 해줌
+const babelify = require('babelify'); // ES6 이상의 문법을 일반 브라우저가 코드를 이해할 수 있도록 컴파일
+const uglifyify = require('uglifyify'); // 코드 최소화 및 난독화
+const minify = require('gulp-minify'); // min파일로 압축
 
 
 // routes --------------------------------------------------------------------------------------------
@@ -49,22 +50,24 @@ function clean() {
 }
 
 async function html() {
+    // 들여쓰기(Tab Indent) 조정을 위한 함수
     const manageEnvironment = (environment) => {
         environment.addFilter('tabIndent', (str, numOfIndents, firstLine) => {
-        str = str.replace(/^(?=.)/gm, new Array(numOfIndents + 1).join('\t'));
+        // str = str.replace(/^(?=.)/gm, new Array(numOfIndents + 1).join('\t'));
+        str = str.replace(/^(?=.)/gm, new Array(numOfIndents + 1).join('    '));
         if(!firstLine) {
-            str = str.replace(/^\s+/, '');
+            str = str.replace(/^\s+/, "");
         }
         return str;
         });
     };
 
-  // _gnb.json 파일 적용을 위한 변수
-  // const gnbJson = JSON.parse(fs.readFileSync(paths.src.html + '/_templates/_json/_gnb.json'));
-  // const json_all = {...gnbJson};
-  // const datafile = () => {
-  //   return json_all;
-  // }
+    // _gnb.json 파일 적용을 위한 변수
+    const gnbJson = {...JSON.parse(fs.readFileSync(di + as + '/json/gnb.json'))};
+    // const json_all = {...gnbJson};
+    const datafile = () => {
+        return gnbJson;
+    }
 
     return src([
         paths.src.html + '/**/*', // 빌드할 njk 파일 경로
@@ -73,7 +76,7 @@ async function html() {
     ], {sourcemaps: true})
     // ], {sourcemaps: true, since: lastRun(html)})
     .pipe(plumber({errorHandler:onErrorHandler})) // 빌드할 njk 파일 경로
-    // .pipe(data(datafile)) // _gnb.json 적용
+    .pipe(data(datafile)) // _gnb.json 적용
     .pipe( nunjucksRender({ // njk 적용
         envOptions: { // njk 옵션 설정
         autoescape: false, // njk 문법의 오류가 있더라도 진행
@@ -89,17 +92,28 @@ async function html() {
 }
 
 function js() {
-    return src(paths.src.js, {sourcemaps: true, since: lastRun(js)})
-    .pipe(sourcemaps.init())
+    // return src(paths.src.js, {sourcemaps: true, since: lastRun(js)})
+    // .pipe(sourcemaps.init())
+    return src(paths.src.js) 
+    .pipe(sourcemaps.init({loadMaps: true})) // 소스맵 초기화
+    .pipe( bro({transform: [ // 트랜스파일 시작
+        babelify.configure({presets: ['@babel/preset-env']}), // ES6 이상의 문법을 일반 브라우저가 코드를 이해 할 수 있도록 변환
+        ['uglifyify', {global: true}] // 코드 최소화 및 난독화
+    ]}))
+    .pipe(sourcemaps.write('./')) // 소스맵 작성
+    .pipe(minify({ // 트랜스파일된 코드 압축 및 min 파일 생성
+        ext: {min: '.min.js'}, // 축소된 파일을 출력하는 파일 이름의 접미사 설정
+        iignoreFiles: ['-min.js'] //해당 파일과  일치하는 파일들은 축소하지 않음
+    }))
     // .pipe(
     //   browserify({transfform: [
     //     babelify.configure({presets: ['@babel/preset-env'],}),
     //   ],})
     // )
-    .pipe(babel())
-    .pipe(uglify())
+    // .pipe(babel())
+    // .pipe(uglify())
     // .pipe(concat('main.min.js'))
-    .pipe(sourcemaps.write({includeContent: false, sourceRoot: paths.dist.js}))
+    // .pipe(sourcemaps.write({includeContent: false, sourceRoot: paths.dist.js}))
     .pipe(dest(paths.dist.js))
     // .pipe(browserSync.reload({ stream : true }));
 }
@@ -127,6 +141,16 @@ function img() {
     // .pipe(image()) // 이미지 최적화
     .pipe(dest(paths.dist.img))
     // .pipe(browserSync.reload({ stream : true }));
+}
+
+function rui() {
+    return src(sr + as + '/rui2.8/**/*')
+    .pipe(dest(di + as + '/rui2.8'))
+}
+
+function datas() {
+    return src(sr + as + '/json/**/*')
+    .pipe(dest(di + as + '/json'))
 }
 
 function watcher() {
@@ -188,6 +212,7 @@ function server() {
     // })
 }
 
-export const build = series(clean, parallel(html, img), parallel(js, css));
+const options = parallel(rui, datas);
+export const build = series(clean, datas, parallel(html, img), parallel(js, css, rui));
 exports.default = series(build, parallel(server, watcher));
 

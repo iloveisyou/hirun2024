@@ -1,0 +1,9 @@
+div.L-timebox {
+    height: 17px;
+    *height: 20px;
+}
+
+div.L-timebox input {
+    height: 17px;
+    *height: 18px;
+}

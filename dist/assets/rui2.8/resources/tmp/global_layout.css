@@ -1,0 +1,59 @@
+#LblockWrapper {
+	position:relative;
+	margin:5px;
+}
+#LblockHeader {
+	position:relative;
+	height:66px;
+}
+#LblockTopLogo {
+	position:absolute;
+	margin:7px 0 0 20px;
+}
+#LblockSupportMenu {
+	position:absolute;
+	right:0px;
+	top:9px;
+}
+#LblockTotalSearch {
+}
+#LblockTopMenu {
+	position:absolute;
+	left:0px;
+	top:36px;
+	height:26px;
+}
+#LblockLeft {
+	float:left;
+	width:97%;
+	margin:0 0 0 5px;
+}
+#LblockLeftTitle {
+}
+#LblockLeftMenu {
+	margin:0 0 10px 0;
+}
+#LblockBanner01 {
+}
+#LblockMain {
+	float:right;
+	width:99%;
+	min-height:400px;
+	margin:0 8px 0 0;
+}
+#LblockFooter {
+	float:left;
+	margin:0 0 0 0;
+}
+#LblockFooterLogo {
+	float:left;
+	margin:0 0 0 0;
+}
+#LblockFooterMenu {
+	float:left;
+	margin:0 0 0 0;
+}
+#LblockFooterCopyright {
+	float:left;
+	margin:0 0 0 0;
+}

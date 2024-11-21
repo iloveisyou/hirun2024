@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" DialogContent="text/html; charset=utf-8" />
+    <title>FrameDialog Content</title>
+    <meta name="devon-rui-keyword" content="팝업 샘플, 프레임 다이얼로그(LFrameDialog)" />
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/LFrameDialog.js"></script>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript">
+    
+        var DialogContent = {
+
+            /* 그리드를 생성하고 랜더링 한다. */
+            init: function(){
+            	
+                var dialogGridDataSet = new Rui.data.LJsonDataSet({
+                    id: 'dialogGridDataSet',
+                    fields: [
+                        { id: 'col1' },
+                        { id: 'col8', type: 'number', defaultValue: 1000 },
+                        { id: 'code' },
+                        { id: 'value' },
+                        { id: 'date1', type: 'date', defaultValue: new Date() }
+                    ]
+                });
+    
+                var columnModel = new Rui.ui.grid.LColumnModel({
+                    defaultSortable: true,
+                    autoWidth: true,
+                    columns: [
+                        new Rui.ui.grid.LSelectionColumn(),
+                        new Rui.ui.grid.LNumberColumn(),
+                        { field: 'col1', label: 'Name' },
+                        { field: 'code', label: 'Type', align: 'center' },
+                        { field: 'value', align: 'center' },
+                        { field: 'col8', label: 'Fee', align: 'right', renderer: 'number' },
+                        { field: 'date1' , label: 'Issue Date', align: 'center', renderer: 'date' }
+                    ]
+                });
+    
+                var grid = new Rui.ui.grid.LGridPanel({
+                    columnModel: columnModel,
+                    dataSet: dialogGridDataSet,
+                    footerBar: new Rui.ui.grid.LGridStatusBar(),
+                    height: 250,
+                    autoWidth: true
+                });
+                grid.render('grid');
+                
+                grid.on('cellDblClick', function(){
+                	var dialog = Rui.ui.LFrameDialog.getHostDialog();
+                    dialog.getButtons()[0].click();
+                });
+                
+                this.dataSet = dialogGridDataSet;
+            },
+
+            /* 그리드의 데이터를 조회하는 함수. */
+            loadData: function(){
+                this.dataSet.load({
+                    url: './../../../../sample/data/data.json'
+                });
+            },
+
+            /* 데이터셋 선택된 복수개행의 값을 Array로 반환한다. */
+            getMarked: function(colId){
+            	var objs = [];
+                if(this.dataSet.getMarkedCount() > 0){
+                    var count = this.dataSet.getCount();
+                    for(var i = 0; i < count; i++){
+                    	if(this.dataSet.isMarked(i))
+                    	    objs.push(this.dataSet.getAt(i).get(colId));
+                    }
+                }else{
+                    objs.push(this.dataSet.getAt(this.dataSet.getRow()).get(colId));
+                }
+                return objs;
+            },
+
+            /* 데이터셋 선택된 한개행의 값을 JSON Object로 반환한다.*/
+            getSelected: function(){
+                return this.dataSet.getAt(this.dataSet.getRow()).getValues();
+            },
+            
+            /* 데이터셋의 선택된 행을 지정한다. */
+            setSelect: function(row){
+            	this.dataSet.setRow(row);
+            }
+            
+        };
+
+        Rui.onReady(function(){
+            DialogContent.init();
+            DialogContent.loadData();
+        });
+    
+    </script>
+</head>
+<body>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="grid"></div>
+        </div>
+    </div>
+</body>
+</html>

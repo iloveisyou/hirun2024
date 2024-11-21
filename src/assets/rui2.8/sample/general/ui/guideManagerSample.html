@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="가이드(guide)" />
+    <title>GuideManager</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../plugins/ui/LGuideManager.js"></script>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+
+            /*******************
+            * 변수 및 객체 선언
+            *******************/
+             
+            var guideManager = new Rui.ui.LGuideManager({ pageName: 'guideManagerSample', debug: false });
+            
+            /********************
+            * 버튼 선언 및 이벤트
+            ********************/
+            var initBtn = new Rui.ui.LButton('initBtn');
+            initBtn.on('click', function(){
+                guideManager.clear();
+                document.location.reload();
+            });
+            
+        });
+    </script>
+</head>
+
+<body >
+    <div id='hd'>
+        <h1>GuideManager</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>GuideManager를 구현하는 샘플</h2>
+            <div class="LblockDesc">
+		        <p>처음 접속한 사용자에게 화면의 기능을 상세히 알려줄 수 있도록 가이드를 제공하는 예제입니다.</p>
+		        <p>페이지 성능 및 개발 가이드 소스를 구분하고 가이드의 상태까지 관리해줍니다.</p>
+		        <p>debug 옵션을 통해서 좌표 계산을 쉽게 할 수 있습니다.</p>
+		        <p>가이드 소스는 guideManagerSample_guide.js 파일에 포함되어 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockButton" >
+            <button type="button" id="initBtn" >가이드 초기화</button>
+        </div>
+        <div class="LblockMarkupCode">
+        </div>
+    </div>
+</body>
+</html>

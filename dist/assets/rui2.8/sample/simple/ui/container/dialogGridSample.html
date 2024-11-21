@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="devon-rui-sample" content="yes" />
+<title>Dialog Quick Start</title>
+<script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+<script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+<script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+<script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+<script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+<link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+<style type="text/css">
+    body {
+        margin:0;
+        padding:0;
+    }
+        
+    #example {height:30em;}
+    .bd label { display:block;float:left;width:45%;clear:left; }
+    .clear { clear:both; }
+    #resp { margin:10px;padding:5px;border:1px solid #ccc;background:#fff;}
+    #resp li { font-family:monospace }
+    
+</style>
+<script type='text/javascript' class="script-code">
+$C.namespace("Rui.example.container");
+$C(function() {
+    $C('!config').set('$.core.logger.show', [true]);    
+    $C('#col4').combo({        
+        listWidth: 200
+    });
+
+    var dataSet = $C.dataSet({
+        id: 'dataSet',
+        fields: [
+        { id: 'col1' },
+        { id: 'col2' },
+        { id: 'col3' },
+        { id: 'date1', type: 'date' }
+    ]
+    });
+
+    var columnModel = $C.columnModel({
+        columns: [
+            $C.stateColumn(),
+            $C.numberColumn(),
+            { field: "col1", label: "Col1", sortable:true, width:500 },
+            { field: "col2", align:'center' , renderer: function(v){
+                return '<a href=\'javascript:testFunction(\"aa bb cc\");\'>' + v + '</a>';
+            }},
+            { field: "col3", align: 'right', hidden:true },
+            /*<b>*/
+            { id:'btn', field:'col1', label:'Button', renderer: function(val, p, record, row, i){
+                var btnHtml = "";
+                btnHtml += "<button type='button' class='L-grid-button'>수정</button>";
+                btnHtml += "";
+                return btnHtml;
+            }}]
+            /*</b>*/
+    });
+
+    var grid = $C('#defaultGrid').grid(
+    {
+        columnModel: columnModel,
+        dataSet:dataSet,
+        height:300                
+    });
+
+    var view = grid.getView();
+
+    grid.on("cellClick", function(e){
+        var column = columnModel.getColumnAt(e.col);
+        debugger; 
+        /*<b>*/
+        if(column.id == 'btn') {
+            dialog1.clearInvalid();
+            dialog1.show(true);
+        }
+        /*</b>*/
+    });
+
+    bind = $C.bind( 
+        {
+            groupId: 'dialog1',
+            dataSet: dataSet,
+            bind: true,
+            bindInfo: [
+                {id:'col1', ctrlId:'col1', value:'value'},
+                {id:'col2', ctrlId:'col2', value:'value'},
+                {id:'col3', ctrlId:'col3', value:'value'}
+            ]
+        });
+
+    $C('#searchBtn').button().on("click", function(){
+        dataSet.load({
+            url: './../../../../resources/data/data.json',
+            method: "get"
+        });
+    });
+    
+    // Define various event handlers for Dialog
+    var handleSubmit = function() {
+        this.submit(true);
+    };
+    
+    var handleCancel = function() {
+        this.cancel(true);
+    };
+    /*<b>*/
+    // Instantiate the Dialog
+    var dialog1 = $C('#dialog1').dialog( 
+        { 
+            width : 400,
+            visible : false, 
+            hideaftersubmit: true,
+            buttons : 
+                [ 
+                    { text:"Submit", handler:handleSubmit, isDefault:true },
+                    { text:"Cancel", handler:handleCancel } 
+                ]
+        });
+    
+    dialog1.render();
+    /*</b>*/
+});
+</script>
+</head>
+<body>
+<h1>dialog grid sample</h1>
+<h2>그리드에서 다이얼로그를 생성하는 샘플</h2>
+<div class="LblockLine"></div>
+<div>그리드에서 버튼이나 이벤트를 통해 다이얼로그를 연결하여 사용할 수 있습니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div>
+            <div id="aaa" class="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+            <div class="LblockButton">
+                <button id="searchBtn" >Search</button>
+            </div>
+        </div>
+        
+        <div id="dialog1">
+        <div class="hd">Please enter your information</div>
+        <div class="bd">
+        <form name="frm" method="post" action="/consoleLog.dev">
+            <label for="col1">col1:</label><input type="text" id="col1" name="col1" />
+            <label for="col2">col2:</label><input type="text" id="col2" name="col2" />
+            <label for="col3">col3:</label><input type="text" id="col3" name="col3" />
+            <label for="col4">col4:</label>
+            <select id="col4" name="col4" >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            </select>
+        </form>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

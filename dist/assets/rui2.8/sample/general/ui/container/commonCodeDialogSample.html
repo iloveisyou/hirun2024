@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="콤보(combo),공통코드 조회" />
+    <title>Common Code Dialog</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/LCommonPanel.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/LBasicDialog.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/LCommonCodeDialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LCommonCodeDialog.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LPopupTextBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LPopupTextBox.css"/>
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+
+            /*<b>*/
+            var commonCodePopup1 = new Rui.ui.LCommonCodeDialog({
+                id: 'commCodePopup1',
+                title: '값 1을 선택하세요.',
+                textboxId: 'commonCodePopupTextBox1'
+            });
+            commonCodePopup1.render('commCodePopup1');
+            /*</b>*/
+
+            var commonCodePopup2 = new Rui.ui.LCommonCodeDialog({
+                id: 'commCodePopup2',
+                title: '값 2를 선택하세요.',
+                textboxId: 'commonCodePopupTextBox2',
+                textboxWidth: 150
+            });
+            commonCodePopup2.render('commCodePopup2');
+        });
+    
+    </script>
+</head>
+<body>
+    <h1>Common Code Dialog</h1>
+    <h2>공통 코드 다이얼로그를 만들어서 사용하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">공통 코드 다이얼로그를 사용하여 팝업을 구성합니다. 팝업 화면의 구조 및 내용은 재구성 가능합니다.</div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div id="LblockMainBody">
+                <div id="LblockSearch">
+                    <table summary="공통코드 값 입력">
+                        <tbody>
+                            <tr>
+                                <th><label>1번 값을 선택하세요.</label></th>
+                                <td>
+                                    <div id="commCodePopup1"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>2번 값을 선택하세요.</label></th>
+                                <td>
+                                    <div id="commCodePopup2"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

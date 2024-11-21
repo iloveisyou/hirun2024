@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Checkbox</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type='text/javascript' src='./../../../../plugins/ui/tree/rui_tree.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="common.css" />        
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+        <script type="text/javascript" class="script-code">
+            $C(function(){
+                //***********DataSet*****************
+                var dataSet = $C.dataSet({
+                    id: 'dataSet'
+                    , fields: [{
+                        id: 'menuId', type:"number"
+                    }, {
+                        id: 'seq',type:"number"
+                    }, {
+                        id: 'parentMenuId',type:"number"
+                    }, {
+                        id: 'name'
+                    }, {
+                        id: 'url'
+                    }]
+                });
+    
+                dataSet.load({ url: "./../../../../sample/data/menu.json", method: "get" });
+                
+                /*<b>*/
+                //**********Tree***************
+                var tree = $C.tree({
+                    dataSet: dataSet,
+                    nodeType : "checkbox",
+                    autoMark : false,
+                    //showFolder : false,
+                    fields: {
+                        rootValue: null
+                        , parentId: 'parentMenuId'
+                        , id: 'menuId'
+                        , label: 'name'
+                        , order:'seq'
+                    }
+                });                
+                tree.on("nodeClick",function(e){
+                    var node = e.node;
+                    var parentNode = node.getParentNode();
+                    /*
+                    while(parentNode){
+                        parentNode.mark();
+                        alert("parent node depth : " + parentNode.getDepth() + "label : " + parentNode.getRecord().get('name'));
+                        parentNode = parentNode.getParentNode();
+                    }
+                    */
+                });   
+                tree.render("divUl");
+                /*</b>*/
+
+            });
+            
+        </script>
+
+    </head>
+    <body>
+        <h1>tree Checkbox Sample</h1>
+        <h2>LTreeView에 check box를 연결해서 사용</h2>
+        <div class="LblockLine"></div>
+        <div>
+            <p>트리에 체크박스를 연결하여 사용합니다. 체크박스의 이미지는 css의 이미지 파일 변경을 통해 임의로 변경될 수 있습니다.</p>
+            <p>트리는 기본적으로 체크박스가 표시되지 않기 때문에, 체크박스를 사용하고자 하는 경우 선언할때 명시해야 합니다.</p>
+        </div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id="divUl">
+        </div>
+    </div>
+</div>
+    </body>
+</html>

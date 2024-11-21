@@ -1,0 +1,41 @@
+.L-grid-header {
+    background-color:#F9F9F9;
+    background-image:url(./images/grid/header-row-background.gif);
+}
+
+.L-grid-header-over{
+    background-color:#F9F9F9;
+    background-image:url(./images/grid/header-row-background.gif);
+}
+
+.L-grid-row-selected {
+    background-color: #dfe8f6 !important;
+    background-image: none;
+    border-color:#a3bae9;
+}
+
+.L-grid-row-selected .L-grid-cell-editable {
+    background-color: #dfe8f6 !important;
+    background-image: none;
+    border-color:#a3bae9;
+}
+
+.L-grid-cell-selected {
+    background-color: #fbe1e2 !important;
+    background-image: none;
+    border-color:#a3bae9;
+}
+
+.L-grid-row-selected .L-grid-cell-selected {
+    background-color: #fbe1e2 !important;
+    background-image: none;
+    border-color:#a3bae9;
+}
+
+.L-grid-panel {
+	position:relative;
+}
+
+.L-grid-panel .L-panel .bd {
+    padding: 0px;
+}

@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="애니메이션(LAnim), 색상변경(LColorAnim), 다중 효과" />
+    <title>Chaining</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../plugins/fx/LColorAnim.js"></script>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #demo {
+            background-color: #003366;
+            color: #fff;
+            height: 15em;
+            width: 15em;
+            position: relative;
+            margin: 1em;
+            padding: 1em;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var move = null;
+        var chnageColor = null;
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            // 버튼이 클릭되었을 때 발생하는 첫번째 애니메이션
+            /*<b>*/
+            move = new Rui.fx.LAnim({
+                el: 'demo',
+                attributes: {
+                    left: {
+                        from: 0,
+                        to: 250
+                    }
+                },
+                duration: 1
+            });
+            
+            // 첫번째 애니메이션이 완료되고 발생하는 두번째 애니메이션
+            changeColor = new Rui.fx.LColorAnim({
+                el: 'demo',
+                attributes: {
+                    backgroundColor: {
+                        from: "#003366",
+                        to: "#ff0000"
+                    }
+                },
+                duration: 1
+            });
+            
+            // 첫번째 애니메이션의 onComplete 이벤트가 완료된 이후에
+            // 두번째 애니메이션 핸들러를 수행한다.
+            move.on('complete', function(){
+                changeColor.animate();
+            });
+            
+            // 버튼이 클릭되었을때 첫번째 애니메이션을 실행한다.
+            Rui.get("startAnim").on("click", function(){
+                // 버튼 클릭시마다 여러 번 다시 시작 할수 있도록 컬러값을 리셋
+                Rui.util.LDom.setStyle("demo", "backgroundColor", "#003366");
+                move.animate();
+            });
+            /*</b>*/
+            
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            changeColor.on('start', function(){
+                Rui.log("changeColor animation is starting.", "info", "example");
+            });
+            
+            changeColor.on('tween', function(e){
+                Rui.log("changeColor onTween firing with these arguments: " +
+                Rui.dump(e), "info", "example");
+            });
+            
+            changeColor.on('complete', function(e){
+                Rui.log("changeColor onComplete firing with these arguments: " +
+                Rui.dump(e), "info", "example");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Chaining</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>여러가지 animation을 연결하여 동작하는 샘플</h2>
+            <div class="LblockDesc">
+                <p>각 애니메이션 객체들은 연속적으로 실행될 수 있습니다. 각각의 애니메이션  이벤트에 연결하여 사용하면 됩니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <form action="./../../data/savedCallback.json">
+            <input type="button" id="startAnim" value="Click here to begin" />
+            <div class="LblockMarkupCode">
+                <div id="demo">
+                    This element will animate position 
+                    and then color when you click the 
+                    button.
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

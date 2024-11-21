@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Basic</title>
+        <script type="text/javascript" src='./../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='./../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" >
+
+        <script type="text/javascript" class="script-code">
+            
+            $C(function(){
+                $C('!config').set('$.core.logger.show', [true]);
+                /*<b>*/
+                var provider = $C('!config').getProvider();
+                provider.on('statechange', function(e){
+                    Rui.log('changed data => ' + e.key + ' : ' + e.value);
+                });
+                /*</b>*/
+                /******************JsUnit용 소스 시작**********************/
+                setUpPageStatus = 'complete';
+                /******************JsUnit용 소스   끝**********************/
+            })
+            
+            function getConfig(){
+                var defaultLocale = $C('!config').get("$.core.defaultLocale")[0];
+                Rui.log("get : " + defaultLocale);
+                return defaultLocale;                
+            }
+            
+            function getFirstConfig(){
+                var defaultLocale = $C('!config').getFirst("$.core.defaultLocale");
+                Rui.log("getFirst : " + defaultLocale);
+                return defaultLocale;
+            }
+            
+            function setConfig(){
+                $C('!config').set("$.core.defaultLocale", ["en_US"]);
+                var defaultLocale = $C('!config').getFirst("$.core.defaultLocale");
+                Rui.log("set : " + defaultLocale);
+                return defaultLocale;
+            }
+        </script>
+
+    </head>
+    <body>
+        <h1>configuration sample</h1>
+        <h2>환경 정보를 관리하는 LConfiguration의 사용 방법 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>rui_config.js에 설정되어 있는 환경 정보 값을 필요에 따라 사용할 수 있습니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+            <div class="LblockMarkupCode">
+                <div>Ctrl + Shift + F12를 누르시면 콘솔이 열립니다. 콘솔을 여신 후에 아래를 클릭하세요.</div>
+                <div>콘솔 상단의 catalog중 Debug를 check하시면 아래 클릭의 결과를 확인하실 수 있습니다. </div>
+            </div>
+            <a href="#" onclick="javascript:getConfig()">get('$.core.defaultLocale')[0]</a>
+            <a href="#" onclick="javascript:getFirstConfig()">getFirst('$.core.defaultLocale')</a>
+            <a href="#" onclick="javascript:setConfig()">set('$.core.defaultLocale', 'en_US')</a>
+            <div id="result">
+            </div>
+        </div>
+    </body>
+</html>

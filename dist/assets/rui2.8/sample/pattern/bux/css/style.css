@@ -1,0 +1,181 @@
+*
+ @charset "utf-8";
+a:link {
+	color: #555555;
+	text-decoration: none;
+}
+a:visited {
+	color: #555555;
+	text-decoration: none;
+}
+a:hover,a:focus,a:active {
+	color: #000000;
+	text-decoration: none;
+}
+body {
+	font: 75%/1.5em Gulim;
+	color: #494949;
+	overflow: auto;
+}
+img {
+	border: none;
+}
+* {
+	font-family: tahoma,sans-serif;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	border: none;
+}
+h1 {
+	float: left;
+	margin: 0;
+	padding: 0px 0 0 5px;
+}
+h2 {
+	font-size: 12px;
+	padding-bottom: 10px;
+	color: #a5204d;
+}
+h3 {
+	font-size: 14px;
+	padding-bottom: 10px;
+	color: #555555;
+	display: inline;
+}
+h4 {
+	font-size: 15px;
+	padding-bottom: 10px;
+	color: #474747;
+	display: inline;
+} 
+h5 {
+	font-size: 11px;
+	padding-bottom: 10px;
+	color: #A02547;
+	display: inline;
+}
+ul, ol {
+	list-style-type: none;
+}
+
+.ux-content-wrap {
+    width: 90%;
+    min-width: 1024px;
+    position: relative;
+    padding: 30px 25px 42px 25px;
+}
+ 
+#ft {
+    background: url(../images/footer_bg.png);
+    height: 40px;
+    text-align: right;
+}
+ 
+ .ft_copyright {
+    float: right;
+ 	padding-right: 20px;
+	margin: 10px 0px 0px 0px;
+	color: gray;
+ }
+
+h4.ux-grid-title {
+    background: url(../images/bullet.png) no-repeat left 50%;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    padding: 1px 0;
+    height: 23px;
+    line-height: 23px;
+    overflow: hidden;
+    text-indent: 15px;
+    font-weight: bold;
+}
+
+ .ux-title {
+    height: 23px;
+ }
+
+ .ux-title-bar {
+    border-bottom: 2px solid #c5003d;
+    height: 30px;
+}
+
+.ux-grid-table {
+	width: 100%;
+    border-top: 2px solid #c5003d;
+    border-left: 0px solid #fff;
+    border-right: 0px solid #fff;
+    margin-bottom: 52px;
+    clear: both;
+}
+
+.ux-more {
+    cursor: pointer;
+    background: url(../images/more.png) no-repeat right 50%;
+    *background: url(../images/more.gif) no-repeat right 50%;
+    height: 25px;
+    width: 50px;
+}
+
+.L-tutorial {
+    position: fixed;
+    right: 10px;
+    top: 200px;
+    border: 2px solid #ccc;
+    width: 90px;
+    background-color: #fff;
+    z-index: 100;
+    -moz-box-shadow: 1px 3px 3px 1px #ccc;
+    -webkit-box-shadow: 1px 3px 3px 1px #ccc;
+    box-shadow: 1px 3px 3px 1px #ccc;
+}
+ 
+ .L-tutorial .title {
+    background-color: #D6D6D6;
+    padding: 5px;
+    color: #222222;
+    font-weight: bold;
+    text-align: center;
+ }
+
+ .L-tutorial ul {
+    padding: 15px;
+ }
+ 
+ .L-tutorial li {
+    padding: 2px;
+}
+ 
+ .L-tutorial a, .L-tutorial a:active, .L-tutorial a:hover {
+    text-decoration: none;
+    color: #222222;
+ }
+ 
+ .topicon-container {
+    position: fixed;
+    display: inline-block;
+    right: 30px;
+    top: 320px;
+    margin-top: 130px;
+    z-index: 100;
+}
+ 
+.topicon {
+    background: url(../dashboard/assets/quickmenu/btn_top.png) no-repeat;
+    display: inline-block;
+    width: 35px;
+    height: 30px;
+}
+
+ .topicon:hover {
+    background: url(../dashboard/assets/quickmenu/btn_top_mouseover.png) no-repeat;
+}
+ 
+.L-focus-notification-focusCombo .L-fn-arrow {
+    margin-left: 50px;
+}
+
+div.L-datebox {
+    text-align: left;
+}

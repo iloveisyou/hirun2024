@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>data Memory leak</title>
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <script type="text/javascript" src="./../../../plugins/ui/grid/LEditButtonColumn.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui_skin1.css"/>
+    
+    <style type="text/css" >
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+                var mlist;
+        Rui.onReady(function() {
+            Rui.get(agentInfo).html(navigator.userAgent.toLowerCase());
+            //var http;
+            //http = new ActiveXObject('MSXML2.XMLHTTP.3.0');
+
+            var searchBtn = new Rui.ui.LButton("searchBtn");
+            searchBtn.on("click", function(){
+                var uri = Rui.util.LString.getTimeUrl('/bmt/web/data/treeGriddata100000.json');
+                //http.open('get', uri, true);
+                //http.send(null);
+                var o = Rui.LConnect.asyncRequest('GET', uri, {
+                    success: function(e) {
+                        var data = null;
+                        var rootData = [];
+                        try{
+                            data = e.responseText;
+                        } catch(e) {
+                            throw new Error(Rui.getMessageManager().get('$.base.msg110') + ':' + conn.responseText);
+                        }
+                        try {
+                            var fields = [
+                    {id:'headerId'},
+                    {id:'lineId'},
+                    {id:'refLineId'},
+                    {id:'orderNo'},
+                    {id:'quoteNumber'},
+                    {id:'orderNumber'},
+                    {id:'lineNo'},
+                    {id:'orderTypeName'},
+                    {id:'orderTypeId'},
+                    {id:'headerStatus'},
+                    {id:'headerStatusName'},
+                    {id:'lineStatus'},
+                    {id:'oeLineStatus'},
+                    {id:'holdCnt'},
+                    {id:'orderSourceName'},
+                    {id:'orderSourceId'},
+                    {id:'orderEntryDate'},
+                    {id:'orderBookDate'},
+                    {id:'fulfillmentDate'},
+                    {id:'orderCategoryCode'},
+                    {id:'lineType'},
+                    {id:'lineTypeId'},
+                    {id:'lineCategoryCode'},
+                    {id:'salesOrganizationId'},
+                    {id:'salesOrganizationCode'},
+                    {id:'salesOrganizationName'},
+                    {id:'customerShortName'},
+                    {id:'customerFullName'},
+                    {id:'customerId'},
+                    {id:'customerCode'},
+                    {id:'shipToOrgId'},
+                    {id:'shipToCode'},
+                    {id:'shipToName'},
+                    {id:'billToOrgId'},
+                    {id:'billToCode'},
+                    {id:'billToName'},
+                    {id:'departmentName'},
+                    {id:'customerPoDate'},
+                    {id:'quoteExpireDate'},
+                    {id:'quoteDate'},
+                    {id:'custPoNumber'},
+                    {id:'invoiceNo'},
+                    {id:'invoiceLineNo'},
+                    {id:'customerTrxLineId'},
+                    {id:'invoiceDate'},
+                    {id:'reqArrivalDateFrom'},
+                    {id:'reqArrivalDateTo'},
+                    {id:'promiseDate'},
+                    {id:'paymentTermName'},
+                    {id:'paymentTermId'}
+                            ];
+                            var list = data.split('\r\n');
+                            for(var i = 0, len = list.length; i < len; i++) {
+                                var rowList = list[i].split('|');
+                                var rowData = {};
+                                for(var j = 0, flen = fields.length; j < flen ; j++) {
+                                    if(rowData.type == 'date'){
+                                        var r = rowList[j];
+                                        var Y = r.substring(0, 4);
+                                        var M = parseInt(r.substring(4, 6));
+                                        var d = r.substring(6, 8);
+                                        var h = r.substring(8, 10);
+                                        var m = r.substring(10, 12);
+                                        var s = r.substring(12, 14);
+                                        var d = new Date(Y, M + 1, d, h, m, s);
+                                        rowData[fields[j].id] = d;
+                                    } else if(rowData.type == 'number'){
+                                        rowData[fields[j].id] = parseInt(rowList[j], 10);
+                                    } else {
+                                        rowData[fields[j].id] = rowList[j];
+                                    }
+                                }
+                                rootData.push(rowData);
+                                rowList = null;
+                                rowData = null;
+                            }
+                            list = null;
+                            if(mlist) {
+                                //alert(1);
+                                //mlist = null;
+                            }
+                            /*
+                            //mlist = null;
+                            obj = false;
+                            //obj = null;
+                            */
+                            mlist = [];
+                            //obj.mlist = [];
+                            for(var i = 0, len = rootData.length ; i < len; i++) {
+                                var r = { data : rootData[i] };
+                                mlist.push(r);
+                            }
+
+                        } finally {
+                            rootData = null;
+                            data = null;
+                        }
+                        Rui.get('showData').html(parseInt(Rui.get('showData').getHtml()) + 1);
+                        Rui.later(10, window, function() {
+                            searchBtn.click();
+                        }, null);
+                    }
+                });
+            });
+            
+            var setStartBtn = new Rui.ui.LButton('setStartBtn');
+            setStartBtn.on('click', function(){
+                searchBtn.click();
+                /*
+                laterFn = Rui.later(10000, window, function() {
+                    searchBtn.click();
+                    Rui.get('showData').html(parseInt(Rui.get('showData').getHtml()) + 1);                
+                }, null, true);
+                */
+            });
+            var laterFn;
+            var setEndBtn = new Rui.ui.LButton('setEndBtn');
+            setEndBtn.on('click', function(){
+                if(laterFn) laterFn.cancel();
+            });
+        });
+            
+        </script>
+
+</head>
+<body>
+    <h1>dataset memory leak test</h1>
+    <h2>dataset memory leak test 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div> 데이터셋의 메모리릭 체크 샘플</div>
+    <div id='bd'>
+    <div id='agentInfo'></div>
+    <div class="LblockButton" >
+        <button type="button" id="setStartBtn" >start</button>
+        <button type="button" id="setEndBtn" >end</button>
+    </div>
+    
+    <div class="LblockMarkupCode">
+        <div id="aaa" class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+    <div class="LblockButton" >
+        <button type="button" id="searchBtn" >Search</button>
+    </div>
+    <div id='showData'>0</div>
+</div>
+</body>
+</html>

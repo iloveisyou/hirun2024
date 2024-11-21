@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Multi Header</title>
+        <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+        <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+        <script type='text/javascript' src='./../../../../plugins/ui/grid/LGridPanelExt.js'></script>
+        <script type='text/javascript' src='./../../../../plugins/ui/grid/LTotalSummary.js'></script>
+        <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+        <style type="text/css">
+            .L-grid-cell, td.L-grid-dummy-cell {
+                height: 26px;
+            }
+        </style>
+        <script>
+            
+        </script>
+        <script type="text/javascript" class="script-code">
+            var dataSet = null;
+            $C(function(){
+                /*
+                 $C.browser.msie6 = true;
+                 $C.browser.msie7 = false;
+                 $C.browser.msie8 = false;
+                 $C.browser.msie67 = true;
+                 $C.browser.msie678 = true;
+                 $C.browser.msie9 = false;
+                 */
+                $C('!config').set('$.core.logger.show', [true]);
+                
+                dataSet = $C.dataSet({
+                    id: 'dataSet',
+                    fields: [{
+                        id: 'col1'
+                    }, {
+                        id: 'col2'
+                    }, {
+                        id: 'col3'
+                    }, {
+                        id: 'col4'
+                    }, {
+                        id: 'date1',
+                        type: 'date'
+                    }, {
+                        id: 'col8',
+                        type: 'number'
+                    }]
+                });
+                
+                /*<b>*/
+                var columnModel = $C.columnModel({
+                    freezeColumnId: 'col2',
+                    groupMerge: true,
+                    columns: [
+                    $C.stateColumn(), 
+                    $C.numberColumn(),
+                    {
+                        id:'3-0'
+                    },
+                    {
+                        field: "col1",
+                        width: 100,
+                        label: '3-1',
+                        hMerge: true,
+                        vMerge: true,
+                        //hidden:true,
+                        groupId:'3-0',
+                        editor: $C.textBox()
+                    }, {
+                        field: "col2",
+                        sortable: false,
+                        align: 'center',
+                        width: 130,
+                        editor: $C.textBox(),
+                        hMerge: true,
+                        vMerge: true,
+                        label: '4-1',
+                        groupId:'3-0'
+                    }, {
+                        id: '5-0'
+                    }, {
+                        field: "col3",
+                        align: 'right',
+                        groupId: '5-0',
+                        hMerge: true,
+                        vMerge: true,
+                        editor: $C.textBox(),
+                        label: '5-1'
+                    }, {
+                        field: "col4",
+                        align: 'right',
+                        groupId: '5-0',
+                        hMerge: true,
+                        vMerge: true,
+                        editor: $C.textBox(),
+                        label: '5-1-1'
+                    }, {
+                        field: "date1",
+                        align: 'center',
+                        renderer: function(v){
+                            return '<font color="red">' + v + '</font>';
+                        },
+                        groupId: '5-0',
+                        editor: $C.textBox(),
+                        label: '6-1'
+                    }, {
+                        id: '7-1',
+                        groupId: '5-0'
+                    }, {
+                        field: "col8",
+                        label: "8-2",
+                        //width: 600,
+                        align: 'right',
+                        editor: $C.numberBox({
+                            decimalPrecision: 2,
+                            minValue: -1,
+                            maxValue: 10000
+                        }),
+                        renderer: $C.renderer.moneyRenderer(),
+                        groupId: '7-1'
+                    }]
+                });
+                
+                var sumColumns = ['balance', 'monthSum', 'assets'];
+                var summary = $C.totalSummary();
+                summary.on('renderTotalCell', function(e){
+                    var column = columnModel.getColumnAt(e.col);
+                    if ($C.array.contains(sumColumns, column.getId())) {
+                        // dataSet의 컬럼이 존재할 경우 
+                        e.value = $C.format.moneyFormat(dataSet.sum(column.getId()));
+                    }
+                });
+                
+                var grid = $C('#defaultGrid').grid({
+                    columnModel: columnModel,
+                    dataSet: dataSet,
+                    autoWidth: false,
+                    width: 800,
+                    height: 300
+                });
+                
+                /*</b>*/
+                var column1 = columnModel.getColumnById('7-1');
+                column1.setLabel('컬럼1');
+                
+                column1 = columnModel.getColumnById('col1');
+                column1.setHidden(true);
+                
+                grid.getView().on('focus', function(e){
+                    $C.log('focus');
+                });
+                
+                grid.getView().on('blur', function(e){
+                    $C.log('blur');
+                });
+                
+                var searchBtn = $C('#searchBtn').button();
+                searchBtn.on("click", function(){
+                    dataSet.load({
+                        url: './../../../../sample/data/data11.json',
+                        method: "get"
+                    });
+                });
+                
+                $C('#newBtn').button();
+                $C('#newBtn').on("click", function(){
+                    var row = dataSet.newRecord();
+                    var record = dataSet.getAt(row);
+                    record.set("col1", "Junee");
+                    record.set("col2", "(02) 6363-7009");
+                    record.set("col3", "R2");
+                    record.set("date1", new Date());
+                });
+                
+                $C('#insertBtn').button();
+                $C('#insertBtn').on("click", function(){
+                    var row = dataSet.newRecord(0);
+                    var record = dataSet.getAt(row);
+                    record.set("col1", "Junee5");
+                    record.set("col2", "(02) 6363-7009");
+                    record.set("col3", "R1");
+                    record.set("date1", new Date());
+                });
+                
+                $C('#updateBtn').button();
+                $C('#updateBtn').on("click", function(){
+                    var record = dataSet.getAt(3);
+                    record.set("col3", "R2");
+                });
+                
+                $C('#undoBtn').button();
+                $C('#undoBtn').on("click", function(){
+                    dataSet.undo(dataSet.getRow());
+                });
+                
+                $C('#undoAllBtn').button();
+                $C('#undoAllBtn').on("click", function(){
+                    dataSet.undoAll();
+                });
+                
+                $C('#deleteBtn').button();
+                $C('#deleteBtn').on("click", function(){
+                    if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRow();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+                });
+                
+                $C('#clearBtn').button();
+                $C('#clearBtn').on("click", function(){
+                    dataSet.clearData();
+                });
+                
+                $C('#filterBtn').button();
+                $C('#filterBtn').on("click", function(){
+                    dataSet.filter(function(id, record){
+                        return record.get("col3") == "R2"
+                    });
+                });
+                
+                $C('#syncDataSetBtn').button();
+                $C('#syncDataSetBtn').on("click", function(){
+                    grid.setSyncDataSet(true);
+                });
+                
+                $C('#unSyncDataSetBtn').button();
+                $C('#unSyncDataSetBtn').on("click", function(){
+                    grid.setSyncDataSet(false);
+                });
+                    
+                $C('#firstBtn').button();
+                $C('#firstBtn').on("click", function(){
+                    dataSet.setRow(0);
+                });
+    
+                $C('#previousBtn').button();
+                $C('#previousBtn').on("click", function(){
+                    if(dataSet.getRow() > 0)
+                        dataSet.setRow(dataSet.getRow() - 1);
+                });
+    
+                $C('#nextBtn').button();
+                $C('#nextBtn').on("click", function(){
+                    if(dataSet.getCount() > dataSet.getRow())
+                        dataSet.setRow(dataSet.getRow() + 1);
+                });
+    
+                $C('#lastBtn').button();
+                $C('#lastBtn').on("click", function(){
+                    dataSet.setRow(dataSet.getCount() - 1);
+                });
+                
+                $C('#sortBtn').button();
+                $C('#sortBtn').on("click", function(){
+                    dataSet.sortField("col1");
+                });
+                
+                $C('#columnShowBtn').button();
+                $C('#columnShowBtn').on("click", function(){
+                    columnModel.getColumnById('col8').setHidden(false);
+                });
+                
+                $C('#columnHideBtn').button();
+                $C('#columnHideBtn').on("click", function(){
+                    columnModel.getColumnById('col8').setHidden(true);
+                });
+                
+                $C('#groupColumnShowBtn').button();
+                $C('#groupColumnShowBtn').on("click", function(){
+                    columnModel.getColumnById('col1').setHidden(false);
+                    columnModel.getColumnById('col2').setHidden(false);
+                });
+                
+                $C('#groupColumnHideBtn').button();
+                $C('#groupColumnHideBtn').on("click", function(){
+                    columnModel.getColumnById('col1').setHidden(true);
+                    columnModel.getColumnById('col2').setHidden(true);
+                });
+                
+                $C('#showBtn').button();
+                $C('#showBtn').on("click", function(){
+                    grid.show();
+                });
+                $C('#hideBtn').button();
+                $C('#hideBtn').on("click", function(){
+                    grid.hide();
+                });
+                
+                $C('#setLableColumnBtn').button();
+                $C('#setLableColumnBtn').on("click", function(){
+                    var column = columnModel.getColumnById('col1');
+                    column.setLabel('컬럼1');
+                });
+                
+                $C('#saveExcelBtn').button();
+                $C('#saveExcelBtn').on("click", function(){
+                    //grid.saveExcel('한글테스트_' + new Date().format('%Y%m%d') + '.xls');
+                    
+                    /*
+                     var excelColumnModel = columnModel.createExcelColumnModel();
+                     // 멀티 헤더를 쓸 경우 LSelectionColumn, LStateColumn, LNumberColumn 컬럼으로 인하여 헤더가 밀리는 경우가 발생할 수 있다.
+                     // 그럴 경우 아래와 같이 false 인수와 multiheaderHtml을 재정의하면 된다.
+                     */
+                    var excelColumnModel = columnModel.createExcelColumnModel(false);
+                    debugger;
+                    grid.saveExcel('한글테스트_' + new Date().format('%Y%m%d') + '.xls', {
+                        columnModel: excelColumnModel
+                    });
+                    
+                    
+                });
+                
+                searchBtn.click();
+            });
+        </script>
+    </head>
+    <body>
+        <h1>gridpanel multi header sample</h1>
+        <h2>LGridPanel에서 멀티 헤더(multi header)를 구현하는 샘플 (grid/merge)</h2>
+        <div class="LblockLine"></div>
+        <div>
+            그리드 헤더에 대한 멀티 헤더를 표시합니다. 각 헤더는 html로 표시되어 질 수 있고, rowspan, colspan을 통해 그룹핑 됩니다.
+        </div>
+        <div id='bd'>
+            <button type="button" id="searchBtn">
+                Search
+            </button>
+            <button type="button" id="newBtn">
+                new
+            </button>
+            <button type="button" id="insertBtn">
+                insert
+            </button>
+            <button type="button" id="updateBtn">
+                update
+            </button>
+            <button type="button" id="undoBtn">
+                undo
+            </button>
+            <button type="button" id="undoAllBtn">
+                undoAll
+            </button>
+            <button type="button" id="deleteBtn">
+                delete
+            </button>
+            <button type="button" id="clearBtn">
+                clear
+            </button>
+            <button type="button" id="filterBtn">
+                filter
+            </button>
+            <button type="button" id="syncDataSetBtn">
+                syncDataSet
+            </button>
+            <button type="button" id="unSyncDataSetBtn">
+                unSyncDataSet
+            </button>
+            <button type="button" id="firstBtn">
+                first
+            </button>
+            <button type="button" id="previousBtn">
+                previous
+            </button>
+            <button type="button" id="nextBtn">
+                next
+            </button>
+            <button type="button" id="lastBtn">
+                last
+            </button>
+            <button type="button" id="sortBtn">
+                sort
+            </button>
+            <button type="button" id="columnShowBtn">
+                column show
+            </button>
+            <button type="button" id="columnHideBtn">
+                column hide
+            </button>
+            <button type="button" id="groupColumnShowBtn">
+                group column show
+            </button>
+            <button type="button" id="groupColumnHideBtn">
+                group column hide
+            </button>
+            <button type="button" id="showBtn">
+                show
+            </button>
+            <button type="button" id="hideBtn">
+                hide
+            </button>
+            <button type="button" id="setLableColumnBtn">
+                setLabel('컬럼2')
+            </button>
+            <br/>
+            <button type="button" id="saveExcelBtn">
+                Excel download
+            </button>
+            <br/>
+            <div class="LblockMarkupCode">
+                <div id="defaultGrid">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

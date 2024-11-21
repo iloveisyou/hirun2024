@@ -1,0 +1,204 @@
+<div>
+<div class="class_description">
+데이터의 실제 값을 가지는 객체
+
+데이터셋의 state정보 실제로 LRecord가 가지고 있다.
+또한 row마다 변경건 처리를 하지않고 임시로 저장할 수 있는 사용자 정보 저장 공간을 활용하여 
+각 row마다 값을 유지할 수 도 있다.(getAttribute/setAttribute) 
+</div>
+<!-- config 시작 -->
+<div class="config_data">
+<div class="L-description">
+Record의 데이터 객체로 json형 데이터객체를 저장한다.
+</div>
+<div class="L-sample">
+sample: col1 콤보 객체를 dataSet의 code, value 필드와 바인드하고 col2 spane객체를 innerHTMl로 출력한다.  
+<div class="L-code">
+var data = {
+    col1: '값1',
+    col2: '값2'
+}  
+var record = new Rui.data.LRecord(data);
+dataSet.add(record);
+</div>
+</div>
+
+</div>
+
+<div class="config_state">
+<div class="L-description">
+Record의 상태 정보
+</div>
+
+<div class="L-sample">
+sample: insert 상태로 record를 생성한다.  
+<div class="L-code">
+var data = {
+    col1: '값1',
+    col2: '값2'
+}  
+var record = new Rui.data.LRecord(data, { state: Rui.data.LRecord.STATE_INSERT } );
+dataSet.add(record);
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_getAttribute">
+<div class="L-description">
+ui용 attribute key에 해당되는 데이터를 리턴하는 메소드
+record의 임시 공간으로 사용한다. 데이터 처리시에 값 자체를 서버에 전달하지 않는다.
+</div>
+<div class="L-sample">
+sample: attr1 이름의 attribute를 읽어온다.  
+<div class="L-code">
+var record = dataSet.getAt(dataSet.getRow());
+record.getAttribute('attr1');
+</div>
+</div>
+</div>
+
+<div class="method_setAttribute">
+<div class="L-description">
+ui용 attribute key에 해당되는 value를 저장하는 메소드
+</div>
+<div class="L-sample">
+sample: attr1 이름의 attribute를 저장한다.  
+<div class="L-code">
+var record = dataSet.getAt(dataSet.getRow());
+record.setAttribute('attr1', '임시값1');
+</div>
+</div>
+</div>
+
+<div class="method_undo">
+<div class="L-description">
+현재 Record를 undo하는 메소드 undo 메소드가 호출되면 dataSet의 undo 이벤트가 호출된다.
+</div>
+<div class="L-sample">
+sample: record를 undo한다.  
+<div class="L-code">
+var record = dataSet.getAt(dataSet.getRow());
+record.undo();
+</div>
+</div>
+</div>
+
+<div class="method_setState">
+<div class="L-description">
+현재 Record의 상태를 변경한다.
+</div>
+<div class="L-sample">
+sample: record의 상태를 update 상태로 변경한다.  
+<div class="L-code">
+var record = dataSet.getAt(dataSet.getRow());
+record.setState(Rui.data.LRecord.STATE_UPDATE);
+</div>
+</div>
+</div>
+
+<div class="method_getModifiedData">
+<div class="L-description">
+record 데이터중에 field의 값이 변경된 데이터만 json object형으로 리턴한다.
+</div>
+<div class="L-sample">
+sample: record에 변경된 데이터중에 col1이 존재하면 col1의 값을 출력한다.  
+<div class="L-code">
+var record = dataSet.getAt(dataSet.getRow());
+var data = record.getModifiedData();
+if(data.col1) {
+    alert(data.col1);
+}
+</div>
+</div>
+</div>
+
+<div class="method_getValues">
+<div class="L-description">
+Record의 전체값을 json형 Object 객체로 리턴한다.
+{ col1: '값1', col2: '값2' }
+</div>
+<div class="L-sample">
+sample: record전체 데이터를 ajax 파라미터로 만든다.  
+<div class="L-code">
+var record = dataSet.getAt(dataSet.getRow());
+var params = record.getValues();
+params.col3 = '값3';
+Rui.ajax({
+    url: 'test.rui',
+    params: params
+});
+</div>
+</div>
+</div>
+
+<div class="method_setValues">
+<div class="L-description">
+Record에 json형 Object의 객체 정보의 값을 반영한다. dataSet의 update이벤트가 발생한다.
+</div>
+<div class="L-sample">
+sample: record전체 데이터를 ajax 파라미터로 만든다.  
+<div class="L-code">
+var data = { col1: '값1', col2: '값2' };
+var record = dataSet.getAt(dataSet.getRow());
+record.setValues(data);
+</div>
+</div>
+
+<div class="L-sample">
+sample: 이전 레코드의 값들을 다음 레코드에 반영한다.
+<div class="L-code">
+var obj = record1.getValues();
+record2.setValues(obj);
+</div>
+</div>
+</div>
+
+<div class="method_isModifiedField">
+<div class="L-description">
+Record에 id에 해당되는 Field가 변경 데이터인지 여부를 리턴한다.
+</div>
+<div class="L-sample">
+sample: col1 필드의 값이 변경되었으면 메시지를 출력한다.
+<div class="L-code">
+var record = dataSet.getAt(dataSet.getRow());
+if(record.isModifiedField('col1') == true) {
+    alert('col1의 값이 변경되었습니다.');
+}
+</div>
+</div>
+</div>
+
+<div class="method_isModified">
+<div class="L-description">
+Record가 변경되었는지를 true or false로 리턴한다.
+</div>
+<div class="L-sample">
+sample: 레코드 값이 변경되었으면 메시지를 출력한다.
+<div class="L-code">
+var record = dataSet.getAt(dataSet.getRow());
+if(record.isModified() == true) {
+    alert('레코드의 데이터가 변경되었습니다.');
+}
+</div>
+</div>
+</div>
+
+<div class="method_clone">
+<div class="L-description">
+Record를 newId객체로 복사하여 리턴한다.
+clone을 통해 새로 생성된 record는 dataSet에 add하기전에는 변경이 불가능하다.
+</div>
+<div class="L-sample">
+sample: 레코드 값이 변경되었으면 메시지를 출력한다.
+<div class="L-code">
+var record = dataSet.getAt(dataSet.getRow());
+var newRecord = record.clone();
+dataSet2.add(newRecord);
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<!-- property 시작 -->
+</div>

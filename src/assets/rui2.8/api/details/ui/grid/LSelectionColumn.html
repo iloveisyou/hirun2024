@@ -1,0 +1,110 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+그리드의 row를 선택할 수 있게 하는 LColumn
+
+샘플 경로 :
+<a href="./../sample/general/ui/grid/gridpanelDynamicSelectMarkSample.html" target="_new">/rui/sample/general/ui/grid/gridpanelDynamicSelectMarkSample.html</a>
+</div>
+
+<div class="L-sample">
+sample: 그리드의 헤더에 전체 선택을 제거하는 샘플이다. label에 공백을 적용하면 전체 선택이 출력되지 않는다.
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    columns: [
+        new Rui.ui.grid.LSelectionColumn({ label: ' ' }),
+        { field: "col1", editor: new Rui.ui.form.LTextBox() },
+        { field: "col2", editor: new Rui.ui.form.LTextBox() }
+    ]
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: 그리드의 3번 index에 해당되는 row의 선택을 막는 샘플, canMarkable 이벤트와 데이터셋의 canMarkableEvent config값을 true로 적용하면 된다.
+<div class="L-code">
+var dataSet = new Rui.data.LJsonDataSet({
+    id: 'dataSet',
+    canMarkableEvent: true,
+    fields: [
+        { id: 'col1' },
+        { id: 'col2' },
+        { id: 'col3' }
+    ]
+});
+
+dataSet.on('canMarkable', function(e){
+    if(e.row == 3) return false;
+});
+</div>
+</div>
+
+</div>
+
+<!-- config 시작 -->
+<div class="config_selectionType">
+<div class="L-description">
+checkbox형식으로 출력할지 radio형식으로 출력할지 결정하는 속성
+기본값은 checkbox이다.
+</div>
+<div class="L-sample">
+sample: LSelectionColumn을 그리드에 생성한다. 
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    columns: [
+        new Rui.ui.grid.LSelectionColumn(),
+        { field: "col1", editor: new Rui.ui.form.LTextBox() },
+        { field: "col2", editor: new Rui.ui.form.LTextBox() }
+    ]
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height:300
+});
+
+grid.render('grid');
+</div>
+</div>
+<div class="L-sample">
+sample: LSelectionColumn을 radio type으로 그리드에 생성한다. 
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    columns: [
+        new Rui.ui.grid.LSelectionColumn({ selectionType: 'radio' }),
+        { field: "col1", editor: new Rui.ui.form.LTextBox() },
+        { field: "col2", editor: new Rui.ui.form.LTextBox() }
+    ]
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height:300
+});
+
+grid.render('grid');
+</div>
+</div>
+</div>
+
+<div class="config_syncRow">
+<div class="L-description">
+selectionType이 radio일 경우 dataSet의 row 위치에 자동으로 선택되하게 하는 기능
+</div>
+<div class="L-sample">
+sample: LSelectionColumn을 그리드에 생성한다. 
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    columns: [
+        new Rui.ui.grid.LSelectionColumn({ selectionType: 'radio', syncRow: true }),
+        { field: "col1", editor: new Rui.ui.form.LTextBox() },
+        { field: "col2", editor: new Rui.ui.form.LTextBox() }
+    ]
+});
+</div>
+</div>
+</div>
+
+</div>

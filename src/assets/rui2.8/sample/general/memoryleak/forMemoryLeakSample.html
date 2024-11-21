@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <META content=IE=8 http-equiv=X-UA-Compatible>
+    <title>Memory leak</title>
+    
+    <style type="text/css" >
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+function forLoop() {
+    for(var i = 0 ; i < 10000000; i++) {
+        new Object();
+    }
+}
+forLoop();
+
+    </script>
+
+</head>
+<body>
+    <h1>gridpanel edit sample</h1>
+    <h2>LGridPanel의 기본 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <a href="javascript:forLoop()">open</a>
+</div>
+</body>
+</html>

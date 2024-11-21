@@ -1,0 +1,82 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+여러 개의 LCombo를 동시에 생성하면서 서버측 로딩까지 한번에 적용하는 클래스
+</div>
+<div class="L-sample">
+sample: 기본 샘플이다.
+<div class="L-code">
+var combo1 = new Rui.ui.form.LCombo({
+    id: 'code01Combo',
+    applyTo: 'code01Combo',
+    params: 'code01Combo=0014&abcd=def'
+});
+
+var loader = new Rui.ui.form.LComboLoader({
+    emptyText: '전체'
+});
+
+loader.load({
+    url: './../../../data/codeMultipleLoad.json',
+    comboInfo: [
+        combo1, 
+        { id: 'code02Combo', applyTo: 'code02Combo', emptyText: '선택하세요.', params: 'code02Combo=0015&abc1=def' },
+        { id: 'code03Combo', applyTo: 'code03Combo', params: 'code03Combo=0022&abc2=def2' }
+    ]
+});
+</div>
+</div>
+
+</div>
+
+<!-- config 시작 -->
+
+<!-- method 시작 -->
+<div class="method_load">
+<div class="L-description">
+여러개의 콤보 생성 config 값을 가지고 지정된 url에서 콤보용 데이터를 loading 한다.
+loader 생성시에 모든 콤보에 공통으로 적용되는 config를 지정할 수 있다.
+</div>
+<div class="L-sample">
+sample:
+<div class="L-code">
+    var loader = new Rui.ui.form.LComboLoader({
+        emptyText: '전체'
+    });
+
+    loader.load({
+        url: '/server/console.ajax',
+        comboInfo: [
+            { id: 'code01Combo', applyTo: 'code01Combo', emptyText: '선택하세요.', params: 'code02Combo=0015&code01param=abc' },
+            { id: 'code02Combo', applyTo: 'code02Combo', params: 'code03Combo=0022&code02param=abc' },
+            { applyTo: 'code03Combo', params: 'code03Combo=0029&code03param=abc' }
+        ]
+    });
+    
+</div>
+</div>
+</div>
+
+<div class="method_getCombo">
+<div class="L-description">
+생성된 cobmo List array 에 있는 콤보들 중에서 id 에 해당하는 LCombo를 리턴한다.
+</div>
+<div class="L-sample">
+sample:
+<div class="L-code">
+    var combo = loader.getCombo('code01Combo');
+
+    combo.on('changed', function(e) {
+        Rui.log("changed event~!!");
+    });
+    
+    var comboDataSet = combo.getDataSet();
+
+    comboDataSet.on('rowPosChanged', function(e) {
+        Rui.log("rowPosChanged event~!!");
+    });
+</div>
+</div>
+</div>
+
+</div>

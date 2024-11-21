@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Grid NumberColumn</title>
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 넘버컬럼(LNumberColumn)" />
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col7' },
+                    { id: 'col8' },
+                    { id: 'date1', type: 'date' }
+                ]
+            });
+
+            /*<b>*/
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                groupMerge: true,
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn({ mappingField: 'num' }),
+                    { field: 'col1', label: 'Col1', sortable: true, width: 200, vMerge: true},
+                    { field: 'col3', label: 'Col3', sortable: true, width: 60, align: 'center', vMerge: true, renderer: function(value){
+                        return '<font color="red">' + value + '</font>';
+                    }},
+                    { field: 'col2', label: 'Col2', sortable: true, width:130, align: 'center', renderer: function(value){
+                        if(!value || value.length < 13) return value;
+                        return value.substring(0, 6) + '-' + value.substring(6);
+                    }},
+                    { field: 'col7', width: 160, sortable: true, renderer: function(value){
+                        return '<a href=\'javascript:alert("' + value + '");\'>' + value + '</a>';
+                    }},
+                    { field: 'col8', width: 80, align: 'right', sortable: true, renderer: 'money'},
+                    { field: 'date1', width: 200, align: 'left'}
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel(
+            {
+                columnModel: columnModel,
+                dataSet:dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height:300
+            });
+
+            grid.render('defaultGrid');
+            /*</b>*/
+
+            grid.getView().on('focus', function(e){
+                Rui.log('focus');
+            });
+
+            grid.getView().on('blur', function(e){
+                Rui.log('blur');
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json',
+                    method: 'get'
+                });
+            });
+
+            var newBtn = new Rui.ui.LButton('newBtn');
+            newBtn.on('click', function(){
+                var row = dataSet.newRecord();
+                var record = dataSet.getAt(row);
+                record.set('col1', null);
+                record.set('col2', null);
+                record.set('col3', 'R2');
+                record.set('col7', '');
+                record.set('col8', 1);
+                record.set('code', 'code9');
+                record.set('date1', new Date());
+            });
+
+            var insertBtn = new Rui.ui.LButton('insertBtn');
+            insertBtn.on('click', function(){
+                if(dataSet.getRow() < 0) return;
+                var row = dataSet.newRecord(dataSet.getRow());
+                if (row !== false) {
+                    var record = dataSet.getAt(row);
+                    record.set('col1', null);
+                    record.set('col2', null);
+                    record.set('col3', 'R2');
+                    record.set('col7', '');
+                    record.set('col8', 1);
+                    record.set('code', 'code9');
+                    record.set('date1', new Date());
+                }
+            });
+
+            var updateBtn = new Rui.ui.LButton('updateBtn');
+            updateBtn.on('click', function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var record = dataSet.getAt(row);
+                record.set('col1', 'Tester');
+                record.set('col2', '(02) 6363-7009');
+                record.set('col3', 'R1');
+                record.set('col7', 'inserted');
+                record.set('col8', 10000);
+                record.set('date1', new Date());
+            });
+
+            var deleteBtn = new Rui.ui.LButton('deleteBtn');
+            deleteBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRows();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+
+            var undoBtn = new Rui.ui.LButton('undoBtn');
+            undoBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    for(var i = 0 ; i < dataSet.getCount() ; i++) {
+                        if(dataSet.isMarked(i))
+                            dataSet.undo(i);
+                    }
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.undo(row);
+                }
+            });
+
+            var undoAllBtn = new Rui.ui.LButton('undoAllBtn');
+            undoAllBtn.on('click', function(){
+                dataSet.undoAll();
+            });
+
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData();
+            });
+
+            searchBtn.click();
+            loadPage.hide();
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Grid NumberColumn</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid)의 NumberColumn</h2>
+            <div class="LblockDesc">
+                <p>그리드(Grid) NumberColumn 기능을 설명하는 샘플 입니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >search</button>
+            <button type="button" id="newBtn" >new</button>
+            <button type="button" id="insertBtn" >insert</button>
+            <button type="button" id="updateBtn" >update</button>
+            <button type="button" id="deleteBtn" >delete</button>
+            <button type="button" id="undoBtn" >undo</button>
+            <button type="button" id="undoAllBtn" >undoAll</button>
+            <button type="button" id="clearBtn" >clear</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+	<script type="text/javascript">
+	    var loadPage = new Rui.ui.LLoadPage();
+		loadPage.show();
+	</script>
+</body>
+</html>

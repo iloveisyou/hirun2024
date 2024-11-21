@@ -1,0 +1,21 @@
+[
+    {
+        "records": [
+            {
+                "combo1": "a1",
+                "combo2": "b1",
+                "combo3": "c2"
+            },
+            {
+                "combo1": "a2",
+                "combo2": "b3",
+                "combo3": "c6"
+            },
+            {
+                "combo1": "a2",
+                "combo2": "b4",
+                "combo3": "c7"
+            }
+        ]
+    }
+]

@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Grid NumberColumn Sample</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+
+        $C(function() {
+            
+            //log 활성화
+            $C('!config').set('$.core.logger.show', [true]);
+            $C.log("start !!");
+            
+            
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'col7' },
+                { id: 'col8' },
+                { id: 'date1', type: 'date' }
+            ]
+            });
+
+            /*<b>*/
+            var columnModel = $C.columnModel({
+                groupMerge: true,
+                columns: [
+                    $C.selectionColumn(),
+                    $C.stateColumn(),
+                    $C.numberColumn({ mappingField: 'num' }),
+                    { field: 'col1', label: 'Col1', sortable: true, width: 200, vMerge: true},
+                    { field: 'col3', label: 'Col3', sortable: true, width: 60, align: 'center', vMerge: true, renderer: function(value){
+                        return '<font color="red">' + value + '</font>';
+                    }},
+                    { field: 'col2', label: 'Col2', sortable: true, width:130, align:'center', renderer: function(value){
+                        if(!value || value.length < 13) return value;
+                        return value.substring(0, 6) + '-' + value.substring(6);
+                    }},
+                    { field: 'col7', width: 160, sortable: true, renderer: function(value){
+                        return '<a href=\'javascript:alert("' + value + '");\'>' + value + '</a>';
+                    }},
+                    { field: 'col8', width: 80, align: 'right', sortable: true, renderer: 'money'},
+                    { field: 'date1', width: 200, align:'left'}
+                ]
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet:dataSet,
+                height:300
+            });
+
+            /*</b>*/
+            
+            grid.getView().on('focus', function(e){
+                $C.log('focus');
+            });
+            
+            grid.getView().on('blur', function(e){
+                $C.log('blur');
+            });
+            
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json',
+                    method: "get"
+                });
+            });
+            
+            $C('#newBtn').button();
+            $C('#newBtn').on("click", function(){
+                var row = dataSet.newRecord();
+                var record = dataSet.getAt(row);
+                record.set("col1", null);
+                record.set("col2", null);
+                record.set("col3", "R2");
+                record.set("col7", "");
+                record.set("col8", 1);
+                record.set("code", 'code9');
+                record.set("date1", new Date());
+            });
+
+            $C('#insertBtn').button();
+            $C('#insertBtn').on("click", function(){
+                if(dataSet.getRow() < 0) return;
+                var row = dataSet.newRecord(dataSet.getRow());
+                if (row !== false) {
+                    var record = dataSet.getAt(row);
+                    record.set("col1", null);
+                    record.set("col2", null);
+                    record.set("col3", "R2");
+                    record.set("col7", "");
+                    record.set("col8", 1);
+                    record.set("code", 'code9');
+                    record.set("date1", new Date());
+                }
+            });
+
+            $C('#updateBtn').button();
+            $C('#updateBtn').on("click", function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var record = dataSet.getAt(row);
+                record.set("col1", "Tester");
+                record.set("col2", "(02) 6363-7009");
+                record.set("col3", "R1");
+                record.set("col7", "inserted");
+                record.set("col8", 10000);
+                record.set("date1", new Date());
+            });
+
+            $C('#deleteBtn').button();
+            $C('#deleteBtn').on("click", function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRow();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+            
+            $C('#undoBtn').button();
+            $C('#undoBtn').on("click", function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    for(var i = 0 ; i < dataSet.getCount() ; i++) {
+                        if(dataSet.isMarked(i))
+                            dataSet.undo(i);
+                    }
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.undo(row);
+                }
+            });
+            
+            $C('#undoAllBtn').button();
+            $C('#undoAllBtn').on("click", function(){
+                dataSet.undoAll();
+            });
+            
+            $C('#clearBtn').button();
+            $C('#clearBtn').on("click", function(){
+                dataSet.clearData();
+            });
+            
+            $C('#filterBtn').button();
+            $C('#filterBtn').on("click", function(){
+                dataSet.filter(function(id, record){
+                    return record.get("col3") == "R2"
+                });
+            });
+
+            $C('#sortBtn').button();
+            $C('#sortBtn').on("click", function(){
+                dataSet.sortField("col1");
+            });
+            
+            $C('#syncDataSetBtn').button();
+            $C('#syncDataSetBtn').on("click", function(){
+                grid.setSyncDataSet(true);
+            });
+            
+            $C('#unSyncDataSetBtn').button();
+            $C('#unSyncDataSetBtn').on("click", function(){
+                grid.setSyncDataSet(false);
+            });
+            
+            $C('#firstBtn').button();
+            $C('#firstBtn').on("click", function(){
+                dataSet.setRow(0);
+            });
+
+            $C('#previousBtn').button();
+            $C('#previousBtn').on("click", function(){
+                if(dataSet.getRow() > 0)
+                    dataSet.setRow(dataSet.getRow() - 1);
+            });
+
+            $C('#nextBtn').button();
+            $C('#nextBtn').on("click", function(){
+                if(dataSet.getCount() > dataSet.getRow())
+                    dataSet.setRow(dataSet.getRow() + 1);
+            });
+
+            $C('#lastBtn').button();
+            $C('#lastBtn').on("click", function(){
+                dataSet.setRow(dataSet.getCount() - 1);
+            });
+            
+            $C('#columnShowBtn').button();
+            $C('#columnShowBtn').on("click", function(){
+                columnModel.getColumnById('col3').setHidden(false);
+            });
+
+            $C('#columnHideBtn').button();
+            $C('#columnHideBtn').on("click", function(){
+                columnModel.getColumnById('col3').setHidden(true);
+            });
+            
+            $C('#showBtn').button();
+            $C('#showBtn').on("click", function(){
+                grid.show();
+            });
+            
+            $C('#hideBtn').button();
+            $C('#hideBtn').on("click", function(){
+                grid.hide();
+            });
+            
+            $C('#columnWidthBtn').button();
+            $C('#columnWidthBtn').on("click", function(){
+                var column = columnModel.getColumnById('col3');
+                var width = 120;
+                if(column.getWidth() == 120){
+                    width = 60;
+                }
+                column.setWidth(width);
+            });
+            
+            $C('#moveColumnBtn').button();
+            $C('#moveColumnBtn').on("click", function(){
+                var column = columnModel.getColumnById('col2');
+                var oldIndex = columnModel.getIndexById('col2');
+                var newIndex = 5;
+                if(oldIndex == 5){
+                    newIndex = 4;
+                }
+                columnModel.moveColumn(oldIndex,newIndex);
+            });
+            
+            $C('#setLableColumnBtn').button();
+            $C('#setLableColumnBtn').on("click", function(){
+                var column = columnModel.getColumnById('col2');
+                debugger;
+                column.setLabel('컬럼2');
+            });
+            
+            searchBtn.click();
+            
+        });        
+        
+    </script>
+
+</head>
+<body>
+    <h1>Grid Basic Sample</h1>
+    <h2>Grid의 생성 및 기능을 소개하는 기본 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div>Grid 생성 방법 및 각종 기능을 설명하는 샘플 입니다.</div>
+<div id='bd'>
+    <div class="LblockButton" >
+        <button type="button" id="searchBtn" >search</button>
+        <button type="button" id="newBtn" >new</button>
+        <button type="button" id="insertBtn" >insert</button>
+        <button type="button" id="updateBtn" >update</button>
+        <button type="button" id="deleteBtn" >delete</button>
+        <button type="button" id="undoBtn" >undo</button>
+        <button type="button" id="undoAllBtn" >undoAll</button>
+        <button type="button" id="clearBtn" >clear</button>
+    </div>
+    <div class="LblockMarkupCode">    
+        <div id="defaultGrid"></div>    
+    </div>
+    <button type="button" id="filterBtn" >filter</button>
+    <button type="button" id="sortBtn" >sort</button>
+    <button type="button" id="syncDataSetBtn" >syncDataSet</button>
+    <button type="button" id="unSyncDataSetBtn" >unSyncDataSet</button>
+    <button type="button" id="firstBtn" >first</button>
+    <button type="button" id="previousBtn" >previous</button>
+    <button type="button" id="nextBtn" >next</button>
+    <button type="button" id="lastBtn" >last</button>
+    <button type="button" id="columnShowBtn" >column show</button>
+    <button type="button" id="columnHideBtn" >column hide</button>
+    <button type="button" id="showBtn" >show</button>
+    <button type="button" id="hideBtn" >hide</button>
+    <button type="button" id="columnWidthBtn" >setWidth</button>
+    <button type="button" id="moveColumnBtn" >moveColumn</button>
+    <button type="button" id="setLableColumnBtn" >setLabel</button>
+</div>
+</body>
+</html>

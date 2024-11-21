@@ -1,0 +1,252 @@
+[
+    {
+        "metaData": {"dataSetId": "dataset1"},
+        "records": [
+            {
+                "value": "code1",
+                "state": "0",
+                "text": "코드1"
+            },
+            {
+                "value": "code2",
+                "state": "0",
+                "text": "코드2"
+            },
+            {
+                "value": "code3",
+                "state": "0",
+                "text": "코드3"
+            },
+            {
+                "value": "code4",
+                "state": "0",
+                "text": "코드4"
+            },
+            {
+                "value": "code5",
+                "state": "0",
+                "text": "코드5"
+            },
+            {
+                "value": "code6",
+                "state": "0",
+                "text": "코드6"
+            },
+            {
+                "value": "code7",
+                "state": "0",
+                "text": "코드7"
+            },
+            {
+                "value": "code8",
+                "state": "0",
+                "text": "코드8"
+            },
+            {
+                "value": "code9",
+                "state": "0",
+                "text": "코드9"
+            },
+            {
+                "value": "code10",
+                "state": "0",
+                "text": "코드10"
+            },
+            {
+                "value": "code11",
+                "state": "0",
+                "text": "코드11"
+            },
+            {
+                "value": "code12",
+                "state": "0",
+                "text": "코드12"
+            },
+            {
+                "value": "code13",
+                "state": "0",
+                "text": "코드13"
+            },
+            {
+                "value": "code14",
+                "state": "0",
+                "text": "코드14"
+            },
+            {
+                "value": "code15",
+                "state": "0",
+                "text": "코드15"
+            },
+            {
+                "value": "data1",
+                "state": "0",
+                "text": "데이터1"
+            },
+            {
+                "value": "data2",
+                "state": "0",
+                "text": "데이터2"
+            },
+            {
+                "value": "data3",
+                "state": "0",
+                "text": "데이터3"
+            },
+            {
+                "value": "data4",
+                "state": "0",
+                "text": "데이터4"
+            },
+            {
+                "value": "data5",
+                "state": "0",
+                "text": "데이터5"
+            },
+            {
+                "value": "data6",
+                "state": "0",
+                "text": "데이터6"
+            },
+            {
+                "value": "data7",
+                "state": "0",
+                "text": "데이터7"
+            },
+            {
+                "value": "data8",
+                "state": "0",
+                "text": "데이터8"
+            },
+            {
+                "value": "data9",
+                "state": "0",
+                "text": "데이터9"
+            },
+            {
+                "value": "data10",
+                "state": "0",
+                "text": "데이터10"
+            },
+            {
+                "value": "data11",
+                "state": "0",
+                "text": "데이터11"
+            },
+            {
+                "value": "data12",
+                "state": "0",
+                "text": "데이터12"
+            },
+            {
+                "value": "data13",
+                "state": "0",
+                "text": "데이터13"
+            },
+            {
+                "value": "data14",
+                "state": "0",
+                "text": "데이터14"
+            },
+            {
+                "value": "data15",
+                "state": "0",
+                "text": "데이터15"
+            }
+        ]
+    },
+    {
+        "metaData": {"dataSetId": "dataset2"},
+        "records": [
+            {
+                "value": "data1",
+                "state": "0",
+                "text": "데이터1"
+            },
+            {
+                "value": "data2",
+                "state": "0",
+                "text": "데이터2"
+            },
+            {
+                "value": "data3",
+                "state": "0",
+                "text": "데이터3"
+            },
+            {
+                "value": "data4",
+                "state": "0",
+                "text": "데이터4"
+            },
+            {
+                "value": "data5",
+                "state": "0",
+                "text": "데이터5"
+            },
+            {
+                "value": "data6",
+                "state": "0",
+                "text": "데이터6"
+            },
+            {
+                "value": "data7",
+                "state": "0",
+                "text": "데이터7"
+            },
+            {
+                "value": "data8",
+                "state": "0",
+                "text": "데이터8"
+            },
+            {
+                "value": "data9",
+                "state": "0",
+                "text": "데이터9"
+            },
+            {
+                "value": "data10",
+                "state": "0",
+                "text": "데이터10"
+            },
+            {
+                "value": "data11",
+                "state": "0",
+                "text": "데이터11"
+            },
+            {
+                "value": "data12",
+                "state": "0",
+                "text": "데이터12"
+            },
+            {
+                "value": "data13",
+                "state": "0",
+                "text": "데이터13"
+            },
+            {
+                "value": "data14",
+                "state": "0",
+                "text": "데이터14"
+            },
+            {
+                "value": "data15",
+                "state": "0",
+                "text": "데이터15"
+            }
+        ]
+    },
+    {
+        "metaData": {"dataSetId": "dataset3"},
+        "records": [
+            {
+                "value": "test1",
+                "state": "0",
+                "text": "테스트1"
+            },
+            {
+                "value": "test2",
+                "state": "0",
+                "text": "테스트2"
+            }
+        ]
+    }
+]

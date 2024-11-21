@@ -1,0 +1,201 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+prototype에 추가된 메소드 외에도 Rui.util.LString객체를 이용하여 더 많은 기능을 사용할 수 있다.
+<a href="../sample/general/base/prototypeSample.html" target="_new">/rui/sample/general/base/prototypeSample.html</a>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_trim">
+<div class="L-description">
+문자에 앞뒤를 trim한다.
+</div>
+<div class="L-sample">
+sample: 문자에 앞뒤를 trim한다.  
+<div class="L-code">
+var a = '  aaaaa  ';
+var v = a.trim();
+리턴 : 'aaaaa'
+</div> 
+</div>
+</div>
+
+<div class="method_lPad">
+<div class="L-description">
+문자에 앞에 자리수 만큼 인수 문자를 추가한다.
+</div>
+<div class="L-sample">
+sample: 1010문자열 앞에 0을 7자리까지 채워서 리턴한다.  
+<div class="L-code">
+var a = '1010';
+var v = a.lPad('0', 7);
+리턴 : '0001010'
+</div> 
+</div>
+</div>
+
+<div class="method_rPad">
+<div class="L-description">
+문자에 뒤에 자리수 만큼 인수 문자를 추가한다.
+</div>
+<div class="L-sample">
+sample: 1010문자열 뒤에 0을 7자리까지 채워서 리턴한다.  
+<div class="L-code">
+var a = '1010';
+var v = a.rPad('0', 7);
+리턴 : '1010000'
+</div> 
+</div>
+</div>
+
+<div class="method_toDate">
+<div class="L-description">
+문자를 Date객체로 리턴한다. 날짜 형식의 문자가 안 맞으면 false를 리턴한다.
+</div>
+<div class="L-sample">
+sample: 2013년 6월 24일 날짜 객체를 문자열로 리턴한다. 각 %X 등 포멧 정보는 Api의 Rui.util.LDate객체를 참조한다.
+<div class="L-code">
+var a = new Date(2013, 5, 24);
+var v = a.toDate('%q');
+리턴 : '20130624'
+</div> 
+</div>
+
+<div class="L-sample">
+sample: 2013년 6월 24일 날짜 객체를 - 구분자가 있는 문자열로 리턴한다. 각 %Y,%m,%d 등 포멧 정보는 Api의 Rui.util.LDate객체를 참조한다.
+<div class="L-code">
+var a = new Date(2013, 5, 24);
+var v = a.toDate('%Y-%m-%d');
+리턴 : '2013-06-24'
+</div> 
+</div>
+</div>
+
+<div class="method_toXml">
+<div class="L-description">
+xml 문자열을 XML 브라우져 객체로 리턴한다.
+</div>
+<div class="L-sample">
+sample: xml 문자열을 XML 브라우져 객체로 리턴한다.
+<div class="L-code">
+var xml = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;project name="devon-framework" &gt;&lt;/project&gt;';
+var v = a.toXml();
+리턴 : XML 브라우져 객체
+</div> 
+</div>
+</div>
+
+<div class="method_trimAll">
+<div class="L-description">
+문자열 내부에 있는 모든 공백을 제거한다.
+</div>
+<div class="L-sample">
+sample: 문자열 내부에 모든 공백을 제거한다.
+<div class="L-code">
+var a = '  a  aa  aa  ';
+var v = a.trimAll();
+리턴 : 'aaaaa'
+</div> 
+</div>
+</div>
+
+<div class="method_cut">
+<div class="L-description">
+문자열의 지정된 위치 만큼 리턴한다.
+</div>
+<div class="L-sample">
+sample: 문자열의 지정된 위치 만큼 리턴한다.
+<div class="L-code">
+var a = 'abcdef';
+var v = a.cut(2, 3);
+리턴 : 'cd'
+</div> 
+</div>
+</div>
+
+<div class="method_lastCut">
+<div class="L-description">
+문자열의 지정된 위치 만큼 뒤에서 리턴한다.
+</div>
+<div class="L-sample">
+sample: 문자열의 뒤에서 5자리 만큼 리턴한다.
+<div class="L-code">
+var a = 'abcdefgh';
+var v = a.lastCut(5);
+리턴 : 'defgh'
+</div> 
+</div>
+</div>
+
+<div class="method_startsWith">
+<div class="L-description">
+문자열의 시작 값이 인수와 같으면 true을 리턴한다.
+</div>
+<div class="L-sample">
+sample: 문자열에서 앞 문자열이 ' my'이면 true을 리턴한다.
+<div class="L-code">
+var s = ' my name is jun-hee,hong ';
+var v = s.startsWith(' my');
+리턴 : true
+</div> 
+</div>
+</div>
+
+<div class="method_endsWith">
+<div class="L-description">
+문자열의 마지막 값이 인수와 같으면 true을 리턴한다.
+</div>
+<div class="L-sample">
+sample: 문자열에서 마지막 문자열이 'hong '이면 true을 리턴한다.
+<div class="L-code">
+var s = ' my name is jun-hee,hong ';
+var v = s.startsWith('hong ');
+리턴 : true
+</div> 
+</div>
+</div>
+
+<div class="method_simpleReplace">
+<div class="L-description">
+문자열을 지정한 인수에 맞게 치환한다.
+</div>
+<div class="L-sample">
+sample: 문자열에서 my를 you로 치환하여 리턴한다.
+<div class="L-code">
+var s = ' my name is jun-hee,hong ';
+var v = s.simpleReplace('my', 'you');
+리턴 : ' you name is jun-hee,hong '
+</div> 
+</div>
+</div>
+
+<div class="method_insert">
+<div class="L-description">
+문자열을 지정한 인수에 맞게 문자열을 추가하여 리턴한다.
+</div>
+<div class="L-sample">
+sample: 문자열에서 2번째 index에 ecd를 추가하여 리턴한다.
+<div class="L-code">
+var s = ' my name is jun-hee,hong ';
+var v = s.insert(2, 'edc');
+리턴 : ' medcy name is jun-hee,hong '
+</div> 
+</div>
+</div>
+
+<div class="method_firstUpperCase">
+<div class="L-description">
+문자열을 첫번째 문자를 대문자로 변환하여 리턴한다.
+</div>
+<div class="L-sample">
+sample: 문자열에서 첫번째 a 문자를 대문자로 변환하여 리턴한다.
+<div class="L-code">
+var s = 'abc|de|fg'
+var v = s.firstUpperCase();
+리턴 : 'Abc|de|fg'
+</div> 
+</div>
+</div>
+
+</div>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="간단한 공통 팝업을 만드는 샘플" />
+    <title>Common Dialog</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./rui_popup_sample.js"></script>
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        .LblockSearchTable {
+            width: 50%;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            
+            new Rui.ui.LButton('popup').on('click', function(e){
+                var biz1Dialog = getBiz1Dialog({
+                    params: {
+                        biz1QueryCombo: Rui.get('code').getValue()
+                    },
+                    selectHandler: function(values) {
+                        alert(Rui.dump(values));
+                    }
+                });
+                biz1Dialog.show();
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <h1>Common Dialog</h1>
+    <h2>공통 다이얼로그를 만들어서 사용하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>프로젝트에서 공통 다이얼로그 팝업을 만드는 샘플입니다.</p>
+        <p>그리드를 출력하는 업무 공통이나 단순 공통 팝업을 만들경우 아래의 요구사항이 발생합니다.</p><br>
+        <p>요구사항</p>
+        <p>- 브라우저를 새창으로 띄울 경우 주소가 보이니 않게 구현한다.</p>
+        <p>- 팝업 구현시 파라미터 전달 방식이 쉬우며 원 페이지와 팝업 페이지의 콤포넌트 연동이 복잡하지 않아야 한다.</p><br>
+        <p>위 요구사항이 발생할 경우 div형 dialog를 생성해야 하는데 아래의 문제점이 발생합니다.</p>
+        <p>- Dialog의 컨텐츠를 페이지에 모두 생성해야 하므로 여러개의 Dialog를 사용하면 페이지 로딩시 성능 저하 및 메모리 증가 발생 (activeX 솔루션들이 대부분 이와 같은 구현 방식으로 페이지 로딩시 성능이 저하됩니다.)</p>
+        <p>- 페이지 내에  dialog 생성 소스를 작성해야 하므로 유지 관리의 복잡도 발생. </p>
+        <p>- 페이지 내에 dialog를 생성하므로 메모리 릭 발생 확율이 높음.</p><br>
+        <p>이 샘플은 위와 같은 상태에 대한 문제를 방지할 수 있게 구현되었습니다.</p>
+        <p>Dialog 구현 원칙</p>
+        <p>- 페이지 내의 소스와 dialog 소스를 분리해서 관리할 수 있다.</p>
+        <p>- 사용자가 사용하지 않는 dialog는 생성하지 않는다.</p>
+        <p>- 페이지와 dialog 페이지의 콤포넌트와 연동이 쉽다.</p>
+        <p>- 페이지 내에서 dialog를 여러개(10개 이상)를 사용할 수 있는 화면을 만들어도 성능 저하가 발생하면 안된다.</p>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div id="LblockSearch">
+                <table summary="사원 검색조건" class="LblockSearchTable">
+                <tbody>
+                    <tr>
+                        <th><label for="commCodeBox">팝업</label></th>
+                        <td>
+                            <input type="text" id="code" value="code2">
+                            <button type="button" id="popup">팝업</button>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Make Table</title>
+    <meta name="devon-rui-keyword" content="Dom 생성" />
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            var btnAddRow = new Rui.ui.LButton('btnAddRow');
+            btnAddRow.on('click', function(e) {
+                /*<b>*/
+                var tr = '<tr><td>test</td></tr>';
+                var elList = Rui.createElements(tr);
+                var tableEl = Rui.get('sample');
+                tableEl.appendChild(elList);
+                /*</b>*/
+            });
+        
+            var btnDelete = new Rui.ui.LButton('btnDelete');
+            btnDelete.on('click', function(e) {
+                var tableEl = Rui.get('sample');
+                tableEl.select('tr:last-child').remove();
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>DomHandle</h1>
+    <h2>HTML Dom 제어를 통해 tr row를 생성하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>HTML Dom 제어를 통해 table에 row의 html를 생성하여 추가하는 샘플</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+        </div>
+        <div class="LblockMarkupCode">
+            <table id="sample" style="height:300px;width:500px" border="1"></table>
+        </div>
+        <div class="LblockButton" >
+	        <button type="button" id="btnAddRow" >Add Row</button>
+	        <button type="button" id="btnDelete" >Delete Row</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

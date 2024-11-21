@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Transaction Manager multi dataSet</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+        <script type="text/javascript" class="script-code">
+            var dataSet1, dataSet2, tm;
+            $C(function(){
+            
+                dataSet1 = $C.dataSet({
+                    id: 'dataset1',
+                    fields: [
+                    {id: 'code'}, 
+                    {id: 'value'}
+                    ]
+                });
+                
+                var columnModel1 = $C.columnModel({
+                    columns: [
+                    $C.stateColumn(), 
+                    $C.numberColumn(), 
+                    {field: "code",label: "Col1"}, 
+                    {field: "value",label: "Col1"}
+                    ]
+                });
+                
+                $C('#grid1').grid({
+                    columnModel: columnModel1,
+                    width: 400,
+                    height: 200,
+                    dataSet: dataSet1
+                });
+                
+                
+                dataSet2 = $C.dataSet({
+                    id: 'dataset2',
+                    fields: [
+                    {id: 'code'}, 
+                    {id: 'value'}
+                    ]
+                });
+                
+                var columnModel2 = $C.columnModel({
+                    columns: [
+                    $C.stateColumn(), 
+                    $C.numberColumn(), 
+                    {field: "code",label: "Col1"}, 
+                    {field: "value",label: "Col1"}
+                    ]
+                });
+                
+                $C('#grid2').grid({
+                    columnModel: columnModel2,
+                    width: 400,
+                    height: 200,
+                    dataSet: dataSet2
+                });
+                
+                /*<b>*/
+                tm = $C.dataSetManager();
+                // loadDataSet 메소드 호출시 성공 이벤트
+                tm.on('load', function(e){
+                    $C.log("tm 성공");
+                });
+                // loadDataSet 메소드 호출시 실패 이벤트
+                tm.on('loadException', function(e){
+                    $C.log("tm 실패");
+                });
+                // updateDataSet 메소드 호출시 성공 이벤트
+                tm.on('success', function(e){
+                    $C.log("tm 성공");
+                    var responseText = e.responseText;
+
+                    /*
+                    var data = dataSet.getReadData(e);
+                    dataSet.loadData(data);
+                    */    
+                });
+                // updateDataSet 메소드 호출시 실패 이벤트
+                tm.on('failure', function(e){
+                    $C.log("tm 실패");
+                });
+                /*</b>*/
+                
+
+            })
+            
+            function editData(){
+                dataSet1.getAt(2).set('value', 'Change value');
+                dataSet2.getAt(4).set('value', 'Change value');
+            }
+            
+function testLoad(){
+    // loadDataSet시에는 load와 loadException 이벤트가 호출됨.
+    tm.loadDataSet({
+        dataSets: [dataSet1, dataSet2],
+        url: './../../../sample/data/code.json'
+    });
+}
+
+function testUpdate(){
+    // updateDataSet시에는 success와 failure 이벤트가 호출됨.
+    tm.updateDataSet({
+        dataSets: [dataSet1, dataSet2],
+        url: '/loadmultidataset.dev',
+        params: {
+            mode: 'update'
+        }
+    });
+}
+
+        </script>
+
+    </head>
+    <body>
+        <h1>transactionmanager multidataset sample</h1>
+        <h2>LDataSetManager를 이용하여 복수의 dataset을 제어하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>트랜잭션 매니저를 이용하여, 2개 이상의 데이터셋을 핸들링 합니다. 데이터셋은 연관배열 형태로 지정합니다.</div>
+
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <a href='javascript:testLoad()'>Load</a>
+                <a href='javascript:editData()'>Edit</a>
+                <a href='javascript:testUpdate()'>Update</a>
+                <div id='grid1'>
+                </div>
+                <div id='grid2'>
+                </div>
+                <div id='grid3'>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

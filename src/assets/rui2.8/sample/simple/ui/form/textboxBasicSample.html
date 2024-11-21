@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>TextBox Basic</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+          <style type="text/css">
+            .L-disabled {
+                color: black;
+                cursor: default;
+                opacity: .6;
+                -moz-opacity: 0.6;
+                filter: alpha(opacity=60);
+            }
+        </style>
+        <script type='text/javascript' class="script-code">
+        //log 활성화
+       
+            var col1TextBox = null;
+            $C('!config').set('$.core.logger.show', [true]);
+            $C(function(){
+                /*<b>*/
+                 $C('#textbox1').textBox({
+                    width: 300,    
+                    
+                   //includeChars: '123', 
+                   //inputType: Rui.util.LString.PATTERN_TYPE_KOREAN, 
+                    
+                    applyTo:'textbox1',
+                    // type: 'email', <-- password, url, email
+                   // mask: '999-999',
+                    placeholder: 'placeholder 내용이 출력됩니다',
+                    invalidBlur: false,
+                    //disabled: true,
+
+                    attrs: {
+                        tabIndex: 1,
+                        maxLength: 10
+                    }
+                });
+                /*</b>*/
+                
+                
+                
+                $C('#textbox1').on('focus', function(e){
+                    $C.log('Focused !');
+                });
+                
+                $C('#textbox1').on('blur', function(e){
+                    $C.log('Blured !');
+                });
+                
+                /******************JsUnit용 소스 시작**********************/
+                setUpPageStatus = 'complete';
+                /******************JsUnit용 소스   끝**********************/
+            });
+            
+        </script>
+        <!--*********************************JsUnit Test용 소스 시작********************************-->
+        <script type='text/javascript' >
+
+            //**************test function 시작*****************
+            function testSetWidth(){
+                $C('#textbox1').setWidth(30);
+            }
+            
+            function testGetWidth(){
+                $C.log($C('#textbox1').getWidth());
+            }
+            
+            function testSetHeight(){
+                $C('#textbox1').setHeight(20);
+            }
+            
+            function testGetHeight(){
+                $C.log($C('#textbox1').getHeight());
+            }
+            
+            function testFocus(){
+                $C('#textbox1').focus();
+            }
+            
+            function testBlur(){
+                $C('#textbox1').blur();
+            }
+            
+            function testIsValid(){
+                $C.log($C('#textbox1').isValid());
+            }
+            
+            function testValid(){
+                $C('#textbox1').valid();
+            }
+            
+            function testInvalid(){
+                $C('#textbox1').invalid();
+            }
+            
+            function testIsExpand(){
+                $C.log($C('#textbox1').isExpand());
+            }
+            
+            function testClearFilter(){
+                $C('#textbox1').clearFilter();
+            }
+            
+            function testGetValue(){
+                $C.log($C('#textbox1').getValue());
+            }
+            
+            function testGetDisplayValue(){
+                $C.log($C('#textbox1').getDisplayValue());
+            }
+            
+            function testSetValue(){
+                $C('#textbox1').setValue('');
+            }
+            
+            function testGetDataSet(){
+                $C.log($C('#textbox1').getDataSet());
+            }
+            
+            function testSetEditable(){
+                $C('#textbox1').setEditable(false);
+            }
+            
+            function noTestDestroy(){
+                $C('#textbox1').destroy();
+            }
+            
+            function testEditable(){
+                if($C('#textbox1').isEditable()) $C('#textbox1').setEditable(false);
+                else $C('#textbox1').setEditable(true);
+            }
+            
+            function testEnable(){
+                
+                $C('#textbox1').enable();
+            }
+            
+            function testDisable(){
+                $C('#textbox1').disable();
+            }
+            
+            //**************test function   끝*****************
+            //모든 test function이 실행된 후 실행된다.
+            function tearDown(){
+            }
+        </script>
+        <!--*********************************JsUnit Test용 소스   끝********************************-->
+    </head>
+    <body>
+        <h1>textbox basic sample</h1>
+        <h2>LTextBox를 구현하는 기본 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>기본적인 텍스트박스 구조 입니다. 텍스트박스에 입력 가능한 값을 지정 가능합니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div>
+            <!-- div id="textbox1"></div -->
+            <input type="text" id="textbox1" name="textbox1" >
+        </div>
+    </div>
+    <a href='javascript:noTestDestroy()'>destroy</a>
+    <a href='javascript:testSetWidth()'>setWidth</a>
+    <a href='javascript:testGetWidth()'>getWidth</a>
+    <a href='javascript:testSetHeight()'>setHeight</a>
+    <a href='javascript:testGetHeight()'>getHeight</a>
+    <a href='javascript:testSetEditable()'>setEditable</a>
+    <a href='javascript:testFocus()'>focus</a>
+    <a href='javascript:testBlur()'>blur</a>
+    <a href='javascript:testIsValid()'>isValid</a>
+    <a href='javascript:testValid()'>valid</a>
+    <a href='javascript:testInvalid()'>invalid</a>
+    <a href='javascript:testIsExpand()'>isExpand</a>
+    <a href='javascript:testClearFilter()'>clearFilter</a>
+    <a href='javascript:testGetValue()'>getValue</a>
+    <a href='javascript:testGetDisplayValue()'>getDisplayValue</a>
+    <a href='javascript:testSetValue()'>setValue</a>
+    <a href='javascript:testGetDataSet()'>getDataSet</a>
+    <a href='javascript:testEnable()'>enable</a>
+    <a href='javascript:testDisable()'>disable</a>
+</div>
+    </body>
+</html>

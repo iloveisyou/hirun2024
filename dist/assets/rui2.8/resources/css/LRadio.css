@@ -1,0 +1,16 @@
+/* LRadio
+------------------------------*/
+.L-form-field.L-radio-panel {
+    border: 0;
+}
+.L-form-field.L-radio-group {
+    border: 0;
+}
+.L-editor-panel .L-radio-group {
+    vertical-align: top;
+}
+.L-editor-panel .L-radio-panel {
+	float:left;
+	text-align: center;
+	vertical-align: top;
+}

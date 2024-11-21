@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="슬라이드메뉴(LSlideMenu)" />
+    <title>Slide Menu</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/menu/rui_menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/menu/rui_menu.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #bd {
+            height: 350px;
+        }
+        #divOut {
+            margin: 10px 0;
+            height: 20px;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'menuId', type: 'number' },
+                    { id: 'seq', type: 'number' },
+                    { id: 'parentMenuId', type: 'number' },
+                    { id: 'name' },
+                    { id: 'url' }
+                ]
+            });
+            
+            /*<b>*/
+            var slide = new Rui.ui.menu.LSlideMenu({
+                onlyOneTopOpen: true,
+                useAnimation: true,
+                defaultOpenTopIndex: 1,
+                dataSet: dataSet,
+                fields: {
+                    rootValue: 0,
+                    parentId: 'parentMenuId',
+                    id: 'menuId',
+                    label: 'name',
+                    order: 'seq'
+                }
+            });
+            /*</b>*/
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            slide.on('nodeClick', function(e) {
+                var recordId = e.node.getRecordId();
+                //최상위가 0
+                var depth = e.node.getDepth();
+                //자식이 없는지 여부
+                var hasChild = e.node.hasChild();
+                var r = dataSet.get(recordId);
+                var url = r.get('url');
+                Rui.get('divOut').html('url : ' + url + ', depth : ' + depth + ', hasChild? : ' + hasChild);
+            });
+            
+            dataSet.on('load', function(){
+                slide.defaultOpenTopIndex = 4;
+                if(!slide.isRendered())
+                    slide.render('divMenu');
+            });
+            dataSet.load({ url: './../../../../sample/data/menuTwoDepth.json' });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>SlideMenu</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>슬라이드메뉴(SliceMenu) 기본 샘플</h2>
+            <div class="LblockDesc">
+                <p>슬라이드메뉴(SliceMenu)의 기본 샘플 입니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="divOut"></div>
+            <div id="divMenu"></div>
+        </div>
+    </div>
+</body>
+</html>

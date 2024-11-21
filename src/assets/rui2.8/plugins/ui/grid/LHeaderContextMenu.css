@@ -1,0 +1,120 @@
+.L-grid-header-tool {
+    position: absolute;
+    width: 15px;
+    top: 0;
+    z-index: 1;
+    height: 15px;
+    cursor: pointer;
+    margin-left: -5px;
+    overflow: hidden;
+}
+
+.L-header-context-menu {
+    position: absolute;
+    z-index: 100;
+    width: 180px;
+    background-color: #fff;
+    top: 0px;
+    border: 1px solid #c5c5c5;
+    padding: 0;
+    box-shadow: 5px 5px 5px #c5c5c5;
+    color: #000; 
+}
+
+.L-header-master-menu-body {
+	margin: 0px 0px 2px 0px;
+	padding: 0px;
+} 
+
+.L-header-context-menu ul {
+    list-style-type: none;
+}
+
+.L-header-context-menu li {
+    cursor: pointer;
+}
+
+.L-header-sub-menu {
+    position: absolute;
+    z-index: 100;
+    background-color: #fff;
+    top: 0px;
+    max-height: 500px;
+    border: 1px solid #c5c5c5;
+    padding: 4px 5px 4px 7px;
+    overflow: auto;
+    max-width: 200px;
+    min-width: 150px;
+    box-shadow: 5px 5px 5px #c5c5c5; 
+}
+
+.L-header-context-menu .L-header-group-menu-row {
+    cursor: default;
+    font-weight: bold;
+    padding: 8px 20px 8px 10px;
+    background-color: #E2EFF8;
+    color: #2880B4  ;
+}
+
+.L-header-menu-row {
+    min-width: 50px;
+    white-space: nowrap;
+    padding: 4px 20px 4px 18px;
+}
+
+.L-header-sub-menu .L-header-menu-row {
+	padding: 4px 0px 4px 0px;
+}
+
+.L-header-sub-menu-buttons {
+	text-align: right;
+}
+
+.L-header-sub-menu-buttons .L-filter-btn {
+    border: 1px solid #e0e0e0;
+    background-color: #f3f2f2;
+    color: #222222;
+}
+
+.L-header-sub-menu-buttons .L-filter-btn:hover {
+    border: 1px solid #797979;
+    background-color: #a8a8a8;
+}
+
+.dataFilter {
+    display: none;
+}
+
+.L-use-field .dataFilter {
+    display: block;
+}
+
+.L-grid-header .L-filtered {
+	background: transparent url(./../../../resources/images/grid/header-filtered.jpg) no-repeat top left;
+}
+
+.L-sort-label {
+	display: inline-block;
+	*display: inline;
+	*zoom: 100%;
+	min-width: 70px;
+	cursor: pointer;
+}
+
+.L-header-menu-rows {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.L-grid-header-tool-icon {
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	*display: inline;
+	*zoom: 100%;
+}
+.L-grid-header-tool-dialog {
+	z-index: 100 /*!important*/;
+	max-height: 400px;
+}

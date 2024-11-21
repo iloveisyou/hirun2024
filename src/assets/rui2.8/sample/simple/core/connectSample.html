@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Connect tests</title>
+        
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        
+        <script type="text/javascript">
+            $C(function(){
+                //asyncRequest();
+            });
+            
+            var logInfo = {
+                src: 'example',
+                cat: 'info'
+            }
+            
+            function asyncRequest(){
+                var sUrl = '/consoleLog.dev';
+                var params = 'test=aaa';
+                var request = $C('!connect').asyncRequest('post', sUrl, {
+                        success: successAsyncHandler,
+                        failure: failureAsyncHandler,
+                        customevents: {
+                            onStart: function(e){
+                                Rui.log('start', logInfo);
+                            },
+                            onComplete: function(e){
+                                Rui.log('complete', logInfo);
+                            },
+                            onSuccess: function(e){
+                                Rui.log('success', logInfo);
+                            },
+                            onFailure: function(e){
+                                Rui.log('failure', logInfo);
+                            },
+                            onUpload: function(e){
+                                Rui.log('upload', logInfo);
+                            },
+                            onAbort: function(e){
+                                Rui.log('abort', logInfo);
+                            }
+                        }
+                    }, params);
+            }
+
+            function successAsyncHandler(conn){
+                $C.log("Success handler called; handler will parse the retrieved XML and insert into DOM.", logInfo);
+                /******************JsUnit용 소스 시작**********************/
+                asyncRequestSuccess = true;
+                setUpPageStatus = 'complete';
+                /******************JsUnit용 소스   끝**********************/
+            }
+            
+            function failureAsyncHandler(conn){
+                $C.log("Failure handler called;status:" + conn.status, logInfo);
+                /******************JsUnit용 소스 시작**********************/
+                asyncRequestSuccess = false;
+                setUpPageStatus = 'complete';
+                /******************JsUnit용 소스   끝**********************/
+            }
+        </script>
+        <!--*********************************JsUnit Test용 소스 시작********************************-->
+        <script type='text/javascript' >
+            var asyncRequestSuccess = false;
+            
+            //setUpPageStatus == 'complete'가 되어야만  test function이 실행된다.
+            function setUpPage(){
+                setUpPageStatus = 'running';
+                asyncRequest();
+            }
+            
+            //test function이 실행되기 전에 먼저 실행된다.
+            function setUp(){                
+            }
+            
+            //**************test function 시작*****************
+            //**************test function   끝*****************
+            //모든 test function이 실행된 후 실행된다.
+            function tearDown(){
+            }
+        </script>
+        <!--*********************************JsUnit Test용 소스   끝********************************-->
+    </head>
+    <body>
+        <h1>Connect Sample</h1>
+        <h2>ajax 호출을 직접 호출하는 샘플</h2>
+        <a href='javascript:asyncRequest()' title='asyncRequest 작동 여부'>asyncRequest</a>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+/* LTabMenu
+------------------------------*/
+.L-ul.L-ul-tabmenu {
+    overflow: inherit;
+}
+.L-ul-tabmenu ul, 
+.L-ul-tabmenu li {
+    list-style: none outside none;
+}
+.L-ul-tabmenu ul {
+    margin-left: 0px;
+}
+.L-ul-tabmenu li {
+    float: left;
+}
+.L-ul-tabmenu .L-ul-li-depth-0 > ul {
+	position: absolute;
+}
+.L-ul-tabmenu .L-ul-li-depth-0 .L-ul-li-div-depth-0 .L-ul-tabmenu-content {
+    padding: 1px 8px 0px;
+}
+.L-ul-tabmenu .L-ul-li-depth-1 .L-ul-tabmenu-content {
+    padding: 0px 8px;
+}
+.L-ul-tabmenu .L-ul-focus-parent-node {
+    background-color: #888888;
+    color: #ffffff;
+}
+.L-ul-tabmenu .L-ul-focus-node {
+    background-color: #888888;
+    color: #ffffff;
+}
+.L-ul-tabmenu .L-ul-first {
+    display: inline-block;
+    border: solid 1px #c4c4be;
+}
+.L-ul-tabmenu .L-ul-first ul {
+    border: solid 1px #c4c4be;
+    padding: 2px 1px;
+    background-color: #fff;
+}
+.L-ul-tabmenu .L-ul-depth-1 ul{
+    margin-left: 30px;
+}
+.L-ul-node {
+	cursor: pointer;
+}

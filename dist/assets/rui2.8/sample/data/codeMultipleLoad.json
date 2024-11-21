@@ -1,0 +1,2373 @@
+[
+    {
+        "metaData": {
+            "dataSetId": "code30ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 17
+        },
+        "records": [
+            {
+                "value": "11",
+                "codeGroup": "0292",
+                "text": "서울특별시"
+            },
+            {
+                "value": "21",
+                "codeGroup": "0292",
+                "text": "부산광역시"
+            },
+            {
+                "value": "22",
+                "codeGroup": "0292",
+                "text": "대구광역시"
+            },
+            {
+                "value": "23",
+                "codeGroup": "0292",
+                "text": "인천광역시"
+            },
+            {
+                "value": "24",
+                "codeGroup": "0292",
+                "text": "광주광역시"
+            },
+            {
+                "value": "25",
+                "codeGroup": "0292",
+                "text": "대전광역시"
+            },
+            {
+                "value": "26",
+                "codeGroup": "0292",
+                "text": "울산광역시"
+            },
+            {
+                "value": "31",
+                "codeGroup": "0292",
+                "text": "경기도"
+            },
+            {
+                "value": "32",
+                "codeGroup": "0292",
+                "text": "강원도"
+            },
+            {
+                "value": "33",
+                "codeGroup": "0292",
+                "text": "충청북도"
+            },
+            {
+                "value": "34",
+                "codeGroup": "0292",
+                "text": "충청남도"
+            },
+            {
+                "value": "35",
+                "codeGroup": "0292",
+                "text": "전라북도"
+            },
+            {
+                "value": "36",
+                "codeGroup": "0292",
+                "text": "전라남도"
+            },
+            {
+                "value": "37",
+                "codeGroup": "0292",
+                "text": "경상북도"
+            },
+            {
+                "value": "38",
+                "codeGroup": "0292",
+                "text": "경상남도"
+            },
+            {
+                "value": "39",
+                "codeGroup": "0292",
+                "text": "제주특별자치도"
+            },
+            {
+                "value": "99",
+                "codeGroup": "0292",
+                "text": "기타"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code13ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 4
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0068",
+                "text": "미결"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0068",
+                "text": "진행"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0068",
+                "text": "담당자연결"
+            },
+            {
+                "value": "9",
+                "codeGroup": "0068",
+                "text": "완료"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code20ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 5
+        },
+        "records": [
+            {
+                "value": "01",
+                "codeGroup": "0114",
+                "text": "중도금"
+            },
+            {
+                "value": "02",
+                "codeGroup": "0114",
+                "text": "잔금"
+            },
+            {
+                "value": "03",
+                "codeGroup": "0114",
+                "text": "이자후불"
+            },
+            {
+                "value": "04",
+                "codeGroup": "0114",
+                "text": "계약금대여"
+            },
+            {
+                "value": "05",
+                "codeGroup": "0114",
+                "text": "기타"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code28ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 194
+        },
+        "records": [
+            {
+                "value": "ER",
+                "codeGroup": "0187",
+                "text": "에리트레아"
+            },
+            {
+                "value": "EE",
+                "codeGroup": "0187",
+                "text": "에스토니아"
+            },
+            {
+                "value": "ES",
+                "codeGroup": "0187",
+                "text": "에스파냐"
+            },
+            {
+                "value": "EC",
+                "codeGroup": "0187",
+                "text": "에콰도르"
+            },
+            {
+                "value": "ET",
+                "codeGroup": "0187",
+                "text": "에티오피아"
+            },
+            {
+                "value": "SV",
+                "codeGroup": "0187",
+                "text": "엘살바도르"
+            },
+            {
+                "value": "GB",
+                "codeGroup": "0187",
+                "text": "영국"
+            },
+            {
+                "value": "YE",
+                "codeGroup": "0187",
+                "text": "예멘"
+            },
+            {
+                "value": "OM",
+                "codeGroup": "0187",
+                "text": "오만"
+            },
+            {
+                "value": "AU",
+                "codeGroup": "0187",
+                "text": "오스트레일리아"
+            },
+            {
+                "value": "AT",
+                "codeGroup": "0187",
+                "text": "오스트리아"
+            },
+            {
+                "value": "HN",
+                "codeGroup": "0187",
+                "text": "온두라스"
+            },
+            {
+                "value": "JO",
+                "codeGroup": "0187",
+                "text": "요르단"
+            },
+            {
+                "value": "UG",
+                "codeGroup": "0187",
+                "text": "우간다"
+            },
+            {
+                "value": "UY",
+                "codeGroup": "0187",
+                "text": "우루과이"
+            },
+            {
+                "value": "UZ",
+                "codeGroup": "0187",
+                "text": "우즈베키스탄"
+            },
+            {
+                "value": "UA",
+                "codeGroup": "0187",
+                "text": "우크라이나"
+            },
+            {
+                "value": "IQ",
+                "codeGroup": "0187",
+                "text": "이라크"
+            },
+            {
+                "value": "IR",
+                "codeGroup": "0187",
+                "text": "이란"
+            },
+            {
+                "value": "IL",
+                "codeGroup": "0187",
+                "text": "이스라엘"
+            },
+            {
+                "value": "EG",
+                "codeGroup": "0187",
+                "text": "이집트"
+            },
+            {
+                "value": "IT",
+                "codeGroup": "0187",
+                "text": "이탈리아"
+            },
+            {
+                "value": "IN",
+                "codeGroup": "0187",
+                "text": "인도"
+            },
+            {
+                "value": "ID",
+                "codeGroup": "0187",
+                "text": "인도네시아"
+            },
+            {
+                "value": "JP",
+                "codeGroup": "0187",
+                "text": "일본"
+            },
+            {
+                "value": "JM",
+                "codeGroup": "0187",
+                "text": "자메이카"
+            },
+            {
+                "value": "ZM",
+                "codeGroup": "0187",
+                "text": "잠비아"
+            },
+            {
+                "value": "GQ",
+                "codeGroup": "0187",
+                "text": "적도 기니"
+            },
+            {
+                "value": "KP",
+                "codeGroup": "0187",
+                "text": "조선민주주의인민공화국"
+            },
+            {
+                "value": "CN",
+                "codeGroup": "0187",
+                "text": "중국"
+            },
+            {
+                "value": "CF",
+                "codeGroup": "0187",
+                "text": "중앙아프리카 공화국"
+            },
+            {
+                "value": "TW",
+                "codeGroup": "0187",
+                "text": "중화민국"
+            },
+            {
+                "value": "DJ",
+                "codeGroup": "0187",
+                "text": "지부티"
+            },
+            {
+                "value": "ZW",
+                "codeGroup": "0187",
+                "text": "짐바브웨"
+            },
+            {
+                "value": "TD",
+                "codeGroup": "0187",
+                "text": "차드"
+            },
+            {
+                "value": "CZ",
+                "codeGroup": "0187",
+                "text": "체코"
+            },
+            {
+                "value": "CL",
+                "codeGroup": "0187",
+                "text": "칠레"
+            },
+            {
+                "value": "CM",
+                "codeGroup": "0187",
+                "text": "카메룬"
+            },
+            {
+                "value": "CV",
+                "codeGroup": "0187",
+                "text": "카보베르데"
+            },
+            {
+                "value": "GH",
+                "codeGroup": "0187",
+                "text": "가나"
+            },
+            {
+                "value": "GA",
+                "codeGroup": "0187",
+                "text": "가봉"
+            },
+            {
+                "value": "GY",
+                "codeGroup": "0187",
+                "text": "가이아나"
+            },
+            {
+                "value": "GM",
+                "codeGroup": "0187",
+                "text": "감비아"
+            },
+            {
+                "value": "GT",
+                "codeGroup": "0187",
+                "text": "과테말라"
+            },
+            {
+                "value": "GD",
+                "codeGroup": "0187",
+                "text": "그레나다"
+            },
+            {
+                "value": "GE",
+                "codeGroup": "0187",
+                "text": "그루지야"
+            },
+            {
+                "value": "GR",
+                "codeGroup": "0187",
+                "text": "그리스"
+            },
+            {
+                "value": "GN",
+                "codeGroup": "0187",
+                "text": "기니"
+            },
+            {
+                "value": "GW",
+                "codeGroup": "0187",
+                "text": "기니비사우"
+            },
+            {
+                "value": "NA",
+                "codeGroup": "0187",
+                "text": "나미비아"
+            },
+            {
+                "value": "NR",
+                "codeGroup": "0187",
+                "text": "나우루"
+            },
+            {
+                "value": "NG",
+                "codeGroup": "0187",
+                "text": "나이지리아"
+            },
+            {
+                "value": "ZA",
+                "codeGroup": "0187",
+                "text": "남아프리카 공화국"
+            },
+            {
+                "value": "NL",
+                "codeGroup": "0187",
+                "text": "네덜란드"
+            },
+            {
+                "value": "NP",
+                "codeGroup": "0187",
+                "text": "네팔"
+            },
+            {
+                "value": "NO",
+                "codeGroup": "0187",
+                "text": "노르웨이"
+            },
+            {
+                "value": "NZ",
+                "codeGroup": "0187",
+                "text": "뉴질랜드"
+            },
+            {
+                "value": "NE",
+                "codeGroup": "0187",
+                "text": "니제르"
+            },
+            {
+                "value": "NI",
+                "codeGroup": "0187",
+                "text": "니카라과"
+            },
+            {
+                "value": "KR",
+                "codeGroup": "0187",
+                "text": "대한민국"
+            },
+            {
+                "value": "DK",
+                "codeGroup": "0187",
+                "text": "덴마크"
+            },
+            {
+                "value": "DM",
+                "codeGroup": "0187",
+                "text": "도미니카"
+            },
+            {
+                "value": "DO",
+                "codeGroup": "0187",
+                "text": "도미니카 공화국"
+            },
+            {
+                "value": "DE",
+                "codeGroup": "0187",
+                "text": "독일"
+            },
+            {
+                "value": "TL",
+                "codeGroup": "0187",
+                "text": "동티모르"
+            },
+            {
+                "value": "LA",
+                "codeGroup": "0187",
+                "text": "라오스"
+            },
+            {
+                "value": "LR",
+                "codeGroup": "0187",
+                "text": "라이베리아"
+            },
+            {
+                "value": "LV",
+                "codeGroup": "0187",
+                "text": "라트비아"
+            },
+            {
+                "value": "RU",
+                "codeGroup": "0187",
+                "text": "러시아"
+            },
+            {
+                "value": "LB",
+                "codeGroup": "0187",
+                "text": "레바논"
+            },
+            {
+                "value": "LS",
+                "codeGroup": "0187",
+                "text": "레소토"
+            },
+            {
+                "value": "RO",
+                "codeGroup": "0187",
+                "text": "루마니아"
+            },
+            {
+                "value": "LU",
+                "codeGroup": "0187",
+                "text": "룩셈부르크"
+            },
+            {
+                "value": "RW",
+                "codeGroup": "0187",
+                "text": "르완다"
+            },
+            {
+                "value": "LY",
+                "codeGroup": "0187",
+                "text": "리비아"
+            },
+            {
+                "value": "LT",
+                "codeGroup": "0187",
+                "text": "리투아니아"
+            },
+            {
+                "value": "LI",
+                "codeGroup": "0187",
+                "text": "리히텐슈타인"
+            },
+            {
+                "value": "MG",
+                "codeGroup": "0187",
+                "text": "마다가스카르"
+            },
+            {
+                "value": "MH",
+                "codeGroup": "0187",
+                "text": "마셜 제도"
+            },
+            {
+                "value": "MK",
+                "codeGroup": "0187",
+                "text": "마케도니아 공화국"
+            },
+            {
+                "value": "MW",
+                "codeGroup": "0187",
+                "text": "말라위"
+            },
+            {
+                "value": "MY",
+                "codeGroup": "0187",
+                "text": "말레이시아"
+            },
+            {
+                "value": "ML",
+                "codeGroup": "0187",
+                "text": "말리"
+            },
+            {
+                "value": "MX",
+                "codeGroup": "0187",
+                "text": "멕시코"
+            },
+            {
+                "value": "MC",
+                "codeGroup": "0187",
+                "text": "모나코"
+            },
+            {
+                "value": "MA",
+                "codeGroup": "0187",
+                "text": "모로코"
+            },
+            {
+                "value": "MU",
+                "codeGroup": "0187",
+                "text": "모리셔스"
+            },
+            {
+                "value": "MR",
+                "codeGroup": "0187",
+                "text": "모리타니"
+            },
+            {
+                "value": "MZ",
+                "codeGroup": "0187",
+                "text": "모잠비크"
+            },
+            {
+                "value": "ME",
+                "codeGroup": "0187",
+                "text": "몬테네그로"
+            },
+            {
+                "value": "MD",
+                "codeGroup": "0187",
+                "text": "몰도바"
+            },
+            {
+                "value": "MV",
+                "codeGroup": "0187",
+                "text": "몰디브"
+            },
+            {
+                "value": "MT",
+                "codeGroup": "0187",
+                "text": "몰타"
+            },
+            {
+                "value": "MN",
+                "codeGroup": "0187",
+                "text": "몽골"
+            },
+            {
+                "value": "US",
+                "codeGroup": "0187",
+                "text": "미국"
+            },
+            {
+                "value": "MM",
+                "codeGroup": "0187",
+                "text": "미얀마"
+            },
+            {
+                "value": "FM",
+                "codeGroup": "0187",
+                "text": "미크로네시아 연방"
+            },
+            {
+                "value": "VU",
+                "codeGroup": "0187",
+                "text": "바누아투"
+            },
+            {
+                "value": "BH",
+                "codeGroup": "0187",
+                "text": "바레인"
+            },
+            {
+                "value": "BB",
+                "codeGroup": "0187",
+                "text": "바베이도스"
+            },
+            {
+                "value": "VA",
+                "codeGroup": "0187",
+                "text": "바티칸"
+            },
+            {
+                "value": "BS",
+                "codeGroup": "0187",
+                "text": "바하마"
+            },
+            {
+                "value": "BD",
+                "codeGroup": "0187",
+                "text": "방글라데시"
+            },
+            {
+                "value": "BJ",
+                "codeGroup": "0187",
+                "text": "베냉"
+            },
+            {
+                "value": "VE",
+                "codeGroup": "0187",
+                "text": "베네수엘라"
+            },
+            {
+                "value": "VN",
+                "codeGroup": "0187",
+                "text": "베트남"
+            },
+            {
+                "value": "BE",
+                "codeGroup": "0187",
+                "text": "벨기에"
+            },
+            {
+                "value": "BY",
+                "codeGroup": "0187",
+                "text": "벨라루스"
+            },
+            {
+                "value": "BZ",
+                "codeGroup": "0187",
+                "text": "벨리즈"
+            },
+            {
+                "value": "BA",
+                "codeGroup": "0187",
+                "text": "보스니아 헤르체고비나"
+            },
+            {
+                "value": "BW",
+                "codeGroup": "0187",
+                "text": "보츠와나"
+            },
+            {
+                "value": "BO",
+                "codeGroup": "0187",
+                "text": "볼리비아"
+            },
+            {
+                "value": "BI",
+                "codeGroup": "0187",
+                "text": "부룬디"
+            },
+            {
+                "value": "BF",
+                "codeGroup": "0187",
+                "text": "부르키나파소"
+            },
+            {
+                "value": "BT",
+                "codeGroup": "0187",
+                "text": "부탄"
+            },
+            {
+                "value": "BG",
+                "codeGroup": "0187",
+                "text": "불가리아"
+            },
+            {
+                "value": "BR",
+                "codeGroup": "0187",
+                "text": "브라질"
+            },
+            {
+                "value": "BN",
+                "codeGroup": "0187",
+                "text": "브루나이"
+            },
+            {
+                "value": "WS",
+                "codeGroup": "0187",
+                "text": "사모아"
+            },
+            {
+                "value": "SA",
+                "codeGroup": "0187",
+                "text": "사우디아라비아"
+            },
+            {
+                "value": "SM",
+                "codeGroup": "0187",
+                "text": "산마리노"
+            },
+            {
+                "value": "ST",
+                "codeGroup": "0187",
+                "text": "상투메 프린시페"
+            },
+            {
+                "value": "SN",
+                "codeGroup": "0187",
+                "text": "세네갈"
+            },
+            {
+                "value": "RS",
+                "codeGroup": "0187",
+                "text": "세르비아"
+            },
+            {
+                "value": "SC",
+                "codeGroup": "0187",
+                "text": "세이셸"
+            },
+            {
+                "value": "KN",
+                "codeGroup": "0187",
+                "text": "세인트 키츠 네비스"
+            },
+            {
+                "value": "LC",
+                "codeGroup": "0187",
+                "text": "세인트루시아"
+            },
+            {
+                "value": "VC",
+                "codeGroup": "0187",
+                "text": "세인트빈센트 그레나딘"
+            },
+            {
+                "value": "SO",
+                "codeGroup": "0187",
+                "text": "소말리아"
+            },
+            {
+                "value": "SB",
+                "codeGroup": "0187",
+                "text": "솔로몬 제도"
+            },
+            {
+                "value": "SD",
+                "codeGroup": "0187",
+                "text": "수단"
+            },
+            {
+                "value": "SR",
+                "codeGroup": "0187",
+                "text": "수리남"
+            },
+            {
+                "value": "LK",
+                "codeGroup": "0187",
+                "text": "스리랑카"
+            },
+            {
+                "value": "SZ",
+                "codeGroup": "0187",
+                "text": "스와질란드"
+            },
+            {
+                "value": "SE",
+                "codeGroup": "0187",
+                "text": "스웨덴"
+            },
+            {
+                "value": "CH",
+                "codeGroup": "0187",
+                "text": "스위스"
+            },
+            {
+                "value": "SK",
+                "codeGroup": "0187",
+                "text": "슬로바키아"
+            },
+            {
+                "value": "SI",
+                "codeGroup": "0187",
+                "text": "슬로베니아"
+            },
+            {
+                "value": "SY",
+                "codeGroup": "0187",
+                "text": "시리아"
+            },
+            {
+                "value": "SL",
+                "codeGroup": "0187",
+                "text": "시에라리온"
+            },
+            {
+                "value": "SG",
+                "codeGroup": "0187",
+                "text": "싱가포르"
+            },
+            {
+                "value": "AE",
+                "codeGroup": "0187",
+                "text": "아랍에미리트"
+            },
+            {
+                "value": "AM",
+                "codeGroup": "0187",
+                "text": "아르메니아"
+            },
+            {
+                "value": "AR",
+                "codeGroup": "0187",
+                "text": "아르헨티나"
+            },
+            {
+                "value": "IS",
+                "codeGroup": "0187",
+                "text": "아이슬란드"
+            },
+            {
+                "value": "HT",
+                "codeGroup": "0187",
+                "text": "아이티"
+            },
+            {
+                "value": "IE",
+                "codeGroup": "0187",
+                "text": "아일랜드"
+            },
+            {
+                "value": "AZ",
+                "codeGroup": "0187",
+                "text": "아제르바이잔"
+            },
+            {
+                "value": "AF",
+                "codeGroup": "0187",
+                "text": "아프가니스탄"
+            },
+            {
+                "value": "AD",
+                "codeGroup": "0187",
+                "text": "안도라"
+            },
+            {
+                "value": "AL",
+                "codeGroup": "0187",
+                "text": "알바니아"
+            },
+            {
+                "value": "DZ",
+                "codeGroup": "0187",
+                "text": "알제리"
+            },
+            {
+                "value": "AO",
+                "codeGroup": "0187",
+                "text": "앙골라"
+            },
+            {
+                "value": "AG",
+                "codeGroup": "0187",
+                "text": "앤티가 바부다"
+            },
+            {
+                "value": "KZ",
+                "codeGroup": "0187",
+                "text": "카자흐스탄"
+            },
+            {
+                "value": "QA",
+                "codeGroup": "0187",
+                "text": "카타르"
+            },
+            {
+                "value": "KH",
+                "codeGroup": "0187",
+                "text": "캄보디아"
+            },
+            {
+                "value": "CA",
+                "codeGroup": "0187",
+                "text": "캐나다"
+            },
+            {
+                "value": "KE",
+                "codeGroup": "0187",
+                "text": "케냐"
+            },
+            {
+                "value": "KM",
+                "codeGroup": "0187",
+                "text": "코모로"
+            },
+            {
+                "value": "CR",
+                "codeGroup": "0187",
+                "text": "코스타리카"
+            },
+            {
+                "value": "CI",
+                "codeGroup": "0187",
+                "text": "코트디부아르"
+            },
+            {
+                "value": "CO",
+                "codeGroup": "0187",
+                "text": "콜롬비아"
+            },
+            {
+                "value": "CG",
+                "codeGroup": "0187",
+                "text": "콩고 공화국"
+            },
+            {
+                "value": "CD",
+                "codeGroup": "0187",
+                "text": "콩고 민주 공화국"
+            },
+            {
+                "value": "CU",
+                "codeGroup": "0187",
+                "text": "쿠바"
+            },
+            {
+                "value": "KW",
+                "codeGroup": "0187",
+                "text": "쿠웨이트"
+            },
+            {
+                "value": "HR",
+                "codeGroup": "0187",
+                "text": "크로아티아"
+            },
+            {
+                "value": "KG",
+                "codeGroup": "0187",
+                "text": "키르기스스탄"
+            },
+            {
+                "value": "KI",
+                "codeGroup": "0187",
+                "text": "키리바시"
+            },
+            {
+                "value": "CY",
+                "codeGroup": "0187",
+                "text": "키프로스"
+            },
+            {
+                "value": "TH",
+                "codeGroup": "0187",
+                "text": "타이"
+            },
+            {
+                "value": "TJ",
+                "codeGroup": "0187",
+                "text": "타지키스탄"
+            },
+            {
+                "value": "TZ",
+                "codeGroup": "0187",
+                "text": "탄자니아"
+            },
+            {
+                "value": "TR",
+                "codeGroup": "0187",
+                "text": "터키"
+            },
+            {
+                "value": "TG",
+                "codeGroup": "0187",
+                "text": "토고"
+            },
+            {
+                "value": "TO",
+                "codeGroup": "0187",
+                "text": "통가"
+            },
+            {
+                "value": "TM",
+                "codeGroup": "0187",
+                "text": "투르크메니스탄"
+            },
+            {
+                "value": "TV",
+                "codeGroup": "0187",
+                "text": "투발루"
+            },
+            {
+                "value": "TN",
+                "codeGroup": "0187",
+                "text": "튀니지"
+            },
+            {
+                "value": "TT",
+                "codeGroup": "0187",
+                "text": "트리니다드 토바고"
+            },
+            {
+                "value": "PA",
+                "codeGroup": "0187",
+                "text": "파나마"
+            },
+            {
+                "value": "PY",
+                "codeGroup": "0187",
+                "text": "파라과이"
+            },
+            {
+                "value": "PK",
+                "codeGroup": "0187",
+                "text": "파키스탄"
+            },
+            {
+                "value": "PG",
+                "codeGroup": "0187",
+                "text": "파푸아 뉴기니"
+            },
+            {
+                "value": "PW",
+                "codeGroup": "0187",
+                "text": "팔라우"
+            },
+            {
+                "value": "PE",
+                "codeGroup": "0187",
+                "text": "페루"
+            },
+            {
+                "value": "PT",
+                "codeGroup": "0187",
+                "text": "포르투갈"
+            },
+            {
+                "value": "PL",
+                "codeGroup": "0187",
+                "text": "폴란드"
+            },
+            {
+                "value": "FR",
+                "codeGroup": "0187",
+                "text": "프랑스"
+            },
+            {
+                "value": "FJ",
+                "codeGroup": "0187",
+                "text": "피지"
+            },
+            {
+                "value": "FI",
+                "codeGroup": "0187",
+                "text": "핀란드"
+            },
+            {
+                "value": "PH",
+                "codeGroup": "0187",
+                "text": "필리핀"
+            },
+            {
+                "value": "HU",
+                "codeGroup": "0187",
+                "text": "헝가리"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code03ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 22
+        },
+        "records": [
+            {
+                "value": "01",
+                "codeGroup": "0022",
+                "text": "맑음"
+            },
+            {
+                "value": "02",
+                "codeGroup": "0022",
+                "text": "구름조금"
+            },
+            {
+                "value": "03",
+                "codeGroup": "0022",
+                "text": "흐림"
+            },
+            {
+                "value": "04",
+                "codeGroup": "0022",
+                "text": "비"
+            },
+            {
+                "value": "05",
+                "codeGroup": "0022",
+                "text": "눈"
+            },
+            {
+                "value": "06",
+                "codeGroup": "0022",
+                "text": "눈비"
+            },
+            {
+                "value": "07",
+                "codeGroup": "0022",
+                "text": "소나기"
+            },
+            {
+                "value": "08",
+                "codeGroup": "0022",
+                "text": "소낙눈"
+            },
+            {
+                "value": "09",
+                "codeGroup": "0022",
+                "text": "안개"
+            },
+            {
+                "value": "10",
+                "codeGroup": "0022",
+                "text": "뇌우"
+            },
+            {
+                "value": "11",
+                "codeGroup": "0022",
+                "text": "차차 흐려짐"
+            },
+            {
+                "value": "12",
+                "codeGroup": "0022",
+                "text": "흐려져 뇌우"
+            },
+            {
+                "value": "13",
+                "codeGroup": "0022",
+                "text": "흐려져 비"
+            },
+            {
+                "value": "14",
+                "codeGroup": "0022",
+                "text": "흐려져 눈"
+            },
+            {
+                "value": "15",
+                "codeGroup": "0022",
+                "text": "흐려져 눈비"
+            },
+            {
+                "value": "16",
+                "codeGroup": "0022",
+                "text": "흐린 후 갬"
+            },
+            {
+                "value": "17",
+                "codeGroup": "0022",
+                "text": "뇌우 후 갬"
+            },
+            {
+                "value": "18",
+                "codeGroup": "0022",
+                "text": "비 후 갬"
+            },
+            {
+                "value": "19",
+                "codeGroup": "0022",
+                "text": "눈 후 갬"
+            },
+            {
+                "value": "20",
+                "codeGroup": "0022",
+                "text": "눈비 후 갬"
+            },
+            {
+                "value": "21",
+                "codeGroup": "0022",
+                "text": "구름많음"
+            },
+            {
+                "value": "22",
+                "codeGroup": "0022",
+                "text": "황사"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code14ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 3
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0081",
+                "text": "작성중"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0081",
+                "text": "요청중"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0081",
+                "text": "승인"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code21ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 3
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0115",
+                "text": "계약금"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0115",
+                "text": "중도금"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0115",
+                "text": "잔금"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code29ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 5
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0204",
+                "text": "특급"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0204",
+                "text": "고급"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0204",
+                "text": "중급"
+            },
+            {
+                "value": "4",
+                "codeGroup": "0204",
+                "text": "초급"
+            },
+            {
+                "value": "9",
+                "codeGroup": "0204",
+                "text": "기타"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code04ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 4
+        },
+        "records": [
+            {
+                "value": "01",
+                "codeGroup": "0029",
+                "text": "등기"
+            },
+            {
+                "value": "02",
+                "codeGroup": "0029",
+                "text": "직접수령"
+            },
+            {
+                "value": "03",
+                "codeGroup": "0029",
+                "text": "퀵"
+            },
+            {
+                "value": "04",
+                "codeGroup": "0029",
+                "text": "기타"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "abcdDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 0
+        },
+        "records": []
+    },
+    {
+        "metaData": {
+            "dataSetId": "abc3DataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 0
+        },
+        "records": []
+    },
+    {
+        "metaData": {
+            "dataSetId": "abc2DataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 0
+        },
+        "records": []
+    },
+    {
+        "metaData": {
+            "dataSetId": "code15ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 5
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0083",
+                "text": "입찰실행"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0083",
+                "text": "부분실행"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0083",
+                "text": "합의실행"
+            },
+            {
+                "value": "4",
+                "codeGroup": "0083",
+                "text": "확정실행"
+            },
+            {
+                "value": "5",
+                "codeGroup": "0083",
+                "text": "변경실행"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "abc1DataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 0
+        },
+        "records": []
+    },
+    {
+        "metaData": {
+            "dataSetId": "code22ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 2
+        },
+        "records": [
+            {
+                "value": "0010",
+                "codeGroup": "0122",
+                "text": "온라인"
+            },
+            {
+                "value": "0020",
+                "codeGroup": "0122",
+                "text": "오프라인"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code05ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 2
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0035",
+                "text": "현장"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0035",
+                "text": "본사"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code16ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 16
+        },
+        "records": [
+            {
+                "value": "01",
+                "codeGroup": "0090",
+                "text": "계약"
+            },
+            {
+                "value": "02",
+                "codeGroup": "0090",
+                "text": "계약1차"
+            },
+            {
+                "value": "03",
+                "codeGroup": "0090",
+                "text": "계약2차"
+            },
+            {
+                "value": "04",
+                "codeGroup": "0090",
+                "text": "중도금1차"
+            },
+            {
+                "value": "05",
+                "codeGroup": "0090",
+                "text": "중도금2차"
+            },
+            {
+                "value": "06",
+                "codeGroup": "0090",
+                "text": "중도금3차"
+            },
+            {
+                "value": "07",
+                "codeGroup": "0090",
+                "text": "중도금4차"
+            },
+            {
+                "value": "08",
+                "codeGroup": "0090",
+                "text": "중도금5차"
+            },
+            {
+                "value": "09",
+                "codeGroup": "0090",
+                "text": "중도금6차"
+            },
+            {
+                "value": "10",
+                "codeGroup": "0090",
+                "text": "중도금7차"
+            },
+            {
+                "value": "11",
+                "codeGroup": "0090",
+                "text": "중도금8차"
+            },
+            {
+                "value": "12",
+                "codeGroup": "0090",
+                "text": "중도금9차"
+            },
+            {
+                "value": "13",
+                "codeGroup": "0090",
+                "text": "중도금10차"
+            },
+            {
+                "value": "14",
+                "codeGroup": "0090",
+                "text": "잔금"
+            },
+            {
+                "value": "15",
+                "codeGroup": "0090",
+                "text": "잔금1차"
+            },
+            {
+                "value": "16",
+                "codeGroup": "0090",
+                "text": "잔금2차"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code23ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 3
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0136",
+                "text": "정규직"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0136",
+                "text": "계약직"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0136",
+                "text": "현채직"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code06ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 3
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0038",
+                "text": "공공"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0038",
+                "text": "민간"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0038",
+                "text": "그룹"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code17ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 5
+        },
+        "records": [
+            {
+                "value": "01",
+                "codeGroup": "0093",
+                "text": "작업중"
+            },
+            {
+                "value": "02",
+                "codeGroup": "0093",
+                "text": "승인요청"
+            },
+            {
+                "value": "03",
+                "codeGroup": "0093",
+                "text": "반려"
+            },
+            {
+                "value": "04",
+                "codeGroup": "0093",
+                "text": "승인취소"
+            },
+            {
+                "value": "05",
+                "codeGroup": "0093",
+                "text": "승인"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code24ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 5
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0146",
+                "text": "국내"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0146",
+                "text": "해외"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0146",
+                "text": "타회사"
+            },
+            {
+                "value": "4",
+                "codeGroup": "0146",
+                "text": "본사"
+            },
+            {
+                "value": "5",
+                "codeGroup": "0146",
+                "text": "국내사무소"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code07ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 3
+        },
+        "records": [
+            {
+                "value": "10",
+                "codeGroup": "0043",
+                "text": "사내한"
+            },
+            {
+                "value": "20",
+                "codeGroup": "0043",
+                "text": "부서한"
+            },
+            {
+                "value": "30",
+                "codeGroup": "0043",
+                "text": "비밀"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code10ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 4
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0064",
+                "text": "착수전"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0064",
+                "text": "진행중"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0064",
+                "text": "완료"
+            },
+            {
+                "value": "4",
+                "codeGroup": "0064",
+                "text": "지연"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code18ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 31
+        },
+        "records": [
+            {
+                "value": "01",
+                "codeGroup": "0095",
+                "text": "갑"
+            },
+            {
+                "value": "02",
+                "codeGroup": "0095",
+                "text": "개소"
+            },
+            {
+                "value": "03",
+                "codeGroup": "0095",
+                "text": "대"
+            },
+            {
+                "value": "04",
+                "codeGroup": "0095",
+                "text": "매"
+            },
+            {
+                "value": "05",
+                "codeGroup": "0095",
+                "text": "면"
+            },
+            {
+                "value": "06",
+                "codeGroup": "0095",
+                "text": "백개"
+            },
+            {
+                "value": "07",
+                "codeGroup": "0095",
+                "text": "본"
+            },
+            {
+                "value": "08",
+                "codeGroup": "0095",
+                "text": "세대"
+            },
+            {
+                "value": "09",
+                "codeGroup": "0095",
+                "text": "식"
+            },
+            {
+                "value": "10",
+                "codeGroup": "0095",
+                "text": "월"
+            },
+            {
+                "value": "11",
+                "codeGroup": "0095",
+                "text": "장"
+            },
+            {
+                "value": "12",
+                "codeGroup": "0095",
+                "text": "재"
+            },
+            {
+                "value": "13",
+                "codeGroup": "0095",
+                "text": "조"
+            },
+            {
+                "value": "14",
+                "codeGroup": "0095",
+                "text": "주"
+            },
+            {
+                "value": "15",
+                "codeGroup": "0095",
+                "text": "통"
+            },
+            {
+                "value": "16",
+                "codeGroup": "0095",
+                "text": "포"
+            },
+            {
+                "value": "17",
+                "codeGroup": "0095",
+                "text": "B/T"
+            },
+            {
+                "value": "18",
+                "codeGroup": "0095",
+                "text": "CM"
+            },
+            {
+                "value": "19",
+                "codeGroup": "0095",
+                "text": "D/M"
+            },
+            {
+                "value": "20",
+                "codeGroup": "0095",
+                "text": "EA"
+            },
+            {
+                "value": "21",
+                "codeGroup": "0095",
+                "text": "G"
+            },
+            {
+                "value": "22",
+                "codeGroup": "0095",
+                "text": "HR"
+            },
+            {
+                "value": "23",
+                "codeGroup": "0095",
+                "text": "KG"
+            },
+            {
+                "value": "24",
+                "codeGroup": "0095",
+                "text": "KIT"
+            },
+            {
+                "value": "25",
+                "codeGroup": "0095",
+                "text": "L"
+            },
+            {
+                "value": "26",
+                "codeGroup": "0095",
+                "text": "M"
+            },
+            {
+                "value": "27",
+                "codeGroup": "0095",
+                "text": "M2"
+            },
+            {
+                "value": "28",
+                "codeGroup": "0095",
+                "text": "M3"
+            },
+            {
+                "value": "29",
+                "codeGroup": "0095",
+                "text": "ROLL"
+            },
+            {
+                "value": "30",
+                "codeGroup": "0095",
+                "text": "SET"
+            },
+            {
+                "value": "31",
+                "codeGroup": "0095",
+                "text": "TON"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code25ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 5
+        },
+        "records": [
+            {
+                "value": "F",
+                "codeGroup": "0169",
+                "text": "Fix"
+            },
+            {
+                "value": "N",
+                "codeGroup": "0169",
+                "text": "None"
+            },
+            {
+                "value": "W",
+                "codeGroup": "0169",
+                "text": "Worst"
+            },
+            {
+                "value": "M",
+                "codeGroup": "0169",
+                "text": "Moderate"
+            },
+            {
+                "value": "B",
+                "codeGroup": "0169",
+                "text": "Best"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code08ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 2
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0049",
+                "text": "ACCEPTED"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0049",
+                "text": "REJECTED"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code11ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 4
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0065",
+                "text": "설계"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0065",
+                "text": "영업"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0065",
+                "text": "예산"
+            },
+            {
+                "value": "4",
+                "codeGroup": "0065",
+                "text": "시공"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code19ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 6
+        },
+        "records": [
+            {
+                "value": "06",
+                "codeGroup": "0112",
+                "text": "정산"
+            },
+            {
+                "value": "01",
+                "codeGroup": "0112",
+                "text": "현금"
+            },
+            {
+                "value": "02",
+                "codeGroup": "0112",
+                "text": "미수"
+            },
+            {
+                "value": "03",
+                "codeGroup": "0112",
+                "text": "대여"
+            },
+            {
+                "value": "04",
+                "codeGroup": "0112",
+                "text": "환불"
+            },
+            {
+                "value": "05",
+                "codeGroup": "0112",
+                "text": "기금대출"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code26ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 6
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0175",
+                "text": "내국인"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0175",
+                "text": "외국인"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0175",
+                "text": "사업자"
+            },
+            {
+                "value": "4",
+                "codeGroup": "0175",
+                "text": "개인사업자"
+            },
+            {
+                "value": "5",
+                "codeGroup": "0175",
+                "text": "부서거래처"
+            },
+            {
+                "value": "6",
+                "codeGroup": "0175",
+                "text": "해외거래처"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code01ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 10
+        },
+        "records": [
+            {
+                "value": "A",
+                "codeGroup": "0014",
+                "text": "건축"
+            },
+            {
+                "value": "C",
+                "codeGroup": "0014",
+                "text": "토목"
+            },
+            {
+                "value": "H",
+                "codeGroup": "0014",
+                "text": "주택"
+            },
+            {
+                "value": "E",
+                "codeGroup": "0014",
+                "text": "전기"
+            },
+            {
+                "value": "M",
+                "codeGroup": "0014",
+                "text": "기계"
+            },
+            {
+                "value": "P",
+                "codeGroup": "0014",
+                "text": "플랜트"
+            },
+            {
+                "value": "L",
+                "codeGroup": "0014",
+                "text": "조경"
+            },
+            {
+                "value": "O",
+                "codeGroup": "0014",
+                "text": "기타"
+            },
+            {
+                "value": "T",
+                "codeGroup": "0014",
+                "text": "통신"
+            },
+            {
+                "value": "G",
+                "codeGroup": "0014",
+                "text": "관리"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code09ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 3
+        },
+        "records": [
+            {
+                "value": "01",
+                "codeGroup": "0059",
+                "text": "월복리"
+            },
+            {
+                "value": "02",
+                "codeGroup": "0059",
+                "text": "연복리"
+            },
+            {
+                "value": "03",
+                "codeGroup": "0059",
+                "text": "일반관리비"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code12ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 7
+        },
+        "records": [
+            {
+                "value": "1",
+                "codeGroup": "0066",
+                "text": "작성중"
+            },
+            {
+                "value": "2",
+                "codeGroup": "0066",
+                "text": "반려1"
+            },
+            {
+                "value": "3",
+                "codeGroup": "0066",
+                "text": "요청중"
+            },
+            {
+                "value": "4",
+                "codeGroup": "0066",
+                "text": "본사검토"
+            },
+            {
+                "value": "5",
+                "codeGroup": "0066",
+                "text": "반려"
+            },
+            {
+                "value": "6",
+                "codeGroup": "0066",
+                "text": "미결재"
+            },
+            {
+                "value": "7",
+                "codeGroup": "0066",
+                "text": "결재완료"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code27ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 7
+        },
+        "records": [
+            {
+                "value": "07",
+                "codeGroup": "0180",
+                "text": "기타"
+            },
+            {
+                "value": "03",
+                "codeGroup": "0180",
+                "text": "대안"
+            },
+            {
+                "value": "02",
+                "codeGroup": "0180",
+                "text": "턴키"
+            },
+            {
+                "value": "01",
+                "codeGroup": "0180",
+                "text": "적격"
+            },
+            {
+                "value": "05",
+                "codeGroup": "0180",
+                "text": "CM"
+            },
+            {
+                "value": "04",
+                "codeGroup": "0180",
+                "text": "최저가"
+            },
+            {
+                "value": "06",
+                "codeGroup": "0180",
+                "text": "수의"
+            }
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "code02ComboDataSet",
+            "idColumn": "id",
+            "stateColumn": "duistate",
+            "totalCount": 21
+        },
+        "records": [
+            {
+                "value": "0099",
+                "codeGroup": "0015",
+                "text": "기타"
+            },
+            {
+                "value": "0080",
+                "codeGroup": "0015",
+                "text": "전기"
+            },
+            {
+                "value": "0081",
+                "codeGroup": "0015",
+                "text": "기계"
+            },
+            {
+                "value": "0082",
+                "codeGroup": "0015",
+                "text": "조경"
+            },
+            {
+                "value": "0083",
+                "codeGroup": "0015",
+                "text": "환경"
+            },
+            {
+                "value": "0084",
+                "codeGroup": "0015",
+                "text": "통신"
+            },
+            {
+                "value": "0085",
+                "codeGroup": "0015",
+                "text": "플랜트"
+            },
+            {
+                "value": "0065",
+                "codeGroup": "0015",
+                "text": "토목"
+            },
+            {
+                "value": "0005",
+                "codeGroup": "0015",
+                "text": "건축"
+            },
+            {
+                "value": "0010",
+                "codeGroup": "0015",
+                "text": "구조"
+            },
+            {
+                "value": "0015",
+                "codeGroup": "0015",
+                "text": "흙막이"
+            },
+            {
+                "value": "0020",
+                "codeGroup": "0015",
+                "text": "부대토목"
+            },
+            {
+                "value": "0030",
+                "codeGroup": "0015",
+                "text": "기계설비"
+            },
+            {
+                "value": "0035",
+                "codeGroup": "0015",
+                "text": "기계소방"
+            },
+            {
+                "value": "0040",
+                "codeGroup": "0015",
+                "text": "전기설비"
+            },
+            {
+                "value": "0045",
+                "codeGroup": "0015",
+                "text": "전기소방"
+            },
+            {
+                "value": "0050",
+                "codeGroup": "0015",
+                "text": "전기통신"
+            },
+            {
+                "value": "0061",
+                "codeGroup": "0015",
+                "text": "색채"
+            },
+            {
+                "value": "0062",
+                "codeGroup": "0015",
+                "text": "주민공동시설"
+            },
+            {
+                "value": "0060",
+                "codeGroup": "0015",
+                "text": "OAD"
+            },
+            {
+                "value": "0055",
+                "codeGroup": "0015",
+                "text": "인테리어"
+            }
+        ]
+    }
+]

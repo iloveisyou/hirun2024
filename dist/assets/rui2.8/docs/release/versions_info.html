@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache; no-store; no-save"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=0.1" />
+	<title>RUI release information</title>
+	<script type="text/javascript" src="./../../js/rui_base-min.js"></script>
+	<style type="text/css">
+	html, body {
+	    height: 100%;
+	    width: 100%;
+	}
+	body {
+	    overflow-y: auto;
+	    overflow-x: hidden;
+	    color: #333;
+	}
+	h2 {
+	    color: #94c3e8;
+	    font-size: 37px;
+	    margin: 0px;
+	    margin-left: -20px;
+	    font-family: tahoma,sans-serif;
+	    font-weight: bold;
+	    margin-bottom: 26px;
+	    cursor: pointer;
+	}
+	h3 {
+	    font-size: 14px;
+	    color: #333;
+	    padding-left: 13px;
+	    background: url(./../../resources/images/bullet.png) no-repeat center left;
+	    margin-left: -20px;
+	}
+	a, a:hover {
+	    color: #333;
+	}
+	ul {
+	    list-style-type: none;
+	    margin: 0px;
+	    padding: 0px 0px 0px 38px;
+	}
+	.dokuwiki, #page {
+	    width: 100%;
+	}
+	.left {
+	    width: 250px;
+	    position: absolute;
+	    top: 28px;
+	}
+	.right {
+	    width: 100%;
+	    height: 100%;
+	    margin-left: 270px;
+	    margin-top: 100px;
+	}
+	.level-content {
+	    font-size: 12px;
+	}
+	</style>
+	<script type="text/javascript">
+	Rui.onReady(function() {
+	    Rui.select('h2').on('click', function(e) {
+	        Rui.get(this).getNextSibling().toggle();
+	    });
+	});
+	function loadViewFrame(url, isNew) {
+	    if(isNew === true) {
+	        window.open(url);
+	    } else {
+	        Rui.get('viewFrame').dom.src = url;
+	        document.location = '#';
+	    }
+	}
+	</script>
+</head>
+<body>
+<div>
+    <div class="left">
+        <h1>버전별 주요기능</h1>
+        <div class="level1">
+            <ul>
+                <li class="level1">
+                    <h2>2.0</h2>
+                    <div class="level-content">
+                        <h3>공통</h3>
+                        <ul>
+                            <li><a href="javascript:loadViewFrame('./../../api/index.html', true)">Api 개선(새창)</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/pattern/bux/index.jsp', true)">Demo 사이트 구축(새창)</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/memoryleak/gridpanelMemoryLeakSample.html')">성능 및 메모리 최적화 적용</a></li>
+                        </ul>
+                        <h3>DataSet</h3>
+                        <ul>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelEditPerformanceSample.html')">CSVDataSet</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/data/datasetCopySample.html')">대용량 변경 처리(batch)</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelEditSample.html')">삭제건 유지</a></li>
+                        </ul>
+                        <h3>Grid</h3>
+                        <ul>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelSummarySample.html')">소계(건,합계,평균)</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelFirstRowSample.html')">초기 Load시 위치 이동</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelFreezeSample.html')">틀 고정</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelMultiSortSample.html')">데이터 멀티 정렬</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelMultiFilterSample.html')">데이터 멀티 필터</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelColumnAutoWidthSample.html')">LColumnModel 폭 채움</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelColumnFitSample.html')">컬럼 폭 데이터 맞춤</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelExpandableRowSample.html')">SubGrid (Grid In Grid)</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelEditSample.html')">그리드 삭제건 표시</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelTooltipSample.html')">툴팁</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelMultiheaderSample.html')">그리드 멀티 헤더 사용성 향상</a></li>
+                        </ul>
+                        <h3>Tab</h3>
+                        <ul>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/tab/tabViewSample.html')">탭 실행 성능 개선</a></li>
+                        </ul>
+                        <h3>MultiCombo</h3>
+                        <ul>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/form/comboMultiSample.html')">멀티 선택 콤보</a></li>
+                        </ul>
+                        <h3>플러그인</h3>
+                        <ul>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/notificationManagerSample.html')">사용자 알림</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/guideManagerSample.html')">사용자 기능 가이드</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/form/fromtodateboxSample.html')">FromToDateBox</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/switchSample.html')">Switch</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="level1">
+                    <h2>1.5</h2>
+                    <div class="level-content L-hide-display">
+                        <h3>Grid</h3>
+                        <ul>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelContextMenuSample.html')">Context menu</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelCellMergeGroupSample.html')">셀 가로 병합</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelTreeListSample.html')">TreeGrid</a></li>
+                        </ul>
+                        <h3>Combo</h3>
+                        <ul>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/form/comboRendererSample.html')">멀티 출력</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="level1">
+                    <h2>1.4</h2>
+                    <div class="level-content L-hide-display">
+                        <h3>DataSet</h3>
+                        <ul>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/data/datasetSample.html')">CRUD 지원</a></li>
+                            <li>XMLDataSet</li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/data/jsonDatasetSample.html')">JSONDataSet</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/data/datasetManagerMultidatasetSample.html')">멀티 DataSet 지원</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/data/datasetSample.html')">데이터 변경 상태 인식</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/data/datasetSample.html')">데이터 정렬</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/data/datasetSample.html')">데이터 필터</a></li>
+                        </ul>
+                        <h3>Bind</h3>
+                        <ul>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/data/bindSample.html')">Form Object bind</a></li>
+                        </ul>
+                        <h3>Grid</h3>
+                        <ul>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelEditSample.html')">다양한 Display/Edit 타입</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelEditSample.html')">Row 데이터 신규/수정/삭제</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelMultiLoadSample.html')">Multi 데이터 처리</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelKeywordSample.html')">키보드 제어</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelMultiSortSample.html')">정렬(sort)</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelFilterSample.html')">필터</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelEditSample.html')">컬럼 너비 조정</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelEditSample.html')">컬럼 이동</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelEditSample.html')">컬럼 숨기기</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelEditSample.html')">Button/Image Cell</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelPagerSample.html')">Paging</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelCellMergeGroupSample.html')">셀 세로 병합</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelMultiheaderSample.html')">멀티 헤더</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelEditSample.html')">입력/수정 상태표시</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelEditSample.html')">편집 취소 기능</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelValidateSample.html')">유효성 검사</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelCellEditableSample.html')">셀 단위 editing 가능/불가능</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelColorSample.html')">Row/Column BGColor</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelTotalSummarySample.html')">합계</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelExcelDownloadSample.html')">Excel Export</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelImportExcelSample.html')">Excel Import</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelCustomEditSample.html')">Custom Editor</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelFilterSample.html')">Filter</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelFormatSample.html')">Cell Format</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelExcelDownloadSample.html')">Excel Download</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelDynamicSelectMarkSample.html')">Dynamic Select Mark</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelNumberColumnSample.html')">일련번호 붙이기</a></li>
+                            <li><a href="javascript:loadViewFrame('./../../sample/general/ui/grid/gridpanelValidateSample.html')">Grid Validation</a></li>
+                        </ul>
+                        <h3>Tab</h3>
+                        <ul>
+                            <li>레이블 변경</li>
+                            <li>편집</li>
+                            <li>순서 변경</li>
+                        </ul>
+                        <h3>Menu</h3>
+                        <ul>
+                            <li>Context Menu</li>
+                            <li>Toolbar Menu</li>
+                            <li>Slide Menu</li>
+                            <li>Menu 편집</li>
+                            <li>Node/label 클릭 이벤트</li>
+                            <li>데이터바인딩</li>
+                            <li>아코디언</li>
+                            <li>동적 자식 Node 생성</li>
+                        </ul>
+                        <h3>Tree</h3>
+                        <ul>
+                            <li>노드 클릭 및 라벨클릭</li>
+                            <li>데이터바인딩</li>
+                            <li>아코디언</li>
+                            <li>체크박스</li>
+                            <li>동적 자식 Node 생성</li>
+                        </ul>
+                        <h3>Form Object 공통</h3>
+                        <ul>
+                            <li>유효성검사</li>
+                            <li>기본값 설정</li>
+                            <li>툴팁</li>
+                            <li>place holder</li>
+                            <li>사이즈 조정</li>
+                        </ul>
+                        <h3>Combo</h3>
+                        <ul>
+                            <li>데이터바인딩</li>
+                            <li>멀티 출력</li>
+                            <li>콤보 간 종속 처리</li>
+                        </ul>
+                        <h3>Textbox</h3>
+                        <ul>
+                            <li>자동완성기능</li>
+                            <li>마스크 기능</li>
+                            <li>입력형식 지정</li>
+                        </ul>
+                        <h3>Datebox</h3>
+                        <ul>
+                            <li>입력날짜 자동선택</li>
+                        </ul>
+                        <h3>Checkbox</h3>
+                        <ul>
+                            <li>check/uncheck</li>
+                            <li>다중 체크</li>
+                        </ul>
+                        <h3>Radio</h3>
+                        <ul>
+                            <li>여러건 중 한 건 선택</li>
+                        </ul>
+                        <h3>File Upload</h3>
+                        <ul>
+                            <li>Progress Bar</li>
+                        </ul>
+                        <h3>Textarea</h3>
+                        <ul>
+                            <li>다중 행 입력</li>
+                        </ul>
+                        <h3>Numberbox</h3>
+                        <ul>
+                            <li>최대/최소값</li>
+                            <li>소수점</li>
+                        </ul>
+                        <h3>Timebox</h3>
+                        <ul>
+                            <li>시간입력</li>
+                        </ul>
+                        <h3>Calendar</h3>
+                        <ul>
+                            <li>FROM-TO 동시 선택</li>
+                            <li>멀티선택</li>
+                            <li>선택불가</li>
+                            <li>Multi Calendar</li>
+                        </ul>
+                        <h3>Dialog</h3>
+                        <ul>
+                            <li>div Popup</li>
+                            <li>iframe Popup</li>
+                            <li>modal/modaless</li>
+                            <li>mask 처리</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="right">
+        <iframe class="viewFrame" id="viewFrame" frameborder="no" width="80%" height="90%" src="version_body.html"></iframe>
+    </div>
+</div>
+</body>
+</html>

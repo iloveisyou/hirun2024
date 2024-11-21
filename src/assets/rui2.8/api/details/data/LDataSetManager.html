@@ -1,0 +1,361 @@
+<div>
+<div class="class_description">
+변경된 dataSet을 서버에 전송하거나 멀티건의 dataSet을 load하는 객체
+
+서버에서 단순하게 하나의 dataSet만 처리할 경우에는 loadDataSet 메소드를 사용하지 않는다. 
+LDataSet 자체에 load 메소드를 사용하고 loadDataSet 메소드는 불필요하게 성능이나 메모리를 증가시킨다. (변경건은 updateDataSet 메소드 사용)
+
+에러 처리 방법
+    에러가 발생하면 failure/loadException 이벤트가 발생한다.
+    하지만 일반적으로 에러 처리는 거의 공통사항이므로 rui_config.js에 dataSetManager에 해당되는 
+    기본 속성으로 defaultFailureHandler/defaultLoadExceptionHandler값이 true로 적용되어 있다. 
+    값이 true가 적용되면 rui_config.js에 failureHandler/loadExceptionHandler function이 수행되어
+    공통적으로 에러 처리를 할 수 있다.
+    공통 에러처리를 제외하고 생성할 경우에는 생성자에 failureHandler/loadExceptionHandler을 false로 적용하면 된다.
+
+샘플 경로 : 
+<a href="./../sample/general/data/datasetManagerSample.html" target="_new">/rui/sample/general/data/datasetManagerSample.html</a>
+<a href="./../sample/general/data/datasetManagerMultidatasetSample.html" target="_new">/rui/sample/general/data/datasetManagerMultidatasetSample.html</a>
+<a href="./../sample/general/data/datasetManagerUpdaterSample.html" target="_new">/rui/sample/general/data/datasetManagerUpdaterSample.html</a>
+<div class="L-sample">
+sample: LDataSetManager의 기본 샘플  
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();            
+
+dm.on('beforeUpdate', function(e) {
+    if(vm.validateDataSet(dataSet) == false) {
+        Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>') );
+        return false;
+    }
+});
+
+dm.updateDataSet({
+    url: 'test.rui',
+    dataSets:[dataSet]
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample1: 공통 에러 핸들러를 사용하지 않고 에러 처리하는 샘플,
+defaultFailureHandler값을 false로 주지않고 failure 이벤트를 탑재하면 공통 에러 메시지와 
+아래의 failure 이벤트 탑재 처리가 동시에 수행되어 에러 처리가 두번 발생한다.
+<div class="L-code">
+dm = new Rui.data.LDataSetManager({ defaultFailureHandler: false });
+
+dm.on('failure', function(e) {
+    // 에러 발생
+});
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_success">
+<div class="L-description">
+Update가 성공할 경우 발생하는 이벤트
+</div>
+<div class="L-sample">
+sample: dataSet을 서버에 저장한후 메시지를 출력한다.  
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();
+dm.on('success', function(e) {
+    alert('저장이 완료되었습니다.');
+});
+dm.updateDataSet({
+    url: 'test.rui',
+    dataSets:[dataSet],
+    params: {
+        col1: '값1'
+    }
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: 저장후 서버에서 데이터셋 데이터를 받아 다시 로딩한다.  
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();
+dm.on('success', function(e) {
+    dataSet.loadData(dataSet.getReadData(e));
+});
+dm.updateDataSet({
+    url: 'test.rui',
+    dataSets:[dataSet],
+    params: {
+        col1: '값1'
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="event_failure">
+<div class="L-description">
+Update가 실패할 경우 발생하는 이벤트
+failure는 http status값이 200~300 사이가 아니면 에러로 간주한다.
+서버에서 에러가 발생되면 
+http status를 에러로 설정되어야 한다.
+서버 에러 코드:
+response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+
+failure은 rui_config.js에 기본적으로 셋팅되어 있다.
+defaultFailureHandler값이 true이면 rui_config.js에 있는 failureHandler에 있는 function이 호출된다.
+기본속성으로 true이므로 모든 dataSet은 failureHandler function이 호출되게 셋팅되어 있다.
+
+dataSetManager: {
+    defaultProperties: {
+        defaultFailureHandler: true,
+        ............
+    },
+    failureHandler : function(e) {
+        ............
+        여기서 메시지 출력이나 세션이 끊어지면 로그인 페이지로 이동 등 코딩을 추가하면 된다. 
+    }
+ 
+</div>
+<div class="L-sample">
+sample: 저장시 에러가 발생하면 메시지를 출력한다.
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();
+dm.on('failure', function(e) {
+    alert('서버에서 에러가 발생했습니다.');
+});
+dm.updateDataSet({
+    url: 'test.rui',
+    dataSets:[dataSet],
+    params: {
+        col1: '값1'
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="event_upload">
+<div class="L-description">
+Update가 실패할 경우 발생하는 이벤트
+upload는 ajax구조가 아닌 frame구조로 되어 있으므로 서버에서 http status 코드로 에러를 판단할 수 없다.
+그러므로 에러가 발생하면 responseText의 값으로 에러 여부를 판단해야 한다. 서버에서 에러가 발생하면 에러 메시지 코드를 리턴한다.
+upload는 LDataSetManager의 updateForm에서만 발생한다.
+</div>
+<div class="L-sample">
+sample: upload가 완료되면 메시지를 출력한다.
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();
+dm.on('update', function(e) {
+    alert('업로드가 완료되었습니다.');
+});
+dm.updateForm({
+    url: 'test.rui',
+    form: 'frm',
+    params: {
+        col1: '값1'
+    }
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: upload가 완료되면 메시지의 값으로 에러 여부를 판단한 후 메시지를 출력한다.
+서버에서 에러가 발생하면 'ERROR' 메시지를 리턴한다.
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();
+dm.on('update', function(e) {
+    if(e.responseText == 'ERROR') {
+        alert('업로드하는데 실패했습니다.');
+    } else {
+        alert('업로드가 완료되었습니다.');
+    }
+});
+dm.updateForm({
+    url: 'test.rui',
+    form: 'frm',
+    params: {
+        col1: '값1'
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="event_beforeUpdate">
+<div class="L-description">
+Update를 실행하기전에 실행여부를 판단하는 이벤트
+update시 유효성 체크를 한다. function수행시 return을 false로 하면 update 수행이 중단된다.
+</div>
+<div class="L-sample">
+sample: dataSet의 변경 여부 및 유효성 체크를 한다.
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();            
+
+dm.on('beforeUpdate', function(e) {
+    if(dataSet.isUpdated() == false) {
+        alert(Rui.getMessageManager().get('$.base.msg102'));
+        return false;
+    }
+    
+    if(vm.validateDataSet(dataSet) == false) {
+        Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>') );
+        return false;
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="event_load">
+<div class="L-description">
+loadDataSet메소드 호출시 수행되는 이벤트
+</div>
+<div class="L-sample">
+sample: dataSet1과 dataSet2의 데이터를 로드한 후 메시지를 출력한다.
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();            
+dm.on('load', function(e) {
+    alert('데이터를 읽어왔습니다.');
+});
+
+dm.loadDataSet({
+    dataSets: [dataSet1, dataSet2],
+    url: '/test.rui'
+});
+</div>
+</div>
+</div>
+
+<div class="event_loadException">
+<div class="L-description">
+loadDataSet메소드 호출시 에러가 발생했을 경우
+이벤트 인수의 e.throwObject는 javascript의 기본 에러 객체 error 이다.
+</div>
+<div class="L-sample">
+sample: loadDataSet호출 후 에러가 발생하면 에러 메시지를 출력한다.
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();            
+dm.on('loadException', function(e) {
+    alert('에러가 발생했습니다. ' + e.throwObject.message);
+});
+
+dm.loadDataSet({
+    dataSets: [dataSet1, dataSet2],
+    url: '/test.rui'
+});
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_update">
+<div class="L-description">
+params정보를 가지고 url로 서버를 호출하는 메소드. 정상이면 success, 에러면 failure 이벤트가 호출된다.
+options 정보
+    url &lt;String&gt; url
+    params &lt;Object&gt; 파라미터 객체
+    callback &lt;Object&gt; success, failure 콜백 메소드
+</div>
+<div class="L-sample">
+sample: col1과 col2의 값을 서버에 전송한다.
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();            
+
+dm.update({
+    url:'/test.rui', 
+    params:'col1=값1&col2=값2'
+});
+</div>
+</div>
+</div>
+
+<div class="method_updateForm">
+<div class="L-description">
+form의 element정보를 가지고 url로 서버를 호출하는 메소드. 정상이면 success, 에러면 failure 이벤트가 호출된다.
+options 정보
+    url &lt;String&gt; url
+    form &lt;String&gt; 폼 dom 객체 id
+</div>
+<div class="L-sample">
+sample: frm아이디를 가지는 form태그 객체 하위에 있는 form object들을 서버에 전송한다. 전송시 col1이라는 파라미터를 포함한다.
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();            
+
+dm.updateForm({
+    url: '/test.rui',
+    form: 'frm',
+    params: {
+        col1:'값1'    
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="method_updateDataSet">
+<div class="L-description">
+dataSet의 변경정보를 가지고 url로 서버를 호출하는 메소드. 정상이면 success, 에러면 failure 이벤트가 호출된다.
+options 정보
+    dataSets &lt;Array&gt; dataSet 배열
+    url &lt;String&gt; url
+    callback &lt;Object&gt; success, failure 콜백 메소드
+    params &lt;Object&gt; 파라미터 객체
+    checkIsUpdate &lt;boolean&gt; 기본값은 true이고 변경된 값이 존재하는지 체크할지 여부
+    modifiedOnly &lt;boolean&gt; 기본값은 true이고 true일 경우에는 변경된값만 false일 경우에는 모든 값을 서버에 전송한다.
+    beforeUpdateEvent &lt;boolean&gt; 기본값은 true이고 beforeUpdate 이벤트를 수행하지 않아야 할 경우에는 false로 설정한다.
+</div>
+<div class="L-sample">
+sample: 두개의 데이터셋을 서버에 전송한다.
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();
+     
+dm.updateDataSet({
+    dataSets:[dataSet1, dataSet2],
+    url:'/test.rui',
+    params: {
+        col1: '값1'
+    }
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: 변경건이 없는 모든 데이터를 서버로 전송한다. modifiedOnly값이 false이면 현재 상태의 모든 데이터를 서버에 전송한다.
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();
+     
+dm.updateDataSet({
+    dataSets:[dataSet1],
+    url:'/test.rui',
+    modifiedOnly: false
+});
+</div>
+</div>
+</div>
+
+<div class="method_loadDataSet">
+<div class="L-description">
+여러개의 dataSet을 서버에서 load하는 메소드. 정상이면 load, 에러면 loadException 이벤트가 호출된다.
+options 정보
+    dataSets &lt;Array&gt; DataSet 배열
+    url &lt;String&gt; 서버 호출 url
+    params &lt;Object&gt; 서버에 전달할 파라미터 객체
+    method &lt;String&gt; get or post
+    state &lt;Rui.data.LRecord.STATE_INSERT|Rui.data.LRecord.STATE_UPDATE|Rui.data.LRecord.STATE_DELETE&gt; load시 record의 기본 상태
+</div>
+<div class="L-sample">
+sample: 두개의 데이터셋을 서버에서 읽어온다. 각 데이터셋이 연결된 콤포넌트는 자동으로 해당 데이터가 채워진다.
+<div class="L-code">
+var dm = new Rui.data.LDataSetManager();            
+
+dm.loadDataSet({
+    dataSets: [dataSet1, dataSet2],
+    url: '/test.rui',
+    params: {
+        col1: '값1'
+    }
+});
+</div>
+</div>
+</div>
+
+<!-- property 시작 -->
+</div>

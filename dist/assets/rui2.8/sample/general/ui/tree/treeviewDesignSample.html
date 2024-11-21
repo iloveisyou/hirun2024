@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="트리(LTreeViw), 디자인(design), CSS" />
+    <title>Design</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/tree/rui_tree.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/tree/rui_tree.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+	    /*폴더 이미지 숨기는 것은 config에서 showFolder:false로 설정하면 된다.*/
+	    .L-ul-treeview .L-ul-li-line {
+	        background: transparent;/*url('../../../resources/images/ul/tree/mid_blank.gif') repeat-y scroll left top transparent;*/
+	    }
+	
+	    .L-ul-treeview .L-ul-li-depth-0 .L-ul-treeview-node-image-close-mid,
+	    .L-ul-treeview .L-ul-li-depth-0 .L-ul-treeview-node-image-close-last,
+	    .L-ul-treeview .L-ul-li-depth-0 .L-ul-treeview-node-image-mid,
+	    .L-ul-treeview .L-ul-li-depth-0 .L-ul-treeview-node-image-last {
+	        background: url('../../../../resources/images/menu/submenu_closed.gif') no-repeat scroll 50% 50% transparent;
+	    }
+	
+	    .L-ul-treeview .L-ul-li-depth-0 .L-ul-treeview-node-image-open-mid,
+	    .L-ul-treeview .L-ul-li-depth-0 .L-ul-treeview-node-image-open-last {
+	        background: url('../../../../resources/images/menu/submenu_open.gif') no-repeat scroll 50% 50% transparent;
+	    }
+	
+	    .L-ul-treeview .L-ul-li-depth-1 .L-ul-treeview-node-image-close-mid,
+	    .L-ul-treeview .L-ul-li-depth-1 .L-ul-treeview-node-image-close-last {
+	        background: url('../../../../resources/images/menu/leftMenu_blt.gif') no-repeat scroll 50% 50% transparent;
+	    }
+	    .L-ul-treeview .L-ul-li-depth-1 .L-ul-treeview-node-image-open-mid,
+	    .L-ul-treeview .L-ul-li-depth-1 .L-ul-treeview-node-image-open-last {
+	        background: url('../../../../resources/images/menu/leftMenu_blt_on.gif') no-repeat scroll 50% 50% transparent;
+	    }
+	    .L-ul-treeview .L-ul-li-depth-1 .L-ul-treeview-node-image-mid,
+	    .L-ul-treeview .L-ul-li-depth-1 .L-ul-treeview-node-image-last {
+	        background: url('../../../../resources/images/menu/leftMenu_blt_3.gif') no-repeat scroll 50% 50% transparent;
+	    }
+        #treeView .L-ul {
+            border: 1px solid #dcdcdc;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'menuId', type: 'number' },
+                    { id: 'seq', type: 'number' },
+                    { id: 'parentMenuId', type: 'number' },
+                    { id: 'name' },
+                    { id: 'url' }
+                ]
+            });
+
+            /*<b>*/
+            var treeView = new Rui.ui.tree.LTreeView({
+                dataSet: dataSet,
+                fields: {
+                    rootValue: null,
+                    parentId: 'parentMenuId',
+                    id: 'menuId',
+                    label: 'name',
+                    order:'seq'
+                },
+                showFolder: false, //폴더 이미지 감추기
+                width: 200,
+                height: 300,
+                renderer: function(label, record){
+                    return '<font color=\"blue\">' + label + '</font>';
+                }
+            });
+
+            treeView.render('treeView');
+            /*</b>*/
+
+            dataSet.load({ url: './../../../../sample/data/menu.json' });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>TreeView Design</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>트리(Tree)의 디자인(Design)을 적용하여 노드 펼침 아이콘을 변경하거나 삭제하는 샘플</h2>
+            <div class="LblockDesc">
+                <p>CSS를 이용하여 트리(Tree)의 디자인(Design)을 변경하는 방법을 가이드하는 샘플</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+    <div class="LblockMarkupCode">
+        <div id="treeView"></div>
+    </div>
+</div>
+</body>
+</html>

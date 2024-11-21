@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Provider Sample</title>
+        
+        <script type="text/javascript" src='./../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='./../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" >
+
+        <script type="text/javascript" class="script-code">
+            var p = null;
+            var m = null;
+            $C(function(){
+                //log 활성화
+                $C('!config').set('$.core.logger.show', [true]);
+                $C('!config').set('$.core.logger.expand', [true]);
+                
+                /*<b>*/
+                p = $C.provider();
+                p.on('statechange', function(e){
+                    $C.log("statechange event fire, e.type 값 : " + e.type);
+                });
+                
+                m = $C.manager($C.cookieProvider());
+                /*</b>*/
+
+            });
+
+            function testSetRemove(){
+                //providerTests : testSetRemove 작동 여부
+                p.set('aaa', 'data');
+                $C.log("설정한 aaa값 : " + p.get('aaa'));
+                console.log(p.get('aaa'), 'data');
+                p.remove('aaa');
+                $C.log("remove후 aaa값 : " + $C.object.isUndefined(p.get('aaa')));
+                console.log($C.object.isUndefined(p.get('aaa')));
+            }
+
+            function testManager(){
+                //providerTests : testManager 작동 여부                
+                m.set('ccc', '1');
+                $C.log("설정한 cookie ccc값 : " + m.get('ccc'));
+                console.log(m.get('ccc'), '1');
+                m.remove('ccc');
+                $C.log("remove후 cookie ccc값 : " + $C.object.isUndefined(m.get('ccc')));
+                console.log($C.object.isUndefined(m.get('ccc')));
+            }
+        </script>
+
+    </head>
+    <body>
+        <h1>Provider Sample</h1>
+        <h2>객체의 상태정보를 관리하는 LWebStorage객체를 보여주는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>객체에 대한 매니저 객체를 생성하여 상태정보를 관리하거나 조회합니다.</div>
+
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id='divObj'>
+                </div>
+                <a href='javascript:testSetRemove()'>SetRemove</a>
+                <a href='javascript:testManager()'>Manager</a>
+            </div>
+        </div>
+
+
+    </body>
+</html>

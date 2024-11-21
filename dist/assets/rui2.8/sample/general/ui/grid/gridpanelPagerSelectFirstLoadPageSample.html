@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Grid Pager Selection First Load Page</title>
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 페이지(LPager)" />
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LPager.js"></script>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'date1', type: 'date' }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1' },
+                    { field: 'col2', sortable: true, align: 'center' },
+                    { field: 'col3', align: 'right', hidden: true },
+                    { field: 'date1', align: 'center', renderer: Rui.util.LRenderer.dateRenderer() }
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 300
+            });
+
+            /*<b>*/
+            var pager = new Rui.ui.LPager({
+                gridPanel: grid,
+                viewPageNumber: 5//최초 load시 5page 이동하고 싶을 경우
+            });
+
+            pager.render();
+            /*</b>*/
+
+            grid.render('defaultGrid');
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json',
+                    params : pager.getParams(5)//5page로 이동하기 위한 parameter가져오기
+                });
+            });
+
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <h1>그리드(Grid) 페이저(Pager) Selection First Load Page</h1>
+    <h2>그리드(Grid) 페이저(Paging) 최초 loading page를 지정(grid)</h2>
+    <div class="LblockDesc">
+        <p>그리드(Grid)에서 viewPageNumber속성을 통해 최초 로딩되는 페이지(Pager)를 지정할수가 있습니다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >Search</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div id="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

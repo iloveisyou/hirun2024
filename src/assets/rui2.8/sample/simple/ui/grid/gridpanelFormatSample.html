@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Format</title>
+
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+    
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        $C(function() {
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'time' },
+                { id: 'date', type: 'date' },
+                { id: 'money'},
+                { id: 'kg'},
+                { id: 'm'}
+            ]
+            });
+
+            /*<b>*/
+            var columnModel = $C.columnModel({
+                columns: [
+                    { field: "time",
+                        renderer: new $C.renderer.timeRenderer()
+                    },
+                    { field: "date", 
+                        renderer: new $C.renderer.dateRenderer()
+                    },
+                    { field: "money",
+                        renderer: new $C.renderer.moneyRenderer()
+                     },
+                    { field: "kg",
+                        renderer: new $C.renderer.weightRenderer('kg')
+                    },
+                    { field: "m",
+                        renderer: new $C.renderer.lengthRenderer('m')
+                    }
+                    ]
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet:dataSet,
+                height:300
+            });
+
+            /*</b>*/
+
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/formatData2.json'
+                });
+            });
+            
+            $C('#clearBtn').button();
+            $C('#clearBtn').on("click", function(){
+                dataSet.clearData();
+            });
+
+            });
+            
+        </script>
+
+</head>
+<body>
+    <h1>gridpanel format sample</h1>
+    <h2>LGridPanel에서 cell의 format(renderer)를 연결하는 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div>그리드의 컬럼별 format을 설정합니다. 기존에 정의된 renderer를 사용할 수 있으며(API 참고), 사용자 정의된 renderer도 사용 가능합니다.</div>
+<div id='bd'>
+    <div>
+        <button type="button" id="searchBtn" >Search</button>
+        <button type="button" id="clearBtn" >clear</button>
+    </div>
+    <div class="LblockMarkupCode">
+        <div id="defaultGrid"></div><br />
+    </div>
+</div>
+</body>
+</html>

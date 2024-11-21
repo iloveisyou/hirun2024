@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Grid Design</title>
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 디자인(Design)" />
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LEditButtonColumn.js"></script>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css" >
+        .L-grid-col {
+            background-color:#e7e7e7;
+        }
+
+        .L-grid-body .L-grid-cell-col3 {
+            background-color:#e7e7e0;
+        }
+
+        .L-grid-cell-editable {
+            background-color:#fff;
+        }
+
+        .L-button#searchBtn button {
+            background: url(../../../../resources/skin/sam2/images/search_btn.gif) center left no-repeat;
+            background-color: #f3f2f2;
+            padding-left: 22px;
+        }
+        
+        .L-grid-header-checkBox {
+            background-position: 2px 2px;
+        }
+
+        .L-grid-row .L-grid-col-btn {
+            padding: 1px 3px 0px 3px;
+        }
+
+        /* 그리드의 좌우 라인 제거 */
+        .L-grid-panel .L-panel {
+            border-width: 1px 0 1px 0;
+        }
+
+        /* 그리드 상단 라인 색 변경 */
+        .L-grid-panel .L-panel {
+            border-top: 2px solid #49B3D2;
+        }
+
+        /* 그리드 첫번째 헤더 상단 라인 제거 */
+        .L-grid-header table tr.L-grid-header-row-first td {
+            border-top: none !important;
+        }
+
+        /* 그리드 헤더 배경색 변경 */
+        .L-grid-header {
+            background-color:#EFF7FF;
+            border-bottom-width: 3px;
+        }
+
+        /* 그리드 헤더 폰트 변경 */
+        .L-grid-header a {
+            font-weight: normal;
+        }
+
+        /* 그리드  cell 상하좌우 여백 */
+        .L-grid-header-row .L-grid-header-inner, .L-grid-row .L-grid-cell-inner {
+            padding: 7px 3px 6px 5px;
+        }
+
+        /* 에디터 그리드에 맞추기 */
+        .L-editor-panel .bd, .L-editor-panel .L-panel {
+            height: 93%;
+        }
+
+        /* 에디터 그리드에 맞추기 */
+        .L-editor-panel .L-panel {
+            border-top: 1px solid #49B3D2;
+        }
+
+        /* 하단 그리드 라인 설정 */
+        .L-grid-panel .L-panel {
+            border-bottom: 2px solid #49B3D2;
+        }
+
+    </style>
+
+    <script type="text/javascript" class="script-code">
+
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var col1Combo = new Rui.ui.form.LCombo({
+               rendererField: 'value',
+               url: './../../../../sample/data/code.json'
+            });
+
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number', defaultValue: 1000 },
+                    { id: 'code' },
+                    { id: 'value' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+
+            var dm = new Rui.data.LDataSetManager();
+
+            dm.on('success', function(e) {
+                // 페이지에서는 log가 아니라 alert을 써야 함.
+                alert(Rui.getMessageManager().get('$.base.msg100'));
+            });
+
+            var popuButton = new Rui.ui.LButton({
+                label: '>>'
+            });
+
+             /*<b>*/
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', sortable: true, editor: new Rui.ui.form.LTextBox(), renderer: col1EditableRenderer },
+                    { field: 'col2', align: 'center', sortable: true, editor: new Rui.ui.form.LTextBox({ mask: '999999-9999999' }) },
+                    { field: 'value', align: 'center'},
+                    { field: 'code', align: 'center', sortable: true, rendererField: 'value', editor: col1Combo },
+                    { field: 'col3', align: 'right', editor: new Rui.ui.form.LRadioGroup({
+                        items:[
+                            {
+                                label : 'R1',
+                                value: 'R1'
+                            },
+                            {
+                                label : 'R2',
+                                value: 'R2',
+                                checked:true
+                            }
+                        ]
+                    }) },
+                    { field: 'col5', align: 'right', editor: new Rui.ui.form.LCheckBox({
+                        bindValues : ['R1', '']
+                    }) },
+                    { field: 'col6', label: 'Col6', width: 200, editor: new Rui.ui.form.LTextArea() },
+                    { field: 'col8', label: 'Col8', align: 'right', editor: new Rui.ui.form.LNumberBox(), renderer: Rui.util.LRenderer.moneyRenderer() },
+                    { field: 'date1' , align: 'center', editor: new Rui.ui.form.LDateBox(), renderer: Rui.util.LRenderer.dateRenderer() },
+                    new Rui.ui.grid.LEditButtonColumn({
+                        field: 'value', label: 'Popup'
+                    }),
+                    { id: 'btn', field: 'col1', label: 'Button', renderer: function(val, p, record, row, i){
+                        return '<button type="button" class="L-grid-button">' + val + '</button>';
+                    }}
+                ]
+            });
+            /*</b>*/
+
+            var validatorManager = new Rui.validate.LValidatorManager({
+                validators:[
+                    { id: 'searchSelectedUserGrpId', validExp: '그룹:true' },
+                    { id: 'col1', validExp: 'Col1:true' },
+                    { id: 'col2', validExp: 'Col2:true' },
+                    { id: 'col3', validExp: 'Col3:true' },
+                    { id: 'col6', validExp: 'Col6:true' },
+                    { id: 'col8', validExp: 'Col8:true:number&maxNumber=20000' },
+                    { id: 'code', validExp: 'Code:true' },
+                    { id: 'date1', validExp: 'Date1:true' }
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 300
+            });
+
+            var view = grid.getView();
+
+            /********************
+             * 사용자 정의 함수
+             ********************/
+            /*<b>*/
+            var col1EditableRenderer = function(value, p, record, row, i) {
+                if(record.state == Rui.data.LRecord.STATE_INSERT) {
+                    p.css.push('L-grid-cell-editable');
+                }
+                return value;
+            }
+            /*</b>*/
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            grid.on('cellClick', function(e){
+                var column = columnModel.getColumnAt(e.col, true);
+                if(column.id == 'btn')
+                    alert(e.row + ' 버튼 실행');
+                else
+                    Rui.log('cellClick : row ' + e.row + ', col ' + e.col);
+            });
+
+            grid.on('popup', function(e){
+                alert('popup click row : ' + e.row + ', col : ' + e.col);
+            });
+
+            grid.render('defaultGrid');
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json',
+                    method: 'get'
+                });
+            });
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <h1>Grid Design</h1>
+    <h2>그리드(Grid)에서 디자인(design)을 변경하는 방법을 설명하는 샘플</h2>
+    <div class="LblockDesc">
+        <p>그리드(Grid)에서 디자인(Design)을 변경하는 방법을 설명한다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton">
+            <button type="button" id="searchBtn" >Search</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div>
+                <div class="LblockGrid">
+                    <div id="defaultGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+﻿[
+    {
+        "metaData": {
+            "dataSetId": "dataSet1"
+        },
+        "records": [
+            {"depth":0,"dataType":0,"field01":"A551939859","field02":"","field03":"20130519","field04":"인피니아 47LM 외 1건","field05":2429400,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A551939859","field02":"TV_47LM6200","field03":"20130519","field04":"인피니아 47LM","field05":1690000,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A551939859","field02":"FR2558MC1Z","field03":"20130519","field04":"트롬6모션 FR2558","field05":739400,"field06":"배송준비중"},
+            {"depth":0,"dataType":0,"field01":"A567487813","field02":"","field03":"20130520","field04":"LG옵티머스 G 외 3건","field05":3961900,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A567487813","field02":"LG_201209F180","field03":"20130520","field04":"LG옵티머스 G","field05":469600,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A567487813","field02":"TV_42LN5400","field03":"20130520","field04":"인피니아 42LN","field05":799900,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A567487813","field02":"FR2558MC1Z","field03":"20130520","field04":"트롬6모션 FR2558","field05":739400,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A567487813","field02":"FQ166DURWBW","field03":"20130520","field04":"휘센 FQ166","field05":1953000,"field06":"배송준비중"},
+            {"depth":0,"dataType":0,"field01":"A563040406","field02":"","field03":"20130521","field04":"Nexus 4 외 4건","field05":2987400,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A563040406","field02":"LG_201211E960","field03":"20130520","field04":"Nexus 4","field05":259400,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A563040406","field02":"TV_32LA6100","field03":"20130520","field04":"인피니아 32LA","field05":493000,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A563040406","field02":"F1925WC","field03":"20130520","field04":"트롬 F1925","field05":410000,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A563040406","field02":"R-S852NHMDW","field03":"20130520","field04":"디오스 R-S852","field05":982000,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A563040406","field02":"R-S769MHWE","field03":"20130520","field04":"디오스 R-S769","field05":843000,"field06":"배송준비중"},
+            {"depth":0,"dataType":0,"field01":"A554094776","field02":"","field03":"20130522","field04":"LG옵티머스 G Pro 외 2건","field05":3332500,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A554094776","field02":"LG_201302F240","field03":"20130522","field04":"LG옵티머스 G Pro","field05":838000,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A554094776","field02":"LG_201303F260","field03":"20130522","field04":"LG옵티머스 LTE3","field05":399500,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A554094776","field02":"R-U913VBDW","field03":"20130522","field04":"디오스 R-U913","field05":2095000,"field06":"배송준비중"},
+            {"depth":0,"dataType":0,"field01":"A555199129","field02":"","field03":"20130525","field04":"옵티머스 Vu2 외 3건","field05":2600200,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A555199129","field02":"LG_201210F200","field03":"20130525","field04":"옵티머스 Vu2","field05":549600,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A555199129","field02":"LG_201209F180","field03":"20130525","field04":"LG옵티머스 G","field05":469600,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A555199129","field02":"TV_32CS460","field03":"20130525","field04":"인피니아 32CS","field05":424000,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A555199129","field02":"TV_42LA6230","field03":"20130525","field04":"인피니아 42LA","field05":1157000,"field06":"배송준비중"},
+            {"depth":0,"dataType":0,"field01":"A556225752","field02":"","field03":"20130527","field04":"트롬6모션 F1352 외 3건","field05":4570200,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A556225752","field02":"F1352NCZ","field03":"20130527","field04":"트롬6모션 F1352","field05":609200,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A556225752","field02":"R-T872MBHGL","field03":"20130527","field04":"디오스 R-T872","field05":1638000,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A556225752","field02":"FQ166DURWBW","field03":"20130527","field04":"휘센 FQ166","field05":1953000,"field06":"배송준비중"},
+            {"depth":1,"dataType":1,"field01":"A556225752","field02":"SC066BBW","field03":"20130527","field04":"휘센 SC066","field05":370000,"field06":"배송준비중"}
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "dataSet2"
+        },
+        "records": [
+            {"field01":"R251939859","field02":"20130521","field03":"A551939859","field04":"FR2558MC1Z","field06":"트롬 F1925","field05":"접수중"},
+            {"field01":"R252345467","field02":"20130521","field03":"A567487813","field04":"TV_42LN5400","field06":"디오스 R-S802","field05":"접수중"},
+            {"field01":"R250416891","field02":"20130523","field03":"A563040406","field04":"TV_32LA6100","field06":"인피니아 32LA","field05":"접수중"},
+            {"field01":"R254570427","field02":"20130523","field03":"A563040406","field04":"R-S769MHWE","field06":"디오스 R-S769","field05":"접수중"},
+            {"field01":"R251083079","field02":"20130524","field03":"A554094776","field04":"LG_201303F260","field06":"LG옵티머스 LTE3","field05":"접수중"},
+            {"field01":"R254097150","field02":"20130526","field03":"A555199129","field04":"LG_201209F180","field06":"LG옵티머스 G","field05":"접수중"},
+            {"field01":"R253961939","field02":"20130529","field03":"A556225752","field04":"R-T872MBHGL","field06":"디오스 R-T872","field05":"접수중"},
+            {"field01":"R257363220","field02":"20130529","field03":"A556225752","field04":"SC066BBW","field06":"휘센 SC066","field05":"접수중"}
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "dataSet3"
+        },
+        "records": [
+            {"field01":"성동지점","field02":"20130525","field03":"신한","field04":4590000,"field05":"일시불","field06":"333-22-555555"},
+            {"field01":"성동지점","field02":"20130527","field03":"우리","field04":3780000,"field05":"일시불","field06":"4444-666-787878"}
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "dataSet4"
+        },
+        "records": [
+            {"field01":"성동지점","field02":"201305","field03":7000000,"field04":2500000}        
+        ]
+    }
+]

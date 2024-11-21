@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="FromToCalendar (LFromToCalendar)" />
+    <title>FromToCalendar</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/calendar/LFromToCalendar.js"></script>
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    
+    <style type="text/css">
+        #divOutput {
+            height: 20px;
+        }
+        #bd {
+            height: 320px;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            
+            /*<b>*/
+            var calendar = new Rui.ui.calendar.LFromToCalendar({
+                applyTo: 'divFTCalendar'
+            });
+            /*</b>*/
+
+            calendar.on('changed', function(e){
+                Rui.log(e.value);
+            });
+
+            calendar.on('focus', function(e){
+                Rui.log('focus');
+            });
+            
+            calendar.on('blur', function(e){
+                Rui.log('blur');
+            });
+
+            calendar.on('specialkey', function(e){
+                Rui.log('specialkey');
+            });
+           
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            calendar.on('select',function(e){
+                Rui.get('divOutput').html('Selected Date: ' + (e.start || e.end));
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <h1>From To Calendar</h1>
+    <h2>시작, 종료일을 관리하는 달력(FromToCalendar)</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>FromToCalendar의 기본 모습입니다.</p>
+        <p>시작(Start)일과 종료(End)일 선택시 select 이벤트를 이용하여 선택된 날짜(Date)를 얻을 수 있습니다..</p>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="divOutput"></div>
+            <div id="divFTCalendar"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <META content=IE=8 http-equiv=X-UA-Compatible>
+    <title>Memory leak</title>
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    
+    <style type="text/css" >
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var dsList = [];
+        function init() {
+        }
+        
+        function windowOpen() {
+            window.open('./../ui/grid/gridpanelBasicMultiSample.html')
+        }
+        
+        function showDsList() {
+            Rui.get('console').html(dsList.length);
+        }
+                                                
+        function add(ds) {
+            dsList.push(ds);
+        }
+    
+    </script>
+
+</head>
+<body onload="init()">
+    <div id="test">
+    </div>
+    <a href="javascript:windowOpen()">open</a>
+    <a href="javascript:showDsList()">show</a>
+    <div id="console"></div>
+</body>
+</html>

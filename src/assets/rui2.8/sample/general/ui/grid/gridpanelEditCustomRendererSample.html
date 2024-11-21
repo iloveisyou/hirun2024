@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Grid Edit Custom Renderer</title>
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 랜더러(Renderer)" />
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'value' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    /*<b>*/
+                    { field: 'col1', label: 'Col1', sortable: true, editor: new Rui.ui.form.LTextBox(), vMerge: true },
+                    { field: 'col5', align: 'right', editor: new Rui.ui.form.LCheckBox({
+                        bindValues: ['R1', '']
+                    }) }
+                    /*</b>*/
+                ]
+            });
+
+            /*<b>*/
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+            /*</b>*/
+
+            /********************
+            * 버튼 선언 및 이벤트
+            ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data11.json'
+                });
+            });
+
+            var newBtn = new Rui.ui.LButton('newBtn');
+            newBtn.on('click', function(){
+                var row = dataSet.newRecord();
+            });
+
+            var insertBtn = new Rui.ui.LButton('insertBtn');
+            insertBtn.on('click', function(){
+                if(dataSet.getRow() < 0) return;
+                var row = dataSet.newRecord(dataSet.getRow());
+                var record = dataSet.getAt(row);
+                record.set('col1', 'Junee5');
+                record.set('col2', '(02) 6363-7009');
+                record.set('col3', 'R1');
+            });
+
+            var updateBtn = new Rui.ui.LButton('updateBtn');
+            updateBtn.on('click', function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var record = dataSet.getAt(row);
+                record.set('col2', null);
+                record.set('col3', 'R2');
+                record.set('col8', 1);
+            });
+
+            var undoBtn = new Rui.ui.LButton('undoBtn');
+            undoBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    for(var i = 0 ; i < dataSet.getCount() ; i++) {
+                        if(dataSet.isMarked(i))
+                            dataSet.undo(i);
+                    }
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.undo(row);
+                }
+            });
+
+            var undoAllBtn = new Rui.ui.LButton('undoAllBtn');
+            undoAllBtn.on('click', function(){
+                dataSet.undoAll();
+            });
+
+            var deleteBtn = new Rui.ui.LButton('deleteBtn');
+            deleteBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRows();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+
+            var saveBtn = new Rui.ui.LButton('saveBtn');
+            saveBtn.on('click', function(){
+                if(dataSet.isUpdated() == false) {
+                    alert(Rui.getMessageManager().get('$.base.msg102'));
+                    return;
+                }
+
+                if(vm.validateDataSet(dataSet) == false) {
+                    Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>') );
+                    return;
+                }
+
+                tm.updateDataSet({
+                    dataSets: [dataSet],
+                    url: './../../../data/savedCallback.json'
+                });
+
+            });
+
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData();
+            });
+
+            loadPage.hide();
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <h1>Grid Edit Custom Renderer</h1>
+    <h2>LGridPanel의 기본  Edit 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>편집(Edit)이 가능한 그리드(Grid)의 기본 형태입니다. 그리드 안에는 텍스트 에디터(TextBox), 라디오(radio), 체크박스(check), 콤보(combo), 팝업(popup) 등이 가능하며,</p>
+        <p>버튼(Button)을 연결할 수 있습니다. 같은 값의 셀(Cell)을 합쳐서 보이게 하는 병합(Merge) 기능도 제공합니다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >search</button>
+            <button type="button" id="newBtn" >new</button>
+            <button type="button" id="insertBtn" >insert</button>
+            <button type="button" id="updateBtn" >update</button>
+            <button type="button" id="deleteBtn" >delete</button>
+            <button type="button" id="saveBtn" >save</button>
+            <button type="button" id="undoBtn" >undo</button>
+            <button type="button" id="undoAllBtn" >undoAll</button>
+            <button type="button" id="clearBtn" >clear</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div class="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+var loadPage = new Rui.ui.LLoadPage();
+loadPage.show();
+</script>
+</body>
+</html>

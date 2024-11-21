@@ -1,0 +1,19 @@
+[
+    {
+        "message": "return message and value and so on...",
+        "metaData": {
+            "dataSetId": "dataset1",
+            "fields": [
+                {"name": "fileName"}
+            ],
+            "recordId": "id",
+            "recordState": "state",
+            "totalCount": 1
+        },
+        "records": [
+            {
+                "fileName": "Sample File.ext"
+            }
+        ]
+    }
+]

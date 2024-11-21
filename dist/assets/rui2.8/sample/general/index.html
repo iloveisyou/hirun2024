@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>DevOn RUI samples</title>
+    
+    <script type="text/javascript" src="./../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../plugins/ui/LLoadPage.js"></script>
+    <script type="text/javascript" src="./../../plugins/fx/LScrollAnim.js"></script>
+    <script type="text/javascript" src="./../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="./../../resources/rui_license.js"></script>
+    <script type="text/javascript" src="./../../plugins/ui/LFrameDialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../resources/rui_sample_base.css"/>
+    <link rel="stylesheet" type="text/css" href="./../../resources/rui.css"/>
+    <link rel="stylesheet" type="text/css" href="./../../plugins/ui/LLoadPage.css"/>
+    <link rel="stylesheet" type="text/css" href="./../../plugins/ui/LFrameDialog.css" />
+
+    <style type="text/css" >
+        body {
+            font-family: tahoma,sans-serif;
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        h1 a {
+            left: 800px;
+        }
+        
+        h2 {
+            border-bottom: 2px solid #9cbaef;
+            margin-right: 10px;
+            margin-bottom: 0px;
+        }
+    
+        h3 {
+            margin: 0px 0px 5px 0px !important;
+            padding: 5px 0px !important;
+            font-weight: bold;
+            color: black;
+            background-color: #fff;
+            background: url(./../../resources/images/button/leaf.gif) no-repeat center right;
+        }
+        
+        #hd-title h1 {
+            right: auto;
+            left: 50px;
+            top: 20px;
+        }
+        
+        #bd {
+            overflow: visible;
+            margin-top: 50px;
+        }
+        
+        .sampleview {
+            border: 5px solid #deebf7;
+            width: 750px;
+            height: 400px;
+            overflow-y: visible;
+            position: relative;
+            float: left;
+            margin-top: 30px;
+            margin-left: 40px;
+        }
+        
+        .sampleview li {
+            height:100px;
+            margin:5px 5px 5px 10px;
+            clear: left;
+            overflow: visible;
+        }
+        
+        .sampleview .dd-box {
+            cursor:pointer;
+            float:left;
+            height:110px;
+            width:300px;
+            position: relative;
+            /*background-color: #DEEBF7;*/
+            border: 1px solid #9cbaef;
+            margin:5px 5px 2px 10px;
+            font-size: 12px;
+            -moz-border-radius:5px 5px 5px 5px;
+            -moz-box-shadow:1px 1px 2px 1px #000000;
+            -webkit-border-radius:5px 5px 5px 5px;
+            -webkit-box-shadow:1px 1px 2px 1px #000000;
+        }
+        
+        .sampleview .hide-box {
+            visibility: hidden;
+        }
+        
+        .sampleview .dd-box:hover {
+            -moz-box-shadow:3px 3px 5px 3px #000000;
+            -webkit-box-shadow:3px 3px 5px 3px #000000;
+        }
+        
+        .sampleview .dd-box .dd-inner {
+            margin:2px 5px 2px 10px;      
+            padding: 0px;
+            /*background-color: #DEEBF7;*/
+            height: 100px;
+        }
+        
+        .sampleview img {
+            border:1px solid #DEEBF7;
+            float: left;
+            height:80px;
+            margin:0px 0 0 5px;
+            width:100px;
+            margin-right: 5px;
+            margin-top: 12px;
+        }
+        
+        .sampleview .content {
+            float:right;
+            margin: 10px 5px 0px 0px;
+            width: 160px;
+        }
+        
+        .category {
+            position: absolute;
+            top: 72px;
+            left: 820px;
+            _left: 850px;
+            width: 120px;
+        }
+        
+        .category_list {
+            font-size: large;
+            padding-bottom: 10px;
+            display: block;
+        }
+        
+        .category a, .category a:link {
+            _font-family: Dotum;
+        }
+        
+        #doc3 #hd h3 {
+            background: none;
+        }
+        
+        #hd {
+            top: -58px;
+            overflow: hidden;
+        }
+        
+        #hd .header_title {
+            padding-left: 10px;
+            font-size: xx-large;
+            font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+        }
+        
+        .header_top_menu {
+            position: absolute;
+            right: 100px;
+            top: 10px;
+        }
+        
+        .header_top_menu ul {
+            list-style-type: none;
+        }
+        
+        .header_top_menu li {
+            float: left;
+            margin-left: 10px;
+        }
+        
+        #ft {
+            position: absolute;
+            bottom: 0px;
+            text-align: center;
+            background-color: #dbdbdb;
+            padding: 10px 0px;
+            width: 100%;
+        }
+        
+    </style>
+    
+    <script type="text/javascript">
+        var loadPage = null;
+        var frameDialog = null;
+        Rui.onReady(function() {
+
+            var handleClose = function() {
+                this.hide();
+            };
+            
+            var documentWidth = document.documentElement.clientWidth - 100;
+            var documentHeight = document.documentElement.clientHeight - 100;
+
+            frameDialog = new Rui.ui.LFrameDialog({
+                width: documentWidth,
+                height: documentHeight,
+                modal: true,
+                visible: false,
+                keylisteners: true,
+                buttons : 
+                    [ 
+                        { text:"Close", handler:handleClose } 
+                    ]
+            });
+            frameDialog.render(document.body);
+
+            var hdEl = Rui.select('.L-frame-dialog .hd');
+            hdEl.setStyle('padding-left', '20px');
+            var closeEl = Rui.select('.L-frame-dialog .container-close');
+            closeEl.setStyle('left', '4px');
+
+            Rui.ajax({
+                url: "../data/widgetMenu.json",
+                    success: function(e) {
+                        var data = eval(e.responseText);
+                        var records = data[0].records;
+                        var liHtml = '';
+                        var ddHtml = '';
+                        var categoryHtml = '';
+                        var parentMenuId = null;
+                        var parentName = null;
+                        var i = 0;
+                        
+                        var appendHtml = function() {
+                            var firstUpperName = parentName.substring(0, 1).toUpperCase() + parentName.substring(1);
+                            
+                            liHtml += liTemplate.apply({
+                                menuId: parentMenuId,
+                                title: firstUpperName,
+                                ddHtml: ddHtml
+                            });
+                            ddHtml = '';
+                            categoryHtml += categoryTemplate.apply({
+                                menuId: parentMenuId,
+                                title: firstUpperName
+                            });
+                        };
+                        
+                        var widgetId = -1;
+                        for (i = 0; i < records.length; i++) {
+                            if(records[i].name == 'ui') {
+                                widgetId = records[i].menuId;
+                                break;
+                            }
+                        }
+                        
+                        for(i = 0; i < records.length ; i++) {
+                            var record = records[i];
+                            if(record.parentMenuId == 0) continue;
+                            if(record.parentMenuId == 1 || record.parentMenuId == widgetId) {
+                                if(Rui.util.LObject.isEmpty(record.url) == false) continue;
+                                if(parentMenuId != null && parentMenuId != record.parentMenuId) {
+                                    appendHtml();
+                                }
+                                parentName = record.name;
+                                parentMenuId = record.menuId;
+                            }
+                            
+                            if(record.parentMenuId == parentMenuId) {
+                                var name = record.name;
+                                var url = record.url;
+                                var sPos = url.lastIndexOf('/');
+                                var ePos = url.lastIndexOf('.');
+                                var image = './../../resources/images/samples/' + url.substring(sPos + 1, ePos) + '.jpg';
+                                ddHtml += ddTemplate.apply({
+                                    id: name,
+                                    title: name,
+                                    url: url,
+                                    image: image,
+                                    css: '',
+                                    description: record.desc
+                                });
+                            }
+                        }
+                        
+                        appendHtml();
+                        
+                        $S('.sampleview > ul').html(liHtml);
+                        
+                        $S('.category > ul').html(categoryHtml);
+                        
+                        $S('.dd-box').addClass('hide-box');
+                        
+                        categoryLiList = $S('.category li');
+
+                        loadPage.hide();
+                        
+                        ddHandler();
+                        titleHandler();
+                    },
+                    failure: function(e) {
+                        alert('메뉴를 읽어 오지 못했습니다.');
+                    }
+            })
+            
+            var liTemplate = new Rui.LTemplate(
+                '<li id="menuId_{menuId}">',
+                    '<h2>{title}</h2>',
+                    '<dl>',
+                        '{ddHtml}',
+                    '</dl>',
+                '</li>'
+            );
+            
+            var ddTemplate = new Rui.LTemplate(
+                '<dd class="dd-box" onclick="goPage(this)">',
+                    '<input type="hidden" name="url" value="{url}">',
+                    '<div class="dd-inner {css}">',
+                    '<img src="{image}">',
+                    '<div class="content">',
+                    '<h3><a href="{url}" target="_new">{title}</a></h3>',
+                    '<span>{description}</span>',
+                    '</div>',
+                    '</div>',
+                '</dd>'
+            );
+            
+            var categoryTemplate = new Rui.LTemplate(
+                '<li class="category_list"><a href="javascript:moveCategory(\'menuId_{menuId}\')">{title}</a></li>'
+            );
+            
+            var titleHandler = function() {
+                var hd = $E('hd').animate({
+                    top: {
+                        from: -58,
+                        to: 0
+                    },
+                    method: Rui.fx.LEasing.bounceOut,
+                    delay: 2000,
+                    callback: function() {
+                        var h1 = $S('h1 a');
+                        h1.animate({
+                            type: 'LAnim',
+                            left: {
+                                from: 800,
+                                to: 0
+                            }
+                        });
+                    }
+                });
+            };
+            
+            var sampleviewHandler = function() {
+                $S('.sampleview').setStyle('overflow-y', 'scroll');
+                $S('.sampleview').animate({
+                    opacity: { from:0, to: 1 },
+                    callback: function() {
+                        $S('.dd-box').removeClass('hide-box');
+                        categoryHandler();
+                    }
+                });
+            };
+            
+            var categoryLiList = null;
+            var categoryHandler = function(inx) {
+                var count = 0;
+                categoryLiList.each(function(item){
+                    $E(this).setStyle('opacity', 0);
+                    $E(this).animate({
+                        opacity: { from: 0, to: 1},
+                        delay: 200 * (count++)
+                    });
+                });
+            };
+            
+            var ddHandler = function() {
+                var count = 9;
+                
+                var ddBoxs = $S('.dd-box');
+                var ddAnimation = function(item, i) {
+                    item.animate({
+                        top: { from: -500, to: 0 },
+                        method: Rui.fx.LEasing.bounceOut,
+                        onStart: function() {
+                            item.removeClass('hide-box');                            
+                        },
+                        callback: function(){
+                            if(i == 0) 
+                                sampleviewHandler();
+                        },
+                        delay: ((100 * (9 - i)) + 300)
+                    });
+                }
+                for(var i = 9 ; i >= 0; i--) {
+                    ddAnimation(ddBoxs.getAt(i), i);
+                }
+            };
+            
+        });
+        
+        function goPage(obj) {
+            var objEl = $E(obj);
+            objEl.setStyle('zIndex', 1000);
+            var url = objEl.select('input[name="url"]').getAt(0).getValue();
+            objEl.animate({
+                type: 'LMotionAnim',
+                points: {
+                    to: [300, 250],
+                    control: [[-300, 485], [512, 0]]
+                },
+                callback: function(){
+                    obj.style.left = '';
+                    obj.style.top = '';
+                    obj.style.position = '';
+                    objEl.setStyle('zIndex', 0);
+                    frameDialog.show();
+                    if(!Rui.browser.msie)
+                        $E(frameDialog.element).animate({ opacity: { from: 0, to: 1} });
+                    frameDialog.setUrl(Rui.getConfig().getFirst('$.core.contextPath') + url);
+                }
+            });
+        }
+        
+        function moveCategory(menuId){
+            var menuObj = $E(menuId);
+            var sampleview = $S('.sampleview');
+            sampleview.animate({
+                type: 'LScrollAnim',
+                scroll: {
+                    to: [0, (menuObj.getTop() + sampleview.getAt(0).dom.scrollTop) -110]
+                }
+            });
+        }
+    </script>
+
+</head>
+<body id='doc3'>
+<!-- 아래의 ie6 문장은 프로젝트에서 사용하셔도 됩니다. -->
+<!--[if lt IE 7]>
+<div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="./../../../resources/images/banner.jpg" border="0" height="42" width="820" alt="" /></a></div> 
+<![endif]-->
+<div id='hd'>
+    <div id="hd-title">
+        <h1><a href="http://www.dev-on.com/rui/" title="RUI! UI Library" class="header_title">DevOn RUI! User Interface Library.</a></h1>
+        <div class="header_top_menu">
+            <ul>
+                <li class=""><a href='./../api/info/intro.html' title='rui'>RUI 소개</a></li>
+                <li class=""><a href='./../../api/info/notice.html' title="공지사항">공지사항</a></li>
+                <li class=""><a href='http://www.dev-on.com/portal/common/standard/board/BoardItemListView.do?moduleType=BD4&boardSystemId=1&board.boardId=1264054580927' title='FAQ'>FAQ</a></li>
+                <li class=""><a href='http://www.dev-on.com/portal/common/standard/board/BoardItemListView.do?moduleType=BD4&boardSystemId=1&board.boardId=1264054580926' title="Q&A">Q&A</a></li>
+                <li class=""><a href='./pattern/system/index.html' title='데모' target="_new">데모</a></li>
+                <li class=""><a href='./pattern/rui/index.html' title='화면 패턴' target="_new">화면 패턴</a></li>
+                <li class=""><a href="./apiBoard.html" target="_new">API</a></li>
+                <li class=""><a href='./../../License.txt' title='rui'>License</a></li>
+                <li class=""><a href='./../../Release.txt' title='rui'>Release</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id='bd' >
+    <div class='sampleview'>
+        <ul class='sampleList'>
+        </ul>
+    </div>
+    <div class='category'>
+        <ul>
+            <li><a href="#menuId_2">Animations</a></li>
+        </ul>
+    </div>
+</div>
+<div id="ft">
+    <div class="ft_logo">
+        
+    </div>
+    <div class="ft_copyright">
+        Copyright 2010 LG CNS Development Technology Team. All Right Reserved.
+    </div>
+</div>
+<script type='text/javascript'>
+loadPage = new Rui.ui.LLoadPage();
+loadPage.show();
+</script>
+</body>
+</html>

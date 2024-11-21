@@ -1,0 +1,59 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+LDialog와 달리 내부적으로 iframe을 사용하여 별도의 구현 페이지로 구현할 수 있는 다이얼로그
+디자인은 LDialog와 동일하게 구현되어 사용자에게 일관성 있는 다이얼로그 화면을 제공할 수 있다.
+개발의 편리성을 위하여 제공된다.
+
+단, 내부적으로 iframe을 사용하므로 메모리릭에 주의해야 한다.
+
+샘플 경로 :
+<a href="./../sample/general/ui/container/frameDialogSample.html" target="_new">/rui/sample/general/ui/container/frameDialogSample.html</a> 
+</div>
+<div class="L-sample">
+sample: 기본 샘플
+<div class="L-code">
+var handleApply = function() {
+    this.submit(true);
+};
+
+var handleClose = function() {
+    this.cancel();
+};
+
+var frameDialog = new Rui.ui.LFrameDialog( {
+    id: 'test', 
+    width: 800,
+    height: 400,
+    modal: true,
+    visible: false,
+    buttons : [ 
+        { text:'Apply', handler:handleApply, isDefault:true },
+        { text:'Close', handler:handleClose } 
+    ]
+});
+
+frameDialog.render(document.body);
+
+var showBtn = new Rui.ui.LButton('showBtn');
+
+showBtn.on('click', function(e){
+   frameDialog.show();
+   frameDialog.setUrl('./../../../../sample/general/ui/buttonSample.html')
+});
+
+var checkBtn = new Rui.ui.LButton('checkBtn');
+
+checkBtn.on('click', function(e){
+    var frameWindow = frameDialog.getFrameWindow();
+    if(!frameWindow.dataSet || frameWindow.dataSet.getCount() < 1) {
+        Rui.alert('조회된 데이터가 없습니다.');
+        return;
+    }
+    Rui.alert(frameWindow.dataSet.getNameValue(0, 'col1'));
+});
+</div>
+</div>
+</div>
+
+</div>

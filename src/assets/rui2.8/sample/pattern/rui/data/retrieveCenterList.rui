@@ -1,0 +1,51 @@
+[{
+    "metaData": {
+        "idColumn": "id",
+        "stateColumn": "duistate",
+        "dataSetId": "centerDataSet",
+        "totalCount": 0
+    },
+    "records": [{
+        "code": "00001",
+        "name": "서울센터",
+        "chief": "김호준",
+        "address": "서울시 중구 신당동 23",
+        "phone": "02-733-0000"
+    }, {
+        "code": "00002",
+        "name": "경기센터",
+        "chief": "이영선",
+        "address": "경기도 수원시 팔달구 342-11",
+        "phone": "031-000-0000"
+    }, {
+        "code": "00003",
+        "name": "경북센터",
+        "chief": "최수부",
+        "address": "경상북도 구미시 원평동 11 ",
+        "phone": "054-000-0000"
+    }, {
+        "code": "00004",
+        "name": "대전센터",
+        "chief": "김학도",
+        "address": "대전시 중구 문화동 3212",
+        "phone": "042-000-0000"
+    }, {
+        "code": "00005",
+        "name": "전북센터",
+        "chief": "임성준",
+        "address": "전라북도 전주시 금양동 232-7",
+        "phone": "063-000-0000"
+    }, {
+        "code": "00006",
+        "name": "제주센터",
+        "chief": "김형미",
+        "address": "제주시 이도1동",
+        "phone": "064-000-0000"
+    }, {
+        "code": "00007",
+        "name": "광주센터",
+        "chief": "나한국",
+        "address": "광주시 동구 광산동 13",
+        "phone": "062-000-0000"
+    }]
+}]

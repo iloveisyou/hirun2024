@@ -1,0 +1,144 @@
+.L-fn-viewer h2 {
+    font-size: 12px;
+    color: #a5204d;
+}
+.L-focus-notification {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1000px;
+    width: 1000px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+}
+.L-focus-notification-wrap {
+    top: 0px;
+}
+.L-focus-notification-wrap.L-panel {
+    background-color: transparent;
+}
+.L-fn-top, .L-fn-left, .L-fn-right, .L-fn-bottom {
+    position: absolute;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+    z-index: 20000;
+    moz-opacity: 0.5;
+    opacity: .50;
+    filter: alpha(opacity=50);
+    background-color: #9C989B;
+}
+.L-fn-viewer .L-fn-topLine h2{
+    position: relative;
+    color: gray;
+    font-size: 1px;
+    line-height: 1px;
+    margin: 27px 0 10px 0 !important;
+    border-bottom: 1px solid #abadb3;
+}
+.L-fn-viewer .L-fn-bottomLine h2{
+    position: relative;
+    color: gray;
+    font-size: 1px;
+    line-height: 1px;
+    margin: 10px 0 !important;
+    border-bottom: 1px solid #abadb3;
+}
+.L-fn-buttons {
+	text-align: right;
+}
+.L-fn-buttun {
+    background-color: #fafafa;
+    border: 1px solid #bababa;
+    padding: 1px 6px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.L-fn-buttun:hover {
+	background-color: #2880b4;
+	border: 1px solid #bababa;
+	color: white;
+}
+.L-fn-buttun_over {
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+    width: 47px;
+    height: 23px;
+    cursor: pointer;
+    background-image: url(../../resources/images/notification/btn_ok_mouseover.png);
+}
+.L-fn-top {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+.L-fn-bottom {
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}
+.L-fn-left {
+    left: 0px;
+}
+.L-fn-right {
+    right: 0px;
+}
+.L-fn-viewer {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+    z-index: 20001;
+    padding: 22px;
+    background-color: #f8f8f8;
+    border: 1px solid #abadb3;
+}
+.L-fn-arrow {
+    background-image: url(../../resources/images/notification/fn-arrow.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: 0px 0px;
+    height: 40px;
+    position: absolute;
+    top: -11px;
+    left: 50px;
+    width: 100px;
+}
+.L-fn-arrow-down {
+    background-image: url(../../resources/images/notification/fn-arrow-down.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: 0px 0px;
+    height: 40px;
+    position: absolute;
+    bottom: -50px;
+    left: 50px;
+    width: 100px;
+}
+.L-fn-title{
+    position: relative;
+    background-image: url(../../resources/images/notification/tutorial_title.png);
+    height: 17px;
+    width: 83px;    
+}
+.L-fn-mask {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.L-fn-view {
+    position: relative;
+    min-height: 50px;
+    padding: 0 10px;
+    /*height: 100%;*/
+    width: 100%;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+}

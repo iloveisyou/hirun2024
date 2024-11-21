@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>DataSet Tests</title>
+<script type="text/javascript" src="../../../js/rui_base.js"></script>
+<script type="text/javascript" src="../../../js/rui_ext.js"></script>
+<script type='text/javascript' src='../../../resources/rui_config.js'></script>
+<script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+<link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+<script type="text/javascript" class="script-code">
+
+window.onerror = function(message, filename, lineno) {
+    var logMsg = 'message : ' + message + '\r\nfilename : ' + filename + '\r\nlineno : ' + lineno;
+    $C.log(logMsg, 'error', 'Global');
+};
+
+var bind = null;
+var dataSet = null;
+$C('!config').set('$.core.logger.show', [true]);
+$C(function() {
+    /*<b>*/
+    dataSet = $C.dataSet({
+        id:'dataSet',
+        fields:[
+            {id:'id'},
+            {id:'col1'},
+            {id:'col2'},
+            {id:'col3'},
+            {id:'col4'},
+            {id:'col5'},
+            {id:'col6'}
+        ]
+    });
+    
+    var dataSet2 = $C.dataSet({
+        id:'dataSet',
+        fields:[
+            {id:'id'},
+            {id:'col1'},
+            {id:'col2'},
+            {id:'col3'},
+            {id:'col4'},
+            {id:'col5'},
+            {id:'col6'}
+        ]
+    });
+    
+    dataSet.on('dataUpdated', function() {
+        $C.log('복사 완료 : ' + dataSet2.getCount(), 'time');
+    });
+    
+    dataSet.on('load', function(){
+        $C.log('복사 시작', 'time');
+        dataSet.batch(function(){
+            for(var i = 0, len = dataSet.getCount(); i < len; i++) {
+                var r = dataSet.getAt(i).clone();
+                dataSet2.add(r);
+            }
+        });
+    })
+   
+    // 데이터셋 로딩 시에는 비동기화(async)를 일반적으로 사용한다.(기본값 false)
+    dataSet.load({
+        url: './../../../sample/data/large/largeData10000.json'
+    });
+    
+    /*</b>*/
+    
+    /******************JsUnit용 소스 시작**********************/
+   //dataSet load event에 넣으면 작동되지 않는다.
+    setUpPageStatus = 'complete';
+    /******************JsUnit용 소스   끝**********************/
+});
+
+
+</script>
+</head>
+
+<body>
+    <h1>DataSet Basic Sample</h1>
+    <h2>LDataSet을 사용하는 기본 샘플</h2>
+    <div class="LblockLine"></div>
+    <div>
+        <p>데이터셋을 사용하는 기본적인 형태입니다.</p>
+        <p>데이터셋의 이벤트 등을 정의하여 이벤트와 연결된 여러 액션이 가능합니다.</>
+    </div>
+ 
+</body>
+</html>

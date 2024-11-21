@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="애니메이션(LAnim), 크기조정(from, to), 단위(em|%|en|ex|pt|in|cm|mm|pc)" />
+    <title>Fx Units</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #demo {
+            background: #ccc;
+            margin-bottom: 1em;
+            overflow: hidden;
+            width: 30em;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var anim = null;
+        Rui.onReady(function(){
+            /*<b>*/
+            anim = new Rui.fx.LAnim({
+                el: 'demo',
+                attributes: {
+                    width: {
+                        from: 30,
+                        to: 10,
+                        unit: 'em' // em|%|en|ex|pt|in|cm|mm|pc
+                    }
+                }
+            });
+            /*</b>*/
+            
+            Rui.get('demo-run').on('click', function(){
+                anim.animate();
+            });
+            
+            Rui.log("The example has finished loading; as you interact with it, you'll see log messages appearing here.", "info", "example");
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Fx Units</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>animation 효과의 움직임 단위(em|%|en|ex|pt|in|cm|mm|pc)를 지정하는 샘플</h2>
+            <div class="LblockDesc">
+                <p>애니메이션의 단위를 지정할 수 있습니다. 픽셀(px)외에 여러 단위를 지정할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div id="demo">
+                Demo
+            </div>
+        </div>
+        <button id="demo-run">
+            run
+        </button>
+    </div>
+</body>
+</html>

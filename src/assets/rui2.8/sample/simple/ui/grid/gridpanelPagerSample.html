@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Pager</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/ui/LPager.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+    
+    <style type="text/css">
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        var grid = null;
+        $C(function() {
+            /*********dataSet************/
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'date1', type: 'date' }
+            ]
+            });            
+
+            /*********columnModel************/
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.stateColumn(),
+                    $C.numberColumn(),
+                    { field: "col1", label: "Col1", editor: $C.textBox() },
+                    { field: "col2", sortable: true, align:'center' },
+                    { field: "col3", align: 'right', hidden:true },
+                    { field: "date1" , align:'center', renderer: $C.renderer.dateRenderer()}]
+            });
+            
+            /*********gridView************/
+            grid = $C.grid({
+                columnModel: columnModel,
+                dataSet:dataSet,
+                height:300
+            });
+            
+            /*********pager************/
+            var pager = $C.pager({
+                gridPanel : grid
+            });
+            
+            pager.on('beforeChangePage', function(e){
+                $C.log("current viewPageNumber : " + this.viewPageNumber + ", new viewPageNumber : " + e.viewPageNumber);
+            });
+            
+            pager.on('changedPage', function(e){
+                $C.log('page changed : ' + e.viewPageNumber);
+            });
+
+            pager.render();
+            
+            grid.render('defaultGrid');            
+
+            /*********buttons************/
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){                
+                dataSet.load({
+                    url: './../../../../sample/data/data-sample.json'
+                });
+            });            
+
+            $C('#newBtn').button();
+            $C('#newBtn').on("click", function(){
+                var row = dataSet.newRecord();
+                var record = dataSet.getAt(row);
+                record.set("col1", "Junee");
+                record.set("col2", "(02) 6363-7009");
+                record.set("col3", "R2");
+                record.set("date1", new Date());
+            });
+
+            $C('#insertBtn').button();
+            $C('#insertBtn').on("click", function(){
+                var row = dataSet.newRecord(0);
+                var record = dataSet.getAt(row);
+                record.set("col1", "Junee5");
+                record.set("col2", "(02) 6363-7009");
+                record.set("col3", "R1");
+                record.set("date1", new Date());
+            });
+
+            $C('#updateBtn').button();
+            $C('#updateBtn').on("click", function(){
+                var record = dataSet.getAt(3);
+                record.set("col3", "R2");
+            });
+
+            $C('#undoBtn').button();
+            $C('#undoBtn').on("click", function(){
+                dataSet.undo(3);
+            });
+            
+            $C('#undoAllBtn').button();
+            $C('#undoAllBtn').on("click", function(){
+                dataSet.undoAll();
+            });
+            
+            $C('#deleteBtn').button();
+            $C('#deleteBtn').on("click", function(){
+                dataSet.removeAt(2);
+            });
+            
+            $C('#clearBtn').button();
+            $C('#clearBtn').on("click", function(){
+                dataSet.clearData();
+            });
+            
+            $C('#filterBtn').button();
+            $C('#filterBtn').on("click", function(){
+                dataSet.filter(function(id, record){
+                    return record.get("col3") == "R2"
+                });
+            });
+            
+            $C('#syncDataSetBtn').button();
+            $C('#syncDataSetBtn').on("click", function(){
+                grid.setSyncDataSet(true);
+            });
+            
+            $C('#unSyncDataSetBtn').button();
+            $C('#unSyncDataSetBtn').on("click", function(){
+                grid.setSyncDataSet(false);
+            });
+            
+            $C('#sortBtn').button();
+            $C('#sortBtn').on("click", function(){
+                dataSet.sortField("col1");
+            });
+            
+            $C('#columnShowBtn').button();
+            $C('#columnShowBtn').on("click", function(){
+                columnModel.getColumnById('col3').setHidden(false);
+            });
+
+            $C('#columnHideBtn').button();
+            $C('#columnHideBtn').on("click", function(){
+                columnModel.getColumnById('col3').setHidden(true);
+            });
+            
+            $C('#nextPageBtn').button();
+            $C('#nextPageBtn').on("click", function(){
+                pager.moveNextPage();
+            });
+            
+            searchBtn.click();
+
+        });
+            
+        </script>
+
+
+</head>
+<body>
+    <h1>gridpanel Pager Sample</h1>
+    <h2>LGridPanel 에의 Page 적용에 대한 기본적인 Paging 샘플(grid)</h2>
+<div id='bd'>
+    <button type="button" id="searchBtn" >Search</button>
+    <button type="button" id="newBtn" >new</button>
+    <button type="button" id="insertBtn" >insert</button>
+    <button type="button" id="updateBtn" >update</button>
+    <button type="button" id="undoBtn" >undo</button>
+    <button type="button" id="undoAllBtn" >undoAll</button>
+    <button type="button" id="deleteBtn" >delete</button>
+    <button type="button" id="clearBtn" >clear</button>
+    <button type="button" id="filterBtn" >filter</button>
+    <button type="button" id="syncDataSetBtn" >syncDataSet</button>
+    <button type="button" id="unSyncDataSetBtn" >unSyncDataSet</button>
+    <button type="button" id="sortBtn" >sort</button>
+    <button type="button" id="columnShowBtn" >column show</button>
+    <button type="button" id="columnHideBtn" >column hide</button>
+    <button type="button" id="nextPageBtn" >next page</button>
+
+    <div class="LblockMarkupCode">
+        <div id="defaultGrid"></div>
+    </div>
+</div>
+</body>
+

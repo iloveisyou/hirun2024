@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 불규칙 Scroll, BR 데이터" />
+    <title>Irregular Rows Scrolling</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+            *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                focusFirstRow: -1,
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', sortable: true, vMerge: true },
+                    { field: 'col2', align: 'center', width: 120, vMerge: true },
+                    { field: 'code', align: 'center' },
+                    { field: 'col3', align: 'right', hMerge: true, width: 80 },
+                    { field: 'col5', align: 'center', hMerge: true },
+                    { field: 'col6', label: 'Col6', width: 200, editor: new Rui.ui.form.LTextArea(), renderer: function(value){
+                    	return value ? value.replace(/\n/g, '<br>') : value;
+                    } },
+                    { field: 'col8', label: 'Col8', align: 'right', sortable: true },
+                    { field: 'date1' , align: 'center' },
+                    { id: 'btn', label: 'Button', width: 150 }
+                ]
+            });
+            var issueGrid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 150
+            });
+            
+            var fixedGrid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                /*<b>*/
+                viewConfig: {
+                    //스크롤 기능을 보강하는 irregularScroll 기능은 반드시 필요한 경우에만 사용할것 (성능 저하 발생)
+                    irregularScroll: true
+                    //irregularField: 'col6'
+                },
+                /*</b>*/
+                height: 150
+            });
+
+            issueGrid.render('issueGrid');
+            fixedGrid.render('fixedGrid');
+
+            /********************
+             * 버튼 선언 및 이벤트
+            ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/dataBr.json'
+                });
+            });
+            
+            dataSet.on('load', function(e) {
+                dataSet.setRow(dataSet.getCount()-1);
+            });
+
+            var moveScrollTopBtn = new Rui.ui.LButton('moveScrollTopBtn');
+            moveScrollTopBtn.on('click', function(){
+                dataSet.setRow(0);
+            });
+            
+            var moveScrollLastBtn = new Rui.ui.LButton('moveScrollLastBtn');
+            moveScrollLastBtn.on('click', function(){
+                dataSet.setRow(dataSet.getCount()-1);
+            });
+            
+            loadPage.hide();
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <h1>Irregular Rows Scrolling</h1>
+    <h2>그리드(Grid)의 고르지 못한 행이 있는경우의 스크롤(Scroll) 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>그리드(Grid)의 데이터에 &lt;BR&gt;등의 태그를 사용하여 행의 높이가 불규칙 적일 때에도 정상적으로 스크롤(Scroll)이 동작합니다.</p>
+        <p>해당 속성 사용시 그리드 reRender로 인한 성능 저하가 발생할 수 있으므로, 반드시 필요한 경우에만 사용하여야 합니다.</p>
+        <p>
+         기본 그리드뷰어인 LBufferGridView에서 irregularScroll 기능을 사용하지 않고, 몇가지 조건에 맞다면 LGridView 사용하는것이 좋습니다.
+         <BR>이는 irregularScroll의 경우 스크롤 제어를 위한 스크립트 처리 비용이 높아 성능 저하가 발생하며, 부자연스러운 스크롤 동작이 발생할수 있는데 반해
+         <BR>LGridView의 경우 브라우저가 생성해내는 스크롤을 직접 사용하므로 빠르고 매끄럽기 때문입니다.
+         <BR>다만 LGridView의 경우 대량건의 데이터 처리에 적합하지 않고, 소계, 합계 등 일부 기능을 지원 하지 않습니다.
+         </p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >Load</button>
+            <button type="button" id="moveScrollTopBtn" >move Top</button>
+            <button type="button" id="moveScrollLastBtn" >move Last</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div class="LblockGrid">
+                <ul>
+                    <li>
+                        <h4>irregularScroll 속성 비적용 그리드 - 그리드의 하단의 마지막행이 약간 잘림.</h4>
+                        <div id="issueGrid"></div>
+                    </li>
+                    <li>
+                        <h4>irregularScroll 적용 그리드 - 그리드 하단의 마지막행 전체가 정상적으로 표시됨.</h4>
+                        <div id="fixedGrid"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id='showData'>
+        </div>
+    </div>
+<script type="text/javascript">
+var loadPage = new Rui.ui.LLoadPage();
+loadPage.show();
+</script>
+</body>
+</html>

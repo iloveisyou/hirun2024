@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="그리드 동적 생성, 그리드 멀리 로딩, 그리드 랜더링 성능" />
+    <title>Many Grid Performance</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            Rui.log('onReady start', 'timer');
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var reapeatNm = 40;
+            var htmlStr = '';
+            for(var i = 0 ; i < reapeatNm; i++) {
+                htmlStr += '<div id="grid'+ ((i + 1) + '').lPad('0', 2) + '">'+ (i+1) +'</div>';
+            }
+
+            Rui.get('gridList').html(htmlStr);
+            
+            var dataSetList = [];
+            for(var i = 0 ; i < reapeatNm; i++) {
+                var idx = ((i + 1) + '').lPad('0', 2);
+                var dsId = 'dataSet' + idx;
+                var dataSet = new Rui.data.LJsonDataSet({
+                    id: dsId,
+                    fields: [
+                        { id: 'codeGroup' },
+                        { id: 'code' },
+                        { id: 'value' }
+                    ],
+                    params: dsId + '=0187'
+                });
+
+                dataSetList.push(dataSet);
+
+                var columnModel = new Rui.ui.grid.LColumnModel({
+                    columns: [
+                        new Rui.ui.grid.LStateColumn(),
+                        new Rui.ui.grid.LSelectionColumn(),
+                        new Rui.ui.grid.LNumberColumn(),
+                        { field: 'codeGroup', label: 'codeGroup', sortable: true, editor: new Rui.ui.form.LTextBox()},
+                        { field: 'code', label: 'code', sortable: true, editor: new Rui.ui.form.LTextBox()},
+                        { field: 'value', label: 'value', sortable: true, editor: new Rui.ui.form.LTextBox()}
+                        ]
+                });
+
+                var grid = new Rui.ui.grid.LGridPanel({
+                    columnModel: columnModel,
+                    dataSet:dataSet,
+                    autoWidth: true,
+                    // LGridStatusBar는 샘플용으로 사용
+                    footerBar: new Rui.ui.grid.LGridStatusBar(),
+                    height:100
+                });
+
+                grid.render('grid'+ idx);
+            }
+            
+            var dm = new Rui.data.LDataSetManager();            
+            
+            dm.on('success', function(e) {
+                // 페이지에서는 log가 아니라 alert을 써야 함.
+                alert(Rui.getMessageManager().get('$.base.msg100'));
+            });
+
+            var params = '';
+            for (var i = 0; i < dataSetList.length; i++) {
+                var currParams = dataSetList[i].params;
+                if (typeof currParams == 'object') {
+                    params += Rui.util.LObject.serialize(currParams) + '&';
+                } else { 
+                    params += currParams + '&';
+                }
+            }
+            
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dm.loadDataSet({
+                    dataSets: dataSetList,
+                    url: './../../../../sample/data/gridMultipleLoad.json',
+                    params: params
+                });
+            });
+            Rui.log('onReady end', 'timer');
+            // cpu i5, ram 3기가 기준
+            // 초기 랜더링
+            // 크롬 기준 : 898ms
+            // ie9 기준 : 2460ms
+            // ie7 기준 : 3316ms
+            // 데이터셋 로딩
+            // 크롬 기준 : 20ms
+            // ie9 기준 : 18ms
+            // ie7 기준 : 34ms
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Many Grid Performance</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>여러개의 그리드(Grid)를 동시에 멀티로 로딩 할 경우의 성능 입니다.</h2>
+            <div class="LblockDesc">
+              <p>다수의 그리드(Grid)에서 데이터를 동시 로딩할 경우에도 빠르게 동작합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton">
+            <button type="button" id="searchBtn" >Search</button>
+        </div>
+        <div class="LblockMarkupCode" id="gridList">
+        </div>
+    </div>
+</body>
+</html>

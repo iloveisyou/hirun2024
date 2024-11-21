@@ -1,0 +1,258 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Home</title>
+    
+    <script type="text/javascript" src="./../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../js/rui_grid.js"></script>
+        
+    <script type="text/javascript" src="./../plugins/ui/layout/rui_layout.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../plugins/ui/layout/rui_layout.css" />
+    <script type="text/javascript" src="./../plugins/tab/rui_tab.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../plugins/tab/rui_tab.css" />
+    <script type="text/javascript" src="./../plugins/ui/menu/rui_menu.js"></script>
+    <script type="text/javascript" src="./../plugins/ui/tree/rui_tree.js"></script>  
+    <link rel="stylesheet" type="text/css" href="./../plugins/ui/tree/rui_tree.css" />    
+    <script type="text/javascript" src="./../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../resources/rui.css" />
+    <style type="text/css">
+        .L-layout .L-layout-unit div.L-layout-bd {
+            background-color: #fff;
+        }
+        
+        #ifr_center {
+            width: 100%;
+            height: 100%;
+        } #div_center {
+            width: 100%;
+            height: 100%;
+        } #tree_title {
+            text-align: center;
+            padding: 12px 0px 11px 0px;
+            margin: 0px;
+            color: #165cb3;
+            font-size: 14px;
+            font-weight: bold;
+        } #div_tree {
+            margin: 0px 0px 0px 4px;
+        }
+        
+        .L-layout .L-layout-unit div.L-layout-bd-nohd {
+            border-top:0px solid #98AAB1;
+        }
+        
+        .L-navset .L-nav, .L-navset .L-navset-top .L-nav {
+            border-width:0 0 0;
+        }
+        .L-layout .L-layout-unit div.L-layout-bd {
+            border-right:0px solid #808080;
+        }
+        
+        .L-ul-slidemenu {
+            background:none repeat scroll 0 0 #fff;
+        }
+        
+        .L-ul-slidemenu .L-ul-li-depth-0 {
+            background-image: none;
+        }
+        
+        .L-ul-slidemenu .L-ul-li-div-depth-0 {
+            background-color: #dee7f7;
+            border-top:1px solid #98AAB1;
+        }
+    </style>
+    <script type="text/javascript">
+        var dataSet = null;
+        var tabView = null;
+        var slide = null;
+        var layout = null;
+        var tree = null;
+        var fields = null;
+        var webRootPath = "";
+        //************ Dom ready ***********
+        Rui.onReady(function(){
+            webRootPath = Rui.getConfig().get("$.core.contextPath")[0];
+            //***********DataSet*****************
+            dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [{
+                    id: 'menuId',
+                    type: 'number'
+                }, {
+                    id: 'seq',
+                    type: 'number'
+                }, {
+                    id: 'parentMenuId',
+                    type: 'number'
+                }, {
+                    id: 'name'
+                }, {
+                    id: 'url'
+                }, {
+                    id: 'desc'
+                }]
+            });
+            
+            //**************Layout******************
+            layout = new Rui.ui.layout.LLayoutManager({
+                units: [{
+                    position: 'top',
+                    height: 90,
+                    body: 'div_top',
+                    scroll: false,
+                    resize: false,
+                    gutter: "0px"
+                }, {
+                    position: 'left',
+                    width: 224,
+                    body: 'div_left',
+                    scroll: true,
+                    resize: false,
+                    gutter: "0px"
+                }, {
+                    position: 'center',
+                    body: 'div_center',
+                    scroll: false,
+                    resize: false,
+                    gutter: "0px"
+                }, {
+                    position: 'bottom',
+                    height: 45,
+                    body: 'div_bottom',
+                    scroll: false,
+                    resize: false,
+                    gutter: "0px"
+                }]
+            });
+            layout.render();
+            //****************TreeView*********************
+            tree = new Rui.ui.tree.LTreeView({
+                dataSet: dataSet
+            });
+            
+            // Trees with TextNodes will fire an event for when the label is clicked:
+            tree.on("labelClick", function(e){
+                var url = this.dataSet.get(e.node.getRecordId()).get('url');
+                ChangeURL(url);
+            });
+            
+            tree.render("div_tree");
+            
+            //***********TabView(Top Menu)*****************
+            fields = {
+                rootValue: null,
+                parentId: 'parentMenuId',
+                label: 'name',
+                order: 'seq'
+            };
+            tabView = new Rui.ui.tab.LTabView({
+                dataSet: dataSet,
+                fields: fields
+            });
+            tabView.render("div_top_menu");
+            //tab click시 하위 메뉴 설정
+            tabView.on("activeTabChange", function(){
+                BindSubMenu();
+            });
+            
+            //**********SlideMenu***************            
+            slide = new Rui.ui.menu.LSlideMenu({
+                dataSet: dataSet
+            });
+            
+            slide.on("nodeClick", function(e){
+                var recordId = e.node.getRecordId();
+                ChangeURL(dataSet.get(recordId).get('url'));
+            });
+            
+            slide.render("div_slide");
+            
+            //load전에 정의되어 있어야 한다.
+            dataSet.on('load', function(e){
+                BindSubMenu();
+            });
+            
+            dataSet.load({
+                url: "../resources/data/menu.json",
+                method: "get"
+            });
+        });
+        
+        //******************Custom function**************************        
+        
+        function BindSubMenu(){
+            //활성화된 tab에 binding된 record의 id로 dataset을 조회한다.
+            //alert(tabView.activeTab);
+            var _active_tab = tabView.get("activeTab");
+            if (_active_tab) {
+                var r = dataSet.get(_active_tab.get("recordId"));
+                var _rootValue = r.get('menuId');
+                //slide menu 뿌려주기.
+                slide.setRootValue(_rootValue);
+                //tree 설정
+                tree.setRootValue(_rootValue);
+            }
+        }
+        
+        //iframe url 변경
+        function ChangeURL(url){
+            if (url != "") {
+                var ifr = Rui.get("ifr_center");
+                ifr.set("src", webRootPath + url);
+            }
+        }
+        
+        function ToggleMenu(obj){
+            var sm = Rui.get("div_slide_menu");
+            var t = Rui.get("div_tree_menu");
+            
+            if (obj.innerHTML == "Tree Menu") {
+                sm.setStyle("display", "none");
+                t.setStyle("display", "block");
+                obj.innerHTML = "Slide Menu";
+            }
+            else {
+                sm.setStyle("display", "block");
+                t.setStyle("display", "none");
+                obj.innerHTML = "Tree Menu";
+            }
+        }
+        
+        function HideMenu(){
+            layout.getUnitByPosition('left').toggle();
+        }
+    </script>
+</head>
+<body>
+    <div id="div_top">
+        <div style="float:left;">
+            <img src="./../resources/images/rich-ui.gif" alt="logo" style="height: 48px; width: 222px;"/>
+        </div>
+        <div id="div_top_menu" style="padding-top: 55px;">
+        </div>
+    </div>
+    <div id="div_left">
+        <div style="text-align: center;">
+            <a href="#" onclick="ToggleMenu(this);">Tree Menu</a>
+            | <a href="#" onclick="HideMenu();">Hide Menu</a>
+        </div>
+        <div id="div_slide_menu">
+            <div id="div_slide"></div>
+        </div>
+        <div id="div_tree_menu" style="display: none;">
+            <div id="div_tree">
+            </div>
+        </div>
+    </div>
+    <div id="div_center">
+        <iframe id="ifr_center" frameborder="0" scrolling="auto">
+        </iframe>
+    </div>
+    <div id="div_bottom">
+        <a href="./../../jsunit/testRunner.html?showTestFrame=true" target="_new"></a>
+    </div>
+</body>
+</html>

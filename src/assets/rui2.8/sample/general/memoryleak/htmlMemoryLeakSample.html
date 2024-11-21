@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>html Memory leak</title>
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    
+    <style type="text/css" >
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            //document.getElementById('defaultGrid').childNode();
+            document.getElementById('aaa').innerHTML = '';
+        });
+            
+        </script>
+
+</head>
+<body>
+    <h1>html memory leak test</h1>
+    <h2>html memory leak test 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div> html의 메모리릭 체크 샘플</div>
+    <div id='bd'>
+    <div class="LblockButton" >
+        <button type="button" id="setStartBtn" >start</button>
+        <button type="button" id="setEndBtn" >end</button>
+    </div>
+    
+    <div class="LblockMarkupCode">
+        <div id="aaa" class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+    <div class="LblockButton" >
+        <button type="button" id="searchBtn" >Search</button>
+    </div>
+    <div id='showData'>
+    </div>
+</div>
+</body>
+</html>

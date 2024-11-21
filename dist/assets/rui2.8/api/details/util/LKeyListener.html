@@ -1,0 +1,23 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+Ctrl, Shift, Alt등과 함께 조합된 키 입력을 모니터하여 동작을 실행할 수 있다. 
+<a href="../sample/general/ui/container/keylistenerSample.html">/rui/sample/general/ui/container/keylistenerSample.html</a>
+</div>
+<div class="L-sample">
+sample: Ctrl + Y 버튼을 클릭하면 새로운 윈도우를 열어 페이지를 이동시킨다.
+<div class="L-code">
+var keyListener = new Rui.util.LKeyListener(document, {
+        ctrl: true,
+        keys: 89 //Y
+    }, {
+        fn: function(){
+             window.open('http://www.dev-on.com');
+        }
+    }
+);
+</div> 
+</div>
+</div>
+
+</div>

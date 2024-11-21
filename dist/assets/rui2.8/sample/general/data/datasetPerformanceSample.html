@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="데이터셋 성능, dataset performance" />
+    <title>Loading Performance</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+        var startTime;
+        Rui.onReady(function() {
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'date' },
+                { id: 'monthSum', type: 'float' },
+                { id: 'balance', type: 'float' },
+                { id: 'assets', type: 'float' }
+            ]
+            });
+            
+            dataSet.on('load', function(){
+                var compTime = new Date() - startTime;
+                Rui.alert('data load end : ' + compTime + '(ms)');
+            });
+
+            var searchBtn = new Rui.ui.LButton("searchBtn");
+            searchBtn.on("click", function(){
+                startTime = new Date();
+                Rui.alert({
+                    text: 'data load start',
+                    handler: function() {
+                        /*<b>*/
+                        dataSet.load({
+                            url: './../../../sample/data/large/largeData' + Rui.get('dataCount').getValue() + '.txt'
+                        });
+                        /*</b>*/
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Loading Performance</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>데이터셋(dataset)의 성능을 체크하는 샘플</h2>
+            <div class="LblockDesc">
+		        <p>데이터셋(DataSet)으로 대량의 데이터를 로딩하는 성능을 테스트합니다.</p>
+		        <p>데이터 로딩에 소요되는 시간을 확인하기 위해서는 디버그 콘솔을 확인합니다.</p>
+		        <p>화면 조회 성능과 연관되는 샘플은 그리드(Grid)의 편집(Edit) Performance를 참고하십시오.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div>
+                <p>아래 콤보 선택 후 버튼을 클릭하여 수행 결과를 확인 하실 수 있습니다.</p>
+            </div>
+            <select id="dataCount">
+                <option value="1000">1000건</option>
+                <option value="10000">10000건</option>
+                <option value="50000">50000건</option>
+            </select>
+            <div class="LblockButton">
+                <button type="button" id="searchBtn" >Search</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

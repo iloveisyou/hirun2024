@@ -1,0 +1,12 @@
+[{
+    "metaData": {
+        "datasetId":"dataSet"
+    },
+    "records": [
+        { "value": "G001", "text": "그룹1" },
+        { "value": "G002", "text": "그룹2" },
+        { "value": "G003", "text": "그룹3" },
+        { "value": "G004", "text": "그룹4" },
+        { "value": "G005", "text": "그룹5" }
+    ]
+}]

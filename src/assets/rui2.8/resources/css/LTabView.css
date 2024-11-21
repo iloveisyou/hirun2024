@@ -1,0 +1,271 @@
+/* LTabView
+------------------------------*/
+/******* default space between tabs *********/
+.L-navset.L-disabled .L-masked-message {
+	display:none;
+}
+.L-navset .L-nav-bottom li,
+.L-navset .L-nav li,
+.L-navset .L-navset-top .L-nav li,
+.L-navset .L-navset-bottom .L-nav li {
+    margin:0 0.5em 0 0; /* horizontal tabs */
+}
+.L-navset .L-navset-left .L-nav-bottom li,
+.L-navset .L-navset-right .L-nav-bottom li,
+.L-navset .L-navset-left .L-nav li,
+.L-navset .L-navset-right .L-nav li {
+    margin:0 0 0.5em; /* vertical tabs */
+}
+.L-navset .L-content-bottom .L-nav-hidden,
+.L-navset .L-content .L-nav-hidden {
+    position:absolute;
+    left:-999999px;
+    visibility:hidden;
+    display:none; 
+}
+.L-navset .L-nav-bottom .disabled,
+.L-navset .L-nav .disabled {
+	background-color: #BCBDC0;
+}
+
+/********* default width for side tabs **********/
+.L-navset .L-navset-left{ 
+    padding:0 0 0 6em; 
+} /* map to nav width */
+.L-navset .L-navset-right { 
+    padding:0 6em 0 0; 
+} /* ditto */
+.L-navset .L-navset-left .L-nav-bottom,
+.L-navset .L-navset-right .L-nav-bottom,
+.L-navset .L-navset-left .L-nav,
+.L-navset .L-navset-right .L-nav { 
+	width:6em;
+}
+.L-navset .L-navset-top,
+.L-navset .L-navset-bottom {
+    padding:auto;
+}
+.L-navset .L-navset-top .L-nav-bottom,
+.L-navset .L-navset-bottom .L-nav-bottom,
+.L-navset .L-navset-top .L-nav,
+.L-navset .L-navset-bottom .L-nav {
+    width:auto;
+}
+
+/************ core ************/
+.L-navset .L-nav-bottom, 
+.L-navset .L-nav-bottom li,
+.L-navset .L-nav, 
+.L-navset .L-nav li {
+    margin:0;
+    padding:0;
+    list-style:none;
+    white-space:nowrap;
+}
+.L-navset li em { 
+	font-style:normal; 
+}
+.L-navset {
+    position:relative;
+    zoom:1;
+    overflow:auto;
+}
+.L-navset .L-content-bottom,
+.L-navset .L-content{
+    overflow:auto;
+}
+.L-navset .L-nav-bottom,
+.L-navset .L-nav {
+	display: inline-block;
+	position: relative;
+}
+.L-nav-scroll {
+    position: relative;
+    overflow: hidden;
+}
+.L-nav-spin-left.enable {
+    position: absolute;
+	display: inline-block;
+    width: 20px;
+    height: 100%;
+    left: 0px;
+    background: transparent url(./../../resources/images/tab/left.png) no-repeat left;
+    cursor: pointer;
+}
+.L-nav-spin.enable {
+	position: relative;
+    overflow: hidden;
+    margin: 0 20px;
+}
+.L-nav-spin-right.enable {
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 100%;
+    right: 0px;
+    top: 0px;
+    background: transparent url(./../../resources/images/tab/right.png) no-repeat right;
+    cursor: pointer;
+}
+.L-navset .L-content-bottom,
+.L-navset .L-content-bottom div,
+.L-navset .L-content,
+.L-navset .L-content div {
+    zoom:1;
+}
+.L-navset .L-content-bottom:after,
+.L-navset .L-content:after {
+    content:'';
+    display:block;
+    clear:both;
+}
+.L-navset .L-nav-bottom li,
+.L-navset .L-navset-top .L-nav-bottom li, 
+.L-navset .L-navset-bottom .L-nav-bottom li,
+.L-navset .L-nav li,
+.L-navset .L-navset-top .L-nav li, /* in case nested */
+.L-navset .L-navset-bottom .L-nav li {
+    display:inline-block;
+    display:-moz-inline-stack;
+    *display:inline; /* IE */
+    vertical-align:bottom; /* safari: for overlap */
+    cursor:pointer; /* gecko: due to -moz-inline-stack on anchor */
+    zoom:1; /* IE: kill space between horizontal tabs */
+}
+.L-navset .L-navset-left .L-nav-bottom li, 
+.L-navset .L-navset-right .L-nav-bottom li,
+.L-navset .L-navset-left .L-nav li, 
+.L-navset .L-navset-right .L-nav li {
+    display:block;
+}
+.L-navset .L-nav-bottom a,
+.L-navset .L-nav a {
+    outline:0; /* gecko: keep from shifting */
+    position:relative; 
+ } /* IE: to allow overlap */
+.L-navset .L-nav-bottom li a,
+.L-navset .L-navset-top .L-nav-bottom li a,
+.L-navset .L-navset-bottom .L-nav-bottom li a,
+.L-navset .L-nav li a,
+.L-navset .L-navset-top .L-nav li a,
+.L-navset .L-navset-bottom .L-nav li a {
+    display:block;
+    display:inline-block;
+    vertical-align:bottom; /* safari: for overlap */
+    zoom:1;
+}
+.L-navset .L-navset-left .L-nav-bottom li a, 
+.L-navset .L-navset-right .L-nav-bottom li a,
+.L-navset .L-navset-left .L-nav li a, 
+.L-navset .L-navset-right .L-nav li a {
+    display:block;
+}
+.L-navset-bottom .L-nav-bottom li a,
+.L-navset-bottom .L-nav li a {
+    vertical-align:text-top; /* for inline overlap (reverse for Op border bug) */
+}
+.L-navset .L-nav-bottom li a em,
+.L-navset .L-navset-top .L-nav-bottom li a em,
+.L-navset .L-navset-bottom .L-nav-bottom li a em,
+.L-navset .L-nav li a em,
+.L-navset .L-navset-top .L-nav li a em,
+.L-navset .L-navset-bottom .L-nav li a em { 
+    display:block; 
+}
+/* position left and right oriented tabs */
+.L-navset .L-navset-left .L-nav-bottom,
+.L-navset .L-navset-right .L-nav-bottom,
+.L-navset .L-navset-left .L-nav,
+.L-navset .L-navset-right .L-nav {
+   position:absolute;
+   z-index:1; 
+}
+.L-navset .L-navset-top .L-nav-bottom,
+.L-navset .L-navset-bottom .L-nav-bottom,
+.L-navset .L-navset-top .L-nav,
+.L-navset .L-navset-bottom .L-nav {
+    position:static;
+}
+.L-navset .L-navset-left .L-nav-bottom,
+.L-navset .L-navset-left .L-nav { 
+    left:0; 
+    right:auto; 
+}
+.L-navset .L-navset-right .L-nav-bottom,
+.L-navset .L-navset-right .L-nav { 
+	right:0;
+    left:auto;
+}
+
+/*********** border **********/
+
+.L-navset .L-nav li a, 
+.L-navset .L-content {
+    border:1px solid #000;  /* label and content borders */
+    border-top-color: #000000;
+}
+.L-navset .L-nav-bottom li a, 
+.L-navset .L-content-bottom {
+    border:1px solid #000;  
+    border-bottom-color: #000000;
+}
+.L-navset .L-nav .selected a, 
+.L-navset .L-nav a:hover, 
+.L-navset .L-content {
+    /*background-color:#f6f7ee; *//* active tab, tab hover, and content bgcolor */
+}
+.L-navset .L-nav-bottom li em,
+.L-navset .L-nav li em { 
+	padding:.5em; 
+} /* tab padding */
+
+/* defaults to orientation "top" */
+.L-navset .L-nav .selected a {
+    border-bottom-width:0; /* no bottom border for active tab */
+    padding-bottom:1px; /* to match height of other tabs */
+}
+.L-navset .L-nav-bottom .selected a {
+    border-top-width:0; 
+    padding-top:1px; 
+}
+.L-navset .L-content {
+    margin-top:-1px; /* for active tab overlap */
+}
+.L-navset .L-content-bottom {
+    margin-bottom:-1px; 
+}
+/* overrides for other orientations */
+.L-navset-bottom .L-nav .selected a {
+    border-width:0 1px 1px; /* no top border for active tab */
+    padding:1px 0 0; /* to match height of other tabs */
+}
+.L-navset-bottom .L-nav-bottom .selected a {
+    border-width:1px 1px 0; 
+    padding:0 0 1px; 
+}
+.L-navset-bottom .L-content {
+    margin:0 0 -1px; /* for active tab overlap */
+}
+.L-navset-bottom .L-content-bottom {
+    margin:-1px 0 0; 
+}
+.L-navset-left .L-nav-bottom li.selected a,
+.L-navset-left .L-nav li.selected a {
+    border-width:1px 0 1px 1px; /* no right border for active tab */
+    padding:0 1px 0 0; /* to match width of other tabs */
+}
+.L-navset-left .L-content {
+    margin:0 0 0 -1px; /* for active tab overlap */
+}
+.L-navset-left .L-content-bottom {
+    margin:0 -1px 0 0; 
+}
+.L-navset-right .L-nav-bottom li.selected a,
+.L-navset-right .L-nav li.selected a {
+    border-width:1px 1px 1px 0; /* no left border for active tab */
+    padding:0 0 0 1px; /* to match width of other tabs */
+}
+.L-navset-right .L-content-bottom,
+.L-navset-right .L-content {
+    margin:0 -1px 0 0; /* for active tab overlap */
+}

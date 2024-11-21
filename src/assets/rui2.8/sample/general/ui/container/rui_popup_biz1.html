@@ -1,0 +1,120 @@
+<!--
+ajax 방식으로 페이지를 로딩하므로 html, head, body 태그들은 생성하지 않는다.
+ajax 방식으로 로딩할 경우 타 프레임워크는 해당 페이지에서 javascript나 css가 HTML 내용만 메인 페이지에 로딩될 뿐 모든 브라우저에서 정상적으로 작동하지 않는다.
+RUI은 appendChildByAjax 메소드가 위 기능을 동작 할 수 있게 구현되었다.
+구현시 반드시 아래 HTML의 dom id나 콤포넌트 id는 런타임시 부모 페이지나 현재 페이지에서 유일해야 한다. (중복되면 안된다.)
+-->
+<style type="text/css">
+</style>
+<script type="text/javascript" class="script-code">
+    Rui.onReady(function() {
+        
+        var biz1QueryCombo = new Rui.ui.form.LCombo({
+            applyTo: 'biz1QueryCombo',
+            url: './../../../../sample/data/code.json'
+        });
+        
+        /*******************
+         * 변수 및 객체 선언
+         *******************/
+        var dataSet = new Rui.data.LJsonDataSet({
+            id: 'dataSet',
+            fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'date1', type: 'date' }
+            ]
+        });
+    
+        var columnModel = new Rui.ui.grid.LColumnModel({
+            columns: [
+                new Rui.ui.grid.LStateColumn(),
+                new Rui.ui.grid.LNumberColumn(),
+                { field: 'col1', label: 'Col1', sortable:true, width:500 },
+                { field: 'col2', align:'center' , renderer: function(v){
+                    return '<a href=\'javascript:testFunction(\'aa bb cc\');\'>' + v + '</a>';
+                }},
+                { field: 'col3', align: 'right', hidden:true },
+                /*<b>*/
+                { id:'btn', field:'col1', label:'Button', renderer: function(val, p, record, row, i){
+                    var btnHtml = '';
+                    btnHtml += '<button type=\'button\' class=\'L-grid-button\'>수정</button>';
+                    btnHtml += '';
+                    return btnHtml;
+                }}
+                /*</b>*/
+            ]
+        });
+    
+        var grid = new Rui.ui.grid.LGridPanel({
+            columnModel: columnModel,
+            dataSet: dataSet,
+            autoWidth: true,
+            height: 350
+        });
+    
+        grid.render('biz1DefaultGrid');
+        
+        grid.on('cellDblClick', function(e){
+            dialog.submit();
+        });
+    
+        /********************
+         * 버튼 선언 및 이벤트
+         ********************/
+        var biz1SearchBtn = new Rui.ui.LButton('biz1SearchBtn');
+        biz1SearchBtn.on('click', function(){
+            var params = Rui.util.LDom.getFormValues('LblockSearch');
+            dataSet.load({
+                url: './../../../../sample/data/data.json',
+                params: params
+            });
+        });
+        
+        var dialog = getBiz1Dialog();
+        
+        dialog.on('validate', function(e) {
+            var row = dataSet.getRow();
+            if(row < 0) {
+                alert('선택된 항목이 없습니다.');
+                return false;
+            }
+        });
+        
+        dialog.on('submit', function(e) {
+            dialog.selectHandler(dataSet.getAt(dataSet.getRow()).getValues());
+        });
+        
+        dialog.initData = function(params) {
+            params = Rui.applyIf(params, {
+                biz1QueryCombo: ''
+            });
+            
+            biz1QueryCombo.setValue(params.biz1QueryCombo);
+        }
+        
+        dialog.initData(dialog.initParams);
+        
+        biz1SearchBtn.click();
+    });
+</script>
+<div >
+    <div class="LblockMarkupCode">
+        <div>
+            <table id="LblockSearch">
+            <tr>
+                <th>조건</th>
+                <td><div id="biz1QueryCombo"></div></td>
+            </tr>
+                
+            </table>
+            <div class="LblockButton">
+                <button id="biz1SearchBtn" >Search</button>
+            </div>
+            <div class="LblockGrid">
+                <div id="biz1DefaultGrid"></div>
+            </div>
+        </div>
+    </div>
+</div>

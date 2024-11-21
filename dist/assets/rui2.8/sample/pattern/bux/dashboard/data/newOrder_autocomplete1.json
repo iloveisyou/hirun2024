@@ -1,0 +1,24 @@
+[
+    {
+        "metaData": {
+            "dataSetId": "dataSet1"
+        },
+        "records": [
+            {"text":"TV_47LM6200" },
+            {"text":"FR2558MC1Z" },
+            {"text":"LG_201209F180" },
+            {"text":"TV_42LN5400" },
+            {"text":"FR2558MC1Z" },
+            {"text":"FQ166DURWBW" },
+            {"text":"LG_201211E960" },
+            {"text":"TV_32LA6100" },
+            {"text":"F1925WC" },
+            {"text":"R-S852NHMDW" },
+            {"text":"R-S769MHWE" },
+            {"text":"LG_201302F240" },
+            {"text":"LG_201303F260" },
+            {"text":"R-U913VBDW" },
+            {"text":"LG_201210F200" }
+        ]
+    }
+]

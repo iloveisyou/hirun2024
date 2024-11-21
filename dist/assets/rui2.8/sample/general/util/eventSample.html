@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="커스텀 이벤트 생성, Custom event" />
+    <title>Event</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*<b>*/
+            var EventTest = function(){
+                var demoEl = Rui.get("demo");
+                // select function 안에서 this는 EventTest로 수행하고자 함으로 delegate로 감쌈.
+                demoEl.on("click", this.select, this, true);
+                
+                // 이벤트 정의
+                this.createEvent('select');
+            }
+            
+            Rui.extend(EventTest, Rui.util.LEventProvider, {
+                select: function(e){
+                    var target = e.target;
+                    if (target.id == "col2") {
+                        // 이벤트 호출
+                        this.fireEvent('select', this);
+                    }
+                }
+            });
+            
+            var eventTest = new EventTest();
+            
+            // 이벤트 탑재
+            eventTest.on("select", function(e){
+                Rui.alert("this : " + this + ', e.target : ' + e.target);
+            }, EventTest, true);
+            /*</b>*/
+        });
+    </script>
+
+</head>
+<body>
+    <div id='hd'>
+        <h1>Event</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>이벤트를 사용하는 방법을 보여주는 샘플</h2>
+            <div class="LblockDesc">
+                <p>기본적인 이벤트 사용 방법입니다. 이미 정의된 이벤트를 사용하거나, 새로운 이벤트를 정의할 수 있습니다.</div>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="demo">
+                <div id="col1">col1</div>
+                <div id="col2">col2</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

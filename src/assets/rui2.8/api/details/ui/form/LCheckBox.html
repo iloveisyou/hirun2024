@@ -1,0 +1,196 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+input태그의 type이 checkbox로 정의된 LCheckBox 객체
+그리드는 기본적으로 편집기를 출력하지 않는다. 
+하지만 checkbox의 경우에는 기본 출력을 원할 경우 gridFixed 속성을 true로 한다.
+
+샘플 경로 :
+<a href="./../sample/general/ui/form/checkboxgroupSample.html" target="_new">/rui/sample/general/ui/form/checkboxgroupSample.html</a>
+<a href="./../sample/general/ui/form/checkboxSample.html" target="_new">/rui/sample/general/ui/form/checkboxSample.html</a>
+</div>
+<div class="L-sample">
+sample: 기본 샘플이다.
+<div class="L-code">
+var checkBox = new Rui.ui.form.LCheckBox({
+    applyTo: 'checkBox',
+    name: 'checkBox',
+    label: '라벨',
+    value: 'Y'
+});
+</div>
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_label">
+<div class="L-description">
+label로 출력할 값
+</div>
+<div class="L-sample">
+sample: label이 선택이라는 checkbox를 생성한다.
+<div class="L-code">
+var checkBox1 = new Rui.ui.form.LCheckBox({
+    id: 'checkBox1',
+    applyTo: 'checkBox1',
+    label: '선택'
+});
+</div>
+</div>
+</div>
+
+<div class="config_value">
+<div class="L-description">
+input태그의 value값
+html dom객체의 value값
+applyTo로 적용된 input태그에 value값이 존재하면 해당 값이 value에 적용된다.
+</div>
+<div class="L-sample">
+sample: value가 'Y'로 되어 있는 checkbox를 생성한다.
+<div class="L-code">
+var checkBox1 = new Rui.ui.form.LCheckBox({
+    id: 'checkBox1',
+    applyTo: 'checkBox1',
+    value: 'Y'
+});
+</div>
+</div>
+</div>
+
+<div class="config_checked">
+<div class="L-description">
+체크 상태 여부
+</div>
+<div class="L-sample">
+sample: 체크된 checkbox를 생성한다.
+<div class="L-code">
+var checkBox1 = new Rui.ui.form.LCheckBox({
+    id: 'checkBox1',
+    applyTo: 'checkBox1',
+    checked: true
+});
+</div>
+</div>
+</div>
+
+<div class="config_bindValues">
+<div class="L-description">
+value checkbox 선택시 dataset에 bind할 값
+getValue 메소드가 호출될때 bindValues가 적용되어 있지 않으면 true/false값이 bindValues가 적용되면 bindValues에 적용된 값을 리턴한다.
+</div>
+<div class="L-sample">
+sample: 체크되면 Y값을 체크가 취소되면 N값을 적용하는 checkbox를 생성한다.
+<div class="L-code">
+var checkBox1 = new Rui.ui.form.LCheckBox({
+    id: 'checkBox1',
+    applyTo: 'checkBox1',
+    bindValues: ["Y", "N"]
+});
+</div>
+</div>
+</div>
+
+<div class="config_bindFn">
+<div class="L-description">
+checkbox 선택시 dataset에 bind할 값을 리턴하는 function
+</div>
+<div class="L-sample">
+sample: getValue시 function으로 로직을 적용한 checkbox를 생성한다.
+<div class="L-code">
+var checkBox1 = new Rui.ui.form.LCheckBox({
+    id: 'checkBox1',
+    applyTo: 'checkBox1',
+    bindFn: function(val){
+        return val ? "Y":"N";
+    }
+});
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_setValue">
+<div class="L-description">
+값을 변경한다.
+</div>
+<div class="L-sample">
+sample: checkBox1객체를 스크립트로 체크한다.
+<div class="L-code">
+var checkBox1 = new Rui.ui.form.LCheckBox({
+    id: 'checkBox1',
+    applyTo: 'checkBox1'
+});
+checkBox1.setValue(true);
+</div>
+</div>
+
+<div class="L-sample">
+sample: bindValues가 적용된 checkBox1객체를 스크립트로 체크한다.
+<div class="L-code">
+var checkBox1 = new Rui.ui.form.LCheckBox({
+    id: 'checkBox1',
+    applyTo: 'checkBox1',
+    bindValues: ["Y", "N"]
+});
+checkBox1.setValue("Y");
+</div>
+</div>
+</div>
+
+<div class="method_getValue">
+<div class="L-description">
+현재 값을 리턴한다
+</div>
+
+<div class="L-sample">
+sample: checkBox1객체가 체크되어 있는 여부를 비교하여 메시지를 출력한다.
+<div class="L-code">
+var checkBox1 = new Rui.ui.form.LCheckBox({
+    id: 'checkBox1',
+    applyTo: 'checkBox1'
+});
+if(checkBox1.getValue() == true) {
+    alert('체크되었습니다.');
+}
+</div>
+</div>
+
+<div class="L-sample">
+sample: bindValues가 적용된 checkBox1객체가 체크되어 있는 여부를 비교하여 메시지를 출력한다.
+<div class="L-code">
+var checkBox1 = new Rui.ui.form.LCheckBox({
+    id: 'checkBox1',
+    applyTo: 'checkBox1',
+    bindValues: ["Y", "N"]
+});
+if(checkBox1.getValue() == "Y") {
+    alert('체크되었습니다.');
+}
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_keydown">
+<div class="L-description">
+keydown 기능이 호출되면 수행하는 이벤트. 기본적인 dom 이벤트
+</div>
+<div class="L-sample">
+sample: textBox1에서 enter(13)키를 입력하면 textBox2로 이동한다.  
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id:'combo1',
+    applyTo:'combo1'
+});
+
+textBox1.on('keydown', function(e) {
+    if(e.keyCode == 13) {
+        textBox2.focus();
+    }
+});
+</div>
+</div>
+</div>
+
+<!-- property 시작 -->
+</div>

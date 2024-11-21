@@ -1,0 +1,200 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+tree나 menu와 같이 계층 구조를 가지는 객체들의 수정용(CUD) 상위 추상 클래스
+LUnorderedListBase는 출력만 담당하므로 변경건을 처리할 수 없지만 LUnorderedList는 변경건을 처리할 수 있다.
+addTopNode/addChildNode/deleteNode/cutNode/copyNode/pasteNode
+샘플 경로 :
+<a href="./../sample/general/ui/tree/treeCheckboxSample.html" target="_new">/rui/sample/general/ui/tree/treeCheckboxSample.html</a>
+<a href="./../sample/general/ui/tree/treeChildRecordSample.html" target="_new">/rui/sample/general/ui/tree/treeChildRecordSample.html</a>
+<a href="./../sample/general/ui/tree/treeContextMenuEditSample.html" target="_new">/rui/sample/general/ui/tree/treeContextMenuEditSample.html</a>
+<a href="./../sample/general/ui/tree/treeDesign.html" target="_new">/rui/sample/general/ui/tree/treeDesign.html</a>
+<a href="./../sample/general/ui/tree/treeDesignSample.html" target="_new">/rui/sample/general/ui/tree/treeDesignSample.html</a>
+<a href="./../sample/general/ui/tree/treeDynamicSample.html" target="_new">/rui/sample/general/ui/tree/treeDynamicSample.html</a>
+<a href="./../sample/general/ui/tree/treeHideFolderSample.html" target="_new">/rui/sample/general/ui/tree/treeHideFolderSample.html</a>
+<a href="./../sample/general/ui/tree/treeInlineEditorSample.html" target="_new">/rui/sample/general/ui/tree/treeInlineEditorSample.html</a>
+<a href="./../sample/general/ui/tree/treeSample.html" target="_new">/rui/sample/general/ui/tree/treeSample.html</a>
+<a href="./../sample/general/ui/tree/unorderListBaseSample.html" target="_new">/rui/sample/general/ui/tree/unorderListBaseSample.html</a>
+<a href="./../sample/general/ui/tree/unorderListSample.html" target="_new">/rui/sample/general/ui/tree/unorderListSample.html</a>
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_contextMenu">
+<div class="L-description">
+context menu를 연결하는 LContextMenu의 객체
+</div>
+<div class="L-sample">
+sample: tree에 LContextMenu를 연결한다.
+<div class="L-code">
+//tree method를 사용할 경우 (권장)
+function addTopNode(type, args, obj){
+    var label = window.prompt("추가할 Node Name을 입력하세요 : ", "");
+    var row = tree.addTopNode(label);
+    var newRecord = dataSet.getAt(row);
+    //추가적인 값 변경은 newRecord를 변경하면 된다.
+    //newRecord.set("desc","xxxx");
+}
+
+//tree의 method 사용 (권장)
+function addNode(type, args, obj){
+    var e = args[0];
+    alert(e.target);
+    var label = window.prompt("추가할 Node Name을 입력하세요 : ", "");
+    //부모가 id가 없으면 추가되지 않는다.
+    var row = tree.addChildNode(label);
+    var newRecord = dataSet.getAt(row);
+    newRecord.set("menuSeq",'');
+    //추가적인 값 변경은 newRecord를 변경하면 된다.
+    //newRecord.set("desc","xxxx");
+}
+
+//dataSet을 통하여 추가할 경우
+/*
+function addNode(){
+    var label = window.prompt("추가할 Node Name을 입력하세요 : ", "");
+    var node = tree.getFocusNode();
+    var row = dataSet.newRecord();
+    var record = dataSet.getAt(row);
+    record.set("menuName",label);
+    record.set("prntMenuId",node.getIdValue());
+}
+*/
+//선택한 node명 수정하기
+function editNodeLabel(){
+    var label = window.prompt("수정할 Node Name을 입력하세요 : ", tree.getNodeLabel());
+    tree.setNodeLabel(label);
+}
+
+//선택한 node 삭제하기
+function deleteNode(){
+    tree.deleteNode();
+}
+
+function cutNode(){
+    tree.cutNode();
+}
+
+function copyNode(){
+    tree.copyNode();
+}
+
+function pasteNode(){
+    tree.pasteNode();
+}
+
+var oContextMenu = new Rui.ui.menu.LContextMenu("mytreecontextmenu", {
+    trigger: "treeDiv1",
+    itemdata: [
+        { text: "Add Top Node", onclick: { fn: addTopNode } },
+        { text: "Add Child Node", onclick: { fn: addNode } },
+        { text: "Edit Node Label", onclick: { fn: editNodeLabel } },
+        { text: "Delete Node", onclick: { fn: deleteNode } },
+        { text: "Copy Node", onclick: { fn: copyNode }},
+        { text: "Cut Node", onclick: { fn: cutNode } },
+        { text: "Paste Node", onclick: { fn: pasteNode } },
+        { text: "Change Order", onclick: { fn: changeOrder } }
+    ]
+});
+
+tree = new Rui.ui.tree.LTreeView({
+    dataSet: dataSet,
+    height: 500,
+    width: 300,
+    contextMenu: oContextMenu
+    }
+});
+
+tree.render("treeDiv1");
+</div>
+</div>
+</div>
+
+<div class="config_useTempId">
+<div class="L-description">
+복사하고 붙여넣기시 tempId 사용할 지 여부, tempId를 사용하지 않으면 직접 id를 생성해서 작업해야 한다.
+복사하고 붙여넣을때 child는 복사되지 않는다.
+tempId를 사용하면 신규 생성하는 record는 tempId를 가진다.  신규 생성된 record의 자식은 id field도 tempId이고 parentId field도 tempId이다.
+</div>
+<div class="L-sample">
+sample: useTempId 속성을 부여하여 tree를 생성한다.
+<div class="L-code">
+tree = new Rui.ui.tree.LTreeView({
+    dataSet: dataSet,
+    height: 500,
+    width: 300,
+    useTempId: true
+    }
+});
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_addTopNode">
+<div class="L-description">
+최상위 depth에 label을 가지는 record 추가
+</div>
+<div class="L-sample">
+sample: 최상위 node를 추가하고 설명을 '값1'로 설정한다.
+<div class="L-code">
+tree = new Rui.ui.tree.LTreeView({
+    dataSet: dataSet,
+    height: 500,
+    width: 300,
+    useTempId: true
+    }
+});
+..........................
+var row = tree.addTopNode(label);
+var newRecord = dataSet.getAt(row);
+//추가적인 값 변경은 newRecord를 변경하면 된다.
+newRecord.set("desc","값1");
+</div>
+</div>
+</div>
+
+<div class="method_addChildNode">
+<div class="L-description">
+선택된 node 밑에 label을 가지는 record 추가
+</div>
+<div class="L-sample">
+sample: 하위 node를 추가하고 설명을 '값1'로 설정한다.
+<div class="L-code">
+tree = new Rui.ui.tree.LTreeView({
+    dataSet: dataSet,
+    height: 500,
+    width: 300,
+    useTempId: true
+    }
+});
+..........................
+var row = tree.addChildNode(label);
+var newRecord = dataSet.getAt(row);
+//추가적인 값 변경은 newRecord를 변경하면 된다.
+newRecord.set("desc","값1");
+</div>
+</div>
+</div>
+
+<div class="method_deleteNode">
+<div class="L-description">
+특정 node 지우기, 지운 후에 clone한 record array를 return한다.
+</div>
+<div class="L-sample">
+sample: 현재 선택된 node를 삭제한다.
+<div class="L-code">
+tree = new Rui.ui.tree.LTreeView({
+    dataSet: dataSet,
+    height: 500,
+    width: 300,
+    useTempId: true
+    }
+});
+..........................
+tree.deleteNode();
+</div>
+</div>
+</div>
+
+</div>

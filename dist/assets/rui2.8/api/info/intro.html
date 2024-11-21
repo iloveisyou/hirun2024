@@ -1,0 +1,83 @@
+<!DOCTYPE html>  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>RUI 소개</title>
+    <script type="text/javascript" src="./../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../plugins/ui/LSideBar.js"></script>
+    <script type="text/javascript" src="./../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../resources/rui.css"/>
+    <style type="text/css" >
+        body {
+            width: 100%;
+            height: 1024px;
+        }
+        
+        a {
+            font-size: small;
+            text-decoration: none;
+            color: #333;
+            font-family: tahoma,sans-serif;
+        }
+        
+        img {
+            width: 100%;
+        }
+        
+        .LBlockMain {
+            width: 100%;
+            min-width: 1024px;
+            height: 1024px;
+        }
+        
+        .LBlockRight {
+            display: inline;
+            height: 100%;
+            width : 50%;
+        }
+        
+        .LBlockRight ul {
+            padding-left: 180px;
+            list-style-type: none;
+        }
+        
+    </style>
+    
+    <script type="text/javascript">
+        Rui.onReady(function(){
+            var sideBar = new Rui.ui.LSideBar({
+                applyTo: 'sideBar',
+                y: 20
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+<body>
+    <div class="LBlockMain">
+        <div class="LBlockLeft" id="sideBar">
+            <ul>
+                <li><a href="#intro2">개요</a></li>
+                <li><a href="#intro3">Big Picture</a></li>
+                <li><a href="#intro4">Features</a></li>
+                <li><a href="#intro5">경쟁제품 분석</a></li>
+            </ul>
+        </div>
+        <div class="LBlockRight">
+            <ul>
+                <li><a name="intro2"><img src="./intro2.png"></a></li>
+                <li><a name="intro3"><img src="./intro3.png"></a></li>
+                <li><a name="intro4"><img src="./intro4.png"></a></li>
+                <li><a name="intro5"><img src="./intro5.png"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

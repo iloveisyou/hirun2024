@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="LEvent.addListener, 이벤트" />
+    <title>Event Listener</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../plugins/dd/LDDOnTop.js"></script>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        .eventDiv {
+            height: 100px;
+        }
+        .dd-demo {
+            #position: relative;
+            border: 4px solid #666;
+            text-align: center;
+            color: #fff;
+            cursor: move;
+            height: 60px;
+            width: 60px;
+        }
+
+        #dd-demo-1 {
+            position: absolute;
+            background-color: #6D739A;
+            top: 0px;
+            left: 200px;
+        }
+
+        #dd-demo-2 {
+            position: absolute;
+            background-color: #566F4E;
+            top: 0px;
+            left: 0px;
+            z-index: 100;
+        }
+
+        #dd-demo-3 {
+            position: absolute;
+            background-color: #7E5B60;
+            top: 0px;
+            left: 200px;
+            z-index: 1;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            Rui.util.LEvent.addListener(document.getElementById('dd-demo-2'), 'mousedown', function(e){
+                alert('dd-demo-2 mousedown');
+            }, this, true);
+            Rui.util.LEvent.addListener(document.getElementById('dd-demo-2-2'), 'mousedown', function(e){
+                alert('dd-demo-2-2 mousedown');
+            }, this, true);
+            Rui.util.LEvent.addListener(document.getElementById('dd-demo-3'), 'mousedown', function(e){
+                alert('dd-demo-3 mousedown');
+            }, this, true);
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Event Listener</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>이벤트 리스터(Event Listener)를 사용하여 간편하게 이벤트를 생성하고 제어할 수 있습니다.</h2>
+            <div class="LblockDesc">
+		        <p>HTML Dom객체의 이벤트(Event)를 제어합니다. 각 이벤트는 개별적 혹은 연속적으로 수행될 수 있습니다.</p>
+		        <p>1.click => Dom을 클릭하면 dd-demo-2-2객체와 dd-demo-2의 mousedown 이벤트가 발생합니다.</p>
+		        <p>2.click => Dom을 클릭하면 dd-demo-2의 mousedown 이벤트가 발생합니다.</p>
+		        <p>3.click => Dom을 클릭하면 dd-demo-3의 mousedown 이벤트가 발생합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div class="eventDiv">
+                <div id="dd-demo-1" class="dd-demo">
+                </div>
+                <div>
+                    <div id="dd-demo-2" class="dd-demo">
+                        <div id="dd-demo-2-2">1.click</div><br>
+                        2.click
+                    </div>
+                </div>
+                <div id="dd-demo-3" class="dd-demo">
+                    3.click
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

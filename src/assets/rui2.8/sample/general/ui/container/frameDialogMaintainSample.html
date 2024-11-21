@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="대화상자(dialog), IFrame Dialog, 컨텐츠 유지" />
+    <title>Frame Dialog Maintain</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/LFrameDialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LFrameDialog.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LPopupTextBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LPopupTextBox.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+
+            var handleSubmit = function(){
+                var frameWindow = this.getFrameWindow(); //Dialog 내부 Content에 접근할 때 사용할 수 있는 Dialog내 IFrame의 window 객체
+                var content = frameWindow.DialogContent; //Dialog의 IFrame내부에 생성된 DialogContent 객체
+                if(content){
+                	var objs = content.getMarked('col1');
+                	if(objs.length > 0)
+                		   popupTextBox.setValue(objs.join(', '));
+                }
+                this.submit(true);
+            };
+            
+            var frameDialog;
+            
+            var openDialog = function(){
+                /*<b>*/
+            	if(!frameDialog){
+            		frameDialog = new Rui.ui.LFrameDialog({
+                        id: 'frameDialog', 
+                        title: '선택하세요',
+                        width: 800,
+                        height: 400,
+                        modal: true,
+                        visible: false,
+                        buttons: [ 
+                                { text: 'Apply', handler: handleSubmit, isDefault: true },
+                                { text: 'Close', handler: function(){
+                                    this.cancel();
+                                } } 
+                            ]
+                    });
+                    frameDialog.render(document.body);
+                    frameDialog.setUrl('./frameDialogContent.html');
+
+                    frameDialog.on('ready', function(e){
+                    	var win = frameDialog.getFrameWindow();
+                    	win.DialogContent.setSelect(2);
+                    });
+            	}
+                /*</b>*/
+            	
+                frameDialog.show();
+            }
+
+            var popupTextBox = new Rui.ui.form.LPopupTextBox({
+                applyTo: 'popupTextBox',
+                width: 300,
+                enterToPopup: true
+            });
+            
+            
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+             
+            popupTextBox.on('popup', function(){
+            	openDialog();
+            });
+
+            var openBtn = new Rui.ui.LButton('openBtn');
+            openBtn.on('click', function(e){
+            	openDialog();
+            });
+            
+        });
+        
+    </script>
+</head>
+<body>
+    <h1>Frame Dialog</h1>
+    <h2>IFrame을 사용하는 Dialog의 컨텐츠를 재사</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>Dialog 내부 컨텐츠를 IFrame을 이용하여 페이지를 구성합니다. 이때 컨텐츠는 최초 한번만 로드되며 이후부터는 재사용 합니다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="popupTextBox"></div>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="openBtn" >Open</button>
+        </div>
+    </div>
+</body>
+</html>

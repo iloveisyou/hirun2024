@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="드래그 드랍(LDragDrop), LDDApp, Reorder" />
+    <title>Reorder</title>
+    
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../plugins/dd/LDDList.js"></script>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        div.workarea { padding:10px; float:left }
+        ul.draglist { 
+            position: relative;
+            width: 200px; 
+            height:140px;
+            background: #f7f7f7;
+            border: 1px solid gray;
+            list-style: none;
+            margin:0;
+            padding:0;
+        }
+        ul.draglist li {
+            margin: 1px;
+            cursor: move;
+            zoom: 1;
+        }
+        ul.draglist_alt { 
+            position: relative;
+            width: 200px; 
+            list-style: none;
+            margin:0;
+            padding:0;
+            /*
+               The bottom padding provides the cushion that makes the empty 
+               list targetable.  Alternatively, we could leave the padding 
+               off by default, adding it when we detect that the list is empty.
+            */
+            padding-bottom:20px;
+        }
+        ul.draglist_alt li {
+            margin: 1px;
+            cursor: move; 
+        }
+        li.list1 {
+            background-color: #D1E6EC;
+            border:1px solid #7EA6B2;
+        }
+        li.list2 {
+            background-color: #D8D4E2;
+            border:1px solid #6B4C86;
+        }
+        #user_actions { float: right; }
+         .LblockMarkupCode {
+             position: relative;
+             height: 300px;
+         }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+
+            var Event = Rui.util.LEvent;
+            /*<b>*/
+            Rui.dd.LDDApp = {
+
+                init: function() {
+                    var rows=3,
+                        cols=2,
+                        i,
+                        j;
+                    for (i=1;i<rows+1;i=i+1) {
+                        new Rui.dd.LDDTarget({
+                            id: 'ul'+i
+                        });
+                    }
+
+                    for (i=1;i<cols+1;i=i+1) {
+                        for (j=1;j<rows+1;j=j+1) {
+                            new Rui.dd.LDDList({
+                                id: 'li' + i + '_' + j
+                            });
+                        }
+                    }
+
+                    //Event.on('showButton', 'click', this.showOrder);
+                    //Event.on('switchButton', 'click', this.switchStyles);
+                },
+
+                showOrder: function() {
+                    var parseList = function(ul, title) {
+                        var items = ul.getElementsByTagName('li');
+                        var out = title + ': ';
+                        for (i=0;i<items.length;i=i+1) {
+                            out += items[i].id + ' ';
+                        }
+                        return out;
+                    };
+
+                    var ul1=Dom.get('ul1'), ul2=Dom.get('ul2');
+                    alert(parseList(ul1, 'List 1') + '\n' + parseList(ul2, 'List 2'));
+                },
+
+                switchStyles: function() {
+                    Dom.get('ul1').className = 'draglist_alt';
+                    Dom.get('ul2').className = 'draglist_alt';
+                }
+            };
+            /*</b>*/
+            Event.onDOMReady(Rui.dd.LDDApp.init, Rui.dd.LDDApp, true);
+        });
+    </script>
+</head>
+<body >
+    <div id='hd'>
+        <h1>Reorder</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>drag and drop을 통해 리스트 박스에 추가하는 샘플</h2>
+            <div class="LblockDesc">
+                <p>드래그 앤 드랍을 이용하여 리스트(UL) 박스의 항목을 상호 이동 시킬수 있습니다. 항목은 순서 없이 중간에 삽입할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div class="workarea">
+              <h3>List 1</h3>
+              <ul id="ul1" class="draglist">
+                <li class="list1" id="li1_1">list 1, item 1</li>
+                <li class="list1" id="li1_2">list 1, item 2</li>
+                <li class="list1" id="li1_3">list 1, item 3</li>
+              </ul>
+            </div>
+            <div class="workarea">
+              <h3>List 2</h3>
+              <ul id="ul2" class="draglist">
+                <li class="list2" id="li2_1">list 2, item 1</li>
+                <li class="list2" id="li2_2">list 2, item 2</li>
+                <li class="list2" id="li2_3">list 2, item 3</li>
+              </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

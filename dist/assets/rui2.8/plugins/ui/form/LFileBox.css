@@ -1,0 +1,45 @@
+/* LFileBox
+****************************************/
+div.L-filebox {
+    position: relative;
+}
+.L-filebox-button {
+    position: absolute;
+    right: 0;
+    border: 1px solid #e0e0e0;
+    padding: 1px 6px;
+    margin: 0 0 0 2px;
+    height: 99%;
+}
+.L-disabled .L-filebox-button {
+	color: #BCBDC0;
+}
+html.L-ua-msie7 .L-filebox-button {
+    width: 80px;
+}
+.L-filebox-input {
+    position: absolute;
+    margin: 0px;
+    height: 99%;
+    top: 0px;
+    left: 0px;
+    vertical-align: middle;
+    filter:alpha(opacity=0);
+    opacity: 0;
+}
+html.L-ua-msie8 .L-filebox-input, html.L-ua-msie7 .L-filebox-input, html.L-ua-msie6 .L-filebox-input {
+    position: absolute;
+    z-index: 1;
+}
+.L-ua-compatible .L-filebox-button {
+        width: 100px;
+        height: 20px;
+}
+.L-ua-compatible .L-filebox-input {
+        width: 100% !important;
+        left: 0px;
+}
+.L-ua-compatible .L-filebox {
+        height: 20px;              
+}
+ 

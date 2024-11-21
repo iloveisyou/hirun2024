@@ -1,0 +1,157 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+그리드의 데이터를 출력하는 LGridView
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_emptyDataMessageCode">
+<div class="L-description">
+'검색된 데이터가 없습니다.' 메시지를 변경할 수 있는 메시지코드
+LMessageManager를 통해 lang-파일에서 '$.base.msg115'값을 다른 프로젝트 값으로 변경할 수 있다.
+</div>
+<div class="L-sample">
+sample: LGridView의 emptyDataMessageCode를 '$message.emptytext'로 변경한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300,
+    viewConfig : {
+        emptyDataMessageCode: '$message.emptytext'
+    }
+});
+
+grid.render('grid');
+</div>
+</div>
+</div>
+
+<div class="config_skipRowCellEvent">
+<div class="L-description">
+그리드가 render시 row와 cell render event를 skip할지 여부(성능과 연관되므로 대량건 처리시는 false로 처리)
+LGridView는 LGridPanel에 적용한 속성을 그대로 따라간다. 그러므로 LGridPanel에 적용하면 된다.
+</div>
+<div class="L-sample">
+sample: LGridView에 skipRowCellEvent값을 적용한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300,
+    viewConfig : {
+        skipRowCellEvent: true
+    }
+});
+
+grid.render('grid');
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_renderBody">
+<div class="L-description">
+그리드의 데이터부분이 다시 렌더링되면 호출되는 이벤트
+이벤트 처리시 반복 호출될 수 있습니다.
+반복 호출되는 케이스:
+- 데이터를 출력할 경우. 
+- width가 변경되거나 필터, 정렬등으로 컬럼이 다시 그려질 경우
+- 데이터부분이 스크롤 될 경우
+- 윈도우 창 사이즈나 부모창 사이즈가 변경될 경우
+</div>
+<div class="L-sample">
+sample: 
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+var view = grid.getView();
+view.on('renderBody', function(e) {
+.................
+});
+</div>
+</div>
+</div>
+
+<div class="event_renderRow">
+<div class="L-description">
+getRenderRow 메소드가 호출되면 수행하는 이벤트
+그리드의 각 row를 다시 그릴때마다 호출되는 이벤트로 row에 css나 style을 추가할때 사용한다.
+LGridView의 skipRowCellEvent속성이 false일때만 작동하며 기본값이 false이다.
+skipRowCellEvent을 true로 정의하면 화면 출력하는 렌더링 속도가 향상한다. 
+</div>
+<div class="L-sample">
+sample: 모든 row dom에 L-test css를 추가한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+var view = grid.getView();
+view.on('renderRow', function(e) {
+    e.css.push('L-test');
+});
+</div>
+</div>
+</div>
+
+<div class="event_renderCell">
+<div class="L-description">
+getRenderCell 메소드가 호출되면 수행하는 이벤트
+그리드의 각 cell를 다시 그릴때마다 호출되는 이벤트로 row에 css나 style을 추가할때 사용한다.
+기본적으로 LColumn객체의 renderer를 이용해야 한다. renderer 처리가 속도가 빠르다.  
+LGridView의 skipRowCellEvent속성이 false일때만 작동하며 기본값이 false이다.
+skipRowCellEvent을 true로 정의하면 화면 출력하는 렌더링 속도가 향상한다.  
+</div>
+<div class="L-sample">
+sample: 모든 dom dom에 L-test css를 추가한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+var view = grid.getView();
+view.on('renderCell', function(e) {
+    e.css.push('L-test');
+});
+</div>
+</div>
+</div>
+
+<div class="event_sortField">
+<div class="L-description">
+dataSet의 sortField 메소드가 호출되거나 그리드에서 정렬버튼을 클릭할 경우 수행하는 이벤트
+sortField이벤트는 dataSet의 dataChanged 이벤트 처리후 호출된다.
+정렬이 수행되면 dataSet 위치는 기본적으로 0번(데이터 있을 경우)이나 -1번(데이터 없을 경우) 위치로 이동한다.  
+</div>
+<div class="L-sample">
+sample: 정렬이 되면 LGridView에 L-test css를 추가한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+var view = grid.getView();
+view.on('sortField', function(e) {
+    view.getGridEl().addClass('L-test');
+});
+</div>
+</div>
+</div>
+
+</div>

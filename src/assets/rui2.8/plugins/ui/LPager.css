@@ -1,0 +1,33 @@
+div.L-pager{
+	text-align:center;	
+}
+div.L-pager, 
+div.L-pager div,
+div.L-pager table, 
+div.L-pager table tbody, 
+div.L-pager table tr, 
+div.L-pager table td {
+    margin:0px;
+    padding:0px;
+    border:0px;
+}
+div.L-pager div {
+    vertical-align:middle;
+}
+div.L-pager table {
+	width:auto;
+	height:100%;
+	margin:auto;
+}
+div.L-pager table td {
+   vertical-align:middle;
+}
+.L-pager-selected {
+    cursor:default !important;
+}
+.L-pager-first, .L-pager-prev-group, .L-pager-prev, .L-pager-next, .L-pager-next-group, .L-pager-last, .L-pager-item {
+	cursor:pointer;
+}
+.L-pager.L-mode-scroll {
+    display: none;
+}

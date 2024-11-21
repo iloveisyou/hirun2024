@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), Scroller를 이용한 Dynamic Loading" />
+    <title>Scroller Dynamic Loading</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        .L-panel .ft {
+            padding: 0px;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+             var dataSet = new Rui.data.LJsonDataSet({
+                 id: 'dataSet',
+                 /*<b>*/
+                 focusFirstRow: false,
+                 /*</b>*/
+                 fields: [
+                     { id: 'num' },
+                     { id: 'col1' },
+                     { id: 'col2' },
+                     { id: 'col3' },
+                     { id: 'col4' },
+                     { id: 'col5' },
+                     { id: 'col6' },
+                     { id: 'col7' },
+                     { id: 'col8', type: 'number' },
+                     { id: 'code' },
+                     { id: 'multiCode' },
+                     { id: 'multiCodeName' },
+                     { id: 'value' },
+                     { id: 'time' },
+                     { id: 'date1', type: 'date', defaultValue: new Date() }
+                 ]
+             });              
+
+             var columnModel = new Rui.ui.grid.LColumnModel({
+                 freezeColumnId: 'col2',
+                 columns: [
+                     new Rui.ui.grid.LStateColumn(),
+                     new Rui.ui.grid.LNumberColumn(),
+                     { field: 'col1', label: 'Col1', sortable: true, editor: new Rui.ui.form.LTextBox() },
+                     { field: 'col2', sortable: true, align: 'center', width: 120 },
+                     { field: 'code', align: 'center', sortable: true },
+                     { field: 'multiCode', align: 'center', sortable: true },
+                     { field: 'col3', align: 'right' },
+                     { field: 'col5', align: 'right' },
+                     { field: 'col6', label: 'Col6', width: 200, editor: new Rui.ui.form.LTextArea() },
+                     { field: 'col8', label: 'Col8', align: 'right', sortable: true, editor: new Rui.ui.form.LNumberBox({decimalPrecision: 2, minValue: -1, maxValue: 10000 }),
+                         renderer: 'money' },
+                     { field: 'date1' , align: 'center', editor: new Rui.ui.form.LDateBox(), renderer: 'date' },
+                     { field: 'col7', label: 'Popup', editor: new Rui.ui.form.LTextBox(), renderer: 'popup' },
+                     { field: 'time', label: 'Time', align: 'center', editor: new Rui.ui.form.LTimeBox() }
+                 ]
+             });
+            
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                viewConfig: {
+                    // 소팅을 처리할 경우 customSortable가 true이면 UI는 sort으로 처리되고 데이터셋은 변경하지 않는다.
+                    /*<b>*/
+                    customSortable: true
+                    /*</b>*/
+                },
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 310
+            });
+            
+            grid.render('defaultGrid');
+            
+            var gridView = grid.getView();
+            /*<b>*/
+            gridView.on('scrollY', function(e) {
+                // 스크롤이 마지막에 도달할 경우 e.isEnd는 true
+                if(e.isEnd) {
+                    // 전체 건수와 현재 로딩된 건수를 비교하여 처리
+                    if(dataSet.getCount() < dataSet.getTotalCount()) {
+                        dataSet.load({
+                            url: './../../../../sample/data/data11.json',
+                            params: {
+                                // 시작점을 서버에 전송하여 해당 값 기준으로 쿼리한다.
+                                startRow: dataSet.getCount()
+                            },
+                            add: true
+                        });
+                    }
+                }
+            }, this, true);
+            /*</b>*/
+            
+            /*<b>*/
+            //그리드의 헤더에 sorting 버튼이 동작되면 실행되는 이벤트로 커스텀한 sort를 처리할 수 있다. 서버에서 페이징 sort 처리 후 row 위치를 변경하면 된다.
+            gridView.on('sortField', function(e) {
+                alert('sortId : ' + e.sortId + ' sortField : ' + e.sortField + ', sortDir : ' + e.sortDir);
+            }, this, true);
+            /*</b>*/
+            
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){                
+                dataSet.load({
+                    url: './../../../../sample/data/data11.json'
+                });
+            });
+            
+            searchBtn.click();
+        });
+        </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Scroller를 이용한 Dynamic Loading</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>대량건 처리를 위한 그리드(Grid)에서 초기에 필요한 만큼만 로드한 후 이후 스크롤 할 때마다 추가로 가져와 그리드에 더하는 샘플</h2>
+            <div class="LblockDesc">
+		        <p>- 데이터셋(DataSet)을 처음 로드(Load)할 때 모든 데이터를 로드하지 않는다. 이후 로드시엔 add 속성을 부여하여 기존의 데이터에 추가되도록 한다. </p>
+		        <p>이를위해 스크롤이 가장 마지막 위치에 도달했을때인 scrollY 이벤트에서 데이터를 add 방식으로 로딩한다.</p>
+		        <p>- 처음부터 모든 데이터를 로드하는것이 아니므로 데이터 정렬을 위해 그리드(Grid) 헤더(Header)의 정렬(Sort) 버튼을 클릭시 sortField 이벤트를 이용하여 별도 구현할수 있다.</p>
+		        <p>이를위해 그리드의 viewConfig으로 customSortable 기능을 활성화 해야한다.</p>
+		        <p>- Scroller를 이용한 Dynamic Loading을 사용하려면 그리드의 다음 기능은 사용할 수 없다. (Cell Merge, 트리그리드, 소계, 합계, 필터)</p>
+		        <br/>
+		        <p>[필수 속성]</p>
+		        <p>1. DataSet에 생성자 속성으로 focusFirstRow값을 반드시 false로 생성해야 한다.</p>
+		        <p>2. 정렬을 구현하기 위해 Grid의 View객체에 sortField 이벤트를 추가하여 sort를 직접 구현해야 한다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >Search</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+</body>
+</html>

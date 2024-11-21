@@ -1,0 +1,60 @@
+div.L-textbox {
+    white-space: nowrap;
+    height: 17px;
+    *height: 20px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    width: 146px;
+}
+
+div.L-textbox input {
+    margin: 0 0 0 0;
+    font:normal 12px tahoma, arial, helvetica, sans-serif;
+    padding:0px 3px;
+    position: absolute;
+    border:1px solid #B5B8C8;
+    height: 17px;
+    *height: 18px;
+    vertical-align:middle; 
+    left: 0px;
+    top: 0px; 
+    width: 129px;  
+}
+
+div.L-textbox-list-wrapper {
+    left: 0px;
+    top: 21px;
+    border: 1px solid #a5bad6;
+    background-color: #FFFFFF;
+    padding: 0;
+    margin: 0;
+    width: 146px;
+    bottom: auto;
+}
+
+div.L-textbox-list-wrapper-up {
+    top: auto;
+    bottom: 21px;
+}
+
+div.L-textbox-list-wrapper  div.L-list {
+    padding: 0;
+    padding-left: 5px;
+    font:normal 14px tahoma, arial, helvetica, sans-serif;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    margin: 0;
+}
+
+div.L-textbox-list-wrapper div.L-list.active {
+    background-color: rgb(223, 232, 246);
+}
+
+.L-editor-panel div.L-textbox {
+	height:20px;
+}
+
+.L-editor-panel div.L-textbox input {
+	height:20px;
+}

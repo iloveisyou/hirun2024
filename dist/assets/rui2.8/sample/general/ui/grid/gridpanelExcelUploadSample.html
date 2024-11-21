@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="Excel 파일 업로드 다이얼로그(LFileUploadDialog)" />
+    <title>Excel Upload</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LFileBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LFileBox.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/LFileUploadDialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LFileUploadDialog.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var excelDataSet = new Rui.data.LJsonDataSet({
+                id: 'excelDataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col6' }
+                ]
+            });
+            var excelColumnModel = new Rui.ui.grid.LColumnModel({
+                freezeColumnId: 'col1',
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    { field: 'col1', label: 'Col1', width: 160 },
+                    { field: 'col3', label: 'Col3', align: 'center', width: 80},
+                    { field: 'col4', label: 'Col4', align: 'center', width: 80},
+                    { field: 'col6', label: 'Col6', width: 200, autoWidth: true}
+                ]
+            });
+            var excelGrid = new Rui.ui.grid.LGridPanel({
+                columnModel: excelColumnModel,
+                dataSet: excelDataSet,
+                width: 600,
+                height: 200
+            });
+            excelGrid.render('excelGrid');
+            
+            /*<b>*/
+            var fileUploadDialog = new Rui.ui.LFileUploadDialog({
+                //Uploading URL (Multipart)
+                url: './../../../data/data.jsp',
+                width: 420
+            });
+            fileUploadDialog.render(document.body);
+            fileUploadDialog.on('validate', function(){
+                var fileBox = this.getFileBox();
+                var value = fileBox.getValue();
+                var ext = value.substring(value.lastIndexOf('.') + 1);
+                if(ext != 'xls' && ext != 'xlsx') {
+                    Rui.alert('엑셀 파일만 업로드가 가능합니다. [xls, xlsx]');
+                    return false;
+                }
+                return true;
+            });
+            fileUploadDialog.on('success', function(e){
+                // upload된 파일 목록 출력
+                // 서버에서 Rui의 json 형식으로 리턴한다. 
+                var data = excelDataSet.getReadData(e.conn);
+                excelDataSet.loadData(data);
+                Rui.alert('파일을 업로드 했습니다.');
+            });
+            /*</b>*/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var fileAddBtn = new Rui.ui.LButton('fileAdd');
+            fileAddBtn.on('click', function(){
+                fileUploadDialog.show();
+            });
+        });
+        
+    </script>
+
+</head>
+<body>
+    <div id='hd'>
+        <h1>Excel Upload</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>엑셀 업로드(Excel Upload) And Loading</h2>
+            <div class="LblockDesc">
+		        <p>엑셀(Excel)을 서버(Server)로 업로드(Upload) 한 후 그리드(Grid)에 데이터를 출력하는 예제 입니다.</p>
+		        <p>LFileUploadDialog를 이용하여 Excel파일(File)을 업로드 하며 업로드가 끝나면 서버로부터 업로드된 Excel 데이터를 조회합니다.</p>
+		        <p>서버 구현은 쿼리후 LMultiData로 변환하거나 Devon frame을 사용할 경우에는 프레임워크팀에 문의하세요.</p>
+            </div>
+        </div>
+    </div>
+	<div id='bd'>
+	    <div class="LblockMarkupCode">
+	        <div id="excelGrid"></div>
+	        <div class='blockButton' >
+	            <button id='fileAdd'>Upload Excel</button>
+	        </div>
+	    </div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="알림, 공지" />
+    <title>NotificationManager</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../plugins/ui/LNotification.js"></script>
+    <script type="text/javascript" src="./../../../plugins/ui/LNotificationManager.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../plugins/ui/LNotificationManager.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            var cnt = 0;
+            var fn = function() {
+                Rui.ui.LNotificationManager.getInstance().show('사용자 알림을 제공합니다.<br>이 알림은 5초후에 사라집니다.');
+                cnt++;
+                if(cnt < 7) {
+                    setTimeout(fn, 500);
+                }
+            };
+            fn();
+        });
+    </script>
+</head>
+
+<body >
+    <div id='hd'>
+        <h1>NotificationManager</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>NotificationManager를 구현하는 샘플</h2>
+            <div class="LblockDesc">
+                <p>서버에서 받아온 메시지를 사용자에게 출력하는 알림 기능을 제공할 수 있는 예제입니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+        </div>
+    </div>
+</body>
+</html>

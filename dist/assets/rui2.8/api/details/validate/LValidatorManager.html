@@ -1,0 +1,113 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+UI 콤포넌트나 dom객체의 유효성을 체크하는 기능
+validators에 들어가는 json object는 내부적으로 LValidator의 정보를 가지는 json object로 변환된다.
+validator를 수행할 경우에는 alert과 같은 focus가 변경되는 처리는 해서는 안된다.
+validator의 id는 validate를 수행할때 객체를 구분하는 값으로 validate하는 메소드에 따라서 처리 하는 방식이 달라진다.
+id의 맵핑 정보
+- dataSet: dataSet에 선언한 field의 field값이나 id값
+- grid: column의 id값
+- html dom : id나 name속성으로 name이 우선순위가 높다.
+- form object : 해당 객체의 id
+
+validExp는 ':' 문자로 기능을 구분하고 첫번째는 invalid시 출력할 label값이고 두번째는 필수여부 세번째는 수행할 validator 객체명이다.
+validator 객체명 형식
+
+{ id: 'col1', validExp:'Col1:true:length=50' },
+'L' + 'length' + 'Validator' = Rui.validate.LLengthValidator
+
+세번째 수행할 validator를 복수건으로 사용하려면 '&'로 구분하여 사용할 수 있다.
+{ id: 'col1', validExp:'Col1:true:maxByteLength=50&minByteLength=5' },
+</div>
+<div class="L-sample">
+sample: 유효성을 검증하는 기본 샘플
+<div class="L-code">
+var vm = new Rui.validate.LValidatorManager({
+    validators:[
+    { id:'searchSelectedUserGrpId', validExp:'그룹:true' },
+    { id: 'col1', validExp:'Col1:true:maxByteLength=50&minByteLength=5' },
+    { id: 'col8', validExp:'Col8:true:number&maxNumber=20000' }
+    ]
+});
+...........................
+if(vm.validateDataSet(dataSet) == false) {
+    Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>') );
+    return false;
+}
+</div>
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_validators">
+<div class="L-description">
+LValidator들을 가지는 객체
+</div>
+<div class="L-sample">
+sample: validators를 추가한다.
+<div class="L-code">
+var vm = new Rui.validate.LValidatorManager({
+    validators:[
+        { id:'searchSelectedUserGrpId', validExp:'그룹:true' },
+        { id: 'col1', validExp:'Col1:true:maxByteLength=50&minByteLength=5' },
+        { id: 'col8', validExp:'Col8:true:number&maxNumber=20000' }
+    ]
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: validators를 개발자 로직을 추가하여 구현한다.
+<div class="L-code">
+var vm = new Rui.validate.LValidatorManager({
+    validators:[
+        { id:'searchSelectedUserGrpId', validExp:'그룹:true' },
+        { id: 'col1', validExp:'Col1:true:maxByteLength=50&minByteLength=5' },
+        { id: 'col8', validExp:'Col8:true', fn: function(value, row) {
+                 if(dataSet.getNameValue(row, 'col5') == 'R1' && value != 'code3')) {
+                    this.message = 'Col5 컬럼이 R1일 경우 Col8의 값은 code3이어야 합니다.';
+                    return false;
+                 }
+            } 
+        }
+    ]
+});
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_validateGroup">
+<div class="L-description">
+validation를 dom을 지정하여 하위 모든 객체를 수행하는 메소드
+</div>
+<div class="L-sample">
+sample: html dom중에 frm이라는 id를 가지는 form 객체 하위에 form object들의 유효성 체크를 한다.
+<div class="L-code">
+if(vm.validateGroup('frm') == false) {
+    //Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + validatorManager.getMessageList().join('<br>') );
+    alert('유효하지 않습니다.\r\n' + validatorManager.getMessageList().join('\r\n') );
+}
+</div>
+</div>
+</div>
+
+<div class="method_validateDataSet">
+<div class="L-description">
+dataSet의 값을 기준으로 유효성체크를 한다.
+dataSet의 각 row, col 기준으로 invalid가 발생하면 dataSet의 valid or invalid 이벤트가 발생하여 dataSet과 연결된 다른 콤포넌트(grid/tree/bind)들은 
+자신의 invalid상태를 기준으로 출력된다.
+</div>
+<div class="L-sample">
+sample: dataSet을 유효성 체크 한다.
+<div class="L-code">
+if(vm.validateDataSet(dataSet) == false) {
+    Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>') );
+    return false;
+}
+</div>
+</div>
+</div>
+
+</div>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="디자인 기본" />
+    <title>Grid Design</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LHeaderContextMenu.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LTotalSummary.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LTotalSummary.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LTreeGridSelectionModel.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LTreeGridView.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LTreeGridView.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+    label {
+        width: 10%;
+        display: inline-block;
+    }
+    
+    .L-label {
+        width: auto;
+    }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        
+        Rui.onReady(function() {
+        	var col1TextBox = new Rui.ui.form.LTextBox();
+        	
+            var col1Combo = new Rui.ui.form.LCombo({
+                rendererField: 'value',
+                autoMapping: true,
+                url: './../../../../sample/data/code.json'
+            });
+        	
+            var dataSet1 = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                remainRemoved: true,
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'multiCode' },
+                    { id: 'multiCodeName' },
+                    { id: 'value' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+            
+            var columnModel1 = new Rui.ui.grid.LColumnModel({
+                groupMerge: true,
+                freezeColumnId: 'col1',
+                autoWidth: true,
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', sortable: true, editable: false, editor: col1TextBox, vMerge: true, renderer: function(val, p, record){
+                        p.editable = (record.get('col2') !== '760221111113');
+                        return val;
+                    } },
+                    { field: 'col2', sortable: true, align: 'center', width: 120, editor: col1TextBox, vMerge: false, renderer: function(value, p, record, row, col) {
+                        if (value == '7602111111113') {
+                            // 셀의 편집여부를 결정한다.
+                            p.editable = false;
+                            //p.css.push('color-red');
+                            //p.style = 'background-color:orange;';
+                        }
+                        if(Rui.isEmpty(value) == false)
+                            value = value.substring(0, 6) + '-' + value.substring(6);
+                        return value;
+                    } },
+                    { field: 'code', align: 'center', sortable: true, editor: col1Combo },
+                    { field: 'col3', align: 'right', vMerge: false, editor: new Rui.ui.form.LRadioGroup({
+                        gridFixed: true,
+                        items:[
+                            { label : 'R1', value: 'R1' },
+                            { label : 'R2', value: 'R2', checked: true }
+                        ]
+                    }) },
+                    { field: 'col5', align: 'right', vMerge: false, editor: new Rui.ui.form.LCheckBox({
+                        gridFixed: true,
+                        bindValues : ['R1', '']
+                    }) },
+                    { field: 'col6', label: 'Col6', width: 200, editable: true, editor: new Rui.ui.form.LTextArea() },
+                    { field: 'col8', label: 'Col8', align: 'right', sortable: true, editor: new Rui.ui.form.LNumberBox({decimalPrecision: 2, minValue: -1, maxValue: 10000 }),
+                        renderer: Rui.util.LRenderer.moneyRenderer() },
+                    { field: 'date1' , align: 'center', editor: new Rui.ui.form.LDateBox(), renderer: 'date' },
+                    { field: 'col7', label: 'Popup', editor: new Rui.ui.form.LTextBox(), renderer: 'popup' },
+                    { id: 'btn', label: 'Button', width: 150, renderer: function(val, p, record, row, i){
+                        return '<button type="button" class="L-grid-button">' + record.get('col1') + '</button>';
+                    } }
+                ]
+            });
+
+            var grid1 = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel1,
+                dataSet: dataSet1,
+                headerTools: true,
+                autoToEdit: true,
+                autoWidth: true,
+                width: 600,
+                height: 317
+            });
+
+            grid1.render('editorGrid');
+            
+            dataSet1.load({
+                url: './../../../../sample/data/data11.json'
+            });
+            
+            var dataSet2 = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'month'},
+                    { id: 'company'},
+                    { id: 'date', type: 'date' },
+                    { id: 'monthSum', type: 'number', defaultValue: 0 },
+                    { id: 'balance', type: 'number', defaultValue: 0 },
+                    { id: 'assets', type: 'number', defaultValue: 0 }
+                ]
+            });
+        
+            var columnModel2 = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'month', label: 'Month', width: 70, sortable: true },
+                    { field: 'company', label: 'Company', sortable: true, editor: new Rui.ui.form.LTextBox() },
+                    { field: 'date', label: 'Date', align: 'center', renderer: 'date', editor: new Rui.ui.form.LDateBox() },
+                    { field: 'monthSum', align: 'right', width: 150, renderer: 'money', /*<b>*/ summary: { ids: [ 'company' ] } /*</b>*/, editor: new Rui.ui.form.LNumberBox() },
+                    { field: 'balance', align: 'right', width: 150, renderer: 'money', summary: { ids: [ 'date' ] }, editor: new Rui.ui.form.LNumberBox() },
+                    { field: 'assets', width: 120, align: 'right', width: 150, renderer: 'money' }
+                ]
+            });
+        
+            var sumColumns = ['balance', 'monthSum', 'assets'];
+            var summary = new Rui.ui.grid.LTotalSummary();
+            
+            summary.on('renderTotalCell', summary.renderer({
+                label: {
+                    id: 'date',
+                    text: 'Total'
+                }, 
+                columns: {
+                    monthSum: { type: 'sum', renderer: 'money' },
+                    balance: { type: 'sum', renderer: 'money' },
+                    assets: { type: 'avg', renderer: function(val) { return Rui.util.LNumber.round(val, 2) + '%'; } }
+                }
+            }));
+            
+            var grid2 = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel2,
+                dataSet: dataSet2,
+                autoWidth: true,
+                autoToEdit: true,
+                viewConfig: {
+                    plugins: [ summary ]
+                },
+                height: 400
+            });
+        
+            grid2.render('summaryGrid');
+            
+            dataSet2.load({
+                url: './../../../../sample/data/gridSummary20000.txt'
+            });
+            
+
+            var dataSet3 = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'id' },
+                    { id: 'depth', type: 'number', defaultValue: 0 },
+                    { id: 'seq' },
+                    { id: 'name' },
+                    { id: 'url' },
+                    { id: 'desc' }
+                ]
+            });
+
+            var columnModel3 = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    { id: 'rowId', label: 'id', width: 50, renderer: function(val, param, record, row, i) {
+                        return record.id;
+                    } },
+                    { id: 'pId', label: 'pid', width: 50, renderer: function(val, param, record, row, i) {
+                        return record.pId;
+                    } },
+                    { field: 'id', label: 'id', width: 200 },
+                    { field: 'depth', label: 'depth' },
+                    { id: 'show', label: 'Show', renderer: function(val, p, record) {
+                        return record.getAttribute('_show') + '';
+                    } },
+                    { id: 'expand', label: 'Expand', renderer: function(val, p, record) {
+                        return record.getAttribute('_expand') + '';
+                    } }
+                ]
+            });
+
+            /*<b>*/
+            var treeGridView = new Rui.ui.grid.LTreeGridView({
+                defaultOpenDepth: -1,
+                columnModel: columnModel3,
+                dataSet: dataSet3,
+                fields: {
+                    depthId: 'depth'
+                },
+                treeColumnId: 'id'
+            });
+            /*</b>*/
+
+            var grid3 = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel3,
+                dataSet: dataSet3,
+                /*<b>*/
+                view: treeGridView,
+                selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+                /*</b>*/
+                autoWidth: true,
+                height: 250
+            });
+
+            grid3.render('treeGrid');
+            
+            dataSet3.load({
+                url: './../../../../sample/data/gridTree.json'
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <div id='hd'>
+        <h1>Grid Design View</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>디자인(Design) 변경을 위한 그리드(Grid) 샘플 모음 입니다.</h2>
+            <div class="LblockDesc">
+               <P>RUI가 제공하는 그리드(Grid)의 모습입니다.</P>
+               <p>이 샘플을 이용하여 그리드의 디자인을 변경하세요.</p>
+        </div>
+    </div>
+	<div id='bd'>
+	    <div class="LblockMarkupCode">
+	        <div class="section">
+	            <ul>
+	                <li>
+	                    <label>Editor Grid</label>
+	                    <div id="editorGrid"></div>
+	                </li>
+	                <li>
+	                    <label>Summary Grid</label>
+	                    <div id="summaryGrid"></div>
+	                </li>
+	                <li>
+	                    <label>Tree Grid</label>
+	                    <div id="treeGrid"></div>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+</body>
+</html>

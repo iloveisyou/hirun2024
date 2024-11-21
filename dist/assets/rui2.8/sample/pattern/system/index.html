@@ -1,0 +1,96 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>DevOn RUI Framework Sample</title>
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../plugins/menu/rui_menu.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_license.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+    <link rel="stylesheet" type="text/css" href="./common/css/rui_skin1.css" />
+    <link rel="stylesheet" type="text/css" href="./../../../plugins/menu/rui_menu.css" />
+    <style type="text/css">
+    	.LblockMain {
+    		width : 100%;
+    		min-width: 800px;
+    		height: 800px;
+            position: relative;
+    	}
+   	
+    	#LblockList01_left {
+    	    display: inline;
+    		width: 17%;
+            height: 100%;
+            position: absolute;
+    	}
+    	#LblockList01_right {
+    	    display: inline;
+    		width: 80%;
+            height: 100%;
+            margin-left: 17%;
+    	}
+    	#LblockBody {
+    		width: 80%;
+    		height: 100%;
+    	}
+    </style>
+
+    <script type="text/javascript">
+        var dataSet = null;
+        var slideMenu = null;
+        //************ Dom ready ***********
+        Rui.onReady(function() {
+            //***********DataSet*****************
+            dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet'
+                , dataIndex: 0
+                , fields: [
+                    { id: 'menuId', type: 'number', defaultValue: '' }
+                    , { id: 'seq', type: 'number', defaultValue: '' }
+                    , { id: 'parentMenuId', type: 'number', defaultValue: '' }
+                    , { id: 'name', type: 'string', defaultValue: '' }
+                    , { id: 'url', type: 'string', defaultValue: '' }
+                    ]
+            });
+
+            //**********SlideMenu***************
+            slideMenu = new Rui.ui.menu.LSlideMenu({
+                id: "menuDiv",
+                title: "메뉴 타이틀",
+                dataSet: dataSet,
+                width: 200
+            });
+
+            slideMenu.on("nodeClick", function(e) {
+                var node = e.node;
+                var r = node.getRecord();
+                var url = r.get('url');
+                if(!Rui.util.LObject.isEmpty(url)) {
+                    Rui.get('LblockBody').dom.src = url;
+                }
+            });
+
+            slideMenu.render("menuDiv");
+
+            dataSet.load({ url: "./menu.json", method: "get" });
+        });
+</script>
+
+</head>
+<body>
+    <h1>DevOn RUI Framework Sample</h1>
+    <div class='LblockMain'>
+	    <div id="LblockList01_left">
+	    	<div id="menuDiv"></div>
+	    </div>
+	    <div id="LblockList01_right">
+		    <iframe id="LblockBody" src="" frameborder="0">
+		    </iframe>
+		</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 멀티정렬(multi sort)" />
+    <title>Multi sort</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LHeaderContextMenu.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css" >
+        .LblockMarkupCode {
+            position: relative;
+            height: 400px;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                remainRemoved: true,
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'value' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                groupMerge: true,
+                freezeColumnId: 'col1',
+                defaultSortable: true,
+                autoWidth: true,
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', width: 200 },
+                    { field: 'col2', align: 'center', width: 120 },
+                    { field: 'code', align: 'center' },
+                    { field: 'col3', align: 'right' },
+                    { field: 'col5', align: 'center' },
+                    { field: 'col6', label: 'Col6', width: 200 },
+                    { field: 'col8', label: 'Col8', align: 'right' },
+                    { field: 'date1' , align: 'center', renderer: 'date' },
+                    { field: 'col7', label: 'Popup',renderer: 'popup' }
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                headerTools: true,
+                autoWidth: true,
+                autoHeight: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                width: 800,
+                height: 317
+            });
+
+            grid.render('defaultGrid');
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    params: 'test=aaa',
+                    url: './../../../../sample/data/data11.json'
+                });
+            });
+            
+            var setMultiSortBtn = new Rui.ui.LButton('setMultiSortBtn');
+            setMultiSortBtn.on('click', function(){
+                /*<b>*/
+                var fn = function(vo1, vo2, c){
+                    var r1 = vo1.value;
+                    var r2 = vo2.value;
+                    var v1 = r1.get('col1');
+                    var v2 = r2.get('col1');
+                    var ret = (v1 > v2 ? 1 : (v1 < v2 ? -1 : 0)) * 1;
+                    if(ret === 0) {
+                        var vc1 = r1.get('col2');
+                        var vc2 = r2.get('col2');
+                        ret = (vc1 > vc2 ? 1 : (vc1 < vc2 ? -1 : 0)) * 1;
+                    }
+                    return ret;
+                }; //Function
+                var desc = 'asc'; //String asc | desc
+                dataSet.sort(fn, desc);
+                /*</b>*/
+                grid.getView().getHeaderCellEl(3).addClass(Rui.ui.grid.LBufferGridView.CLASS_GRIDVIEW_SORT_ASC)
+                grid.getView().getHeaderCellEl(4).addClass(Rui.ui.grid.LBufferGridView.CLASS_GRIDVIEW_SORT_ASC)
+            });
+
+            loadPage.hide();
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Multi sort</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid) 멀티 정렬 샘플</h2>
+            <div class="LblockDesc">
+		        <p>그리드(Grid)에 멀티 정렬(Multi Sort)을 적용한 샘플입니다.</p>
+		        <p>멀티 정렬 버튼을 클릭하면 col1, col2 컬럼으로 멀티 정렬이 적용됩니다.</p>
+		        <p>그리드의 헤더 툴바(Header Toolbar)를 이용해서도 멀티 정렬을 사용할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >search</button>
+            <button type="button" id="setMultiSortBtn" >멀티 정렬(col1, col2)</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div class="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+        </div>
+    </div>
+	<script type="text/javascript">
+	var loadPage = new Rui.ui.LLoadPage();
+	//loadPage.show();
+	</script>
+</body>
+</html>

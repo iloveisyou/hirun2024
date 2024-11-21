@@ -1,0 +1,224 @@
+@charset "utf-8";
+
+/*@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);*/
+
+body {
+    font-family: tahoma,sans-serif;
+    font-size:12px;
+    font-size-adjust:none;
+    font-style:normal;
+    font-variant:normal;
+    font-weight:normal;
+    height: 100%;
+    margin: 15px 23px 12px 0px;
+}
+.L-form-field input[type=text], 
+.L-form-field textarea {
+    border: 0;
+}
+
+.L-form-field input[type=checkbox],
+.L-form-field input[type=radio] {
+    margin: 0px 3px 0px 5px;
+}
+
+#hd {
+	margin: 15px 0;
+}
+#hd h1 {
+    padding: 0px 0 0 35px;
+}
+
+#bd {
+    border: 1px solid #fff;
+    padding: 12px 30px 0 20px;
+    margin: 10px 0;
+    margin-left: 20px;
+    color: #222222;
+}
+#bd p {
+    margin-top: 0px;
+}
+#bd h3 {
+    margin: 0px !important;
+}
+
+.LblockSubj {
+	padding: 0 30px 0 20px;
+}
+.LblockSubj h2 {
+	border-bottom: 1px solid #2880B4;
+    line-height: 46px;
+	margin: 0px !important;
+	padding-left: 16px;
+	background: url(./../resources/images/demo/subtitle_blue.gif) no-repeat 0px center;
+}
+.LblockDetail {
+    margin: 5px 5px 10px 5px;
+}
+
+div.blockCode {
+    background-color: #f0f0f0;
+    border: 1px solid #bababa;
+    margin: 0 30px 0 20px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 40px;
+    font-size: 12px;
+    padding-top: 10px;
+}
+
+.detail {
+    font-size: 12px !important;
+    display: none;
+    background-color: #F0F0F0;
+    padding: 1px 28px 5px 28px;
+    margin-top: 14px;
+}
+
+.expand .detail {
+    display: block;
+}
+
+#doc3 div.blockCode .pre {
+    margin:0;
+    padding:0 !important;
+}
+
+#doc3 pre {
+    padding:0 !important;
+}
+
+#doc3 code, pre {
+    font-size: 100% !important;
+}        
+
+#doc3 .script-pre code b {
+}        
+
+h1 {
+    color: #333;
+    font-size: 14px;
+    margin: 0px;
+    font-family: tahoma,sans-serif;
+    font-weight: bold;
+    padding-left: 35px;
+    background: url(./../resources/images/bullet.png) no-repeat 20px 5px;
+    margin-bottom: 14px;
+}
+
+#hd .LblockLine {
+	background-color: #bababa;
+}
+
+#hd-title h1 {
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 100px;
+}
+
+h2 {
+    color: #333;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 10px 0 22px !important;
+}
+
+h3 {
+    color: #333;
+    padding-left: 13px;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    margin: 28px 3px 20px 3px !important;
+    background: url(./images/bullet.png) no-repeat center left;
+}
+
+ul.scripts, ul.styles {
+    list-style-type: none;
+}
+
+ul.scripts li, ul.styles li {
+    padding-left: 10px;
+    background: url(./images/bullet_small.png) no-repeat center left;
+}
+
+.LblockLine {
+    background-color: #bababa;
+    height: 1px;
+}
+
+.LblockMarkupCode {
+    position: relative;
+    *z-index: 2;
+}
+
+.blockCode a:hover {
+    color:#95c3e5;
+}
+
+.blockCode a {
+    color:#333;
+}
+
+.L-button button {
+    height: 22px;
+}
+
+.L-combo-list-wrapper, .L-textbox-list-wrapper, .bd {
+    color: #000;
+}
+
+.L-layout .L-layout-unit div.L-layout-hd h2 {
+    color: #000;
+}
+
+.LblockMarkupCode h1, .LblockMarkupCode h2, .LblockMarkupCode h3 {
+    color: #000;
+}
+
+.more {
+    background: url(./images/unfolding.png) no-repeat center left;
+    padding-left: 17px;
+}
+
+.expand .more {
+    background: url(./images/folding.png) no-repeat center left;
+}
+
+.LblockDesc {
+    padding-top: 19px;
+    padding-bottom: 1px;
+}
+
+.LblockDesc p {
+    margin: 7px 0px;
+}
+
+.vertical {
+    vertical-align: middle;
+}
+
+.LblockButton {
+    padding: 10px 0px;
+}
+
+.LblockButton .L-button {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    *margin-right: 5px;
+}
+
+.LblockDesc a {
+	color: #000;
+}
+
+.L-ux-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background-color: #fff;
+}

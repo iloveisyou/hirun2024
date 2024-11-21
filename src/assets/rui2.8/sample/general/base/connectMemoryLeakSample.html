@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-keyword" content="Connect, ajax, 비동기 요청, 메모리릭(memory leak)" />
+    <title>DataSet Memory leak Check</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        var data = null;
+        Rui.getConfig().set('$.core.logger.show', [true]);
+        Rui.onReady(function() {
+            Rui.get(agentInfo).html('테스트 브라우저 종류 : ' + navigator.userAgent.toLowerCase());
+            //var http;
+            //http = new ActiveXObject('MSXML2.XMLHTTP.3.0');
+            
+            var searchBtn = new Rui.ui.LButton("searchBtn");
+            searchBtn.on("click", function(){
+                var uri = Rui.util.LString.getTimeUrl('./../../../sample/data/large/largeData10000.json');
+                //http.open('get', uri, true);
+                //http.send(null);
+                var request = Rui.LConnect.asyncRequest('GET', uri, {
+                    success: function(e) {
+                        data = eval('(' + conn.responseText +  ')');
+                        //alert(2);
+                    }
+                });
+            });
+            
+            var setStartBtn = new Rui.ui.LButton('setStartBtn');
+            setStartBtn.on('click', function(){
+                laterFn = Rui.later(2000, window, function() {
+                    searchBtn.click();
+                    Rui.get('showData').html(parseInt(Rui.get('showData').getHtml()) + 1);                
+                }, null, true);
+            });
+            var laterFn;
+            var setEndBtn = new Rui.ui.LButton('setEndBtn');
+            setEndBtn.on('click', function(){
+                if(laterFn) laterFn.cancel();
+            });
+        });
+            
+        </script>
+
+</head>
+<body>
+    <h1>DataSet Memory leak Test</h1>
+    <h2>DataSet Memory leak Test용 샘플 (dataset)</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc"><p>DataSet 처리 과정의 메모리 누수 현상 체크를 위한 테스트용 샘플 입니다.</p></div>
+    <div id='bd'>
+    <div id='agentInfo'></div>
+    <div class="LblockButton" >
+        <button type="button" id="setStartBtn" >start</button>
+        <button type="button" id="setEndBtn" >end</button>
+    </div>
+    
+    <div class="LblockMarkupCode">
+        <div id="aaa" class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+    <div class="LblockButton" >
+        <button type="button" id="searchBtn" >Search</button>
+    </div>
+    <div id='showData'>0</div>
+</div>
+</body>
+</html>

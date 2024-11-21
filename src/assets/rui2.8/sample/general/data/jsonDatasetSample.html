@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-keyword" content="JSonDataSet" />
+    <title>JSON DataSet</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*<b>*/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                dataIndex: 0,
+                fields: [
+                    { id: 'col1' }
+                ]
+            });
+            
+            dataSet.load({
+                url: './../../data/data.json',
+                params: {
+                    aaa: 'aaa',
+                    bbb: 'bbb'
+                }
+            });
+            /*</b>*/
+    
+            alert("dataSet..getNameValue(0,'col1') : " + dataSet.getNameValue(0,'col1'));
+    
+            var dataSet2 = new Rui.data.LJsonDataSet({
+                id: 'dataSet2',
+                dataIndex: 1,
+                fields: [{
+                    id: 'col1'
+                }]
+            });
+    
+            dataSet2.on('load', function(e){
+                alert("dataSet2..getNameValue(0,'col1') : " + dataSet2.getNameValue(0,'col1'));
+            });
+    
+            dataSet2.on('loadException', function(e){
+                alert("load error : " + e.throwObject.message);
+            });
+    
+            dataSet2.load({
+                url: './../../data/data.json'
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>JSON DataSet</h1>
+    <h2>json 구조를 가지는 데이터셋(DataSet)을 사용하는 기본 샘플 (LJsonDataSet)</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>json 형태를 사용하는 데이터셋(DataSet)의 기본 구조입니다. RUI에서의 기본 데이터셋은 json 형태입니다.</p>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+        </div>
+        <div>Ctrl + Shift + F12를 누르시면 디버그 콘솔이 열립니다.</div>
+        <div>콘솔 상단의 catalog중 Debug를 check하시면 command 실행이나 클릭 등의 수행결과를 확인하실 수 있습니다. </div><br>
+    </div>                
+</body>
+</html>

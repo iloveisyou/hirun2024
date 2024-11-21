@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>UnorderList</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../plugins/ui/tree/rui_tree.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="common.css" />        
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type="text/javascript" class="script-code">
+            $C(function(){
+                //***********DataSet*****************
+                var dataSet = $C.dataSet({
+                    id: 'dataSet'
+                    , fields: [
+                        { id: 'menuId',type:"number"}
+                        , { id: 'seq', type: 'number'}
+                        , { id: 'parentMenuId',type:"number"}
+                        , { id: 'name'}
+                        , { id: 'url'}
+                        ]
+                });
+    
+                dataSet.load({ url: "./../../../../sample/data/menu.json", method: "get" });
+                
+                /*<b>*/
+                //**********SlideMenu***************
+                var ul = $C.unorderList({
+                    dataSet: dataSet,
+                    fields: {
+                        rootValue: null
+                        , parentId: 'parentMenuId'
+                        , id: 'menuId'
+                        , label: 'name'
+                        , order:'seq'
+                    }
+                });                
+                
+                ul.render("divUl");
+                /*</b>*/
+            });
+            
+        </script>
+
+    </head>
+    <body>
+        <h1>unorderList Sample</h1>
+        <h2>unorderList 형태의 LTreeView에 대한 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>unorderList 형태의 트리 구조 입니다. 트리는 unorderList로부터 상속됩니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id="divUl">
+        </div>
+    </div>
+</div>
+    </body>
+</html>

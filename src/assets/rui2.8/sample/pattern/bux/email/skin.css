@@ -1,0 +1,29 @@
+/* body element에 대한 margin/padding은 제거해야 정상 작동한다. */
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 11pt;
+}
+
+.L-layout-hd h2 {
+	margin: 0px;
+}
+
+.markup-code {
+	position: relative;
+	height: 100%;
+}
+
+#toggle {
+	text-align: center;
+	padding: 1em;
+}
+
+#toggle a {
+	padding: 0 5px;
+	border-left: 1px solid black;
+}
+
+#tRight {
+	border-left: none !important;
+}

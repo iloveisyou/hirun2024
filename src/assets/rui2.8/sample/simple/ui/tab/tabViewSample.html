@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>TabView Sample</title>
+    <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+    <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+    <script type='text/javascript' src='./../../../../plugins/ui/tab/rui_tab.js'></script>
+    <script type='text/javascript' src='./../../../../plugins/ui/tree/rui_tree.js'></script>
+    <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+    <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+    <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    <script type="text/javascript" class="script-code">
+        //************ Dom ready ***********
+        var tabView = null;
+        var dataSet = null;
+        var dataSetTree = null;
+        var columnModel = null;
+        var grid = null;
+        var tree = null;
+        
+        $C(function() {
+            /*************dataset*********/            
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'date1', type: 'date' }
+            ]
+            });
+            
+            dataSetTree = $C.dataSet({
+            id: 'dataSet'
+            , fields: [
+                { id: 'menuId', type: 'number'}
+                , { id: 'seq', type: 'number'}
+                , { id: 'parentMenuId', type: 'number'}
+                , { id: 'name'}
+                , { id: 'url'}
+                ]
+            });
+            
+            /*<b>*/
+            /*************tabView*******************/
+            tabView = $C.tabview({                
+                contentHeight: 300
+            });
+            tabView.render("tab-container");
+            /*</b>*/
+            
+            tabView.on('activeIndexChange', function(e){
+
+                if(e.activeIndex == 1){
+                    //첫번째 탭 로딩
+                    
+                    if(!grid){
+                        /**********gridview************/
+                        columnModel = $C.columnModel({
+                            columns: [
+                                new Rui.ui.grid.LStateColumn(),
+                                new Rui.ui.grid.LNumberColumn(),
+                                { field: "col1", label: "Col1", editor: $C.textBox() },
+                                { field: "col2", sortable: false, align:'center' },
+                                { field: "col3", align: 'right', hidden:true },
+                                { field: "date1" , align:'center', renderer: function(v){
+                                    return '<font color="red">' + v + '</font>';
+                            }}]
+                        });
+                        
+                        grid = $C('#defaultGrid').grid({
+                            columnModel: columnModel,
+                            dataSet:dataSet,
+                            height:300
+                        });
+
+                        var pager = $C.pager({
+                            gridPanel : grid
+                        });
+                        pager.render();
+                        
+                        dataSet.load({url: './../../../../resources/data/data.json',method: "get"});
+                    }
+                }else if(e.activeIndex == 2){
+                    //두번째 탭 로딩
+
+                    if(!tree){
+                        /**********treeview************/
+                        tree = $C('#treeDiv1').tree({
+                            width:200,
+                            height:200,
+                            dataSet: dataSetTree
+                        });
+                        dataSetTree.load({ url: "./../../../../resources/data/menu.json", method: "get" });
+                    }
+
+                }
+            });
+        });
+
+    </script>
+</head>
+<body class="L-skin-sam">
+    <h1>TabView Auto Adding Child</h1>
+    <h2>별도의 지정 없이 title 속성으로 자동으로 LTabView label을 지정하는 샘플1</h2>
+    <div class="LblockLine"></div>
+    <div>
+        <p>기본적인 속성 값만으로 탭을 생성하며 이때, div에 있는 title 속성 값을 사용합니다.</p>
+        <p>자동 탭을 구성하기 위해서는 container에 반드시 title attribute가 있어야 합니다. div의 title이 탭의 label이 됩니다.</p>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div id="tab-container">
+                <div title="Lorem">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+                </div>
+                <div title="Grid">
+                    <div id="defaultGrid"></div>
+                </div>
+                <div title="TreeView">
+                    test용 텍스트 입력 부분입니다.
+                    <div id="treeDiv1"></div>
+                </div>
+                <div title="Test 2">
+                    test 2 탭 부분입니다.
+                </div>
+                <div title="Test 3">
+                    test 3 탭 부분입니다.
+                </div>
+            </div>
+            <!--div id="divUl">
+                <div style="height: 20px;" class="L-ul L-ul-tabmenu L-fixed" id="L-gen10">
+                    <ul id="L-gen12" class="L-ul-first ">
+                        <li id="L-gen16" class="L-ul-li-depth-0 L-ul-li-line" style="">
+                            <div id="L-gen13" class="L-ul-node L-ul-li-div-depth-0 L-ul-has-child-open-mid L-ul-node-r1001 L-ul-focus-node L-ul-focus-top-node">
+                                <div class="L-ul-tabmenu-content">
+                                    Core
+                                </div>
+                            </div>
+                        </li>
+                        <li class="L-ul-li-depth-0" style="">
+                            <div id="L-gen14" class="L-ul-node L-ul-li-div-depth-0 L-ul-has-child-close-last L-ul-node-r1062">
+                                <div class="L-ul-tabmenu-content">
+                                    widget
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div-->
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+[{
+"metaData":{
+"totalCount":"130"
+},
+"records":[
+{"menuId":1,"seq":1,"parentMenuId":null,"name":"Pattern","url":"","desc":""},
+{"menuId":2,"seq":1,"parentMenuId":1,"name":"P1 Single Detail","url":"./pt01.jsp","desc":""},
+{"menuId":3,"seq":1,"parentMenuId":1,"name":"P2 Multi Detail","url":"./pt02.jsp","desc":""},
+{"menuId":4,"seq":1,"parentMenuId":1,"name":"P3-1 List to Detail","url":"./pt031.jsp","desc":""},
+{"menuId":5,"seq":1,"parentMenuId":1,"name":"P32. List / Detail","url":"./pt032.jsp","desc":""},
+{"menuId":6,"seq":1,"parentMenuId":1,"name":"P41 Master/Detail[1:1]","url":"./pt041.jsp","desc":""},
+{"menuId":7,"seq":1,"parentMenuId":1,"name":"P42 Master/Detail(1:n)","url":"./pt042.jsp","desc":""},
+{"menuId":8,"seq":1,"parentMenuId":1,"name":"P43 Master/Detail [n:1]","url":"./pt043.jsp","desc":""},
+{"menuId":9,"seq":1,"parentMenuId":1,"name":"P44 Master/Detail [n:n]","url":"./pt044.jsp","desc":""},
+{"menuId":10,"seq":1,"parentMenuId":1,"name":"Patten Extra","url":"./ptx01.jsp","desc":""}
+]
+}]

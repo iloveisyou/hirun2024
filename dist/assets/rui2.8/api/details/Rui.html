@@ -1,0 +1,373 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+RUI의 기본 최상위 객체로서 기능 및 패키지 역활을 한다.
+
+샘플 경로 :
+<a href="./../sample/general/base/baseSample.html" target="_new">/rui/sample/general/base/baseSample.html</a>
+<a href="./../sample/general/base/prototypeSample.html" target="_new">/rui/sample/general/base/prototypeSample.html</a>
+<a href="./../sample/general/base/ruiSample.html" target="_new">/rui/sample/general/base/ruiSample.html</a>
+<a href="./../sample/general/base/appendSample.html" target="_new">/rui/sample/general/base/appendSample.html</a>
+<a href="./../sample/general/base/bootstrapSample.html" target="_new">/rui/sample/general/base/bootstrapSample.html</a>
+<a href="./../sample/general/base/browserSample.html" target="_new">/rui/sample/general/base/browserSample.html</a>
+<a href="./../sample/general/base/connectSample.html" target="_new">/rui/sample/general/base/connectSample.html</a>
+<a href="./../sample/general/base/domHandleSample.html" target="_new">/rui/sample/general/base/domHandleSample.html</a>
+<a href="./../sample/general/base/elementSample.html" target="_new">/rui/sample/general/base/elementSample.html</a>
+<a href="./../sample/general/base/eventSample.html" target="_new">/rui/sample/general/base/eventSample.html</a>
+</div>
+</div>
+<!-- method 시작 -->
+<div class="method_namespace">
+<div class="L-description">
+namespace를 지정하고 만약 존재하지 않는 경우 생성하고 반환한다.
+Rui.namespace("property.package");
+Rui.namespace("Rui.property.package");
+Rui.property나 Rui.property.package 중에 하나를 생성한다.
+
+패키지 네이밍은 조심하여야 한다. 예약어는 어떤 브라우저에서는 작동하고
+또 다른데서는 작동하지 않을 수 있다. 예를 들어, 다음은 Safari에서 실패할 것이다:
+
+Rui.namespace("really.long.nested.namespace");
+
+이 fail은 "long"이 ECMAScript에서 앞으로 예약어가 될 것이기 때문이다.
+</div>
+<div class="L-sample">
+sample: Rui.project라는 패키지를 생성한다.  
+<div class="L-code">
+Rui.namespace("Rui.project");
+</div> 
+</div>
+</div>
+
+<div class="method_log">
+<div class="L-description">
+만약 widget이 사용가능하다면, log message를 출력하기 위하여 Rui.ui.LLogger를 사용한다.
+이는 console 속성이나 alert로 처리 못하는 이벤트 부분을 계층 별로 로그를 남길 수 있게 해준다.
+</div>
+<div class="L-sample">
+sample: '이벤트 호출'이라는 로그를 남긴다.  
+<div class="L-code">
+Rui.log("이벤트 호출");
+</div> 
+</div>
+</div>
+
+<div class="method_extend">
+<div class="L-description">
+constructor들과 method들을 연결할 수 있는 상속 전략을 지원하는
+prototype, constructor, superclass property들을 설정하는 유틸리티.
+Statice member들은 상속되지 않는다. 자바에서의 extends 속성과 비슷하다.
+</div>
+<div class="L-sample">
+sample: LTest1클래스를 LEventProvider로 상속받는 객체를 선언한다. 선언시 생성자는 수퍼클래스의 생성자를 호출한다.  
+<div class="L-code">
+Rui.LTest1 = function(config) {
+    Rui.LTest1.superclass.constructor.call(this, config);
+};
+Rui.extend(Rui.LTest1, Rui.util.LEventProvider, {
+...........
+});
+</div> 
+</div>
+</div>
+
+<div class="method_applyObject">
+<div class="L-description">
+object 객체의 property 및 function을 추가한다.
+기본적으로 원객체의 속성이나 메소드가 없는 기능만 추가되지만
+세번재 인수가 true로 설정되면 overwrite된다.  
+</div>
+<div class="L-sample">
+sample: obj1객체에 obj2의 속성 및 메소드를 추가한다.  
+<div class="L-code">
+var obj1 = {
+    col1: 'col1'
+}
+var obj2 = {
+    col2: 'col2',
+    test: function() {
+    }
+}
+Rui.applyObject(obj1, obj2);
+</div> 
+</div>
+
+<div class="L-sample">
+sample: obj1객체에 obj2의 속성을 강제로 추가한다.  
+<div class="L-code">
+var obj1 = {
+    col1: 'col1'
+}
+var obj2 = {
+    col1: 'col2',
+    col2: 'col2-2'
+}
+Rui.applyObject(obj1, obj2, true);
+</div> 
+</div>
+</div>
+
+<div class="method_applyIf">
+<div class="L-description">
+conifg의 property둘이 이미 존재하지 않는다면, 모든 property를 obj에 복사한다.
+</div>
+<div class="L-sample">
+sample: obj1객체에 없는 obj2의 속성과 메소드를 추가한다.  
+<div class="L-code">
+var obj1 = {
+    col1: 'col1'
+}
+var obj2 = {
+    col1: 'col2',
+    col2: 'col2-2'
+}
+Rui.applyIf(obj1, obj2);
+</div> 
+</div>
+</div>
+
+<div class="method_onReady">
+<div class="L-description">
+DOM이 처음으로 사용가능할때 제공된 callback을 실행한다. (window.onload와 동일)
+onReady event가 발생한 이후에 호출되면 이는 즉시 실행될 것이다.
+스크립트가 동적으로 페이지에 inject될 때 DOMContentReady event는 발생하지 않는다.
+이것은 FireFox나 Opera에서 라이브러리가 inject될때 onReady custom event가
+절대 발생하지 않는 것을 의미한다.
+그것은 Safari에서 event가 발생될 것이며, IE는 지연된 스크립트를 사용할 수 없는 
+경우에 event가 발생하도록 허용한다.
+우리는 이런 것들이 모든 브라우저에서 동일하게 처리되도록 하려한다.
+포함된 inline 대신 스크립트가 inject 되었을때, 확인할수 있는 방법이 있는가?
+덧붙여진 listener를 가지지 않고 window onload event가 발생할지에 대한 여부를 알수 있는 방법이 있는가?
+
+onReady메소드는 복수로 사용 가능하다. 
+</div>
+<div class="L-sample">
+sample: onReady 메소드를 선언한다.  
+<div class="L-code">
+Rui.onReady(function() {
+.........
+});
+</div> 
+</div>
+</div>
+
+<div class="method_ajax">
+<div class="L-description">
+Ajax로 서버에 데이터를 요청한다. 
+</div>
+<div class="L-sample">
+sample: col1파라미터로 서버에서 데이터를 가져와 log라는 html dom객체에 출력한다.
+<div class="L-code">
+Rui.ajax({
+    url: 'test.rui', 
+    success: function(e) {
+        Rui.get('log').html(e.responseText);
+    },
+    failure: function(e) {
+        alert('서버에서 에러가 발생했습니다.');
+    },
+    params: {
+        col1: '값1'
+    }
+});
+</div> 
+</div>
+</div>
+
+<div class="method_id">
+<div class="L-description">
+유일한 id들을 생성한다. 만약 element가 이미 id를 가지고 있으면, 그것은 변하지 않는다. 
+</div>
+<div class="L-sample">
+sample: LTextbox에 고유한 아이디를 생성한다.
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id: Rui.id(),
+    applyTo: 'textBox1'
+});
+</div> 
+</div>
+</div>
+
+<div class="method_select">
+<div class="L-description">
+주어진 CSS selector에 기반한 node들의 집합을 조회하여 Rui.LElementList로 리턴한다.
+Rui.get 메소드는 id를 기본으로 처리하고 Rui.select는 css3 문법을 따른다.
+LElementList기본적으로 method chain 구조를 따른다.
+</div>
+<div class="L-sample">
+sample: html에 LblockDetail css로 정의된 html dom 객체 하위에 input태그들을 모두 disable로 변경한다. 
+<div class="L-code">
+Rui.select('.LblockDetail input').disable();
+</div> 
+</div>
+
+<div class="L-sample">
+sample: html에 LblockDetail css로 정의된 html dom 객체 하위에 input태그들을 모두 disable로 변경하고 'L-test' css 추가한다. 
+<div class="L-code">
+Rui.select('.LblockDetail input').disable().addClass('L-test');
+</div> 
+</div>
+</div>
+
+<div class="method_dump">
+<div class="L-description">
+object나 array를 표현하는 간단한 문자열을 반환한다.
+object들의 다른 타입은 처리되지 않고 반환될 것이다.
+Array들은 색인될 것으로 예상된다.
+연관 배열에 대한 object 표기법을 사용한다.
+※ 자기 자신을 가지는 객체를 dump하게 되면 무한 루프가 발생하므로 주의해야 한다.
+</div>
+<div class="L-sample">
+sample: LTextbox를 dump기능으로 로그를 남긴다.
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id: 'textBox1',
+    applyTo: 'textBox1'
+});
+
+Rui.log(Rui.dump(textBox1));
+</div> 
+</div>
+</div>
+
+<div class="method_createElements">
+<div class="L-description">
+html 해당되는 객체를 생성한후 LElementList로 리턴한다.
+기본적으로 document.createElement 메소드로 처리하면 계층이 있는 항목은 반복적으로 생성해야 하고 또 Rui.LElement객체로
+만들어야 하기때문에 반복되는 문법을 간소화할 수 있고 생성 못하는 계층도 생성이 가능하다.
+</div>
+<div class="L-sample">
+sample: ul태그의 html을 LElementList로 생성한 후 ul을 가지는 첫번째 LElement를 얻어온다.
+<div class="L-code">
+var testEl = Rui.createElelements('&lt;ul&gt;&lt;li&gt;값1&lt;/li&gt;&lt;/ul&gt;');
+var ulEl = testEl.getAt(0);
+ulEl.addClass('L-test');
+</div> 
+</div>
+</div>
+
+<div class="method_hasOwnProperty">
+<div class="L-description">
+object instance에 property이 존재하는지 여부를 리턴한다.
+만약 property가 object에 존재하지 않거나 prototype으로부터 
+상속된 경우에는 false를 반환한다.
+이 abstraction은 Safari 1.3.x 버전에 대해 hasOwnProperty를 사용 가능하도록 제공한다.
+property가 같은 값으로 instance와 prototype 양쪽에 추가될때
+Rui.hasOwnProperty와 Object.prototype.hasOwnProperty 사이엔 차이점이 있다:
+</div>
+<div class="L-sample">
+sample: foo속성 여부를 true or false 메시지로 출력한다.
+<div class="L-code">
+var A = function() {};
+A.prototype.foo = 'foo';
+var a = new A();
+a.foo = 'foo';
+alert(a.hasOwnProperty('foo')); // true
+alert(Rui.hasOwnProperty(a, 'foo')); // false when using fallback
+</div> 
+</div>
+</div>
+
+<div class="method_getConfig">
+<div class="L-description">
+LConfiguration 객체를 리턴한다.
+</div>
+<div class="L-sample">
+sample: defaultLocale 정보를 얻어와 메시지를 출력한다.
+<div class="L-code">
+var config = Rui.getConfig();
+var name = "$.core.defaultLocale";
+alert(typeof config.get(name));
+alert(config.get(name));
+</div> 
+</div>
+</div>
+
+<div class="method_getMessageManager">
+<div class="L-description">
+LMessageManager 객체를 리턴한다.
+</div>
+<div class="L-sample">
+sample: 다국어를 지원하는 성공 메시지를 출력한다.
+<div class="L-code">
+alert(Rui.getMessageManager().get('$.base.msg100'));
+</div> 
+</div>
+</div>
+
+<div class="method_get">
+<div class="L-description">
+Rui.LElement onject들을 조회하기 위한 Static method.
+<p><b>이 method는 콤포넌트들을 조회하지 않는다.</b> 
+이 method는 DOM element들을 캡슐화 하는 Rui.Element object들을 조회한다.
+그것의 ID로 Component를 조회하기 위하여 new로 생성한 해당 객체를 사용한다.</p>
+<p>같은 object를 일관되게 반환하기 위하여 simple 캐싱을 사용한다.
+만약 object가 AJAX나 DOM을 통해 똑같은 id로 재생성되었으면, 자동적으로 수정한다.</p>
+
+단, Rui의 콤포넌트로 생성된 객체는 Rui.get 메소드를 사용하여 변경해서는 안된다.
+콤포넌트로 생성된 객체들은 모두 해당 콤포넌트의 Api 규칙을 따라 이용해야 한다.
+예)
+- dom 처리 방법 : Rui.get(\'col1\').disable();
+- 콤포넌트 처리 방법 : textbox.disable();
+※ 콤포넌트로 생성된 dom을 아래와 같이 호출하면 안됨.
+Rui.get(\'textbox\').disable();
+</div>
+<div class="L-sample">
+sample: col1'객체를 LElement객체로 리턴한다.
+<div class="L-code">
+Rui.get('col1');
+</div> 
+</div>
+</div>
+
+<!-- property 시작 -->
+<div class="property_browser">
+<div class="L-description">
+browser의 agent 정보
+</div>
+<div class="L-sample">
+sample: browser정보를 메시지로 출력한다.
+<div class="L-code">
+var logData = 'msie : ' + Rui.browser.msie + '\r\n';
+logData += 'safari : ' + Rui.browser.safari + '\r\n';
+logData += 'opera : ' + Rui.browser.opera + '\r\n';
+logData += 'mozilla : ' + Rui.browser.mozilla + '\r\n';
+logData += '\r\n';
+
+logData += 'version : ' + Rui.browser.version + '\r\n';
+
+logData += 'webkit : ' + Rui.browser.webkit + '\r\n';
+logData += 'gecko : ' + Rui.browser.gecko + '\r\n';
+
+logData += 'userAgent : ' + navigator.userAgent.toLowerCase();
+alert(logData);
+</div> 
+</div>
+</div>
+
+<div class="property_browser">
+<div class="L-description">
+pc의 platform 정보
+window : 윈도우 여부
+mac : mac 여부
+air : air 여부
+linux : linux 여부
+isMobile : 모바일 여부 (Rui.mobile.android || Rui.mobile.iphone || Rui.mobile.ipad || Rui.mobile.playbook || Rui.mobile.blackberry)
+</div>
+<div class="L-sample">
+sample: browser정보를 메시지로 출력한다.
+<div class="L-code">
+var logData = 'window : ' + Rui.platform.window + '\r\n';
+logData += 'mac : ' + Rui.platform.mac + '\r\n';
+logData += 'air : ' + Rui.platform.air + '\r\n';
+logData += 'linux : ' + Rui.platform.linux + '\r\n';
+logData += 'isMobile : ' + Rui.platform.isMobile + '\r\n';
+
+logData += 'userAgent : ' + navigator.userAgent.toLowerCase();
+alert(logData);
+</div> 
+</div>
+</div>
+
+</div>

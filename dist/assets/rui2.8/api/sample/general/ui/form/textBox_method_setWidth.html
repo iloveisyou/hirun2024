@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="textBox,setWidth,width,폭,너비,가로크기" />
+    <title>TextBox 너비설정 </title>
+    
+    <script type="text/javascript" src="./../../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../../resources/rui.css" />
+    
+    <!--  샘플용 스크립트 -->
+    <script type="text/javascript" src="./../../../../../sample/general/rui_sample.js"></script>
+    
+    <!--  샘플용 스크립트 -->
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+                
+            var txtBox1 = new Rui.ui.form.LTextBox({
+                width: 300,    
+                label: 'setWidth', 
+                applyTo: 'textbox1',
+            });
+           
+            Rui.get('resizeBtn').on('click', function(e) {
+                /*<b>*/
+                txtBox1.setWidth(30);
+                /*</b>*/
+            }); 
+               
+        });            
+    </script>
+</head>
+<body>
+    <h1>TextBox 너비설정</h1>
+    <h2>TextBox의 너비를 설정하는 함수 setWidth</h2>
+    <div class="LblockLine"></div>
+    <div>텍스트박스의 너비설정을 setWidth 함수를 통해 설정할 수가 있습니다.</div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div>
+                <input type="text" id="textbox1" name="textbox1">
+            </div>
+        </div>
+        <div class="LblockButton">
+            <div id="resizeBtn" class="LsampleButton">resize</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Radio Group</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" >
+
+        <script type='text/javascript' class="script-code">
+            var vm = null;
+            $C(function(){
+                /*<b>*/
+                var oneData = {
+                    code: 'code1',
+                    value: 'CODE1'
+                };
+                
+                var col1Radio = $C.radio({
+                    name: 'col1',
+                    label: 'R1',
+                    value: 'R1'
+                });
+                
+                $C('#radio1').radioGroup({
+                    width: 200,
+                    name: 'col1',
+                    items: [col1Radio, {
+                        label: 'R2',
+                        value: 'R2'
+                    }]
+                });
+                /*</b>*/
+
+                vm = $C.validatorManager({
+                    validators:[
+                    { id: 'col1', validExp:'Col1:true:groupRequire=col1'}
+                    ]
+                });
+                                
+                $C('#radio1').on('changed', function(e){
+                    $C.log('dataset Value : ' + this.getValue());
+                });
+                
+                $C('#radio1').on('enable', function(e){
+                    $C.log('enable');
+                });
+                
+                $C('#radio1').on('disable', function(e){
+                    $C.log('disable');
+                });
+                
+                $C('#radio1').on('focus', function(e){
+                    $C.log('focus');
+                });
+                
+                $C('#radio1').on('blur', function(e){
+                    $C.log('blur');
+                });
+                
+                $C('#radio1').on('show', function(e){
+                    $C.log('show');
+                });
+                
+                $C('#radio1').on('hide', function(e){
+                    $C.log('hide');
+                });
+                
+                $C('#radio1').on('valid', function(e){
+                    $C.log('valid');
+                });
+                
+                $C('#radio1').on('invalid', function(e){
+                    $C.log('invalid');
+                });
+            });
+        </script>
+        <!--*********************************JsUnit Test용 소스 시작********************************-->
+        <script type="text/javascript" src="../../../../../jsunit/app/jsUnitCore.js">
+        </script>
+        <script type='text/javascript' class="script-code">
+            //log 활성화
+            $C('!config').set('$.core.logger.show', [true]);
+            //setUpPageStatus == 'complete'가 되어야만  test function이 실행된다.
+            function setUpPage(){
+                setUpPageStatus = 'running';
+            }
+            
+            //test function이 실행되기 전에 먼저 실행된다.
+            function setUp(){
+            }
+            
+            //**************test function 시작*****************
+            function testR1Checked(){
+                $C('#radio1').setValue('R1');
+            }
+            
+            function testR2Checked(){
+                $C('#radio1').setValue('R2');
+            }
+            
+            function testSetVisibilityMode(){
+                $C('#radio1').setVisibilityMode(false);
+            }
+            
+            function testValid(){
+                $C('#radio1').valid();
+            }
+            
+            function testInvalid(){
+                $C('#radio1').invalid();
+            }
+            
+            function testFocus(){
+                $C('#radio1').focus();
+            }
+            
+            function testBlur(){
+                $C('#radio1').blur();
+            }
+            
+            function testSetWidth(){
+                $C('#radio1').setWidth('300px');
+            }
+            
+            function testGetWidth(){
+                $C.log($C('#radio1').getWidth());
+            }
+            
+            function testDisable(){
+                $C('#radio1').disable();
+            }
+            
+            function testEnable(){
+                $C('#radio1').enable();
+            }
+            
+            function testShow(){
+                $C('#radio1').show();
+            }
+            
+            function testHide(){
+                $C('#radio1').hide();
+            }
+            
+            function noTestDestroy(){
+                $C('#radio1').destroy();
+            }
+            
+            function testValidate() {
+                if (vm.validateGroup('panel') == false) {
+                    $C.alert($C('!message').get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>') );
+                    return;
+                }
+            }
+            
+            //**************test function   끝*****************
+            //모든 test function이 실행된 후 실행된다.
+            function tearDown(){
+            }
+        </script>
+        <!--*********************************JsUnit Test용 소스   끝********************************-->
+    </head>
+    <body>
+        <h1>radiogroup sample</h1>
+        <h2>LRadioGroup로 구현하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>라디오 버튼은 그룹화 객체를 통해 2개 이상 그룹화 될 수 있습니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id='panel'>
+            <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                <fieldset>
+                    <label for="radio1">
+                        col1
+                    </label>
+                    <div id="radio1">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <a href='javascript:testR1Checked()'>R1Checked</a>
+    <a href='javascript:testR2Checked()'>R2Checked</a>
+    <a href='javascript:testEnable()'>Enable</a>
+    <a href='javascript:testDisable()'>Disable</a>
+    <a href='javascript:testShow()'>Show</a>
+    <a href='javascript:testHide()'>Hide</a>
+    <a href='javascript:testSetVisibilityMode()'>setVisibilityMode</a>
+    <a href='javascript:testValid()'>Valid</a>
+    <a href='javascript:testInvalid()'>Invalid</a>
+    <a href='javascript:testFocus()'>Focus</a>
+    <a href='javascript:testBlur()'>Blur</a>
+    <a href='javascript:noTestDestroy()'>Destroy</a>
+    <a href='javascript:testSetWidth()'>SetWidth</a>
+    <a href='javascript:testGetWidth()'>GetWidth</a>
+    <a href='javascript:testValidate()'>validate</a>
+</div>
+    </body>
+</html>

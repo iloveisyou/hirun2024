@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="버튼(LButton), Submit, Reset" />
+    <title>Button Form Submit</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+  
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        var form, button1, button2, button3 = null;
+        Rui.onReady(function(){
+        	
+        	var resultElement = Rui.get('result');
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+             
+            /*<b>*/
+            var resetBtn = new Rui.ui.LButton({
+                applyTo: 'submitBtn',
+                type: 'submit'
+            });
+
+            var resetBtn = new Rui.ui.LButton({
+            	applyTo: 'resetBtn',
+            	type: 'reset'
+            });
+            /*</b>*/
+            
+            
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Button Form Submit</h1>
+    <h2>Form Submit을 지원하는 LButton.</h2>
+    <div class="LblockLine"></div> 
+    <div class="LblockDesc">
+        <p>버튼은 기본적으로 더블클릭 방지를 위해 기본적으로 0.5초의 disable time을 가집니다.</p>
+    </div>
+    <div id='bd'>
+        <form action="./buttonExtraSample.html">
+        <div class="LblockMarkupCode">
+            <input type='text' id='result' />
+        </div>
+        <div class="LblockButton" >
+            <button id="submitBtn">Submit</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+        </form>
+    </div>
+</body>
+</html>

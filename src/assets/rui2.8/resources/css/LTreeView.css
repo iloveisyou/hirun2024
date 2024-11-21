@@ -1,0 +1,126 @@
+/* LTreeView
+------------------------------*/
+/*************** inherited & override ***********/
+.L-ul{}
+.L-ul-treeview {}
+.L-ul-treeview ul, .L-ul-treeview li{
+    list-style:none outside none;
+}
+.L-ul-treeview li{}
+.L-ul-treeview .L-ul-first {}
+/*L-ul-li-depth별로 li에 들어가는 class*/
+.L-ul-treeview .L-ul-li-depth-0{}
+.L-ul-treeview .L-ul-li-div-depth-0{}
+.L-ul-treeview .L-ul-li-line{
+    background:url("../../resources/images/ul/tree/mid_blank.gif") repeat-y scroll left top transparent;
+}
+.L-ul-treeview .L-ul-hidden-node{}            
+.L-ul-treeview .L-ul-node{}
+.L-ul-treeview .L-ul-marked-node{}
+.L-ul-treeview .L-ul-has-child-close-mid{}
+.L-ul-treeview .L-ul-has-child-close-last{}
+.L-ul-treeview .L-ul-has-child-open-mid{}
+.L-ul-treeview .L-ul-has-child-open-last{}
+.L-ul-treeview .L-ul-has-no-child-mid{}
+.L-ul-treeview .L-ul-has-no-child-last{}
+.L-ul-treeview .L-ul-focus-node{
+    background-color:silver;
+}
+.L-ul-treeview .L-ul-focus-node a{}
+.L-ul-treeview .L-ul-marked-node{}
+/*********************inherited & override end********************/
+.L-ul a {
+    font-size:13px;
+    vertical-align:middle;
+    white-space:nowrap !important;
+}
+
+.L-ul-treeview-node-table{
+	table-layout:fixed;
+	border:0;
+	margin:0;
+	padding:0;
+	width:100%;
+}
+.L-ul-treeview-node-table-cell{
+	width:18px;
+	height:22px !important;
+	white-space:nowrap !important;
+	border:0 !important;
+}
+.L-ul-treeview-node-table-cell-folder-hidden{
+    display:none;
+}
+.L-ul-treeview-node-table-cell-checkbox-hidden{
+	display:none;
+}
+.L-ul-treeview-node-table-cell-content{
+    width:auto;
+    white-space:nowrap !important;
+}
+.L-ul-treeview-node-image{
+	cursor:hand;
+	cursor:pointer;
+	height:100% !important;
+}
+.L-ul-treeview-node-image-close-mid{
+	background:url("../../resources/images/ul/tree/mid_plus.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-image-close-last{
+	background:url("../../resources/images/ul/tree/last_plus.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-image-open-mid{
+	background:url("../../resources/images/ul/tree/mid_minus.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-image-open-last{
+	background:url("../../resources/images/ul/tree/last_minus.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-image-mid{
+	background:url("../../resources/images/ul/tree/mid_normal.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-image-last{
+	background:url("../../resources/images/ul/tree/last_normal.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-folder{
+	border:0;
+    margin:0;
+    padding:0;
+    cursor:auto;
+    height:100%;
+}
+.L-ul-treeview-node-folder-open{
+    background:url("../../resources/images/ul/tree/folder_open.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-folder-close{
+    background:url("../../resources/images/ul/tree/folder_close.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-checkbox{
+	border:0;
+	margin:0;
+	padding:0;
+	height:100%;
+	width:100%;
+}
+.L-ul-treeview-node-checkbox-checked{
+	background:url("../../resources/images/ul/tree/checkbox_checked.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-checkbox-unchecked{
+	background:url("../../resources/images/ul/tree/checkbox_unchecked.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-table-cell-checkbox-disabled .L-ul-treeview-node-checkbox-unchecked {
+    background: none;
+}
+.L-ul-treeview-node-content{
+	border:0;
+    margin:0;
+    padding:0;
+    padding-left:2px !important;
+}
+.L-ul-treeview-node-label{
+    color:black;
+    text-decoration:none;
+    cursor: pointer;
+}
+li.L-node-state-D .L-ul-treeview-node-image-mid {
+	background: url(./../../resources/images/grid/skin_red/delete_icon.png) no-repeat 5px center rgba(0, 0, 0, 0) !important;
+}

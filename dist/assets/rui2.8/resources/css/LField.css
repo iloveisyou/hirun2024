@@ -1,0 +1,45 @@
+/* LField
+------------------------------*/
+.L-form-field {
+    border: 1px solid #999999;
+    padding: 0px;
+    margin: 0px;
+	display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+.L-form-field input {
+    margin: 0px;
+    border: 0;
+    padding: 2px 2px;
+    height: 16px;
+}
+.L-form-field input[type=checkbox], 
+.L-form-field input[type=radio] {
+    height: inherit;
+}
+.L-form-field textarea {
+    margin: 0px;
+    border: 0;
+    padding: 0px;
+}
+.L-form-field.L-invalid {
+    border: 1px solid #DD7870;
+}
+.L-form-field.L-disabled {
+    color: #BCBDC0;
+    border: 1px solid #BCBDC0;
+}
+.L-form-field.L-disabled input, .L-form-field.L-disabled textarea {
+    color: #BCBDC0;
+}
+.L-form-field.L-disabled .icon {
+    opacity: .4;
+    -moz-opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+/* IE7 및 호환성 보기를 위한 추가 스타일 */
+html.L-ua-msie7 .L-form-field input[type=text], 
+html.L-ua-compatible .L-form-field input[type=text] {
+    height: 14px;
+}

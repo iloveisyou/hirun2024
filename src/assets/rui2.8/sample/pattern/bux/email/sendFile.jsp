@@ -1,0 +1,1 @@
+<%System.out.println(request.getParameter("myFile"));%>OK

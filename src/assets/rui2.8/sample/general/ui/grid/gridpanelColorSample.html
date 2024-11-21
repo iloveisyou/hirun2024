@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 색상(Color)" />
+    <title>Row/Column BGColor</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css" >
+        .L-grid-col-line .bgcolor-blue {
+            background-color: lightblue;
+        }
+
+        .bgcolor-orange {
+            background-color: orange;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                focusFirstRow: false,
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'date1', type: 'date' }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', sortable: true, /*<b>*/renderRow: true/*</b>*/, width: 500, renderer: function(v, p, r){
+                    	//renderRow 기능을 사용할 경우 다른 field의 값이 변경되어도 이 field의는 다시 랜더링됩니다.
+                    	/*<b>*/
+                    	var img = '';
+                    	if(r.get('col2') == null)
+                    		img = '<img src="./../../../../resources/images/bullet_small.png">&nbsp;';
+                    	return img + v;
+                    	/*</b>*/
+                    } },
+                    { field: 'col2', align: 'center' , renderer: function(v, p){
+                        /*<b>*/
+                        p.css.push('bgcolor-orange');
+                        /*</b>*/
+                        return v ? v.substring(0, 3) + '-' + v.substring(3, 7) + '_' + v.substring(7) : v;
+                    }},
+                    { field: 'col3', align: 'right', hidden: true },
+                    { field: 'date1' , align: 'center', autoWidth:true, renderer: function(v){
+                        /*<b>*/
+                        return '<font color="red">' + v + '</font>';
+                        /*</b>*/
+                    }}
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                /*<b>*/
+                rowModel: new Rui.ui.grid.LRowModel({
+                    renderer: function(css, row, record) {
+                    	if(record.get('col2') == null)
+                            css.push('bgcolor-blue');
+                    }
+                }),
+                /*</b>*/
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+            
+            /********************
+            * 버튼 선언 및 이벤트
+            ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json'
+                });
+            });
+
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData();
+            });
+            
+            var setNullBtn = new Rui.ui.LButton('setNullBtn');
+            setNullBtn.on('click', function(){
+            	if(dataSet.getRow() < 0){
+            		Rui.alert('choose row first.');
+            		return;
+            	}
+                dataSet.setNameValue(dataSet.getRow(), 'col2', null);
+            });
+            
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Row/Column BGColor</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid)의 셀(Cell) 색상을 변경하는 샘플 (grid/renderer)</h2>
+            <div class="LblockDesc">
+		        <p>그리드(Grid)의 행(row) 또는 컬럼(column)의 배경색(Color)을 변경 할 수 있으며, css나 font tag등을 추가할 수도 있습니다.</p>
+		        <p>기본적으로 css는 웹표준의 css 우선순위를 따릅니다. (w3c 참조)</p>
+		        <p>row에 공통적으로 css를 탑재할 경우에는 rowModel의 renderer를 이용하여 css를 추가하고</p>
+		        <p>cell별 css를 탑재할 경우에는 LColumn.renderer의 p.css.push 메소드를 이용하여 css를 추가합니다. (p.css는 javascript의 Array임)</p>
+		        <p>추가된 css의 스타일을 전페이지 공통으로 적용하려면 페이지의 skin css 파일에 적용하고, 현재의 페이지만 적용하려면 페이지내에만 정의합니다.</p>
+		        <p>이 예제에서 RUI는 그리드의 row 또는 cell에 css를 추가할 뿐이며, css의 적용 우선 순위 등은 웹표준을 따릅니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >Search</button>
+            <button type="button" id="clearBtn" >Clear</button>
+            <button type="button" id="setNullBtn" >Set 'COL2' Null</button>
+        </div>
+        <div class="LblockMarkupCode">
+        <div class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

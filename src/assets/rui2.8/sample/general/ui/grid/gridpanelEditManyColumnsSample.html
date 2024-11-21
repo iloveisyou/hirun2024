@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="Grid performance, 그리드 성능" />
+    <title>Edit Many Columns</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LHeaderContextMenu.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css" >
+        #LdetailInformation {
+            width: 900px;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+
+          /*******************
+           * 변수 및 객체 선언
+           *******************/
+           var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },{ id: 'col2' },{ id: 'col3' },{ id: 'col4' },{ id: 'col5' },{ id: 'col6' },{ id: 'col7' },{ id: 'col8' },{ id: 'col9' },{ id: 'col10' },
+                    { id: 'col11' },{ id: 'col12' },{ id: 'col13' },{ id: 'col14' },{ id: 'col15' },{ id: 'col16' },{ id: 'col17' },{ id: 'col18' },{ id: 'col19' },{ id: 'col20' },
+                    { id: 'col21' },{ id: 'col22' },{ id: 'col23' },{ id: 'col24' },{ id: 'col25' },{ id: 'col26' },{ id: 'col27' },{ id: 'col28' },{ id: 'col29' },{ id: 'col30' },
+                    { id: 'col31' },{ id: 'col32' },{ id: 'col33' },{ id: 'col34' },{ id: 'col35' },{ id: 'col36' },{ id: 'col37' },{ id: 'col38' },{ id: 'col39' },{ id: 'col40' },
+                    { id: 'col41' },{ id: 'col42' },{ id: 'col43' },{ id: 'col44' },{ id: 'col45' },{ id: 'col46' },{ id: 'col47' },{ id: 'col48' },{ id: 'col49' },{ id: 'col50' },
+                    { id: 'col51' },{ id: 'col52' },{ id: 'col53' },{ id: 'col54' },{ id: 'col55' },{ id: 'col56' },{ id: 'col57' },{ id: 'col58' },{ id: 'col59' },{ id: 'col60' },
+                    { id: 'col61' },{ id: 'col62' },{ id: 'col63' },{ id: 'col64' },{ id: 'col65' },{ id: 'col66' },{ id: 'col67' },{ id: 'col68' },{ id: 'col69' },{ id: 'col70' },
+                    { id: 'col71' },{ id: 'col72' },{ id: 'col73' },{ id: 'col74' },{ id: 'col75' },{ id: 'col76' },{ id: 'col77' },{ id: 'col78' },{ id: 'col79' },{ id: 'col80' },
+                    { id: 'col81' },{ id: 'col82' },{ id: 'col83' },{ id: 'col84' },{ id: 'col85' },{ id: 'col86' },{ id: 'col87' },{ id: 'col88' },{ id: 'col89' },{ id: 'col90' },
+                    { id: 'col91' },{ id: 'col92' },{ id: 'col93' },{ id: 'col94' },{ id: 'col95' },{ id: 'col96' },{ id: 'col97' },{ id: 'col98' },{ id: 'col99' },{ id: 'col100' }
+                ]
+            });
+
+            var dm = new Rui.data.LDataSetManager();
+
+            dm.on('success', function(e) {
+                alert(Rui.getMessageManager().get('$.base.msg100'));
+            });
+
+            var columns = [
+                new Rui.ui.grid.LSelectionColumn(),
+                new Rui.ui.grid.LStateColumn(),
+                new Rui.ui.grid.LNumberColumn(),
+                { field: 'col1', editor: new Rui.ui.form.LTextBox() },{ field: 'col2', width:50 },{ field: 'col3', width:50 },{ field: 'col4', width:50 },{ field: 'col5', width:50 },{ field: 'col6', width:50 },{ field: 'col7', width:50 },{ field: 'col8', width:50 },{ field: 'col9', width:50 },{ field: 'col10', width:50 },
+                { field: 'col11', width:50 },{ field: 'col12', width:50 },{ field: 'col13', width:50 },{ field: 'col14', width:50 },{ field: 'col15', width:50 },{ field: 'col16', width:50 },{ field: 'col17', width:50 },{ field: 'col18', width:50 },{ field: 'col19', width:50 },{ field: 'col20', width:50 },
+                { field: 'col21', width:50 },{ field: 'col22', width:50 },{ field: 'col23', width:50 },{ field: 'col24', width:50 },{ field: 'col25', width:50 },{ field: 'col26', width:50 },{ field: 'col27', width:50 },{ field: 'col28', width:50 },{ field: 'col29', width:50 },{ field: 'col30', width:50 },
+                { field: 'col31', width:50 },{ field: 'col32', width:50 },{ field: 'col33', width:50 },{ field: 'col34', width:50 },{ field: 'col35', width:50 },{ field: 'col36', width:50 },{ field: 'col37', width:50 },{ field: 'col38', width:50 },{ field: 'col39', width:50 },{ field: 'col40', width:50 },
+                { field: 'col41', width:50 },{ field: 'col42', width:50 },{ field: 'col43', width:50 },{ field: 'col44', width:50 },{ field: 'col45', width:50 },{ field: 'col46', width:50 },{ field: 'col47', width:50 },{ field: 'col48', width:50 },{ field: 'col49', width:50 },{ field: 'col50', width:50 },
+                { field: 'col51', width:50 },{ field: 'col52', width:50 },{ field: 'col53', width:50 },{ field: 'col54', width:50 },{ field: 'col55', width:50 },{ field: 'col56', width:50 },{ field: 'col57', width:50 },{ field: 'col58', width:50 },{ field: 'col59', width:50 },{ field: 'col60', width:50 },
+                { field: 'col61', width:50 },{ field: 'col62', width:50 },{ field: 'col63', width:50 },{ field: 'col64', width:50 },{ field: 'col65', width:50 },{ field: 'col66', width:50 },{ field: 'col67', width:50 },{ field: 'col68', width:50 },{ field: 'col69', width:50 },{ field: 'col70', width:50 },
+                { field: 'col71', width:50 },{ field: 'col72', width:50 },{ field: 'col73', width:50 },{ field: 'col74', width:50 },{ field: 'col75', width:50 },{ field: 'col76', width:50 },{ field: 'col77', width:50 },{ field: 'col78', width:50 },{ field: 'col79', width:50 },{ field: 'col80', width:50 },
+                { field: 'col81', width:50 },{ field: 'col82', width:50 },{ field: 'col83', width:50 },{ field: 'col84', width:50 },{ field: 'col85', width:50 },{ field: 'col86', width:50 },{ field: 'col87', width:50 },{ field: 'col88', width:50 },{ field: 'col89', width:50 },{ field: 'col90', width:50 },
+                { field: 'col91', width:50 },{ field: 'col92', width:50 },{ field: 'col93', width:50 },{ field: 'col94', width:50 },{ field: 'col95', width:50 },{ field: 'col96', width:50 },{ field: 'col97', width:50 },{ field: 'col98', width:50 },{ field: 'col99', width:50 },{ field: 'col100', width:50 }
+            ];
+            /*<b>*/
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: columns
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                headerTools: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                width: 1024,
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+            /*</b>*/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/gridManyColumns.json'
+                });
+            });
+
+            var newBtn = new Rui.ui.LButton('newBtn');
+            newBtn.on('click', function(){
+                var row = dataSet.newRecord();
+                var record = dataSet.getAt(row);
+                record.set('col1', 'Junee');
+                record.set('col3', 'R2');
+            });
+
+            var insertBtn = new Rui.ui.LButton('insertBtn');
+            insertBtn.on('click', function(){
+                if(dataSet.getRow() < 0) return;
+                var row = dataSet.newRecord(dataSet.getRow());
+                var record = dataSet.getAt(row);
+                record.set('col1', 'Junee5');
+                record.set('col3', 'R1');
+            });
+
+            var updateBtn = new Rui.ui.LButton('updateBtn');
+            updateBtn.on('click', function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var record = dataSet.getAt(row);
+                record.set('col3', 'R2');
+            });
+
+            var undoBtn = new Rui.ui.LButton('undoBtn');
+            undoBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    for(var i = 0 ; i < dataSet.getCount() ; i++) {
+                        if(dataSet.isMarked(i))
+                            dataSet.undo(i);
+                    }
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.undo(row);
+                }
+            });
+
+            var undoAllBtn = new Rui.ui.LButton('undoAllBtn');
+            undoAllBtn.on('click', function(){
+                dataSet.undoAll();
+            });
+
+            var deleteBtn = new Rui.ui.LButton('deleteBtn');
+            deleteBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRows();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+
+            var saveBtn = new Rui.ui.LButton('saveBtn');
+            saveBtn.on('click', function(){
+                if(dataSet.isUpdated() == false) {
+                    alert(Rui.getMessageManager().get('$.base.msg102'));
+                    return;
+                }
+
+                dm.updateDataSet({
+                    dataSets:[dataSet],
+                    url: './../../../data/savedCallback.json'
+                });
+
+            });
+
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData();
+            });
+
+            var filterBtn = new Rui.ui.LButton('filterBtn');
+            filterBtn.on('click', function(){
+                dataSet.filter(function(id, record){
+                    return record.get('col3') == 'R2'
+                });
+            });
+
+            var syncDataSetBtn = new Rui.ui.LButton('syncDataSetBtn');
+            syncDataSetBtn.on('click', function(){
+                grid.setSyncDataSet(true);
+            });
+
+            var unSyncDataSetBtn = new Rui.ui.LButton('unSyncDataSetBtn');
+            unSyncDataSetBtn.on('click', function(){
+                grid.setSyncDataSet(false);
+            });
+
+            var firstBtn = new Rui.ui.LButton('firstBtn');
+            firstBtn.on('click', function(){
+                dataSet.setRow(0);
+            });
+
+            var previousBtn = new Rui.ui.LButton('previousBtn');
+            previousBtn.on('click', function(){
+                if(dataSet.getRow() > 0)
+                    dataSet.setRow(dataSet.getRow() - 1);
+            });
+
+            var nextBtn = new Rui.ui.LButton('nextBtn');
+            nextBtn.on('click', function(){
+                if(dataSet.getCount() > dataSet.getRow())
+                    dataSet.setRow(dataSet.getRow() + 1);
+            });
+
+            var lastBtn = new Rui.ui.LButton('lastBtn');
+            lastBtn.on('click', function(){
+                dataSet.setRow(dataSet.getCount() - 1);
+            });
+
+            var sortBtn = new Rui.ui.LButton('sortBtn');
+            sortBtn.on('click', function(){
+                dataSet.sortField('col1', 'asc');
+            });
+
+            var columnShowBtn = new Rui.ui.LButton('columnShowBtn');
+            columnShowBtn.on('click', function(){
+                columnModel.getColumnById('col3').setHidden(false);
+            });
+
+            var columnHideBtn = new Rui.ui.LButton('columnHideBtn');
+            columnHideBtn.on('click', function(){
+                columnModel.getColumnById('col3').setHidden(true);
+            });
+
+            var multiSelectBtn = new Rui.ui.LButton('multiSelectBtn');
+            multiSelectBtn.on('click', function(){
+                if(dataSet.getCount() > 5) {
+                    dataSet.setMark(1, true);
+                    dataSet.setMark(3, true);
+                    dataSet.setMark(5, true);
+                }
+            });
+
+            /*<b>*/
+            bind = new Rui.data.LBind({
+                groupId: 'LdetailInformation',
+                dataSet: dataSet,
+                bind: true,
+                bindInfo: [
+                    { id: 'col1', ctrlId: 'col1', value: 'value' },
+                    { id: 'col2', ctrlId: 'col2', value: 'value' },
+                    { id: 'col3', ctrlId: 'col3', value: 'value' },
+                    { id: 'col4', ctrlId: 'col4', value: 'value' },
+                    { id: 'col5', ctrlId: 'col5', value: 'value' },
+                    { id: 'col6', ctrlId: 'col6', value: 'value' },
+                    { id: 'col7', ctrlId: 'col7', value: 'value' },
+                    { id: 'col8', ctrlId: 'col8', value: 'value' },
+                    { id: 'col9', ctrlId: 'col9', value: 'value' },
+                    { id: 'col10', ctrlId: 'col10', value: 'value' },
+                    { id: 'col11', ctrlId: 'col11', value: 'value' },
+                    { id: 'col12', ctrlId: 'col12', value: 'value' },
+                    { id: 'col13', ctrlId: 'col13', value: 'value' },
+                    { id: 'col14', ctrlId: 'col14', value: 'value' },
+                    { id: 'col15', ctrlId: 'col15', value: 'value' },
+                    { id: 'col16', ctrlId: 'col16', value: 'value' },
+                    { id: 'col17', ctrlId: 'col17', value: 'value' },
+                    { id: 'col18', ctrlId: 'col18', value: 'value' },
+                    { id: 'col19', ctrlId: 'col19', value: 'value' },
+                    { id: 'col20', ctrlId: 'col20', value: 'value' },
+                    { id: 'col21', ctrlId: 'col21', value: 'value' },
+                    { id: 'col22', ctrlId: 'col22', value: 'value' },
+                    { id: 'col23', ctrlId: 'col23', value: 'value' },
+                    { id: 'col24', ctrlId: 'col24', value: 'value' },
+                    { id: 'col25', ctrlId: 'col25', value: 'value' },
+                    { id: 'col26', ctrlId: 'col26', value: 'value' },
+                    { id: 'col27', ctrlId: 'col27', value: 'value' },
+                    { id: 'col28', ctrlId: 'col28', value: 'value' },
+                    { id: 'col29', ctrlId: 'col29', value: 'value' },
+                    { id: 'col30', ctrlId: 'col30', value: 'value' },
+                    { id: 'col31', ctrlId: 'col31', value: 'value' },
+                    { id: 'col32', ctrlId: 'col32', value: 'value' },
+                    { id: 'col33', ctrlId: 'col33', value: 'value' },
+                    { id: 'col34', ctrlId: 'col34', value: 'value' },
+                    { id: 'col35', ctrlId: 'col35', value: 'value' },
+                    { id: 'col36', ctrlId: 'col36', value: 'value' },
+                    { id: 'col37', ctrlId: 'col37', value: 'value' },
+                    { id: 'col38', ctrlId: 'col38', value: 'value' },
+                    { id: 'col39', ctrlId: 'col39', value: 'value' },
+                    { id: 'col40', ctrlId: 'col40', value: 'value' },
+                    { id: 'col41', ctrlId: 'col41', value: 'value' },
+                    { id: 'col42', ctrlId: 'col42', value: 'value' },
+                    { id: 'col43', ctrlId: 'col43', value: 'value' },
+                    { id: 'col44', ctrlId: 'col44', value: 'value' },
+                    { id: 'col45', ctrlId: 'col45', value: 'value' },
+                    { id: 'col46', ctrlId: 'col46', value: 'value' },
+                    { id: 'col47', ctrlId: 'col47', value: 'value' },
+                    { id: 'col48', ctrlId: 'col48', value: 'value' },
+                    { id: 'col49', ctrlId: 'col49', value: 'value' },
+                    { id: 'col50', ctrlId: 'col50', value: 'value' },
+                    { id: 'col51', ctrlId: 'col51', value: 'value' },
+                    { id: 'col52', ctrlId: 'col52', value: 'value' },
+                    { id: 'col53', ctrlId: 'col53', value: 'value' },
+                    { id: 'col54', ctrlId: 'col54', value: 'value' },
+                    { id: 'col55', ctrlId: 'col55', value: 'value' },
+                    { id: 'col56', ctrlId: 'col56', value: 'value' },
+                    { id: 'col57', ctrlId: 'col57', value: 'value' },
+                    { id: 'col58', ctrlId: 'col58', value: 'value' },
+                    { id: 'col59', ctrlId: 'col59', value: 'value' },
+                    { id: 'col60', ctrlId: 'col60', value: 'value' },
+                    { id: 'col61', ctrlId: 'col61', value: 'value' },
+                    { id: 'col62', ctrlId: 'col62', value: 'value' },
+                    { id: 'col63', ctrlId: 'col63', value: 'value' },
+                    { id: 'col64', ctrlId: 'col64', value: 'value' },
+                    { id: 'col65', ctrlId: 'col65', value: 'value' },
+                    { id: 'col66', ctrlId: 'col66', value: 'value' },
+                    { id: 'col67', ctrlId: 'col67', value: 'value' },
+                    { id: 'col68', ctrlId: 'col68', value: 'value' },
+                    { id: 'col69', ctrlId: 'col69', value: 'value' },
+                    { id: 'col70', ctrlId: 'col70', value: 'value' },
+                    { id: 'col71', ctrlId: 'col71', value: 'value' },
+                    { id: 'col72', ctrlId: 'col72', value: 'value' },
+                    { id: 'col73', ctrlId: 'col73', value: 'value' },
+                    { id: 'col74', ctrlId: 'col74', value: 'value' },
+                    { id: 'col75', ctrlId: 'col75', value: 'value' },
+                    { id: 'col76', ctrlId: 'col76', value: 'value' },
+                    { id: 'col77', ctrlId: 'col77', value: 'value' },
+                    { id: 'col78', ctrlId: 'col78', value: 'value' },
+                    { id: 'col79', ctrlId: 'col79', value: 'value' },
+                    { id: 'col80', ctrlId: 'col80', value: 'value' },
+                    { id: 'col81', ctrlId: 'col81', value: 'value' },
+                    { id: 'col82', ctrlId: 'col82', value: 'value' },
+                    { id: 'col83', ctrlId: 'col83', value: 'value' },
+                    { id: 'col84', ctrlId: 'col84', value: 'value' },
+                    { id: 'col85', ctrlId: 'col85', value: 'value' },
+                    { id: 'col86', ctrlId: 'col86', value: 'value' },
+                    { id: 'col87', ctrlId: 'col87', value: 'value' },
+                    { id: 'col88', ctrlId: 'col88', value: 'value' },
+                    { id: 'col89', ctrlId: 'col89', value: 'value' },
+                    { id: 'col90', ctrlId: 'col90', value: 'value' },
+                    { id: 'col91', ctrlId: 'col91', value: 'value' },
+                    { id: 'col92', ctrlId: 'col92', value: 'value' },
+                    { id: 'col93', ctrlId: 'col93', value: 'value' },
+                    { id: 'col94', ctrlId: 'col94', value: 'value' },
+                    { id: 'col95', ctrlId: 'col95', value: 'value' },
+                    { id: 'col96', ctrlId: 'col96', value: 'value' },
+                    { id: 'col97', ctrlId: 'col97', value: 'value' },
+                    { id: 'col98', ctrlId: 'col98', value: 'value' },
+                    { id: 'col99', ctrlId: 'col99', value: 'value' },
+                    { id: 'col100', ctrlId: 'col100', value: 'value'}
+                ]
+            });
+            /*</b>*/
+            //searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <h1>Edit Many Columns</h1>
+    <h2>그리드(Grid)에서 대량의 컬럼을 편집하는 샘플 및 그 성능 체험</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>컬럼(Column) 개수에 따른 성능(Performance)을 테스트합니다. 다수의 컬럼을 데이터셋과 바인딩(Bind)하여 처리합니다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton">
+            <button type="button" id="searchBtn" >search</button>
+            <button type="button" id="newBtn" >new</button>
+            <button type="button" id="insertBtn" >insert</button>
+            <button type="button" id="updateBtn" >update</button>
+            <button type="button" id="deleteBtn" >delete</button>
+            <button type="button" id="saveBtn" >save</button>
+            <button type="button" id="undoBtn" >undo</button>
+            <button type="button" id="undoAllBtn" >undoAll</button>
+            <button type="button" id="clearBtn" >clear</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <table class="layout">
+                <tr>
+                    <td>
+                        <div id="defaultGrid" ></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+        <div id="LdetailInformation">
+        <label for="col1">col1</label><input type="text" id='col1' />
+        <label for="col2">col2</label><input type="text" id="col2" value="" />
+        <label for="col3">col3</label><input type="text" id="col3" value="" />
+        <label for="col4">col4</label><input type="text" id="col4" value="" />
+        <label for="col5">col5</label><input type="text" id="col5" value="" /><br />
+        <label for="col6">col6</label><input type="text" id="col6" value="" />
+        <label for="col7">col7</label><input type="text" id="col7" value="" />
+        <label for="col8">col8</label><input type="text" id="col8" value="" />
+        <label for="col9">col9</label><input type="text" id="col9" value="" />
+        <label for="col10">col10</label><input type="text" id="col10" value="" /><br />
+        <label for="col11">col11</label><input type="text" id="col11" value="" />
+        <label for="col12">col12</label><input type="text" id="col12" value="" />
+        <label for="col13">col13</label><input type="text" id="col13" value="" />
+        <label for="col14">col14</label><input type="text" id="col14" value="" />
+        <label for="col15">col15</label><input type="text" id="col15" value="" />
+        <label for="col16">col16</label><input type="text" id="col16" value="" />
+        <label for="col17">col17</label><input type="text" id="col17" value="" />
+        <label for="col18">col18</label><input type="text" id="col18" value="" />
+        <label for="col19">col19</label><input type="text" id="col19" value="" />
+        <label for="col20">col20</label><input type="text" id="col20" value="" />
+        <label for="col21">col21</label><input type="text" id="col21" value="" />
+        <label for="col22">col22</label><input type="text" id="col22" value="" />
+        <label for="col23">col23</label><input type="text" id="col23" value="" />
+        <label for="col24">col24</label><input type="text" id="col24" value="" />
+        <label for="col25">col25</label><input type="text" id="col25" value="" />
+        <label for="col26">col26</label><input type="text" id="col26" value="" />
+        <label for="col27">col27</label><input type="text" id="col27" value="" />
+        <label for="col28">col28</label><input type="text" id="col28" value="" />
+        <label for="col29">col29</label><input type="text" id="col29" value="" />
+        <label for="col30">col30</label><input type="text" id="col30" value="" />
+        <label for="col31">col31</label><input type="text" id="col31" value="" />
+        <label for="col32">col32</label><input type="text" id="col32" value="" />
+        <label for="col33">col33</label><input type="text" id="col33" value="" />
+        <label for="col34">col34</label><input type="text" id="col34" value="" />
+        <label for="col35">col35</label><input type="text" id="col35" value="" />
+        <label for="col36">col36</label><input type="text" id="col36" value="" />
+        <label for="col37">col37</label><input type="text" id="col37" value="" />
+        <label for="col38">col38</label><input type="text" id="col38" value="" />
+        <label for="col39">col39</label><input type="text" id="col39" value="" />
+        <label for="col40">col40</label><input type="text" id="col40" value="" />
+        <label for="col41">col41</label><input type="text" id="col41" value="" />
+        <label for="col42">col42</label><input type="text" id="col42" value="" />
+        <label for="col43">col43</label><input type="text" id="col43" value="" />
+        <label for="col44">col44</label><input type="text" id="col44" value="" />
+        <label for="col45">col45</label><input type="text" id="col45" value="" />
+        <label for="col46">col46</label><input type="text" id="col46" value="" />
+        <label for="col47">col47</label><input type="text" id="col47" value="" />
+        <label for="col48">col48</label><input type="text" id="col48" value="" />
+        <label for="col49">col49</label><input type="text" id="col49" value="" />
+        <label for="col50">col50</label><input type="text" id="col50" value="" />
+        <label for="col51">col51</label><input type="text" id="col51" value="" />
+        <label for="col52">col52</label><input type="text" id="col52" value="" />
+        <label for="col53">col53</label><input type="text" id="col53" value="" />
+        <label for="col54">col54</label><input type="text" id="col54" value="" />
+        <label for="col55">col55</label><input type="text" id="col55" value="" />
+        <label for="col56">col56</label><input type="text" id="col56" value="" />
+        <label for="col57">col57</label><input type="text" id="col57" value="" />
+        <label for="col58">col58</label><input type="text" id="col58" value="" />
+        <label for="col59">col59</label><input type="text" id="col59" value="" />
+        <label for="col60">col60</label><input type="text" id="col60" value="" />
+        <label for="col61">col61</label><input type="text" id="col61" value="" />
+        <label for="col62">col62</label><input type="text" id="col62" value="" />
+        <label for="col63">col63</label><input type="text" id="col63" value="" />
+        <label for="col64">col64</label><input type="text" id="col64" value="" />
+        <label for="col65">col65</label><input type="text" id="col65" value="" />
+        <label for="col66">col66</label><input type="text" id="col66" value="" />
+        <label for="col67">col67</label><input type="text" id="col67" value="" />
+        <label for="col68">col68</label><input type="text" id="col68" value="" />
+        <label for="col69">col69</label><input type="text" id="col69" value="" />
+        <label for="col70">col70</label><input type="text" id="col70" value="" />
+        <label for="col71">col71</label><input type="text" id="col71" value="" />
+        <label for="col72">col72</label><input type="text" id="col72" value="" />
+        <label for="col73">col73</label><input type="text" id="col73" value="" />
+        <label for="col74">col74</label><input type="text" id="col74" value="" />
+        <label for="col75">col75</label><input type="text" id="col75" value="" />
+        <label for="col76">col76</label><input type="text" id="col76" value="" />
+        <label for="col77">col77</label><input type="text" id="col77" value="" />
+        <label for="col78">col78</label><input type="text" id="col78" value="" />
+        <label for="col79">col79</label><input type="text" id="col79" value="" />
+        <label for="col80">col80</label><input type="text" id="col80" value="" />
+        <label for="col81">col81</label><input type="text" id="col81" value="" />
+        <label for="col82">col82</label><input type="text" id="col82" value="" />
+        <label for="col83">col83</label><input type="text" id="col83" value="" />
+        <label for="col84">col84</label><input type="text" id="col84" value="" />
+        <label for="col85">col85</label><input type="text" id="col85" value="" />
+        <label for="col86">col86</label><input type="text" id="col86" value="" />
+        <label for="col87">col87</label><input type="text" id="col87" value="" />
+        <label for="col88">col88</label><input type="text" id="col88" value="" />
+        <label for="col89">col89</label><input type="text" id="col89" value="" />
+        <label for="col90">col90</label><input type="text" id="col90" value="" />
+        <label for="col91">col91</label><input type="text" id="col91" value="" />
+        <label for="col92">col92</label><input type="text" id="col92" value="" />
+        <label for="col93">col93</label><input type="text" id="col93" value="" />
+        <label for="col94">col94</label><input type="text" id="col94" value="" />
+        <label for="col95">col95</label><input type="text" id="col95" value="" />
+        <label for="col96">col96</label><input type="text" id="col96" value="" />
+        <label for="col97">col97</label><input type="text" id="col97" value="" />
+        <label for="col98">col98</label><input type="text" id="col98" value="" />
+        <label for="col99">col99</label><input type="text" id="col99" value="" />
+        <label for="col100">col100</label><input type="text" id="col100" value="" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="LblockButton">
+            <button type="button" id="filterBtn" >filter</button>
+            <button type="button" id="syncDataSetBtn" >syncDataSet</button>
+            <button type="button" id="unSyncDataSetBtn" >unSyncDataSet</button>
+            <button type="button" id="firstBtn" >first</button>
+            <button type="button" id="previousBtn" >previous</button>
+            <button type="button" id="nextBtn" >next</button>
+            <button type="button" id="lastBtn" >last</button>
+            <button type="button" id="sortBtn" >sort</button>
+            <button type="button" id="columnShowBtn" >column show</button>
+            <button type="button" id="columnHideBtn" >column hide</button>
+            <button type="button" id="multiSelectBtn" >multi selection</button>
+        </div>
+    </div>
+</body>
+</html>

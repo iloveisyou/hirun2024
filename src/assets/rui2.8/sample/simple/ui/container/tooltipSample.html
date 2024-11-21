@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="devon-rui-sample" content="yes" />
+<title>Tooltip basic</title>
+<script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+<script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+<script type='text/javascript' src='./../../../../resources/rui_config.js'></script>       
+<script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+<script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+<link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+<style type="text/css">
+    #ctx { background:orange;width:200px;height:200px; }
+</style>
+<script type='text/javascript' class="script-code">
+$C(function() {
+    /*<b>*/
+    var tt1 = $C('#tt1').tooltip( {context:"ctx", text:"My text was set using the 'text' configuration property" });
+    tt1.beforeShowEvent.on(function(){$C.log("Tooltip one is appearing.","info","example");}, this, true, {isCE:true});
+    var tt2 = $C('#tt2').tooltip({ context:"link" });
+    
+    /*</b>*/
+});
+</script>
+</head>
+<body >
+    <h1>tooltip sample</h1>   
+    <h2>LTooltip로 구현하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div>기본적인 툴팁 구조 입니다.</div>
+<div id='bd'>
+    <div id="tt1"></div>
+    <div class="LblockMarkupCode">
+        <p id="ctx">Hover over me to see a Tooltip!</p>
+        <p><a id="link" href="http://www.Rui.com/" title="Do You Rui?">Hover over me to see a Tooltip!</a></p>
+    </div>
+</div>
+
+</body>
+</html>

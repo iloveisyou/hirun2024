@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="날짜(LDate) 계산" />
+    <title>Date</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*<b>*/
+            var today = new Date();
+            Rui.get('spanDate').html(Rui.util.LDate.format(today,'%x %X'));
+            /*</b>*/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var calcDateBtn = new Rui.ui.LButton('calcDateBtn');
+            calcDateBtn.on('click', function(){
+                /*<b>*/
+                var type = Rui.get('selectType').getValue();
+                var value = Rui.get('txtSum').getValue();
+                if (value != '') {
+                    // javascript 기본 객체의 Date의 prototype :
+                    // format/add/equals/compareTo/clone/between/compareString/getFirstDayOfMonth/getLastDayOfMonth/getFirstDayOfWeek
+                    // Data.prototype api 참조
+                    var calDate = today.add(type, parseInt(value, 10));
+                    Rui.get('spanResult').html(calDate);
+                }
+                /*</b>*/
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Date</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>기본적인 날짜(date)객체 사용에 대한 샘플</h2>
+            <div class="LblockDesc">
+                <p>날짜 유틸리티(Date Utility)에 대한 기본적인 적용방법 입니다. 날짜 및 시간 계산에 대한 함수들도 제공됩니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <fieldset>
+                <label for="spanDate">현재시간 :</label>
+                <span id="spanDate"></span>
+                <select id="selectType">
+                    <option value="Y">Year</option>
+                    <option value="M">Month</option>
+                    <option value="W">Week</option>
+                    <option value="D">Day</option>
+                    <option value="H">Hour</option>
+                    <option value="m">Minute</option>
+                    <option value="S">Second</option>
+                    <option value="s">Millisecond</option>
+                </select>
+                <input type="text" id="txtSum" value="1"/>
+                <button type="button" id="calcDateBtn" >계산</button>
+                <label for="spanResult">결과 :</label><span id="spanResult"></span>
+            </fieldset>
+        </div>
+    </div>
+</body>
+</html>

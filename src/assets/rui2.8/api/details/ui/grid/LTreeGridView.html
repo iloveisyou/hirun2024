@@ -1,0 +1,430 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+트리와 같이 펼침과 닫힘을 제공하는 그리드
+LTreeGridView는 반드시 depthId 필드를 가져야 한다.
+필드의 이름은 변경되어도 무관하나 해당 필드의 이름들이 바뀌게 되면 LTreeGridView의 fields도 같게 변경해야 한다.
+트리의 기본 fields 속성은 rui_config.js에 정의되어 있다.
+tGrid: {
+    defaultProperties:{
+        fields: {
+            depthId: 'depth'
+        }
+    }
+},
+
+LTreeGridView는 해당 그리드를 트리가 아닌 그리드로 관리하므로써 서버에서 부모와 자식 관계의 의존관계를 무시하고 단순히 depth만으로 트리와 같은
+기능을 제공한다. 그러므로 해당 insert/update/delete/undo 등을 처리함에 있어서 dataSet의 record의 순서를 개발자가 정확하게 구현해야 정상 작동한다.
+
+LTreeGridView는 LGridPanel의 생성자에 view와 selectionModel config를 넣어 생성해야 한다.
+
+※ 필수 규칙
+1. dataSet의 depth 필드는 반드시 number 타입과 defaultValue를 0으로 셋팅해야한다.
+2. LTreeGridView의 생성자로 넣는 treeColumnId은 그리드의 데이터 컬럼의 첫번째 항목의 LColumn의 id나 field명을 지정해야 한다.
+3. LTreeGridView를 사용하려면 반드시 Rui.ui.grid.LTreeGridSelectionModel 객체를 selectionModel로 사용해야 한다.
+4. depth의 길이를 정의하는 방법은 css로 정의한다. (.L-grid-tree-col-depth-10 .L-grid-tree-col-space)
+
+샘플 경로 :
+<a href="./../sample/general/ui/grid/gridpanelTreeListSample.html" target="_new">/rui/sample/general/ui/grid/gridpanelTreeListSample.html</a>
+</div>
+<div class="L-sample">
+sample: LTreeGridView 생성 샘플
+<div class="L-code">
+var dataSet = new Rui.data.LJsonDataSet({
+    id: 'dataSet',
+    fields: [
+        { id: 'id' },
+        { id: 'depth', type: 'number', defaultValue: 0 }
+    ]
+});
+
+var columnModel = new Rui.ui.grid.LColumnModel({
+    columns: [
+        { field: "id", label: "id", width: 200, editor: new Rui.ui.form.LTextBox() },
+        { field: "depth", label: "depth" }
+    ]
+});
+
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: -1,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+</div>
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_defaultOpenDepth">
+<div class="L-description">
+트리 그리드가 출력될때 처음에 기본으로 펼칠 depth 값을 정의한다.
+depth는 0부터 시작한다.
+</div>
+<div class="L-sample">
+sample: 1단계 depth로 펼처 출력하는 샘플
+<div class="L-code">
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: 1,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+</div>
+</div>
+
+<div class="L-sample">
+sample: 모든 단계 depth로 펼처 출력하는 샘플 (100단계를 넣으면 그 이하는 모두 펼치므로 모두 펼침과 같은 기능을 수행한다.
+<div class="L-code">
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: 100,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+</div>
+</div>
+</div>
+
+
+<!-- method 시작 -->
+<div class="method_expand">
+<div class="L-description">
+row에 해당되는 단계를 펼친다.
+</div>
+<div class="L-sample">
+sample: 8 row에 해당되는 부분을 펼친다.
+<div class="L-code">
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: 100,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+
+.........................
+
+treeGridView.expand(8);
+</div>
+</div>
+</div>
+
+
+<div class="method_collapse">
+<div class="L-description">
+row에 해당되는 단계를 닫는다.
+</div>
+<div class="L-sample">
+sample: 8 row에 해당되는 부분을 닫는다.
+<div class="L-code">
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: 100,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+
+.........................
+
+treeGridView.collapse(8);
+</div>
+</div>
+</div>
+
+
+<div class="method_isExpand">
+<div class="L-description">
+row에 해당되는 단계가 펼쳤는지 닫혔는지 여부를 리턴한다.
+</div>
+<div class="L-sample">
+sample: 8 row에 해당되는 부분의 expand 여부를 출력한다.
+<div class="L-code">
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: 100,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+
+.........................
+
+alert(treeGridView.isExpand(8));
+</div>
+</div>
+</div>
+
+
+<div class="method_toggle">
+<div class="L-description">
+row에 해당되는 단계가 닫혀있으면 열고 열려있으면 닫는다.
+</div>
+<div class="L-sample">
+sample: 8 row에 해당되는 부분을 toggle한다.
+<div class="L-code">
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: 100,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+
+.........................
+
+treeGridView.toggle(8);
+</div>
+</div>
+</div>
+
+
+<div class="method_expandDepth">
+<div class="L-description">
+depth 단계에 해당되는 모든 row를 펼친다.
+</div>
+<div class="L-sample">
+sample: 2 depth 단계의 모든 row를 펼친다.
+<div class="L-code">
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: 100,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+
+.........................
+
+treeGridView.expandDepth(2);
+</div>
+</div>
+</div>
+
+
+<div class="method_getPrevSiblingRow">
+<div class="L-description">
+row의 이전 위치중 보여지는 row 위치를 리턴한다. 
+이전에 출력된 값이 없으면 -1 값을 리턴한다.
+</div>
+<div class="L-sample">
+sample: 3 row의 출력된 이전 위치의 row를 출력한다. 
+<div class="L-code">
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: 100,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+
+.........................
+
+treeGridView.getPrevSiblingRow(2);
+</div>
+</div>
+</div>
+
+
+<div class="method_getNextSiblingRow">
+<div class="L-description">
+row의 다음 위치중 보여지는 row 위치를 리턴한다. 
+다음에 출력된 값이 없으면 -1 값을 리턴한다.
+</div>
+<div class="L-sample">
+sample: 3 row의 출력된 이전 위치의 row를 출력한다. 
+<div class="L-code">
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: 100,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+
+.........................
+
+treeGridView.getNextSiblingRow(2);
+</div>
+</div>
+</div>
+
+
+<div class="method_getChildRows">
+<div class="L-description">
+row의 바로 하위 depth의 row 위치를 배열로 리턴한다.
+</div>
+<div class="L-sample">
+sample: 3 row의 하위 depth의 row들을 얻어온다. 
+<div class="L-code">
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: 100,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+
+.........................
+
+var childRows = treeGridView.getChildRows(2);
+for(var i = 0 ; i < childRows.length ; i++) {
+    var row = childRows[i];
+    dataSet.getAt(row);
+}
+</div>
+</div>
+</div>
+
+<div class="method_getAllChildRows">
+<div class="L-description">
+row의 하위 depth의 모든 row들을 리턴한다. 
+</div>
+<div class="L-sample">
+sample: 3 row의 하위 depth의 모든 row들을 얻어온다. 
+<div class="L-code">
+var treeGridView = new Rui.ui.grid.LTreeGridView({
+    defaultOpenDepth: 100,
+    columnModel: columnModel,
+    dataSet: dataSet,
+    treeColumnId: 'id'
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    view: treeGridView,
+    selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+    width: 500,
+    height:300
+});
+
+grid.render("defaultGrid");
+
+.........................
+
+var allChildRows = treeGridView.getAllChildRows(2);
+for(var i = 0 ; i < allChildRows.length ; i++) {
+    var row = allChildRows[i];
+    dataSet.getAt(row);
+}
+</div>
+</div>
+</div>
+
+</div>
+

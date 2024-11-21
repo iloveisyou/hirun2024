@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="탭메뉴(LTabMenu), 풀다운(Pull Down)" />
+    <title>Pull down Tab Menu</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/menu/rui_menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/menu/rui_menu.css" />
+
+    <style type="text/css">
+        #bd {
+            height: 350px;
+        }
+        #divOut {
+            margin: 10px 0;
+            height: 20px;
+        }
+        li {
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .L-ul-tabmenu .L-ul-first {
+            display: inline-block;
+            border: solid 1px #c4c4be;
+            box-shadow: 1px 1px 0px #888888;
+        }
+        .L-ul-tabmenu .L-ul-first ul {
+            border: solid 1px #c4c4be;
+            padding: 5px 1px;
+            background-color: #fff;
+            box-shadow: 4px 4px 4px #888888;
+            width: 150px;
+        }
+        .L-ul-tabmenu .L-ul-li-depth-0 li {
+            width: 100%;
+        }
+        .L-ul-tabmenu .L-ul-depth-1 ul{
+            margin-left: 30px;
+            width: 200px;
+        }
+        .L-ul-tabmenu .L-ul-focus-parent-node {
+            background-color: #888888;
+            color: #ffffff;
+            font-weight: inherit;
+        }
+        .L-ul-tabmenu .L-ul-focus-node {
+            background-color: #888888;
+            color: #ffffff;
+            font-weight: inherit;
+        }
+    </style>
+            
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                focusFirstRow: -1,
+                fields: [
+                    { id: 'menuId', type: 'number' },
+                    { id: 'seq', type:  'number' },
+                    { id: 'parentMenuId', type: 'number' },
+                    { id: 'name' },
+                    { id: 'url' }
+                ]
+            });
+
+            var ul = new Rui.ui.menu.LTabMenu({
+                dataSet: dataSet,
+                //defaultOpenTopIndex: 2,
+                /*<b>*/
+                expandOnOver: true,
+                /*</b>*/
+                fields: {
+                    rootValue: 0,
+                    parentId: 'parentMenuId',
+                    id: 'menuId',
+                    label: 'name',
+                    order: 'seq'
+                }
+            });
+            ul.render('divMenu');
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            ul.on('nodeClick', function(e) {
+                var depth = e.node.getDepth(),
+                    hasChild = e.node.hasChild(),
+                    name = e.node.getRecord().get('name');
+                Rui.get('divOut').html('depth : ' + depth + ', hasChild? : ' + hasChild + ', name : ' + name);
+                
+                if(depth > 0){
+                    //depth가 0이 아닌 하위 노드를 클릭시 펼쳐진 노드를 접는다.
+                    var parentNode = e.node.getParentNode();
+                    this.dataSet.setRow(parentNode.getRow());
+                    parentNode.collapse();
+                    return false;
+                }
+            });
+
+            dataSet.load({ url: './../../../../sample/data/menuTwoDepth.json' });
+        });
+    </script>
+</head>
+<body>
+    <h1>Mouse Over</h1>
+    <h2>탭메뉴(TabMenu)에 마우스를 올려놓으면 메뉴가 펼쳐지는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>탭메뉴(TabMenu)에 마우스를 올려놓으면 메뉴가 자동으로 펼쳐지도록 expandOnOver 속성을 부여합니다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="divOut"></div>
+            <div id="divMenu"></div>
+        </div>
+    </div>
+</body>
+</html>

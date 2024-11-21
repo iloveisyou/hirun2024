@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-keyword" content="prototype 샘플" />
+    <title>JSON Structure</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        /*
+         * ****** JAVA code *********
+         * public class Employee {
+         *     public String firstName;
+         *     public String lastName;
+         *     public int employNumber;
+         *     public String title;
+         * }
+         *
+         * <?xml version="1.0" encoding="utf-8"?>
+         * <employee>
+         *     <firstName>john</firstName>
+         *     <lastName>Doe</lastName>
+         *     <employNumber>123</employNumber>
+         *     <title>Accountant</title>
+         * </employee>
+         */
+        Rui.onReady(function(){
+            function jsonExcute(){
+                var employee = {
+                    firstName: "john",
+                    lastName: "Doe",
+                    employNumber: 123,
+                    title: "Accountant"
+                }
+                
+                var lastName = employee.lastName;
+                var title = employee.title;
+                employee.employNumber = 456;
+                
+                var JSONTest = function(){
+                    this.id = null;
+                }
+                
+                JSONTest.prototype.toString = function(){
+                
+                }
+                
+                JSONTest.prototype.toString2 = function(){
+                
+                }
+                
+                JSONTest.prototpye = {
+                    id: null,
+                    toString: function(){
+                    
+                    },
+                    toString2: function(){
+                    
+                    }
+                }
+            }
+        });
+    </script>
+
+</head>
+<body>
+    <h1>JSON Sample</h1>
+    <h2>json의 구조를 설명</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc"><p>json 구조에 대한 테스트 예제입니다. 간단한 json의 구조를 나타냅니다.</p></div>
+    <div id="bd">
+        <div class="LblockMarkupCode">  
+        </div>
+    </div>
+</body>
+</html>

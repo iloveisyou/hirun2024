@@ -1,0 +1,35 @@
+/* Elements
+---------------------------------------------------------*/
+* {margin:0;padding:0;}
+* {
+	font-size:12px;
+	font-family: tahoma,sans-serif;
+	color:#000;
+}
+ul {list-style:none;}
+a:link, a:visited {color: #0770FF;text-decoration: none;}
+a:hover, a:active {color: #0770FF;text-decoration: underline;}
+hr { display: none; }
+h1 { font-size:1.2em; }
+img {	border:none;}
+select, input, textarea { font-size:1em; }
+textarea { margin:3px; }
+
+/* Global Classes
+---------------------------------------------------------*/
+.LclearSelf:after {
+	content:".";
+	height:0;
+	visibility:hidden;
+	display:block;
+	clear:both;
+}
+.LclearSelf {display: inline-block;}
+/* Hides from IE-mac (holly hack) \*/
+* html .LclearSelf {height: 1%;}
+.LclearSelf {display: block;}
+/* End hide from IE-mac */
+.Lnodisplay { display:none; }
+.LtextLeft { text-align:left; }
+.LtextCenter { text-align:center; }
+.LtextRight { text-align:right; }

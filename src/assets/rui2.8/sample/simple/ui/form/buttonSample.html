@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Button</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <style type="text/css">
+        </style>
+        <script type='text/javascript' class="script-code">
+            //log 활성화
+            $C('!config').set('$.core.logger.show', [true]);
+            var form = null;
+            var button1 = null;
+            var button2 = null;
+            var button3 = null;
+            $C(function(){
+            
+              
+                $C('#button1').button().on('click', function(e){
+                    alert(1);
+                })
+                
+             
+                $C('#button2').button().addClass('rui_button2');
+                
+                $C('#button2').on('click', function(e){
+                    button3.enable();
+                    $C.log('click');
+                });
+                
+                button3 = $C('#button3').button({
+                    disableDbClick: true
+                });
+                
+                $C('#button4').button({
+                    label: 'test'
+                });
+                
+                $C('#button4').on('click', function(e){
+                    alert(1);
+                });
+                
+               //     $C('#button4').render(document.body);
+                
+                $C('#button2').click();
+                
+            });
+            
+            
+        </script>
+        <script type='text/javascript' >
+           
+            function testFocus(){
+                $C('#button3').focus();
+            }
+            
+            function testBlur(){
+                $C('#button3').blur();
+            }
+            
+            function testGetLabel(){
+                $C.log(button3.getLabel());
+            }
+            
+            function testSetLabel(){
+                $C('#button3').setLabel('testAutoWidth');
+            }
+            
+            function testGetForm(){
+                $C.log(button3.getForm());
+            }
+            
+            function testEnable(){
+                $C('#button3').enable();
+            }
+            
+            function testDisable(){
+                $C('#button3').disable();
+            }
+        </script>
+    </head>
+    <body>
+        <h1>button sample</h1>
+        <h2>LButton을 구현하는 샘플</h2>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id='panel'>
+                    <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                        <input type='text' id='col1' name='col1' /><input type="button" id="button1" value="Button1" disabled="disabled" />
+                        <button type="button" id="button2" class="L-button2">
+                            Button2
+                        </button>
+                        <input type="submit" id="button3" value="Button3" /><a href='javascript:testEnable()'>Enable</a>
+                        <a href='javascript:testDisable()'>Disable</a>
+                        <a href='javascript:testGetLabel()'>GetLabel</a>
+                        <a href='javascript:testFocus()'>Focus</a>
+                        <a href='javascript:testBlur()'>Blur</a>
+                        <a href='javascript:testGetForm()'>GetForm</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

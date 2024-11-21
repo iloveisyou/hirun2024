@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Basic</title>
+        <script type="text/javascript" src='../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='../../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+        <style type="text/css">
+            .L-skin-sam .L-calendar td.sunday {
+                background-color: #999;
+            }
+        </style>
+        <script type="text/javascript" class="script-code">
+            //************ Dom ready ***********
+            $C(function(){
+                //$C('!config').set('$.core.defaultLocale', ['en_US']);
+                /*<b>*/
+                //1. 기본 calendar, navigator:true는 중간 월/년 선택시 바로 다른 년/월을 선택할 수 있게 한다.
+                $C('#cal1Container').calendar({
+                    pagedate: "8/2009",
+                    navigator: true,
+                    close:true,
+                    title:"날짜를 선택하세요..."
+                });
+                
+                //선택/선택해제 이벤트 설정
+                $C('#cal1Container').on('select', function(e){
+                    alert("선택한날짜:" + e.date.format('%A %c'));
+                });
+                $C('#cal1Container').on('deselect', function(e){
+                    alert("선택해제한날짜:" + e.date.format('%A %c'));
+                });
+
+                /*</b>*/
+                
+                
+                //2.날짜 복수 선택 calendar
+                //MULTI_SELECT:true는 복수 선택 가능, 한번 클릭시 선택, 한번더 클릭하면 취소
+                //navigator customizing
+                var navConfig = {
+                    strings: {
+                        month: "달을 선택하세요",
+                        year: "년을 입력하세요",
+                        submit: "이동",
+                        cancel: "취소",
+                        invalidYear: "년을 잘못 입력했습니다."
+                    },
+                    monthFormat: $C('!calendar').SHORT,
+                    initialFocus: "year"
+                };
+                
+                /*<b>*/
+                $C('#cal2Container').calendar({
+                    MULTI_SELECT: true,
+                    navigator: navConfig
+                });
+                /*</b>*/
+                
+                //3. 월 및 날짜 범위 지정
+                $C('#cal3Container').calendar({
+                    pagedate: "8/2009",
+                    mindate: "8/1/2009",
+                    maxdate: "8/15/2009"
+                });
+
+                var startDate = "2009-08-01".toDate("%Y-%m-%d");
+                var endDate = "2009-08-08".toDate("%Y-%m-%d");
+                var compareDate = "2009-08-15".toDate("%Y-%m-%d");
+                /*<b>*/
+                $C('#cal3Container').on('renderCell', function(e){
+                    var cell = $E(e.cell);
+                    var date = e.date;
+                    //특정 구간 highlight coloring하기
+                    // 8월 1일 부터 8월 8일 이전까지이므로 8월 1일부터 8월 7일까지만 스타일 적용
+                    if(date.between(startDate, endDate)) {
+                        cell.addClass(this.Style.CSS_CELL_HIGHLIGHT1);
+                    }
+                    
+                    //render시 특정 날짜 선택 못하도록 설정
+                    if(date.equals(compareDate)) {
+                        cell.addClass(this.Style.CSS_CELL_RESTRICTED);
+                        e.stop = true;
+                        return;
+                    }
+
+                    //render시 특정 날짜 선택 못하도록 설정
+                    //render시 일요일 선택 못하도록 설정 - 수동 rendering 설정                    
+                    if(date.getDay() == 0) { // 일요일
+                        cell.html("X");
+                        cell.addClass("sunday");
+                        e.stop = true;
+                        return;
+                    }
+                });
+                /*</b>*/
+
+                /*<b>*/
+                //4. calendar group : 한번에 여러개의 calendar 보여주기
+                //PAGES:n은 한번에 몇개의 calendar를 보여줄지 설정
+                $C('#calgrpContainer').calendarGroup({
+                    PAGES: 3
+                });
+                /*</b>*/
+            });
+            
+function getSelected() {
+    alert($C('#cal2Container').getProperty("selected"));
+}
+        </script>
+        <!--there is no custom header content for this example-->
+    </head>
+    <body >
+        <h1>Calendar Basic Sample</h1>
+        <h2>Calendar의 기본 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>기본적인 달력 팝업 입니다. 복수 날짜 선택 및 날짜 범위 지정 등이 가능하며, 동시에 여러 개의 달력을 볼 수 있습니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                - navigator:true : 중간 월/년 선택시 바로 다른 년/월을 선택할 수 있게 한다. config설정으로 text등을 customizing할 수 있다.
+                <br/>
+                - MULTI_SELECT:true : 복수의 날짜 선택 가능
+                <br/>
+                - pagedate: "1/2009", mindate: "1/5/2009", maxdate: "1/15/2009" : 월/일 선택 가능 범위 설정 가능
+                <br/>
+                <div style="float: left; margin: 10px">
+                    <h2>1. 기본</h2>
+                    <div id="cal1Container">
+                    </div>
+                </div>
+                <div style="float: left; margin: 10px">
+                    <h2>2. 날짜 복수 선택</h2>
+                    <div id="cal2Container">
+                    </div>
+                </div>
+                <div style="float: left; margin: 10px">
+                    <h2>3. 날짜 범위지정, highlight 및 선택제한</h2>
+                    <div id="cal3Container">
+                    </div>
+                </div>
+                <div style="margin: 10px;clear:left;">
+                    <h2>4. Calendar group</h2>
+                    <div id="calgrpContainer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="javascript:getSelected()">getSelected</a>
+    </body>
+</html>

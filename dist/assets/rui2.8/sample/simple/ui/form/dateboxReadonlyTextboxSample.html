@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>DateBox readonly textbox</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui_skin1.css" />
+        <script type='text/javascript' class="script-code">
+            
+            $C(function(){
+                /*<b>*/
+                $C('#div_datebox').dateBox({
+                    name: 'txtDateBox',
+                    editableTextbox: false
+                });
+                /*</b>*/
+                
+                $C('#div_datebox').setValue("2010-09-08");
+
+            });
+            
+        </script>
+        
+    </head>
+    <body>
+        <h1>datebox readonly textbox sample</h1>
+        <h2>LDateBox의 키보드 입력을 막게 설정하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>날짜 객체를 사용할 때 연결되는 텍스트 박스의 입력 가능 여부를 변경할 수 있습니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id='panel'>
+                    <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                        <fieldset>
+                            <label for="div_datebox">
+                                DateBox
+                            </label>
+                            <div id="div_datebox">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

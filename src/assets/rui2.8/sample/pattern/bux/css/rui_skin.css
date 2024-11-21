@@ -1,0 +1,93 @@
+﻿@charset "utf-8";
+
+.L-grid-row-expand-close .L-grid-tree-col-icon {
+    background: url("../images/tree_plus.png") no-repeat scroll left 3px transparent !important;
+}
+
+.L-grid-row-expand-open .L-grid-tree-col-icon {
+    background: url("../images/tree_minus.png") no-repeat scroll left 3px transparent !important;
+}
+
+.L-grid-body .L-grid-cell {
+	color: #222222;
+}
+
+.L-grid-row-selected {
+    background-color: #d6d6d6 !important;
+}
+
+.L-grid-body .L-grid-cell-selected {
+    background-color: #f7dbe3 !important;
+}
+
+.L-grid-panel.L-panel {
+    border: 0;
+    border-bottom: 2px solid #c5c5c5;
+}
+
+.L-grid-header a {
+    font-weight: bold;
+}
+
+.L-grid-header {
+    border-bottom: 2px solid #c5c5c5;
+}
+
+.L-grid-col-line .L-grid-row td.L-grid-cell {
+}
+
+.L-grid-header-tool {
+    background: transparent url(./../../../../resources/images/grid/skin_red/grid_popup.png) no-repeat right center;
+}
+
+/* LDateBox
+---------------------------------------------------------*/
+.L-datebox a.icon {
+    background: transparent url(./../../../../resources/images/datebox/cal.png) no-repeat 50% 50%;
+    width: 18px;
+    height: 18px;
+    top: 0px;
+}
+.L-datebox-calendar .L-title, 
+.L-datebox-calendar .link-close {
+    display: none;
+}
+
+/* LButton
+---------------------------------------------------------*/
+.L-button button {
+    *overflow: visible;
+    background-color: #fafafa;
+    border: 1px solid #bababa;
+    vertical-align: middle;
+    padding: 1px 6px;
+}
+.L-button button:hover {
+    background-color: #d64757;
+    border: 1px solid #bababa;
+    color: white;
+}
+.L-ua-mobile .L-button button:hover {
+    background-color: inherit;
+    border: 1px solid #bababa;
+    color: inherit;
+}
+.L-button.L-disabled button{
+    border: 1px solid #bababa;
+    color: inherit;
+}
+.L-button.L-disabled button:hover {
+    border: 1px solid #bababa;
+}
+.L-button.L-disabled button:hover {
+    background-color: transparent;
+}
+.L-grid-panel .L-grid-button  {
+    background-color: #fafafa;
+    border: 1px solid #bababa;
+}
+.L-grid-panel .L-grid-button:hover {
+    background-color: #d64757;
+    border: 1px solid #bababa;
+    color: white;
+}

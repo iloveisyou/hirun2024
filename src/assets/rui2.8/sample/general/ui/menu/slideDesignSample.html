@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="슬라이드메뉴(LSlideMenu), 디자인(Design), 스타일(Style), CSS" />
+    <title>SlideMenu Design</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/menu/rui_menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/menu/rui_menu.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        /*slide menu 전체에 적용*/
+        .L-ul-slidemenu {
+            background:#f7f7f7;
+        }
+
+        /*depth 0의 li에 대한 style*/
+        .L-ul-slidemenu .L-ul-li-depth-0 {
+            /*background image 설정*/
+            background:none;
+            /*
+            background-image:url("./images/menu/leftMenu_bg.gif");
+            background-position:left top;
+            background-repeat:repeat-x;
+            */
+        }
+
+        /*
+         * depth 0의 div(label표시 되는 부분)의 style, bullet image등을 설정,
+         * 닫힌 상태의 중간과 마지막에 대한 설정, 중간과 마지막이 다를경우는 각각 style 설정하면 된다.
+         * */
+        .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-has-child-close-mid,
+        .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-has-child-close-last {
+            /*background image 설정*/
+            background-position:0px 50%;
+            /*
+            background-image:url("./images/menu/submenu_closed.gif");
+            background-position:93% 50%;
+            background-repeat:no-repeat;
+            padding-left:14px;
+            */
+        }
+
+        /*
+         * depth 0의 div(label표시 되는 부분)의 style, bullet image등을 설정,
+         * 열린 상태의 중간과 마지막에 대한 설정, 중간과 마지막이 다를경우는 각각 style 설정하면 된다.
+         * */
+        .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-has-child-open-mid,
+        .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-has-child-open-last {
+            background-position:0px 50%;
+            /*
+            background-image:url("./images/menu/submenu_open.gif");
+            background-position:93% 50%;
+            background-repeat:no-repeat;
+            padding-left:14px;
+            */
+        }
+
+        /*
+         * depth 0의 div(label표시 되는 부분)의 style, bullet image등을 설정,
+         * 자식이 없는 상태의 중간과 마지막에 대한 설정, 중간과 마지막이 다를경우는 각각 style 설정하면 된다.
+         * */
+        .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-has-no-child-mid,
+        .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-has-no-child-last {
+        }
+
+        /*
+         * depth 1의 div(label표시 되는 부분)의 style, bullet image등을 설정,
+         * 열린 상태의 중간과 마지막에 대한 설정, 중간과 마지막이 다를경우는 각각 style 설정하면 된다.
+         * */
+        .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-has-child-close-mid,
+        .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-has-child-close-last {
+            /*
+            background-image:url("./images/menu/leftMenu_blt.gif");
+            background-position:0px 50%;
+            background-repeat:no-repeat;
+            */
+        }
+
+        /*
+         * depth 1의 div(label표시 되는 부분)의 style, bullet image등을 설정,
+         * 닫힌 상태의 중간과 마지막에 대한 설정, 중간과 마지막이 다를경우는 각각 style 설정하면 된다.
+         * */
+        .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-has-child-open-mid,
+        .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-has-child-open-last {
+            /*
+            background-image:url("./images/menu/leftMenu_blt_on.gif");
+            background-position:0px 50%;
+            background-repeat:no-repeat;
+            */
+        }
+
+        /*
+         * depth 1의 div(label표시 되는 부분)의 style, bullet image등을 설정,
+         * 자식이 없는 상태의 중간과 마지막에 대한 설정, 중간과 마지막이 다를경우는 각각 style 설정하면 된다.
+         * */
+        .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-has-no-child-mid,
+        .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-has-no-child-last {
+            /*
+            background-image:url("./images/menu/leftMenu_blt_3.gif");
+            background-position:0px 50%;
+            background-repeat:no-repeat;
+            */
+        }
+
+        .L-ul-slidemenu .L-ul-node {
+            font-size:13px;
+            font-weight:100;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'menuId', type: 'number' },
+                    { id: 'seq', type: 'number' },
+                    { id: 'parentMenuId', type: 'number' },
+                    { id: 'name' },
+                    { id: 'url' }
+                ]
+            });
+
+            /*<b>*/
+            var slide = new Rui.ui.menu.LSlideMenu({
+                onlyOneTopOpen: false,
+                dataSet: dataSet,
+                fields: {
+                    rootValue: null,
+                    parentId: 'parentMenuId',
+                    id: 'menuId',
+                    label: 'name',
+                    order:'seq'
+                }
+            });
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            slide.on('nodeClick', function(e) {
+                var recordId = e.node.getRecordId();
+                //최상위가 0
+                var depth = e.node.getDepth();
+                //자식이 없는지 여부
+                var hasChild = e.node.hasChild();
+                var r = dataSet.get(recordId);
+                var url = r.get('url');
+                Rui.get('div_url').html('url : ' + url + ', depth : ' + depth + ', hasChild? : ' + hasChild);
+            });
+
+            slide.render('divUl');
+            /*</b>*/
+
+            dataSet.load({ url: './../../../../sample/data/menu.json' });
+        });
+    </script>
+</head>
+<body>
+    <h1>SlideMenu Design</h1>
+    <h2>슬라이드메뉴(SliceMenu)에 디자인(Design)을 적용한 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>슬라이드메뉴(SliceMenu)의 디자인을 적용하는 방법을 제공하는 샘플 입니다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="div_url">
+                url :</div>
+            <div id="divUl"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-sample" content="yes" />
+    <title>그리드의 업 / 다운 샘플</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        var dataSet1 = null;
+
+        $C('!config').set('$.core.logger.show', [true]);
+        $C(function() {
+/*
+            $C.browser.msie6 = true;
+            $C.browser.msie7 = false;
+            $C.browser.msie8 = false;
+            $C.browser.msie67 = true;
+            $C.browser.msie678 = true;
+            $C.browser.msie9 = false;
+*/
+
+            var col1Combo = $C.combo({
+               listWidth:200,
+               autoMapping: true,
+               isSimpleRenderer: true, // 하위 호환성 때문에 여기에 넣음. 기본적으로는 rui_config.js의 combo 영역에 정의해야 함.
+               url:'./../../../../sample/data/code.json'
+            });
+            
+            var comboDataSet = col1Combo.getDataSet();
+            
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'col4' },
+                { id: 'col5' },
+                { id: 'col6' },
+                { id: 'col7' },
+                { id: 'col8', type: 'number' },
+                { id: 'code' },
+                { id: 'value' },
+                { id: 'date1', type: 'date' }
+                ]
+            });
+            
+            dataSet.on('rowPosChanged', function(e) {
+                if(e.row < 0) return;
+                
+                var modifiedRecords = dataSet.getModifiedRecords();
+                if(modifiedRecords.length < 1) {
+                    $C('#showData').html('no changed');
+                    return;
+                }
+        
+                var data = '';
+                modifiedRecords.each(function(id) {
+                    var record = modifiedRecords.get(id);
+                    data += $C.dump(record.getModifiedData())
+                });
+                $C('#showData').html(data);
+
+            });
+            
+            /*<b>*/
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.stateColumn(),
+                    $C.selectionColumn(),
+                    $C.numberColumn(),
+                    { field: "col1", label: "Col1", sortable: true, editable: false, editor: $C.textBox() },
+                    { field: "col2", align:'center', width: 120, editor: $C.textBox({ mask: '999999-9999999' }) },
+                    { field: "code", align: 'center', editor: col1Combo },
+                    { field: "col3", align: 'right', editor: $C.radioGroup({
+                        items:[
+                            {
+                                label : 'R1',
+                                value:'R1'
+                            },
+                            {
+                                label : 'R2',
+                                value:'R2',
+                                checked:true
+                            }
+                        ]
+                    }) },/*
+                    { field: "col5", align: 'center', editor: $C.checkBox({
+                        bindValues : ['R1', '']
+                    }) },*/
+                    { field: "col5", align: 'center', editor: $C.checkBox({ bindValues : ['R1', ''] }) },
+                    { field: "col6", label: "Col6", width: 200, editor: $C.textArea() },
+                    { field: "col8", label: "Col8", align: 'right', editor: $C.numberBox({decimalPrecision: 2, minValue: -1, maxValue: 10000 }), 
+                        renderer:$C.renderer.moneyRenderer() },
+                    { field: "date1" , align:'center', editor: $C.dateBox(), renderer: $C.renderer.dateRenderer() },
+                    { id:'btn', label:'Button', width: 150, renderer: function(val, p, record, row, i){
+                        return "<button type='button' class='L-grid-button'>" + record.get('col1') + "</button>";
+                    }}
+                    ]
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                width: 400,
+                height:300
+            });
+
+            /*</b>*/
+           
+            var view = grid.getView();
+            
+           grid.getView().focus();
+            
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data11.json'
+                });
+            });
+
+            $C('#newBtn').button();
+            $C('#newBtn').on("click", function(){
+                var row = dataSet.newRecord();
+                var record = dataSet.getAt(row);
+                record.set('col1', 'asdfadsfads');
+            });
+
+            $C('#upBtn').button();
+            $C('#upBtn').on("click", function(){
+                var row = dataSet.getRow();
+                if(row < 1) return;
+                
+                var record1 = dataSet.getAt(row - 1);
+                var record2 = dataSet.getAt(row);
+                var record1Data = record1.getValues();
+                record1.setValues(record2.getValues());
+                record2.setValues(record1Data);
+                dataSet.setRow(row - 1);
+            });
+
+            $C('#downBtn').button();
+            $C('#downBtn').on("click", function(){
+                var row = dataSet.getRow();
+                if((row + 2) > dataSet.getCount()) return;
+                var record1 = dataSet.getAt(row);
+                var record2 = dataSet.getAt(row + 1);
+                var record2Data = record2.getValues();
+                record2.setValues(record1.getValues());
+                record1.setValues(record2Data);
+                dataSet.setRow(row + 1);
+            });
+            
+            $C.log('step 4');
+            searchBtn.click();
+
+            });
+            
+        </script>
+</head>
+<body>
+    <h1>gridpanel up / down sample</h1>
+    <h2>그리드의 업 / 다운 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div> row의 데이터 이동에 대한 기능 샘플.</div>
+    <div id='bd'>
+    <div class="LblockButton" >
+        <button type="button" id="searchBtn" >Search</button>
+        <button type="button" id="newBtn" >New</button>
+        <button type="button" id="upBtn" >Up</button>
+        <button type="button" id="downBtn" >Down</button>
+    </div>
+    
+    <div class="LblockMarkupCode">
+        <div id="aaa" class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+    <div id='showData'>
+    </div>
+</div>
+</body>
+</html>

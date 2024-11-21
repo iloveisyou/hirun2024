@@ -1,0 +1,20 @@
+/* LRui
+------------------------------*/
+.L-lcl-container {
+    float:right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: red;
+    color: white;
+    z-index: 10000;
+}
+
+.L-ux-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+}

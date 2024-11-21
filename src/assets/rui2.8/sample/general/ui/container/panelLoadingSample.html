@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="패널(LPanel), 로딩(Loading)" />
+    <title>Panel Loading</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LPanelManager.js"></script>
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+        var wait;
+        
+        Rui.onReady(function() {
+
+            var showBtn = new Rui.ui.LButton('showBtn');
+            showBtn.on('click', function(){
+
+                var content = document.getElementById('content');
+                content.innerHTML = '';
+        
+                if (!wait) {
+                    // Initialize the temporary Panel to display while waiting for external content to load
+                    /*<b>*/
+                    wait = new Rui.ui.LPanel({
+                        id: 'wait', 
+                        width: '240px',
+                        fixedcenter: true,
+                        close: false,
+                        draggable: false,
+                        zindex:4,
+                        modal: true,
+                        visible: false
+                    });
+        
+                    wait.setHeader('Loading, please wait...');
+                    wait.setBody('<img src=\'http://us.i1.yimg.com/us.yimg.com/i/us/per/gr/gp/rel_interstitial_loading.gif\'/>');
+                    wait.render(document.body);
+                    /*</b>*/
+                }
+
+                // Show the Panel
+                wait.show();
+                
+                // Connect to our data source and load the data
+                var conn = Rui.ajax({
+                    method: 'GET', 
+                    url: '/sleep.dev?r=' + new Date().getTime(), 
+                    success : function(o) {
+                       Rui.log('success'); 
+                       content.innerHTML = o.responseText;
+                       content.style.visibility = 'visible';
+                       setTimeout(function(){
+                            wait.hide();
+                        },1000);
+                    },
+                    failure : function(o) {
+                        content.innerHTML = o.responseText;
+                        content.style.visibility = 'visible';
+                        content.innerHTML = 'CONNECTION FAILED!';
+                        setTimeout(function(){
+                            wait.hide();
+                        },1000);
+                    }
+                });
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Panel Loading</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>LPanel로 구현한 Loading Panel 입니다.</h2>
+            <div class="LblockDesc">
+                <p>Panel 사용에 대한 기본적인 형태입니다. 판넬은 드래그 관련 속성 설정으로 고정 및 이동이 가능합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="content"></div>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="showBtn" >Show</button>
+        </div>
+    </div>
+</body>
+</html>

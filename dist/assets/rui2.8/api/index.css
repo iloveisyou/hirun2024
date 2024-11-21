@@ -1,0 +1,586 @@
+@charset "utf-8";
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+a, a:link, a:visited, a:hover, a:active {color: #333; }
+html { height: 100%;}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: tahoma,sans-serif;
+    color: #333;
+    font-size: 12px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.L-button button {
+	border: 0px;
+}
+
+button {
+    color: #eee;
+}
+
+.L-button {
+	background-color: #8f8f8f;
+}
+
+.body {
+	vertical-align: top;
+}
+
+h2 {
+	color: #333;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: tahoma,sans-serif;
+	padding: 0px;
+	margin: 0px;
+	padding-left: 35px;
+	background: url(./../resources/images/bullet.png) no-repeat 20px 6px;
+}
+
+.L-title {
+	font-weight: bold;
+	height: 36px;
+	vertical-align: top;
+	padding: 5px 5px 5px 15px;
+}
+
+.L-title ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.L-title ul li {
+    float: left;
+}
+
+#searchKey input {
+	height: 33px;
+	background-color: #f0f0f0;
+}
+
+#searchKey {
+    margin-right: 10px;
+}
+
+.L-search-icon {
+    position: absolute;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+    background: url(./images/search.png) no-repeat center left;
+    left: 210px;
+    top: 12px;
+    border: 0px;
+	height: 22px;
+	width: 22px;
+	cursor: pointer;
+}
+
+.L-search-icon button {
+    width: 30px;
+    height: 20px;
+}
+
+.L-header {
+    border: 1px solid #bababa;
+    border-top: 0px;
+    vertical-align: top;
+    margin-bottom: 1px;
+    width: 255px;
+    #height: 85%;
+    display: inline-block;
+    position: absolute;
+    padding: 0px;
+}
+
+#publicOnly {
+	margin: 13px 0px 14px 15px;
+    display: inline-block;
+}
+
+.LblockTree label {
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+.LblockTree {
+	border-top: 1px solid #bababa;
+}
+
+.L-body-scroller {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: inline-block;
+    margin-left: 257px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.L-body {
+    position:relative; 
+    margin:0 auto; 
+    #height:auto !important; 
+    #height:100%; 
+    #min-height:100%;
+    display: inline-block;
+    margin: 0px;
+    padding: 15px 0px;
+    width: 100%;
+}
+
+.L-view-body {
+	overflow: auto;
+	#height: 100%;
+    padding: 0px;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: auto;
+	padding-left: 20px;
+	padding-right: 30px;
+}
+
+.L-view-header {
+    height: 22px;
+    vertical-align: middle;
+    padding: 1px 0px 0px 0px; 
+}
+
+.L-body .L-view-body {
+	min-height: 300px;
+	overflow-y: hidden;
+}
+
+h3 {
+	margin-bottom: 0;
+	background-color: #3c3c3c;
+	padding: 2px 2px 2px 14px;
+    font-size: 15px;
+	font-weight: bold !important;
+	margin: 28px 3px 20px 3px !important;
+	background: url(./../resources/images/demo/subtitle_blue.gif) no-repeat center left;
+}
+
+fieldset {
+	border: 0px;
+	padding: 00px;
+	margin: 15px 0px 0px 0px;
+}
+
+legend {
+	font-size: 15px;
+	font-weight: bold;
+	color: #333;
+	border-bottom: 1px solid #2880B4;
+    display: inline-block;
+	width: 100%;
+	height: 25px;
+	background: url(./../resources/images/demo/subtitle_blue.gif) no-repeat 0px 6px;
+	padding-left: 13px;
+}
+
+.LblockLine {
+    background-color: #bababa;
+    height: 1px;
+}
+
+.L-member-title {
+	margin: 15px 50px;
+}
+
+.L-member-body {
+	margin: 0px 10px 0px 50px;
+}
+
+.L-table-types {
+    border-collapse: collapse;
+    display: block;
+    margin: 0px 10px 0px 50px;
+}
+
+.L-member-return-type {
+}
+
+.L-member-subclasses {
+	display: block;
+}
+
+.L-member-name, .L-subclasses-title {
+	font-weight: bold;
+}
+
+.L-member-parameter-detail, .L-member-return-detail, .L-member-description, .L-member-object-type, .L-member-config-detail, .L-member-default-value {
+	margin-left: 30px;
+}
+
+.L-detail-link {
+    text-decoration: underline;
+    color: #333;
+    cursor: pointer;
+}
+
+.L-detail {
+    border: 1px solid #CCCCCC;
+    margin-top: 5px;
+    padding: 10px;
+    display: none;
+    white-space: pre;
+}
+
+.L-detail code, .L-detail pre {
+    font-size: 100%;
+}
+
+.L-description {
+    border: 1px solid #CCCCCC;
+    white-space: pre;
+    padding-left: 10px;
+    padding-bottom: 15px;
+}
+
+.class_description {
+}
+
+.L-code {
+    white-space: pre;
+    padding-left: 20px;
+}
+
+.L-sample {
+    padding: 10px;
+    border: 1px solid gray;
+}
+
+.L-superclass .L-block {
+    padding: 5px;
+}
+
+pre, code, kbd, samp, tt {
+    line-height: none;
+}
+
+.L-search {
+	width: 315px;
+}
+
+.L-search input {
+	ime-mode: disabled;
+}
+
+.L-grid-panel.L-panel .bd .L-grid {
+    background-color: #f0f0f0 !important;
+}
+
+.L-grid-row-even, .L-grid-row-odd, .L-grid-row-over {
+}
+
+.L-grid-col-line .L-grid-row td.L-grid-cell {
+    border: 0px;
+}
+
+.L-grid-row-expand-close .L-grid-tree-col-icon {
+    background: url("../resources/images/demo/tree_plus_blue.gif") no-repeat scroll 50% 50% transparent;
+}
+
+.L-grid-row-expand-open .L-grid-tree-col-icon {
+    background: url("../resources/images/demo/tree_minus_blue.gif") no-repeat scroll 50% 50% transparent;
+}
+
+.L-grid-body, .L-grid-col-line .L-grid-row {
+	background-color: #f0f0f0 !important;
+}
+
+.L-grid-body .L-grid-cell-selected {
+	background-color: #f0f0f0 !important;
+}
+
+#treeGrid {
+	border-top: 1px solid #BABABA;
+}
+
+#treeGrid .L-panel {
+	border: 0px;
+	background-color: #f0f0f0 !important;
+}
+
+.L-grid-row-depth-0 {
+	font-weight: bold;
+}
+
+.L-member-description {
+	white-space: pre;
+}
+
+.L-member-sample {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.L-body .L-view-header {
+	height: 30px;
+}
+
+.L-view-list {
+	padding: 10px 10px 10px 15px;
+	background-color: #f0f0f0;
+	border: 1px solid #bababa;
+}
+
+.L-view-list.L-api-notification {
+	background-color: #fff;
+    border: 0px;
+}
+
+.L-view-list li {
+	line-height: 25px;
+}
+
+.L-member-list-other {
+	color: gray;
+}
+
+.L-deprecated {
+	text-decoration: line-through;
+	color: gray;
+	padding-right: 100px;
+	background: url(./images/deprecated.jpg) no-repeat center right;
+	background-size: 100px 17px;
+}
+
+.L-grid-cell-inner span {
+	cursor: pointer;
+}
+
+.L-data-type-package {
+    padding-left: 15px !important;
+    background: url(./images/package.png) no-repeat center left;
+}
+
+.L-data-type-type {
+	padding-left: 15px !important;
+	background: url(./images/class.png) no-repeat center left;
+}
+
+.L-data-type-type-static {
+    padding-left: 25px !important;
+    background: url(./images/classStatic.png) no-repeat center left;
+}
+
+.L-data-type-type-plugin {
+    padding-left: 25px !important;
+    background: url(./images/classPlugin.png) no-repeat center left;
+}
+
+.L-data-type-constructor {
+    padding-left: 25px !important;
+    background: url(./images/constructor.png) no-repeat center left;
+}
+
+.L-data-type-config {
+    padding-left: 15px !important;
+    background: url(./images/config.png) no-repeat center left;
+}
+
+.L-data-type-property {
+    padding-left: 15px !important;
+    background: url(./images/property.png) no-repeat center left;
+}
+
+.L-data-type-property-static {
+    padding-left: 25px !important;
+    background: url(./images/propertyStatic.png) no-repeat center left;
+}
+
+.L-data-type-property-plugin {
+    padding-left: 25px !important;
+    background: url(./images/propertyPlugin.png) no-repeat center left;
+}
+
+.L-data-type-event {
+    padding-left: 15px !important;
+    background: url(./images/event.png) no-repeat center left;
+}
+
+.L-data-type-event-plugin {
+    padding-left: 25px !important;
+    background: url(./images/eventPlugin.png) no-repeat center left;
+}
+
+.L-data-type-method {
+    padding-left: 15px !important;
+    background: url(./images/method.png) no-repeat center left;
+}
+
+.L-data-type-method-static {
+    padding-left: 25px !important;
+    background: url(./images/methodStatic.png) no-repeat center left;
+}
+
+.L-data-type-method-plugin {
+    padding-left: 25px !important;
+    background: url(./images/methodPlugin.png) no-repeat center left;
+}
+
+.L-data-static {
+	width: 8px;
+	height: 12px;
+	display: inline-block;
+	*display: inline;
+	*zoom: 100%;
+    background: url(./images/static.png) no-repeat left;
+}
+
+.L-data-plugin {
+    width: 8px;
+    height: 12px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+    background: url(./images/plugin.png) no-repeat center left;
+}
+
+.L-data-protected {
+    width: 8px;
+    height: 12px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+    background: url(./images/protected.png) no-repeat center left;
+}
+
+.L-hierarchy {
+	margin: 15px;
+}
+
+.L-hierarchy-level1 {
+	padding-left: 25px;
+}
+
+.L-hierarchy-level2 {
+    padding-left: 50px;
+}
+
+.L-hierarchy-level3 {
+    padding-left: 75px;
+}
+
+.L-hierarchy-level4 {
+    padding-left: 100px;
+}
+
+.L-hierarchy-level5 {
+    padding-left: 125px;
+}
+
+.L-hierarchy-level6 {
+    padding-left: 150px;
+}
+
+#treeGrid .L-grid-cell, td.L-grid-dummy-cell {
+    height: 21px;
+}
+
+.L-super-class-info {
+	color: #999;
+}
+
+.L-table-types-title {
+    cursor: pointer;
+    padding: 2px 2px 2px 14px;
+    font-size: 15px;
+    font-weight: bold !important;
+    margin: 28px 3px 20px 3px !important;
+	background: url(./../resources/images/demo/subtitle_blue.gif) no-repeat center left;
+}
+
+.L-table-types-title:hover {
+	color: #bababa;
+}
+
+.L-table-types-title:hover {
+    cursor: pointer;
+}
+
+.L-table-types, .L-table-types th, .L-table-types td {
+    border: 1px solid #bbb;
+    padding: 10px 8px;
+}
+
+.L-table-types-icon {
+	width: 10%;
+}
+
+.L-table-types-name {
+    width: 15%;
+}
+
+.L-table-types-description {
+    width: 75%;
+}
+
+.L-table-types-header {
+	text-align: center;
+	font-weight: bold;
+}
+
+.L-grid-header {
+	display: none !important;
+}
+
+.L-visibility-protected, .L-visibility-private {
+	color: gray;
+}
+
+.L-visibility-protected a, .L-visibility-private a {
+    color: gray;
+}
+
+.L-combo-list-wrapper, .L-textbox-list-wrapper {
+    color: #000;
+}
+
+.L-layout .L-layout-unit div.L-layout-hd h2 {
+    color: #000;
+}
+
+.L-grid-row-selected {
+	color: #2880b4;
+	font-weight: bold;
+}
+
+.L-combo input, .L-textbox input {
+    padding: 0px;
+    margin: 0px;
+}
+
+#searchBtn button {
+    padding: 2px 5px;
+}
+
+.L-view-header h2 {
+    font-size: 14px;
+}
+
+iframe {
+	margin: 10px 10px 0px 50px;
+}
+
+.L-grid-row .L-grid-cell-inner {
+	padding: 5px 3px 5px 5px;
+}
+
+div.L-list {
+	height: 20px;
+}

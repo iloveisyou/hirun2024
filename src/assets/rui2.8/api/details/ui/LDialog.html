@@ -1,0 +1,424 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+Dialog를 구현한 객체
+Dialog는 body만 생성하여도 3가지 div의 태그로 header(hd), body(bd), footer(ft)로 기본적으로 구성된다.
+html(markup)으로 dialog를 생성할 수 도 있고 setHeader, setBody, setFooter 메소드를 통해서 생성할 수 도 있다.
+LDialog는 기본 async로 rui_config.js에 셋팅되어 있다.
+프로젝트에서 가장 많이 사용하는 방식은 url을 통해서 Dialog의 페이지를 얻어오는 방식으로 크게 3가지가 존재한다.
+1. 기본 dialog : 페이지 마다 body영역을 생성하거나 body영역을 공통 스트립트로 생성하여 처리 하는 기본 처리 방식이다.
+2. frameDialog : LDialog를 상속받은 LFrameDialog 객체를 통해서 body 영역의 출력하는 방식으로 해당 body 영역이 출력되어있는지 
+                    여부를 제공되지 않으며 기본적인 body의 dom제어도 html의 frame 접근 방식의 부모 창의 객체로 직접 접근하여야 한다.   
+3. ajaxDialog : dialog의 body 영역을 LElement의 appendChildByAjax 기능을 이용하여 해당 페이지를 얻어와 한 화면으로 처리하는 방식이다.
+샘플 경로 :
+<a href="./../sample/general/ui/container/dialogSample.html" target="_new">/rui/sample/general/ui/container/dialogSample.html</a>
+<a href="./../sample/general/ui/container/commonDialogSample.html" target="_new">/rui/sample/general/ui/container/commonDialogSample.html</a>
+<a href="./../sample/general/ui/container/dialogGridSample.html" target="_new">/rui/sample/general/ui/container/dialogGridSample.html</a>
+<a href="./../sample/general/ui/container/dialogAsyncRequestSample.html" target="_new">/rui/sample/general/ui/container/dialogAsyncRequestSample.html</a>
+<a href="./../sample/general/ui/container/dialogNoMarkupSample.html" target="_new">/rui/sample/general/ui/container/dialogNoMarkupSample.html</a>
+</div>
+<div class="L-sample">
+sample: LDialog 기본 샘플
+<div class="L-code">
+var handleSubmit = function(){
+    this.submit(true);
+};
+
+var handleCancel = function(){
+    this.cancel(true);
+};
+
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    buttons: [{
+        text: "Submit",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "Cancel",
+        handler: handleCancel
+    }]
+});
+
+dialog1.render();
+.................
+&lt;div id="dialog1"&gt;
+    &lt;div class="hd"&gt;
+        다이얼로그 header
+    &lt;/div&gt;
+    &lt;div class="bd"&gt;
+        다이얼로그 body
+    &lt;/div&gt;
+    &lt;div class="ft"&gt;
+        다이얼로그 footer
+    &lt;/div&gt;
+&lt;/div&gt;
+</div>
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_postmethod">
+<div class="L-description">
+dialog의 submit 종류를 지정한다. 종류로는 "async", "form", "manual", "none" 가 있다.
+rui_config.js의 기본값은 none으로 되어 있다.
+</div>
+<div class="L-sample">
+sample: LDialog를 form 방식으로 생성한다.
+<div class="L-code">
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    postmethod: 'form',
+    buttons: [{
+        text: "Submit",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "Cancel",
+        handler: handleCancel
+    }]
+});
+
+dialog1.render();
+</div>
+</div>
+</div>
+
+<div class="config_hideaftersubmit">
+<div class="L-description">
+dialog의 submit을 호출한 후에 dialog를 숨길것인지 여부를 결정한다.
+true로 설정되면 submit 호출후 dialog를 숨긴다.
+rui_config.js의 기본값은 true로 되어 있다.
+</div>
+<div class="L-sample">
+sample: LDialog를 form 방식으로 생성한다.
+<div class="L-code">
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    hideaftersubmit: true,
+    buttons: [{
+        text: "Submit",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "Cancel",
+        handler: handleCancel
+    }]
+});
+
+dialog1.render();
+</div>
+</div>
+</div>
+
+<div class="config_buttons">
+<div class="L-description">
+dialog의 button 객체들 정보
+생성된 button들은 LButton객체로 되어 있다.
+</div>
+<div class="L-sample">
+sample: LDialog를 buttons을 3가지로 생성한다.
+<div class="L-code">
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    hideaftersubmit: true,
+    buttons: [{
+        text: "확인",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "적용",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "취소",
+        handler: handleCancel
+    }]
+});
+
+dialog1.render();
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_getButtons">
+<div class="L-description">
+LDialog의 button들의 정보를 배열로 리턴한다.
+</div>
+<div class="L-sample">
+sample: 버튼중 확인버튼을 click한다.
+<div class="L-code">
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    hideaftersubmit: true,
+    buttons: [{
+        text: "확인",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "취소",
+        handler: handleCancel
+    }]
+});
+
+dialog1.render();
+.............
+var buttons = dialog1.getButtons();
+buttons[0].click();
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_beforeSubmitEvent">
+<div class="L-description">
+submit 전에 호출되는 이벤트
+</div>
+<div class="L-sample">
+sample: submit전에 메시지를 출력한다.
+<div class="L-code">
+
+var handleSubmit = function(){
+    this.submit(true);
+};
+
+var handleCancel = function(){
+    this.cancel(true);
+};
+
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    buttons: [{
+        text: "Submit",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "Cancel",
+        handler: handleCancel
+    }]
+});
+
+dialog1.on('beforeSubmit', function(e) {
+    alert('저장합니다.');
+});
+
+dialog1.render();
+</div>
+</div>
+</div>
+
+<div class="event_submit">
+<div class="L-description">
+submit시 호출되는 이벤트
+</div>
+<div class="L-sample">
+sample: submit시 메시지를 출력한다.
+<div class="L-code">
+
+var handleSubmit = function(){
+    this.submit(true);
+};
+
+var handleCancel = function(){
+    this.cancel(true);
+};
+
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    buttons: [{
+        text: "Submit",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "Cancel",
+        handler: handleCancel
+    }]
+});
+
+dialog1.on('submit', function(e) {
+    alert('저장합니다.');
+});
+
+dialog1.render();
+</div>
+</div>
+</div>
+
+<div class="event_manualSubmit">
+<div class="L-description">
+postmethod의 값이 manual일 경우 submit시 호출되는 이벤트
+</div>
+<div class="L-sample">
+sample: submit시 메시지를 출력한다.
+<div class="L-code">
+
+var handleSubmit = function(){
+    this.submit(true);
+};
+
+var handleCancel = function(){
+    this.cancel(true);
+};
+
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    buttons: [{
+        text: "Submit",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "Cancel",
+        handler: handleCancel
+    }]
+});
+
+dialog1.on('manualSubmit', function(e) {
+    alert('저장합니다.');
+});
+
+dialog1.render();
+</div>
+</div>
+</div>
+
+<div class="event_asyncSubmit">
+<div class="L-description">
+postmethod값이 async일 경우 submit 전에 호출되는 이벤트
+</div>
+<div class="L-sample">
+sample: submit시 메시지를 출력한다.
+<div class="L-code">
+
+var handleSubmit = function(){
+    this.submit(true);
+};
+
+var handleCancel = function(){
+    this.cancel(true);
+};
+
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    buttons: [{
+        text: "Submit",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "Cancel",
+        handler: handleCancel
+    }]
+});
+
+dialog1.on('asyncSubmit', function(e) {
+    alert('저장합니다.');
+});
+
+dialog1.render();
+</div>
+</div>
+</div>
+
+<div class="event_formSubmit">
+<div class="L-description">
+postmethod값이 form일 경우 submit 전에 호출되는 이벤트
+</div>
+<div class="L-sample">
+sample: submit시 메시지를 출력한다.
+<div class="L-code">
+
+var handleSubmit = function(){
+    this.submit(true);
+};
+
+var handleCancel = function(){
+    this.cancel(true);
+};
+
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    buttons: [{
+        text: "Submit",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "Cancel",
+        handler: handleCancel
+    }]
+});
+
+dialog1.on('formSubmit', function(e) {
+    alert('저장합니다.');
+});
+
+dialog1.render();
+</div>
+</div>
+</div>
+
+<div class="event_cancel">
+<div class="L-description">
+cancel시 호출되는 이벤트
+</div>
+<div class="L-sample">
+sample: cancel시 메시지를 출력한다.
+<div class="L-code">
+
+var handleSubmit = function(){
+    this.submit(true);
+};
+
+var handleCancel = function(){
+    this.cancel(true);
+};
+
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    buttons: [{
+        text: "Submit",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "Cancel",
+        handler: handleCancel
+    }]
+});
+
+dialog1.on('cancel', function(e) {
+    alert('취소되었습니다.');
+});
+
+dialog1.render();
+</div>
+</div>
+</div>
+
+<div class="event_validate">
+<div class="L-description">
+validate시 호출되는 이벤트
+</div>
+<div class="L-sample">
+sample: submit시 validate를 처리한다.
+<div class="L-code">
+var dialog1 = new Rui.ui.LDialog("dialog1", {
+    width: 400,
+    buttons: [{
+        text: "Submit",
+        handler: handleSubmit,
+        isDefault: true
+    }, {
+        text: "Cancel",
+        handler: handleCancel
+    }]
+});
+
+dialog1.on('validate', function(e) {
+    return validatorManager.validateGroup('dialog1');
+});
+
+dialog1.render();
+</div>
+</div>
+</div>
+
+</div>

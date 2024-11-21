@@ -1,0 +1,13 @@
+
+html.L-ua-safari.L-ua-mobile .L-frame-dialog .bd {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+html.L-ua-safari.L-ua-mobile .L-frame-dialog .bd iframe {
+    overflow: hidden; 
+    display: inline-block; 
+    height: 100%;
+}
+.L-frame-dialog .ft {
+	*overflow: visible;
+}

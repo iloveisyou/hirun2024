@@ -1,0 +1,94 @@
+    <script type="text/javascript" >
+        Rui.onReady(function() {
+            try {
+                var parent = window.getParentDialog();
+                if(parent.lastParams.value) 
+                    Rui.get('codeSearch').setValue(parent.lastParams.value);
+                
+                var codeDataSet = new Rui.data.LJsonDataSet({
+                    id: 'codeDataSet',
+                    fields: [
+                        { id: 'text' },
+                        { id: 'value' }
+                    ]
+                });
+                parent.dialogDataSet = codeDataSet;
+            
+                var columnModel = new Rui.ui.grid.LColumnModel({
+                    defaultSortable: true,
+                    columns: [
+                        new Rui.ui.grid.LSelectionColumn({selectionType: 'radio'}),
+                        new Rui.ui.grid.LNumberColumn(),
+                        { field: 'value', label: 'Value'},
+                        { field: 'text', label: 'Text', autoWidth: true }
+                    ]
+                });
+                var grid = new Rui.ui.grid.LGridPanel({
+                    columnModel: columnModel,
+                    dataSet: codeDataSet,
+                    autoWidth: true,
+                    width: 300,
+                    height: 300
+                });
+
+                
+                var searchBtn = new Rui.ui.LButton('codeSearchBtn');
+                searchBtn.on('click', function(e){
+                    var params = Rui.util.LDom.getValues('input, select', 'blockSearchCode');
+                    loadDataSet(params);
+                }, this, true);
+                
+                codeDataSet.on('rowPosChanged', function(e){
+                    if(e.row < 0) return;
+                    codeDataSet.setMarkOnly(e.row, true);
+                }, this, true);
+                
+                grid.on('cellDblClick', function(e){
+                    if(e.row < 0) return;
+                    parent.applyDialog();
+                });
+                
+                grid.render('codeDialogGrid');
+
+                var loadDataSet = function(params, sync) {
+                    codeDataSet.load({
+                        url: './../../../../sample/data/code.json',
+                        params: params
+                    });
+                };
+
+                parent.handleApply = function() {
+                    var row = codeDataSet.getRow();
+                    if(row < 0) {
+                        Rui.alert('항목을 선택하세요.');
+                        return false;
+                    }
+                    this.popupTextBox.setValue(codeDataSet.getNameValue(row, 'value'));
+                    this.popupTextBox.setDisplayValue(codeDataSet.getNameValue(row, 'text'));
+                    return true;
+                }
+                parent.dialog.on('show', function(e){
+                    /*
+                    if(parent.lastParams.value)
+                        Rui.get('codeSearch').setValue(parent.lastParams.value);
+                    */
+                    searchBtn.click();
+                });
+                parent.dialog.on('hide', function(e){
+                    codeDataSet.clearData();
+                });
+                
+                searchBtn.click();
+                
+            }catch(e) {
+                alert(e.message + ' ' + e.lineNumber + ' ' + e.fileName);
+            }
+        });
+    </script>
+    <div id="blockSearchCode" class="LblockSearch">
+        <input type="text" id="codeSearch" name="code">
+        <button type="button" id="codeSearchBtn">Search</button>
+    </div>
+    <div class="LblockGrid">
+        <div id="codeDialogGrid"></div>
+    </div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>base element</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <script type="text/javascript" class="script-code">
+            $C(function(){
+                $C('#result').appendChildByAjax({
+                   url: './appendData.html',
+                   success: function(e){
+                       //alert('성공');
+                   },
+                   failure: function(e) {
+                       alert('에러');
+                   },
+                   cache: false
+                });
+            })
+        </script>
+
+    </head>
+    <body>
+        <h1>append sample</h1>
+        <h2>url로 페이지를 읽어와서 원하는 dom에 내용을 붙이는 기능 (ajax)</h2>
+        <div id="result">
+        </div>
+    </body>
+</html>

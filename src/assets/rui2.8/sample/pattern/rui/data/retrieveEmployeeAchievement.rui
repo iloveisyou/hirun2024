@@ -1,0 +1,33 @@
+[{
+    "metaData": {
+        "idColumn": "id",
+        "stateColumn": "duistate",
+        "dataSetId": "dataSet",
+        "totalCount": 1
+    },
+    "records": [{
+        "num": "10006",
+        "name": "김현철",
+        "birthdate": "1972-04-09",
+        "ssn": "7204091111111",
+        "sex": "M",
+        "telephone": "025760288",
+        "address": "서울 서초구 양재동 327-18    ",
+        "postal": "121312",
+        "skillCode": "00003",
+        "joblevelCode": "01",
+        "divisionCode": "00007",
+        "departmentCode": "00004",
+        "job": "사원",
+        "department": "범무지원팀",
+        "skill": "고급"
+    }]
+}, {
+    "metaData": {
+        "idColumn": "id",
+        "stateColumn": "duistate",
+        "dataSetId": "achievementDataSet",
+        "totalCount": 0
+    },
+    "records": []
+}]

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="패널(LPanel), 패널관리(Panel Manager)" />
+    <title>Panel Overlay Manager</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LPanelManager.js"></script>
+    
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        .L-skin-sam .L-panel .hd {
+            background: #F2F2F2;
+        }
+        .L-skin-sam .L-panel-container.focused .L-panel .hd {
+            background: url(../../../resources/images/container/sprite.png) repeat-x 0 -200px;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            
+            // Build panel1 based on markup
+            var panel1 = new Rui.ui.LPanel({
+                applyTo: 'panel1', 
+                xy: [150,100],
+                visible: false,
+                width: '300px',
+                isDefaultCSS: false
+            });
+        
+            // Build panel2 based on markup
+            var panel2 = new Rui.ui.LPanel({
+                applyTo: 'panel2', 
+                xy: [250,200],
+                visible: false,
+                width: '300px',
+                isDefaultCSS: false
+            });
+
+            // Build panel3 based on markup
+            var panel3 = new Rui.ui.LPanel({
+                applyTo: 'panel3', 
+                xy: [350,300],
+                visible: false,
+                width: '300px',
+                isDefaultCSS: false
+            });
+
+            /*<b>*/
+            var manager = new Rui.ui.LPanelManager();
+            manager.register([panel1, panel2, panel3]);
+            /*</b>*/
+        
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var showBtn1 = new Rui.ui.LButton('showBtn1');
+            showBtn1.on('click', function(){
+                panel1.show();
+            });
+            var hideBtn1 = new Rui.ui.LButton('hideBtn1');
+            hideBtn1.on('click', function(){
+                panel1.hide();
+            });
+            var focusBtn1 = new Rui.ui.LButton('focusBtn1');
+            focusBtn1.on('click', function(){
+                panel1.focus();
+            });
+
+            var showBtn2 = new Rui.ui.LButton('showBtn2');
+            showBtn2.on('click', function(){
+                panel2.show();
+            });
+            var hideBtn2 = new Rui.ui.LButton('hideBtn2');
+            hideBtn2.on('click', function(){
+                panel2.hide();
+            });
+            var focusBtn2 = new Rui.ui.LButton('focusBtn2');
+            focusBtn2.on('click', function(){
+                panel2.focus();
+            });
+
+            var showBtn3 = new Rui.ui.LButton('showBtn3');
+            showBtn3.on('click', function(){
+                panel3.show();
+            });
+            var hideBtn3 = new Rui.ui.LButton('hideBtn3');
+            hideBtn3.on('click', function(){
+                panel3.hide();
+            });
+            var focusBtn3 = new Rui.ui.LButton('focusBtn3');
+            focusBtn3.on('click', function(){
+                panel3.focus();
+            });
+
+            var showBtnAll = new Rui.ui.LButton('showBtnAll');
+            showBtnAll.on('click', function(){
+                /*<b>*/
+                manager.showAll();
+                /*</b>*/
+            });
+            var hideBtnAll = new Rui.ui.LButton('hideBtnAll');
+            hideBtnAll.on('click', function(){
+                /*<b>*/
+                manager.hideAll();
+                /*</b>*/
+            });
+            var blurBtnAll = new Rui.ui.LButton('blurBtnAll');
+            blurBtnAll.on('click', function(){
+                /*<b>*/
+                manager.blurAll();
+                /*</b>*/
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Panel Overlay Manager</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>Panel들의 관리를 위한 LPanelManager</h2>
+            <div class="LblockDesc">
+                <p>PanelManager 이용하여 여러 개의 팝업이나 다이얼로그 등을 관리할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+        
+            <div id="panel1" style="visibility:hidden">
+            <div class="hd">Panel #1 from Markup</div>
+            <div class="bd">This is a Panel that was marked up in the document.</div>
+            <div class="ft">End of Panel #1</div>
+            </div>
+            
+            <div id="panel2" style="visibility:hidden">
+            <div class="hd">Panel #2 from Markup</div>
+            <div class="bd">This is a Panel that was marked up in the document.</div>
+            <div class="ft">End of Panel #2</div>
+            </div>
+            
+            <div id="panel3" style="visibility:hidden">
+            <div class="hd">Panel #3 from Markup</div>
+            <div class="bd">This is a Panel that was marked up in the document.</div>
+            <div class="ft">End of Panel #3</div>
+            </div>
+            
+        </div>
+        
+        <div>
+            Panel1:
+            <div class="LblockButton" >
+                <button type="button" id="showBtn1" >Show</button>
+                <button type="button" id="hideBtn1" >Hide</button>
+                <button type="button" id="focusBtn1" >Focus</button>
+            </div>
+        </div>
+        <div>
+            Panel2:
+            <div class="LblockButton" >
+                <button type="button" id="showBtn2" >Show</button>
+                <button type="button" id="hideBtn2" >Hide</button>
+                <button type="button" id="focusBtn2" >Focus</button>
+            </div>
+        </div>
+        <div>
+            Panel3:
+            <div class="LblockButton" >
+                <button type="button" id="showBtn3" >Show</button>
+                <button type="button" id="hideBtn3" >Hide</button>
+                <button type="button" id="focusBtn3" >Focus</button>
+            </div>
+        </div>
+        <div>
+            All Panels:
+            <div class="LblockButton" >
+                <button type="button" id="showBtnAll" >Show All</button>
+                <button type="button" id="hideBtnAll" >Hide All</button>
+                <button type="button" id="blurBtnAll" >Blur All</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

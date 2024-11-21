@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>DevOn RUI - Debug console</title>
+    <script type="text/javascript" src="./../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="./../../resources/rui_license.js"></script>
+    <script type="text/javascript" src="./console.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../resources/rui.css" />
+    <link rel="stylesheet" type="text/css" href="./console.css" />
+    <script type="text/javascript">
+        var logger = Rui.ui.LLogger.getInstance();
+        var regExp = new RegExp("row-r([^\\s]+)", "");
+        var manager = new Rui.webdb.LWebStorage(new Rui.webdb.LCookieProvider());
+        Rui.onReady(function() {
+            var asideLeftEl = Rui.get('asideLeft');
+            var windowResizeFn = function() {
+                asideLeftEl.setStyle('height', (Rui.util.LDom.getClientHeight() - 71) + 'px');
+                Rui.get('content').setStyle('height', (Rui.util.LDom.getClientHeight() - 71) + 'px');
+                Rui.select('.topMenuLogSource').setStyle('height', (Rui.util.LDom.getClientHeight() - 75) + 'px');
+            };
+            Rui.util.LEvent.addListener(window, "resize", windowResizeFn, this, true);
+            
+            windowResizeFn();
+            
+            var categoryList = Rui.select('.topMenuLogCategory input');
+            //manager.set('initConsole', false);
+            if(manager.get('initConsole', false) === false) {
+                categoryList.each(function(el, i) {
+                    manager.set(el.id, el.dom.checked);
+                });
+                manager.set('initConsole', true);
+            }
+            Rui.get('debugYn').dom.checked = manager.get('debugYn', 'true') == 'true';
+            categoryList.each(function(el, i) {
+                var v = manager.get(el.id, undefined);
+                if(v !== undefined)
+                    el.dom.checked = v == 'true';
+            });
+            
+            var contentEl = Rui.get('content');
+            asideLeftEl.on('click', function(e){
+                var targetEl = Rui.get(e.target);
+                if(targetEl.hasClass('row')) {
+                    var className = targetEl.dom.className;
+                    if(className) {
+                        var m = className.match(regExp);
+                        if (m && m[1]) {
+                            var logData = logger.getLog(m[1]);
+                            var html = '';
+                            html += 'time : ' + logData.time.format('%Y-%m-%d %H:%M:%S') + '\r\n';
+                            html += 'category : ' + logData.cat + '\r\n';
+                            html += 'source : ' + logData.src + '\r\n\r\n';
+                            html += logData.msg + '\r\n';
+                            contentEl.html('<pre>' + html + '</pre>');
+                        }
+                    }
+                }
+            });
+            var asideLeftUl = asideLeftEl.select('> ul').getAt(0);
+            logger.onSource(function(sources){
+                var srcHtml = '<ul>';
+                var isChecked = false;
+                var m;
+                for(m in sources) {
+                    if(Rui.util.LString.startsWith(m, 'source')) {
+                        srcHtml += '<li><input type="checkbox" id="' + m + 'Yn" class="source" value="Y" ><label for="' + m + 'Yn">' + (m.substring(6)) + '</label></li>';
+                    }
+                }
+                srcHtml += '</ul>';
+                
+                Rui.select('.topMenuLogSource').html(srcHtml);
+                if(isChecked == false) {
+                    var sourceList = Rui.select('.topMenuLogSource #sourceGlobalYn');
+                    if(sourceList.length > 0)
+                        sourceList.getAt(0).dom.checked = true;
+                }
+            });
+            logger.onNotice(function(logs, sources){
+                var html = '';
+                var catList = Rui.select('.topMenuLogCategory input:checked');
+                var srcList = Rui.select('.topMenuLogSource input:checked');
+                var beforeLog = null;
+                for(var i = 0, len = logs.length; i < len; i++) {
+                    var cat = logs[i].cat || "debug";
+                    cat = cat.substring(0, 2).toUpperCase();
+                    var src = "source" + (logs[i].src || "Global");
+                    var isCat = false;
+                    catList.each(function(el, i){
+                        if(el.id.substring(5, 7) == cat) {
+                            isCat = true;
+                            return false;
+                        }
+                    });
+                    if(isCat == false)
+                         continue;
+                    
+                    var isSrc = false;
+                    if(srcList.length > 0) {
+                        srcList.each(function(el, i){
+                            if(el.id == (src + "Yn")) {
+                                isSrc = true;
+                                return false;
+                            }
+                        });
+                        if(isSrc == false)
+                             continue;
+                    }
+                    
+                    var time = logs[i].time;
+                    var elapsedTime = 0;
+                    if(beforeLog) {
+                        elapsedTime = time.getTime() - beforeLog.time.getTime();
+                    }
+                    var sTime = time.format("%M:%S");
+                    var cat = (logs[i].cat || 'debug').substring(0, 2).toUpperCase();
+                    var msg = logs[i].msg;
+                    html = '<li class="row row-r' + logs[i].id + ' log-type-' + cat + '">' + sTime + ' [' + elapsedTime + '] ' + cat + ' ' + msg + '</li>' + html;
+                    beforeLog = logs[i];
+                }
+                asideLeftUl.html(html);
+            });
+            
+            Rui.select('.topMenuLogCategory input').on('click', function(e){
+                logger.notice();
+                var target = e.target;
+                logger.setActiveEvent(target.id.substring(5, 7), target.checked);
+                manager.set(target.id, target.checked + '');
+            });
+            
+            Rui.select('.topMenuLogSource').on('click', function(e) {
+                var targetEl = Rui.get(e.target);
+                if (targetEl.hasClass('source')) {
+                    logger.notice();
+                }
+            });
+            
+            Rui.get('debugYn').on('click', function(){
+                logger.setActive(this.dom.checked);
+                manager.set('debugYn', '' + this.dom.checked + '');
+            });
+            
+            Rui.get('clearBtn').on('click', function() {
+                logger.clear();
+            });
+            
+            Rui.get('loadBtn').on('click', function() {
+                if(opener){
+                	opener.reloadPageForDebug();
+                }else{
+                	Rui.alert('opener가 없으므로 이 기능을 사용할 수 없습니다.');
+                }
+            });
+            
+            Rui.later(1000, this, function(e) {
+                if(opener) {
+                    if(opener.Rui.logList) {
+                        logger.putAllLog(opener.Rui.logList);
+                        logger.notice();
+                        //opener.Rui.logList = null;
+                    }
+                    if(!opener.Rui.debugWin)
+                        opener.Rui.debugWin = window;
+                }
+            }, [], true);
+            
+            document.body.focus();
+        });
+
+		function log(msg, cat, src) {
+		    logger.log(msg, cat, src);
+		}
+		
+		function updateLog(message, filename, lineno){
+		    logger.updateLog(message, filename, lineno);
+		}
+        
+        function deconnectDebugger() {
+            manager.set('debugYn', 'true');
+            manager.set('debugDEYn', 'false');
+            manager.set('debugDVYn', 'true');
+            manager.set('debugINYn', 'false');
+            manager.set('debugWAYn', 'false');
+            manager.set('debugERYn', 'true');
+            manager.set('debugTIYn', 'false');
+            manager.set('debugWIYn', 'false');
+            manager.set('debugEVYn', 'false');
+            manager.set('debugCRYn', 'false');
+            manager.set('debugXHYn', 'false');
+        }
+
+    </script>
+</head>
+<body onBeforeUnload="try{ opener.Rui.debugWin = null; deconnectDebugger();}catch(e){}">
+<!-- header s -->
+<div id="header">
+    <h2>DevOn RUI - Debug console</h2>
+    <div class="topMenu">
+        <div class="topMenuButton">
+            <input type="checkbox" id="debugYn" value="Y" checked><label for="debugYn">활성화</label>
+            <button type="button" id="clearBtn" >Clear</button>
+            <button type="button" id="loadBtn" >Load Debug</button>
+        </div>
+        <div class="topMenuLogCategory">
+            <input type="checkbox" id="debugDEYn" value="Y" checked="checked"><label for="debugDEYn">Debug</label>
+            <input type="checkbox" id="debugDVYn" value="Y" checked="checked"><label for="debugDVYn">Develop</label>
+            <input type="checkbox" id="debugINYn" value="Y" ><label for="debugINYn">Info</label>
+            <input type="checkbox" id="debugWAYn" value="Y" ><label for="debugWAYn">Warning</label>
+            <input type="checkbox" id="debugERYn" value="Y" checked="checked"><label for="debugERYn">Error</label>
+            <input type="checkbox" id="debugTIYn" value="Y" ><label for="debugTIYn">Time</label>
+            <input type="checkbox" id="debugWIYn" value="Y" checked="checked"><label for="debugWIYn">Window</label>
+            <input type="checkbox" id="debugEVYn" value="N" ><label for="debugEVYn">Event</label>
+            <input type="checkbox" id="debugCRYn" value="N" ><label for="debugCRYn">Create</label>
+            <input type="checkbox" id="debugXHYn" value="N" ><label for="debugXHYn">XHR</label>
+        </div>
+    </div>
+</div>
+<!-- header e -->
+<!-- 메인 컨텐츠 영역 래퍼 s -->
+<div id="container">
+    <div class="topMenuLogSource">
+    </div>
+    <div id="headHeight"></div>
+
+    <!-- 왼쪽 s -->
+    <div id="asideLeft">
+        <ul>
+        </ul>
+    </div>
+    <!-- 왼쪽 e -->
+
+    <!-- 중앙 컨텐츠 s -->
+    <div id="content">초기화가 완료되었습니다.
+    </div>
+    <!-- 중앙 컨텐츠 e -->
+
+    <div id="footerHeight"></div>
+</div>
+<!-- 메인 컨텐츠 영역 래퍼 s -->
+<!-- footer s -->
+<div id="footer">Copyright 2012 LG CNS Development Technology Team. All Right Reserved.</div>
+<!-- footer e -->
+
+</body>
+</html>

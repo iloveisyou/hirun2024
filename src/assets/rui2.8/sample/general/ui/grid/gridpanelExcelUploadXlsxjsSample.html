@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="Excel 파일 업로드 XLSX-JS 파일박스" />
+    <title>Excel Upload(XLSX-JS)</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LFileBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LFileBox.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+	<script type="text/javascript" src="./xlsx-js/jszip.js"></script>
+	<script type="text/javascript" src="./xlsx-js/shim.js"></script>    
+    <script type="text/javascript" src="./xlsx-js/xlsx.js"></script>
+    <script type="text/javascript" src="./xlsx-js/xlsxutil.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+        	var rABS = typeof FileReader !== "undefined" && typeof FileReader.prototype !== "undefined" && typeof FileReader.prototype.readAsBinaryString !== "undefined";
+        	
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+             var excelDataSet = new Rui.data.LJsonDataSet({
+                id: 'excelDataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' }
+                ]
+            });
+            var excelColumnModel = new Rui.ui.grid.LColumnModel({
+                freezeColumnId: 'col1',
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', width: 160 },
+                    { field: 'col2', label: 'Col2', width: 160 },
+                    { field: 'col3', label: 'Col3', align: 'center', width: 80},
+                    { field: 'col4', label: 'Col4', align: 'center', width: 80},
+                    { field: 'col5', label: 'Col5', align: 'center', width: 80},
+                    { field: 'col6', label: 'Col6', width: 200, autoWidth: true}
+                ]
+            });
+            var excelGrid = new Rui.ui.grid.LGridPanel({
+                columnModel: excelColumnModel,
+                dataSet: excelDataSet,
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                autoWidth: true,
+                height: 200
+            });
+            excelGrid.render('excelGrid');
+            
+            /*<b>*/
+            var filebox = new Rui.ui.form.LFileBox({
+                applyTo: 'filebox',
+                width: 400,
+                placeholder: '파일을 선택하세요'
+            });
+
+            filebox.on('changed', function(e) {
+            	if(!Rui.browser.msie6789) {
+	            	var useWorker = typeof Worker !== 'undefined';
+	            	
+	            	var files = e.files;
+	            	var f = files[0];
+	            	
+	            	if(f !== null && f !== undefined) {
+	
+		           		var reader = new FileReader();
+		           		reader.onload = function(e) {
+		           			var data = e.target.result;
+		           			
+		           			if(useWorker) {
+		           				xw_xfer(data, process_wb);
+		        			} else {
+		        				var wb;
+		        				if(rABS) {
+		        					wb = XLSX.read(data, {type: 'binary'});
+		        				} else {
+		        					var arr = fixdata(data);
+		        					wb = XLSX.read(btoa(arr), {type: 'base64'});
+		        				}
+		        				process_wb(wb);
+		        			}
+		           		};
+
+		           		if(rABS) reader.readAsBinaryString(f);
+		        		else reader.readAsArrayBuffer(f);
+	            	}
+            	} else {
+            		Rui.alert('IE8 이하 버전에서는 사용할 수 없습니다.')
+            	}
+            });
+            
+            var xw_xfer = function(data, cb) {
+            	var worker = new Worker(rABS ? './xlsx-js/xlsxworker2.js' : './xlsx-js/xlsxworker1.js');
+            	worker.onmessage = function(e) {
+            		switch(e.data.t) {
+            			case 'ready': break;
+            			case 'e': break;
+            			default: xx = ab2str(e.data).replace(/\n/g,"\\n").replace(/\r/g,"\\r"); 
+            			         cb(JSON.parse(xx)); 
+            			         break;
+            		}
+            	};
+            	
+            	if(rABS) {
+            		var val = s2ab(data);
+            		worker.postMessage(val[1], [val[1]]);
+            	} else {
+            		worker.postMessage(data, [data]);
+            	}
+            };
+            
+            var process_wb = function(wb) {
+            	excelDataSet.loadData(to_json(wb));
+            };
+            /*</b>*/
+        });
+    </script>
+
+</head>
+<body>
+    <div id='hd'>
+        <h1>Excel Upload (Using XLSX-JS)</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>엑셀 업로드(Excel Upload) And Loading Using XLSX-JS</h2>
+            <div class="LblockDesc">
+		        <p>Java Script에서 엑셀 문서를 처리하는 오픈소스 컴포넌트 XLSX-JS 를 이용하여 엑셀(Excel)문서를 파싱한 후 그리드(Grid)에 데이터를 출력하는 예제 입니다.</p>
+		        <p>LFileBox를 이용하여 Excel파일(File)을 읽어와 XLSX-JS 를 이용해 파싱한 후 DataSet 에 로딩하여 그리드에 표시합니다.</p>
+		        <p>본 샘플은 XLSX-JS를 이용해 엑셀문서를 파싱하여 DataSet에 로딩하는 방법만을 제시할 뿐 XLSX-JS와 관련된 지원은 하지 않습니다.</p>
+		        <p>XLSX-JS 와 관련된 내용은 <a href="https://github.com/SheetJS/js-xlsx" target="_new">https://github.com/SheetJS/js-xlsx</a> 를 참조하십시요.</p>
+		        <br>
+		        <p>업로드 테스트는 <a href="./xlsx-js/ExcelUpload.xls">테스트 문서</a>를 다운로드 받아 수행하십시요</p>
+		        <br>
+		     	<p>아래는 크롬과 IE11에서 데이터 건수에 따른 수행시간 테스트 결과입니다</p>
+		     	<p>6개의 컬럼을 가진 데이터의 행의 갯수를 바꿔서 엑셀파일을 만들어 테스트를 수행하였습니다 </p> 
+		     	<p>수행시간 및 수행가능한 데이터 건수는 PC의 사양에 따라 값이 변할 수 있기 때문에 참조용으로만 활용하십시요</p>
+		     	<br>
+		     	<table>
+		     		<tr>
+		     			<td></td>
+		     			<td>크롬</td>
+		     			<td>Internet Explorer 11</td>
+		     		</tr>
+		     		<tr>
+		     			<td>1만건</td>
+		     			<td>0.7s</td>
+		     			<td>0.5s</td>
+		     		</tr>
+		     		<tr>
+		     			<td>2만건</td>
+		     			<td>1.6s</td>
+		     			<td>1.0s</td>
+		     		</tr>
+		     		<tr>
+		     			<td>5만건</td>
+		     			<td>3.2s</td>
+		     			<td>5s</td>
+		     		</tr>
+		     		<tr>
+		     			<td>10만건</td>
+		     			<td>6.4s</td>
+		     			<td>11s</td>
+		     		</tr>
+		     		<tr>
+		     			<td>15만건</td>
+		     			<td>측정불가</td>
+		     			<td>17s</td>
+		     		</tr>
+		     		<tr>
+		     			<td>20만건</td>
+		     			<td>측정불가</td>
+		     			<td>26s</td>
+		     		</tr>
+		     	</table>
+		        <br>
+		        <p>※본 샘플은 Internet Explorer 8 이하의 브라우저에서는 동작하지 않습니다.</p>
+            </div>
+        </div>
+    </div>
+	<div id='bd'>
+	    <div class="LblockMarkupCode">
+	    	<input type="text" id="filebox" name="file1">
+	    	<p></p>
+	        <div id="excelGrid"></div>
+	    </div>
+	</div>
+</body>
+</html>
+

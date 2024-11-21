@@ -1,0 +1,102 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+LField 객체는 form 입력 객체들을 추상 클래스
+샘플 경로 :
+<a href="./../sample/general/ui/grid/gridpanelEditSample.html">/rui/sample/general/ui/grid/gridpanelEditSample.html</a>
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_name">
+<div class="L-description">
+field의 name으로 input, select태그들의 name 속성 값
+</div>
+<div class="L-sample">
+sample: col1 콤보 객체를 dataSet의 code, value 필드와 바인드하고 col2 spane객체를 innerHTMl로 출력한다.  
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id: 'textBox1',
+    name: 'col1'
+});
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_changed">
+<div class="L-description">
+changed 메소드가 호출되면 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: textBox1에 changed 이벤트가 발생하면 메시지를 출력한다.
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id: 'textBox1',
+    applyTo: 'col1'
+});
+textBox1.on('changed', function(e) {
+    alert('값이 변경되었습니다.');
+});
+</div>
+</div>
+</div>
+
+<div class="event_valid">
+<div class="L-description">
+valid 메소드가 호출되면 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: textBox1에 valid 이벤트가 발생하면 L-valid css를 삭제한다.
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id: 'textBox1',
+    applyTo: 'col1'
+});
+textBox1.on('valid', function(e) {
+    this.removeClass('L-valid');
+});
+</div>
+</div>
+</div>
+
+<div class="event_invalid">
+<div class="L-description">
+invalid 메소드가 호출되면 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: textBox1에 invalid 이벤트가 발생하면 L-valid css를 추가한다.
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id: 'textBox1',
+    applyTo: 'col1'
+});
+textBox1.on('invalid', function(e) {
+    this.addClass('L-valid');
+});
+</div>
+</div>
+</div>
+
+<div class="event_specialkey">
+<div class="L-description">
+specialkey 메소드가 호출되면 수행하는 이벤트
+specialkey 종류 : ctrlKey, Rui.util.LKeyListener.KEY의 모든 값, Rui.util.LKeyListener.KEY객체 참조 
+</div>
+<div class="L-sample">
+sample: textBox1에 specialkey 이벤트가 발생하면 ctrl키와 a키 모두 선택되었는지 확인한다.
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id: 'textBox1',
+    applyTo: 'col1'
+});
+textBox1.on('specialkey', function(e) {
+    if(e.keyCode == 97) {
+..................
+    }
+});
+</div>
+</div>
+</div>
+
+</div>

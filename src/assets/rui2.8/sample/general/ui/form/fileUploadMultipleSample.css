@@ -1,0 +1,34 @@
+.upload-status .file-upload-dialog {
+    display: block;
+}
+
+.file-upload-dialog {
+    border: 1px solid gray;
+    background-color: white;
+    display: none;
+    left: 40%;
+    top: 40%;
+    overflow: hidden;
+    position: absolute;
+    z-index: 999;
+}
+
+.file-upload-progressbar {
+    background-color: #7e9be3;
+    height: 20px;
+    width: 90%;
+    border: 1px solid gray;
+}
+
+.file-upload-progressbar-mask {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: relative;
+}
+
+.file-upload-progress {
+}
+
+.file-upload-progress-stopper{
+}

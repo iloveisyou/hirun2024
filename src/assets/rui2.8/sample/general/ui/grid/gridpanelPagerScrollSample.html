@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), Pager Scroll" />
+    <title>Pager Scroll</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/LPager.js"></script>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LPager.css" />
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                // <b>
+                focusFirstRow: false,
+                // </b>
+                fields: [
+                    { id: 'num' },
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'multiCode' },
+                    { id: 'multiCodeName' },
+                    { id: 'value' },
+                    { id: 'time' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });            
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+            	freezeColumnId: 'col2',
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn({ mappingField: 'num' }),
+                    { field: 'col1', label: 'Col1', sortable: true, editor: new Rui.ui.form.LTextBox() },
+                    { field: 'col2', sortable: true, align: 'center', width: 120 },
+                    { field: 'code', align: 'center', sortable: true },
+                    { field: 'multiCode', align: 'center', sortable: true },
+                    { field: 'col3', align: 'right' },
+                    { field: 'col5', align: 'right' },
+                    { field: 'col6', label: 'Col6', width: 200, editor: new Rui.ui.form.LTextArea() },
+                    { field: 'col8', label: 'Col8', align: 'right', sortable: true, editor: new Rui.ui.form.LNumberBox({decimalPrecision: 2, minValue: -1, maxValue: 10000 }),
+                        renderer: 'money' },
+                    { field: 'date1' , align: 'center', editor: new Rui.ui.form.LDateBox(), renderer: 'date' },
+                    { field: 'col7', label: 'Popup', editor: new Rui.ui.form.LTextBox(), renderer: 'popup' },
+                    { field: 'time', label: 'Time', align: 'center', editor: new Rui.ui.form.LTimeBox() }
+                ]
+            });
+            
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                height: 310
+            });
+            
+            /*<b>*/
+            var pager = new Rui.ui.LPager({
+                gridPanel: grid,
+                mode: 'scroll'
+            });
+
+            pager.on('beforeChange', function(e){
+            	if(dataSet.isUpdated()) {
+            		alert('변경된 데이터가 존재합니다. 저장 후 이동하세요.');
+            		return false;
+            	}
+            });
+
+            pager.render();
+            /*</b>*/
+            
+            grid.render('defaultGrid');
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){                
+                dataSet.load({
+                    url: './../../../../sample/data/gridPager.json'
+                });
+            });
+            
+            searchBtn.click();
+        });
+        </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Pager Scroll</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>대량건 처리를 위한 그리드(Grid)에서 스크롤된 위치의 데이터를 서버(Server)로부터 즉시 가져와 출력하는 샘플</h2>
+            <div class="LblockDesc">
+		        <p>이 기능은 페이징(Paging) 기능을 활용하고 있으나 페이지 이동을 위한 페이저를 노출하지 않고 스크롤러(Scroll)에 의해 페이지 이동된다.</p>
+		        <p>대량건을 처리할 수 있는 페이징 방식으로 성능에 영향을 주지 않고 기존 그리드와 유사한 사용자 경험을 제공한다.</p>
+		        <p>기능을 구현시에는 현재 페이지가 어느 위치를 출력하는지 알 수 없으므로 LNumberColumn에 mappingField를 반드시 구현해야 한다.</p>
+		        <p>또한 그리드의 다음 기능은 사용될 수 없다. (셀 병합(Cell Merge), 트리그리드(Tree Grid), 소계, 합계, 필터, 페이지별 변경건 유지)</p>
+		        <p>현재 샘플은 서버가 없이 고정된 json으로 구현하여 매 페이지에 같은 데이터가 출력된다.</p>
+		        <br/>
+		        <p>[필수 속성]</p>
+		        <p>1. DataSet에 생성자 속성으로 focusFirstRow값을 반드시 false로 생성해야 한다.</p>
+		        <p>2. 변경된 데이터는 현재의 페이지 안에서만 처리되므로 다른 페이지로 이동전에 데이터를 저장하도록 사용자에게 알린 후 이동시켜야 한다.</p>
+		        <p>3. 그리드 컬럼을 정의시에 Rui.ui.grid.LNumberColumn을 사용하는것이 좋으며 mappingField 속성을 사용하여 현재의 스크롤 위치를 알수 있게 한다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >Search</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+</body>
+</html>

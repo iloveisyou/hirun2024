@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="devon-rui-sample" content="yes" />
+<title>Common dialog sample</title>
+<script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+<script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+<script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+<script type='text/javascript' src='./../../../../plugins/ui/LFrameDialog.js' ></script>
+<script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+<link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" >
+<link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LFrameDialog.css" />
+
+<style type="text/css">
+body {
+    margin:0;
+    padding:0;
+}
+</style>
+<script type='text/javascript' class="script-code">
+
+Rui.onReady(function() {
+    /*<b>*/
+    // Define various event handlers for Dialog
+    var handleApply = function() {
+        this.submit(true);
+    };
+    
+    var handleClose = function() {
+        this.cancel();
+    };
+
+    var frameDialog = $C.frameDialog({
+        width: 800,
+        height: 400,
+        modal: true,
+        visible: false,
+        buttons : 
+            [ 
+                { text:"Apply", handler:handleApply, isDefault:true },
+                { text:"Close", handler:handleClose } 
+            ]
+    });
+    frameDialog.render(document.body);
+    /*</b>*/
+
+    var showBtn = $C('#showBtn').button();
+    showBtn.on('click', function(e){
+        //popup(); 
+        frameDialog.show();
+        frameDialog.setUrl('../../../../sample/general/ui/grid/gridpanelEditSample.html')
+        // 상황에 따라 ie에서 객체가 존재하는데도 출력이 안되는 버그 해결 방법
+        // frameDialog.getFrameWindow().document.body.style.zoom = '100%';
+       
+       
+    });
+    
+    function popup() {
+    window.open("../../../../sample/general/ui/grid/gridpanelEditSample.html","Window1","menubar=no,width=430,height=360,toolbar=no");
+    }
+
+    var checkBtn = $C('#checkBtn').button();
+    checkBtn.on('click', function(e){
+        var frameWindow = frameDialog.getFrameWindow();
+        if(frameWindow.dataSet.getCount() < 1) {
+            alert('조회된 데이터가 없습니다.');
+            return;
+        }
+        
+        alert(frameWindow.dataSet.getNameValue(0, 'col1'));
+    });
+    
+    var setUrlBtn = $C('#setUrlBtn').button();
+    setUrlBtn.on('click', function(e){
+        frameDialog.setUrl('http://m.naver.com')
+    });
+    
+    var setWidthBtn = $C('#setWidthBtn').button();
+    setWidthBtn.on('click', function(e){
+        frameDialog.setWidth(240);
+    });
+    
+    var setHeightBtn = $C('#setHeightBtn').button();
+    setHeightBtn.on('click', function(e){
+        frameDialog.setHeight(360);
+    });
+});
+
+</script>
+</head>
+<body>
+    <h1>frame dialog sample</h1>
+    <h2>iframe으로 구현된 dialog를 구현한 샘플</h2>
+    <div class="LblockLine"></div>
+    <div>iframe을 이용하여 다이얼로그를 구성합니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+    </div>
+    <div id="LblockMainBody">
+        <button type="button" id="showBtn" >Show</button>
+        <button type="button" id="checkBtn" >Check</button>
+        <button type="button" id="setWidthBtn" >setWidth</button>
+        <button type="button" id="setHeightBtn" >setHeight</button>
+        <button type="button" id="setUrlBtn" >setUrl</button>
+    </div><!-- LblockMainBody -->
+</div>
+</body>
+</html>

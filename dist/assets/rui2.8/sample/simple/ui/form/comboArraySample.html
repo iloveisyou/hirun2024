@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Combo Array</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type='text/javascript' class="script-code">
+            $C('!config').set('$.core.logger.show', [true]);
+            var dataSet = null;
+
+            $C(function(){
+                /*<b>*/
+                $C('#combo1').combo({
+                    applyTo: 'combo1',
+                    listWidth: 200,
+                    defaultValue: 'code1'
+                });
+                
+                var dataSet = $C('#combo1').getDataSet();
+                
+                dataSet.loadData({
+                   records: [
+                       { code: 'code1', value: 'CODE1' },
+                       { code: 'code2', value: 'CODE2' }
+                   ] 
+                });
+                /*</b>*/
+                
+                $C('#combo1').on('changed', function(e){
+                    $C.log('dataset Value : ' + this.getValue());
+                });
+                
+                $C('#combo1').on('blur', function(e){
+                    $C.log('blur');
+                });
+                
+                $C('#combo1').on('focus', function(e){
+                    $C.log('focus');
+                });
+                
+                $C('#combo1').on('show', function(e){
+                    $C.log('show');
+                });
+                
+                $C('#combo1').on('hide', function(e){
+                    $C.log('hide');
+                });
+                
+                $C('#combo1').on('keyup', function(e){
+                    $C.log('keyup');
+                });
+                
+                $C('#combo1').on('keypress', function(e){
+                    $C.log('keypress');
+                });
+                
+                /******************JsUnit용 소스 시작**********************/
+                setUpPageStatus = 'complete';
+                /******************JsUnit용 소스   끝**********************/
+            });
+        </script>
+        <script type='text/javascript' class="script-code">
+            
+            //**************test function 시작*****************
+            function testAddAll(){
+                var data = [{
+                    code: 'code4',
+                    value: 'CODE4'
+                }, {
+                    code: 'code5',
+                    value: 'CODE5'
+                }]
+                $C('#combo1').clearFilter();
+                $C('#combo1').addAll(data);
+                console.debug($C('#combo1').getDataSet().serialize());
+            }
+            
+            function testUpdate(){
+                if ($C('#combo1').getCount() < 1) {
+                    $C.log("수정하고자 하는 Combo의 데이터 건수가 작습니다.");
+                    return;
+                }
+                var o = {
+                    code: 'code2',
+                    value: '코드2-2'
+                };
+                $C('#combo1').setData(1, o);
+            }            
+            
+            function testSetVisibilityMode(){
+                $C('#combo1').setVisibilityMode(false);
+            }
+            
+            function testValid(){
+                $C('#combo1').valid();
+            }
+            
+            function testInvalid(){
+                $C('#combo1').invalid();
+            }
+            
+            function testFocus(){
+                $C('#combo1').focus();
+            }
+            
+            function testBlur(){
+                $C('#combo1').blur();
+            }
+            
+            function testSetWidth(){
+                $C('#combo1').setWidth('30px');
+            }
+            
+            function testGetWidth(){
+                $C.log($C('#combo1').getWidth());
+            }
+            
+            function testSetListWidth(){
+                $C('#combo1').setListWidth('400px');
+            }
+            
+            function testGetListWidth(){
+                $C.log($C('#combo1').getListWidth());
+            }            
+            
+            function testRemove(){
+                if ($C('#combo1').getCount() < 1) {
+                    $C.log("삭제하고자 하는 Combo의 데이터 건수가 작습니다.");
+                    return;
+                }
+                $C('#combo1').removeAt(0);
+            }
+            
+            function testSetEditable(){
+                $C('#combo1').setEditable(false);
+            }
+            
+            
+            function testHide(){
+                $C('#combo1').hide();
+            }
+            
+            function testShow(){
+                $C('#combo1').show();
+            }
+            
+            
+            function testEnable(){
+                $C('#combo1').enable();
+            }
+            
+            function testDisable(){
+                $C('#combo1').disable();
+            }
+            
+            function noTestDestroy(){
+                $C('#combo1').destroy();
+            }
+            
+        </script>
+        <!--*********************************JsUnit Test용 소스   끝********************************-->
+    </head>
+    <body>
+        <h1>combo array sample</h1>
+        <h2>LCombo를 array값으로 추가하는 방법을 구현한 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>콤보와 연결되는 데이터를 연관배열을 이용하여 적용합니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id='panel'>
+            <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                <fieldset>
+                    <label for="combo1">
+                        col1
+                    </label>
+                    <div id="combo1">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <!-- 
+    <a href='javascript:testAddAll()'>AddAll</a>
+    <a href='javascript:testUpdate()'>Update</a>
+    <a href='javascript:testRemove()'>Remove</a>
+    <a href='javascript:testEnable()'>Enable</a>
+    <a href='javascript:testDisable()'>Disable</a>
+    <a href='javascript:testSetEditable()'>SetEditable</a>
+    <a href='javascript:testShow()'>Show</a>
+    <a href='javascript:testHide()'>Hide</a>
+    <a href='javascript:testValid()'>Valid</a>
+    <a href='javascript:testInvalid()'>Invalid</a>
+    <a href='javascript:testSetVisibilityMode()'>setVisibilityMode</a>
+    <a href='javascript:testFocus()'>Focus</a>
+    <a href='javascript:testBlur()'>Blur</a>
+    <a href='javascript:noTestDestroy()'>Destroy</a>
+    <a href='javascript:testSetWidth()'>SetWidth</a>
+    <a href='javascript:testGetWidth()'>GetWidth</a>
+    <a href='javascript:testSetListWidth()'>SetListWidth</a>
+    <a href='javascript:testGetListWidth()'>GetListWidth</a>
+     -->
+</div>
+    </body>
+</html>

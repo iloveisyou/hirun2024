@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="라디오(LRadio),라디오버튼" />
+    <title>Radio</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            /*<b>*/
+            var spear = new Rui.ui.form.LRadio({
+                applyTo: 'spear',
+                name: 'contra',
+                label: 'Spear',
+                value: '창'
+            });
+            var shield = new Rui.ui.form.LRadio({
+                applyTo: 'shield',
+                name: 'contra',
+                label: 'Shield',
+                value: '방패'
+            });
+            /*</b>*/
+            
+            spear.on('changed', function(e){
+            	if(e.value == true)
+                    Rui.alert(e.target.getValue());
+            });
+            
+            shield.on('changed', function(e){
+                if(e.value == true)
+                    Rui.alert(e.target.getValue());
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var checkBtn = new Rui.ui.LButton('checkBtn');
+            checkBtn.on('click', function(){
+                spear.setValue(true);
+            });
+            
+            var uncheckedBtn = new Rui.ui.LButton('uncheckedBtn');
+            uncheckedBtn.on('click', function(){
+                spear.setValue(false);
+            });
+            
+            var disableBtn = new Rui.ui.LButton('disableBtn');
+            disableBtn.on('click', function(){
+                spear.disable();
+            });
+            
+            var enableBtn = new Rui.ui.LButton('enableBtn');
+            enableBtn.on('click', function(){
+                spear.enable();
+            });
+
+            var focusBtn = new Rui.ui.LButton('focusBtn');
+            focusBtn.on('click', function() {
+                spear.focus();
+            });
+
+            var blurBtn = new Rui.ui.LButton('blurBtn');
+            blurBtn.on('click', function() {
+                spear.blur();
+            });
+            
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Radio</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>라디오(LRadio) 기본 샘플</h2>
+            <div class="LblockDesc">
+		       <P>기본적인 라디오(Radio) 샘플 입니다. 두개의 Radio를 클릭해 보시고 각 버튼을 클릭하여 동작을 확인 하세요.</P>
+		       <p>하나로 사용할 경우는 없으므로 라디오그룹(RadioGroup)을 사용하세요.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <fieldset>
+                <input type="radio" id="spear" />
+                <div id="shield" ></div>
+            </fieldset>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="checkBtn" >Check</button>
+            <button type="button" id="uncheckedBtn" >Unchecked</button>
+            <button type="button" id="disableBtn" >Disable</button>
+            <button type="button" id="enableBtn" >Enable</button>
+            <button type="button" id="focusBtn">Focus</button>
+            <button type="button" id="blurBtn">Blur</button>
+        </div>
+    </div>
+    </body>
+</html>

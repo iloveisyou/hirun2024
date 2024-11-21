@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="devon-rui-sample" content="yes" />
+<title>Bufferd grid</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+
+    <style type="text/css">
+        .L-yScrollBar {
+            z-index: 100;
+        }
+        .L-scrollContent {
+            height: 100px;
+            overflow: scroll;
+            z-index: 999;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var searchBtn = null;
+        $C(function() {
+            $C('!config').set('$.core.logger.show', [true]);
+
+            var reapeatNm = 40;
+            var htmlStr = "";
+            for(var i = 0 ; i < reapeatNm; i++) {
+                htmlStr += '<div id="grid'+ ((i + 1) + '').lPad('0', 2) + '">'+ (i+1) +'</div>';
+            }
+
+            $C('#gridList').html(htmlStr);
+            
+            var dataSetList = [];
+            for(var i = 0 ; i < reapeatNm; i++) {
+                var idx = ((i + 1) + '').lPad('0', 2);
+                var dsId = 'dataSet' + idx;
+                var dataSet = $C.dataSet({
+                    id: dsId,
+                    fields: [
+                        { id: 'codeGroup' },
+                        { id: 'code' },
+                        { id: 'value' }
+                    ],
+                    params: dsId + '=0187'
+                });
+
+                dataSetList.push(dataSet);
+
+                var columnModel = $C.columnModel({
+                    columns: [
+                        $C.stateColumn(),
+                        $C.selectionColumn(),
+                        $C.numberColumn(),
+                        { field: "codeGroup", label: "codeGroup", sortable: true, editor: $C.textBox()},
+                        { field: "code", label: "code", sortable: true, editor: $C.textBox()},
+                        { field: "value", label: "value", sortable: true, editor: $C.textBox()}
+                        ]
+                });
+
+                $C('#grid' + idx).grid({
+                    columnModel: columnModel,
+                    dataSet:dataSet,
+                    height:150
+                });
+            }
+
+            
+            var tm = $C.dataSetManager();            
+            
+            tm.on('success', function(e) {
+                // 페이지에서는 log가 아니라 alert을 써야 함.
+                $C.log($C('!message').get('$.base.msg100'));
+            });
+
+            var params = '';
+
+            for (var i = 0; i < dataSetList.length; i++) {
+                var currParams = dataSetList[i].params;
+                if (typeof currParams == 'object') {
+                    params += $C.util.LObject.serialize(currParams) + '&';
+                } else { 
+                    params += currParams + '&';
+                }
+            }
+            
+            searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                tm.loadDataSet({
+                    dataSets: dataSetList,
+                    url: './../../../../sample/data/gridMultiLoad.json',
+                    params: params
+                });
+            });
+            /******************JsUnit용 소스 시작**********************/
+            setUpPageStatus = 'complete';
+            /******************JsUnit용 소스   끝**********************/
+        });
+    </script>
+
+</head>
+<body>
+    <h1>Grid Multi Load 샘플</h1>
+    <h2>여러개의 Grid를 로딩하는 성능 테스트용 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div>다수의 그리드에서 데이터 로딩시의 성능을 테스트하기 위한 샘플입니다.<br>
+    </div>
+<div id='bd'>
+    <div class="LblockButton">
+        <button type="button" id="searchBtn" >Search</button>
+    </div>
+    <div class="LblockMarkupCode" id="gridList">
+    </div>
+    <button type="button" id="filterBtn" >filter</button>
+    <button type="button" id="clearFilterBtn" >clearfilter</button>
+    <button type="button" id="syncDataSetBtn" >syncDataSet</button>
+    <button type="button" id="unSyncDataSetBtn" >unSyncDataSet</button>
+    <button type="button" id="firstBtn" >first</button>
+    <button type="button" id="previousBtn" >previous</button>
+    <button type="button" id="nextBtn" >next</button>
+    <button type="button" id="lastBtn" >last</button>
+    <button type="button" id="sortBtn" >sort</button>
+    <button type="button" id="columnShowBtn" >column show</button>
+    <button type="button" id="columnHideBtn" >column hide</button>
+    <button type="button" id="gridShowBtn" >grid show</button>
+    <button type="button" id="gridHideBtn" >grid hide</button>
+    <button type="button" id="multiSelectBtn" >multi selection</button>
+    <button type="button" id="enableBtn" >enable</button>
+    <button type="button" id="disableBtn" >disable</button>
+    <button type="button" id="setWidthBtn" >setWidth</button>
+    <button type="button" id="setHeightBtn" >setHeight</button>
+    <button type="button" id="allUpdateBtn" >All Update</button>
+</div>
+
+</body>
+</html>

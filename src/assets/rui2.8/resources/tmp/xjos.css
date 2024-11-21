@@ -1,0 +1,31 @@
+﻿<!--  xjos.css for xjos 3.0 -->
+  .xjs_required  { background-image : url(required03.gif); background-position:top right; background-repeat:no-repeat;}
+
+  .xjs_flat_box  { border:1 solid black; background-color:white; }
+  .xjs_flat_button { height:19px; border-width:1; border-style:ridge; border-color:#d0d0d0; background-color:#dfdfdf;}
+
+  .xjs_show      { display: inline; } <!-- block /inline /inline-block /list-item /table-header-group /table-footer-group -->
+  .xjs_hide      { display: none;}
+  .xjs_readonly  { BACKGROUND-COLOR: #FFFFCC;}
+  .xjs_disable   { BACKGROUND-COLOR: #CCCCCC;}
+  .xjs_error     { BACKGROUND-COLOR: #EEFFB6;}
+  
+  .xjs_lable     { border:0 solid black; background-color:transparent; }
+  
+  .xjs_right     { text-align : right;}
+  .xjs_center    { text-align : center;}  
+  .xjs_left      { text-align : left;}
+
+  .xjs_imeKor     { ime-mode:active }
+  .xjs_imeEng     { ime-mode:inactive }
+  .xjs_imeDis     { ime-mode:disabled }
+
+  .xjs_dek        { POSITION:absolute;VISIBILITY:hidden;Z-INDEX:200;overflow:hidden;}
+  .xjs_dek_table  { border-width:1; border-style:ridge; border-color:#d0d0d0; background-color:#ffffff; color: blue;}
+  .xjs_dek_skin   { border-width:0; background-color:; color: blue; }
+
+  .xjs_source     { line-height : 17px; padding :5px; margin :5px; border-width:1; width:100%; border-style:ridge; border-color:#d0d0d0; background-color:#E4E4E4;}
+  .xjs_result     { line-height : 17px; padding :5px; margin :5px; border-width:1; width:100%; border-style:ridge; border-color:#d0d0d0; background-color:#D9FFD9;}
+  .xjs_descript   { line-height : 17px; }  
+
+

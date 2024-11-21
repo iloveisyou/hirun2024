@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>SlideMenu</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../plugins/ui/menu/rui_menu.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type="text/javascript" class="script-code">
+            $C(function(){
+                //***********DataSet*****************
+                var dataSet = $C.dataSet({
+                    id: 'dataSet',
+                    fields: [
+                        { id: 'menuId',type:"number"},
+                        { id: 'seq', type: 'number'},
+                        { id: 'parentMenuId',type:"number"},
+                        { id: 'name'},
+                        { id: 'url'}
+                    ]
+                });
+    
+                dataSet.load({ url: "../../../../resources/data/menu.json", method: "get" });
+                
+                /*<b>*/
+                //**********SlideMenu***************
+                var slide = $C.slideMenu({
+                    onlyOneTopOpen : false,
+                    dataSet: dataSet,
+                    fields: {
+                        rootValue: null,
+                        parentId: 'parentMenuId',
+                        id: 'menuId',
+                        label: 'name',
+                        order:'seq'
+                    }
+                });
+                
+                slide.on("nodeClick", function(e) {
+                    var url = e.node.getRecord().get('url');
+                    //최상위가 0
+                    var depth = e.node.getDepth();
+                    //자식이 없는지 여부
+                    var hasChild = e.node.hasChild();
+                    Rui.get("div_url").html("url : " + url + ", depth : " + depth + ", hasChild? : " + hasChild);
+                });
+                
+                slide.render("divUl");
+                /*</b>*/
+
+            });
+            
+        </script>
+
+    </head>
+    <body>
+        <h1>Slide Menu Sample</h1>
+        <h2>Slide Menu 에 대한 기본적인 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>슬라이드 메뉴에 대한 기본 구조 입니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id="div_url">
+                    url :</div>
+                <div id="divUl">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

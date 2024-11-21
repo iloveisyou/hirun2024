@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Edit Basic</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+    <style type="text/css" >
+        .L-grid-col {
+            background-color:#e7e7e7;
+        }
+        
+        .L-grid-col-col3 {
+            background-color:#e7e7e0;
+        }
+        
+        .L-grid-cell-editable {
+            background-color:#fff;
+        }
+        
+        .L-button#searchBtn {
+            background: #DFE8F1 url(../../../../resources/skin/sam2/images/search_btn.gif) center left no-repeat;
+            padding: 0 .1px;
+            width: 80px;
+            *margin-left: 4em;   /* IE only */
+            *padding: 0 1.10px;  /* IE only */
+        }
+        
+        .L-button#searchBtn button {
+            padding-left: 22px;
+        }
+        
+        .LblockGrid {
+            width: 70%;
+            float: left;
+        }
+        
+        .LblockDetail {
+            width: 30%;
+            float: right;
+        }
+        
+        .L-grid-header-checkBox {
+            background-position: 2px 2px;
+        }
+        
+        .L-grid-row .L-grid-col-btn {
+            padding: 1px 3px 0px 3px;
+        }
+        
+        .L-grid-header table td.L-grid-cell-last, .L-grid-col-line .L-grid-row table td.L-grid-cell-last {
+            border-right-color: #fff !important;
+        }
+
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        $C(function() {
+            $C('!config').set('$.core.logger.show', [true]);
+
+            var col1Combo = $C.combo({
+               listWidth:200,
+               rendererField: 'value', 
+               url:'./../../../../sample/data/code.json'
+            });
+
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'col4' },
+                { id: 'col5' },
+                { id: 'col6' },
+                { id: 'col7' },
+                { id: 'col8', type: 'number', defaultValue: 1000 },
+                { id: 'code' },
+                { id: 'value' },
+                { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+
+            var tm = $C.dataSetManager();            
+            
+            tm.on('success', function(e) {
+                // 페이지에서는 log가 아니라 alert을 써야 함.
+                $C.log($C('!message').get('$.base.msg100'));
+            });
+    
+            var popuButton = $C.button({
+                label:'>>'
+            });
+            
+            var col1EditableRenderer = function(value, p, record, row, i) {
+                if(record.state == $C('!record').STATE_INSERT) {
+                    p.css.push('L-grid-cell-editable');
+                }
+                return value;
+            }
+            
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.stateColumn(),
+                    $C.selectionColumn(),
+                    $C.numberColumn(),
+                    { field: "col1", label: "Col1", sortable: true, editor: $C.textBox(), renderer: col1EditableRenderer, vMerge: true },
+                    { field: "col2", align:'center', editor: $C.textBox({ mask: '(999) 999-9999', maskValue: true }), vMerge: true },
+                    { field: "code", align: 'center', editor: col1Combo },
+                    { field: "col3", align: 'right', editor: $C.radioGroup({
+                        items:[
+                            {
+                                label : 'R1',
+                                value:'R1'
+                            },
+                            {
+                                label : 'R2',
+                                value:'R2',
+                                checked:true
+                            }
+                        ]
+                    }) },
+                    { field: "col5", align: 'right', editor: $C.checkBox({
+                        bindValues : ['R1', '']
+                    }) },
+                    { field: "col6", label: "Col6", width: 200, editor: $C.textArea() },
+                    { field: "col8", label: "Col8", align: 'right', editor: $C.numberBox(), renderer:$C.renderer.moneyRenderer() },
+                    { field: "date1" , align:'center', editor: $C.dateBox(), renderer: $C.renderer.dateRenderer() },
+                    { id:'btn', field:'col1', label:'Button', width: 150, renderer: function(val, p, record, row, i){
+                        return "<button type='button' class='L-grid-button'>" + val + "</button>";
+                    }}
+                    ]
+            });
+
+            var validatorManager = $C.validatorManager({
+                validators:[
+                {id:'searchSelectedUserGrpId', validExp:'그룹:true'},
+                { id: 'col1', validExp:'Col1:true:maxByteLength=50&minByteLength=5'},
+                { id: 'col2', validExp:'Col2:true'},
+                { id: 'col3', validExp:'Col3:true'},
+                { id: 'col6', validExp:'Col6:true'},
+                { id: 'col8', validExp:'Col8:true:number&maxNumber=20000'},
+                { id: 'code', validExp:'Code:true'},
+                { id: 'date1', validExp:'Date1:true'}
+                ]
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                height:300
+            });
+            
+            var view = grid.getView();
+
+            grid.on("cellClick", function(e){
+                
+                var column = columnModel.getColumnAt(e.col);
+                if(column.id == 'btn')
+                    alert(e.row + ' 버튼 실행');
+                else
+                    $C.log("cellClick : row " + e.row + ", col " + e.col);
+            });
+
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json',
+                    method: "get"
+                });
+            });
+
+            $C('#newBtn').button();
+            $C('#newBtn').on("click", function(){
+                var row = dataSet.newRecord();
+            });
+
+            $C('#insertBtn').button();
+            $C('#insertBtn').on("click", function(){
+                if(dataSet.getRow() < 0) return;
+                var row = dataSet.newRecord(dataSet.getRow());
+                var record = dataSet.getAt(row);
+                record.set("col1", "Junee5");
+                record.set("col2", "(02) 6363-7009");
+                record.set("col3", "R1");
+            });
+
+            $C('#updateBtn').button();
+            $C('#updateBtn').on("click", function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var record = dataSet.getAt(row);
+                record.set("col2", null);
+                record.set("col3", "R2");
+                record.set("col8", 1);
+            });
+
+            $C('#undoBtn').button();
+            $C('#undoBtn').on("click", function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    for(var i = 0 ; i < dataSet.getCount() ; i++) {
+                        if(dataSet.isMarked(i))
+                            dataSet.undo(i);
+                    }
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.undo(row);
+                }
+            });
+            
+            $C('#undoAllBtn').button();
+            $C('#undoAllBtn').on("click", function(){
+                dataSet.undoAll();
+            });
+            
+            $C('#deleteBtn').button();
+            $C('#deleteBtn').on("click", function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRow();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+            
+            $C('#saveBtn').button();
+            $C('#saveBtn').on("click", function(){
+                if(dataSet.isUpdated() == false) {
+                    alert($C('!message').get('$.base.msg102'));
+                    return;
+                }
+                
+                if(validatorManager.validateDataSet(dataSet) == false) {
+                    $C.alert($C('!message').get('$.base.msg052') + '<br>' + validatorManager.getMessageList().join('<br>') );
+                    return;
+                }
+                
+                tm.updateDataSet({
+                    dataSets:[dataSet], 
+                    url:'/consoleLog.dev'    
+                });
+
+            });
+            
+            bind = $C.bind(
+            {
+                groupId: 'LdetailInformation',
+                dataSet: dataSet,
+                bind: true,
+                bindInfo: [
+                    {id:'col1', ctrlId:'col1', value:'value'},
+                    {id:'col2', ctrlId:'col2', value:'value'},
+                    {id:'col3', ctrlId:'col3', value:'value'},
+                    {id:'col6', ctrlId:'col6', value:'value'},
+                    {id:'code', ctrlId:'code', value:'value'}
+                ]
+            });
+            /*
+             invalid시 row 위치 이동 불가
+           */
+            dataSet.on('canRowPosChange', function(e){
+                if (validatorManager.validateDataSet(dataSet, dataSet.getRow()) == false) {
+                    $C.alert($C('!message').get('$.base.msg052') + '<br>' + validatorManager.getMessageList().join('<br>') );
+                    return false;
+                }
+            });
+            /*
+             * 이동은 가능하나 표시만 되게 하는 경우
+            var validateHandler = function(e) {
+                validatorManager.validateDataSet(dataSet, dataSet.getRow());
+            };
+            dataSet.on('canRowPosChange', validateHandler);
+
+            dataSet.on('rowPosChanged', validateHandler);
+            */
+
+            searchBtn.click();
+        });
+    </script>
+  </head>
+<body>
+    <h1>gridpanel Validate Sample</h1>
+    <h2>LGridPanel 에서의 Validation 에 관한 샘플(grid)</h2>
+<div id='bd'>
+    <div class="LblockButton">
+        <button type="button" id="searchBtn" >Search</button>
+        <button type="button" id="newBtn" >NEW</button>
+        <button type="button" id="insertBtn" >insert</button>
+        <button type="button" id="updateBtn" >update</button>
+        <button type="button" id="deleteBtn" >delete</button>
+        <button type="button" id="saveBtn" >save</button>
+        <button type="button" id="undoBtn" >undo</button>
+        <button type="button" id="undoAllBtn" >undoAll</button>
+    </div>
+    <div class="LblockMarkupCode">
+        <div id="aaa" class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+        <div id="LdetailInformation" class="LblockDetail" >
+            <input id='col1' ><br/>
+            <input id='col2' ><br/>
+            <input type='radio' name='col3' value='R1'/>RADIO1<br/>
+            <input type='radio' name='col3' value='R2'/>RADIO2<br/>
+            <textarea id='col6' rows="3" cols="20" ></textarea>
+        </div>
+    </div>
+</div>
+</body>

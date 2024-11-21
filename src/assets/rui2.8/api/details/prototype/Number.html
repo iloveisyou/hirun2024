@@ -1,0 +1,48 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+prototype에 추가된 메소드 외에도 Rui.util.LNumber객체를 이용하여 더 많은 기능을 사용할 수 있다.
+<a href="../sample/general/base/prototypeSample.html" target="_new">/rui/sample/general/base/prototypeSample.html</a>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_format">
+<div class="L-description">
+숫자를 포멧을 적용한 문자로 리턴한다.
+</div>
+<div class="L-sample">
+sample: 숫자가 있는 a 변수에 천단위 구분자가 포함된 문자로 리턴한다. 
+<div class="L-code">
+var a = 10000.1234567;
+var v = a.format({thousandsSeparator: ','});
+리턴 : '10,000.1234567'
+</div> 
+</div>
+
+<div class="L-sample">
+sample: 숫자가 있는 a 변수에 천단위 구분자가 포함된 문자로 리턴한다. 
+<div class="L-code">
+var a = 10000.1234567;
+var v = a.format({prefix: '$'});
+리턴 : '$10000.1234567'
+</div> 
+</div>
+
+</div>
+
+<div class="method_round">
+<div class="L-description">
+지정한 소수점 자릿수를 반올림하여 리턴한다.
+</div>
+<div class="L-sample">
+sample: 소수점 두번째를 round 처리하고 리턴한다. 
+<div class="L-code">
+var a = 10000.1274567;
+var v = a.round(2);
+리턴 : 10000.13
+</div> 
+</div>
+</div>
+
+</div>

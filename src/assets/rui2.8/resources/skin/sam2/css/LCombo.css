@@ -1,0 +1,72 @@
+div.L-combo {
+    white-space: nowrap;
+    height: 17px;
+    *height: 20px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    width: 146px;
+}
+
+div.L-combo input {
+    margin: 0;
+    font:normal 12px tahoma, arial, helvetica, sans-serif;
+    padding:0px 3px;
+    /* background:#ffffff url(text-bg.gif) repeat-x 0 0; */
+    border:1px solid #a5bad6;
+    height: 17px;
+    *height: 18px;
+    vertical-align:middle; 
+    left: 0px;
+    top: 0px;
+    width: 129px;  
+}
+
+div.L-combo div.icon {
+    width:17px;
+    height:18px;
+    *height:19px;
+}
+
+div.L-combo-list-wrapper {
+    left: 0px;
+    top: 18px;
+    border: 1px solid #a5bad6;
+    background-color: #FFFFFF;
+    padding: 0;
+    margin: 0;
+    width: 146px;
+    bottom: auto;
+}
+
+div.L-combo-list-wrapper-up {
+    top: auto;
+    bottom: 21px;
+}
+
+div.L-combo-list-wrapper  div.L-list {
+    padding: 0;
+    padding-left: 5px;
+    font:normal 14px tahoma, arial, helvetica, sans-serif;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    margin: 0;
+}
+
+div.L-combo-list-wrapper div.L-list.active {
+    background-color: rgb(223, 232, 246);
+}
+
+input.empty {
+    color: gray;
+}
+
+.L-grid-panel div.L-combo input {
+    height: 20px;
+    *height: 20px;
+}
+
+.L-grid-panel div.L-combo div.icon {
+	height: 19px;
+    *height: 20px;
+}

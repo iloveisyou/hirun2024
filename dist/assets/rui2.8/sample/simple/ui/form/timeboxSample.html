@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Time Box</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type='text/javascript' class="script-code">
+            $C(function(){
+                
+                /*<b>*/
+                $C('#timebox1').timeBox({
+                    applyTo: 'timebox1'
+                });
+                /*</b>*/
+                
+                $C('#timebox1').on('changed', function(e){
+                    Rui.log('dataset Value : ' + this.getValue());
+                });
+                
+                $C('#timebox1').on('focus', function(e){
+                    Rui.log('focus');
+                });
+                
+                $C('#timebox1').on('blur', function(e){
+                    Rui.log('blur');
+                });
+                
+                $C('#timebox1').on('show', function(e){
+                    Rui.log('show');
+                });
+                
+                $C('#timebox1').on('hide', function(e){
+                    Rui.log('hide');
+                });
+                
+                $C('#timebox1').on('keydown', function(e){
+                    Rui.log('keydown');
+                });
+                
+                $C('#timebox1').on('keyup', function(e){
+                    Rui.log('keyup');
+                });
+                
+                $C('#timebox1').on('keypress', function(e){
+                    Rui.log('keypress');
+                });
+                
+             
+            });
+            
+
+            function testSetVisibilityMode(){
+                $C('#timebox1').setVisibilityMode(false);
+            }
+
+            function testSetValue(){
+                $C('#timebox1').setValue('0221');
+            }
+
+            function testGetValue(){
+                Rui.log($C('#timebox1').getValue());
+            }
+
+            function testValid(){
+                $C('#timebox1').valid();
+            }
+
+            function testInvalid(){
+                $C('#timebox1').invalid();
+            }
+
+            function testFocus(){
+                $C('#timebox1').focus();
+            }
+
+            function testBlur(){
+                $C('#timebox1').blur();
+            }
+
+            function testSetWidth(){
+                $C('#timebox1').setWidth(130);
+            }
+
+            function testGetWidth(){
+                Rui.log($C('#timebox1').getWidth());
+            }
+
+            function testSetEditable(){
+                $C('#timebox1').setEditable(false);
+            }
+
+            function testDisable(){
+                $C('#timebox1').disable();
+            }
+
+            function testEnable(){
+                $C('#timebox1').enable();
+            }
+
+            function testShow(){
+                $C('#timebox1').show();
+            }
+
+            function testHide(){
+                $C('#timebox1').hide();
+            }
+
+            function noTestDestroy(){
+                $C('#timebox1').destroy();
+            }
+        </script>
+
+    </head>
+    <body>
+        <h1>timebox sample</h1>
+        <h2>LTimeBox를 구현하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>시간을 표시할 수 있는 타임박스의 기본적인 형태입니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id='panel'>
+                    <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                        <fieldset>
+                            <label for="timebox1">
+                                col1
+                            </label>
+                            <div id="timebox1">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <a href='javascript:testSetValue()'>SetValue</a>
+            <a href='javascript:testGetValue()'>GetValue</a>
+            <a href='javascript:testEnable()'>Enable</a>
+            <a href='javascript:testDisable()'>Disable</a>
+            <a href='javascript:testSetEditable()'>SetEditable</a>
+            <a href='javascript:testShow()'>Show</a>
+            <a href='javascript:testHide()'>Hide</a>
+            <a href='javascript:testSetVisibilityMode()'>setVisibilityMode</a>
+            <a href='javascript:testValid()'>Valid</a>
+            <a href='javascript:testInvalid()'>Invalid</a>
+            <a href='javascript:testFocus()'>Focus</a>
+            <a href='javascript:testBlur()'>Blur</a>
+            <a href='javascript:noTestDestroy()'>Destroy</a>
+            <a href='javascript:testSetWidth()'>SetWidth</a>
+            <a href='javascript:testGetWidth()'>GetWidth</a>
+        </div>
+    </body>
+</html>

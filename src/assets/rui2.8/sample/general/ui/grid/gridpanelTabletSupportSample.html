@@ -1,0 +1,511 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 편집기(Editor), 에디터(Editor), 틀고정, 셀병합" />
+    <title>Tablet Support</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LHeaderContextMenu.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LMultiCombo.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LMultiCombo.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LDateTimeBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LDateTimeBox.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LPopupTextBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LPopupTextBox.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css" >
+        /*.L-grid-row .L-grid-cell-editable {
+            background-color:#fff;
+        }*/
+       
+        .L-button#searchBtn {
+        }
+
+        .L-button#searchBtn button {
+            background: url(../../../../resources/skin/sam2/images/search_btn.gif) center left no-repeat transparent;
+            background-color: #f3f2f2;
+            padding-left: 30px;
+        }
+
+        .LblockGrid {
+            width: 70%;
+            height: 100%;
+            float: left;
+        }
+
+        .LblockDetail {
+            width: 28%;
+            float: right;
+        }
+
+        .L-grid-row .L-grid-col-btn {
+            padding: 1px 3px 0px 3px;
+        }
+
+        .L-grid-header table td.L-grid-cell-last, .L-grid-col-line .L-grid-row table td.L-grid-cell-last {
+            border-right-color: #fff !important;
+        }
+
+        .LblockMarkupCode {
+            position: relative;
+            height: 400px;
+        }
+        
+        #defaultGrid {
+            height: 100%;
+        }
+
+        .L-panel .L-grid-header-tool-dialog {
+            overflow: auto;
+        }
+        
+        .L-popup-button-icon {
+        }
+        
+        .L-grid-cell-edited {
+            color: red;
+        }
+        
+        .L-ux-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            background-color: #fff;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+             Rui.getMessageManager().get('$.base.msg100');
+            var col1TextBox = new Rui.ui.form.LTextBox();
+
+            var col1Combo = new Rui.ui.form.LCombo({
+                rendererField: 'value',
+                autoMapping: true,
+                url: './../../../../sample/data/code.json'
+            });
+
+            var codeCombo = new Rui.ui.form.LCombo({
+                emptyValue: null,
+                applyTo: 'code'
+            });
+            
+
+            var multiCodeCombo = new Rui.ui.form.LMultiCombo({
+                rendererField: 'multiCodeName',
+                url: './../../../../sample/data/code.json'
+            });
+
+            var col5CheckBox = new Rui.ui.form.LCheckBox({
+                id: 'col5',
+                applyTo: 'col5',
+                label: 'R1',
+                value: 'R1',
+                bindValues: ['R1', '']
+            });
+
+            var col8NumberBox = new Rui.ui.form.LNumberBox({
+                applyTo: 'col8',
+                decimalPrecision: 2,
+                minValue: -1,
+                maxValue: 10000
+            });
+
+            var date1DateBox = new Rui.ui.form.LDateBox({
+                applyTo: 'date1'
+            });
+
+            var col2TextBox = new Rui.ui.form.LTextBox({ id: 'col2' });
+
+            var popupTextBox = new Rui.ui.form.LPopupTextBox({
+                enterToPopup: true,
+                useHiddenValue: true,
+                editable: true
+            });
+
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                remainRemoved: true,
+                canMarkableEvent: true,
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'multiCode' },
+                    { id: 'multiCodeName' },
+                    { id: 'value' },
+                    { id: 'time' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+            
+            var dm = new Rui.data.LDataSetManager();
+
+            var vm = new Rui.validate.LValidatorManager({
+                validators: [
+                    { id: 'searchSelectedUserGrpId', validExp: '그룹:true' },
+                    { id: 'col1', validExp: '텍스트박스:true:maxByteLength=50&minByteLength=5' },
+                    { id: 'col2', validExp: '마스크:true' },
+                    { id: 'col3', validExp: '라디오:true' },
+                    { id: 'col6', validExp: '멀리타인편집기:true' },
+                    { id: 'col8', validExp: '숫자박스:true:number&maxNumber=20000' },
+                    { id: 'date1', validExp: '날자박스:true' }
+                ]
+            });
+
+            /*<b>*/
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                groupMerge: true,
+                freezeColumnId: 'col1',
+                autoWidth: true,
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: '텍스트박스', sortable: true, editable: false, editor: col1TextBox, tablet: { width: '210px' }, vMerge: true, renderer: function(val, p, record){
+                        p.editable = (record.get('col2') !== '760221111113');
+                        return val;
+                    } },
+                    { field: 'col2', label: '마스크', sortable: true, align: 'center', width: 120, editor: col2TextBox, tablet: { width: '200px', align: 'center' }, vMerge: false, renderer: function(value, p, record, row, col) {
+                        if (value == '7602111111113') {
+                            // 셀의 편집여부를 결정한다.
+                            p.editable = false;
+                            //p.css.push('color-red');
+                            //p.style = 'background-color:orange;';
+                        }
+                        if(Rui.isEmpty(value) == false)
+                            value = value.substring(0, 6) + '-' + value.substring(6);
+                        return value;
+                    } },
+                    { field: 'col6', label: '멀리타인편집기', width: 200, editable: true, tablet: { width: '60%' }, editor: new Rui.ui.form.LTextArea() },
+                    { field: 'code', label: '콤보', align: 'center', sortable: true, editor: col1Combo },
+                    { field: 'multiCode', label: '멀티콤보', align: 'center', sortable: true, editor: multiCodeCombo },
+                    { field: 'col3', label: '라디오', align: 'right', vMerge: false, editor: new Rui.ui.form.LRadioGroup({
+                        gridFixed: true,
+                        items:[
+                            { label : 'R1', value: 'R1' },
+                            { label : 'R2', value: 'R2', checked: true }
+                        ]
+                    }) },
+                    { field: 'col5', label: '체크박스', align: 'right', vMerge: false, editor: new Rui.ui.form.LCheckBox({
+                        gridFixed: true,
+                        bindValues : ['R1', '']
+                    }) },
+                    { field: 'col8', label: '숫자박스', align: 'right', sortable: true, editor: new Rui.ui.form.LNumberBox({decimalPrecision: 2, minValue: -1, maxValue: 10000 }),
+                        renderer: Rui.util.LRenderer.moneyRenderer() },
+                    { field: 'date1' , label: '날자박스', align: 'center', editor: new Rui.ui.form.LDateTimeBox(), renderer: Rui.util.LRenderer.dateRenderer('%X') },
+                    { field: 'col7', label: '팝업', editor: popupTextBox, renderer: 'popup' },
+                    { field: 'time', label: '시간박스', align: 'center', editor: new Rui.ui.form.LTimeBox() },
+                    { id: 'btn', label: '버튼', width: 150, tablet: false, renderer: function(val, p, record, row, i){
+                        return '<button type="button" class="L-grid-button">' + record.get('col1') + '</button>';
+                    } }
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                headerTools: true,
+                autoToEdit: false,
+                autoHeight: true,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                width: 600,
+                height: 317
+            });
+
+            grid.render('defaultGrid');
+            
+            grid.on('cellDblClick', function(e) {
+            	if(e.col < 3)
+            		alert('cell double click event called!')
+            });
+
+            var dialog = new Rui.ui.LDialog({ 
+                applyTo: 'sampleDialog', 
+                width: 400,
+                visible: false,
+                postmethod: 'none',
+                buttons: [ 
+                    { text:'Submit', handler: function() {
+                        var sm = grid.getSelectionModel();
+                        var row = sm.getRow(), colId = 'col7';
+                        dataSet.setNameValue(row, colId, Rui.get('popupData').getValue());
+                        this.submit(true);
+                    } },
+                    { text:'Cancel', isDefault: true, handler: function() {
+                        this.cancel(false);
+                    } } 
+                ]
+            });
+
+            grid.on('popup', function(e){
+                // dialog 연동은 다양한 방법으로 가능합니다.
+                Rui.get('popupData').setValue(dataSet.getNameValue(e.row, 'col7'));
+                dialog.show(true);
+            });
+
+            popupTextBox.on('popup', function(e){
+            	Rui.get('popupData').setValue(dataSet.getNameValue(dataSet.getRow(), 'col7'));
+                // dialog 연동은 다양한 방법으로 가능합니다.
+                dialog.show(true);
+            });
+            
+            /*</b>*/
+
+            var view = grid.getView();
+            
+            bind = new Rui.data.LBind({
+                groupId: 'LdetailInformation',
+                dataSet: dataSet,
+                bind: true,
+                bindInfo: [
+                    {id: 'col1', ctrlId: 'col1', value: 'value'},
+                    {id: 'col2', ctrlId: 'col2', value: 'value'},
+                    {id: 'col3', ctrlId: 'col3', value: 'value'},
+                    {id: 'col5', ctrlId: 'col5', value: 'value'},
+                    {id: 'col6', ctrlId: 'col6', value: 'value'},
+                    {id: 'col8', ctrlId: 'col8', value: 'value'},
+                    {id: 'code', ctrlId: 'code', value: 'value'},
+                    //{id: 'multiCode', ctrlId: 'code', value: 'value'},
+                    {id: 'date1', ctrlId: 'date1', value: 'value'}
+                ]
+            });
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+
+            dataSet.on('update', function(e) {
+                if(e.row < 0) return;
+                if(e.colId == 'date1') {
+                    // 변경 로직
+                }
+            });
+
+            dataSet.on('canMarkable', function(e){
+                if(e.row == 3) return false;
+            });
+            
+            dataSet.on('rowPosChanged', function(e){
+                codeCombo.getDataSet().load({ url: './../../../../sample/data/code.json' });
+            })
+
+            dataSet.on('canRowPosChange', function(e){
+                if (vm.validateDataSet(dataSet, dataSet.getRow()) == false) {
+                    Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>'));
+                    return false;
+                }
+            });
+
+            dm.on('beforeUpdate', function(e) {
+                if(dataSet.isUpdated() == false) {
+                    alert(Rui.getMessageManager().get('$.base.msg102'));
+                    return false;
+                }
+
+                if(vm.validateDataSet(dataSet) == false) {
+                    Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>') );
+                    return false;
+                }
+            });
+
+            dm.on('success', function(e) {
+                // 페이지에서는 log가 아니라 alert을 써야 함.
+                alert(Rui.getMessageManager().get('$.base.msg100'));
+            });
+
+            grid.on('popup', function(e){
+                alert('popup click row : ' + e.row + ', col : ' + e.col);
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    params: 'test=aaa',
+                    url: './../../../../sample/data/data11.json'
+                });
+            });
+
+            var newBtn = new Rui.ui.LButton('newBtn');
+            newBtn.on('click', function(){
+                dataSet.newRecord();
+            });
+
+            var insertBtn = new Rui.ui.LButton('insertBtn');
+            insertBtn.on('click', function(){
+                if(dataSet.getRow() < 0) return;
+                var row = dataSet.newRecord(dataSet.getRow());
+                if (row !== false) {
+                    var record = dataSet.getAt(row);
+                    record.set('col1', 'Junee5');
+                    record.set('col2', '(02) 6363-7009');
+                    record.set('col3', 'R1');
+                }
+            });
+
+            var updateBtn = new Rui.ui.LButton('updateBtn');
+            updateBtn.on('click', function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var record = dataSet.getAt(row);
+                record.set('col2', null);
+                record.set('col3', 'R2');
+                record.set('col8', 1);
+                record.set('code', 'code9');
+            });
+
+            var undoBtn = new Rui.ui.LButton('undoBtn');
+            undoBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    for(var i = 0 ; i < dataSet.getCount() ; i++) {
+                        if(dataSet.isMarked(i))
+                            dataSet.undo(i);
+                    }
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.undo(row);
+                }
+            });
+
+            var undoAllBtn = new Rui.ui.LButton('undoAllBtn');
+            undoAllBtn.on('click', function(){
+                dataSet.undoAll();
+            });
+
+            var deleteBtn = new Rui.ui.LButton('deleteBtn');
+            deleteBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRows();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+
+            var saveBtn = new Rui.ui.LButton('saveBtn');
+            saveBtn.on('click', function(){
+                // 여기서 유효성 체크를 하면 안됩니다. LDataSetManager의 beforeUpdate 이벤트를 참조하세요.(위에 소스에 있습니다.)
+                dm.updateDataSet({
+                    dataSets:[dataSet],
+                    url: './../../../data/savedCallback.json'
+                });
+            });
+
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData();
+            });
+
+            var tabletSupportBtn = new Rui.ui.LButton('tabletSupportBtn');
+            tabletSupportBtn.on('click', function(){
+                grid.showTabletViewer();
+            });
+            
+            loadPage.hide();
+            searchBtn.click();
+        });
+
+        function log(s) {
+            var testEl = Rui.get('test');
+            var html = testEl.getHtml();
+            testEl.html(html + '\r\n' + s);
+        }
+    </script>
+</head>
+<body>
+    <h1>Tablet Support (컨셉 테스트)</h1>
+    <h2>태블릿에서 그리드(Grid) 사용 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>하이브리드 Web UX용으로 그리드를 태블릿에서 사용할 수 있게 지원하는 샘플</p>
+        <p>태블릿에서 그리드를 선택후 오래 터치하고 있으면 태블릿용 UX가 출력된다.</p>
+        <p>태블릿에서 셀을 선택하면 더블클릭 팝업 아이콘이 출력된다. (PC에서는 Action을 그대로 사용할 수 있다.)</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >search</button>
+            <button type="button" id="newBtn" >new</button>
+            <button type="button" id="insertBtn" >insert</button>
+            <button type="button" id="updateBtn" >update</button>
+            <button type="button" id="deleteBtn" >delete</button>
+            <button type="button" id="saveBtn" >save</button>
+            <button type="button" id="undoBtn" >undo</button>
+            <button type="button" id="undoAllBtn" >undoAll</button>
+            <button type="button" id="clearBtn" >clear</button>
+            <button type="button" id="tabletSupportBtn" >Tablet Supoort</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div class="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+            <div id="LdetailInformation" class="LblockDetail" >
+            <fieldset>
+                <input type="text" id="col1" ><br/>
+                <input type="text" id="col2" ><br/>
+                <input type="radio" name="col3" value="R1"/>RADIO1<br/>
+                <input type="radio" name="col3" value="R2"/>RADIO2<br/>
+                <input type="checkbox" id="col5" value="R1"/><br/>
+                <textarea id="col6" rows="3" cols="20" ></textarea><br/>
+                <input type="text" id="col8" ><br/>
+                <input type="text" id="date1" ><br/>
+                <div id="code"></div><br />
+            </fieldset>
+            </div>
+            <!-- textarea id="test" rows="50" cols="30"></textarea -->
+        </div>
+        <div id="sampleDialog">
+            <div class="hd">그리드 팝업 연동 샘플</div>
+            <div class="bd">
+                <div class="level1">
+                    <p>변경할 값을 입력하세요.</p>
+                    <textarea type="text" id="popupData" rows="5" cols="50"></textarea>
+                </div>
+           </div>
+           
+        </div>
+    </div>
+<script type="text/javascript">
+var loadPage = new Rui.ui.LLoadPage();
+loadPage.show();
+</script>
+</body>
+</html>

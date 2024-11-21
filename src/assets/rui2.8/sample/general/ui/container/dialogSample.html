@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="대화상자(dialog)" />
+    <title>Dialog</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        #example {
+            height:30em;
+        }
+        .bd label { 
+            display:block;
+            float:left;
+            width:45%;
+            clear:left; 
+        }
+        .clear { 
+            clear:both;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+        
+            /*<b>*/
+            var dialog1 = new Rui.ui.LDialog({ 
+                applyTo: 'sampleDialog', 
+                width: 400,
+                visible: false,
+                postmethod: 'none',
+                buttons: [ 
+                    { text:'Submit', handler: function() {
+                        this.submit(true);
+                    } },
+                    { text:'Cancel', isDefault: true, handler: function() {
+                        this.cancel(false);
+                    } } 
+                ]
+            });
+            
+            /*</b>*/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var showBtn = new Rui.ui.LButton('showBtn');
+            showBtn.on('click', function(){
+                dialog1.clearInvalid();
+                dialog1.show(true);
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Markup Dialog</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>다이얼로그(Dialog)를 생성하며, Markup기반으로 내부를 구성합니다.</h2>
+            <div class="LblockDesc">
+                <p>준비된 마크업으로 Dialog를 생성한 후 submit시 서버에 정보를 POST합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="showBtn" >show Dialog</button>
+        </div>
+        <div>
+        <div class="LblockMarkupCode">
+            <div id="sampleDialog">
+            
+                <div class="hd">Sample</div>
+                <div class="bd">
+                    <div class="level1">
+                        <p>DevOn RUI는 순수 HTML 표준 기술을 사용해 기존 Plug-in기반 X-Internet 도구들의 기능들을 제공하는 B2B용 Cross Browsing/Platform RUI 솔루션입니다.</p>
+                        <p>RUI를 사용하기 전에 먼저 몇가지 RUI의 특징들을 살펴본 후 "Hello RUI"를 출력해보도록 하겠습니다.</p>
+                        <ul>
+                            <li class="level3"><div class="li"><b>javascript 기반의 객체지향(OOP) 구조</b>로 구현되어 있습니다.</div></li>
+                            <li class="level3"><div class="li">javascript 기반으로 기존 Plug-in기반의 RIA 제품 등과 비교해 유사한 기능과 성능을 제공합니다.</div></li>
+                            <li class="level3"><div class="li"><b>웹 표준 기술을 사용</b>하므로 이를 따르는 모든 브라우저들에서 동작합니다. FireFox, Chrome, Safari 등.</div></li>
+                            <li class="level3"><div class="li">국내 환경에서 가장 많이 사용되는 Internet Explorer 6, 7, 8 을 지원합니다. 그 이후 출시된 Internet Explorer 10과 같은 최신 버전들도 출시 일정에 맞추어 테스트 되고 있습니다.</div></li>
+                            <li class="level3"><div class="li">현재는 PC 버전만 제공되고 있으나 모바일 등 다른 플랫폼으로 확장이 가능한 구조입니다.</div></li>
+                        </ul>
+                        <p>그럼 Hello RUI를 시작해 보도록 하겠습니다.</p>
+                    </div>
+               </div>
+               
+            </div>
+        </div>
+    </div>
+</body>
+</html>

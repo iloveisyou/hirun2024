@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>scroller basic</title>
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <style type="text/css">
+        #panel {
+            width: 250px;
+            height: 250px;
+            background-color: #aaaaaa;
+        }
+        #target {
+            width: 200px;
+            height: 200px;
+            background-color: #bbbbbb;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        var frag = document.createDocumentFragment();
+        
+        function load(){
+            var fn = function(){};
+            var foo = document.createElement('input');
+            foo.attachEvent('click', fn);
+            document.body.appendChild(foo);
+            
+            frag.appendChild(foo);
+            document.body.innerHTML = '';
+            
+            //foo.detachEvent('click', fn);     //leak 발생
+            //frag.removeChild(foo);            //leak 발생
+            //document.body.appendChild(foo);   //leak 발생 안함.
+        }
+    </script>
+</head>
+<body onload='load()'>
+</body>
+</html>

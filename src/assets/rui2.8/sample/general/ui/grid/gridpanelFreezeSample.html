@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 틀고정" />
+    <title>Freeze</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css" >
+        /*.L-grid-row .L-grid-cell-editable {
+            background-color:#fff;
+        }*/
+
+        .L-button#searchBtn button {
+            background: url(../../../../resources/skin/sam2/images/search_btn.gif) center left no-repeat;
+            background-color: #f3f2f2;
+            padding-left: 22px;
+        }
+
+        .LblockGrid {
+            width: 600px;
+            height: 100%;
+            float: left;
+        }
+
+        .LblockDetail {
+            width: 30%;
+            float: right;
+        }
+
+        .L-grid-row .L-grid-col-btn {
+            padding: 1px 3px 0px 3px;
+        }
+
+        .L-grid-header table td.L-grid-cell-last, .L-grid-col-line .L-grid-row table td.L-grid-cell-last {
+            border-right-color: #fff !important;
+        }
+
+        .LblockMarkupCode {
+            position: relative;
+            height: 400px;
+        }
+        
+        #defaultGrid {
+            height: 100%;
+        }
+
+        .L-panel .L-grid-header-tool-dialog {
+            overflow: auto;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                remainRemoved: true,
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'value' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+
+            /*<b>*/
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                groupMerge: true,
+                freezeColumnId: 'col1',
+                autoWidth: true,
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', vMerge: true },
+                    { field: 'col2', align: 'center', width: 120 },
+                    { field: 'code', align: 'center' },
+                    { field: 'col3', align: 'right' },
+                    { field: 'col5', align: 'center' },
+                    { field: 'col6', label: 'Col6', width: 200 },
+                    { field: 'col8', label: 'Col8', align: 'right' },
+                    { field: 'date1' , align: 'center', renderer: 'date' },
+                    { field: 'col7', label: 'Popup',renderer: 'popup' }
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoHeight: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                width: 600,
+                height: 317
+            });
+
+            grid.render('defaultGrid');
+
+            /*</b>*/
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    params: 'test=aaa',
+                    url: './../../../../sample/data/data11.json'
+                });
+            });
+            
+            var setFreezeColumnIdBtn = new Rui.ui.LButton('setFreezeColumnIdBtn');
+            setFreezeColumnIdBtn.on('click', function(){
+                columnModel.setFreezeColumnId('col2');
+            });
+            
+
+            loadPage.hide();
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Freeze</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid) 틀고정(FreezeColumnId) 샘플</h2>
+            <div class="LblockDesc">
+		        <p>그리드(Grid)에 틀고정(FreezeColumnId)을 적용한 샘플입니다.</p>
+		        <p>좌우 스크롤을 이동해보세요.</p>
+		        <p>틀고정 변경 버튼을 클릭하면 col2 컬럼으로 틀고정이 변경됩니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >search</button>
+            <button type="button" id="setFreezeColumnIdBtn" >틀고정 변경(col2)</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div class="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+        </div>
+    </div>
+	<script type="text/javascript">
+	var loadPage = new Rui.ui.LLoadPage();
+	//loadPage.show();
+	</script>
+</body>
+</html>

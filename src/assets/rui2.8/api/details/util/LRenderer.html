@@ -1,0 +1,97 @@
+<div>
+    
+<div class="class_description">
+<div class="L-description">
+그리드의 컬럼 값을 표현하는 LRenderer
+</div>
+<div class="L-sample">
+sample: 각종 랜더러를 사용하는 방법
+<div class="L-code">
+<pre class="brush: js;">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    columns: [
+        new Rui.ui.grid.LStateColumn(),
+        new Rui.ui.grid.LSelectionColumn(),
+        new Rui.ui.grid.LNumberColumn(),
+        { field: "date", label: "Date", renderer: Rui.util.LRenderer.dateRenderer() },
+        { field: "number", label: "Number", renderer: Rui.util.LRenderer.numberRenderer() },
+        { field: "money", label: "Money", renderer: Rui.util.LRenderer.moneyRenderer() },
+        { field: "rate", label: "Rate", renderer: Rui.util.LRenderer.rateRenderer() },
+        { field: "time", label: "Time", renderer: Rui.util.LRenderer.timeRenderer() },
+        { field: "weight", label: "Weight", renderer: Rui.util.LRenderer.weightRenderer() },
+        { field: "length", label: "Length", renderer: Rui.util.LRenderer.lengthRenderer() },
+        { field: "popup", label: "Popup", renderer: Rui.util.LRenderer.popupRenderer() }
+    ]
+});
+</pre>
+</div>
+</div>
+
+<div class="L-sample">
+sample: renderer를 LColumnModel의 컬럼 정의시엔 아래 샘플과 같이 문자열 키워드로 대체할 수 있다.
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    columns: [
+        new Rui.ui.grid.LStateColumn(),
+        new Rui.ui.grid.LSelectionColumn(),
+        new Rui.ui.grid.LNumberColumn(),
+        { field: 'col1', renderer: 'date' },
+        { field: 'col2', renderer: 'time' },
+        { field: 'col3', renderer: 'money' },
+        { field: 'col4', renderer: 'number' },
+        { field: 'col5', renderer: 'rate' },
+        { field: 'col6', renderer: 'popup' }
+    ]
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: 그리드에서 단순히 renderer를 사용하지 못할 경우가 있다. 
+LColumnModel의 컬럼 정의시 컬럼의 속성을 같이변경 해야할 경우인데 아래 샘플과 같이 처리 가능하다. 
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    columns: [
+        new Rui.ui.grid.LStateColumn(),
+        new Rui.ui.grid.LSelectionColumn(),
+        new Rui.ui.grid.LNumberColumn(),
+        { field: "date", label: "Date", renderer: function(value, p, record){
+            if(record.get('flag1') == 'Y')
+                p.editable = false;
+            return Rui.util.LFormat.dateToString(value);
+        } },
+        { field: "number", label: "Number", renderer: function(value, p, record){
+            if(record.get('flag1') == 'Y')
+                p.editable = false;
+            return Rui.util.LFormat.numberFormat(value);
+        } },
+        { field: "money", label: "Money", renderer: function(value, p, record){
+            if(record.get('flag1') == 'Y')
+                p.editable = false;
+            return Rui.util.LFormat.moneyFormat(value);
+        } },
+        { field: "rate", label: "Rate", renderer: function(value, p, record){
+            if(record.get('flag1') == 'Y')
+                p.editable = false;
+            return Rui.util.LFormat.rateFormat(value, '%');
+        } },
+        { field: "time", label: "Time", renderer: function(value, p, record){
+            if(record.get('flag1') == 'Y')
+                p.editable = false;
+            return Rui.util.LFormat.timeFormat(value);
+        } },
+        { field: "popup", label: "Popup", renderer: function(value, p, record){
+            if(record.get('flag1') == 'Y')
+                p.editable = false;
+            return '&lt;div class="L-popup-renderer"&gt;' + 
+                '&lt;div class="L-popup-button"&gt;' + value + '&lt;/div&gt;' + 
+                '&lt;span class="L-popup-button-icon" style="position:absolute"&gt;&nbsp;&lt;/span&gt;' + 
+                '&lt;/div&gt;';
+        } }
+    ]
+});
+</div>
+</div>
+</div>
+
+</div>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="데이터셋매니저,LDataSetManager" />
+    <title>DataSet Manager</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        var bind = null;
+        var dataSet = null;
+        var bindRow = 1;
+        var dm = null;
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            /*<b>*/
+            dm = new Rui.data.LDataSetManager();
+            /*</b>*/
+           
+            dataSet = new Rui.data.LJsonDataSet({
+                id:'dataSet',
+                fields:[
+                    {id:'id'},
+                    {id:'col1'},
+                    {id:'col2'},
+                    {id:'col3'},
+                    {id:'col4'},
+                    {id:'col5'},
+                    {id:'col6'}
+                ]
+            });
+        
+            bind = new Rui.data.LBind({
+                groupId:'frm',
+                dataSet:dataSet,
+                bindInfo: [
+                    {id:'id', ctrlId:'id', value:'value'},
+                    {id:'col1', ctrlId:'col1', value:'value'},
+                    {id:'col3', ctrlId:'col3', value:'value'},
+                    {id:'col4', ctrlId:'col4', value:'value'},
+                    {id:'col5', ctrlId:'col5', value:'value'},
+                    {id:'col6', ctrlId:'col6', value:'value'}
+                ]
+            });
+        
+            /*
+             * rui_config.js에 기본으로 loadException에러가 탑재되어 있습니다. 공통으로 처리할때에는 failure를 처리할 필요가 없습니다.
+            dataSet.on('loadException', function(e) {
+                alert('error : ' + e.throwObject.message);
+            });
+            */
+           
+            dataSet.load({
+                url : './../../../sample/data/data.json'
+            });
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            dataSet.on('update', function(e) {
+                var record = dataSet.getAt(dataSet.getRow());
+                Rui.get('state').setValue(dataSet.getAt(dataSet.getRow()).state);
+                modifiedPrint(this);
+            });
+        
+            dataSet.on('rowPosChanged', function(e) {
+                Rui.get('state').setValue(dataSet.getAt(e.row));
+                modifiedPrint(this);
+            });
+         
+            /*<b>*/
+            dm.on('success', function(e) {
+                Rui.get('showData').html('no changed');
+                alert(Rui.getMessageManager().get('$.base.msg100'));
+                /*
+                 * 서버에 저장후 바로 다시 조회해 올 경우
+                 * 서버에서 저장 처리후 결과를 조회하여 dataSet의 포멧에 맞는 json으로 리턴해야만 가능합니다.
+                 var data = dataSet.getReadData(e);
+                 dataSet.loadData(data);
+                 */
+            });
+            /*
+             * rui_config.js에 기본으로 failure에러가 탑재되어 있습니다. 공통으로 처리할때에는 failure를 처리할 필요가 없습니다.
+            dm.on('failure', function(e) {
+                alert(Rui.getMessageManager().get('$.base.msg101'));
+            });
+            */
+            /*</b>*/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var firstBtn = new Rui.ui.LButton('firstBtn');
+            firstBtn.on('click', function(){
+                dataSet.setRow(0);
+            });
+
+            var previousBtn = new Rui.ui.LButton('previousBtn');
+            previousBtn.on('click', function(){
+                var oldRow = dataSet.getRow();
+                if(oldRow > 0)
+                    dataSet.setRow(oldRow - 1);
+            });
+
+            var nextBtn = new Rui.ui.LButton('nextBtn');
+            nextBtn.on('click', function(){
+                var oldRow = dataSet.getRow();
+                if(oldRow < dataSet.getCount() - 1)
+                    dataSet.setRow(oldRow + 1);
+            });
+
+            var lastBtn = new Rui.ui.LButton('lastBtn');
+            lastBtn.on('click', function(){
+                dataSet.setRow(dataSet.getCount() - 1);
+            });
+
+            var addBtn = new Rui.ui.LButton('addBtn');
+            addBtn.on('click', function(){
+                if(dataSet.getCount() >= 30) {
+                    alert('더이상 Record를 추가할 수 없습니다.');
+                    return;
+                }
+                var row = dataSet.newRecord();
+                if (row !== false) {
+                    var record = dataSet.getAt(row);                
+                    record.set("id", "007");
+                    record.set("col1", "test1");
+                    record.set("col2", "test2");   
+                    record.set("col3", "test3");
+                    record.set("col4", "test4"); 
+                    record.set("col5", "test5");
+                    record.set("col6", "test6"); 
+                }   
+            });
+
+            var testNewBtn = new Rui.ui.LButton('testNewBtn');
+            testNewBtn.on('click', function(){
+                if(dataSet.getCount() >= 30) {
+                    alert('더이상 Record를 추가할 수 없습니다.');
+                    return;
+                }
+                var row = dataSet.newRecord();
+                dataSet.setRow(row);
+            });
+
+            var removeBtn = new Rui.ui.LButton('removeBtn');
+            removeBtn.on('click', function(){
+                dataSet.removeAt(dataSet.getRow());
+            });
+
+            var undoBtn = new Rui.ui.LButton('undoBtn');
+            undoBtn.on('click', function(){
+                dataSet.undo(dataSet.getRow());
+            });
+
+            var undoAllBtn = new Rui.ui.LButton('undoAllBtn');
+            undoAllBtn.on('click', function(){
+                dataSet.undoAll();
+            });
+
+            var updaterBtn = new Rui.ui.LButton('updaterBtn');
+            updaterBtn.on('click', function(){
+                dm.update({
+                    url:'./../../data/savedCallback.json', 
+                    params:'id=asdff&pwd=ddd&pwd=bbb'
+                });
+            });
+
+            var formUpdaterBtn = new Rui.ui.LButton('formUpdaterBtn');
+            formUpdaterBtn.on('click', function(){
+                dm.updateForm({
+                    url: './../../data/savedCallback.json',
+                    form:'frm',
+                    params : {
+                        test:'1'
+                    }
+                });
+            });
+
+            var dataSetUpdaterBtn = new Rui.ui.LButton('dataSetUpdaterBtn');
+            dataSetUpdaterBtn.on('click', function(){
+                /*<b>*/
+                dm.updateDataSet({
+                    dataSets:[dataSet],
+                    modifiedOnly: false, 
+                    url:'./../../data/savedCallback.json'    
+                });
+                /*</b>*/
+            });
+
+            var commitBtn = new Rui.ui.LButton('commitBtn');
+            commitBtn.on('click', function(){
+                dataSet.commit();
+            });
+
+            var callLoadBtn = new Rui.ui.LButton('callLoadBtn');
+            callLoadBtn.on('click', function(){
+                bind.load(1);
+            });
+
+            var setRowBtn = new Rui.ui.LButton('setRowBtn');
+            setRowBtn.on('click', function(){
+                bind.load(2);
+            });
+
+            var setStateBtn = new Rui.ui.LButton('setStateBtn');
+            setStateBtn.on('click', function(){
+                dataSet.setState(2, Rui.data.LRecord.STATE_INSERT);
+            });
+
+            var loadDataSetBtn = new Rui.ui.LButton('loadDataSetBtn');
+            loadDataSetBtn.on('click', function(){
+                /*<b>*/
+                dm.loadDataSet({
+                    dataSets:[dataSet], 
+                    url : './../../data/data.json'
+                });
+                /*</b>*/
+            });
+        });
+        
+        /********************
+         * 사용자 정의 함수
+         ********************/
+        function modifiedPrint(dataSet) {
+            var data = dataSet.serializeModified();
+            if(data.length < 1) {
+                Rui.get('showData').html('no changed');
+                return;
+            }
+            Rui.get('showData').html('update된 dataSet 내용 : ' + data);
+        }
+        
+        function testSubmit() {
+            var form = new Rui.ui.form.LForm('frm', {
+            });
+            try {
+                var obj = form.getValues();
+                Rui.log(Rui.dump(obj));
+            } catch(e) {
+                alert(e);
+            }
+            return false;
+        }
+    </script>
+</head>
+<body >
+    <div id='hd'>
+        <h1>DataSet Manager</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>데이터셋매니저(LDataSetManager)를 사용하는 기본 샘플</h2>
+            <div class="LblockDesc">
+                <p>데이터셋매니저(LDataSetManager) 사용에 대한 기본적인 형태입니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+        </div>
+            <form id="frm" name="frm" method="post" enctype="application/x-www-form-urlencoded" action="./../../data/savedCallback.json">
+            <fieldset>
+                <legend>
+                    Bind form
+                </legend>
+                    <input type="hidden" id="test" name="test" />
+                    <input type="text" id="state" name="state" />
+                    <input type="text" id="id" name="id" /><br/>
+                    <input type="text" id="col1" name="col1" />
+                    <input type="text" id="col2" name="col2" /><br/>
+                    <select id="col3" name="col3" >
+                        <option value="all">ALL</option>
+                        <option value="R1">TES3</option>
+                        <option value="R2">TES4</option>
+                    </select><br/>
+                    <input type="radio" id="col4" name="col4" value="R1"/>RADIO1
+                    <input type="radio" id="col4-2" name="col4" value="R2"/>RADIO2<br/>
+                    <input type="checkbox" id="col5" name="col5" value="R1"/>CHECKBOX1<br/>
+                    <textarea id="col6" name="col6" rows="3" cols="50"></textarea><br/>
+                    <button onclick="testSubmit()">submit</button>
+                </fieldset>
+            </form>
+            <div class="LblockButton" >
+                <button type="button" id="firstBtn" >first</button>
+                <button type="button" id="previousBtn" >Previous</button>
+                <button type="button" id="nextBtn" >next</button>
+                <button type="button" id="lastBtn" >last</button>
+                <button type="button" id="addBtn" >add</button>
+                <button type="button" id="testNewBtn" >new</button>
+                <button type="button" id="removeBtn" >remove</button>
+                <button type="button" id="undoBtn" >undo</button>
+                <button type="button" id="undoAllBtn" >undoAll</button>
+                <button type="button" id="updaterBtn" >update</button>
+                <button type="button" id="formUpdaterBtn" >formUpdate</button>
+                <button type="button" id="dataSetUpdaterBtn" >dataSetUpdate</button>
+                <button type="button" id="commitBtn" >commit</button>
+                <button type="button" id="callLoadBtn" >callLoad</button>
+                <button type="button" id="setRowBtn" >setRow</button>
+                <button type="button" id="setStateBtn" >setState</button>
+                <button type="button" id="loadDataSetBtn" >loadDataSet</button>
+            </div>
+            <div id="showData">
+            </div>
+    </div>
+</body>
+</html>

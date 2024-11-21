@@ -1,0 +1,70 @@
+
+div.L-pager .L-pager-wrap{
+	height:100%;
+}
+
+.L-pager-selected a{
+    color:#5EA5D5 !important;
+    font-weight:bold;
+}
+
+.L-pager-first-wrap{
+    width:50px;    
+}
+.L-pager-first{	
+	height:20px;
+    color:blue;
+    text-align:center;
+}
+.L-pager-prev-group-wrap{
+	width:30px;
+}
+.L-pager-prev-group{
+	height:20px;
+    color:blue;
+    background: transparent url(./skin/sam2/images/pager/prev.gif) no-repeat;
+}
+.L-pager-prev-wrap{}
+.L-pager-prev{}
+.L-pager-next-wrap{}
+.L-pager-next{}
+.L-pager-next-group-wrap{
+	width:30px;
+}
+.L-pager-next-group{ 
+    height:20px;  
+    color:blue;
+    background: transparent url(./skin/sam2/images/pager/next.gif) no-repeat;
+}
+.L-pager-last-wrap{
+	width:50px;
+}
+.L-pager-last{
+	height:20px;
+    color:blue;
+    text-align:center;
+}
+.L-pager-items-wrap{}
+.L-pager-items{}
+.L-pager-items a{}
+.L-pager-item-wrap{}
+.L-pager-item{
+	height:20px;
+    width:auto;
+    text-align:center;
+}
+.L-pager-item a{	
+    text-decoration:none;
+    color:#555;
+}
+.L-pager-item-divider-wrap{
+	width:15px;
+}
+.L-pager-item-divider{
+	height:8px;
+    background: transparent url(./skin/sam2/images/pager/bar.gif) no-repeat;
+}
+
+.L-grid-panel .L-panel .ft {
+	background-color : white;
+}

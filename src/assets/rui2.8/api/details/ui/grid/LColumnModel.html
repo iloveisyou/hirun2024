@@ -1,0 +1,257 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+Grid의 LColumnModel을 생성한다. LColumnModel은 LColumn의 객체들을 관리하는 콤포넌트이다.
+내부에 정의된 LColumn들의 config 정보를 모두 한번에 적용한다거나 LColumn 객체를 찾거나 하는 등...
+
+LColumnModel에 들어가는 columns의 각 json 객체는 실제로 Rui.ui.grid.LColumn 객체로 생성된다.
+정식으로 작성하는 방법은 아래와 같이 코딩하여야 한다. 
+    columns: [
+        new Rui.ui.grid.LColumn({ field: "col1" }),
+        new Rui.ui.grid.LColumn({ field: "col2" }),
+        new Rui.ui.grid.LColumn({ field: "col3", sortable: false })
+    ]
+하지만 각 LColumn객체 생성 코딩이 반복적으로 작성하여 가독성을 떨어지므로 아래와 같인 단순한 json으로 코딩한다.
+    columns: [
+        { field: "col1" },
+        { field: "col2" },
+        { field: "col3", sortable: false }
+    ]
+    
+
+</div>
+<div class="L-sample">
+sample: LColumnModel을 생성한다.
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    defaultSortable: true,
+    columns: [
+        { field: "col1" },
+        { field: "col2" },
+        { field: "col3", sortable: false }
+    ]
+});
+</div>
+</div>
+<div class="L-sample">
+sample: 초기 생성시 화면 기능에 따라 컬럼의 show/hide를 처리하여 LColumnModel을 생성한다.
+<div class="L-code">
+var columns = [
+    { field: "col1" },
+    { field: "col2" },
+    { field: "col3", sortable: false }
+];
+if(true) {  <-- 업무로직
+    columns.push({
+        field: "col4", sortable: true
+    });
+}
+...........................
+var columnModel = new Rui.ui.grid.LColumnModel({
+    columns: columns 
+});
+</div>
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_defaultSortable">
+<div class="L-description">
+LColumn은 기본적으로 sortable값이 false이지만 모든 속성에 sortable을 주면 소스량이 많아지므로 한번에 적용이 가능하다.
+이때 defaultSortable값을 true로 적용하면 각 컬럼의 초기값은 sortable 속성값이 true로 적용되고
+각 컬럼에 sortable를 false로 주는것만 우선 적용된다.
+</div>
+<div class="L-sample">
+sample: 모든 필드는 sortable이 true상태로 만들고 col3필드만 sortable을 false로 지정한다.
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    defaultSortable: true,
+    columns: [
+        { field: 'col1' },
+        { field: 'col2' },
+        { field: 'col3', sortable: false }
+    ]
+});
+</div>
+</div>
+</div>
+
+<div class="config_autoWidth">
+<div class="L-description">
+LColumn객체들의 width를 Grid의 전체 width 기준으로 각 LColumn별 width값이 적용된 기준을 퍼센트로 분할하여 width를 적용하여 Grid에 꽉차게 맞춘다.
+LColumnModel에 autoWidth를 적용하면 모든 LColumn이 적용되므로 개별 컬럼의 autoWidth를 적용하고자 한다면 LColumn에 직접 autoWidth를 적용하여야 한다.
+</div>
+<div class="L-sample">
+sample: 모든 컬럼에 autoWidth를 적용한다. 이때 col2는 autoWidth 적용시 col1과 col2보다 두배로 적용된다.
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    autoWidth: true,
+    columns: [
+        { field: 'col1' },
+        { field: 'col2', width: 200 },
+        { field: 'col3' }
+    ]
+});
+</div>
+</div>
+</div>
+
+<div class="config_freezeColumnId">
+<div class="L-description">
+Grid에 틀고정을 적용한다. 틀고정하고자 하는 column의 id를 지정한다.
+</div>
+<div class="L-sample">
+sample: Grid의 col2 컬럼에 틀고정을 설정한다.
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    freezeColumnId: 'col2',
+    columns: [
+        { field: 'col1' },
+        { field: 'col2' },
+        { field: 'col3' }
+    ]
+});
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_getColumnById">
+<div class="L-description">
+id에 해당되는 LColumn을 리턴하는 메소드
+</div>
+<div class="L-sample">
+sample: col2Id로 해당 컬럼을 얻어온다.
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    verticalGroupMerge: true,
+    columns: [
+        { field: 'col1'},
+        { id: 'col2Id', field: 'col2' },
+        { field: 'col3'}
+    ]
+});
+.....................
+var col2Column = columnModel.getColumnById('col2Id');
+</div>
+</div>
+</div>
+
+<div class="method_getColumnAt">
+<div class="L-description">
+idx 위치에 해당되는 LColumn을 리턴하는 메소드
+</div>
+<div class="L-sample">
+sample: 1번 index의 LColumn객체를 얻어온다.
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    verticalGroupMerge: true,
+    columns: [
+        { field: 'col1' },
+        { field: 'col2' },
+        { field: 'col3' }
+    ]
+});
+.....................
+var col2Column = columnModel.getColumnAt(1);
+</div>
+</div>
+</div>
+
+<div class="method_getColumnCount">
+<div class="L-description">
+전체 LColumn의 갯수를 리턴하는 메소드
+기본적으로 보이는 컬럼의 갯수만 카운트 한다.
+hidden 컬럼에 대해서는 건수로 처리되지 않으므로 인수에 true값을 적용해야만 전체 건수를 얻어올 수 있다. 
+</div>
+<div class="L-sample">
+sample: 보여지는 컬럼의 총 갯수를 얻어와 메시지를 출력한다. (현재 총건수는 2개)
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    verticalGroupMerge: true,
+    columns: [
+        { field: 'col1' },
+        { field: 'col2', hidden: true },
+        { field: 'col3' }
+    ]
+});
+.....................
+var count = columnModel.getColumnCount();
+</div>
+</div>
+<div class="L-sample">
+sample: 모든 컬럼의 총 갯수를 얻어와 메시지를 출력한다. (현재 총건수는 3개)
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    verticalGroupMerge: true,
+    columns: [
+        { field: 'col1' },
+        { field: 'col2', hidden: true },
+        { field: 'col3' }
+    ]
+});
+.....................
+var count = columnModel.getColumnCount(true);
+</div>
+</div>
+</div>
+
+<div class="method_setColumns">
+<div class="L-description">
+전체 LColumn의 모두 바꾼다.
+단순하게 컬럼을 변경하는 방식은 setColumns를 이용하고 복잡한 컬럼 변경 Grid자체를 두개로 만들어서 show/hide로 처리한다.
+페이지를 초기 로드시에 이 메소드를 사용하는 것 보다 LColumnModel 생성자 자체의 columns 정보를 json 방식으로 생성하여 처리하면 성능이 향상된다. LColumnModel의 Class 설명 참조
+</div>
+<div class="L-sample">
+sample: 컬럼을 새로운 규칙으로 모두 변경한다.
+<div class="L-code">
+var columnInfo = {
+    groupMerge: true,
+    freezeColumnId: 'col1',
+    autoWidth: true,
+    columns: [
+        new Rui.ui.grid.LStateColumn(),
+        new Rui.ui.grid.LSelectionColumn(),
+        new Rui.ui.grid.LNumberColumn(),
+        { field: 'col1', label: 'Col1', sortable: true, editable: false, editor: col1TextBox, vMerge: true, renderer: function(val, p, record){
+            p.editable = (record.get('col2') !== '760221111113');
+            return val;
+        } },
+        { field: 'code', align: 'center', sortable: true, editor: col1Combo },
+        { field: 'col6', label: 'Col6', width: 200, editable: true, editor: new Rui.ui.form.LTextArea() },
+        { field: 'col8', label: 'Col8', align: 'right', sortable: true, editor: new Rui.ui.form.LNumberBox({decimalPrecision: 2, minValue: -1, maxValue: 10000 }),
+            renderer:Rui.util.LRenderer.moneyRenderer() },
+        { field: 'date1' , align: 'center', editor: new Rui.ui.form.LDateBox(), renderer: 'date' }
+    ]
+};
+columnModel.setColumns(columnInfo);
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_columnMove">
+<div class="L-description">
+컬럼의 순서가 바뀌면 호출되면 이벤트
+그리드에서 drag를 통해서 순서가 바뀌거나 LColumnModel의 moveColumn 메소드가 실행되도 호출된다.
+</div>
+<div class="L-sample">
+sample: col1의 컬럼과 col2의 컬럼의 위치를 변경하면 메시지를 출력한다.
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    columns: [
+        { field: 'col1' },
+        { field: 'col2' }
+    ]
+});
+
+columnModel.on('columnMove', function(e) {  
+    alert('컬럼의 위치가 변경되었습니다.');
+});
+.......................
+columnModel.moveColumn(0, 1);
+</div>
+</div>
+</div>
+<!-- property 시작 -->
+</div>

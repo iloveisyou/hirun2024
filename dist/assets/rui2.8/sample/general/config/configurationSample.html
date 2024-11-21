@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="환경설정,LConfig,공통환경,환경정보" />
+    <title>Configuration</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            var provider = Rui.getConfig().getProvider();
+
+            provider.on('statechange', function(e){
+                Rui.alert('changed data => ' + e.key + ' : ' + e.value);
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var getBtn = new Rui.ui.LButton('getBtn');
+            getBtn.on('click', function(){
+                /*<b>*/
+                var defaultLocale = Rui.getConfig().get('$.core.defaultLocale')[0];
+                /*</b>*/
+                Rui.alert("get : " + defaultLocale);
+            });
+
+            var getFirstBtn = new Rui.ui.LButton('getFirstBtn');
+            getFirstBtn.on('click', function(){
+                var defaultLocale = Rui.getConfig().getFirst('$.core.defaultLocale');
+                Rui.alert('getFirst : ' + defaultLocale);
+            });
+
+            var setUSBtn = new Rui.ui.LButton('setUSBtn');
+            setUSBtn.on('click', function(){
+                Rui.getConfig().set('$.core.defaultLocale', ['en_US']);
+                var defaultLocale = Rui.getConfig().getFirst('$.core.defaultLocale');
+                //Rui.alert('set : ' + defaultLocale);
+            });
+            
+            var setKOBtn = new Rui.ui.LButton('setKOBtn');
+            setKOBtn.on('click', function(){
+                Rui.getConfig().set('$.core.defaultLocale', ['ko_KR']);
+                var defaultLocale = Rui.getConfig().getFirst('$.core.defaultLocale');
+                //Rui.alert('set : ' + defaultLocale);
+            });
+        })
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Configuration</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>환경 정보를 관리하는 LConfiguration의 사용 방법</h2>
+            <div class="LblockDesc">
+                <p>rui_config.js에 설정되어 있는 환경 정보 값을 필요에 따라 사용할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+        </div>
+        <div>
+            <p>아래 버튼들을 클릭하여 수행 결과를 확인하실 수 있습니다.</p>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="getBtn" >get('$.core.defaultLocale')[0]</button><br/><br/>
+            <button type="button" id="getFirstBtn" >getFirst('$.core.defaultLocale')</button><br/><br/>
+            <button type="button" id="setUSBtn" >set('$.core.defaultLocale', 'en_US')</button><br/><br/>
+            <button type="button" id="setKOBtn" >set('$.core.defaultLocale', 'ko_KR')</button>
+        </div>
+        <div id="result">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="데이터셋 멀티 로딩,데이터셋 멀티 로드,두개 이상의 데이터셋,LDataSetManager" />
+    <title>Multiple DataSet Load & Update</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+             
+            //First Grid
+            var dataSet1 = new Rui.data.LJsonDataSet({
+                id: 'dataset1',
+                fields: [
+                    {id: 'value'}, 
+                    {id: 'text'}
+                ]
+            });
+            var columnModel1 = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LStateColumn(), 
+                    new Rui.ui.grid.LNumberColumn(), 
+                    {field: 'value', label: 'value'}, 
+                    {field: 'text', label: 'text', autoWidth: true}
+                ]
+            });
+            var grid1 = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel1,
+                width: 400,
+                height: 200,
+                dataSet: dataSet1
+            });
+            grid1.render('grid1');
+            
+            //Second Grid
+            var dataSet2 = new Rui.data.LJsonDataSet({
+                id: 'dataset2',
+                fields: [
+                    {id: 'value'}, 
+                    {id: 'text'}
+                ]
+            });
+            var columnModel2 = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LStateColumn(), 
+                    new Rui.ui.grid.LNumberColumn(), 
+                    {field: 'value',label: 'value'}, 
+                    {field: 'text',label: 'text', autoWidth: true}
+                ]
+            });
+            var grid2 = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel2,
+                width: 400,
+                height: 200,
+                dataSet: dataSet2
+            });
+            grid2.render('grid2');
+            
+
+            /*<b>*/
+            var dm = new Rui.data.LDataSetManager();
+            /*</b>*/
+            
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            /*<b>*/
+            // loadDataSet 메소드 호출시 성공 이벤트
+            dm.on('load', function(e){
+                Rui.log('dm 성공');
+            });
+            // loadDataSet 메소드 호출시 실패 이벤트
+            dm.on('loadException', function(e){
+                Rui.log('dm 실패');
+            });
+            // updateDataSet 메소드 호출시 성공 이벤트
+            dm.on('success', function(e){
+                Rui.log('dm 성공');
+                var responseText = e.responseText;
+            });
+            // updateDataSet 메소드 호출시 실패 이벤트
+            dm.on('failure', function(e){
+                Rui.log('dm 실패');
+            });
+            /*</b>*/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var loadBtn = new Rui.ui.LButton('loadBtn');
+            loadBtn.on('click', function(){
+                // loadDataSet시에는 load와 loadException 이벤트가 호출됨.
+                /*<b>*/
+                dm.loadDataSet({
+                    dataSets: [dataSet1, dataSet2],
+                    url: './../../../sample/data/code.json'
+                });
+                /*</b>*/
+            });
+
+            var editDataBtn = new Rui.ui.LButton('editDataBtn');
+            editDataBtn.on('click', function(){
+                dataSet1.getAt(2).set('value', 'Change value');
+                dataSet2.getAt(4).set('value', 'Change value');
+            });
+
+            var updateBtn = new Rui.ui.LButton('updateBtn');
+            updateBtn.on('click', function(){
+                // updateDataSet시에는 success와 failure 이벤트가 호출됨.
+                /*<b>*/
+                dm.updateDataSet({
+                    dataSets: [dataSet1, dataSet2],
+                    url: './../../data/savedCallback.json',
+                    //url: '/loadmultidataset.dev',
+                    params: {
+                        mode: 'update'
+                    }
+                });
+                /*</b>*/
+            });
+        })
+   </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Multiple DataSet Load & Update</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>데이터셋매니저(LDataSetManager)를 이용하여 복수의 데이터셋(dataset)을 제어하는 샘플</h2>
+            <div class="LblockDesc">
+                <p>데이터셋매니저(LDataSetManager)를 이용하여, 2개 이상의 데이터셋(DataSet)을 핸들링 합니다. 데이터셋은 연관 배열 형태로 지정합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="loadBtn" >load</button>
+            <button type="button" id="editDataBtn" >editData</button>
+            <button type="button" id="updateBtn" >update</button>
+        </div>
+        <div id="grid1">
+        </div><br>
+        <div id="grid2">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+[{
+    "metaData": {
+        "datasetId":"dataSet"
+    },
+    "records": [
+        { "userTypeCode": "admin", "userTypeName": "admin"},
+        { "userTypeCode": "employee", "userTypeName": "employee"}
+    ]
+}]

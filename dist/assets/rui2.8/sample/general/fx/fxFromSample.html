@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="애니메이션(LAnim), 크기조정(from, to)" />
+    <title>From To</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #demo {
+            background: #ccc;
+            margin-bottom: 1em;
+            overflow: hidden;
+            width: 200px;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var anim = null;
+        Rui.onReady(function(){
+            /*<b>*/
+            anim = new Rui.fx.LAnim({
+                el: 'demo',
+                attributes: {
+                    width: {
+                        from: 600,
+                        to: 50
+                    }
+                }
+            });
+            /*</b>*/
+            
+            Rui.get('demo-run').on('click', function(){
+                anim.animate();
+            });
+            
+            Rui.log("The example has finished loading; as you interact with it, you'll see log messages appearing here.", "info", "example");
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>From To</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>객체의 크기를 조정하는 animation효과</h2>
+            <div class="LblockDesc">
+                <p>객체를 지정된 두 from, to 좌표를 기준으로 크기 조정 합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="demo">
+                Demo
+            </div>
+        </div>
+        <button id="demo-run">
+            run
+        </button>
+    </div>
+</body>
+</html>

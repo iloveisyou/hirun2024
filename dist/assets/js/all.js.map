@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["all.js"],"sourcesContent":["document.addEventListener('DOMContentLoaded',()=>{\r\n    console.log('스크립트');\r\n});"],"file":"all.js"}

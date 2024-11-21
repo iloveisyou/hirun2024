@@ -1,0 +1,126 @@
+/* LPanel
+------------------------------*/
+.L-overlay {
+    position:absolute;
+    z-index: 2;
+}
+* html div.L-panel-container select {
+    visibility:inherit;
+}
+* html div.drag select {
+    visibility:hidden;
+}
+* html body.masked select {
+    visibility:hidden;
+}
+* html div.hide-select select {
+    visibility:hidden;
+}
+.mask {
+    z-index: 1; 
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    -moz-opacity: 0.5;
+    opacity:.50;
+    filter: alpha(opacity=50);
+    background-color:#CCC;
+}
+.hide-scrollbars,
+.hide-scrollbars * {
+    overflow: hidden;
+}
+.hide-scrollbars select {
+    display: none;
+}
+.show-scrollbars {
+    overflow: auto;
+}
+.L-panel-container.show-scrollbars {
+    overflow: visible;
+}
+.L-panel-container.show-scrollbars .underlay {
+    overflow: auto;
+}
+.L-panel-container.focused {
+}
+/* Panel underlay styles */
+.L-panel-container .underlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.L-panel-container.matte {
+    padding: 3px;
+    background-color: #fff;
+}
+.L-panel-container.shadow .underlay {
+    top: 3px;
+    bottom: -3px;
+    right: -3px;
+    left: 3px;
+    background-color: #000;
+    opacity: .12;
+    filter: alpha(opacity=12);  /* For IE */
+}
+.L-panel-container.shadow .underlay.L-force-redraw {
+    padding-bottom: 1px;
+}
+.L-effect-fade .underlay {
+    display:none;
+}
+.L-panel {
+    /*visibility:hidden;*/
+    border-collapse:separate;
+    position:relative;
+    background-color:#FFF;
+    border:1px solid #000;
+    z-index:1;
+    overflow:hidden;
+}
+.L-panel .hd {
+    background-color:#3d77cb;
+    color:#FFF;
+    border:1px solid #FFF;
+    border-bottom:1px solid #000;
+    font-weight:bold;
+    padding:4px;
+    white-space:nowrap;
+}
+.L-panel .bd {
+    overflow:hidden;
+    padding:4px;
+}
+.L-panel .bd p {
+}
+.L-panel .container-close {
+    position:absolute;
+    top:7px;
+    right:7px;
+    z-index:6;
+    height:12px;
+    width:12px;
+    margin:0px;
+    padding:0px;
+    background:url(./images/container/close12_1.gif) no-repeat;
+    cursor:pointer;
+    visibility:inherit;
+    text-indent:-10000em;
+    overflow:hidden;
+    text-decoration:none;
+}
+.L-panel .ft {
+    padding:4px;
+    overflow:hidden;
+}
+
+.L-override-padding {
+    padding:0 !important;
+}
+.L-panel-container {
+    position:absolute;
+    z-index: 2;
+}

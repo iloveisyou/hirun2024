@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Control</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+        <style type="text/css">
+            #demo {
+                background: #ccc;
+                margin-bottom: 1em;
+                height: 50px;
+                width: 50px;
+            }
+        </style>
+        <script type='text/javascript' class="script-code">
+            var motion = null;
+            $C(function(){
+                /*<b>*/
+                motion = $C.motionAnim({
+                    el: 'demo',
+                    attributes: {
+                        points: {
+                            to: [500, 300],
+                            control: [[-300, 485], [512, 0], [100, 200], [700, 500]]
+                        }
+                    }
+                });
+                
+                $C('#demo-run').on('click', function(){
+                    motion.animate();
+                });
+                /*</b>*/
+                
+                $C.log("The example has finished loading; as you interact with it, you'll see log messages appearing here.", "info", "example");
+
+            });
+        </script>
+
+    </head>
+    <body>
+        <h1>animation control sample</h1>
+        <h2>객체를 원하는 위치로 움직이게 하는 animation효과</h2>
+        <div class="LblockLine"></div>
+        <div>객체를 원하는 위치로 이동시킵니다. 중간좌표를 여러개 지정하면, 각 좌표를 거쳐서 차례대로 이동하게 됩니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id="demo">
+                    Demo
+                </div>
+            </div>
+            <button id="demo-run">
+                run
+            </button>
+        </div>
+    </body>
+</html>

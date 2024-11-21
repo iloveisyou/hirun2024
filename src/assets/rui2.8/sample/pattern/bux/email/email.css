@@ -1,0 +1,595 @@
+#menu_wrap {
+    position: absolute;
+    top:0px;
+}
+#wrap {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    right: 0px;
+    bottom: 13px;
+}
+#ft {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 2;
+}
+
+#bodyCenterArea {
+    background-color: lightgreen;
+    width: 100%;
+}
+
+#bodyBottomArea {
+    width: 100%;
+}
+
+#grid-row-dd-proxy{
+    position: absolute;
+    text-align: center;
+    z-index: 3;
+    #border: 1px solid #000;
+    width: 44px;
+    height: 31px;
+    display: none;
+}
+
+#grid-row-dd-proxy div{
+    background: url(./assets/dd_msg_move.png);'
+    width: 36px;
+    height: 27px;
+    padding: 4px 8px 0px 0px;
+    font-weight: 700;
+}
+
+
+
+#leftArea .L-resize-handle-r {
+    right: 0px;
+    bottom: 0px;
+    height: 100%;
+    width: 5px;
+    position: absolute;
+    cursor: ew-resize;
+}
+
+#bodyTopArea .L-resize-handle-b {
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    cursor: ns-resize;
+}
+
+.L-resize .L-resize-handle-active {
+    background-color: #7d98b8;
+}
+
+
+* {
+    font-family: tahoma,sans-serif;
+    color: #464646;
+    font-size: 12px;
+}
+#wrap .L-button {
+    border: 0;
+}
+
+#leftArea {
+    position: absolute;
+    background: url('./assets/LNB_bg.png') repeat left top;
+    width: 145px;
+    height: 100%;
+}
+#bodyArea {
+    background-color: white;
+    position: absolute;
+    left: 145px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: auto;
+    height: 100%;
+    padding-left: 18px;
+}
+.email-left-topmargin {
+    height: 10px;
+}
+.email-left-divider {
+    background: url('./assets/LNB_divider.png') no-repeat left top;
+    height: 2px;
+    margin: 14px 0 14px 15px;
+}
+.email-left-logo {
+    background: url('./assets/LNB_logo.png') no-repeat left top;
+    height: 59px;
+}
+.box-counter {
+    position: absolute;
+}
+.email-left-list ul li {
+    height: 28px;
+}
+.email-left-list ul li a {
+    width: 145px;
+    height: 28px;
+    display: inline-block;
+}
+#linkCompose {
+    background: url('./assets/btn_compose.png') no-repeat left top;
+}
+#linkCompose:hover {
+    background: url('./assets/btn_compose_selected.png') no-repeat left top;
+}
+#linkInbox {
+    background: url('./assets/btn_inbox.png') no-repeat left top;
+}
+#linkInbox:hover {
+    background: url('./assets/btn_inbox_selected.png') no-repeat left top;
+}
+#linkUnread {
+    background: url('./assets/btn_unread.png') no-repeat left top;
+}
+#linkUnread:hover {
+    background: url('./assets/btn_unread_selected.png') no-repeat left top;
+}
+#linkImportant {
+    background: url('./assets/btn_important.png') no-repeat left top;
+}
+#linkImportant:hover {
+    background: url('./assets/btn_important_selected.png') no-repeat left top;
+}
+#linkSent {
+    background: url('./assets/btn_sent.png') no-repeat left top;
+}
+#linkSent:hover {
+    background: url('./assets/btn_sent_selected.png') no-repeat left top;
+}
+#linkDrafts {
+    background: url('./assets/btn_draft.png') no-repeat left top;
+}
+#linkDrafts:hover {
+    background: url('./assets/btn_draft_selected.png') no-repeat left top;
+}
+#linkJunk {
+    background: url('./assets/btn_junk.png') no-repeat left top;
+}
+#linkJunk:hover {
+    background: url('./assets/btn_junk_selected.png') no-repeat left top;
+}
+#linkTrash {
+    background: url('./assets/btn_trash.png') no-repeat left top;
+}
+#linkTrash:hover {
+    background: url('./assets/btn_trash_selected.png') no-repeat left top;
+}
+
+
+
+#bodyTopArea {
+    width: 100%;
+    height: 75px;
+}
+.email-body-topmargin {
+    height: 33px;
+}
+#bodyTopArea .email-body-buttons button {
+    width: 60px;
+    height: 64px;
+}
+#bodyTopArea .email-body-button-group {
+    float: left;
+    margin-right: 20px;
+}
+#importantButton-button {
+    background: url('./assets/body/btn_important.png') no-repeat left top;
+}
+#readToggleButton-button {
+    background: url('./assets/body/btn_read.png') no-repeat left top;
+}
+#junkButton-button {
+    background: url('./assets/body/btn_junk.png') no-repeat left top;
+}
+#trashButton-button {
+    background: url('./assets/body/btn_trash.png') no-repeat left top;
+}
+#replyButton-button {
+    background: url('./assets/body/btn_reply.png') no-repeat left top;
+}
+#replyAllButton-button {
+    background: url('./assets/body/btn_replyall.png') no-repeat left top;
+}
+#forwardButton-button {
+    background: url('./assets/body/btn_forward.png') no-repeat left top;
+}
+#refreshButton-button {
+    background: url('./assets/body/btn_refresh.png') no-repeat left top;
+}
+#importantButton-button:hover {
+    background: url('./assets/body/btn_important_mouseover.png') no-repeat left top;
+}
+#readToggleButton-button:hover {
+    background: url('./assets/body/btn_read_mouseover.png') no-repeat left top;
+}
+#junkButton-button:hover {
+    background: url('./assets/body/btn_junk_mouseover.png') no-repeat left top;
+}
+#trashButton-button:hover {
+    background: url('./assets/body/btn_trash_mouseover.png') no-repeat left top;
+}
+#replyButton-button:hover {
+    background: url('./assets/body/btn_reply_mouseover.png') no-repeat left top;
+}
+#replyAllButton-button:hover {
+    background: url('./assets/body/btn_replyall_mouseover.png') no-repeat left top;
+}
+#forwardButton-button:hover {
+    background: url('./assets/body/btn_forward_mouseover.png') no-repeat left top;
+}
+#refreshButton-button:hover {
+    background: url('./assets/body/btn_refresh_mouseover.png') no-repeat left top;
+}
+.L-button-disabled #importantButton-button:hover {
+    background: url('./assets/body/btn_important_push.png') no-repeat left top;
+}
+.L-button-disabled #readToggleButton-button:hover {
+    background: url('./assets/body/btn_read_push.png') no-repeat left top;
+}
+.L-button-disabled #junkButton-button:hover {
+    background: url('./assets/body/btn_junk_push.png') no-repeat left top;
+}
+.L-button-disabled #trashButton-button:hover {
+    background: url('./assets/body/btn_trash_push.png') no-repeat left top;
+}
+.L-button-disabled #replyButton-button:hover {
+    background: url('./assets/body/btn_reply_push.png') no-repeat left top;
+}
+.L-button-disabled #replyAllButton-button:hover {
+    background: url('./assets/body/btn_replyall_push.png') no-repeat left top;
+}
+.L-button-disabled #forwardButton-button:hover {
+    background: url('./assets/body/btn_forward_push.png') no-repeat left top;
+}
+.L-button-disabled #refreshButton-button:hover {
+    background: url('./assets/body/btn_refresh_push.png') no-repeat left top;
+}
+
+#mailViewerSwitch {
+    text-align: right;
+}
+.L-switch {
+    width: 90px;
+    margin-top: 35px;
+}
+.L-switch li{
+    width: 29px;
+    height: 29px;
+}
+.L-switch .L-switch-button-0 {
+    background: url('./assets/body/btn_viewFull.png') no-repeat left top;
+}
+.L-switch-on-0 .L-switch-button-0 {
+    background: url('./assets/body/btn_viewFull_selected.png') no-repeat left top;
+}
+.L-switch .L-switch-button-1 {
+    background: url('./assets/body/btn_viewUnder.png') no-repeat left top;
+    width: 26px;
+}
+.L-switch-on-1 .L-switch-button-1 {
+    background: url('./assets/body/btn_viewUnder_selected.png') no-repeat left top;
+    width: 26px;
+}
+.L-switch .L-switch-button-2 {
+    background: url('./assets/body/btn_viewRight.png') no-repeat left top;
+}
+.L-switch-on-2 .L-switch-button-2 {
+    background: url('./assets/body/btn_viewRight_selected.png') no-repeat left top;
+}
+
+
+.L-grid-row-checkBox, 
+.L-grid-header-checkBox {
+    background-image: url('./assets/list/selectbox.png');
+}
+.L-grid-row-marked .L-grid-row-checkBox {
+    background-image: url('./assets/list/selectbox_selected.png');
+    background-position: 2px 0px;
+}
+.L-grid-header-checkBox-mark .L-grid-header-checkBox {
+    background-image: url('./assets/list/selectbox_selected.png');
+    background-position: 7px 0px;
+}
+.L-grid-col-line .L-grid-row td.L-grid-cell {
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
+.L-grid-header-row td, .L-grid-row-dummy td {
+    border-right: 1px solid #ffffff;
+}
+.L-grid-body .L-grid-cell-selected {
+    background-color: #dddddd !important;
+    border-right: 1px solid #dddddd !important;
+    border-bottom: 1px solid #dddddd !important;
+}
+
+/* Message Dialog
+*******************************/
+.L-dialog {
+    border: 1px solid #ddddd;
+}
+.L-dialog .hd {
+    background-color: #c5003d;
+    height: 20px;
+}
+.L-dialog .hd img{
+	margin-top: 3px;
+	margin-left: 10px;
+}
+.L-dialog .container-close {
+    background: url('./assets/dialog/close.png') no-repeat;
+    top: 8px;
+    right: 10px;
+}
+.L-dialog .eml-viewer {
+	padding: 10px 18px;
+}
+.L-dialog label {
+    width: 70px;
+    display: inline-block;
+    text-align: right;
+    font-weight: 700;
+    padding-top: 5px;
+    padding-right: 14px;
+}
+.L-dialog li {
+	height: 22px;
+	margin: 2px 0 3px 0;
+}
+.L-dialog  li.eml-body {
+	height: inherit;
+	margin: 8px 0 0 0;
+}
+.L-dialog .eml-attachment {
+	margin-bottom: 8px;
+}
+.L-dialog .eml-attachment label {
+    vertical-align: top;
+}
+.L-dialog input {
+	height: 20px;
+	padding: 0 3px;
+}
+.L-dialog #wdFiles {
+	width: 686px;
+    height: 50px;
+	display: inline-block;
+    border: 1px solid #d3d3d3;
+    overflow-y: scroll;
+    padding: 0 3px;
+}
+.L-dialog #rdSender, .L-dialog #rdReceiver .L-dialog #rdCC {
+    padding-top: 5px;
+    padding-right: 14px;
+    height: 20px;
+}
+.L-dialog #rdFiles {
+    width: 686px;
+    height: 50px;
+    display: inline-block;
+    border: 1px solid #d3d3d3;
+    overflow-y: scroll;
+}
+.L-dialog #rdMessage {
+    width: 784px;
+    height: 350px;
+    display: inline-block;
+    border: 1px solid #d3d3d3;
+    overflow-y: auto;
+}
+.L-dialog .button-group button {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+#dialogMessageViewer .eml-subject label {
+	display: none;
+}
+#dialogMessageViewer .eml-subject .mark-normal {
+    float: left;
+}
+#rdSubject {
+	font-weight: 700;
+}
+#send button {
+    background: url('./assets/dialog/btn_send.png') no-repeat left top;
+    width: 51px;
+    height: 22px;
+}
+#send button:hover {
+    background: url('./assets/dialog/btn_send_mouseover.png') no-repeat left top;
+    width: 51px;
+    height: 22px;
+}
+#reply button {
+    background: url('./assets/dialog/btn_small_reply.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#reply button:hover {
+    background: url('./assets/dialog/btn_small_reply_mouseover.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#reply.L-button-disabled button:hover {
+    background: url('./assets/dialog/btn_small_reply_push.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#replyAll button {
+    background: url('./assets/dialog/btn_small_replyall.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#replyAll button:hover {
+    background: url('./assets/dialog/btn_small_replyall_mouseover.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#replyAll.L-button-disabled button:hover {
+    background: url('./assets/dialog/btn_small_replyall_push.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#forward button {
+    background: url('./assets/dialog/btn_small_forward.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#forward button:hover {
+    background: url('./assets/dialog/btn_small_forward_mouseover.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#forward.L-button-disabled button:hover {
+    background: url('./assets/dialog/btn_small_forward_push.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#junk button {
+    background: url('./assets/dialog/btn_small_junk.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#junk button:hover {
+    background: url('./assets/dialog/btn_small_junk_mouseover.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#junk.L-button-disabled button:hover {
+    background: url('./assets/dialog/btn_small_junk_push.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#trash button {
+    background: url('./assets/dialog/btn_small_trash.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#trash button:hover {
+    background: url('./assets/dialog/btn_small_trash_mouseover.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+#trash.L-button-disabled button:hover {
+    background: url('./assets/dialog/btn_small_trash_push.png') no-repeat left top;
+    width: 39px;
+    height: 32px;
+}
+
+/* Message Mark
+*******************************/
+
+#bodyBottomArea .eml-subject .mark-normal {
+    float: left;
+}
+#bodyBottomArea .eml-viewer {
+    padding: 10px 18px;
+}
+#bodyBottomArea label {
+    width: 80px;
+    display: inline-block;
+    text-align: right;
+    font-weight: 700;
+    padding-top: 5px;
+    padding-right: 14px;
+}
+#bodyBottomArea .eml-subject label {
+    display: none;
+}
+#bodyBottomArea #rFiles {
+    width: 97%;
+    height: 50px;
+    display: inline-block;
+    border: 1px solid #d3d3d3;
+    overflow-y: scroll;
+}
+#bodyBottomArea #rMessage {
+    width: 97%;
+    display: inline-block;
+    border: 1px solid #d3d3d3;
+    overflow-y: auto;
+}
+#bodyBottomArea {
+	border-width: 2px 0 0 0;
+	border-style: solid;
+	border-color: #8e8f8f;
+}
+#rSubject {
+    font-weight: 700;
+}
+
+/* Message Mark
+*******************************/
+.mark-important {
+    background: url('./assets/list/important.png') no-repeat left top;
+    width: 15px;
+    height: 14px;
+}
+.mark-normal {
+    background: url('./assets/list/unimportant.png') no-repeat left top;
+    width: 15px;
+    height: 14px;
+}
+.mark-attached {
+    background: url('./assets/list/clip.png') no-repeat left top;
+    width: 7px;
+    height: 14px;
+    margin-left: 3px;
+}
+.mark-read {
+    background: url('./assets/list/read.png') no-repeat left top;
+    width: 14px;
+    height: 10px;
+}
+.mark-unread {
+    background: url('./assets/list/unread.png') no-repeat left top;
+    width: 14px;
+    height: 10px;
+}
+.messagebox .L-button  {
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -khtml-border-radius: 1px;
+    border-radius: 1px;
+    border: 1px solid #a8a8a8;
+    background-color: #a8a8a8;
+    vertical-align: middle;
+}
+.messagebox .L-button button {
+    background-color: #f3f2f2;
+    border: 1px solid #e0e0e0;
+    padding: 0 10px;
+    *overflow: visible;  
+    height: 22px;
+    font-weight: bold;
+}
+
+
+.L-switch-button {
+    background-color: #fafafa;
+    border: 1px solid #bababa;
+    color: #333;
+}
+.L-switch-button.L-switch-on {
+    color: #fff;
+}
+.L-switch-multiple .L-switch-button {
+    border-left: 0px;
+}
+.L-switch-multiple .L-switch-first-button {
+    border-left: 1px solid #bababa;
+}

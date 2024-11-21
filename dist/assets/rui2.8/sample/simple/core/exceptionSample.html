@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Exception</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+        <script type='text/javascript' class="script-code">
+        
+        $C(function(){
+            try {
+                $C('!config').set('$.core.logger.show', [true]);
+                new Test.Cls('aa').test();
+            } 
+            catch (e) {
+                $C.log(e.message + ' : ' + Rui.getException(e).getStackTrace());
+            }
+        });
+        
+        /*<b>*/
+        var Test = {};
+        
+        Test.Cls = function(a){
+            this.otype = 'Test.Cls';
+        };
+        
+        Test.Cls.prototype = {
+            test: function(){
+                throw new Rui.LException('test', this);
+            }
+        };
+        /*</b>*/
+        </script>
+
+    </head>
+    <body>
+        <h1>exception sample</h1>
+        <h2>스크립트의 에러를 재구현한 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>exception 처리에 대한 예제입니다. 에러 메세지는 핸들링이 가능합니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+            
+            </div>
+        </div>
+    </body>
+</html>

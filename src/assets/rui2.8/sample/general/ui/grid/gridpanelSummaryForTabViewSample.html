@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="Grid Summary, TabView" />
+    <title>Grid Summary For TabView</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+       
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridView.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridPanelExt.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LTotalSummary.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/tab/rui_tab.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/tab/rui_tab.css" />
+    
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LTotalSummary.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css" >
+        .L-grid-row .L-grid-bg-color-sum {
+            background-color:#d1f141;
+        }
+        .L-grid-cell {
+            height: 26px;
+        }
+        .L-grid-row-summary-total td.L-grid-cell {
+            z-index: 10000;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            /*<b>*/
+            var tabView = new Rui.ui.tab.LTabView({
+                tabs : [
+                    {
+                        label: 'lorem',
+                        content: '<div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</div>',
+                        active: true
+                    },
+                    {
+                        label: 'gridview',
+                        content: '<div><div id="defaultGrid"></div></div>'
+                    }
+                ],
+
+                contentHeight: 380
+            });
+
+            tabView.render('tab-container');
+            /*</b>*/
+
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'company'},
+                    { id: 'date', type: 'date' },
+                    { id: 'monthSum', type: 'number', defaultValue: 0 },
+                    { id: 'balance', type: 'number', defaultValue: 0 },
+                    { id: 'assets', type: 'number', defaultValue: 0 }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                freezeColumnId: 'date',
+                columns: [
+                        new Rui.ui.grid.LStateColumn(),
+                        new Rui.ui.grid.LNumberColumn(),
+                        { field: 'company', label: 'Company', sortable:true, width:200},
+                        { field: 'date', label: 'Date', width:100, align: 'center', renderer : 'date' },
+                        new Rui.ui.grid.LNumberColumn(),
+                        { field: 'monthSum', align: 'right', renderer : 'money', sumType: 'sum', editor: new Rui.ui.form.LNumberBox()},
+                        { field: 'balance', align: 'right', renderer : 'money', sumType: 'sum', editor: new Rui.ui.form.LNumberBox()},
+                        { id: 'difference', width:120, align: 'right', renderRow: true, renderer : function(val, p, record){
+                                p.css.push('L-grid-bg-color-sum');
+                                var calVal = record.get('monthSum') - record.get('balance');
+                                return Rui.util.LNumber.usMoney(calVal);
+                            }, sumType: 'sum'},
+                        { id: 'rate', width:120, align: 'right', renderRow: true, renderer : function(val, p, record){
+                                p.css.push('L-grid-bg-color-sum');
+                                var calVal = (record.get('monthSum') - record.get('balance')) / record.get('monthSum') * 100;
+                                return Rui.util.LNumber.round(calVal, 2) + '%';
+                            }, sumType: 'avg'},
+                        { field: 'assets', width:120, align: 'right', renderer : 'money' }
+                    ]
+            });
+
+            /*<b>*/
+            var sumColumns = ['balance', 'monthSum', 'assets'];
+            var summary = new Rui.ui.grid.LTotalSummary();
+            summary.on('renderTotalCell', summary.renderer({
+                label: {
+                    id: 'date',
+                    text: 'Total',
+                }, 
+                columns: {
+                    monthSum: { type: 'sum', renderer: 'money' },
+                    balance: { type: 'sum', renderer: 'money' },
+                    assets: { type: 'avg', renderer: function(val) { return Rui.util.LNumber.round(val, 2) + '%'; } }
+                }
+            }));
+            /*</b>*/
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet:dataSet,
+                /*<b>*/
+                viewConfig : {
+                    plugins: [summary]
+                },
+                /*</b>*/
+                autoToEdit: true,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                width: 500,
+                height: 280
+            });
+
+            grid.render('defaultGrid');
+
+            var gridView = grid.getView();
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/gridSummary.json',
+                    method: 'get'
+                });
+            });
+
+            var editBtn = new Rui.ui.LButton('editBtn');
+            editBtn.on('click', function(){
+                dataSet.setNameValue(0, 'company', 'Hello');
+            });
+
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData();
+            });
+
+            var newBtn = new Rui.ui.LButton('newBtn');
+            newBtn.on('click', function(){
+                var row = dataSet.newRecord();
+            });
+
+            var exportBtn = new Rui.ui.LButton('exportBtn');
+            exportBtn.on('click', function(){
+                grid.saveExcel('한글테스트_' + new Date().format('%Y%m%d') + '.xls');
+            });
+
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <h1>Grid Summary For TabView</h1>
+    <h2>탭뷰(TabView)안에 그리드(Grid) 합계(Summary)를 표시하는 샘플 </h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>탭뷰(TabView)안에 그리드(Grid)와 합계(Summary)를 표시합니다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >Search</button>
+            <button type="button" id="editBtn" >Edit</button>
+            <button type="button" id="clearBtn" >Clear</button>
+            <button type="button" id="newBtn" >NEW</button>
+            <button type="button" id="exportBtn">Export</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div id="tab-container">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

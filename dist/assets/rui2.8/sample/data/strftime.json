@@ -1,0 +1,181 @@
+[{
+    "message": "",
+    "metaData": {
+        "dataSetId": "Table",
+        "totalCount": "43"
+    },
+    "records": [
+        {
+            "value": "%a",
+            "text": "%a - 현재 locale의 요일의 단축표시"
+        },
+        {
+            "value": "%A",
+            "text": "%A - 현재 locale의 요일 표시"
+        },
+        {
+            "value": "%b",
+            "text": "%b - 현재 locale의 달의 단축표시"
+        },
+        {
+            "value": "%B",
+            "text": "%B - 현재 locale의 달 표시"
+        },
+        {
+            "value": "%c",
+            "text": "%c - 현재 locale의 선호되는 날짜와 시간 표시 "
+        },
+        {
+            "value": "%C",
+            "text": "%C - century number 00~99"
+        },
+        {
+            "value": "%d",
+            "text": "%d - 달의 일을 표시하는 값으로 01 ~ 31을 표시"
+        },
+        {
+            "value": "%D",
+            "text": "%D - %m/%d/%y와 같다."
+        },
+        {
+            "value": "%e",
+            "text": "%e - %d와 비슷하나 1자리수의 경우 0대신이 공백이 들어간다. ' 1' ~ '31'"
+        },
+        {
+            "value": "%F",
+            "text": "%F - %Y-%m-%d와 같다. (ISO 8601 date format)"
+        },
+        {
+            "value": "%g",
+            "text": "%g - 두자리 년도 ISO-8601:1988 standards (see %V)"
+        },
+        {
+            "value": "%G",
+            "text": "%G - 네자리 년도(g%)"
+        },
+        {
+            "value": "%h",
+            "text": "%h - %b와 같다."
+        },
+        {
+            "value": "%H",
+            "text": "%H - 24-hour 00 ~ 23"
+        },
+        {
+            "value": "%I",
+            "text": "%I - 12-hour 01 ~ 12"
+        },
+        {
+            "value": "%j",
+            "text": "%j - 년중 몇번째 일인지 표시 001 ~ 366"
+        },
+        {
+            "value": "%k",
+            "text": "%k - 24-hour 0 ~ 23"
+        },
+        {
+            "value": "%l",
+            "text": "%l - 12-hour 1 ~ 12 "
+        },
+        {
+            "value": "%m",
+            "text": "%m - month 01 ~ 12"
+        },
+        {
+            "value": "%M",
+            "text": "%M - minute 00 ~ 59"
+        },
+        {
+            "value": "%n",
+            "text": "%n - 줄바꿈문자"
+        },
+        {
+            "value": "%p",
+            "text": "%p - 현재 locale의 `AM', `PM'"
+        },
+        {
+            "value": "%P",
+            "text": "%P - %p와 같으나 소문자 'am', 'pm'"
+        },
+        {
+            "value": "%q",
+            "text": "%q - 입력용 format으로 년월일을 표시하며 기본 %Y%m%d이다."
+        },
+        {
+            "value": "%Q",
+            "text": "%Q - 입력용 format으로 년월일시분초를 표시하면 기본 %Y%m%d%H%M%S이다. "
+        },
+        {
+            "value": "%r",
+            "text": "%r - %p를 붙인 12시간제 시간 표시 %I:%M:%S %p와 같다."
+        },
+        {
+            "value": "%R",
+            "text": "%R - 24시간 표시 %H:%M와 같다."
+        },
+        {
+            "value": "%s",
+            "text": "%s - Unix Epoch Time timestamp, 1970-01-01 00:00:00 UTC이후의 초"
+        },
+        {
+            "value": "%S",
+            "text": "%S - 초 00 ~ 59"
+        },
+        {
+            "value": "%t",
+            "text": "%t - tab문자"
+        },
+        {
+            "value": "%T",
+            "text": "%T - 현재시간 %H:%M:%S와 같다."
+        },
+        {
+            "value": "%u",
+            "text": "%u - 요일을 숫자로 표시 1이 월요일이다.  1 ~ 7"
+        },
+        {
+            "value": "%U",
+            "text": "%U - 지정한 년의 주번호 첫번째 일요일 부터 한주로 계산한다."
+        },
+        {
+            "value": "%V",
+            "text": "%V - 지정한 년의 주번호첫번째 월요일 부터, 첫주는 4일이상 01~53"
+        },
+        {
+            "value": "%w",
+            "text": "%w - 요일을 숫자로 표시 0이 일요일이다.  0 ~ 6"
+        },
+        {
+            "value": "%W",
+            "text": "%W - 지정한 년의 주번호 첫번째 월요일 부터 한주로 계산."
+        },
+        {
+            "value": "%x",
+            "text": "%x - 현재 locale의 기본 년월일 format ex) 2010-05-14, 14/05/10"
+        },
+        {
+            "value": "%X",
+            "text": "%X - 현재 locale의 시간 ex) 15:59:16"
+        },
+        {
+            "value": "%y",
+            "text": "%y - century를 뺀 년도 00 ~ 99"
+        },
+        {
+            "value": "%Y",
+            "text": "%Y - century를 포함한 년도 ex) 2010"
+        },
+        {
+            "value": "%z",
+            "text": "%z - time zone(UTC) 약어 또는 전체 명"
+        },
+        {
+            "value": "%Z",
+            "text": "%Z - time zone name / abbreviation"
+        },
+        {
+            "value": "%%",
+            "text": "%% - a literal `%' character    "
+        }
+    ]
+}]

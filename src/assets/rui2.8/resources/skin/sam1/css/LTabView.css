@@ -1,0 +1,176 @@
+.L-navset .L-nav, 
+.L-navset .L-navset-top .L-nav
+{
+    border: solid #2647a0;
+    border-width: 0 0 5px;
+    zoom: 1;
+}
+.L-navset .L-nav li, 
+.L-navset .L-navset-top .L-nav li
+{
+    margin: 0 .16em 0 0;
+    padding: 1px 0 0;
+    zoom: 1;
+}
+.L-navset .L-nav .selected, 
+.L-navset .L-navset-top .L-nav .selected
+{
+    margin: 0 .16em 0px 0; /* _ _ -1px를 0으로 수정 IE scroll문제*/
+}
+.L-navset .L-nav a, 
+.L-navset .L-navset-top .L-nav a
+{
+    background: #d8d8d8 url(./skin/sam1/images/sprite.png) repeat-x;
+    border: solid #a3a3a3;
+    border-width: 0 1px;
+    color: #000;
+    position: relative;
+    text-decoration: none;
+}
+.L-navset .L-nav a em, 
+.L-navset .L-navset-top .L-nav a em
+{
+    border: solid #a3a3a3;
+    border-width: 1px 0 0;
+    cursor: hand;
+    padding: .25em .75em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: -1px;
+    position: relative;
+}
+.L-navset .L-nav .selected a, 
+.L-navset .L-nav .selected a:focus, 
+.L-navset .L-nav .selected a:hover
+{
+    background: #2647a0 url(./skin/sam1/images/sprite.png) repeat-x left -1400px;    
+}
+.L-navset .L-nav a:hover, 
+.L-navset .L-nav a:focus
+{
+    background: #bfdaff url(./skin/sam1/images/sprite.png) repeat-x left -1300px;
+    outline: 0;
+}
+.L-navset .L-nav .selected a em
+{
+    padding: .35em .75em;
+}
+.L-navset .L-nav .selected a, 
+.L-navset .L-nav .selected a em
+{
+    border-color: #243356;
+    color: #fff;
+}
+.L-navset .L-content
+{
+    background: #edf5ff;
+}
+.L-navset .L-content, 
+.L-navset .L-navset-top .L-content
+{
+    border: 1px solid #808080;
+    border-top-color: #000000;
+    padding: .25em .5em;
+}
+.L-navset-left .L-nav, 
+.L-navset .L-navset-left .L-nav, 
+.L-navset .L-navset-right .L-nav, 
+.L-navset-right .L-nav
+{
+    border-width: 0 5px 0 0;
+    xposition: absolute;
+    top: 0;
+    bottom: 0;
+}
+.L-navset .L-navset-right .L-nav, 
+.L-navset-right .L-nav
+{
+    border-width: 0 0 0 5px;
+}
+.L-navset-left .L-nav li, 
+.L-navset .L-navset-left .L-nav li, 
+.L-navset-right .L-nav li
+{
+    margin: 0 0 .16em;
+    padding: 0 0 0 1px;
+}
+.L-navset-right .L-nav li
+{
+    padding: 0 1px 0 0;
+}
+.L-navset-left .L-nav .selected, 
+.L-navset .L-navset-left .L-nav .selected
+{
+    margin: 0 -1px .16em 0;
+}
+.L-navset-right .L-nav .selected
+{
+    margin: 0 0 .16em -1px;
+}
+.L-navset-left .L-nav a, 
+.L-navset-right .L-nav a
+{
+    border-width: 1px 0;
+}
+.L-navset-left .L-nav a em, 
+.L-navset .L-navset-left .L-nav a em, 
+.L-navset-right .L-nav a em
+{
+    border-width: 0 0 0 1px;
+    padding: .2em .75em;
+    top: auto;
+    left: -1px;
+}
+.L-navset-right .L-nav a em
+{
+    border-width: 0 1px 0 0;
+    left: auto;
+    right: -1px;
+}
+.L-navset-left .L-nav a, 
+.L-navset-left .L-nav .selected a, 
+.L-navset-left .L-nav a:hover, 
+.L-navset-right .L-nav a, 
+.L-navset-right .L-nav .selected a, 
+.L-navset-right .L-nav a:hover, 
+.L-navset-bottom .L-nav a, 
+.L-navset-bottom .L-nav .selected a, 
+.L-navset-bottom .L-nav a:hover
+{
+    background-image: none;
+}
+.L-navset-left .L-content
+{
+    border: 1px solid #808080;
+    border-left-color: #000000;
+}
+.L-navset-bottom .L-nav, 
+.L-navset .L-navset-bottom .L-nav
+{
+    border-width: 5px 0 0;
+}
+.L-navset .L-navset-bottom .L-nav .selected, 
+.L-navset-bottom .L-nav .selected
+{
+    margin: -1px .16em 0 0;
+}
+.L-navset .L-navset-bottom .L-nav li, 
+.L-navset-bottom .L-nav li
+{
+    padding: 0 0 1px 0;
+    vertical-align: top;
+}
+.L-navset .L-navset-bottom .L-nav a em, 
+.L-navset-bottom .L-nav a em
+{
+    border-width: 0 0 1px;
+    top: auto;
+    bottom: -1px;
+}
+.L-navset-bottom .L-content, 
+.L-navset .L-navset-bottom .L-content
+{
+    border: 1px solid #808080;
+    border-bottom-color: #000000;
+}

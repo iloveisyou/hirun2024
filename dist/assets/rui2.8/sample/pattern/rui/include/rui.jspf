@@ -1,0 +1,9 @@
+<%@ page pageEncoding="UTF-8" session="false" %>
+<script type="text/javascript" src="<LTag:webPath kind="rui">/js/rui_base-debug.js</LTag:webPath>"></script>
+<script type="text/javascript" src="<LTag:webPath kind="rui">/js/rui_core-debug.js</LTag:webPath>"></script>
+<script type="text/javascript" src="<LTag:webPath kind="rui">/js/rui_ui-debug.js</LTag:webPath>"></script>
+<script type="text/javascript" src="<LTag:webPath kind="rui">/js/rui_form-debug.js</LTag:webPath>"></script>
+<script type="text/javascript" src="<LTag:webPath kind="rui">/js/rui_grid-debug.js</LTag:webPath>"></script>
+<script type="text/javascript" src="<LTag:webPath kind="rui">/resources/rui_config.js</LTag:webPath>"></script>
+<link rel="stylesheet" type="text/css" href="<LTag:webPath kind="rui">/resources/rui.css</LTag:webPath>"/>
+<link rel="stylesheet" type="text/css" href="<LTag:webPath kind="css">/rui_skin.css</LTag:webPath>"/>

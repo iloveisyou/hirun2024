@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Child Records</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type='text/javascript' src='./../../../../plugins/ui/tree/rui_tree.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/data/LDataSetView.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="common.css" />        
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <style type="text/css">
+            #treeDiv1, #gridWrapper {
+                float: left;
+            }
+        </style>
+        <script type="text/javascript" class="script-code">
+            var tree = null;
+            var dataSet = null;
+            var dsChild = null;
+            var dataView = null;
+            //****************Dom onReady******************
+            $C(function(){
+                /*<b>*/
+                dataSet = $C.dataSet({
+                    id: 'dataSet',
+                    fields: [{
+                        id: 'menuId', type:"number"
+                    }, {
+                        id: 'seq',type:"number"
+                    }, {
+                        id: 'parentMenuId',type:"number"
+                    }, {
+                        id: 'name'
+                    }, {
+                        id: 'url'
+                    }]
+                });
+                
+                dataSet.on("rowPosChanged", function (e) {
+                    if (e.row > -1) setDataView(e.row);
+                });
+                /*</b>*/
+     
+                dataSet.on("load", function () {
+                    setDataView();
+                });
+     
+                /********************* dataSetView ******************/
+                dataView = new Rui.data.LDataSetView({  // because syntax error occurred...
+                    sourceDataSet: dataSet
+                });
+                                
+                /*<b>*/
+                tree = $C('#treeDiv1').tree({
+                    dataSet: dataSet,
+                    width: 200,
+                    height: 300,
+                    fields: {
+                        rootValue: null
+                        , parentId: 'parentMenuId'
+                        , id: 'menuId'
+                        , label: 'name'
+                        , order:'seq'
+                    }
+                });             
+                
+               // tree.render("treeDiv1");
+                /*</b>*/
+                
+                dataSet.load({
+                    url: "./../../../../sample/data/menu.json",
+                    method: "get"
+                });
+                
+                var columnModel = $C.columnModel({
+                    columns: [
+                    $C.stateColumn(),
+                    {
+                        field: "parentMenuId",
+                        label: "부모 메뉴ID"
+                    }, {
+                        field: "menuId",
+                        label: "메뉴ID"
+                    }, 
+                    { field: "seq", label: "순서", align: 'right', editor: $C.numberBox()}, 
+                    {
+                        field: "name",
+                        label: "메뉴명"
+                    }, {
+                        field: "url",
+                        label: "URL"
+                    }]
+                });
+                
+                var grid = $C('#defaultGrid').grid({
+                    columnModel: columnModel,
+                    height: 300,
+                    dataSet: dataView
+                });                
+                
+                $C('#newBtn').button().on("click", function(){
+                    addNode();
+                });
+
+                $C('#deleteBtn').button().on("click", function(){
+                    deleteNode();
+                });
+
+            });
+            
+            //******************custom function********************            
+            //해당 id의 자식 목록으로 설정하기
+            function setDataView(row) {
+                var parentId;                
+                if (row > -1) {
+                    parentId = dataSet.getAt(row).get("menuId");
+                }
+                else {
+                    //root처리
+                    parentId = null;
+                    dataSet.setRow(-1);
+                }
+                
+                dataView.loadView(function(recordId, record){
+                    //자기자신 제외
+                    if (record.get("menuId") !== parentId && record.get("parentMenuId") === parentId) 
+                        return true;
+                    else 
+                        return false;
+                });
+            }
+            
+            //tree method를 사용할 경우 (권장)            
+            function addTopNode(){
+                var label = window.prompt("추가할 Node Name을 입력하세요 : ", "");
+                var row = tree.addTopNode(label);
+                var newRecord = dataSet.getAt(row);
+                //추가적인 값 변경은 newRecord를 변경하면 된다.
+                //newRecord.set("desc","xxxx");
+            }           
+            //tree의 method 사용 (권장)
+            function addNode(){
+                var row = tree.addChildNode("");
+                var newRecord = dataSet.getAt(row);
+                //추가적인 값 변경은 newRecord를 변경하면 된다.
+                //newRecord.set("desc","xxxx");
+            }
+            function deleteNode(){
+                tree.deleteNode();
+            }
+        </script>
+
+    </head>
+    <body class="L-skin-sam">
+        <h1>tree Child Record Sample</h1>
+        <h2>LTreeView node 선택 시 선택한 node에 대한  child node 정보 확인</h2>
+        <div class="LblockLine"></div>
+        <div>
+            <p>트리에서 노드를 선택할 때, 해당 노드 정보를 가져옵니다.</p>
+            <p>선택시 트리와 연결된 데이터셋의 rowPosChanged 이벤트를 통해 수행하고자 하는 작업을 처리할 수 있습니다.</p>
+        </div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id="contentWrapper">
+            <div id="treeDiv1">
+            </div>
+        </div>
+    </div>
+    <div id="gridWrapper" style="width:600px;">
+        <h3>선택된 node의 자식 목록</h3>
+            <button type="button" id="newBtn" >행추가</button>
+            <button type="button" id="deleteBtn" >행삭제</button>
+        <div id="defaultGrid">
+        </div>
+    </div>
+</div>
+    </body>
+</html>

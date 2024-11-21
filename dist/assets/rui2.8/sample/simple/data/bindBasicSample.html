@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="devon-rui-sample" content="yes" />
+<title>Bind Basic</title>
+<script type="text/javascript" src="../../../js/rui_base.js"></script>
+<script type="text/javascript" src="../../../js/rui_ext.js"></script>
+<script type='text/javascript' src='../../../resources/rui_config.js'></script>
+<script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+<link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+<script type="text/javascript" class="script-code">
+
+var bind = null;
+var dataSet = null;
+$C(function() {
+    $C('!config').set('$.core.logger.show', [true]);
+    
+    $C('#col1').textBox();
+    
+    /*var col4 = $C.radioGroup({
+        applyTo: 'col4',
+        name: 'col4',
+        items:[
+            {
+                label : 'R1',
+                value: 'R1'
+            },
+            {
+                label : 'R2',
+                value: 'R2'
+            }
+        ]
+    });*/
+    
+    $C('#col5').checkBox({
+        bindValues: ['R1', 'R2']
+    });
+    
+    var cDataSet = $C.dataSet({
+        id:'cDataSet',
+        fields:[
+            {id:'code'},
+            {id:'value'}
+        ]
+    });
+
+    $C('#col7').combo({
+        dataSet: cDataSet
+    });
+    
+    // 샘플에 메인 DataSet의 rowPosChanged 이벤트에서 콤보의 데이터를 filter 하므로 cDataSet 의 url 방식이 아닌 서버 처리 방식으로 데이터를 미리 로딩해 놓아야 한다. 
+    cDataSet.loadData({
+        records: [
+            { state: '0', code:'code1', value:'코드1' },
+            { state: '0', code:'code2', value:'코드2' },
+            { state: '0', code:'code3', value:'코드3' },
+            { state: '0', code:'code4', value:'코드4' },
+            { state: '0', code:'code5', value:'코드5' },
+            { state: '0', code:'code6', value:'코드6' },
+            { state: '0', code:'code7', value:'코드7' },
+            { state: '0', code:'code8', value:'코드8' },
+            { state: '0', code:'code9', value:'코드9' },
+            { state: '0', code:'code10', value:'코드10' },
+            { state: '0', code:'code11', value:'코드11' },
+            { state: '0', code:'code12', value:'코드12' },
+            { state: '0', code:'code13', value:'코드13' },
+            { state: '0', code:'code14', value:'코드14' },
+            { state: '0', code:'code15', value:'코드15' },
+            { state: '0', code:'data1', value:'데이터1' },
+            { state: '0', code:'data2', value:'데이터2' },
+            { state: '0', code:'data3', value:'데이터3' },
+            { state: '0', code:'data4', value:'데이터4' },
+            { state: '0', code:'data5', value:'데이터5' },
+            { state: '0', code:'data6', value:'데이터6' },
+            { state: '0', code:'data7', value:'데이터7' },
+            { state: '0', code:'data8', value:'데이터8' },
+            { state: '0', code:'data9', value:'데이터9' },
+            { state: '0', code:'data10', value:'데이터10' },
+            { state: '0', code:'data11', value:'데이터11' },
+            { state: '0', code:'data12', value:'데이터12' },
+            { state: '0', code:'data13', value:'데이터13' },
+            { state: '0', code:'data14', value:'데이터14' },
+            { state: '0', code:'data15', value:'데이터15' }
+        ]
+    });
+    
+    $C('#col7').on('changed', function(e){
+    });
+    
+    
+    $C('#col7').on('blur', function(){
+        $C.log('blur');
+    })
+    $C('#col7').on('focus', function(){
+        $C.log('focus');
+    })
+    $C('#col7').on('changed', function(){
+        $C.log('changed');
+    })
+    
+    $C('#col8').textBox({
+        autoComplete : true,
+        filterUrl:'/comboFilter.dev'
+    });
+    
+    $C('#col9').dateBox();
+    
+    $C('#col10').timeBox();
+    
+    $C('#col11').textBox({
+        mask: '9999-9999'
+    });
+    
+    dataSet = $C.dataSet({
+        id:'dataSet',
+        fields:[
+            {id:'col1'},
+            {id:'col2'},
+            {id:'col3'},
+            {id:'col4'},
+            {id:'col5'},
+            {id:'col6'},
+            {id:'col7'},
+            {id:'col8'},
+            {id:'col9'},
+            {id:'col10'},
+            {id:'code'},
+            {id:'value'},
+            {id:'date1',type:"date"}
+        ]
+    });
+    
+    dataSet.on('load', function(e){
+        //dataSet.setNameValue(0, 'col7', 'code8');
+        $C.log('load');
+    });
+
+    /*<b>*/
+   // value의 종류는 value/text/html로 되어 있다.
+   // value: 해당 dom이난 Rui의 콤포넌트의 value값 연결
+   // text: LCombo의 displayField와 연동되는 데이터셋 연결
+   // html: span의 innerHTML에 반영, html type만 renderer를 지원
+    bind = $C.bind( 
+        {
+            groupId:'frm',
+            dataSet:dataSet,
+            bind: true,
+            bindInfo: [
+                {id:'col1', ctrlId:'col1', value:'value'},
+                {id:'col2', ctrlId:'col2', value:'value'},
+                //{id:'code', ctrlId:'col3', value:'value'},
+                {id:'value', ctrlId:'col3', value:'text'},
+                {id:'col4', ctrlId:'col4', value:'value'},
+                {id:'col5', ctrlId:'col5', value:'value'},
+                {id:'col6', ctrlId:'col6', value:'value'},
+                {id:'code', ctrlId:'col7', value:'value'},
+                {id:'value', ctrlId:'col8', value:'value'},
+                {id:'date1', ctrlId:'col9', value:'value'},
+                {id:'col10', ctrlId:'col10', value:'value'},
+                {id:'col6', ctrlId:'span1', value:'html', renderer: function(val) {
+                    return "col6:" + val; 
+                }}
+            ]
+        });
+    /*</b>*/
+   
+   dataSet.on('rowPosChanged', function(e){
+       if(e.row > -1) {
+           // 다른 데이터셋과 연동시에는 콤보의 데이터셋은 loadData를 통해 먼저 로딩되어야 한다.
+           // 아래의 cDataSet은 url 방식으로 데이터를 로딩하면 안된다.
+           if(e.row < 1) {
+               cDataSet.filter(function(id, record) {
+                   if(record.get('code') == 'code1')
+                       return true;
+                   return false;
+               });
+           } else {
+               cDataSet.clearFilter();
+               $C('#col7').setValue(dataSet.getNameValue(e.row, 'code'));
+           }
+       }
+   });
+
+    dataSet.on('update', function(e){
+        if(e.colId == 'code'){
+            if(e.value == 'code2'){
+                dataSet.setNameValue(e.row, 'code', 'code1');
+            }
+        }
+        
+    });
+
+    dataSet.on('update', function(e){
+        if(e.colId == 'col1' && e.value != '') {
+            // LBind가 연결된 재귀호출은 반드시  LBind객체가 먼저 초기화 되어야 한다. 
+            //dataSet.setNameValue(e.row, 'col1', '');
+        }
+    });
+    
+    dataSet.on('update', function(e) {
+        $C.log('update column : ' + e.colId);
+        var modifiedRecords = dataSet.getModifiedRecords();
+        if(modifiedRecords.length < 1) {
+            $C('#showData').html('no changed');
+            return;
+        }
+
+        var data = '';
+        modifiedRecords.each(function(id) {
+            var record = modifiedRecords.get(id);
+            data += $C.dump(record.getModifiedData())
+        });
+        $C('#showData').html(data);
+    });
+
+    dataSet.on('loadException', function(e) {
+        alert('error : ' + e.throwObject.message);
+    });
+    
+    dataBind();
+    /******************JsUnit용 소스 시작**********************/
+    setUpPageStatus = 'complete';
+    /******************JsUnit용 소스   끝**********************/
+});
+
+function dataBind(){
+    dataSet.load({
+        url : './../../../sample/data/data.json'
+    });    
+    $C.log("combo bind value : " + $C('#col7').getValue());
+}
+
+function moveDataSetFirst(){
+    dataSet.setRow(0);
+    $C.log("dataSet.first() dataSet.getRow() : " + dataSet.getRow());
+}
+
+function moveDataSetLast(){
+    dataSet.setRow(dataSet.getCount() - 1);
+    $C.log("dataSet.last() dataSet.getRow() : " + dataSet.getRow());
+}
+
+function moveDataSetPrevious(){
+    var oldRow = dataSet.getRow();
+    if(oldRow > 0)
+        dataSet.setRow(oldRow - 1);
+}
+
+function moveDataSetNext(){
+    var oldRow = dataSet.getRow();
+    if(oldRow < dataSet.getCount() - 1)
+        dataSet.setRow(oldRow + 1);
+}
+
+function setValue(){
+    $C('#col2').setValue('dddd');
+    var value = dataSet.getAt(dataSet.getRow()).get('col2');
+    $C('#col11').setValue('99999999');
+    return value;
+}
+</script>
+
+</head>
+
+<body>
+    <h1>Bind Basic</h1>
+    <h2>LBind을 사용하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div>데이터셋과 객체들을 바인딩 합니다. 데이터가 변경될때, 연결된 객체마다 자동으로 적용됩니다.</div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <form id='frm' name='frm' method='post' action='' >
+            <input type='hidden' id='test' />
+            <input type='text' id='col1' name="col1" /><br/>
+            <input type='text' id='col2' /><br/>
+            <!--
+            <select id='col3'>
+                <option value=''>ALL</option>
+                <option value='code1'>코드1</option>
+                <option value='code2'>코드2</option>
+            </select>
+            -->
+            <br/>
+            <!-- div id="col4"></div -->
+            <input type='radio' id='col41' name='col4' value='R1'/>RADIO1<br/>
+            <input type='radio' id='col42' name='col4' value='R2'/>RADIO2<br/>
+            <input type='checkbox' id='col5' name='col5' value='R1' />CHECKBOX1<br/>
+            <textarea id='col6' rows="3" cols="50"></textarea><br/>
+            <select id='col7'>
+                <option value='code1'>CODE1</option>
+                <option value='code2'>CODE2</option>
+                <option value='code3'>CODE3</option>
+                <option value='code4'>CODE4</option>
+                <option value='code5'>CODE5</option>
+                <option value='code6'>CODE6</option>
+                <option value='code7'>CODE7</option>
+                <option value='code8'>CODE8</option>
+                <option value='code9'>CODE9</option>
+                <option value='code10'>CODE10</option>
+            </select>
+            <input type="text" id='col8'>
+            <input type="text" id='col9'>
+            <input type="text" id='col10'>
+            <input type="text" id='col11'>
+            <span id="span1"></span>
+            </form>
+        </div>
+        <br>
+        <a href='javascript:dataBind()'>dataBind</a>
+        <a href='javascript:moveDataSetFirst()'>moveDataSetFirst</a>
+        <a href='javascript:moveDataSetLast()'>moveDataSetLast</a>
+        <a href='javascript:moveDataSetPrevious()'>moveDataSetPrevious</a>
+        <a href='javascript:moveDataSetNext()'>moveDataSetNext</a>
+        <a href='javascript:testSetValue()'>setValue</a>
+        <a href='javascript:testRebind()'>rebind</a>
+        <a href='javascript:testSetData()'>setDataSet</a>
+        <a href='javascript:testAdd()'>add</a>
+        <a href='javascript:testDisable()'>disable</a>
+        <a href='javascript:testEnable()'>enable</a>
+        <a href='javascript:testValidate()'>validate</a>
+        <a href='javascript:testSetBind(true)'>setBind true</a>
+        <a href='javascript:testSetBind(false)'>setBind false</a>
+        <div id='showData'></div>
+    </div>
+</body>
+</html>

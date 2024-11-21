@@ -1,0 +1,22 @@
+[{
+    "metaData": {
+        "datasetId":"dataSet"
+    },
+    "records": [
+        { "userId": "admin", "password": "1111", "userName": "admin", "userFullName": "admin", 
+        "phoneNo": "", "email": "", "useFlag": "Y", "localeCode": "US", "languageCode": "en_US", 
+        "langName": "English", "countryCode": "US", "countryName": "", "loginDate": "", "loginExpired": "", 
+        "passwordChgDate": "", "passwordExpired": "", "userTypeCode": "admin", "userTypeName": "", 
+        "phoneNo": "010-123-4567", "userNameEng": "", "divisionName": "", "division1Name": "", "authcode": "A001" },
+        { "userId": "honggindong", "password": "1111", "userName": "홍길동", "userFullName": "홍길동", 
+        "phoneNo": "", "email": "", "useFlag": "Y", "localeCode": "KR", "languageCode": "ko_KR", 
+        "langName": "English", "countryCode": "US", "countryName": "", "loginDate": "", "loginExpired": "", 
+        "passwordChgDate": "", "passwordExpired": "", "userTypeCode": "admin", "userTypeName": "", 
+        "phoneNo": "010-123-4567", "userNameEng": "", "divisionName": "", "division1Name": "", "authcode": "A001" },
+        { "userId": "sejong", "password": "1111", "userName": "세종대왕", "userFullName": "세종대왕", 
+        "phoneNo": "", "email": "", "useFlag": "Y", "localeCode": "KR", "languageCode": "ko_KR", 
+        "langName": "English", "countryCode": "US", "countryName": "", "loginDate": "", "loginExpired": "", 
+        "passwordChgDate": "", "passwordExpired": "", "userTypeCode": "admin", "userTypeName": "", 
+        "phoneNo": "010-123-4567", "userNameEng": "", "divisionName": "", "division1Name": "", "authcode": "A001" }
+    ]
+}]

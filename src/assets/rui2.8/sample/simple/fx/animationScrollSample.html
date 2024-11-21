@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Scroll</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/fx/LScrollAnim.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+        <style type="text/css">
+            #demo {
+                height: 6em;
+                width: 20em;
+                overflow: auto;
+                margin-bottom: 1em;
+            }
+        </style>
+        <script type='text/javascript' class="script-code">
+            var scroll = null;
+            $C(function(){
+                /*<b>*/
+                scroll = $C.scrollAnim({
+                    el: 'demo',
+                    attributes: {
+                        scroll: {
+                            to: [0, 200]
+                        }
+                    }
+                });
+                
+                $C('#demo-run').on('click', function(){
+                    scroll.animate();
+                });
+                /*</b>*/
+                
+                $C.log("The example has finished loading; as you interact with it, you'll see log messages appearing here.", "info", "example");
+
+            });
+        </script>
+
+    </head>
+    <body>
+        <h1>animation scroll sample</h1>
+        <h2>스크롤을 부드럽게 움직이게 하는 animation효과</h2>
+        <div class="LblockLine"></div>
+        <div>스크롤을 자동으로 움직입니다. 현재 스크롤된 위치에서 지정된 값만큼 자동으로 움직입니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id="demo">
+                    <p>
+                        Sed pretium leo a quam. Sed placerat cursus odio. Duis varius mauris luctus enim. Sed augue. Vivamus malesuada pretium orci. In hac habitasse platea dictumst. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent et ante. Praesent convallis. Pellentesque sit amet leo. Ut convallis. Curabitur tincidunt, ipsum facilisis ultricies bibendum, eros dolor venenatis odio, id rutrum purus sem ac sem. Donec vel enim. Quisque purus. Vivamus fringilla, nibh sit amet blandit suscipit, dui arcu viverra magna, id consectetuer dui orci tincidunt neque. Morbi eget libero. Phasellus tempor. Duis dapibus. Pellentesque nisi arcu, mollis in, euismod non, fermentum sit amet, neque.
+                    </p>
+                </div>
+            </div>
+            <button id="demo-run">
+                run
+            </button>
+        </div>
+    </body>
+</html>

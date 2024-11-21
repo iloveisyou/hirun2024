@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Rui</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+        <script type="text/javascript" class="script-code">
+            
+            $C(function(){
+                $C('!config').set('$.core.logger.show', [true]);
+            
+            });
+            
+            function getNamespace(){
+                $C.namespace('Rui.Test');
+                var ns = typeof Rui.Test;
+                $C.log("Rui.Test Name Space :" + ns);
+                return ns;
+            }
+            
+            function getExtendNamespace(){
+                //namespace 정의
+                $C.namespace('Rui.namespacetest');
+                //Rui.namespacetest에서 SuperTest class 정의
+                Rui.namespacetest.SuperTest = function(){
+                    this.attr1 = 'super_attr1';
+                };
+                //Test class 정의
+                Rui.namespacetest.Test = function(){
+                    //부모의 constructor를 호출해야 한다.
+                    Rui.namespacetest.Test.superclass.constructor.call(this);
+                };
+                //Test가 SuperTest 상속 받도록 설정, Rui.extend를 사용.
+                $C.extend(Rui.namespacetest.Test, Rui.namespacetest.SuperTest, {
+                    attr2: 'bbbb',
+                    message: function(){
+                        return 'test';
+                    }
+                });
+                
+                var t = new Rui.namespacetest.Test();
+                //Test를 생성후 SuperTest의 attr1이 접근이 된다.
+                $C.log("t.attr1 : " + t.attr1);
+                return t.attr1;
+            }
+            
+            function getEvent(){
+                //RuiTests : testEvent 작동 여부
+                $C.namespace('Rui.namespacetest');
+                Rui.namespacetest.SuperTest1 = function(){
+                    this.attr1 = 'super_attr1';
+                    this.createEvent('test');
+                    this.test = function(){
+                        var resultData = this.fireEvent('test', {
+                            id: 'test',
+                            name: 'testName'
+                        });
+                        $C.log("event result data : " + resultData);
+                    }
+                };
+                
+                $C.extend(Rui.namespacetest.SuperTest1, Rui.util.LEventProvider, {});
+                
+                var idData = null;
+                var nameData = null;
+                var t = new Rui.namespacetest.SuperTest1();
+                t.on("test", function(a){
+                    idData = a.id;
+                    return true;
+                });
+                
+                t.on("test", function(a){
+                    nameData = a.name;
+                    return true;
+                });
+                
+                t.test();
+                
+                $C.log("idData : " + idData + ", nameData : " + nameData);
+                
+                return nameData;
+            }
+            
+            function getDom(){
+                //RuiTests : testGetDom Rui.getDom 작동 여부
+                var result = typeof $C('#divObj').getAt(0).dom;
+                $C.log("typeof Rui.getDom('divObj') : " + result);
+                return result;
+            }
+            
+        </script>
+
+    </head>
+    <body>
+        <h1>Rui Sample</h1>
+        <h2>Rui 객체에서 지원하는 extend, namespace, event등을 사용하는 샘플 </h2>
+        <div class="LblockLine"></div>
+        <div>사용자가 직접 객체를 상속받거나 정의할 수 있습니다. 객체에는 속성과 이벤트들이 포함됩니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id='divObj'>
+                    divObj
+                </div>
+            </div>
+            <a href="#" onclick='javascript:getNamespace()'>getNamespace</a>
+            <a href="#" onclick='javascript:getExtendNamespace()'>getExtendNamespace</a>
+            <a href="#" onclick='javascript:getEvent()'>getEvent</a>
+            <a href="#" onclick='javascript:getDom()'>getDom</a>
+        </div>
+    </body>
+</html>

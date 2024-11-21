@@ -1,0 +1,23 @@
+.L-ul-tabmenu .L-ul-first {
+    background-image: url(./images/menu/tab/tab_bg.gif);
+}
+.L-ul-tabmenu .L-ul-li-depth-0 .L-ul-li-div-depth-0 {    
+    background-image: url(./images/menu/tab/tab_l.gif);
+}
+.L-ul-tabmenu .L-ul-li-depth-0 .L-ul-li-div-depth-0 .L-ul-tabmenu-content {
+    background-image: url(./images/menu/tab/tab_r.gif);
+    color:#777;
+}
+.L-ul-tabmenu .L-ul-li-depth-0 .L-ul-focus-top-node .L-ul-tabmenu-content{
+    color:#927A00;    
+}
+.L-ul-tabmenu .L-ul-focus-node{
+    color:#927A00;
+}
+.L-ul-tabmenu .L-ul-li-depth-0 ul {
+    background-color:#f4f2b1;
+}
+
+.L-ul-tabmenu .L-ul-li-depth-0 li {
+    background: url(./images/menu/tab/tab_divider.gif) no-repeat 0% 100%;
+}

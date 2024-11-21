@@ -1,0 +1,49 @@
+/* LTimeBox
+------------------------------*/
+div.L-timebox {
+    position: relative;
+}
+.L-timebox div.icon {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 9px;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+}
+html.L-ua-msie6 .L-timebox div.icon {
+    top: 1px;
+}
+.L-timebox div.icon .L-spin-up {
+    width: 9px;
+    height: 50%;
+    background: transparent url(./images/timebox/spin_up.gif) no-repeat 0 0;
+    background-position: 50% 50%;
+}
+.L-timebox div.icon .L-spin-down {
+    width: 9px;
+    height: 50%;
+    background: transparent url(./images/timebox/spin_down.gif) no-repeat 0 0;
+    background-position: 50% 50%;
+}
+.L-timebox div.icon .L-spin-up-click {
+	background: transparent url(./images/timebox/spin_up_click.gif) no-repeat 0 0;
+}
+.L-timebox div.icon .L-spin-down-click {
+    background: transparent url(./images/timebox/spin_down_click.gif) no-repeat 0 0;
+}
+div.L-timebox input.empty {
+    color: gray;
+}
+/*used when emptyText config opt is set. Applied to text input*/
+.L-grid-panel div.L-timebox input {
+    height: 21px;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+/* for iOS safari */
+.L-ua-safari.L-ua-mobile .L-timebox.L-form-field {
+    border: 0;
+}

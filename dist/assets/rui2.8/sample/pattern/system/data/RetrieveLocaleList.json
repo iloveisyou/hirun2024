@@ -1,0 +1,13 @@
+[{
+    "metaData": {
+        "datasetId":"dataSet"
+    },
+    "records": [
+        { "javaLocaleCode": "US", "localeCode": "US", "localeName": "미국", "countryCode": "US", "countryName": "미국", 
+        "languageCode": "en_US", "languageName": "영어", "useFlag": "Y" },
+        { "javaLocaleCode": "KR", "localeCode": "KR", "localeName": "한국", "countryCode": "KR", "countryName": "한국", 
+        "languageCode": "ko_KR", "languageName": "한국어", "useFlag": "Y" },
+        { "javaLocaleCode": "JP", "localeCode": "JP", "localeName": "일본", "countryCode": "JP", "countryName": "일본", 
+        "languageCode": "ja_JP", "languageName": "일본어", "useFlag": "Y" }
+    ]
+}]

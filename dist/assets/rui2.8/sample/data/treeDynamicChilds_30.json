@@ -1,0 +1,10 @@
+[{
+    "metaData": {
+        "totalCount": "2"
+    },
+    "records": [
+        {"nodeId": 31, "parentNodeId": 30, "name": "North America", "url": "", "hasChild": 1, "seq": 1},
+        {"nodeId": 41, "parentNodeId": 30, "name": "South America", "url": "", "hasChild": 1, "seq": 2}
+    ],
+    "message": ""
+}]

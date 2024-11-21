@@ -1,0 +1,27 @@
+<%@ page pageEncoding="UTF-8" session="false" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="LTag" uri="http://www.dev-on.com/LTag"%>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Cache-Control" content="no-cache; no-store; no-save">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<LTag:hWatch command="tick">Processing Jsp Begin</LTag:hWatch>
+
+<link rel="stylesheet" type="text/css" href="<LTag:webPath kind="css">base_rui.css</LTag:webPath>" />
+<link rel="stylesheet" type="text/css" href="<LTag:webPath kind="css">global_layout_rui.css</LTag:webPath>" />
+<link rel="stylesheet" type="text/css" href="<LTag:webPath kind="css">global_style_rui.css</LTag:webPath>" />
+<link rel="stylesheet" type="text/css" href="<LTag:webPath kind="css">page_layout_rui.css</LTag:webPath>" />
+<link rel="stylesheet" type="text/css" href="<LTag:webPath kind="css">page_style_rui.css</LTag:webPath>" />
+
+<script type="text/javascript">
+
+function handleError(err, url, line) {
+    alert('Error : ' + err + '\nURL: ' + url + '\nLine:' + line);
+    return true;
+}
+
+//window.onerror = handleError;
+</script>

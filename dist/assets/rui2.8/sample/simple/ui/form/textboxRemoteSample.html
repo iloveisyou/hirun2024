@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="devon-rui-sample" content="yes" />
+<title>Textbox Remote</title>
+<script type="text/javascript" src='./../../../../js/rui_base.js' ></script>
+<script type='text/javascript' src='./../../../../js/rui_ext.js' ></script>
+<script type='text/javascript' src='./../../../../resources/rui_config.js' ></script>
+<script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+<link rel="stylesheet" type="text/css" href="./../../../../resources/rui_skin1.css" />
+<script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+<link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+<style type="text/css">
+.L-sample-panel {
+    border :1px solid gray;
+    width : 100%;
+    height : 200px;
+}
+
+.L-sample-config {
+    width : 100%;
+}
+
+.L-sample-method {
+    width : 100%;
+}
+
+.L-sample-config-table {
+    
+}
+</style>
+<script type='text/javascript' class="script-code">
+var col1TextBox = null;
+$C(function() {
+        $C('!config').set('$.core.logger.show', [true]);
+    /*<b>*/
+    $C('#textbox1').textBox({
+        id: 'textbox1',
+        applyTo: 'textbox1',
+        filterMode: 'remote',
+        autoComplete : true,
+        filterUrl: '../../../../sample/data/data.json'
+    });
+    /*</b>*/
+});
+
+</script>
+</head>
+<body >
+    <h1>textbox remote sample</h1>
+    <h2>LTextBox에서 autocomplete(자동완성) 기능을 구현하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div>텍스트 박스에 자동완성 기능을 설정합니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div class="L-sample-panel">
+            <input id="textbox1" name="textbox1">
+        </div>
+    </div>
+</div>
+</body>
+</html>

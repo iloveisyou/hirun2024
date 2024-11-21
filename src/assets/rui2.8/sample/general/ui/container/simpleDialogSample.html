@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="심플대화상자(LSimpleDialog), 다이얼로그(dialog)" />
+    <title>Simple Dialog</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/util/LResize.js"></script>
+
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #container { height:12em; }
+    </style>
+    <script type='text/javascript' class="script-code">
+        Rui.onReady(function() {
+
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            // Define various event handlers for Dialog
+            var handleYes = function() {
+                alert("You clicked yes!");
+                this.hide();
+            };
+            
+            var handleNo = function() {
+                this.hide();
+            };
+        
+            // Instantiate the Dialog
+            var simpleDialog = new Rui.ui.LSimpleDialog({
+                   applyTo: 'container',
+                   width: 300,
+                   fixedcenter: true,
+                   visible: false,
+                   draggable: true,
+                   close: true,
+                   modal: true,
+                   text: "Do you want to continue?",
+                   icon: Rui.ui.LSimpleDialog.ICON_HELP,
+                   constraintoviewport: true,
+                   isDefaultCSS: false,
+                   buttons: [
+                       {
+                           text:"Yes", 
+                           handler: handleYes, 
+                           isDefault: true
+                       }, {
+                           text:"No", 
+                           handler: handleNo
+                       } 
+                   ]
+            });
+            
+            simpleDialog.setHeader("Are you sure?");
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+
+             var showBtn = new Rui.ui.LButton('showBtn');
+             showBtn.on('click', function(){
+                 simpleDialog.show();
+             });
+             var hideBtn = new Rui.ui.LButton('hideBtn');
+             hideBtn.on('click', function(){
+                 simpleDialog.hide();
+             });
+    });
+    </script>
+</head>
+<body>
+    <h1>Simple Dialog</h1>
+    <h2>Simple Dialog</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>단일 값을 submit 하는데 사용할 수 있는 간단한 Dialog</p>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+        <div id="container"></div>
+        </div>
+        
+        <div class="LblockButton" >
+            <button type="button" id="showBtn" >Show Dialog</button>
+            <button type="button" id="hideBtn" >Hide Dialog</button>
+        </div>
+   
+</body>
+</html>

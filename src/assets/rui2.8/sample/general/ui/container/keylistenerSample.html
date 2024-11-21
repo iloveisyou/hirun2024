@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="키리스너(LKeyListener), 키코드(Key Code)" />
+    <title>Key Listener</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #example {
+           height:20em;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var panel1 = new Rui.ui.LPanel({
+                applyTo: 'panel1', 
+                xy: [150, 130], 
+                width: 250, 
+                visible: false, 
+                isDefaultCSS: false 
+            });
+            
+
+            // keyup is used here because Safari won't recognize the ESC
+            // keydown event, which would normally be used by default
+            /*<b>*/
+            var keyListener = new Rui.util.LKeyListener(document, {
+                    keys: 27 //esc 
+                }, {
+                    fn: panel1.hide,
+                    scope: panel1,
+                    correctScope: true 
+                }, 
+                'keyup' 
+            );
+            panel1.cfg.setProperty('keylisteners', keyListener);
+        
+            var keyListener2 = new Rui.util.LKeyListener(document, {
+                ctrl: true,
+                alt: true,
+                keys: 89 //Y
+            }, {
+                fn: panel1.show,
+                scope: panel1,
+                correctScope: true
+            });
+            keyListener2.enable();
+            /*</b>*/
+        
+            /********************
+             * 버튼 선언 및 이벤트
+              ********************/
+             var showBtn = new Rui.ui.LButton('showBtn');
+             showBtn.on('click', function(){
+                 panel1.show();
+             });
+
+             var hideBtn = new Rui.ui.LButton('hideBtn');
+             hideBtn.on('click', function(){
+                 panel1.hide();
+             });
+            
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Key Listener</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>키보드의 키 입력에 따라 처리합니다.</h2>
+            <div class="LblockDesc">
+		        <p>특정 키 입력값을 통해서 이벤트를 수행합니다. 키입력 값은 입력된 키의 코드 값을 이용합니다.</p>
+		        <p>조합될 수 있는 특수키는 shift, alt, ctrl이 있으며, 2개 이상 동시 적용이 가능합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="panel1" style="visibility:hidden">
+                <div class="hd">KeyListener Example Panel</div>
+                <div class="bd">Press [ESC] to dismiss this Panel.</div>
+            </div>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="showBtn" >Show Dialog (Ctrl+Alt+Y)</button>
+            <button type="button" id="hideBtn" >Hide Dialog (Esc)</button>
+        </div>
+    </div>
+</body>
+</html>

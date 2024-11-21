@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="트리(LTreeViw) 랜더러(Renderer), 체크박스(checkbox)" />
+    <title>Renderer Mark</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/tree/rui_tree.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/tree/rui_tree.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        #treeView .L-ul {
+            border: 1px solid #dcdcdc;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                focusFirstRow:false,
+                canMarkableEvent: true,
+                fields: [
+                    { id: 'nodeId', type: 'number' }, 
+                    { id: 'seq', type: 'number' }, 
+                    { id: 'parentNodeId', type: 'number' }, 
+                    { id: 'name' }, 
+                    { id: 'url' }
+                ]
+            });
+
+            var treeView = new Rui.ui.tree.LTreeView({
+                id: 'treeView',
+                dataSet: dataSet,
+                fields: {
+                    rootValue: null,
+                    parentId: 'parentNodeId',
+                    id: 'nodeId',
+                    label: 'name',
+                    order: 'seq'
+                },
+                width: 200,
+                height: 300,
+                useAnimation: true,
+                defaultOpenDepth: 0,
+                /*<b>*/
+                nodeType: 'checkbox',
+                renderer : function(label, record){
+                    var url = record.get('url');
+                    if(url)
+                        return '<span style="text-decoration:underline; color:red">' + label + '</font>';
+                    return '<span style="color:blue">[' + label + ']</font>';
+                }
+                /*</b>*/
+            });
+
+            treeView.render('treeView');
+
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            dataSet.on('canMarkable', function(e) {
+                if(e.row == 3 || e.row == 7) return false;
+            });
+
+            /*<b>*/
+            dataSet.on('marked', function(e){
+            	if(e.isSelect) Rui.log('Marked : ' + e.record.get('name'));
+            	else Rui.log('Unmarked : ' + e.record.get('name'));
+            });
+            /*</b>*/
+
+            dataSet.load({ url: './../../../../sample/data/tree.json' });
+
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>TreeView Renderer Mark</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>트리(Tree)의 랜더러(Renderer)를 사용하는 샘플</h2>
+            <div class="LblockDesc">
+		        <p>트리(Tree)에서 랜더러(Renderer)를 이용하여 트리의 레이블(Label)을 다양한 모습으로 편집할 수 있다.</p>
+		        <p>또한 nodeType을 체크박스(Checkbox)로 설정하여 데이터셋의 레코드를 mark, unmark 할 수 있습니다.</p>
+		        <p>노드(Node)에 추가된 체크박스는 이미지(Image)로 표현됩니다. CSS를 이용하여 이미지를 변경할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+	        <div id="treeView"></div>
+        </div>
+    </div>
+</body>
+</html>

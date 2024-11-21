@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="prototype, 날짜 변환, 문자 변환, 포멧, xml, 날짜 비교" />
+    <title>Prototypes</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        #divObj li {
+            line-height: 20px;
+        }
+        #bd h2 {
+            color: blue;
+            margin: 20px 0 14px !important;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            var s = ' my name is jun-hee,hong ';
+            var s1 = '1';
+            var s2 = '20101015';
+            var s3 = 'abc|de|fg';
+            var s4 = '한글';
+            var xml = '<?xml version="1.0" encoding="UTF-8"?><project name="devon-framework" ></project>';
+            // prototype 타입외 문자 관련 유틸리티는 Rui.util.LString Api 참조
+            Rui.log('[' + s + '] => ' + s.trim());
+            Rui.log('[' + s1 + '] => ' + s1.lPad('0', 3));
+            Rui.log('[' + s1 + '] => ' + s1.rPad('0', 3));
+            Rui.log('[' + s2 + '] => ' + s2.toDate('%q'));
+            Rui.log('[' + xml + '] => ' + xml.toXml());
+            Rui.log('[' + s + '] => ' + s.trimAll());
+            Rui.log('[' + s + '] => ' + s.cut(2, 3));
+            Rui.log('[' + s + '] => ' + s.lastCut(5));
+            Rui.log('[' + s + '] => ' + s.startsWith(' my'));
+            Rui.log('[' + s + '] => ' + s.endsWith('hong '));
+            Rui.log('[' + s + '] => ' + s.simpleReplace('my', 'you'));
+            Rui.log('[' + s + '] => ' + s.insert(2, 'edc'));
+            Rui.log('[' + s3 + '] => ' + s3.advancedSplit('|'));
+            Rui.log('[' + s3 + '] => ' + s3.firstUpperCase());
+            Rui.log('[' + s4 + '] => ' + s4.getByteLength());
+            Rui.log('[' + s4 + '] => ' + s4.isHangul());
+            
+            // prototype 타입외 날짜 관련 유틸리티는 Rui.util.LDate Api 참조
+            var date1 = new Date();
+            var date2 = date1.add('D', 1);
+            var date3 = date1.add('H', 1);
+            var date4 = '20130429'.toDate();
+            Rui.log(date1.compareTo(date2));
+            Rui.log(date1.equals(date2));
+            Rui.log(date1 + ' => format(yyyy-mm-dd) ' + date2.format('%x'));
+            Rui.log(date1 + ' clone => ' + date1.clone());
+            Rui.log(date4 + ' between => ' + date4.between('20130401'.toDate(), '20130430'.toDate()));
+            Rui.log(date1 + ' compareString => ' + date1.compareString(date1.format('%x')));
+            Rui.log(date1 + ' getFirstDayOfMonth => ' + date1.getFirstDayOfMonth());
+            Rui.log(date1 + ' getLastDayOfMonth => ' + date1.getLastDayOfMonth());
+            Rui.log(date1 + ' getFirstDayOfWeek => ' + date1.getFirstDayOfWeek(1));
+            
+            // prototype 타입외 숫자 관련 유틸리티는 Rui.util.LNumber Api 참조
+            var a = 10000.1234567;
+            Rui.log(a + ' format => ' + a.format({thousandsSeparator: ','}));
+            Rui.log(a + ' round => ' + a.round(2));
+
+            // prototype 타입외 배열 관련 유틸리티는 Rui.util.LArray Api 참조
+            var a1 = ['aaa', 'bbb', 'ccc'];
+            Rui.log(a1 + ' contains => ' + a1.contains('bbb'));
+            Rui.log(a1 + ' removeAt => ' + a1.removeAt(1));
+        })
+    </script>
+
+</head>
+<body>
+    <div id='hd'>
+        <h1>Prototypes</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>문자열(String), 날짜(Date) 등 객체의 프로토타입(prototype)</h2>
+            <div class="LblockDesc">
+                <p>문자열(String), 날짜(Date) 객체의 많이 사용되는 기능들은 프로토타입(prototype)으로 확장되어 제공됩니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">  
+        </div>
+        <div>
+            <p>Ctrl + Shift + F12를 누르시면 디버그 콘솔이 열립니다.</p>
+            <p>콘솔 상단의 catalog중 Debug를 check하시면 아래의 실행이나 클릭 등의 수행결과를 확인하실 수 있습니다. </p>
+        </div>
+
+        <div id="divObj">
+            <h2>STRING PROTOTYPE</h2>
+            <p>prototype 타입외 더 많은 문자 관련 유틸리티는 <b>Rui.util.LString</b> Api 참조</p>
+            <ul>
+                <li>trim : ' my name is jun-hee,hong '.trim(); => 'my name is jun-hee,hong'</li>
+                <li>lPad : '1'.lPad('0', 3); => '01'</li>
+                <li>rPad : '1'.rPad('0', 3); => '10'</li>
+                <li>toDate : '20130429'.toDate('%q'); => new Date(2013, 03, 29)</li>
+                <li>toXml : '<?xml version="1.0" encoding="utf-8"?><test>1</test>'.toXml(); => Xml Object</li>
+                <li>trimAll : ' my name is jun-hee,hong '.trimAll(); => 'mynameisjun-hee,hong'</li>
+                <li>cut : 'abcdefg'.cut(2, 3); => 'abfg'</li>
+                <li>lastCut : 'abcdefg'.lastCut(5); => 'ab'</li>
+                <li>startsWith : 'abcdefg'.startsWith('abc'); => true</li>
+                <li>endsWith : 'abcdefg'.endsWith('efg'); => true</li>
+                <li>simpleReplace : 'abcdefg'.simpleReplace('cde', 'edc'); => 'abedcfg'</li>
+                <li>insert : 'abcdefg'.insert(2, 'edc'); => 'abedccdefg'</li>
+                <li>advancedSplit : 'abc|de|fg'.advancedSplit('|'); => new Array('abc', 'de', 'fe')</li>
+                <li>firstUpperCase : 'abc'.firstUpperCase(); => 'Abc'</li>
+                <li>getByteLength : '한글'.getByteLength(); => 4</li>
+                <li>isHangul : '한글'.isHangul(); => true</li>
+            </ul>
+            
+            <h2>DATE PROTOTYPE</h2>
+            <p>prototype 타입외 더 많은 날짜 관련 유틸리티는 <b>Rui.util.LDate</b> Api 참조</p>
+            <ul>
+                <li>format : date.format('%x') => '2010-05-14 15:59:16'</li>
+                <li>add : date.add('D', 1); => 다음일자</li>
+                <li>equals : date2.equals(date2) => true</li>
+                <li>compareTo : date1.compareTo(date2) => true</li>
+                <li>clone : date.clone() => 박사</li>
+                <li>between : date.between(new Date(2013, 0, 1), new Date(2013, 0, 30)) => true</li>
+                <li>compareString : date.compareString('20130101') => true</li>
+                <li>getFirstDayOfMonth : date.getFirstDayOfMonth() => 1</li>
+                <li>getLastDayOfMonth : date.getLastDayOfMonth() => 31</li>
+                <li>getFirstDayOfWeek : date.getFirstDayOfWeek(1) => 월요일 Date 객체</li>
+            </ul>
+            
+            <h2>NUMBER PROTOTYPE</h2>
+            <p>prototype 타입외 더 많은 숫자 관련 유틸리티는 <b>Rui.util.LNumber</b> Api 참조</p>
+            <ul>
+                <li>format : 10000.1234567.format({thousandsSeparator: ','}) => 10,000.1234567</li>
+                <li>round : 10000.1234567.round(2) => 10000.12</li>
+            </ul>
+            
+            <h2>ARRAY PROTOTYPE</h2>
+            <p>prototype 타입외 더 많은 배열 관련 유틸리티는 <b>Rui.util.LArray</b> Api 참조</p>
+            <ul>
+                <li>contains : ['aaa', 'bbb', 'ccc'].contains('bbb') => 1</li>
+                <li>removeAt : ['aaa', 'bbb', 'ccc'].removeAt(1) => ['aaa', 'ccc']</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

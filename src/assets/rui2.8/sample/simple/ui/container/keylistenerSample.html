@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Key Listener</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type='text/javascript' src='../../../../resources/rui_config.js'></script>
+    <script type="text/javascript" src='../../../../plugins/util/simpleSyntax.js'></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    <style type="text/css">
+        body {
+            margin:0;
+            padding:0;
+        }
+        #example {
+           height:20em;
+        }
+    </style>
+    <script type='text/javascript' class="script-code">
+    $C(function() {
+        /*<b>*/
+        // Build panel1 based on markup
+        $C('#panel1').panel({
+            xy: [150,130], 
+            width: 250,
+            visible: false, 
+            isDefaultCSS: false 
+        });
+        
+        var kl1 = $C.keyListener({
+            attachTo: document.body,
+            keyData: {
+                keys: 27
+            },
+            handler: {
+                fn: $C('#panel1').hide,
+                scope: $C('#panel1'),
+                correctScope: true
+            },
+            event: 'keyup'
+        });
+        
+        //변경요 (문혁찬)
+        $C('#panel1').cfg.queueProperty("keylisteners", kl1);
+        
+        $C('#panel1').render();
+    
+        var kl2 = $C.keyListener({
+            attachTo: document.body,
+            keyData: {
+                ctrl:true,
+                alt:true,
+                keys:89
+            }, 
+            handler: {
+                fn: $C('#panel1').show,
+                scope: $C('#panel1'),
+                correctScope: true
+            }
+        });
+        kl2.enable();
+        /*</b>*/
+    
+        $C.event.addListener("show", "click", $C('#panel1').show, $C('#panel1'), true);
+        $C.event.addListener("hide", "click", $C('#panel1').hide, $C('#panel1'), true);
+        
+    });
+    </script>
+</head>
+<body class=" L-skin-sam">
+    <h1>key listener sample</h1>
+    <h2>key listener를 구현한 샘플</h2>
+    <div class="LblockLine"></div>
+    <div>
+        <p>특정 키 입력값을 통해서 이벤트를 수행합니다. 키입력 값은 코드 값을 이용합니다.</p>
+        <p>조합될 수 있는 특수키는 shift, alt, ctrl이 있으며, 2개 이상 동시 적용이 가능합니다.</p>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+        </div>
+        <div>
+            panel1: 
+            <button id="show">Show (Ctrl+Alt+Y)</button> 
+            <button id="hide">Hide (Esc)</button>
+        </div>
+        <div id="panel1" style="visibility:hidden">
+            <div class="hd">KeyListener Example Panel</div>
+            <div class="bd">Press [ESC] to dismiss this Panel.</div>
+        </div>
+    </div>
+</body>
+</html>

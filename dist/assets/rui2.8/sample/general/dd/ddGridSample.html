@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="드래그 드랍(LDragDrop), LDDProxy, LDDTarget" />
+    <title>Move Grid Rows</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #grid1, #grid2 {
+            display: inline-block;
+            *display: inline;
+            *zoom: 100%;
+        }
+        #grid-row-proxy {
+            position: absolute;
+            /*visibility: hidden;*/
+            color: #000;
+            text-align: center;
+            background-color: gray;
+            z-index: 3;
+            #border: 1px solid #000;
+        }
+        .L-grid-panel.L-panel.target {
+            border-top: 2px solid #574188;
+            border-bottom-color: #574188;
+        }
+        #grid2 .L-grid-row.dd-target {
+            background-color: #BAA5E3;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+        	
+            var LDDM = Rui.dd.LDragDropManager;
+            var LDom = Rui.util.LDom;
+            
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet1 = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+            var dataSet2 = dataSet1.clone('dataSet2');
+            
+            var columnModel1 = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: "col1", label: "Col1", autoWidth: true, sortable: true },
+                    { field: "date1" , align:'center', renderer: 'date' }
+                ]
+            });
+            var grid1 = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel1,
+                dataSet: dataSet1,
+                autoWidth: false,
+                width: 350,
+                height:300
+            });
+            grid1.render('grid1');
+
+            var columnModel2 = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: "col1", label: "Col1", autoWidth: true, sortable: true },
+                    { field: "date1" , align:'center', renderer: 'date' }
+                ]
+            });
+            var grid2 = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel2,
+                dataSet: dataSet2,
+                autoWidth: false,
+                width: 350,
+                height:300
+            });
+            grid2.render('grid2');
+            
+            /*<b>*/
+            // dd proxy start
+            var ddProxy = new Rui.dd.LDDProxy({
+                id: 'grid1',
+                attributes: {
+                    dragElId: 'grid-row-proxy',
+                    resizeFrame: false,
+                    useShim: true
+                }
+            });
+            ddProxy.clickValidator = function(e) {
+                if (Rui.get(e.target).findParent('.L-grid-col') == null) {
+                    return false;
+                }
+                return true;
+            }
+
+            var ddTarget = new Rui.dd.LDDTarget({
+                id: 'grid2'
+            });
+            /*<b>*/
+
+            dataSet1.load({
+                url: '../../data/data.json'
+            });
+            
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            ddProxy.on('dragEvent', function(args) {
+                var el = Rui.get(this.getDragEl());
+                var x = Rui.util.LEvent.getPageX(args.e);
+                var y = Rui.util.LEvent.getPageY(args.e);
+                el.setXY([x - 5, y - 5]);
+                
+                var rowEl = Rui.get(args.e.target).findParent('.L-grid-row');
+                if(rowEl == null) return;
+                var proxyEl = Rui.get('grid-row-proxy');
+                if(proxyEl.dom.childNodes.length == 0) {
+                    proxyEl.appendChild(rowEl.dom.cloneNode(true));
+                    proxyEl.setWidth(rowEl.getWidth());
+                    proxyEl.setHeight(rowEl.getHeight());
+                    
+                    //Target 그리드의 border 색상 변경
+                    Rui.select('#grid2 .L-grid-panel').addClass('target');
+                }
+            });
+            
+
+            ddProxy.on('dragOverEvent', function(args) {
+            	
+            	//Drop될 위치의 행에 Drop 가능함을 background 색상으로 표시
+                if(dataSet2.getCount() > 0 && LDDM.interactionInfo.over.length === 1){
+                	//행이 존재할 경우엔 Drag Over 중인 행에 background를 표시함. (존재 안할경우 표시 하지 않고 마지막에 추가한다.)
+                    var proxyPoint = LDDM.interactionInfo.point;
+                    var targetRegion = Rui.util.LDom.getRegion('grid2');
+                    if (targetRegion.intersect(proxyPoint)) {
+                        var rows = Rui.select('#grid2 .L-grid-row');
+                        //행이 존재하므로 행에 추가하거나, 마지막 행으로 추가
+                        for(var i = 0, len = rows.length; i < len; i++){
+                            var rowEl = rows.getAt(i);
+                            var rowRegion = Rui.util.LDom.getRegion(rowEl.dom);
+                            if(rowRegion.intersect(proxyPoint)){
+                            	rowEl.addClass('dd-target');
+                            }else{
+                            	rowEl.removeClass('dd-target');
+                           }
+                        }
+                    }
+                }
+                
+            });
+            
+            ddProxy.on('dragDropEvent', function(args) {
+            	
+            	var moveTo = function(targetRow){
+	                var proxyEl = Rui.get('grid-row-proxy');
+	                var rowEl = proxyEl.select('.L-grid-row').getAt(0);
+	                var rowId = 'r' + Rui.util.LDom.findStringInClassName(rowEl.dom, 'L-grid-row-r');
+	                var record = dataSet1.get(rowId);
+	                dataSet1.remove(rowId);
+	                if(!Rui.isEmpty(targetRow) && targetRow >= 0){
+	                	dataSet2.insert(targetRow+1, record.clone());
+	                }else
+	                    dataSet2.add(record.clone());
+	                proxyEl.html('');
+            	}
+                
+                if (LDDM.interactionInfo.drop.length === 1) {
+                    var proxyPoint = LDDM.interactionInfo.point;
+                    var gridRegion = Rui.util.LDom.getRegion('grid2');
+                    if (gridRegion.intersect(proxyPoint)) {
+                   		var rows = Rui.select('#grid2 .L-grid-row');
+                    	var len = rows.length;
+                    	if(len > 0){
+                    		//행이 존재하므로 행 아래에 추가하거나, 마지막 행으로 추가
+                    		var index = len-1;
+                    		for(var i = 0; i < len; i++){
+                    			var rowEl = rows.getAt(i);
+                    			var region = Rui.util.LDom.getRegion(rowEl.dom);
+                    			if(region.intersect(proxyPoint)){
+                    				var rowId = 'r' + Rui.util.LDom.findStringInClassName(rowEl.dom, 'L-grid-row-r');
+                                   	index = dataSet2.indexOfKey(rowId);
+                                   	if(index > -1)
+                                   	    break;
+                    			}
+                    		}
+                    		moveTo(index);
+                    	}else{
+                    		//행이 없으므로 그리드에 마지막 행으로 추가
+                    		moveTo();
+                    	}
+                    }
+                }
+
+            });
+            
+            ddProxy.on('endDragEvent', function(e) {
+            	var grid1El = Rui.get('grid1');
+                grid1El.setStyle('left', '');
+                grid1El.setStyle('top', '');
+                grid1El.setStyle('position', '');
+
+                //Target 그리드의 border 색상 복원
+                Rui.select('#grid2 .L-grid-panel').removeClass('target');
+            });
+            
+            /*<b>*/
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Move Grid Rows</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드에서  drag and drop을 이용해 데이터를 추가하는 샘플</h2>
+            <div class="LblockDesc">
+                <p>드래그 앤 드랍을 통해, 하나의 그리드에서 다른 그리드로 데이터를 추가할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="grid1"></div>
+            <div id="grid2"></div>
+            <div id="grid-row-proxy"></div>
+        </div>
+    </div>
+</body>
+</html>

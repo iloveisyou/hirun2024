@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="Connect, ajax, 비동기 요청" />
+    <title>Ajax (XHR)</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var asyncRequestBtn = new Rui.ui.LButton('asyncRequestBtn');
+            asyncRequestBtn.on('click', function(){
+                var sUrl = '../../data/savedCallback.json';
+                var params = 'test=aaa';
+                /*<b>*/
+                Rui.ajax({
+                    params: params,
+                    url: sUrl,
+                    success: function(e) {
+                        alert("ajax 호출 성공 - Success handler called; handler will parse the retrieved XML and insert into DOM.");
+                        Rui.log(e.responseText);
+                    },
+                    failure: function(e) {
+                        alert("ajax 호출 실패 - Failure handler called;status:" + conn.status);
+                    }
+                }, params);
+                /*</b>*/
+            });
+        });
+        
+        var logInfo = {
+            src: 'example',
+            cat: 'info'
+        }
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Ajax (XHR)</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>XHR을 이용한 비동기 ajax 호출 샘플 (ajax)</h2>
+            <div class="LblockDesc">
+		        <p>XMLHttpRequest 객체를 이용하여 비동기 형태의 ajax 호출을 실행합니다.</p>
+		        <p>사용자가 define 가능한 형태로 handler, event 등을 별도 명시하여 ajax 호출 가능합니다.</p>
+		        <p>Ajax를 동기로 호출하면 성능이 심하게 저하되므로 비동기 형태로 호출하세요.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">  
+        </div>
+        <div>
+            <p>아래를 클릭하여 ajax 호출을 테스트 합니다.</p>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="asyncRequestBtn" >asyncRequest</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+.L-file-upload-progress {
+	height: 20px;
+	display: none;
+	border: 1px solid gray;
+    position: relative;
+    overflow: hidden;
+}
+
+.L-file-upload-active-true {
+    background:url(./loading.gif) repeat-x;
+}
+
+.L-file-upload-active-false {
+    background:url(./loading.gif) repeat-x;
+}
+
+.upload-status .L-file-upload-progress {
+	display: block;
+}
+
+.upload-status .L-file-upload-form {
+	display: none;
+}
+
+.L-file-upload-active-true .L-file-upload-progress-mask {
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	position: absolute;
+}
+.L-file-upload-active-false .L-file-upload-progress-mask {
+    display: none;
+}

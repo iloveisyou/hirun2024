@@ -1,0 +1,170 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+Tree에 사용될 DataSet은 반드시 id, parentId, label, order에 대입될 필드들을 가지고 있어야 하며, 
+이러한 속성들의 기본 값은 rui_config.js에 다음과 같이 정의되어 있다.
+treeView: {
+    defaultProperties:{
+        fields: {
+            rootValue: null,
+            id: 'nodeId',
+            parentId: 'parentNodeId',
+            label: 'name',
+            order: 'seq'
+        }
+    }
+}
+
+id는 유일한 값이어야 한다. null, 공백(''), undefined 또한 모두 다른값으로 판단한다.
+parentId는 자식노드부터 반드시 값이 존재해야한다.
+order는 정렬의 기준 컬럼이다.
+label은 node에 출력될 label이다. 
+
+각 필드의 이름은 변경되어도 무관하나 해당 필드의 이름들이 바뀌게 되면 LTreeView의 fields도 같게 변경해야 한다.
+트리의 기본 fields 속성은 rui_config.js에 정의되어 있다.
+서버에서 데이터는 처리되었는데 트리의 데이터가 출력되지 않을 경우 rootValue의 값이 맞지 않을 경우이다.
+값이 null인지 '' 공백문자인지 정확하게 확인하여 값을 맞춰야 한다.
+
+샘플 경로 :
+<a href="./../sample/general/ui/tree/treeviewSample.html" target="_new">/rui/sample/general/ui/tree/treeviewSample.html</a>
+<a href="./../sample/general/ui/tree/treeviewBindSample.html" target="_new">/rui/sample/general/ui/tree/treeviewBindSample.html</a>
+<a href="./../sample/general/ui/tree/treeviewChildGridSample.html" target="_new">/rui/sample/general/ui/tree/treeviewChildGridSample.html</a>
+<a href="./../sample/general/ui/tree/treeviewContextMenuEditSample.html" target="_new">/rui/sample/general/ui/tree/treeviewContextMenuEditSample.html</a>
+<a href="./../sample/general/ui/tree/treeviewDesignSample.html" target="_new">/rui/sample/general/ui/tree/treeviewDesignSample.html</a>
+<a href="./../sample/general/ui/tree/treeviewDynamicSample.html" target="_new">/rui/sample/general/ui/tree/treeviewDynamicSample.html</a>
+<a href="./../sample/general/ui/tree/treeviewInlineEditorSample.html" target="_new">/rui/sample/general/ui/tree/treeviewInlineEditorSample.html</a>
+<a href="./../sample/general/ui/tree/treeviewOpenDepthSample.html" target="_new">/rui/sample/general/ui/tree/treeviewOpenDepthSample.html</a>
+<a href="./../sample/general/ui/tree/treeviewRendererSample.html" target="_new">/rui/sample/general/ui/tree/treeviewRendererSample.html</a>
+</div>
+<div class="L-sample">
+sample: 트리를 출력한다.
+<div class="L-code">
+dataSet = new Rui.data.LJsonDataSet({
+    id: 'dataSet',
+    fields: [
+        { id: 'id', type: "number" },
+        { id: 'seq', type: "number" },
+        { id: 'parentId', type: "number" },
+        { id: 'name' }
+    ]
+});
+
+tree = new Rui.ui.tree.LTreeView({
+    dataSet: dataSet,
+    fields: {
+        rootValue: null,
+        parentId: 'parentId',
+        id: 'id',
+        label: 'name',
+        order:'seq'
+    },
+    width:200,
+    height:300
+});
+
+tree.render("tree");
+</div>
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_nodeType">
+<div class="L-description">
+트리의 checkbox를 출력할지 단순 text를 출력할지 결정한다.
+nodeType을 정의하지 않으면 text로 처리된다.
+</div>
+<div class="L-sample">
+sample: checkbox가 있는 트리를 생성한다.
+<div class="L-code">
+tree = new Rui.ui.tree.LTreeView({
+    dataSet: dataSet,
+    fields: {
+        rootValue: null,
+        parentId: 'parentId',
+        id: 'id',
+        label: 'name',
+        order:'seq'
+    },
+    width:200,
+    height:300,
+    nodeType: 'checkbox'
+});
+
+tree.render("tree");
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_nodeImageClick">
+<div class="L-description">
+node의 +/- image를 click했을 때 발생
+treeSample.html 샘플 참조
+</div>
+<div class="L-sample">
+sample: node가 펼져였는지 여부를 메시지로 출력한다.
+<div class="L-code">
+.........
+tree.render("tree");
+
+tree.on("nodeImageClick", function(e){
+    var node = e.node;
+    alert(node.isExpand());
+});
+</div>
+</div>
+</div>
+
+<div class="event_labelClick">
+<div class="L-description">
+node의 label을 click했을 때 발생
+treeSample.html 샘플 참조
+</div>
+<div class="L-sample">
+sample: 부모의 node를 얻어온다.
+<div class="L-code">
+.........
+tree.render("tree");
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    var parentNode = node.getParentNode();
+});
+</div>
+</div>
+</div>
+
+<div class="event_checkboxClick">
+<div class="L-description">
+node의 check box를 click했을 때 발생
+treeSample.html 샘플 참조
+nodeType이 checkbox여야만 작동한다.
+</div>
+<div class="L-sample">
+sample: checkbox의 상태가 변경되면 메시지를 출력한다.
+<div class="L-code">
+tree = new Rui.ui.tree.LTreeView({
+    dataSet: dataSet,
+    fields: {
+        rootValue: null,
+        parentId: 'parentNodeId',
+        id: 'nodeId',
+        label: 'name',
+        order:'seq'
+    },
+    width:200,
+    height:300,
+    nodeType: 'checkbox'
+});
+tree.render("tree");
+
+ulTree.on("checkboxClick", function(e){
+    var node = e.node;
+    alert(e.checked);
+});
+</div>
+</div>
+</div>
+
+</div>
+

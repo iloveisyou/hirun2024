@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       <!--  <meta name="devon-rui-sample" content="yes" />  -->
+        <title>TreeView OpenDepth</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../plugins/ui/menu/rui_menu.js'></script>
+        <script type='text/javascript' src='./../../../../plugins/ui/tree/rui_tree.js'></script>
+		<script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="common.css" />        
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type="text/javascript" class="script-code">
+            var dataSet, tree, bind, txtBox;
+            var nodeIdx = 0; 
+            Rui.onReady(function(){
+                $C('!config').set('$.core.logger.show', [true]);
+                
+                /*<b>*/
+                //***********DataSet*****************
+                dataSet = $C.dataSet({
+                    id: 'dataSet',
+                    focusFirstRow:false,
+                    fields: [{
+                        id: 'menuId', type:"number"
+                    }, {
+                        id: 'menuSeq',type:"number"
+                    }, {
+                        id: 'prntMenuId',type:"number"
+                    }, {
+                        id: 'menuName'
+                    }, {
+                        id: 'menuCode'
+                    }]
+                });
+                
+                tree = $C('#divUl').tree({
+                    dataSet: dataSet,
+					useTempId: true, 
+                    renderer : function(v,record){
+                        return '<font color=\"blue\">' + v + '</font>';
+                    },
+                    fields: {
+                        rootValue: null
+                        , parentId: 'prntMenuId'
+                        , id: 'menuId'
+                        , label: 'menuName'
+                        , order:'menuSeq'
+                    },
+                    width:200,
+                    height:300,
+                    nodeType: 'checkbox',
+                    defaultOpenDepth: 0
+                });                                /*</b>*/
+               
+               dataSet.on('load', function(){
+					
+               });
+               dataSet.on('rowPosChanged', function(e){
+            	   
+            	   //this.setRow(e.row);
+            	 
+            	//   
+            	 //  alert('test :' + e); 
+            	   //                  alert('rowposchanged');
+               });
+               
+                dataSet.on('canRowPosChange', function(e){  
+                    //if (dataSet.getRow() > -1 && validatorManager.validateDataSet(dataSet, dataSet.getRow()) == false) {
+                     //   dataSet.undo(dataSet.getRow());
+                        //Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + validatorManager.getMessageList().join('<br>') );
+                      //  return false;
+                   //}
+                });
+                
+                /*<b>*/
+                //**********SlideMenu***************
+                tree.on("renderData",function(){
+                    //$C.log("focusNode : " + this.getFocusNode());
+                    //dataSet config중 focusFirstRow = false;로 해야만 로드후 첫번째행으로 이동하지 않는다.
+                   // dataSet.setRow(dataSet.indexOfKey('r1165'));
+                });
+
+                doSearch();
+
+                tree.on("nodeClick",function(e){             
+                	 
+                	 var node = e.node;                	 
+                     nodeIdx = node.getIndex();
+
+                     var parentNode = node.getParentNode();
+                     if(!parentNode)return; 
+
+                     var txtParent = Rui.getDom("txtParent"); 
+                     var txtChild = Rui.getDom("txtChild"); 
+                     txtParent.value = ""; 
+                     txtChild.value = ""; 
+
+                     txtParent.value += "parent nodeDepth:" + parentNode.getDepth() + "\r";
+                     txtParent.value += "label:" + parentNode.getRecord().get('name') + "\r";
+                     txtParent.value += "current nodeDepth:" + node.getDepth() + "\r"; 
+                   
+                     // 자식노드 정보 가져오기 
+                     var childNode = parentNode.getChildNodes(); 
+                     for(var i=0, len = childNode.length; i<len; i++)
+                     {
+                         var v = childNode[i].getValues();                     	   
+                             txtChild.value += "child node: " + i 
+ 	                        + " label: " + v.menuName 
+ 	                        + " parent menuId: " + v.prntMenuId 
+ 	                        + " menuId: " + v.menuId  
+ 	                        + " seq: " + v.menuSeq + "\r"; 
+                      }   
+                     
+                     
+                   
+                });   
+                
+                tree.on("nodeImageClick",function(e){
+                    //+/-그림 click시 발생
+                    var node = e.node;
+                });   
+                
+                tree.on("labelClick",function(e){                    
+                    var node = e.node;
+                    $C.log("labelClick");                    
+                });    
+                
+                tree.on("checkboxClick",function(e){      
+                    //nodeType:checkbox일 경우  checkbox를 클릭했을 때 발생하는  event              
+                    var node = e.node;                    
+                    var checked = e.checked;
+                });     
+                
+                tree.on("focusChanged",function(e){
+                    //다음 node를 선택했을 때 발생하는 event
+                    
+                    var oldNode = e.oldNode;
+                    var newNode = e.newNode; 
+                   // tree.focusNode( e.target.dataSet.rowPosition);
+                });
+                
+                tree.on("collapse",function(e){
+                    //node collapse               
+                    var node = e.node;                    
+                });
+                
+                tree.on("expand",function(e){
+                    //node expand              
+                    var node = e.node;                    
+                });
+                
+                tree.on("show",function(e){
+                    $C.log("show");
+                });
+                
+                tree.on("hide",function(e){
+                    $C.log("hide");
+                });
+                
+                tree.on("enable",function(e){
+                    $C.log("enable");
+                });
+                
+                tree.on("disable",function(e){
+                    $C.log("disable");
+                });
+                
+                tree.on("destroy",function(e){
+                    $C.log("destroy");
+                });
+                
+                txtBox = $C('#txtDepth').textBox({
+                //	id: 'txtDepth',
+                //	applyTo: 'txtDepth',
+                	width: 200
+                }); 
+                                
+             
+                //************numberbox*************** 
+                $C('#seq').numberBox({
+                    //applyTo: 'seq',
+                    minValue: 0,
+                    maxValue: 9999,
+                    width: 200
+                });
+                
+                //************bind***************
+                bind = $C.bind( 
+                {
+                    groupId:'frm',
+                    dataSet:dataSet,
+                    bind:true,
+                    bindInfo: [
+                        {id:'menuName', ctrlId:'menuName', value:'value'},
+                        {id:'menuSeq', ctrlId:'menuSeq', value:'value'}
+                    ]
+                });
+     
+                //**************validator*************
+                var validatorManager = $C.validatorManager({
+                    validators:[
+                    { id: 'menuName', validExp:'menuName'},
+                    { id: 'menuSeq', validExp:'menuSeq:true:number'}
+                    ]
+                });                
+                
+            });
+            
+            function doSearch(){
+                dataSet.load({ url: "./../../../../sample/data/treePerformance.json", method: "get" });
+            }
+            
+        </script>
+        <script type='text/javascript' >
+
+            function testFocusLastest(){
+                dataSet.load({ url: "./../../../../sample/data/treePerformance.json", method: "get" });              
+            }
+            
+            function testFocus(){
+                tree.focus();
+            }
+            
+            function testBlur(){
+                tree.blur();
+            }   
+            
+            function testShow(){
+                tree.show();
+            }
+            
+            function testHide(){
+                tree.hide();
+            }         
+                        
+            function testEnable(){
+                tree.enable();
+            }
+            
+            function testDisable(){
+                tree.disable();
+            }
+            
+            function noTestDestroy(){
+                tree.destroy();
+            }
+            
+            function testAddTopNode(){
+                tree.addTopNode('test'); 
+            }
+
+            function testAddChildNode(){
+            	// test용
+                var row = tree.addChildNode('test',false,nodeIdx++);    
+                var newRecord = dataSet.getAt(row);
+                newRecord.set("seq",200 + nodeIdx);
+            }
+            
+            function testSetDataSet() {
+                tree.setDataSet(dataSet);
+            }
+            
+            function testOpenDepthNode(){
+            /*  Performance test data 
+            	if(dataSet.getCount() == 0 )return; 
+				var menuId = 15000; 
+				var records = [], record; 
+				var len = dataSet.getCount();
+				var ds = dataSet.clone(); 
+				debugger;
+				for(var i=0; i<len; i++){
+					var row = ds.newRecord();	
+			            if (row !== false) {			            	
+			                var record = ds.getAt(row);                
+			                record.set("menuId", menuId++); 
+			                record.set("menuSeq", ds.data.items[i].data.menuSeq); 
+			                record.set("prntMenuId", ds.data.items[i].data.prntMenuId); 
+			                record.set("menuName",  ds.data.items[i].data.menuName); 
+			                record.set("menuCode", ds.data.items[i].data.menuCode); 
+			            }
+				}
+				
+				tree.dataSet = ds;
+				tree.render('divUl'); 
+	*/
+            	tree.openDepthNode(txtBox.getValue()); 
+            }
+
+        </script>
+        <!--*********************************JsUnit Test용 소스   끝********************************-->
+    </head>
+    <body>
+        <h1>tree Sample</h1>
+        <h2>기본적인 LTreeView 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>기본적인 트리 구조 입니다. 트리에 대한 각각의 이벤트들을 명시하여 사용할 수 있습니다.</div>
+        <div id='bd'>
+            <input type="button" value="search" onclick="doSearch();"/>
+            <input type="button" value="testFocusLastest" onclick="testFocusLastest();"/>
+            <input type="button" value="testShow" onclick="testShow();"/>
+            <input type="button" value="testHide" onclick="testHide();"/>
+            <input type="button" value="testEnable" onclick="testEnable();"/>
+            <input type="button" value="testDisable" onclick="testDisable();"/>
+            <input type="button" value="testDestroy" onclick="noTestDestroy();"/>
+            <input type="button" value="testAddTopNode" onclick="testAddTopNode();"/>
+            <input type="button" value="testAddChildNode" onclick="testAddChildNode();"/>
+            <input type="button" value="testSetDataSet" onclick="testSetDataSet();"/>
+             <input type="button" value="testOpenDepthNode" onclick="testOpenDepthNode();"/>
+            <div class="LblockMarkupCode">
+                <table>
+                <tr><td>Open Depth:<input type="text" id="txtDepth" name="txtDepth" </td></tr>
+            		<tr><td><div id="divUl"></div></td>
+            			<td><textarea id="txtParent" style="width:200px;height:200px;"></textarea></td>
+            			<td><textarea id="txtChild" style="width:600px;height:200px;"></textarea></td>            			
+            	   </tr>
+            	</table>
+            </div>
+            <div id="frm">
+                <input type="text" id="name" name="name"/>
+                <input type="text" id="seq" name="seq"/>
+            </div>
+        </div>
+    </body>
+</html>

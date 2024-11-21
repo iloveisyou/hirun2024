@@ -1,0 +1,100 @@
+/* LElement
+------------------------------*/
+select {
+    /* height: 22px; */
+}
+input[type=text], input[type=password], input[type=month], input[type=date], input[type=time], input[type=email] {
+    /* height: 16px; */
+    padding: 2px;
+    margin: 0px;
+}
+input[type=text], input[type=password], input[type=month], input[type=date], input[type=time], input[type=email], select, textarea {
+    border: 1px solid #999999;
+}
+input[type=text].L-invalid, select.L-invalid, textarea.L-invalid {
+    border: 1px solid #dd7870;
+}
+.L-disabled {
+    cursor: default;
+}
+input[type=text].L-disabled, textarea.L-disabled, select.L-disabled {
+    border: 1px solid #BCBDC0;
+    color: #BCBDC0;
+}
+.L-disable-mask {
+    position: absolute;
+    background-color: #fff;
+    z-index: 1;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    _height: expression(parentNode.offsetHeight);
+}
+.L-hidden {
+    position:absolute !important;
+    left:-10000px !important;
+    top:-10000px !important;
+    visibility:hidden !important;
+}
+.L-hide-display {
+	display:none !important;
+}
+.L-hide-visibility {
+    visibility:hidden !important;
+}
+.L-block-display {
+    display: block !important;
+    position: relative !important;
+}
+.L-elementCenter {
+	position : inherit;
+	margin: 0 auto;
+}
+.L-masked {
+    background-color: gray;
+    opacity: .3;
+    -moz-opacity: 0.3;
+    filter: alpha(opacity=20);
+    width: 100%;
+    height: 100%;
+    _height: expression(parentNode.offsetHeight);
+}
+.L-masked-panel {
+    position : absolute;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    _height: expression(parentNode.offsetHeight);
+}
+.L-masked-message {
+    /*background:transparent url(./images/grid/waiticon.gif) no-repeat 0 0;*/
+    display: inline;
+    margin: 0 auto;
+    text-align: left;
+    position: absolute;
+    top: 45%;
+    left: 46%;
+    width: 100px;
+    height: 100px;
+}
+.L-toast {
+    background-color: white;
+    border: 1px solid;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #000;
+    top: 300px;
+    margin: 0;
+    position: absolute;
+    text-align: center;
+    min-width: 300px;
+    max-width: 600px;
+    z-index: 2;
+}
+.L-toast-inner {
+    margin: 10px 10px;
+    white-space: pre;
+    color: #000;
+}

@@ -1,0 +1,83 @@
+[{
+    "message": "return message and value and so on...",
+    "metaData": {
+        "datasetId": "dataset1",
+        "recordId": "id",
+        "recordState": "state",
+        "totalCount": 100
+    },
+    "records": [
+        {
+            "assets": 183026060,
+            "balance": 8131,
+            "date": "2009-07-25",
+            "monthSum": 1844838
+        },
+        {
+            "assets": 302365895,
+            "balance": 1659,
+            "date": "2010-03-01",
+            "monthSum": 1427697
+        },
+        {
+            "assets": 434999397,
+            "balance": 14976,
+            "date": "2008-10-06",
+            "monthSum": 1359905
+        },
+        {
+            "assets": 44478265,
+            "balance": 15014,
+            "date": "2010-04-20",
+            "monthSum": 552291
+        },
+        {
+            "assets": 969536245,
+            "balance": 6685,
+            "date": "2010-08-19",
+            "monthSum": 1685554
+        },
+        {
+            "assets": 101483526,
+            "balance": 14283,
+            "date": "2009-04-13",
+            "monthSum": 381834
+        },
+        {
+            "assets": 277116460,
+            "balance": 14740,
+            "date": "2009-06-12",
+            "monthSum": 1362309
+        },
+        {
+            "assets": 628066649,
+            "balance": 9320,
+            "date": "2009-07-14",
+            "monthSum": 215108
+        },
+        {
+            "assets": 203663191,
+            "balance": 10434,
+            "date": "2008-11-22",
+            "monthSum": 1434558
+        },
+        {
+            "assets": 118999151,
+            "balance": 8518,
+            "date": "2010-06-16",
+            "monthSum": 323204
+        },
+        {
+            "assets": 493966448,
+            "balance": 6966,
+            "date": "2009-07-08",
+            "monthSum": 302912
+        },
+        {
+            "assets": 528622504,
+            "balance": 1243,
+            "date": "2009-01-15",
+            "monthSum": 649108
+        }
+    ]
+}]

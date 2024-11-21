@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="레이아웃메니져(LlayoutManager), 레이아웃(layout)" />
+    <title>Layout</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/layout/rui_layout.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/layout/rui_layout.css" />
+    <script type="text/javascript" src="./../../../../plugins/util/LResize.js"></script>
+    <!-- 샘플에서 LResize css가 필요하나 구조상 프레임워크에 포함하지 않고 샘플에서 별도 추가함
+           해당 싸이트에 맞게 수정이 필요함.   -->
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui_skin2.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        #bd, .LblockMarkupCode, #container {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        #left {
+            background-color: lightblue;
+            width: 200px;
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
+            float: left;
+            z-index: 2;
+        }
+        
+        #right {
+            background-color: yellow;
+            min-width: 100%;
+            margin-left: -200px;
+            z-index: 2;
+        }
+        
+        #bodyTop {
+            background-color: lightgreen;
+            height: 200px;
+            z-index: 1;
+        }
+        
+        #bodyBottom {
+            background-color: orange;
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        #left .L-resize-handle-r {
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            width: 8px;
+            position: absolute;
+        }
+        
+        #bodyTop .L-resize-handle-r {
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            width: 8px;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        //window onload와 같다고 생각하면 됨.     
+        Rui.onReady(function(){
+            
+            var leftResize = new Rui.util.LResize({
+                el: 'left',
+                attributes: {
+                    handles: ['r'],
+                    autoRatio: true,
+                    minWidth: 200,
+                    maxWidth: 300,
+                    status: false
+                }
+            });
+
+            var bodyTop = new Rui.util.LResize({
+                el: 'bodyTop',
+                attributes: {
+                    handles: ['b'],
+                    autoRatio: true,
+                    minHeight: 200,
+                    maxHeight: 400,
+                    status: false
+                }
+            });
+            
+            bodyTop.on('resize', function(e){
+                debugger;
+            })
+            
+        });
+    </script>
+
+</head>
+<body style="overflow: scroll;">
+    <h1>Layout</h1>
+    <h2>일반적  header, left, center, right, footer 구조의 page layout 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">layout의 header, left, center, right, footer 구조를 설정하는 샘플</div>
+
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id="container">
+        
+            <div id="left">Left
+            </div>
+            <div id="right">
+                <div id="bodyTop">Right Top</div>
+                <div id="bodyBottom">Right Bottom</div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+[{
+    "metaData": {
+        "dataSetId": "dsQryList",
+        "idColumn": "id",
+        "stateColumn": "duistate",
+        "totalCount": 0
+    },
+    "records": [
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "alterField",
+            "col3": "oracle.sql.CLOB@3a4822",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@55bfaf",
+            "col7": null,
+            "col8": null,
+            "col9": "<![CDATA[dfasdfda]]>"
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "alterPkConstraint",
+            "col3": "oracle.sql.CLOB@19b7c62",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@1031310",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@d8978c",
+            "col9": "ALTER TABLE ${tableName:not} ADD CONSTRAINT  ${con..."
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "createPack",
+            "col3": "oracle.sql.CLOB@1c5a33b",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@5facbd",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@145c414",
+            "col9": "<![CDATA[\n         insert into tb_co_pack_dev (\n  ...]]>"
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "createPackage",
+            "col3": "oracle.sql.CLOB@14c02d4",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@14db52b",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@b124fa",
+            "col9": "insert into tb_co_pack_dev (             pack_id, ..."
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "createStdObject",
+            "col3": "oracle.sql.CLOB@1f2a9da",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@6d4f30",
+            "col7": null,
+            "col8": null,
+            "col9": "CREATE TABLE ${tableName:not} ( ${fldList:not} )"
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "deletePack",
+            "col3": "oracle.sql.CLOB@6a150e",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@8c4b5f",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@a84b47",
+            "col9": "<![CDATA[\n         update tb_co_pack_dev set\n     ...]]>"
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "dropPkConstraint",
+            "col3": "oracle.sql.CLOB@e64795",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@659812",
+            "col7": null,
+            "col8": null,
+            "col9": "alter table ${sysObjNm:not} drop primary key"
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "retrieveDeployPackList",
+            "col3": "oracle.sql.CLOB@1e2fe5d",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@1a9b4a4",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@929ba3",
+            "col9": "<![CDATA[\n         select\n             pack_id,\n  ...]]>"
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "retrieveFldList",
+            "col3": "oracle.sql.CLOB@127fa03",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@18ef117",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@17644c8",
+            "col9": "select fld_id, fld_label_nm kor_name, user_fld_nm ..."
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "retrieveFldTypeList",
+            "col3": "oracle.sql.CLOB@19dd97b",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@315068",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@1961a84",
+            "col9": "select code_val code, code_nm name from tb_cm_comm..."
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "retrieveObjList",
+            "col3": "oracle.sql.CLOB@1a6eeab",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@7f5bf9",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@16f3ed7",
+            "col9": "select obj_id, user_obj_nm, obj_label_nm, descr, c..."
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "retrievePack",
+            "col3": "oracle.sql.CLOB@86d597",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@30b601",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@1fd25ce",
+            "col9": "<![CDATA[\n         select\n             pack_id,\n  ...]]>"
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "retrievePackList",
+            "col3": "oracle.sql.CLOB@bd36fa",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@646bfb",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@ed3b53",
+            "col9": "<![CDATA[         select             pack_id,     ...]]>"
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "updatePack",
+            "col3": "oracle.sql.CLOB@d1f0ad",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@110195c",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@1f0f8ff",
+            "col9": "<![CDATA[\n         update tb_co_pack_dev set\n     ...]]>"
+        },
+        {
+            "col1": "/saas/meta/pack/pack",
+            "col2": "updatePackage",
+            "col3": "oracle.sql.CLOB@16b69d7",
+            "col4": "Y",
+            "col5": "super",
+            "col6": "oracle.sql.TIMESTAMP@f1b25e",
+            "col7": "super",
+            "col8": "oracle.sql.TIMESTAMP@1f55cae",
+            "col9": "update tb_co_pack_dev set    pack_label_nm = ${pac..."
+        }
+    ]
+}]

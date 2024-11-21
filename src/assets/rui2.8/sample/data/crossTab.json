@@ -1,0 +1,40 @@
+﻿[
+    {
+        "message": "return message and value and so on...",
+        "metaData": {
+            "datasetId": "dataSet",
+            "recordId": "id",
+            "recordState": "state",
+            "totalCount": 1000
+        },
+        "records": [{
+                "name": "Kaden Q. Delacruz",
+                "m1": 1000,
+                "m2": 2000,
+                "m3": 3000,
+                "m4": 4000,
+                "m5": 5000,
+                "m6": 6000,
+                "m7": 7000,
+                "m8": 8000,
+                "m9": 9000,
+                "m10": 10000,
+                "m11": 11000,
+                "m12": 12000
+            }, {
+                "name": "Bertha G. Carr",
+                "m1": 1001,
+                "m2": 2001,
+                "m3": 3001,
+                "m4": 4001,
+                "m5": 5001,
+                "m6": 6001,
+                "m7": 7001,
+                "m8": 8001,
+                "m9": 9001,
+                "m10": 10001,
+                "m11": 11001,
+                "m12": 12001
+            }]
+    }
+]

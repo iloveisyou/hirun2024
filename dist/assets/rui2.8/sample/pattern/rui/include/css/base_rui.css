@@ -1,0 +1,40 @@
+/* HTML Elements
+---------------------------------------------------------*/
+* {
+	margin:0;
+	padding:0;
+}
+body {
+	font-family: tahoma,sans-serif;
+	font-size: 12px;
+	color:#7f7f7f;
+	background:#fff;
+}
+ul {list-style:none;}
+a:link, a:visited {color: #ff7bb1;text-decoration: none;}
+a:hover, a:active {color: #ff7bb1;text-decoration: none;}
+hr { display: none; }
+h1 { font-size:1.2em; }
+img {	border:none; vertical-align:middle; }
+select, input, textarea { 
+	font-family: '����',dotum,Helvetica,sans-serif;
+	font-size: 12px;	
+	padding:2px;
+	color:#7f7f7f;
+	border:1px solid #7F9DB9;
+	vertical-align:middle;
+}
+option{padding-right: 0.5em;}
+legend { display:none; }
+fieldset { border:none; }
+
+/* Global Classes
+---------------------------------------------------------*/
+.Lclear:after {content:"."; display: block; clear: both; visibility: hidden; height: 0;}
+.Lclear {display: inline-block; clear: both; }
+* html .Lclear {height: 1%;}
+.Lclear {display: block;}
+
+.LtextLeft { text-align:left !important; }
+.LtextCenter { text-align:center !important; }
+.LtextRight { text-align:right !important; }

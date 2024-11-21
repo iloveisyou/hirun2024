@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+<script type="text/javascript" src="./../../js/rui_base.js"></script>
+<script type="text/javascript" src="./../../js/rui_core.js"></script>
+<script type="text/javascript" src="./../../js/rui_ui.js"></script>
+<script type="text/javascript" src="./../../js/rui_form.js"></script>
+<script type="text/javascript" src="./../../js/rui_grid.js"></script>
+<script type="text/javascript" src="./../../js/rui_tablet.js"></script>
+<script type="text/javascript" src="./../../resources/locale/lang-ko_KR.js"></script>
+<script type="text/javascript" src="./../../resources/rui_config.js"></script>
+<link rel="stylesheet" type="text/css" href="./../../resources/rui.css"/>
+
+<script type="text/javascript" src="./../../plugins/ui/LPager.js"></script>
+<link rel="stylesheet" type="text/css" href="./../../plugins/ui/LPager.css" />
+
+<script type="text/javascript" src="./../../plugins/ui/form/LDateTimeBox.js"></script>
+<link rel="stylesheet" type="text/css" href="./../../plugins/ui/form/LDateTimeBox.css" />
+
+<script type="text/javascript" src="./../../plugins/ui/form/LMultiCombo.js"></script>
+<link rel="stylesheet" type="text/css" href="./../../plugins/ui/form/LMultiCombo.css" />
+
+<script type="text/javascript" src="./../../plugins/ui/form/LPopupTextBox.js"></script>
+<link rel="stylesheet" type="text/css" href="./../../plugins/ui/form/LPopupTextBox.css" />
+
+<title>Rui 하이드리드 Web UX</title>
+<style>
+html,body, .L-view-container, .L-edit-container {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	z-index: 3;
+}
+.L-header-focus {
+    background: transparent url(./../../resources/images/tablet/RUI_header_logo.png) no-repeat left 10px;
+    display: block;
+    height: 60px;
+    text-align: center;
+    vertical-align: middle;
+}
+.L-header-title {
+	margin-top: 15px;
+	display: inline-block;
+	font-weight: bold;
+	font-size: 24px;
+	color: #2880B4
+}
+.L-container-footer {
+    line-height: 60px;
+    height: 60px;
+	vertical-align: middle;
+	display: block;
+	width: 100%;
+	background-color: #F0F0F0;
+    border-top: 1px solid #BABABA;
+    position: absolute;
+    bottom: 0px;
+}
+.LblockHeaderTop {
+    border-bottom: 6px solid #2880B4;
+}
+.LblockTopMenuTitle {
+    height: 50px;
+	background-color: #F8F8F8;
+	border-bottom: 1px solid #BABABA;
+	text-align: center;
+	font-size: 20px;
+    font-weight: bold;
+    line-height: 50px;
+}
+.LblockTopMenuTitle a {
+    color: #000;
+	display: inline-block;
+	text-decoration: none;
+}
+button, .L-view-container, .L-edit-container {
+    font-size: 23px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	list-style: none;
+}
+
+.L-data-title1, .L-data-title2, .L-data-title3 {
+    width: 150px;
+    margin-right: 30px;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.L-data-detail {
+    width: 99%;
+    margin: 10px 5px;
+}
+
+.L-btn-edit {
+    margin-right: 50px;
+}
+
+.L-data-detail td {
+    padding: 10px;
+}
+
+.L-collapse {
+    display: none;
+}
+
+.L-view-container {
+    padding: 0px;
+}
+
+.L-edit-container {
+    background-color: #fff;
+}
+
+.L-edit-container table, .L-edit-container table td, .L-data-detail table, .L-data-detail td {
+    border: 1px solid #CCC;
+}
+
+.L-edit-container .L-edit-label {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.L-edit-container .L-grid-cell-inner {
+    display: inline-block;
+}
+
+.L-edit-container .L-grid-cell, td.L-grid-dummy-cell {
+    height: auto;
+}
+
+.L-edit-container td {
+    padding: 10px;
+}
+
+.L-block-font-size {
+    position: absolute;
+	top: 8px;
+	right: 30px;
+}
+
+.L-btn-close {
+    
+}
+
+.L-edit-button {
+    position: absolute;
+    right: 30px;
+    top: 15px;
+	padding: 5px 15px;
+	border: 1px solid #BABABA;
+	background-color: #FAFAFA;
+	font-size: 20px;
+}
+
+.L-detail-view, .L-edit-items {
+    width: 99%;
+    border-collapse: collapse;
+    border-spacing: 0px 0px;
+    border: 0px;
+    border-top: 1px solid #BABABA;
+	border-left: 1px solid #BABABA;
+	border-right: 1px solid #BABABA;
+}
+
+.L-detail-view th {
+    background-color: #F0F0F0;
+    text-align: right;
+    padding: 10px;
+    border-right: 1px solid #BABABA;
+}
+
+.L-detail-view td {
+    background-color: #fafafa;
+    padding: 10px;
+}
+
+.L-form-field input {
+    height: inherit;
+    font-size: 23px;
+}
+
+.L-combo div.icon, .L-datebox a.icon {
+	height: 24px;
+	zoom: 1.5;
+}
+
+.L-timebox div.icon {
+    margin-left: -5px;
+}
+
+div.L-list {
+    font-size: 22px;
+}
+
+.L-edit-container table {
+    width: 100%;
+}
+
+.L-timebox div.icon .L-spin-up, .L-timebox div.icon .L-spin-down {
+    zoom: 1.5;
+}
+
+.L-textarea textarea {
+    font-size: 23px;
+}
+ 
+.L-block-buttons {
+    text-align: center;
+    line-height: 60px;
+    padding-right: 30px;
+}
+
+.L-block-buttons button {
+    padding: 5px 15px;
+    border: 1px solid #BABABA;
+    background-color: #FAFAFA;
+    font-size: 20px;
+}
+
+.L-edit-items {
+}
+
+tr.L-edit-item {
+}
+
+tr.L-edit-item .L-edit-label {
+	background-color: #F0F0F0;
+	text-align: right;
+	padding: 10px;
+	border-right: 1px solid #BABABA;
+	width: 30%;
+}
+
+li.L-list-row {
+    position: relative;
+    border-bottom: 1px solid #bababa;
+    padding-left: 30px;
+}
+
+.L-grid-cell-inner {
+    line-height: 61px;
+    width: 100%;
+}
+
+.L-tablet-viewport[rui-ux-big-size="true"] .L-grid-cell-inner {
+    line-height: 100px;
+} 
+/* L-pager
+---------------------------------------------------------*/
+div.L-pager {
+    margin-top: 25px;
+    height: 50px !important;
+}
+.L-pager-first, .L-pager-prev-group, .L-pager-prev, .L-pager-next, .L-pager-next-group, .L-pager-last {
+    width: 23px;
+    height: 11px;
+}
+.L-pager-item {
+    height: 50px;
+    text-align: center;
+	width: 50px;
+	border: 1px solid;
+	margin-right: 20px;
+}
+.L-pager-item-wrap {
+    width: 21px;
+}
+.L-pager-first {
+    background: transparent url(./../../resources/images/pager/move_first.png) no-repeat left;
+}
+.L-pager-prev-group {
+    background: transparent url(./../../resources/images/pager/move_prev_page.png) no-repeat left;
+}
+.L-pager-prev {
+    background: transparent url(./../../resources/images/pager/move_prev.png) no-repeat left;
+}
+.L-pager-next {
+    background: transparent url(./../../resources/images/pager/move_next.png) no-repeat right;
+}
+.L-pager-next-group {
+    background: transparent url(./../../resources/images/pager/move_next_page.png) no-repeat right;
+}
+.L-pager-last {
+    background: transparent url(./../../resources/images/pager/move_last.png) no-repeat right;
+}
+.L-pager-item a {
+    padding: 10px 5px 0 3px;
+    display: inline-block;
+}
+.L-pager-item.L-pager-selected {
+    background: none;
+    font-weight: bold;
+}
+.L-pager-item-wrap:hover .L-pager-item {
+    background: transparent url(./../../resources/images/pager/skin_red/underline.png) no-repeat bottom;
+}
+.L-tablet-viewport[rui-ux-big-size="true"] button, 
+    .L-tablet-viewport[rui-ux-big-size="true"] .L-view-container, 
+    .L-tablet-viewport[rui-ux-big-size="true"] .L-edit-container {
+    font-size: 50px;
+}
+.L-tablet-viewport[rui-ux-big-size="true"] .L-data-title1, 
+    .L-tablet-viewport[rui-ux-big-size="true"] .L-data-title2, 
+    .L-tablet-viewport[rui-ux-big-size="true"] .L-data-title3 {
+    width: auto;
+}
+.L-tablet-viewport[rui-ux-big-size="true"] .L-edit-container .L-edit-label {
+    font-size: 50px;
+}
+.L-tablet-viewport[rui-ux-big-size="true"] .L-form-field input, .L-tablet-viewport[rui-ux-big-size="true"] .L-form-field textarea {
+    font-size: 50px;
+}
+.L-tablet-viewport[rui-ux-big-size="true"] .L-container-footer {
+    line-height: 120px;
+    height: 120px;
+}
+.L-tablet-viewport[rui-ux-big-size="true"] .L-block-buttons {
+    line-height: 120px;
+}
+.L-tablet-viewport[rui-ux-big-size="true"] .L-view-container {
+    padding: 0px 0px 50px 0px;
+}
+
+.L-toast {
+    margin-top: -300px;
+    position: fixed;
+}
+.L-btn-font-big, .L-btn-font-small {
+    width: 40px;
+	height: 32px;
+	display: inline-block;
+}
+.L-btn-font-big {
+    background: transparent url(./../../resources/images/tablet/btn_tablet_font_large_on.png) no-repeat bottom;
+}
+.L-btn-font-small {
+    background: transparent url(./../../resources/images/tablet/btn_tablet_font_small_off.png) no-repeat bottom;
+}
+.L-tablet-viewport[rui-ux-big-size="true"] .L-btn-font-big {
+    background: transparent url(./../../resources/images/tablet/btn_tablet_font_large_off.png) no-repeat bottom;
+}
+.L-tablet-viewport[rui-ux-big-size="true"] .L-btn-font-small {
+    background: transparent url(./../../resources/images/tablet/btn_tablet_font_small_on.png) no-repeat bottom;
+}
+ 
+</style>
+<script>
+    Rui.License = 'MTI3LjAuMC4xO2xvY2FsaG9zdA==';
+	Rui.onReady(function() {
+		var gridPanel = parent.Rui._tabletData.gridPanel;
+
+		var tabletViewer = new Rui.ui.grid.LTabletViewer({ 
+			gridPanel: gridPanel
+		});
+
+		tabletViewer.render();
+	});
+</script>
+</HEAD>
+<BODY>
+</BODY>
+</HTML>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 버퍼그리드, buffergrid" />
+    <title>Bufferd Grid</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_license.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LEditButtonColumn.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridView.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridPanelExt.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+            *******************/
+            var col1Combo = new Rui.ui.form.LCombo({
+               rendererField: 'value',
+               url: './../../../../sample/data/code.json'
+            });
+
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                remainRemoved: true,
+                lazyLoad: true,
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'value' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+
+            var dm = new Rui.data.LDataSetManager();
+
+            dm.on('success', function(e) {
+                // 페이지에서는 log가 아니라 alert을 써야 함.
+                alert(Rui.getMessageManager().get('$.base.msg100'));
+            });
+
+            var popuButton = new Rui.ui.LButton({
+                label: '>>'
+            });
+
+            /*<b>*/
+            var col1EditableRenderer = function(value, p, record, row, i) {
+                if(record.state == Rui.data.LRecord.STATE_INSERT) {
+                    p.css.push('L-grid-cell-editable');
+                }
+                return value;
+            }
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                groupMerge: true,
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', sortable: true, editor: new Rui.ui.form.LTextBox(), renderer: col1EditableRenderer, vMerge: true },
+                    { field: 'col2', align: 'center', sortable: true, editor: new Rui.ui.form.LTextBox({ mask: '(999) 999-9999', maskValue: true }) },
+                    { field: 'code', align: 'center', sortable: true, editor: col1Combo },
+                    { field: 'col3', align: 'right', sortable: true, editor: new Rui.ui.form.LRadioGroup({
+                        items: [
+                            { label : 'R1', value: 'R1' },
+                            { label : 'R2', value: 'R2', checked:true }
+                        ]
+                    }) },
+                    { field: 'col5', align: 'right', sortable: true, editor: new Rui.ui.form.LCheckBox({
+                        bindValues : [ 'R1', '' ]
+                    }) },
+                    { field: 'col6', label: 'Col6', sortable: true, width: 200, editor: new Rui.ui.form.LTextArea() },
+                    { field: 'col8', label: 'Col8', sortable: true, align: 'right', editor: new Rui.ui.form.LNumberBox({ decimalPrecision: 3, maxValue: 999999999999.999 }), render: 'number'},
+                    { field: 'date1' , align: 'center', sortable: true, editor: new Rui.ui.form.LDateBox(), renderer: 'date' },
+                    new Rui.ui.grid.LEditButtonColumn({
+                        field: 'value', label: 'Popup'
+                    }),
+                    { id: 'btn', field: 'col1', sortable: true, label: 'Button', width: 150, renderer: function(val, p, record, row, i){
+                        return '<button type="button" class="L-grid-button">' + val + '</button>';
+                    }}
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                height: 270,
+                scrollerConfig: {
+                    scrollbar: 'y'
+                },
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                autoToEdit: true,
+                autoWidth: true
+            });
+            
+            grid.render('defaultGrid');
+            /*</b>*/
+
+             /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            grid.getView().on('renderBody',function(e){
+                Rui.log('grid rendered !!');
+            });
+
+            /*<b>*/
+            grid.on('cellClick', function(e){
+                var column = columnModel.getColumnAt(e.col, true);
+                if(column.id == 'btn')
+                    alert(e.row + ' 버튼 실행');
+                else
+                    Rui.log('cellClick : row ' + e.row + ', col ' + e.col);
+            });
+
+            grid.on('popup', function(e){
+                alert('popup click row : ' + e.row + ', col : ' + e.col);
+            });
+            /*</b>*/
+
+            var isAllSelect = false;
+            dataSet.on('allMarked', function(e){
+                isAllSelect = e.isSelect;
+            });
+            dataSet.on('marked',function(e){
+                /*if(!isAllSelect)
+                    console.log('marked');
+                    */
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                // 성능 분석을 위한 처리 방법, 일반적으로는 그냥 load 메소드를 사용함.
+                var sUrl = './../../../../sample/data/large/largeData' + Rui.get('dataCount').getValue() + '.txt';
+                dataSet.load({
+                    url: sUrl
+                });
+            });
+
+            var newBtn = new Rui.ui.LButton('newBtn');
+            newBtn.on('click', function(){
+                var row = dataSet.newRecord();
+            });
+
+            var insertBtn = new Rui.ui.LButton('insertBtn');
+            insertBtn.on('click', function(){
+                if(dataSet.getRow() < 0) return;
+                var row = dataSet.newRecord(dataSet.getRow());
+                var record = dataSet.getAt(row);
+                record.set('col1', 'Junee5');
+                record.set('col2', '(02) 6363-7009');
+                record.set('col3', 'R1');
+            });
+
+            var updateBtn = new Rui.ui.LButton('updateBtn');
+            updateBtn.on('click', function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var record = dataSet.getAt(row);
+                record.set('col2', null);
+                record.set('col3', 'R2');
+                record.set('col8', 1);
+            });
+
+            var undoBtn = new Rui.ui.LButton('undoBtn');
+            undoBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    for(var i = 0 ; i < dataSet.getCount() ; i++) {
+                        if(dataSet.isMarked(i))
+                            dataSet.undo(i);
+                    }
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.undo(row);
+                }
+            });
+
+            var undoAllBtn = new Rui.ui.LButton('undoAllBtn');
+            undoAllBtn.on('click', function(){
+                dataSet.undoAll();
+            });
+
+            var deleteBtn = new Rui.ui.LButton('deleteBtn');
+            deleteBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRows();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+
+            var saveBtn = new Rui.ui.LButton('saveBtn');
+            saveBtn.on('click', function(){
+                if(dataSet.isUpdated() == false) {
+                    alert(Rui.getMessageManager().get('$.base.msg102'));
+                    return;
+                }
+
+                dm.updateDataSet({
+                    dataSets:[dataSet],
+                    url: './../../../data/savedCallback.json'
+                });
+
+            });
+
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData(); // Message
+               // dataSet.clearData({showMsg:false}); // No Message
+            });
+
+            var filterBtn = new Rui.ui.LButton('filterBtn');
+            filterBtn.on('click', function(){
+                dataSet.filter(function(id, record){
+                    return record.get('col3') == 'R2';
+                });
+            });
+
+            var clearFilterBtn = new Rui.ui.LButton('clearFilterBtn');
+            clearFilterBtn.on('click', function(){
+                dataSet.clearFilter();
+            });
+
+            var syncDataSetBtn = new Rui.ui.LButton('syncDataSetBtn');
+            syncDataSetBtn.on('click', function(){
+                grid.setSyncDataSet(true);
+            });
+
+            var unSyncDataSetBtn = new Rui.ui.LButton('unSyncDataSetBtn');
+            unSyncDataSetBtn.on('click', function(){
+                grid.setSyncDataSet(false);
+            });
+
+            var firstBtn = new Rui.ui.LButton('firstBtn');
+            firstBtn.on('click', function(){
+                dataSet.setRow(0);
+            });
+
+            var previousBtn = new Rui.ui.LButton('previousBtn');
+            previousBtn.on('click', function(){
+                if(dataSet.getRow() > 0)
+                    dataSet.setRow(dataSet.getRow() - 1);
+            });
+
+            var nextBtn = new Rui.ui.LButton('nextBtn');
+            nextBtn.on('click', function(){
+                if(dataSet.getCount() > dataSet.getRow())
+                    dataSet.setRow(dataSet.getRow() + 1);
+            });
+
+            var lastBtn = new Rui.ui.LButton('lastBtn');
+            lastBtn.on('click', function(){
+                dataSet.setRow(dataSet.getCount() - 1);
+            });
+
+            var sortBtn = new Rui.ui.LButton('sortBtn');
+            sortBtn.on('click', function(){
+                dataSet.sortField('col1', 'asc');
+            });
+
+            var columnShowBtn = new Rui.ui.LButton('columnShowBtn');
+            columnShowBtn.on('click', function(){
+                columnModel.getColumnById('col3').setHidden(false);
+            });
+
+            var columnHideBtn = new Rui.ui.LButton('columnHideBtn');
+            columnHideBtn.on('click', function(){
+                columnModel.getColumnById('col3').setHidden(true);
+            });
+
+            var gridShowBtn = new Rui.ui.LButton('gridShowBtn');
+            gridShowBtn.on('click', function(){
+                grid.show();
+            });
+
+            var gridHideBtn = new Rui.ui.LButton('gridHideBtn');
+            gridHideBtn.on('click', function(){
+                grid.hide();
+            });
+
+            var multiSelectBtn = new Rui.ui.LButton('multiSelectBtn');
+            multiSelectBtn.on('click', function(){
+                if(dataSet.getCount() > 5) {
+                    dataSet.setMark(1, true);
+                    dataSet.setMark(3, true);
+                    dataSet.setMark(5, true);
+                }
+            });
+
+            var enableBtn = new Rui.ui.LButton('enableBtn');
+            enableBtn.on('click', function(){
+                grid.getView().enable();
+            });
+
+            var disableBtn = new Rui.ui.LButton('disableBtn');
+            disableBtn.on('click', function(){
+                grid.getView().disable();
+            });
+
+            var setWidthBtn = new Rui.ui.LButton('setWidthBtn');
+            setWidthBtn.on('click', function(){
+                grid.setWidth(100);
+            });
+
+            var setHeightBtn = new Rui.ui.LButton('setHeightBtn');
+            setHeightBtn.on('click', function(){
+                grid.setHeight(100);
+            });
+
+            var allUpdateBtn = new Rui.ui.LButton('allUpdateBtn');
+            allUpdateBtn.on('click', function(){
+                for(var i = 0 ; i < dataSet.getCount(); i++) {
+                    dataSet.setState(i, 2);
+                }
+            });
+            
+            var focusCellBtn = new Rui.ui.LButton('focusCellBtn');
+            focusCellBtn.on('click', function(){
+                grid.selectCell(dataSet.rowPosition, 11);
+            });
+
+            var saveExcelBtn = new Rui.ui.LButton('saveExcelBtn');
+            saveExcelBtn.on('click', function(){
+
+                alert('start-->:' + new Date().getHours() + 'H ' + new Date().getMinutes() + 'M ' + new Date().getSeconds() + 'S ' +
+                     new Date().getMilliseconds()+'mm');
+                grid.saveExcel('한글테스트_' + new Date().format('%Y%m%d') + '.xls');
+
+                /*
+                var excelColumnModel = columnModel.createExcelColumnModel();
+                // 멀티 헤더를 쓸 경우 LSelectionColumn, LStateColumn, LNumberColumn 컬럼으로 인하여 헤더가 밀리는 경우가 발생할 수 있다.
+                // 그럴 경우 아래와 같이 false 인수와 multiheaderHtml을 재정의하면 된다.
+                */
+
+                /*
+                var excelColumnModel = columnModel.createExcelColumnModel(false);
+                grid.saveExcel('한글테스트_' + new Date().format('%Y%m%d') + '.xls',{
+                    columnModel: excelColumnModel
+                });
+                */
+            });
+
+            loadPage.hide() ;
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Bufferd Grid</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>대량 데이터 처리를 위한 Buffered 그리드(Grid)를 사용하는 샘플</h2>
+            <div class="LblockDesc">
+		        <p>대량 데이터 처리시 성능 저하를 피하기 위해 버퍼링 기술을 적용한 그리드(Grid) 입니다.</p>
+		        <p>1,000건, 10,000건, 50,000건의 데이터를 조회하며 처리 속도를 비교해보세요.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <select id="dataCount">
+            <option value="1000">1000건</option>
+            <option value="2000">2000건</option>
+            <option value="3000">3000건</option>
+            <option value="4000">4000건</option>
+            <option value="5000">5000건</option>
+            <option value="6000">6000건</option>
+            <option value="10000">10000건</option>
+            <option value="50000">50000건</option>
+        </select>
+        <div class="LblockButton">
+            <button type="button" id="searchBtn" >search</button>
+            <button type="button" id="newBtn" >new</button>
+            <button type="button" id="insertBtn" >insert</button>
+            <button type="button" id="updateBtn" >update</button>
+            <button type="button" id="deleteBtn" >delete</button>
+            <button type="button" id="saveBtn" >save</button>
+            <button type="button" id="undoBtn" >undo</button>
+            <button type="button" id="undoAllBtn" >undoAll</button>
+            <button type="button" id="clearBtn" >clear</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div class="LblockGrid">
+                <div id="defaultGrid" ></div>
+            </div>
+            <div class="LblockButton">
+                <button type="button" id="filterBtn" >filter</button>
+                <button type="button" id="clearFilterBtn" >clearfilter</button>
+                <button type="button" id="syncDataSetBtn" >syncDataSet</button>
+                <button type="button" id="unSyncDataSetBtn" >unSyncDataSet</button>
+                <button type="button" id="firstBtn" >first</button>
+                <button type="button" id="previousBtn" >previous</button>
+                <button type="button" id="nextBtn" >next</button>
+                <button type="button" id="lastBtn" >last</button>
+                <button type="button" id="sortBtn" >sort</button>
+                <button type="button" id="columnShowBtn" >column show</button>
+                <button type="button" id="columnHideBtn" >column hide</button>
+                <button type="button" id="gridShowBtn" >grid show</button>
+                <button type="button" id="gridHideBtn" >grid hide</button>
+                <button type="button" id="multiSelectBtn" >multi selection</button>
+                <button type="button" id="enableBtn" >enable</button>
+                <button type="button" id="disableBtn" >disable</button>
+                <button type="button" id="setWidthBtn" >setWidth</button>
+                <button type="button" id="setHeightBtn" >setHeight</button>
+                <button type="button" id="allUpdateBtn" >All Update</button>
+                <button type="button" id="focusCellBtn" >focus cell</button>
+                <button type="button" id="saveExcelBtn" >Excel download</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var loadPage = new Rui.ui.LLoadPage();
+    loadPage.show();
+    </script>
+</body>
+</html>

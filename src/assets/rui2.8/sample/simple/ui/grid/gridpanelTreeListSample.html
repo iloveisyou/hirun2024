@@ -1,0 +1,471 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Tree list grid basic</title>
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ext.js"></script>
+    <script type='text/javascript' src='./../../../../plugins/ui/grid/LTreeGridSelectionModel.js'></script>
+    <script type='text/javascript' src='./../../../../plugins/ui/grid/LTreeGridView.js'></script>
+    <script type='text/javascript' src='./../../../../plugins/ui/grid/LTotalSummary.js'></script>
+    <script type="text/javascript" src="./../../../../plugins/util/simpleSyntax.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LTreeGridView.css" >
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LTotalSummary.css" />    
+    
+
+    <style type="text/css" >
+        .LblockGrid li.left, .LblockGrid li.right {
+            display: inline-block;
+            *display: inline;
+            *zoom: 100%;
+        }
+        .LblockButton {
+            margin: 20px 0px 0px;
+        }
+        
+        .L-grid-cell-inner {
+            height: 19px;
+        }
+        
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        var dataSet1 = null;
+
+        $C('!config').set('$.core.logger.show', [true]);
+        $C(function() {
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'id' },
+                { id: 'parentId' },
+                { id: 'depth', type: 'number', defaultValue: 0 },
+                { id: 'seq' },
+                { id: 'name' },
+                { id: 'url' },
+                { id: 'desc' }
+                ]
+            });
+            
+            /*<b>*/
+            var columnModel = $C.columnModel({
+                freezeColumnId: 'id',
+                columns: [
+                    $C.selectionColumn(),
+                    {id : 'rowId', label : 'id', width : 50, sortable : false, align : 'left', 
+                    renderer : function(val, param, record, row, i) {
+                        return record.id;
+                    }},
+                    {id : 'pId', label : 'pid', width : 50, sortable : false, align : 'left',
+                    renderer : function(val, param, record, row, i) {
+                        return record.pId;
+                    }},
+                    { field: "id", label: "id", width: 200, editor: $C.textBox() },
+                    { field: "depth", label: "depth", editor: $C.textBox() },
+                    { id: "show", label: "Show", renderer: function(val, p, record) { 
+                        return record.getAttribute('_show') + ''; 
+                    } },
+                    { id: "expand", label: "Expand", renderer: function(val, p, record) { 
+                        return record.getAttribute('_expand') + ''; 
+                    } },
+                    { field: "parentId", label: "parentId", editor: $C.textBox() },
+                    { field: "seq", label: "seq", editor: $C.textBox() }
+                    ]
+            });
+
+            var sumColumns = ['depth'];
+            var summary = $C.totalSummary();
+            summary.on('renderTotalCell', function(e){
+                var column = columnModel.getColumnAt(e.col);
+                if ($C.array.contains(sumColumns, column.getId())) {
+                    e.value = $C.format.moneyFormat(dataSet.sum(column.getId()));
+                } 
+            });
+            
+            // 한 LColumnModel을 두 그리드에 같이 쓰면 안됨(디버그 용도라서 임시로 씀)            
+            var treeGridView = $C.treeGridView({
+                defaultOpenDepth: -1,
+                columnModel: columnModel,
+                dataSet: dataSet,
+                fields: {
+                    depthId: 'depth'
+                },
+                plugins: [summary],
+                treeColumnId: 'id'
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                view: treeGridView,
+                selectionModel: $C.tGridSelectionModel(),
+                autoWidth: false,
+                width: 500,
+                height: 300
+            });
+            /*            
+            var sm = grid.getSelectionModel();
+            sm.on('selectCell', function(e) {
+                if(e.row > 10) {
+                    grid.setCellConfig(e.row, e.colId, 'editable', false);
+                }
+            });
+            */
+
+            /*</b>*/
+           
+            var view = grid.getView();
+
+/*
+            $C('#debugGrid').grid({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: false,
+                width: 500,
+                height:300
+            });
+*/
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/gridTree.json'
+                });
+            });
+
+            $C('#insertBtn').button();
+            $C('#insertBtn').on("click", function(){
+                var row = dataSet.getRow();
+                row = dataSet.newRecord(row);
+                var record = dataSet.getAt(row);
+                record.set('id', dataSet.getCount());
+            });
+
+            $C('#childInsertBtn').button();
+            $C('#childInsertBtn').on("click", function(){                
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var depth = dataSet.getNameValue(row, 'depth');
+                // parentId에 해당되는 부모 위치에 정확하게 추가해야 함.
+                var newRow = dataSet.newRecord(row + 1);
+                var record = dataSet.getAt(newRow);
+                record.set('id', dataSet.getCount());
+                record.set('depth', depth + 1);
+                treeGridView.expand(row);
+            });
+
+            $C('#updateBtn').button();
+            $C('#updateBtn').on("click", function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var record = dataSet.getAt(row);
+                record.set("col2", null);
+                record.set("col3", "R2");
+                record.set("col8", 1);
+                record.set("code", 'code9');
+            });
+
+            $C('#undoBtn').button();
+            $C('#undoBtn').on("click", function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                dataSet.undo(row);
+            });
+            
+            $C('#undoAllBtn').button();
+            $C('#undoAllBtn').on("click", function(){
+                dataSet.undoAll();
+            });
+            
+            $C('#deleteBtn').button();
+            $C('#deleteBtn').on("click", function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var depth = dataSet.getNameValue(row, 'depth');
+                while(true) {
+                    if(depth >= dataSet.getNameValue(row + 1, 'depth') || (depth + 1) == dataSet.getCount()) break;
+                    dataSet.removeAt(row + 1);
+                }
+                dataSet.removeAt(row);
+            });
+            
+            $C('#saveBtn').button();
+            $C('#saveBtn').on("click", function(){
+                // 여기서 유효성 체크를 하면 안됩니다. LDataSetManager의 beforeUpdate 이벤트를 참조하세요.(위에 소스에 있습니다.)
+                tm.updateDataSet({
+                    dataSets:[dataSet], 
+                    url:'/consoleLog.dev'
+                });
+
+            });
+            
+            $C('#clearBtn').button();
+            $C('#clearBtn').on("click", function(){
+                dataSet.clearData();
+            });
+            
+            $C('#expandBtn').button();
+            $C('#expandBtn').on("click", function(){
+                treeGridView.expand(17);
+            });
+            
+            $C('#collapseBtn').button();
+            $C('#collapseBtn').on("click", function(){
+                treeGridView.collapse(14);
+            });
+            
+            $C('#expandDepthBtn').button();
+            $C('#expandDepthBtn').on("click", function(){
+                treeGridView.expandDepth(1);
+            });
+            
+            $C('#getPreSiblingRowBtn').button();
+            $C('#getPreSiblingRowBtn').on("click", function(){
+                alert(treeGridView.getPreSiblingRow(dataSet.getRow()));
+            });
+            
+            $C('#getNextSiblingRowBtn').button();
+            $C('#getNextSiblingRowBtn').on("click", function(){
+                alert(treeGridView.getNextSiblingRow(dataSet.getRow()));
+            });
+            
+            $C('#getChildRowsBtn').button();
+            $C('#getChildRowsBtn').on("click", function(){
+                alert($C.dump(treeGridView.getChildRows(dataSet.getRow())));
+            });
+            
+            $C('#getAllChildRowsBtn').button();
+            $C('#getAllChildRowsBtn').on("click", function(){
+                alert($C.dump(treeGridView.getAllChildRows(dataSet.getRow())));
+            });
+            
+            $C('#filterBtn').button();
+            $C('#filterBtn').on("click", function(){
+                dataSet.filter(function(id, record){
+                    return record.get("col3") == "R2"
+                });
+            });
+            
+            $C('#clearFilterBtn').button();
+            $C('#clearFilterBtn').on("click", function(){
+                dataSet.clearFilter();
+            });
+            
+            $C('#syncDataSetBtn').button();
+            $C('#syncDataSetBtn').on("click", function(){
+                grid.setSyncDataSet(true);
+            });
+            
+            $C('#unSyncDataSetBtn').button();
+            $C('#unSyncDataSetBtn').on("click", function(){
+                grid.setSyncDataSet(false);
+            });
+            
+            $C('#firstBtn').button();
+            $C('#firstBtn').on("click", function(){
+                dataSet.setRow(0);
+            });
+
+            $C('#previousBtn').button();
+            $C('#previousBtn').on("click", function(){
+                if(dataSet.getRow() > 0)
+                    dataSet.setRow(dataSet.getRow() - 1);
+            });
+
+            $C('#nextBtn').button();
+            $C('#nextBtn').on("click", function(){
+                if(dataSet.getCount() > dataSet.getRow())
+                    dataSet.setRow(dataSet.getRow() + 1);
+            });
+
+            $C('#lastBtn').button();
+            $C('#lastBtn').on("click", function(){
+                dataSet.setRow(dataSet.getCount() - 1);
+            });
+            
+            $C('#sortBtn').button();
+            $C('#sortBtn').on("click", function(){
+                dataSet.sortField("col1");
+            });
+            
+            $C('#columnShowBtn').button();
+            $C('#columnShowBtn').on("click", function(){
+                columnModel.getColumnById('col3').setHidden(false);
+                columnModel.getColumnById('col5').setHidden(false);
+            });
+
+            $C('#columnHideBtn').button();
+            $C('#columnHideBtn').on("click", function(){
+                columnModel.getColumnById('col3').setHidden(true);
+                columnModel.getColumnById('col5').setHidden(true);
+            });
+            
+            $C('#gridShowBtn').button();
+            $C('#gridShowBtn').on("click", function(){
+                grid.show();
+            });
+
+            $C('#gridHideBtn').button();
+            $C('#gridHideBtn').on("click", function(){
+                grid.hide();
+            });
+            
+            $C('#multiSelectBtn').button();
+            $C('#multiSelectBtn').on("click", function(){
+                if(dataSet.getCount() > 5) {
+                    dataSet.clearMark();
+                    dataSet.setMark(1, true);
+                    dataSet.setMark(3, true);
+                    dataSet.setMark(5, true);
+                }
+            });
+            
+            $C('#enableBtn').button();
+            $C('#enableBtn').on("click", function(){
+                view.enable();
+            });
+
+            $C('#disableBtn').button();
+            $C('#disableBtn').on("click", function(){
+                debugger;
+                view.disable();
+            });
+            
+            $C('#setHeightBtn').button();
+            $C('#setHeightBtn').on("click", function(){
+                grid.setHeight(100);
+            });
+            
+            $C('#setStateBtn').button();
+            $C('#setStateBtn').on("click", function(){
+                var row = dataSet.getRow();
+                if(dataSet.getState(row) == 3) dataSet.setState(row, 0);
+                else dataSet.setState(row, 2);
+            });
+
+            $C('#setDataSetBtn').button();
+            $C('#setDataSetBtn').on("click", function(){
+                dataSet1 = dataSet1 || dataSet;
+                grid.setDataSet(dataSet1);
+                bind.setDataSet(dataSet1);
+            });
+
+            $C('#cloneDataSetBtn').button();
+            $C('#cloneDataSetBtn').on("click", function(){
+                dataSet1 = dataSet.clone('newDataSet');
+            });
+            
+            $C('#toastBtn').button();
+            $C('#toastBtn').on("click", function(){
+                grid.toast('Toast 메시지가 제대로되는지 테스트합니다.');
+            });
+            
+            $C('#allMarkedBtn').button();
+            $C('#allMarkedBtn').on("click", function(){
+                if(dataSet.isAllSelectMark) {
+                    dataSet.setMarkAll(false);
+                    dataSet.isAllSelectMark = false;
+                } else {
+                    dataSet.setMarkAll(true);
+                    dataSet.isAllSelectMark = true;
+                }
+            });
+            
+            $C('#isSelectMarkBtn').button();
+            $C('#isSelectMarkBtn').on("click", function(){
+                alert(dataSet.isMarked(dataSet.getRow()));
+            });
+            
+            $C('#focusCellBtn').button();
+            $C('#focusCellBtn').on("click", function(){
+                var sm = grid.getSelectionModel();
+                sm.selectCell(14, 3);
+            });
+            
+            $C('#debugSyncBtn').button();
+            $C('#debugSyncBtn').on('click', function(){
+                $C('#debugGrid').setSyncDataSet(false);
+                $C('#debugGrid').setSyncDataSet(true);
+            });
+
+            $C.log('step 4');
+            searchBtn.click();
+            });
+            
+        </script>
+</head>
+<body>
+    <h1>tree list grid sample</h1>
+    <h2>트리 리스트 그리드 기본 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div> 트리처럼 보여주는 리스트형 그리드. 그리드에 펼침/닫힘과 같은 기능만 제공된다.</div>
+    <div id='bd'>
+    <div class="LblockButton" >
+        <button type="button" id="expandBtn" >expand 18</button>
+        <button type="button" id="collapseBtn" >collapse 15</button>
+        <button type="button" id="expandDepthBtn" >expand depth 1</button>
+        <button type="button" id="getPreSiblingRowBtn" >getPreSiblingRow</button>
+        <button type="button" id="getNextSiblingRowBtn" >getNextSiblingRow</button>
+        <button type="button" id="getChildRowsBtn" >getChildRows</button>
+        <button type="button" id="getAllChildRowsBtn" >getAllChildRows</button>
+        <button type="button" id="debugSyncBtn" >debug sync</button>
+        <button type="button" id="searchBtn" >Search</button>
+        <button type="button" id="insertBtn" >insert</button>
+        <button type="button" id="childInsertBtn" >child insert</button>
+        <button type="button" id="updateBtn" >update</button>
+        <button type="button" id="deleteBtn" >delete</button>
+        <button type="button" id="saveBtn" >save</button>
+        <button type="button" id="undoBtn" >undo</button>
+        <button type="button" id="undoAllBtn" >undoAll</button>
+        <button type="button" id="clearBtn" >clear</button>
+    </div>
+
+    <div class="LblockMarkupCode">
+        <div class="LblockGrid">
+            <ul>
+                <li class="left">
+                    tree grid
+                    <div id="defaultGrid"></div>
+                </li>
+                <li class="right">
+                    debug grid
+                    <div id="debugGrid"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="LblockButton" >
+        <button type="button" id="filterBtn" >filter</button>
+        <button type="button" id="clearFilterBtn" >clearfilter</button>
+        <button type="button" id="syncDataSetBtn" >syncDataSet</button>
+        <button type="button" id="unSyncDataSetBtn" >unSyncDataSet</button>
+        <button type="button" id="firstBtn" >first</button>
+        <button type="button" id="previousBtn" >previous</button>
+        <button type="button" id="nextBtn" >next</button>
+        <button type="button" id="lastBtn" >last</button>
+        <button type="button" id="sortBtn" >sort</button>
+        <button type="button" id="columnShowBtn" >column show</button>
+        <button type="button" id="columnHideBtn" >column hide</button>
+        <button type="button" id="gridShowBtn" >grid show</button>
+        <button type="button" id="gridHideBtn" >grid hide</button>
+        <button type="button" id="multiSelectBtn" >multi selection</button>
+        <button type="button" id="enableBtn" >enable</button>
+        <button type="button" id="disableBtn" >disable</button>
+        <button type="button" id="setHeightBtn" >setHeight</button>
+        <button type="button" id="setStateBtn" >setState</button>
+        <button type="button" id="cloneDataSetBtn" >cloneDataSetBtn</button>
+        <button type="button" id="setDataSetBtn" >setDataSet</button>
+        <button type="button" id="toastBtn" >toast message</button>
+        <button type="button" id="allMarkedBtn" >allMarked</button>
+        <button type="button" id="isSelectMarkBtn" >isSelectMark</button>
+        <button type="button" id="focusCellBtn" >focusCell</button>
+    </div>
+    <div id='showData'></div>
+</div>
+</body>
+</html>

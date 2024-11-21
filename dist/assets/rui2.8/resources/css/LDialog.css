@@ -1,0 +1,22 @@
+/* LDialog
+------------------------------*/
+.L-dialog {
+	box-shadow: 5px 5px 5px gray;	
+}
+.L-dialog .ft {
+    padding-bottom:5px;
+    padding-right:5px;
+    text-align:right;
+}
+.L-dialog form {
+    margin:0;
+}
+.button-group button {
+    margin: 2px;
+}
+.L-excel-dialog {
+	z-index: 10000;
+}
+.L-excel-dialog .bd {
+	padding: 4px 10px;
+}

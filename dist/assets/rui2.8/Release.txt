@@ -1,0 +1,512 @@
+================Update History===============
+2.8 Version Release (2022/XX/XX)
+
+** New Feature
+    DEVONRUI-2371 : LTreeGridView 필터 기능 추가
+    DEVONRUI-2370 : LTreeGridView 복사/붙여넣기 기능 추가
+    DEVONRUI-2366 : LNumberBox 통화 체크 로직 추가 및 오류 개선
+    DEVONRUI-2307 : LSelectionColumn 개별선택/전체선택 동기화 로직 추가
+
+** Bug
+    DEVONRUI-2368 : LHeaderContextMenu sort 로직 오류 개선
+    DEVONRUI-2353 : LFrameDialog 닫을 시 부모 윈도우 스크롤 되는 현상 개선
+    DEVONRUI-2306 : LCombo 렌더링 비정상 위치로 나타나는 현상 개선 
+    DEVONRUI-2288 : LPivotDialog pivotMetaData 메세지 구조 변경
+    DEVONRUI-2277 : LSlideMenu / LTooltip 혼용 시 LTooltip 위치 오류 현상 개선
+    DEVONRUI-2257 : LMonthBox 네비게이터에서 월 선택 콤보 제거
+    DEVONRUI-2245 : LGridPanel 에서 사용되는 LCheckBox disable image 미적용현상 개선
+    DEVONRUI-2235 : 그리드 Cell Merge 로직 오류 개선
+    DEVONRUI-2233 : LTextBox 사용 시 inputType 옵션 관련 오류 개선
+    DEVONRUI-2202 : LDateBox hide 관련 오류 수정
+    DEVONRUI-2192 : LGridPanel 의 setDataSet 메소드 사용 시 bind 오류 개선
+    DEVONRUI-2142 : LColumn에서 renderer 사용 시 p.editable속성 핸들링 오류 개선
+    DEVONRUI-2132 : LGridPanel로 엑셀 데이터 붙여 넣을때 더미값으로 인한 오류 개선
+
+** Improvement
+    DEVONRUI-2190 : LPivot load 완료 이벤트 추가
+    DEVONRUI-2137 : LGridPanel 붙여넣기 시 완료 이벤트 추가
+
+
+================Update History===============
+2.7 Version Release (2021/02/09)
+** Notice
+    공식 명칭 변경 : DevOn RichUI -> DevOn RUI
+    
+** Bug
+    DEVONRUI-2107 : column 삭제 후 그리드 검색오류 수정
+    DEVONRUI-2103 : 그리드 컬럼 hide 시 가로 스크롤 포지션 위치 개선
+    DEVONRUI-2084 : LTextBox/LCombo optionListBox 항목 줄바꿈현상 수정 및 listbox 포지션 계산로직 개선
+    DEVONRUI-2078 : 그리드 LCheckBox에서 editable:false 시 spacebar로 edit 되는 현상 수정
+    DEVONRUI-2050 : depth별 pixel 값 오류 수정
+    DEVONRUI-2006: LMultiCombo setDataSet 오류 개선
+    DEVONRUI-1977: LHeaderContextMenu resize시 오류 개선
+    DEVONRUI-1952: 그리드 숫자타입 필터링(0값 처리) 개선
+    DEVONRUI-1950: LFromToDateBox의 blur 시 캘린더 처리 개선
+    DEVONRUI-1941: 특정조건에서 combo expand시 포커스 오류 현상 개선
+    DEVONRUI-1923: 정렬조건에 따라 그리드 데이터 reload 시 오류 발생 개선
+
+** New Feature
+    LPivot Component 추가
+    
+** Improvement
+    DEVONRUI-2004: updateDataSet 함수 markedOnly 속성 추가
+    DEVONRUI-1991: LTotalSummary destroy 함수 불필요 코드 삭제        
+
+
+================Update History===============
+2.6 Version Release (2019/04/26)
+** Bug
+    DEVONRUI-1879  Lcombo expandCount 속성 정상적으로 반영되지 않는 현상 수정
+    DEVONRUI-1877  특정조건에서 LBufferGridView 스크롤 계산 오류 현상 수정
+    DEVONRUI-1872  데이터셋의 removeRemained속성과 filter 동시 적용 시 오류 현상 수정
+    DEVONRUI-1774  LDateBox에 한글 입력 시 오류 메세지 보여지지 않는 현상 수정
+    DEVONRUI-1773  그리드의 컬럼에서 editor로 LNumberBox 사용 시 0값이 보여지지 않는 현상 수정
+    DEVONRUI-1769  LCombo 에 autoComplete 적용 시 데이터 로드 타이밍에 따른 값 오류 현상 수정
+    DEVONRUI-1756  rateFormat, weightRenderer 등의 포맷과 관련된 함수 이용 시, 소수점 아래 숫자가 단위기호 뒤로 붙어서 표현되는 현상수정
+    DEVONRUI-1726  그리드에서 데이터셋 필터 적용 시 포커스 동작 및 바인드 동작 오류 수정
+    DEVONRUI-1723  LGridPanel destroy 함수 호출 시 에러발생 오류 수정
+    DEVONRUI-1713  그리드 사용 시  <br> 태그가 포함된 컬럼에서 vMerge 사용할때 렌더링 오류 수정
+** New Feature
+    DEVONRUI-1890  LFromToDateBox에 min/maxdate 속성 추가
+    DEVONRUI-1714  headerContext menu 행별로 필터 적용
+    DEVONRUI-1742  Lpager의 페이지 숫자 버튼 더블클릭 컨트롤 속성 추가
+    DEVONRUI-1658  LTabView의 tab 네비게이션 영역을 위/아래 중 선택가능하도록 옵션 속성 추가
+    
+** Improvement
+    DEVONRUI-1889  그리드 내 검색 로직 변경 - 마지막 검색항목일 경우 처음부터 재검색
+    DEVONRUI-1775  LNumberBox 특수키 입력되지 않도록 수정
+    DEVONRUI-1745  트리뷰 체크박스 체크로직 수정
+    DEVONRUI-1735  LNumberBox에 invalid한 값을 붙여넣기 하고 blur 이벤트 발생 시 직전값으로 되돌리도록 변경
+    DEVONRUI-1700  탭뷰 스크롤 로직 개선 : 탭 추가/삭제/브라우저 사이즈 변경 시
+
+
+================Update History===============
+2.5.1 Version Release (2018/06/29)
+** Bug
+    DEVONRUI-1608 클립보드 paste 이벤트 객체 추가 수정
+    DEVONRUI-1687 LGridPanel doStartEditor 객체 수정 
+
+
+================Update History===============
+2.5 Version Release (2018/05/18)
+** Bug
+    DEVONRUI-1608 클립보드 paste 이벤트 객체 오류 수정
+    SVN Rev.9538  LNumberBox에서 한글 입력 시 blur 처리가 되지 않는 현상 수정
+    SVN Rev.9530  LDateBox 캘린더 월 이동후 날짜선택이 되지 않던 부분 수정
+
+** New Feature
+    DEVONRUI-1594 그리드 영역 rtl 기능 적용 
+    DEVONRUI-1430 클립보드 팝업창 기능 개선
+    
+** Improvement
+    DEVONRUI-1614 LDateTimeBox에 config 값 추가 (defaultValue/disabled)
+    DEVONRUI-1607 DateBox blur 처리부분 수정
+    SVN Rev.9530  LBufferedGridView의 updateColumnFit() 로직 개선
+    DEVONRUI-833  그리드의 summary의 count 사용시 null 데이터를 연산에서 제외하는 로직 추가
+
+
+================Update History===============
+2.4 Version Release (2015/06/05)
+** Bug
+    7437 결함 숨겨진 탭 내부에 total summary 가 그려질 경우 최하단 row 가 안보이는 현상
+    7275 결함 combo 에서 filtering 된 상태에서 선택후 blur 되면 다른 값으로 선택되어 있는 문제
+	7164 결함 그리드내의 NumberBox 에 신규 데이터일 경우 0이 입력되지 않는 현상
+	5642 결함 NumberBox 에서 포커스가 없는 상태에서 setValue() 를 호출하면 validation 이 적용 안되는 현상
+	5636 결함 그리드 엑셀 다운로드 다이얼로그를 띄우지 않을 경우 파일명이 undefined 로 넘어가는 문제
+	5531 결함 그리드 summary 사용시 하단 데이터가 숨겨져서 나오는 현상
+	4787 결함 여러개의 form 을 가진 화면에서 LForm 에서 disable() 시 모든 form 의 객체가 disable 되는 현상
+	4273 결함 그리드에 데이터가 없을때 브라우저 리사이즈시 전체선택 체크박스가 체크된 상태가 되는 현상
+	3995 결함 From to datebox 가 그리드 위에 있을시 달력이 보이지 않는 현상
+	3992 결함 그리드 틀고정시 렌더링 안되는 현상 패치
+	2301 결함 Dataset 의 batch 사용시 신규 row 추가하고 삭제한 후 다시 row 추가하면 스크립트 에러 발생
+	2292 결함 Tree Grid 에서 insert 후 delete 시 row 가 삭제되지 않고 남아있어서 체크 박스 체크시 에러 발생
+	
+	
+** New Feature
+	5990 새기능 그리드에서 ctrl+c, ctrl+v 시에 클립보드창이 뜨는 것을 막는 옵션 추가
+	4966 새기능 헤더툴바 커스텀하게 변경하는 방법
+    3432 새기능 RUI 그리드 스크롤 오류에 관한 문의
+	3427 새기능 최상위 node에 load되는것과 동시에 focus를 주는 방법
+	
+** 사용성
+    7468 기능개선 그리드의 summary 의 count 사용시 null 데이터를 연산에서 제외하는 기능 추가
+    3113 기능개선 그리드에 툴팁 사용시 셀의 데이터가 변경되어도 툴팁의 내용이 변하지 않아 동기화 시키는 기능 개선	
+	3112 기능개선 LMonthBox 에 로케일 적용
+
+
+================Update History===============
+2.3 Version Release (2015/02/24)
+** Bug
+    2275 결함 LTextBox의 mask 적용시 스크립트 오류 증상 해결
+    2271 결함 LTextBox에서 2회 이상 disable이 메소드가 호출되면 입력이 불가능한 문제 해결
+    2259 결함 그리드의 LSelectionColumn에서 전체 체크시 canMarkable 이벤트를 사용할 경우 전체선택이 취소되지 않는 증상 해결
+    2253 결함 LMultiComo에 defaultValue를 적용하면 에러가 발생하는 증상 해결
+    2247 결함 그리드에서 마지막 row 삭제 후 그 위의 row 의 LDateBox를 클릭시 오류 발생하는 증상 해결
+    2224 결함 그리드의 마지막 row가 출력되지 않는 증상 해결
+    2217 결함 LCombo에서 load 이벤트가 발생하지 않는 증상 해결
+    2209 결함 5000건 이상 조회시 5000건까지만 dataset이 로드되는 증상 해결
+    2200 결함 LNumberBox의 decimalSeparator 변경에 따른 에러
+    2186 결함 소수점 표시가 다를경우 입력이 이상해지는 증상, 달력에서 포멧을 바꿀 경우 날짜 키입력이 안되는 증상 해결
+    2182 결함 Rui.confirm시 zIndex가 10000으로 적용되어서 달력이 뒤로 감춰지는 증상 해결
+    2180 결함 LNumberBox에서 thousandsSeparator와 decimalSeparator 속성을 적용한후 값을 바꾸면 LNumberBox를 벗어날 수 없는 증상 해결
+    2179 결함 LCombo의 useEmptyText가 false 경우 신규건 추가시 기본값이 변경되지 않는 문제 해결
+    2170 결함 LNumber의 format에서 sDecimalSeparator 속성을 적용할 경우 값이 잘 못된 값이 나오는 증상 해결
+    2163 결함 IE8에서 LTextBox에 password type으로 설정하면 초기화시 에러가 발생하는 증상 해결
+    2162 결함 LCheckBox 폼으로 바인드된 그리드의 행이동시 LCheckBox와 바인드된 컬럼의 값이 변경되는 증상 해결
+    2153 결함 멀티 데이터셋 저장시 값이 Rui.alert으로 호출하면 값이 바뀌는 증상 해결
+
+** New Feature
+    1676 새기능 태블릿 지원
+    2209 새기능 엑셀 다운로드시 마크된 항목만 다운로드되는 기능 추가
+    2218 새기능 LTab에 disabled 기능 구현
+
+** 사용성
+    2150 개선 모바일 스크롤 개선
+    2167 새기능 LDataSetManager의 beforeUpdate이벤트를 선택적으로 수행할 수 있는 속성 지원
+
+
+================Update History===============
+2.2 Version Release (2014/11/13)
+
+** Bug
+	 2073 결함 IE8의 호환성 보기에서 LDateBox의 calendar가 선택되지 않는 문제
+	 2046 결함 그리드의 hidden 컬럼을 editable할 때 엉뚱한 컬럼에 editable이 변경되는 문제
+	 2043 결함 Scroller.getScrollHeight에서 스크립트 오류 발생하는 문제
+	 2039 결함 LSelectionModel을 lock 건 후 DataSet clear할 경우 그리드 재 랜더링이 안됨
+	 2031 결함 그리드가 resize될 때 일부 데이터가 랜더링되지 않고 사라지는 문제
+	 2029 결함 그리드에서 PopupTextBox 사용중 편집기를 열어놓고 팝업을 열 경우 문제
+	 2028 결함 멀티헤더에서 틀고정시 그리드폭을 넓히면 헤더의 width가 변경되지 않음
+	 2023 결함 LCombo에 마우스로 focus 했다가 값을 변경하지 않고 body를 클릭하여 blur할 경우 combo changed 이벤트 발생하는 문제
+	 2022 결함 바인드된 데이터셋에 신규 추가후 소트를 하면 바인드 위치가 잘 못 됨
+	 2017 결함 LCombo에서 editable이 true일 경우 값이 공백값이 나오는 증상
+	 2010 결함 Combo의 editable을 이용하여 값을 선택후 값을 지우면 change이벤트가 발생하지 않아 bind된 경우 값이 데이터셋에 남는증상
+	 2009 결함 그리드에서 checkbox의 gridFixed 사용시 다른 셀에 포커스한 후 스페이스바 키를 누르면 체크 또는 체크해제되는 증상
+	 1996 결함 콤보의 데이터 재로딩시 코드값이 같으면 display값이 안 바뀌는 증상
+	 1995 결함 그리드의 irregular scroll 사용시에도 첫 랜더링시 하단에 일부 공간이 생기는 문제
+	 1991 결함 칼렌더 그룹 사용시 마우스 오버를 하면 불규칙한 에러 발생
+	 1989 결함 헤더 툴바 호버시 깜박이기만 하고 선택을 못하는 증상
+	 1981 결함 소계가 상황에 따라 값이 잘 못 계산되는 문제
+	 1978 결함 그리드의 스크롤을 3단계 내린 후 재조회하여 4개 미만의 데이터 조회시 랜더링이 비정상되는 문제
+	 1892 결함 그리드에서 LTooltip이 적용안되는 문제
+	 1876 결함 LAllowValidator에서 공백문자도 숫자로 판단하고 허용하는 문제 패치
+	 1868 결함 그리드의 데이터 재 조회시 기존보다 데이터가 적어질 경우 데이터 랜더링 안되는 증상
+	 1852 결함 autoComplete가 되면 LBind가 가끔 연결 안되는 증상
+
+** New Feature
+	 2064 새기능 LUnorderedList의 각 노드에 브라우저 기본 툴팁 기능 추가
+	 1984 새기능 LFrameDialog와 같은 iframe을 사용할 경우 iPad에서의 터치 스크롤이 가능하도록 조치
+	 1676 새기능 태블릿 지원
+
+** 사용성
+	 2058 개선 디자인 변경
+	 2001 개선 LTreeView에서 dynamic load를 사용시 상위 노드가 mark되어 있을 시 하위 노드들도 mark되어 로드되도록 개선
+	 1985 개선 콤보의 코드값이 숫자형으로 0인경우 emptyValue로 적용안되는 증상
+	 1983 개선 LFrameDialog를 띄울때 Input 박스에서 keydown enter를 이용할 경우 페이지 갱신되는 증상
+	 1822 개선 LBootstrap에 min 및 min-hold 기능 추가 및 구조 변경    
+	
+================Update History===============
+2.1.2 Version Release (2014/11/3)
+
+** Bug
+    1646 결함 멀티콤보 바인드 그리드 출력, 콤보 자동완성 기능 사용시 값이 없을 경우 목록이 안나오는 증상
+    1602 결함 LNumberBox에서 정상적인 값을 넣어도 minValue값의 아래에 있으면 무조건 초기화되어 값을 입력할 수 없음
+    1601 결함 LNumberBox의 minValue를 지정할 경우 key in 할 때 마다 invalid 관련 toast메시지 출력되며 초기화됨
+    1594 결함 LPopupTextBox의 useHiddenValue사용중 setValue, setDisplayValue 후 blur시 숨겨진 값이 보이는값으로 변경되는 증상    문 혁찬    2014/08/04 15:08
+    1593 결함 LDateBox의 dateType: 'string' 인 경우 사용자가 값 변경중 잘못된 날짜입력시 이상한 값으로 변경되는 증상
+    1582 결함 LTimeBox에서 maskValue를 사용하면 스핀버튼이 작동안함
+    1576 결함 LCombo의 생성자에 disabled 속성이 true일 경우 disabled가 적용되지 않음
+    1573 결함 그리드에 LPager를 사용시 브라우저 창을 리사이즈 시키면 에러 발생
+    1562 결함 LSlideMenu 에서 render 전 dataSet의 row 위치가 제대로 출력이 안되는 문제
+    1540 결함 RUI Grid Summary 샘플이 IE11에서 처음 데이터 조회시 스크롤과 다르게 마지막이 보여지는 증상
+    1522 결함 데이터셋의 행이 -1인 경우 첫번째로 행을 이동시 canRowPosChange 이벤트가 발생안함.
+    1509 결함 LRadioGroup 버튼에 setValue시 올바르게 선택되지 않는 증상
+    1494 결함 LBind 사용중 현재의 row가 아닌 다른 row의 값을 변경시에도 바인드된 컨트롤의 값이 변경되는 증상
+    1493 결함 탭안의 그리드에서 row의 건수 1건밖에 안나오는 증상
+    1486 결함 그리드 편집기가 활성화 된 후 컬럼을 이동하면 기존 편집기가 다른 위치에 떠 있는 증상
+    1481 결함 LToolTip에서 toString 에러 및 tooltip값이 이전 컬럼값으로 나오는 문제
+    1478 결함 LBufferedGridView의 redoRender시 스크롤바 관련 스크립트 오류발생
+    1473 결함 toast 메시지 크로스 브라우저에 맞춰서 좌우 중앙 정렬
+    1471 결함 LPanel에서 zindex가 동적으로 적용되지 않는 문제
+    1467 결함 LSlideMenu의 신규노드 추가시 스크립트 오류 발생 및 포커스 불규칙적 이동이 발생됨
+    1463 결함 ie11에서 LNumberBox를 반복적으로 입력할 경우 에러 발생
+    1443 결함 툴팁의 내용이 우측끝에 붙으면 화면에 걸려 안 보이는 문제
+    1441 결함 autoWidth시 좌우스크롤 발생하는 경우가 발생함.
+    1438 결함 그리드의 setHeight으로 크기 변경시 데이터가 일부 행만 출력되는 증상
+    1404 결함 소계, 합계가 포함된 그리드에서 스크롤이 필요없는데도 스크롤이 나타나는 증상
+    1358 결함 LPanel 생성시 무조건 div가 하나 더 생기는 증상
+
+** New Feature
+    1450 새기능 데이터셋에 min/max 값을 얻어올 수 있는 기능(메소드) 추가
+    1841 새기능 태블릿 제한적 지원 (iOS Safari, Android Chrome브라우저 및 WebView)
+
+** 사용성
+    1584 개선 LTooltip의 마우스 위치에 따라 화면에 툴팁이 잘리지 않도록 툴팁 처리 개선
+    1636 개선 LTimeBox에서 key-in으로 25:01이 입력될수 있음, 자체 값 검사하여 입력전 값으로 되될리도록 해야함.
+    1822 개선 LBootstrap에 min 및 min-hold 기능 추가 및 구조 변경
+    1596 개선 dataSetManager로 로딩하면 캐쉬로 인해 readFieldFormater가 작동하지 않는문제 개선
+    1592 개선 rui를 로컬 file 경로로 부터도 페이지가 뜨도록 기능 개선
+    1584 개선 LTooltip의 마우스 위치에 따라 화면에 툴팁이 잘리지 않도록 툴팁 처리 개선
+    1574 개선 LDialog의 setButtons 메소드 추가
+    1515 개선 LFrameDialog 내부 컨텐츠가 load된 후를 부모가 알 수 있도록 이벤트 제공
+    1511 개선 LDateTimeBox, LFromToDateBox의 LBind 연결을 지원하도록 개선
+    1498 개선 그리드에서 일반 button 태그를 넣어도 popup 이벤트와 연동되게 수정
+    1476 개선 LDataSet의 load 메소드시 dataSetId의 이름을 직접 넣어서 가지고 올 수 있게 개선
+    1475 개선 LDateTimeBox에서도 dataType: 'string'을 사용할 수 있도록 속성 추가
+    1461 개선 Pager Scroll 기능 사용중 pager를 통해 페이지 이동시에도 스크롤이 이동하도록 개선
+    1421 개선 LTabView의 탭 index가 변경되기 전에 변경되어도 되는지 확인하는 단계의 이벤트 추가
+    1359 개선 그리드의 정렬 아이콘을 반대로 변경
+    1357 개선 LNotificationManager에서 하단 스크롤 안생기게 수정
+    1352 개선 그리드 정렬시 기본으로 null이나 undefined일때 ''로 변경하여서 정렬하게 수정
+    1333 개선 LHeaderToolbar에서 필터시 멀티콤보의 display값으로 출력
+    1332 개선 LDataSet의 sort시 대소문자 구분 안하게 수정
+    1331 개선 LMessageBox에서 엔터키로 button이 클릭되도록 개선
+    1330 개선 firefox에서 LMultiCombo의 항목을 space로 선택이 가능하게 수정
+    1318 개선 LLoadPage의 자동으로 닫히는 시간을 조절할 수 있도록 개선
+    1316 개선 중복된 toast 메시지 호출되면 한번만 출력되게 수정
+    1298 개선 개발자 가이드 개선
+    
+
+================Update History===============
+2.1.1 Version Release (2014/09/01)
+
+** Bug
+    1646 결함 멀티콤보 바인드 그리드 출력, 콤보 자동완성 기능 사용시 값이 없을 경우 목록이 안나오는 증상
+    1602 결함 LNumberBox에서 정상적인 값을 넣어도 minValue값의 아래에 있으면 무조건 초기화되어 값을 입력할 수 없음
+    1601 결함 LNumberBox의 minValue를 지정할 경우 key in 할 때 마다 invalid 관련 toast메시지 출력되며 초기화됨
+    1594 결함 LPopupTextBox의 useHiddenValue사용중 setValue, setDisplayValue 후 blur시 숨겨진 값이 보이는값으로 변경되는 증상    문 혁찬    2014/08/04 15:08
+    1593 결함 LDateBox의 dateType: 'string' 인 경우 사용자가 값 변경중 잘못된 날짜입력시 이상한 값으로 변경되는 증상
+    1582 결함 LTimeBox에서 maskValue를 사용하면 스핀버튼이 작동안함
+    1576 결함 LCombo의 생성자에 disabled 속성이 true일 경우 disabled가 적용되지 않음
+    1573 결함 그리드에 LPager를 사용시 브라우저 창을 리사이즈 시키면 에러 발생
+    1562 결함 LSlideMenu 에서 render 전 dataSet의 row 위치가 제대로 출력이 안되는 문제
+    1540 결함 RUI Grid Summary 샘플이 IE11에서 처음 데이터 조회시 스크롤과 다르게 마지막이 보여지는 증상
+    1522 결함 데이터셋의 행이 -1인 경우 첫번째로 행을 이동시 canRowPosChange 이벤트가 발생안함.
+    1509 결함 LRadioGroup 버튼에 setValue시 올바르게 선택되지 않는 증상
+    1494 결함 LBind 사용중 현재의 row가 아닌 다른 row의 값을 변경시에도 바인드된 컨트롤의 값이 변경되는 증상
+    1493 결함 탭안의 그리드에서 row의 건수 1건밖에 안나오는 증상
+    1486 결함 그리드 편집기가 활성화 된 후 컬럼을 이동하면 기존 편집기가 다른 위치에 떠 있는 증상
+    1481 결함 LToolTip에서 toString 에러 및 tooltip값이 이전 컬럼값으로 나오는 문제
+    1478 결함 LBufferedGridView의 redoRender시 스크롤바 관련 스크립트 오류발생
+    1473 결함 toast 메시지 크로스 브라우저에 맞춰서 좌우 중앙 정렬
+    1471 결함 LPanel에서 zindex가 동적으로 적용되지 않는 문제
+    1467 결함 LSlideMenu의 신규노드 추가시 스크립트 오류 발생 및 포커스 불규칙적 이동이 발생됨
+    1463 결함 ie11에서 LNumberBox를 반복적으로 입력할 경우 에러 발생
+    1443 결함 툴팁의 내용이 우측끝에 붙으면 화면에 걸려 안 보이는 문제
+    1441 결함 autoWidth시 좌우스크롤 발생하는 경우가 발생함.
+    1438 결함 그리드의 setHeight으로 크기 변경시 데이터가 일부 행만 출력되는 증상
+    1404 결함 소계, 합계가 포함된 그리드에서 스크롤이 필요없는데도 스크롤이 나타나는 증상
+    1358 결함 LPanel 생성시 무조건 div가 하나 더 생기는 증상
+
+** New Feature
+    1450 새기능 데이터셋에 min/max 값을 얻어올 수 있는 기능(메소드) 추가
+    1841 새기능 태블릿 제한적 지원 (iOS Safari, Android Chrome브라우저 및 WebView)
+
+** 사용성
+    1584 개선 LTooltip의 마우스 위치에 따라 화면에 툴팁이 잘리지 않도록 툴팁 처리 개선
+    1636 개선 LTimeBox에서 key-in으로 25:01이 입력될수 있음, 자체 값 검사하여 입력전 값으로 되될리도록 해야함.
+    1822 개선 LBootstrap에 min 및 min-hold 기능 추가 및 구조 변경
+    1596 개선 dataSetManager로 로딩하면 캐쉬로 인해 readFieldFormater가 작동하지 않는문제 개선
+    1592 개선 rui를 로컬 file 경로로 부터도 페이지가 뜨도록 기능 개선
+    1584 개선 LTooltip의 마우스 위치에 따라 화면에 툴팁이 잘리지 않도록 툴팁 처리 개선
+    1574 개선 LDialog의 setButtons 메소드 추가
+    1515 개선 LFrameDialog 내부 컨텐츠가 load된 후를 부모가 알 수 있도록 이벤트 제공
+    1511 개선 LDateTimeBox, LFromToDateBox의 LBind 연결을 지원하도록 개선
+    1498 개선 그리드에서 일반 button 태그를 넣어도 popup 이벤트와 연동되게 수정
+    1476 개선 LDataSet의 load 메소드시 dataSetId의 이름을 직접 넣어서 가지고 올 수 있게 개선
+    1475 개선 LDateTimeBox에서도 dataType: 'string'을 사용할 수 있도록 속성 추가
+    1461 개선 Pager Scroll 기능 사용중 pager를 통해 페이지 이동시에도 스크롤이 이동하도록 개선
+    1421 개선 LTabView의 탭 index가 변경되기 전에 변경되어도 되는지 확인하는 단계의 이벤트 추가
+    1359 개선 그리드의 정렬 아이콘을 반대로 변경
+    1357 개선 LNotificationManager에서 하단 스크롤 안생기게 수정
+    1352 개선 그리드 정렬시 기본으로 null이나 undefined일때 ''로 변경하여서 정렬하게 수정
+    1333 개선 LHeaderToolbar에서 필터시 멀티콤보의 display값으로 출력
+    1332 개선 LDataSet의 sort시 대소문자 구분 안하게 수정
+    1331 개선 LMessageBox에서 엔터키로 button이 클릭되도록 개선
+    1330 개선 firefox에서 LMultiCombo의 항목을 space로 선택이 가능하게 수정
+    1318 개선 LLoadPage의 자동으로 닫히는 시간을 조절할 수 있도록 개선
+    1316 개선 중복된 toast 메시지 호출되면 한번만 출력되게 수정
+    1298 개선 개발자 가이드 개선
+    
+================Update History===============
+2.1.0 Version Release (2014/05/30)
+
+** Bug
+    1165    결함   소계를 사용중인 그리드의 행 추가, 삭제시 스크립트 오류 발생하여 랜더링이 안되는 문제 수정
+    1133    결함   ie8의 호환성 보기에서 멀티콤보의 항목을 선택할 수 없는 문제
+    1119    결함   LNotificationManager에서 rui_config.js가 적용되게 수정
+    1116    결함   LDateTImeBox를 그리드 셀에서 편집기로 사용시 줄바꿈되는 문제 수정
+    1114    결함   onResize 이벤트의 크로스 브라우저 처리
+    1108    결함   Form Object에서 invalid시 widht와 height의 사이즈가 변하지 않게 수정
+
+** New Feature
+    375 새기능 탭뷰에서 탭이 많을 경우 좌우스크롤 버튼 디자인이 가능하게 개선
+    1170    새기능   LUIComponent를 사용하는 LButton 추가
+
+** 사용성
+    1274    개선   toast 메시지 기능 향상
+    1171    개선   엑셀 다운로드 실제 파일로 저장되도록 개선
+    1145    개선   LPanel에 shadow 및 wrapper 기능 제거
+    1143    개선   LGridPanel에서 LColumnModel을 새로운 걸로 갱신하는 기능 추가
+    1141    개선   LCheckBox에서 스페이스키를 입력하면 선택/취소가 되게 수정
+    1140    개선   트리뷰에서 데이터 로딩시 mask 처리
+    1138    개선   트리의 체크박스를 canMarkable 이벤트에 따라 선택 가능 여부를 지원하게 수정
+    1127    개선   LDateBox의 placeholder에 다국어 처리 지원
+    1117    개선   그리드 클립보드시 태그가 있으면 태그를 제거하고 데이터를 생성
+    1115    개선   LElement의 click 메소드 추가
+    1113    개선   LCombo의 listWidth에 -1을 적용하면 width값을 따라가게 수정
+    1112    개선   Rui의 root 경로를 얻어오는 메소드 추가
+    1110    개선   LFrameDialog의 frame안에 dialog를 얻어올 수 있게 기능 추가
+    1109    개선   LGridPanel의 toast 메시지를 공통 유틸리티로 변경
+
+================Update History===============
+2.0.4 Version Release (2014/03/31)
+
+** Bug
+
+** New Feature
+    대용량 데이터 처리 가능하도록 그리드 기능 개선
+
+** 사용성
+
+================Update History===============
+2.0.3 Version Release (2014/03/06)
+
+** Bug
+    895 결함  숨겨진 그리드의 데이터를 재 조회했을 때 mask가 나타나지 않는 증상
+    883 결함  그리드의 콤보에서 items 데이터를 로딩하면 출력시 계산 형식으로 출력됨
+    879 결함  summary 적용시 소계 label이 적용되지 않는 문제
+    871 결함  그리드에서 br 사용후 setHeight가 발생하면 데이터가 다 안 나오는 문제
+    870 결함  irregularScroll을 사용하는 그리드를 setHeight하여 크기를 조정할 경우 스크립트 오류 발생함
+    864 결함  LCookieProvider 에서 useLocalStorage값이 true로 인해 작동하지 않음
+    863 결함  LHeaderContextMenu 사용시 그리드의 height가 50보다 작게 설정되면 ie에서 에러 발생
+    860 결함  최신 크롬브라우저에서 스크롤바의 Step 버튼이 없어졌으므로 RUI의 스크롤 스텝버튼도 제거
+    858 결함  그리드에 데이터 편집시 편집된 데이터중에 <BR>이 포함될 경우 스크롤이 안생기는 문제
+    844 결함  IE8에서 그리드의 행을 선택 후 disable된 Textbox를 클릭할 경우 스크립트 오류 발생
+    840 결함  TabView의 selectTab() 실행시 이전 선택된 탭이 여전히 선택된 문제
+    826 결함  그리드 groupMerge사용시 vMerge:true를 중간에 누락할 경우 그룹머지가 새롭게 시작되는증상
+
+** New Feature
+
+** 사용성
+
+
+================Update History===============
+2.0.2 Version Release (2014/01/09)
+** Bug
+    1. 그리드의 데이터 랜더링을 모두 마친 후 y-Scroller가 추가될 경우 x-Scroll이 끝까지 이동하지 않는 증상
+    2. MacOS의 Chrome, Safari등에서 그리드 틀고정 사용시 좌우틀이 틀어지는 증상
+    3 LSwitch의 changed이벤트에서 off시에 on된 버튼의 index가 제공되는 증상
+
+** New Feature
+    1. IE 사용환경 개선을 위해 HTML에 L-ua-msie{version}을 추가하여 IE 문서모드에 따른 차별적 디자인이 가능함.
+
+** 사용성
+    1. TabMenu의 현재 펼쳐진 노드를 다시클릭할 경우 collapse되도록 수정.
+    2. DataSetManager의 updateDataSet할 때 서버로 전송될 DataSet 값의 parameter name을 변경할수 있도록 수정
+
+================Update History===============
+2.0.1 Version Release (2013/12/17)
+** Bug
+    1. LGridPanel에서 applyTo로 그리드 생성시에도 DOM 계층이 renderTo 계층으로 생성됨.
+    2. LNumberBox를 사용하는 일부 브라우저에서 숫자 이외에 한글이 입력되는 증상.
+    3. Grid의 데이터가 없는 컬럼 너비를 최소화한 후 다시 크게 늘리려할 때 늘려지지 않는 증상. 
+    4. LCheckBox를 단독으로 사용시 name 속성을 지정하지 않을 경우 name이 gen-id로 생성되는 증상. 
+    5. IE10에서 placeholder 기능이 지원되는데 null값일때도 문자로 인식하는 문제.
+    6. 그리드의 Total Summary를 사용중 마우스로 컬럼의 순서를 변경할 경우 마지막 행이 합계행에 가려지는 증상.
+    
+** New Feature
+    1. 그리드 내 데이터 검색 기능 추가
+        - 그리드 컬럼을 선택후 Ctrl+F 키를 누르면 검색 다이얼로그가 활성되며 키워드를 입력하여 검색된 행으로 이동할 수 있다.
+    2. LBind의 대상 데이터셋이 빈 경우 폼 컨트롤들은 disabled 상태가 된다.
+        - LBind의 대상 데이터셋이 빈 경우 바인드된 폼 컨트롤들은 disable 상태가 되며 데이터셋에 행이 없는동안 유지된다.
+        - 따라서 신규행을 생성하거나, 데이터를 로드하여 데이터셋에 행이 발생되면 disabled상태에서 자동으로 enable 상태가 된다.
+    3. 그리드에서 멀티 셀 선택 후 del 키로 데이터를 삭제할 수 있는 기능 추가
+    4. 멀티선택콤보 추가 (Rui.ui.form.LMultiCombo)
+    
+    
+** 사용성
+    1. LTabMenu, LSlideMenu 플러그인 사용시 디자인 요소 변경
+        - RUI의 기본 CSS인 rui.css와 rui_skin_xxx.css를 조합하여 이 두 메뉴 컴포넌트를 사용할 경우 
+        디자인 변경이 용이하지 않고 계층이 맞지 않아 디자인 적용에 어려움이 있었기에 재구성함.
+        변경 전:
+            - rui.css는 메뉴 긴능으로 판단할 수 있는 디자인적 요소 스타일들이 전혀 없음.
+            - rui.skin_xxx.css는 메뉴의 구조, 구성 및 크기등 스킨의 영역을 넘어선 스타일들이 포함되어 있음.
+        벼경 후: 
+            - rui.css에는 최소한의 디자인이 적용되어 메뉴 기능이라는 효과가 나타나도록 하는 스타일만 포함.
+            - rui_skin_xxx.css에는 색상, 폰트, 크기등의 스타일만 포함.
+            - 기타 구성 및 디자인은 해당 업무 페이지에서 구현하도록 함.
+        * 중요!
+        기존 RUI 2.0의 LTabMenu와 LSlideMenu를 사용중이라면 RUI 2.0.1을 적용시 메뉴의 디자인 스타일을 
+        새로운 스타일 구조에 맞게 수정 해야함.
+    2. LFileBox의 기본 디자인 개선
+        - 파일 선택을 위한 "browse..." 버튼의 디자인을 개선하고, 사용자가 변경할 수 있도록 css를 추가함.
+    3.  LCombo의 목록의 높이를 css로 제어할 수 있도록 수정
+    4. 파일 업로드관련된 데모 및 샘플 정리
+        - 파일 업로드를 위한 LFileBox의 샘플 "fileboxSample.html" 추가
+        - 파일 업로드 기능을 지원하는 LFileUploadDialog의 샘플인 "fileUploadDialogSample.html" 추가 
+        - Excel파일을 업로드 한 후 그 데이터를 그리드에 출력하는 샘플인 "gridpanelExcelUploadSample.html" 추가
+    5. readonly인 LDateBox에 값이 없을 경우 mask인 "____-__-__"가 나타나지 않도록 개선
+    6. 그리드의 컬럼을 클릭시 sortable:true 컬럼의 경우 무조건 정렬 되는데 정렬 마크를 클릭해야만 정렬이되도록 수정
+     
+
+================Update History===============
+2.0 Version Release
+** Bug
+
+
+** New Feature
+
+    
+** 사용성
+
+================Update History===============
+2.0_Beta3 Version Release
+** Bug
+
+
+** New Feature
+
+    
+** 사용성
+
+================Update History===============
+2.0_Beta3 Version Release
+** Bug
+
+
+** New Feature
+
+    
+** 사용성
+
+================Update History===============
+2.0_Beta1 Version Release
+** Bug
+
+
+** New Feature
+
+    
+** 사용성
+
+================Update History===============
+2.0_Alpha2 Version Release
+** Bug
+
+
+** New Feature
+
+    
+** 사용성
+
+=================Update History==============
+2.0 Version Release
+** Bug
+
+
+** New Feature
+
+    
+** 사용성
+
+

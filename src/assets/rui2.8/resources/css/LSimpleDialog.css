@@ -1,0 +1,46 @@
+/* LSimpleDialog
+------------------------------*/
+.L-simple-dialog .bd {
+    padding: 10px;
+}
+.L-simple-dialog .bd .L-icon {
+    background-repeat:no-repeat;
+    width:16px;
+    height:16px;
+    margin-right:10px;
+    float:left;
+}
+
+.L-simple-dialog .bd span.blckicon {
+    background: url("./images/container/blck16_1.gif") no-repeat;
+}
+
+.L-simple-dialog .bd span.alrticon {
+    background: url("./images/container/alrt16_1.gif") no-repeat;
+}
+
+.L-simple-dialog .bd span.hlpicon {
+    background: url("./images/container/hlp16_1.gif") no-repeat;
+}
+
+.L-simple-dialog .bd span.infoicon {
+    background: url("./images/container/info16_1.gif") no-repeat;
+}
+
+.L-simple-dialog .bd span.warnicon {
+    background: url("./images/container/warn16_1.gif") no-repeat;
+}
+
+.L-simple-dialog .bd span.tipicon {
+    background: url("./images/container/tip16_1.gif") no-repeat;
+}
+
+.L-simple-dialog .ft {
+    padding-bottom:5px;
+    padding-right:5px;
+    text-align:right;
+}
+
+.L-simple-dialog form {
+    margin:0;
+}

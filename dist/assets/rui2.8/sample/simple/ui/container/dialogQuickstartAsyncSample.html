@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Dialog Quick Start Async</title>
+    <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+    <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+    <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+    <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+    <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    <style type="text/css">
+        body {
+            margin:0;
+            padding:0;
+        }
+            
+        #example {height:30em;}
+        .bd label { display:block;float:left;width:45%;clear:left; }
+        .clear { clear:both; }
+        #resp { margin:10px;padding:5px;border:1px solid #ccc;background:#fff;}
+        #resp li { font-family:monospace }
+        
+    </style>
+    <script type='text/javascript' class="script-code">
+    $C.namespace("Rui.example.container");
+    $C(function() {
+        
+        $C('#show').button();
+        $C('#show').on('click', function(){
+            dialog1.clearInvalid();
+            dialog1.show(true);
+        });
+    
+        $C('#hide').button();
+        $C('#hide').on('click', function(){
+            dialog1.hide(false);
+        });
+        
+        $C('#initialize').button('initialize');
+        $C('#initialize').on('click', function(){
+        });
+    
+        var validatorManager = $C.validatorManager({
+            validators:[
+                {id:'firstname', validExp:'First Name:true:maxByteLength=30'},
+                {id:'lastname', validExp:'Last Name:true:maxByteLength=30'},
+                {id:'email', validExp:'email:true:email'},
+                {id:'state', validExp:'State:true'},
+                {id:'radiobuttons', validExp:'Radio buttons:true:groupRequire=radiobuttons'},
+                {id:'textarea', validExp:'Text area:true:maxByteLength=100'},
+                {id:'cbarray', validExp:'Multi checkbox:true:groupRequire=cbarray'}
+            ]
+        });
+    
+        /*<b>*/
+        // Define various event handlers for Dialog
+        var handleSubmit = function() {
+            if(validatorManager.validateGroup('dialog1') != true) return;
+            this.submit();
+        };
+        
+        var handleCancel = function() {
+            this.cancel(true);
+        };
+        var handleSuccess = function(o) {
+            var response = o.responseText;
+            response = response.split("<!")[0];
+            document.getElementById("resp").innerHTML = response;
+        };
+        var handleFailure = function(o) {
+            alert("Submission failed: " + o.status);
+        };
+    
+        // Instantiate the Dialog
+        var dialog1 = $C('#dialog1').dialog( 
+            { 
+                width : 400,
+                visible : false, 
+                postmethod:'async',
+                buttons : 
+                    [ 
+                        { text:"Submit", handler:handleSubmit, isDefault:true },
+                        { text:"Cancel", handler:handleCancel } 
+                    ],
+                callback : { 
+                    success: handleSuccess,
+                    failure: handleFailure
+                } 
+            });
+        
+        // Render the Dialog
+        dialog1.render();
+        /*</b>*/
+    });
+    </script>
+</head>
+<body>
+<h1>dialog quickstart async sample</h1>
+<h2>dialog를 마크업으로 생성하여 aync로 서버에 요청하는 샘플</h2>
+<div class="LblockLine"></div>
+<div>다이얼로그 생성 후 서버에 요청을 합니다.</div>
+<div id='bd'>
+    <div>
+    <button id="show">Show dialog1</button> 
+    <button id="hide">Hide dialog1</button>
+    <button id="initialize">Initialize dialog1</button>
+    </div>
+    <div class="LblockMarkupCode">
+        <div id="dialog1">
+        <div class="hd">Please enter your information</div>
+        <div class="bd">
+        <form name="frm" method="post" action="/consoleLog.dev">
+            <label for="firstname">First Name:</label><input type="text" id="firstname" name="firstname" />
+            <label for="lastname">Last Name:</label><input type="text" id="lastname" name="lastname" />
+            <label for="email">E-mail:</label><input type="text" id="email" name="email" /> 
+        
+            <label for="state">State:</label>
+            <select multiple="multiple" id="state" name="state">
+                <option value="California">California</option>
+                <option value="New Jersey">New Jersey</option>
+                <option value="New York">New York</option>
+            </select> 
+        
+            <div class="clear"></div>
+        
+            <label >Radio buttons:</label>
+            <input type="radio" id="radiobuttons1" name="radiobuttons" value="1" /> 1
+            <input type="radio" id="radiobuttons2" name="radiobuttons" value="2" /> 2
+            
+            <div class="clear"></div>
+        
+            <label for="check">Single checkbox:</label><input type="checkbox" id="check" name="check" value="1" /> 1
+            
+            <div class="clear"></div>
+                
+            <label for="textarea">Text area:</label><textarea id="textarea" name="textarea" rows="3" cols="25"></textarea>
+        
+            <div class="clear"></div>
+        
+            <label >Multi checkbox:</label>
+            <input type="checkbox" id="cbarray1" name="cbarray" value="1" /> 1
+            <input type="checkbox" id="cbarray2" name="cbarray" value="2" /> 2
+        </form>
+        </div>
+        </div>
+    </div>
+    <div id="resp">Server response will be displayed in this area</div> 
+</div>
+
+</body>
+</html>

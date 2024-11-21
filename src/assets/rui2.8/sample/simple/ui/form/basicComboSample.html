@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Basic Combo basic</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type='text/javascript' class="script-code">
+            $C('!config').set('$.core.logger.show', [true]);
+            var dataSet = null;
+           
+            $C(function(){
+
+                $C('#combo1').combo({
+                   // id: 'combo1',
+                   // applyTo: 'combo1',
+                    url: './../../../data/code.json'
+                });
+                
+                dataSet = $C('#combo1').getDataSet();
+                
+                $C('#combo1').on('changed', function(e){
+                    $C.log('dataset row index : ' + dataSet.getRow());
+                    $C.log('dataset bindValue : ' + this.getValue());
+                });
+                
+                $C('#combo1').on('focus', function(e){
+                    $C.log('Focused !');
+                });
+                
+                $C('#combo1').on('blur', function(e){
+                    $C.log('Blured !');
+                });
+                
+            });
+            
+        </script>
+        <script type='text/javascript' class="script-code">
+            //**************test function 시작*****************
+            
+            function testReload(){
+                dataSet.load({
+                    url: './../../../../resources/data/code.json'                    
+                });            
+            }
+            
+            function testForceSelection(){
+                $C('#combo1').setDisplayValue('ccc');
+                $C.log("$C('#combo1').getValue() != 'ccc' : " + ($C('#combo1').getValue() != 'ccc'));
+            }
+            
+            function testChangeDataSetRow(){
+                dataSet.setRow(2);
+            }
+            
+            function testGetBindColVal(){
+                $C.log($C('#combo1').getValue());
+            }
+            
+            function testSetSelectedIndex(){
+                $C('#combo1').setSelectedIndex(7);
+                $C.log("value : " + $C('#combo1').getValue());
+            }
+            
+            function testSetBindValue(){
+                $C('#combo1').setValue('code11');
+            }
+            
+            function testInvalid(){
+                 $C('#combo1').validatorManager({
+                    validators: [{
+                        id: 'combo1',
+                        validExp: 'afdafsd:true'
+                    }]
+                });
+                
+                 $C('#combo1').validateGroup('panel');
+            }
+            
+            function testInvalid(){
+                $C('#combo1').validatorManager({
+                    validators: [{
+                        //id: 'combo1',
+                        validExp: 'afdafsd:true'
+                    }]
+                });
+                
+                $C('#combo1').validateGroup('panel');
+            }
+            
+            function testSetAddEmptyText(){
+                $C('#combo1').setAddEmptyText(!$C('#combo1').hasEmptyText());
+            }
+            
+            function testQueryString(){
+                var params = Rui.util.LDom.getValues('input', 'panel');
+                $C.log('params : ' + Rui.dump(params));
+            }
+            
+            function testDataSetAdd() {
+                var row = dataSet.newRecord();
+                dataSet.setNameValue(row, 'code', 'code17');
+                dataSet.setNameValue(row, 'value', '코드17');                
+            }
+            
+            function testDataSetUpdate() {
+                dataSet.setNameValue(1, 'code', 'code111');
+                dataSet.setNameValue(1, 'value', '코드111');
+            }
+            
+            function testDataSetRemove() {
+                if(dataSet.getCount() > 1)
+                    dataSet.removeAt(1);
+            }
+        </script>
+        <!--*********************************JsUnit Test용 소스   끝********************************-->
+    </head>
+    <body>
+        <h1>basic combo sample</h1>
+        <h2>LCombo의 기본 샘플</h2>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id='panel'>
+            <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                <fieldset>
+                    <label for="combo1">col1</label>
+                    <select id="combo1"></select>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <a href='javascript:testReload()'>testReload</a>
+    <a href='javascript:testForceSelection()'>ForceSelection</a>
+    <a href='javascript:testChangeDataSetRow()'>ChangeDataSetRow</a>
+    <a href='javascript:testGetBindColVal()'>GetBindColVal</a>
+    <a href='javascript:testSetSelectedIndex()'>SetSelectedIndex</a>
+    <a href='javascript:testSetBindValue()'>SetBindValue</a>
+    <a href='javascript:testInvalid()'>invalid</a>
+    <a href='javascript:testSetAddEmptyText()'>SetAddEmptyText</a>
+    <a href='javascript:testQueryString()'>QueryString</a>
+</div>
+    </body>
+</html>

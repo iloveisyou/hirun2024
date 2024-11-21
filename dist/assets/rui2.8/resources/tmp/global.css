@@ -1,0 +1,167 @@
+/* banner
+---------------------------------------------------------*/
+/* footer
+---------------------------------------------------------*/
+/* footerCopyright
+---------------------------------------------------------*/
+/* footerLogo
+---------------------------------------------------------*/
+/* footerMenu
+---------------------------------------------------------*/
+/* header
+---------------------------------------------------------*/
+#LblockHeader {
+	background:url(/images/bg_header.gif) repeat-x left top;
+}
+/* left
+---------------------------------------------------------*/
+/* leftTitle
+---------------------------------------------------------*/
+#LblockLeftTitle {
+	background:url(/images/bg_title_submenu.gif) no-repeat left top;
+}
+#LblockLeftTitle h1 {
+	padding: 5px 0px 0px 10px;
+	height:30px;
+	color:#000;
+	font-size:1.1em;
+	background:url(/images/bg_title_submenu_right.gif) no-repeat right top;
+}
+/* leftMenu
+---------------------------------------------------------*/
+#LblockLeftMenu {
+}
+#LblockLeftMenu span {
+	color:#000;
+}
+#LblockLeftMenu a:link {
+	color:#000;
+}
+#LblockLeftMenu a:visited {
+	color:#000;
+}
+#LblockLeftMenu a:hover {
+	color:#000;
+}
+#LblockLeftMenu a:active {
+	color:#000;
+}
+#LblockLeftMenu ul li {
+	padding:3px 0px 3px 10px;
+}
+#LblockLeftMenu ul li ul li {
+	padding:3px 0px 3px 20px;
+}
+#LblockLeftMenu ul li span.opened {
+	display:block;
+	font-weight:bold;
+	padding-left:30px;
+	background:url(/images/tree_opened.gif) no-repeat 17px 35%;
+}
+#LblockLeftMenu ul li span.closed {
+	display:block;
+	font-weight:bold;
+	padding-left:30px;
+	background:url(/images/tree_closed.gif) no-repeat 17px 35%;
+}
+#LblockLeftMenu ul li span.node {
+	display:block;
+	padding-left:30px;
+	background:url(/images/tree_node.gif) no-repeat 17px 35%;
+}
+#LblockLeftMenu ul li span.current {
+	display:block;
+	padding-left:30px;
+	background:url(/images/tree_node.gif) no-repeat 17px 35%;
+	background-color:#DDD;
+}
+/* main
+---------------------------------------------------------*/
+#LblockMain {
+}
+/* supportMenu
+---------------------------------------------------------*/
+#LblockSupportMenu li {
+	float:left;
+	padding:0px 7px 0px 10px;
+	background:url(/images/supportmenu_bar.gif) no-repeat 0 50%;
+}
+#LblockSupportMenu li.first {
+	background:none;
+}
+#LblockSupportMenu li span.current {
+	font-weight:bold;
+}
+#LblockSupportMenu li a {
+	text-decoration:none;
+	color:#000;	
+}
+#LblockSupportMenu li a:hover {
+	text-decoration:underline;
+}
+#LblockSupportMenu li a:active {
+	text-decoration:underline;
+}
+/* topLogo
+---------------------------------------------------------*/
+#LblockTopLogo {
+}
+#LblockTopLogo a {
+}
+/* topMenu
+---------------------------------------------------------*/
+#LblockTopMenu {
+}
+#LblockTopMenu ul {
+	overflow:hidden;
+	display:inline-block;
+}
+#LblockTopMenu li {
+	float:left;
+	background:url(/images/tmtab_bg_left.gif) no-repeat scroll left top;
+	margin-right:5px;
+}
+#LblockTopMenu li.current {
+	float:left;
+	background:url(/images/tmtab_bg_current_left.gif) no-repeat scroll left top;
+}
+#LblockTopMenu li span {
+	float:left;
+	height:26px;
+	padding:4px 20px 0;
+	background:url(/images/tmtab_bg_right.gif) no-repeat scroll right top;
+}
+#LblockTopMenu li.current span {
+	font-weight:bold;
+	background:url(/images/tmtab_bg_current_right.gif) no-repeat scroll right top;	
+}
+#LblockTopMenu li span a {
+	display:inline-block;
+	text-decoration:none;
+	color:#000;
+}
+#LblockTopMenu li span a:link {
+	color:#000;
+}
+#LblockTopMenu li span a:visited {
+	color:#000;
+}
+#LblockTopMenu li span a:hover {
+	text-decoration:underline;
+	color:#000;
+}
+#LblockTopMenu li span a:active {
+	text-decoration:underline;
+	color:#000;
+}
+/* totalSearch
+---------------------------------------------------------*/
+/* wrapper
+---------------------------------------------------------*/
+#LblockWrapper {
+}
+* html #LblockWrapper {
+	height: 1%;
+}
+
+

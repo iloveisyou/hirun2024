@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-keyword" content="ajax memory leak, 메모리릭" />
+    <title>ajax Memory leak</title>
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../plugins/ui/LLoadPage.js"></script>
+    <script type="text/javascript" src="./../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <script type="text/javascript" src="./../../../plugins/ui/grid/LEditButtonColumn.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui_skin1.css"/>
+    <link rel="stylesheet" type="text/css" href="./../../../plugins/ui/LLoadPage.css"/>
+    
+    <style type="text/css" >
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.getConfig().set('$.core.logger.show', [true]);
+        Rui.onReady(function() {
+            
+            var searchBtn = new Rui.ui.LButton("searchBtn");
+            searchBtn.on("click", function(){
+                Rui.ajax({
+                    //url: './../../../sample/data/data11.json'
+                    url: './../../../sample/data/large/performanceData.json',
+                    cache: false
+                });
+            });
+            
+            var setStartBtn = new Rui.ui.LButton('setStartBtn');
+            setStartBtn.on('click', function(){
+                laterFn = Rui.later(1000, window, function() {
+                    searchBtn.click();                
+                }, null, true);
+            });
+            var laterFn;
+            var setEndBtn = new Rui.ui.LButton('setEndBtn');
+            setEndBtn.on('click', function(){
+                if(laterFn) laterFn.cancel();
+            });
+        });
+            
+        </script>
+
+</head>
+<body>
+    <h1>ajax memory leak test</h1>
+    <h2>ajax memory leak test 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div> ajax의 메모리릭 체크 샘플</div>
+    <div id='bd'>
+    <div class="LblockButton" >
+        <button type="button" id="setStartBtn" >start</button>
+        <button type="button" id="setEndBtn" >end</button>
+    </div>
+    
+    <div class="LblockMarkupCode">
+        <div id="aaa" class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+    <div class="LblockButton" >
+        <button type="button" id="searchBtn" >Search</button>
+    </div>
+    <div id='showData'>
+    </div>
+</div>
+<script type='text/javascript'>
+loadPage = new Rui.ui.LLoadPage();
+//loadPage.show();
+</script>
+</body>
+</html>

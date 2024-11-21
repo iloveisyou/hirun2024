@@ -1,0 +1,21 @@
+/* LTextArea
+------------------------------*/
+div.L-textarea {
+    position:relative;
+    overflow:hidden;
+}
+.L-textarea textarea {
+    resize: none;
+}
+.L-editor-panel div.L-textarea {
+    vertical-align: top;
+}
+.L-editor-panel div.L-textarea textarea {
+    border-width : 0px;
+	height: 20px;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    vertical-align: top;
+    font:normal 12px tahoma, arial, helvetica, sans-serif;
+}

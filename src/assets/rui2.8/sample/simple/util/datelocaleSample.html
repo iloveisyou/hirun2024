@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Date Locale</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+        <script type='text/javascript' class="script-code">
+            //<![CDATA[
+            var dataSet1, dataSet2;
+            $C(function(){
+                
+                dataSet1 = $C.dataSet({
+                    id: 'dataSet1',
+                    fields: [
+                    {id: 'code'}, 
+                    {id: 'value'}
+                    ]
+                });
+                
+                dataSet2 = $C.dataSet({
+                    id: 'dataSet2',
+                    fields: [
+                    {id: 'code'}, 
+                    {id: 'value'}
+                    ]
+                });
+                
+                $C('#combo1').combo({
+                    id: 'combo1',
+                    dataSet: dataSet1
+                });
+                $C('#combo1').on('changed', function(e){
+                    displayDate();
+                });
+                
+                $C('#combo2').combo({
+                    id: 'combo2',
+                    dataSet: dataSet2,
+                    listWidth:500,
+                    applyTo: 'combo2'
+                });
+                $C('#combo2').on('changed', function(e){
+                    displayDate(); 
+                });
+                
+                dataSet1.load({
+                    url: '../../data/locale.json'
+                });
+                
+                dataSet2.load({
+                    url: '../../data/strftime.json'
+                });
+
+            });
+            
+            function displayDate(locale, format){
+                var locale = $C('#combo1').getValue(),
+                    format = $C('#combo2').getValue();
+                if (format) {
+                    /*<b>*/
+                    var sDate = $C.date.format(new Date(), {
+                        format: format,
+                        locale: locale
+                    });
+                    Rui.get("spanResult").html("<b>" + sDate + "</b>");
+                    /*</b>*/
+                }
+            }
+
+            function testDateLocale(){
+                //date object를 문자열로
+                var sDate = $C.date.format(new Date());
+                var d1 = "default Locale format : " + sDate + "<br/>";
+                //date string을 date object로
+                var oDate = $C.date.parse(sDate, {
+                    format: "%x"
+                });
+                d1 += "default Locale date : " + oDate + "<br/>";
+
+                sDate = $C.date.format(oDate, {
+                    format: '%x',
+                    locale: 'en'
+                });
+                d1 += "en Locale format : " + sDate + "<br/>";
+                oDate = $C.date.parse(sDate, {
+                    format: '%x',
+                    locale: 'en'
+                });
+                d1 += "en Locale date : " + oDate + "<br/>";
+
+                $C.dateLocale['fr'] = Rui.merge($C.dateLocale['ko'], {
+                    x: '%Y/%m/%d'
+                });
+
+                sDate = $C.date.format(oDate, {
+                    format: '%x',
+                    locale: 'fr'
+                });
+                d1 += "fr Locale format : " + sDate + "<br/>";
+
+                oDate = $C.date.parse(sDate, {
+                    format: '%x',
+                    locale: 'fr'
+                });
+                d1 += "fr Locale date : " + oDate + "<br/>";
+
+                sDate = $C.date.format(new Date(), {
+                    format: '%T'
+                });
+                d1 += "%T format : " + sDate + "<br/>";
+
+                Rui.log(d1);
+
+                Rui.get('demo').html(d1);
+            }
+            
+            //]]>
+        </script>
+ 
+    </head>
+    <body>
+        <h1>Date Locale Sample</h1>
+        <h2>Date객체의 Locale에 따른 처리를 보여주는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>Date객체의 locale 및 포맷 설정에 따라 다양하게 날짜/시간을 표시합니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <fieldset>
+                    <label for="combo1">
+                        locale : 
+                    </label>
+                    <div id="combo1">
+                    </div>
+                    <label for="combo2">
+                        format : 
+                    </label>
+                    <div id="combo2">
+                    </div>
+                    결과(new Date()를 LDate.format적용) : <span id="spanResult"></span>
+                </fieldset>
+                <div id="demo">
+                </div>
+            </div>
+            <a href='javascript:testDateLocale()'>testDateLocale</a>
+        </div>
+    </body>
+</html>

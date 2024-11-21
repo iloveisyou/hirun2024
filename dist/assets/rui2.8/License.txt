@@ -1,0 +1,327 @@
+DevOn RUI 상용 소프트웨어 라이센스 계약서
+버전 2.0
+
+/********************************************!!!!매우중요!!!!*********************************************
+ ** 1. 사내 사용시 DevOn RUI 담당자를 통해 요청하여 사용허가를 받아야만 소프트웨어 라이센스 계약서에 동의하는 것으로 간주됩니다.
+ ** 2. DevOn RUI가 포함된 제품을 판매할 경우에도 담당자를 통해 요청하여 사용허가를 받아야만 합니다.
+ ** 3. 담당자를 통해 사용허가를 받지 않은 경우 소프트웨어 라이센스 계약을 위반한 것으로 간주됩니다.
+ ** 4. DevOn License Center를 통해 라이센스를 발급 받지 않고 사용하는 경우 소프트웨어 라이센스 계약을 위반한 것으로 간주됩니다.
+ ** 5. 별도로 판매될 경우 LGCNS의 소프트웨어 판매정책을 따릅니다. (추가적인 문의 사항은 담당자에게 연락 바랍니다.)
+ ** 6. 원저자의 허락없이 재배포 할 수 없으며 LG CNS 외부로의 유출을 하여서는 안 됩니다.
+**********************************************************************************************************/
+
+이 문서는 ( "우리", "회사") LGCNS 주식 회사 간의 법적 계약 ( "사용권 계약")이고 
+DevOn RUI의 모든 소스 및 개체 코드 형태 및 모든 관련 자료 또는 DevOn RUI 소프트웨어 라이브러리(이하 "소프트웨어")을 
+다운로드, 설치, 복사 또는 기타 소프트웨어를 사용하면
+본 계약서에 구속되거나 이의 당사자가 되는데 동의하는 것으로 간주됩니다.
+
+본 계약의 제반 조건에 동의하지 않는 경우, 다운로드, 복사, 설치 또는 소프트웨어 
+또는 그 일부를 어떠한 다른 용도로 사용을 진행하지 마십시오. 
+소프트웨어는 한국 저작권법 및 국제 저작권법뿐만 아니라, 기타 지적 재산 권법 및 조약에 의해 보호됩니다. 
+소프트웨어는 판매되지 않은 것이며, 라이센스가 부여된 것입니다. 
+
+이 라이센스 계약은 소프트웨어와 그 구성 요소와 관련하여 귀하의 권리를 설명합니다. 
+
+DevOn RUI Commercial Software License Agreement
+Version 0.9
+
+THIS DOCUMENT IS A LEGAL AGREEMENT (the "License Agreement") BETWEEN LGCNS INC. ("We," "Us") AND
+YOU OR THE ORGANIZATION ON WHOSE BEHALF YOU ARE UNDERTAKING THE LICENSE DESCRIBED BELOW ("You") IN
+RELATION TO THE DEVON RUI SOFTWARE LIBRARY (THE "Software"), IN BOTH SOURCE AND
+OBJECT CODE FORM, AND/OR ALL RELATED MATERIALS. BY DOWNLOADING, INSTALLING, COPYING OR OTHERWISE
+USING THE SOFTWARE, YOU ACCEPT THE FOLLOWING TERMS AND CONDITIONS. IF YOU DO NOT AGREE WITH ANY OF
+THE TERMS OR CONDITIONS OF THIS LICENSE AGREEMENT, DO NOT PROCEED WITH THE DOWNLOADING, COPYING,
+INSTALLATION OR ANY OTHER USE OF THE SOFTWARE OR ANY PORTION THEREOF. THE SOFTWARE IS PROTECTED BY
+KOREA COPYRIGHT LAWS AND INTERNATIONAL COPYRIGHT LAWS, AS WELL AS OTHER INTELLECTUAL
+PROPERTY LAWS AND TREATIES. THE SOFTWARE IS LICENSED, NOT SOLD.
+
+THIS LICENSE AGREEMENT DESCRIBES YOUR RIGHTS WITH RESPECT TO THE SOFTWARE AND ITS COMPONENTS.
+
+
+1. OWNERSHIP, LICENSE GRANT
+
+This is a license agreement and not an agreement for sale. We reserve ownership of all intellectual
+property rights inherent in or relating to the Software, which include, but are not limited to, all
+copyright, patent rights, all rights in relation to registered and unregistered trademarks
+(including service marks), confidential information (including trade secrets and know-how) and all
+rights other than those expressly granted by this Agreement.
+
+Subject to the payment of the fee required and subject to the terms and conditions of this License
+Agreement, We grant to You a revocable, non- transferable and non-exclusive license (i) for a
+Designated User(s) (as defined below)  within Your organization to install and use the Software on
+any workstations used exclusively by such Designated User and (ii) for You to install and use the
+Software in connection with unlimited domains and sub-domains on unlimited servers, solely in
+connection with distribution of the Software in accordance with sections 3 and 4 below. This license
+is not sublicensable except as explicitly set forth herein. "Designated User(s)" shall mean Your
+employee(s) acting within the scope of their employment or Your consultant(s) or contractor(s)
+acting within the scope of the services they provide for You or on Your behalf for whom You have
+purchased a license to use the Software.
+
+
+2. PERMITTED USES, SOURCE CODE, MODIFICATIONS
+
+We provide You with source code so that You can create Modifications of the original Software, where
+Modification means: a) any addition to or deletion from the contents of a file included in the
+original Software or previous Modifications created by You, or b) any new file that contains any
+part of the original Software or previous Modifications. While You retain all rights to any original
+work authored by You as part of the Modifications, We continue to own all copyright and other
+intellectual property rights in the Software.
+
+3. DISTRIBUTION
+
+You may distribute the Software in any applications, frameworks, or elements that you develop using
+the Software in accordance with this License Agreement, provided that such distribution does not
+violate the restrictions set forth in section 4 of this agreement. You must not remove, obscure or
+interfere with any copyright, acknowledgment, attribution, trademark, warning or disclaimer
+statement affixed to, incorporated in or otherwise applied in connection with the Software.
+
+You are required to ensure that the Software is not reused by or with any applications other than
+those with which You distribute it as permitted herein. For example, if You install the Software on
+a customer's server, that customer is not permitted to use the Software independently of Your
+application, and must be informed as such.
+
+You will not owe Us any royalties for Your distribution of the Software in accordance with this
+License Agreement.
+
+4. PROHIBITED USES
+
+You may not, without Our prior written consent, redistribute the Software or Modifications other
+than by including the Software or a portion thereof within Your own product, which must have
+substantially different functionality than the Software or Modifications and must not allow any
+third party to use the Software or Modifications, or any portions thereof, for software development
+purposes. You are explicitly not allowed to redistribute the Software or Modifications as part of
+any product that can be described as a development toolkit or library or is intended for use by
+software developers and not end-users. You are not allowed to redistribute any part of the Software
+documentation.
+
+You may not: a) use any part of the Software or Modifications or Your knowledge of the Software (or
+any information that You learn as a result of Your use of the Software) to create a product with the
+same or substantially the same functionality as the Software; b) transfer, rent, lease, or
+sublicense the Software or Modifications, or any portions thereof; c) change or remove the copyright
+notice from any of the files included in the Software or Modifications.
+
+UNDER NO CIRCUMSTANCES MAY YOU USE THE SOFTWARE (INCLUDING WITHOUT LIMITATION THE SOURCE CODE
+THEREOF) AS THE BASIS FOR OR IN CONNECTION WITH A PRODUCT THAT CONTAINS THE SAME, OR SUBSTANTIALLY
+THE SAME, FUNCTIONALITY AS THE SOFTWARE.
+
+5. TERMINATION
+
+This License Agreement and Your right to use the Software and Modifications will terminate
+immediately without notice if You fail to comply with the terms and conditions of this License
+Agreement. Upon termination, You agree to immediately cease using and destroy the Software or
+Modifications, including all accompanying documents. The provisions of sections 4, 5, 6, 7, and 8
+will survive any termination of this License Agreement.
+
+6. DISCLAIMER OF WARRANTIES
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, WE AND OUR SUPPLIERS DISCLAIM ALL WARRANTIES AND
+CONDITIONS, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT, WITH REGARD TO THE
+SOFTWARE. WE DO NOT GUARANTEE THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR
+ERROR-FREE, AND YOU ACKNOWLEDGE THAT IT IS NOT TECHNICALLY PRACTICABLE FOR US TO DO SO.
+
+7. LIMITATION OF LIABILITIES
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL WE OR OUR SUPPLIERS BE LIABLE
+FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES WHATSOEVER (INCLUDING, WITHOUT
+LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS
+INFORMATION OR ANY OTHER PECUNIARY LAW) ARISING OUT OF THE USE OF OR INABILITY TO USE THE SOFTWARE,
+EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN ANY CASE, OUR ENTIRE LIABILITY
+UNDER ANY PROVISION OF THIS LICENSE AGREEMENT SHALL BE LIMITED TO THE GREATER OF THE AMOUNT ACTUALLY
+PAID BY YOU FOR THE SOFTWARE OR FIVE ($5.00) DOLLARS (USD).
+
+8. MISCELLANEOUS
+
+The license granted herein applies only to the version of the Software downloaded or installed in
+connection with the terms of this Agreement. Any previous or subsequent license granted to You for
+use of the Software shall be governed by the terms and conditions of the agreement entered in
+connection with downloading or installation of that version of the Software.
+
+You agree that you will comply with all applicable laws and regulations with respect to the
+Software, including without limitation all export and re-export control laws and regulations.
+
+While redistributing the Software or Modifications thereof, You may choose to offer acceptance of
+support, warranty, indemnity, or other liability obligations and/or rights consistent with this
+Agreement. However, in accepting such obligations, You may act only on Your own behalf and on Your
+sole responsibility, not on our behalf. You agree to indemnify, defend, and hold Us harmless from
+and against any liability incurred by, or claims asserted against, Us by reason of Your accepting
+any such support, warranty, indemnity or additional liability.
+
+You agree to be identified as a customer of ours and You agree that We may refer to You by name,
+trade name and trademark, if applicable, and may briefly describe Your business in our marketing
+materials and web site.
+
+You may not assign this License Agreement without Our prior written consent. This License Agreement
+will inure to the benefit of Our successors and assigns.
+
+You acknowledge that this License Agreement is complete and is the exclusive representation of our
+agreement. No oral or written information given by Us or on our behalf shall create a warranty or
+collateral contract, or in any way increase the scope of this License Agreement in any way, and You
+may not rely on any such oral or written information.
+
+If any provision in this License Agreement shall be determined to be invalid, such provision shall
+be deemed omitted; the remainder of this License Agreement shall continue in full force and effect.
+
+This License Agreement may be modified only by a written instrument signed by an authorized
+representative of each party.
+
+This Agreement is governed by the law of the State of California, United States (notwithstanding
+conflicts of laws provisions), and all parties irrevocably submit to the jurisdiction of the courts
+of the State of California and further agree to commence any litigation which may arise hereunder in
+the state or federal courts located in the judicial district of Santa Clara County, California, US.
+
+If the Software or any related documentation is licensed to the U.S. government or any agency
+thereof, it will be deemed to be "commercial computer software" or "commercial computer software
+documentation," pursuant to SFAR Section 227.7202 and FAR Section 12.212. Any use of the Software or
+related documentation by the U.S. government will be governed solely by the terms of this License
+Agreement.
+
+/********************************************!!!!매우중요!!!!*********************************************
+*
+* 아래의 라이센스는 오픈 소스를 부분적으로 사용하여 소스에 적용했으므로 참조한 라이센스들을 명시합니다.  
+*
+/********************************************!!!!매우중요!!!!*********************************************
+
+/* 본 파일에는 BSD로 배포된 YUI Library의 소스코드를 포함하며, 해당 소스코드의 저작권 문구는 다음과 같습니다. */
+/* Copyright (c) 2006 Yahoo! Inc. All rights reserved. */
+
+/* 본 파일에는 BSD로 배포된 YUI Library의 소스코드를 포함하며, 해당 소스코드의 저작권 문구는 다음과 같습니다. */
+/*
+Copyright (c) 2006 Yahoo! Inc. All rights reserved.
+version 0.9.0
+*/
+
+/*
+Copyright (c) 2006, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+*/
+
+/* 본 파일에는 BSD로 배포된 YUI Library의 소스코드를 포함하며, 해당 소스코드의 저작권 문구는 다음과 같습니다. */
+/*
+Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.3.0
+*/
+
+/* 본 파일에는 BSD로 배포된 YUI Library의 소스코드를 포함하며, 해당 소스코드의 저작권 문구는 다음과 같습니다. */
+/*
+Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.3.1
+*/
+
+/* 본 파일에는 BSD로 배포된 YUI Library의 소스코드를 포함하며, 해당 소스코드의 저작권 문구는 다음과 같습니다. */
+/*
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.7.0
+*/
+
+/*!
+ * jQuery JavaScript Library v1.3.2
+ * http://jquery.com/
+ *
+ * Copyright (c) 2009 John Resig
+ * Dual licensed under the MIT and GPL licenses.
+ * http://docs.jquery.com/License
+ *
+ * Date: 2009-02-19 17:34:21 -0500 (Thu, 19 Feb 2009)
+ * Revision: 6246
+ */
+ 
+ /*
+ * Ext Core Library 3.0 Beta
+ * http://extjs.com/
+ * Copyright(c) 2006-2009, Ext JS, LLC.
+ * 
+ * The MIT License
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * 
+ */
+ 
+ /*
+Copyright (c) 2008 Fred Palmer fred.palmer_at_gmail.com
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+http://code.google.com/p/javascriptbase64/
+Code license MIT License
+*/
+
+
+/* 본 파일에는 MIT로 배포된 SyntaxHighlighter의 소스코드를 포함합니다. */
+/*
+SyntaxHighlighter 3.0.83 (http://alexgorbatchev.com/SyntaxHighlighter/download/ , MIT License V2)
+*/
+
+
+
+Apache Solr             3.5.0       Apache License 2.0  http://lucene.apache.org/solr/
+Apache Tomcat           5.0.28      Apache License 2.0  http://jakarta.apache.org/tomcat/index.html
+Apache Torque           3.1.1       Apache License 2.0  http://db.apache.org/torque/
+Apache XML Xalan-Java   2.6.0       Apache License 2.0  http://xml.apache.org/xalan-j/index.html
+ashcroft                1.0         BSD 3-clause "New" or "Revised" License http://xircles.codehaus.org/projects/ashcroft
+CyberNeko HTML Parser - (NekoHTML)  0.8.1b  CyberNeko Software License 1.0  http://people.apache.org/~andyc/neko/doc/html/
+Daum open editor        7.2.3       GNU Lesser General Public License v3.0 or later http://code.google.com/p/daumopeneditor/
+Ext Core                3.0 beta1   MIT License http://www.sencha.com/products/core/
+httpunit                1.5.4       MIT License http://sourceforge.net/projects/httpunit/
+javascriptbase64        2008-08-01  MIT License http://code.google.com/p/javascriptbase64/
+JDOM                    1.0         Jdom License    http://www.jdom.org
+Jetty - Java HTTP Servlet Server    5.1.0   Apache License 2.0  http://jetty.mortbay.org
+Jetty - Java HTTP Servlet Server    5.1.10  Apache License 2.0  http://jetty.mortbay.org
+jquery4jsf              0.0.1.CR2   Apache License 2.0  http://sourceforge.net/projects/jquery4jsf/
+JsonPath                0.9.0       Apache License 2.0  http://github.com/jayway/JsonPath/
+JsUnit                  2.2alpha    GNU Library General Public License v2 or later  http://sourceforge.net/projects/jsunit/
+JUnit                   3.8.1       Common Public License 1.0   http://www.junit.org/.
+jWebUnit                1.2         GNU Library General Public License v2 or later  http://sourceforge.net/projects/jwebunit/
+Mozilla Rhino: JavaScript for Java  1.5R4.1 Mozilla Public License 1.1  http://www.mozilla.org/rhino/
+NHN SmartEditor     GNU Lesser General Public License v2.1 or later http://dev.naver.com/projects/smarteditor/
+OGNL                    2.6.5       BSD 3-clause "New" or "Revised" License 
+OSCore - opensymphony   2.2.4       Open Symphony 1.1 License   http://www.opensymphony.com/oscore/
+RIFE/Continuations      0.0.1       GNU Lesser General Public License v2.1 or later http://repo1.maven.org/maven2/org/rifers/rife-continuations/
+start                   5.1.10      Apache License 2.0  http://repo1.maven.org/maven2/jetty/start/
+stop                    5.1.10      Apache License 2.0  http://repo1.maven.org/maven2/jetty/stop/
+syntaxhighlighter       3.0.83      MIT License http://code.google.com/p/syntaxhighlighter/
+yui2                    1405        BSD 3-clause "New" or "Revised" License http://github.com/yui/yui2/
+YUI Library             2.3.0       BSD 3-clause "New" or "Revised" License http://yuilibrary.com/
+SortableJS              1.10.2      MIT License https://github.com/SortableJS/Sortable/blob/master/LICENSE
+jsrsasign               8.0.20      Mit License https://github.com/kjur/jsrsasign/blob/master/LICENSE.txt

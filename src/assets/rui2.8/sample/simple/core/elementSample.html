@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Element Basic</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+        <style type="text/css">
+            #frm label {
+                display: block;
+                float: left;
+                width: 10%;
+                clear: left;
+            } .clear {
+                clear: both;
+            } #demo {
+                background: #ccc;
+                margin-bottom: 1em;
+                height: 30px;
+                width: 30px;
+            } .container {
+                height: 600px;
+            } .over_test {
+                font-weight: bold;
+            } .focus_test {
+                background: #ccc;
+            } .click_test {
+                background: red;
+            }
+            .
+        </style>
+        <script type='text/javascript' class="script-code">
+            //<![CDATA[
+            var panelEl = null;
+            $C(function(){
+                $C('!config').set('$.core.logger.show', [true]);
+                //setUpPageStatus == 'complete'가 되어야만  test function이 실행된다.
+                
+                /*<b>*/
+                $C('#container').on('click', function(e){
+                    $C.log('click test true');
+                });
+            
+                /*</b>*/
+                
+            });
+            //]]>
+        </script>
+     
+
+    </head>
+    <body>
+        <h1>Element Sample</h1>
+        <h2>element 객체를 제어하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>element객체를 액세스 하여 제어합니다. 객체의 ID를 이용하여, 객체를 지정합니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id="demo">
+                    Demo
+                </div>
+                <div id="container" class="container">
+                    <div id="panel">
+                        <form id="frm" name="frm" method="post" action="/consoleLog.dev">
+                            <fieldset>
+                                <legend>
+                                    로그인 폼
+                                </legend>
+                                <input type="hidden" id="test" name="test" />
+                                <label for="state">
+                                    state
+                                </label>
+                                <input type="text" id="state" name="state" />
+                                <br/>
+                                <label for="id">
+                                    id
+                                </label>
+                                <input type="text" id="id" name="id" />
+                                <br/>
+                                <label for="col1">
+                                    col1
+                                </label>
+                                <input type="text" id="col1" name="col1" />
+                                <br/>
+                                <label for="col2">
+                                    col2
+                                </label>
+                                <input type="text" id="col2" name="col2" />
+                                <br/>
+                                <label for="col3">
+                                    col3
+                                </label>
+                                <select id="col3" name="col3">
+                                    <option value="all">ALL</option>
+                                    <option value="tes3">TES3</option>
+                                    <option value="tes4">TES4</option>
+                                </select>
+                                <br/>
+                                <div id="bbb">
+                                </div>
+                                <label>
+                                    col4
+                                </label>
+                                <input type="radio" id="col4_1" name="col4" value="RADIO1"/>RADIO1<input type="radio" id="col4_2" name="col4" value="RADIO2"/>RADIO2
+                                <br/>
+                                <label>
+                                    col5
+                                </label>
+                                <input type="checkbox" id="col5_1" name="col5" value="CHECKBOX1"/>CHECKBOX1<input type="checkbox" id="col5_2" name="col5" value="CHECKBOX2"/>CHECKBOX2
+                                <br/>
+                                <label for="col6">
+                                    col6
+                                </label>
+                                <textarea id="col6" name="col6" rows="10" cols="50">
+                                </textarea>
+                                <br/>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div id='p'>
+                    </div>
+                    <ul id="appendTest"></ul>
+                </div>    
+                <a href="#" onclick="testEnableDisable()" id="enableDisableLink">EnableDisable</a>
+                <a href="#" onclick="testInvalid()" id="invalidLink">Invalid</a>
+                <a href="#" onclick="testHide()" id="hideLink">Hide</a>
+                <a href="#" onclick="testSetValue()">SetValue</a>
+                <a href="#" onclick="testSetValues()">SetValues</a>
+                <a href="#" onclick="testFindParent()">FindParent</a>
+                <a href="#" onclick="testFindParentNode()">FindParentNode</a>
+                <a href="#" onclick="testParent()">Parent</a>
+                <br/>
+                <a href="#" onclick="testClip()">Clip</a>
+                <a href="#" onclick="testUnclip()">Unclip</a>
+                <a href="#" onclick="testRepaint()">Repaint</a>
+                <a href="#" onclick="noTestRemove()">Remove</a>
+                <a href="#" onclick="testAppendTo()">AppendTo</a>
+                <a href="#" onclick="testInsertBefore()">InsertBefore</a>
+                <a href="#" onclick="testInsertAfter()">InsertAfter</a>
+                <a href="#" onclick="testCreateElement()">createElement</a>
+                <br/>
+                <a href="#" onclick="testMoveTo()">MoveTo</a>
+                <a href="#" onclick="testSetWidth()">SetWidth</a>
+                <a href="#" onclick="testSetSize()">SetSize</a>
+                <a href="#" onclick="testSetRegion()">SetRegion</a>
+                <a href="#" onclick="testGetLRTB()">GetLRTB</a>
+                <a href="#" onclick="testMargins()">Margins</a>
+                <a href="#" onclick="testForm()">Form</a>
+                <a href="#" onclick="testMask()">mask</a>
+                <a href="#" onclick="testUnmask()">unmask</a>
+            </div>
+        </div>
+    </body>
+</html>

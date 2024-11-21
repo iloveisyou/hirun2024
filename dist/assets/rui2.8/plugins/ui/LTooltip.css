@@ -1,0 +1,21 @@
+.L-stt {
+    position:absolute;
+    color:#222222;
+    background-color:#FFFFFF;
+    padding:8px 12px 8px 12px;
+    border:1px solid #C5003D;
+    border-radius: 4px;
+    font:normal 12px dotum;
+    width:auto;
+    white-space:pre;
+    z-index:9999;
+    top: 0px;
+    left: 0px;
+}
+
+.L-grid-cell-tooltip {
+    background-image: url(../../resources/images/container/tooltip.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-color:transparent;
+}

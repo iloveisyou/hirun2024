@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="그리드 높이, Grid Auto Height" />
+    <title>AutoHeight</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style>
+    .L-grid-li-first table tbody tr:first-child .L-grid-col .L-grid-cell-inner br{
+        display: none;
+    }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            
+            var dm = new Rui.data.LDataSetManager();
+            
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col5' },
+                    { id: 'col7' },
+                    { id: 'col8' },
+                    { id: 'date1', type: 'date' }
+                ]
+            });
+
+            /*<b>*/
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                groupMerge: true,
+                autoWidth: true,
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', sortable: true, width: 200, vMerge: true},
+                    { field: 'col3', label: 'Col3', sortable: true, width: 60, align: 'center', autoWidth: true,vMerge: true, renderer: function(value){
+                        return '<font color="red">' + value + '</font>';
+                    }},
+                    { field: 'col2', label: 'Col2', sortable: true, width: 130, align: 'center', renderer: function(value){
+                        if(!value || value.length < 13) return value;
+                        return value.substring(0, 6) + '-' + value.substring(6);
+                    }},
+                    { field: 'col5', align: 'right', vMerge: false, editor: new Rui.ui.form.LCheckBox({
+                        gridFixed: true,
+                        bindValues : ['R1', '']
+                    }) },
+                    { field: 'col7', width: 160, sortable: true, renderer: function(value){
+                        return '<a href="javascript:alert(\'' + value + '\');">' + value + '</a>';
+                    }},
+                    { field: 'col8', width: 80, align: 'right', sortable: true, renderer: 'money'},
+                    { field: 'date1', width: 200, align: 'left'}
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                autoHeight: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 200,
+                width: 600,
+            });
+
+            grid.renderAt('defaultGrid');
+            Rui.log('grid가 화면에 랜더링되었습니다.');
+            /*</b>*/
+
+            dm.on('success', function(e) {
+                // 페이지에서는 log가 아니라 alert을 써야 함.
+                alert(Rui.getMessageManager().get('$.base.msg100'));
+            });
+
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json'
+                });
+            });
+
+            var newBtn = new Rui.ui.LButton('newBtn');
+            newBtn.on('click', function(){
+                dataSet.newRecord();
+            });
+
+            var insertBtn = new Rui.ui.LButton('insertBtn');
+            insertBtn.on('click', function(){
+                if(dataSet.getRow() < 0) return;
+                var row = dataSet.newRecord(dataSet.getRow());
+                if (row !== false) {
+                    var record = dataSet.getAt(row);
+                    record.set('col1', 'Junee5');
+                    record.set('col2', '(02) 6363-7009');
+                    record.set('col3', 'R1');
+                }
+            });
+
+            var updateBtn = new Rui.ui.LButton('updateBtn');
+            updateBtn.on('click', function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var record = dataSet.getAt(row);
+                record.set('col2', null);
+                record.set('col3', 'R2');
+                record.set('col8', 1);
+                record.set('code', 'code9');
+            });
+
+            var undoBtn = new Rui.ui.LButton('undoBtn');
+            undoBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    for(var i = 0 ; i < dataSet.getCount() ; i++) {
+                        if(dataSet.isMarked(i))
+                            dataSet.undo(i);
+                    }
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.undo(row);
+                }
+            });
+
+            var undoAllBtn = new Rui.ui.LButton('undoAllBtn');
+            undoAllBtn.on('click', function(){
+                dataSet.undoAll();
+            });
+
+            var deleteBtn = new Rui.ui.LButton('deleteBtn');
+            deleteBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRows();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+
+            var saveBtn = new Rui.ui.LButton('saveBtn');
+            saveBtn.on('click', function(){
+                // 여기서 유효성 체크를 하면 안됩니다. LDataSetManager의 beforeUpdate 이벤트를 참조하세요.(위에 소스에 있습니다.)
+                dm.updateDataSet({
+                    dataSets:[dataSet],
+                    url: './../../../data/savedCallback.json'
+                });
+            });
+
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData();
+            });
+            
+            Rui.onResize(function() {
+            	var h = Rui.util.LDom.getViewportHeight();
+                if(h < 300) h = 300;
+            	Rui.select('.LblockMarkupCode').setHeight(h - 200);
+            	grid.setHeight(h - 200);
+            }, true);
+        });
+    </script>
+    <style>
+    html, body{
+	    margin: 0;
+	    padding: 0;
+	    border: 0;
+	    height: 100%;
+    }
+    
+    .LblockMarkupCode {
+        height: 400px;
+    }
+    </style>
+</head>
+<body>
+    <h1>AutoHeight</h1>
+    <h2>그리드(Grid)의 높이를 동적으로 적용하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>그리드(Grid)의 생성자 속성에 autoHeight를 true로 적용하면 부모 기준에서 높이가 변경된다.</p>
+        <p>단, 바로 상위의 HTML 객체를 기준으로만 높이 계산을 하므로 상위 객체의 높이가 정상적으로 적용되어야 한다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >search</button>
+            <button type="button" id="newBtn" >new</button>
+            <button type="button" id="insertBtn" >insert</button>
+            <button type="button" id="updateBtn" >update</button>
+            <button type="button" id="deleteBtn" >delete</button>
+            <button type="button" id="saveBtn" >save</button>
+            <button type="button" id="undoBtn" >undo</button>
+            <button type="button" id="undoAllBtn" >undoAll</button>
+            <button type="button" id="clearBtn" >clear</button>
+        </div>
+        <div class="LblockMarkupCode">
+		    <div id="defaultGrid"></div>
+        </div>
+    </div>
+</body>
+</html>

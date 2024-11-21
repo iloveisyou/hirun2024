@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="달력(LCalendar), 휴일(Holiday)" />
+    <title>Calendar Holiday</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        .blockCalendar {
+            position: relative;
+            float: left;
+            margin: 10px;
+        }
+        
+        .L-calendar td.L-calcell.sunday {
+            color: red;
+        }
+        .L-calendar td.L-calcell.saturday {
+            color: blue;
+        }
+        .L-calendar td.L-calcell.holiday {
+            color: red;
+        }
+        .L-calendar td.L-calcell.oom {
+            color:#e0e0e0;
+        }
+        
+        .L-calendar .L-calweekdaycell {
+            color: #000
+        }
+        .L-calendar .L-calweekdayrow {
+            height: 24px;
+        }
+
+    </style>
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+        
+            //Rui.getConfig().set('$.core.defaultLocale', ['en_US']);
+            
+            /*******************
+            * 변수 및 객체 선언
+            *******************/
+
+            var hoildays = {}, md;
+
+            /*<b>*/
+            var dataSetHoildays = new Rui.data.LJsonDataSet({
+                id: 'dataSetHoildays',
+                fields: [
+                    {id: 'date' },  // 특수일자 mmdd(4자리)
+                    {id: 'descr' }, // 해당 날짜에 대한 팁
+                    {id: 'work' }   // 근무여부
+                ]
+            });
+            dataSetHoildays.load({
+                url: './../../../../sample/data/holiday.json'
+            });
+            dataSetHoildays.on('load', function(){
+                for(var i = 0, len = dataSetHoildays.getCount(); i < len; i++){
+                    md = dataSetHoildays.getNameValue(i, 'date');  //MMDD
+                    hoildays[md] = dataSetHoildays.getAt(i);
+                }
+                calendar.render();
+            });
+            /*</b>*/
+
+            var calendar = new Rui.ui.calendar.LCalendar({
+                applyTo: 'calendarDiv',
+                pagedate: '10/2013',
+                mindate: '1/1/2013', //mindate, maxdate를 이용하여 2013년만 선택 가능하도록 설정.
+                maxdate: '12/31/2013'
+            });
+
+            calendar.on('renderCell', function(e){
+                var cell = Rui.get(e.cell);
+                var date = e.date, 
+                    pageMonth = e.pageDate.getMonth() +1,
+                    m = date.getMonth() +1,
+                    d = date.getDate(),
+                    day = date.getDay();
+                
+                if(pageMonth != m){
+                    cell.addClass('oom');
+                }
+
+                //토요일, 일요일은 선택불가
+                if(day == 6 /*Sat*/ || day == 0 /*Sun*/) { 
+                   cell.html(d);
+                   cell.addClass(day == 0 ? 'sunday' : 'saturday');
+                   e.stop = true;
+                   return;
+                }
+                
+                //데이터셋 기준 휴일은 선택불가
+                var md = (m<10?'0':'')+m+(d<10?'0':'')+d;
+                var title = Rui.util.LFormat.dateToString(date, {format: '%x'});
+                if(hoildays[md]){
+                    cell.html(d);
+                    e.stop = true;
+                    cell.addClass('holiday');
+                    title += ' (' + hoildays[md].get('descr') + ')';
+                }
+                cell.setAttribute('title', title);
+                
+            });
+           
+            /********************
+            * 버튼 선언 및 이벤트
+            ********************/
+            var showSelectedBtn = new Rui.ui.LButton('showSelectedBtn');
+            showSelectedBtn.on('click', function(){
+               alert(calendar.getProperty('selected'));
+            });
+           
+       });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Holiday</h1>
+	    <div class="LblockLine"></div>
+	    <div class="LblockSubj">
+		    <h2>달력(Calendar)에서 공휴일(Holiday)을 표현합니다.</h2>
+		    <div class="LblockDesc">
+		        <p>서버로부터 공휴일(Holiday) 정보가 포함된 데이터셋(DataSet)을 얻어와 달력(Calendar)랜더링시 공휴일 정보를 포함합니다.</p>
+		    </div>
+	    </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div class="blockCalendar">
+                <h2>1. 휴일이 표시되는 달력</h2>
+                <div id="calendarDiv">
+                </div>
+            </div>
+        </div>
+        <div class="LblockButton" style="padding: 10px 0 0 10px; clear:both;">
+            <button type="button" id="showSelectedBtn">show</button>
+        </div>
+    </div>
+</body>
+</html>

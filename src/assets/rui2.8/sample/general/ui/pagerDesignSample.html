@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="그리드 페이징(LPager)" />
+    <title>Pager Designed</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../plugins/ui/LPager.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../plugins/ui/LPager.css" />
+    
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        /*LPager를 싸고있는 div 배경색 등 지정*/
+        div.L-pager {
+            background-color: #F3F8F9;
+        }
+        
+        div.L-pager .L-pager-wrap {
+            
+        }
+        /*선택된 div page number style*/
+        .L-pager-selected a {
+            color: #000 !important;
+            font-weight: bold;
+        }
+        /*first page, previous group, previous page, next page, next group, last page를 싸는 td 공통 설정값*/
+        .L-pager-first-wrap,.L-pager-prev-group-wrap,.L-pager-prev-wrap,.L-pager-next-group-wrap,.L-pager-next-wrap,.L-pager-last-wrap {
+            width: 26px;
+            font-size: 0px;
+        }
+        /*first page, previous group, previous page, next page, next group, last page div 공통 설정값*/
+        .L-pager-first,.L-pager-prev-group,.L-pager-prev,.L-pager-next-group,.L-pager-next,.L-pager-last {
+            width: 18px !important;
+            height: 13px !important;
+        }
+        /*first page div*/
+        .L-pager-first {
+            background: transparent url(../../../resources/images/grid/pager/btn_first.gif) no-repeat;
+        }
+        /*first page div를 싸는 td*/
+        .L-pager-prev-group-wrap {
+            
+        }
+        /*first page div*/
+        .L-pager-prev-group {
+            background: transparent url(../../../resources/images/grid/pager/btn_prev.gif) no-repeat;
+        }
+        /*previous page div를 싸는 td*/
+        .L-pager-prev-wrap {
+            display: none;
+        }
+        /*previous page div*/
+        .L-pager-prev {
+            
+        }
+        /*next page div를 싸는 td*/
+        .L-pager-next-wrap {
+            display: none;
+        }
+        /*next page div*/
+        .L-pager-next {
+            
+        }
+        /*next group div를 싸는 td*/
+        .L-pager-next-group-wrap {
+            
+        }
+        /*next group div*/
+        .L-pager-next-group {
+            background: transparent url(../../../resources/images/grid/pager/btn_next.gif) no-repeat;
+        }
+        /*last page div를 싸는 td*/
+        .L-pager-last-wrap {
+            
+        }
+        /*last page div*/
+        .L-pager-last {
+            background: transparent url(../../../resources/images/grid/pager/btn_last.gif) no-repeat;
+        }
+        /*page numbers div를 싸는 td*/
+        .L-pager-items-wrap {
+            width: 184px;
+        }
+        /*page numbers div*/
+        .L-pager-items {
+            height: 13px;
+        }
+        /*page numbers a*/
+        .L-pager-items a {
+            color: #555;
+        }
+        /*page numbers a hover*/
+        .L-pager-items a:hover {
+            font-weight: bold;
+            color: #555;
+        }
+        /*page number div를 싸는 td*/
+        .L-pager-item-wrap {
+            width: 18px;
+        }
+        /*page number div*/
+        .L-pager-item {
+            font-size: 12px;
+            text-align: center;
+        }
+        /*page number 구분자 div를 싸는 td*/
+        div.L-pager table td.L-pager-item-divider-wrap {
+            border-right: 1px solid #555;
+        }
+        /*page number 구분자 div*/
+        .L-pager-item-divider {
+            
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            
+            /*<b>*/
+            var pager1 = new Rui.ui.LPager({
+                totalCount: 300,
+                showPageCount: false
+            });
+            pager1.render('divPager1');
+            /*</b>*/
+            
+        });
+    </script>
+</head>
+<body>
+    <h1>Pager Designed</h1>
+    <h2>페이징(LPaging)을 하는 페이저(LPager) 디자인 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>페이저(LPager)에 디자인을 적용한 모습입니다.</p>
+        <p>L-pager, L-pager-items 등 제공된 CSS에 스타일을 부여하여 디자인 할 수 있습니다.</p>
+        <p>css 클래스 별로 적용하는 내용은 샘플 소스의 css 설정 부분을 참조하시기 바랍니다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="divPager1"></div>
+        </div>
+    </div>
+</body>
+</html>

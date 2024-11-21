@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="돔(LDom) 필터" />
+    <title>Dom Filtering</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #selector-demo ul {
+            float: left;
+        }
+
+        #selector-demo ol {
+            clear: both;
+        }
+
+        .selected {
+            color: red;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            Rui.get('demo-run').on('click', function(e){
+                /*<b>*/
+                nodes = Rui.get('selector-demo').filter('.selected');
+                /*</b>*/
+                Rui.alert(nodes.length);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Dom Filtering</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>LDomSelector의 filter 기능을 보여주는 샘플</h2>
+            <div class="LblockDesc">
+                <p>ID로 DOM 객체를 셀렉트 하고 필터 기능을 사용합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button id="demo-run">run</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div id="selector-demo">
+                <ul>
+                    <li class="selected">lorem</li>
+                    <li>ipsum</li>
+                    <li>dolor</li>
+                    <li>sit</li>
+                </ul>
+                <ul>
+                    <li>lorem</li>
+                    <li class="selected">ipsum</li>
+                    <li>dolor</li>
+                    <li>sit</li>
+                </ul>
+                <ul>
+                    <li>lorem</li>
+                    <li>ipsum</li>
+                    <li>dolor</li>
+                    <li class="selected">sit</li>
+                </ul>
+                <ol>
+                    <li>lorem</li>
+                    <li>ipsum</li>
+                    <li>dolor</li>
+                    <li class="selected">sit</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+tab과 같이 좌우로 펼쳐져 나열되는 모양의 menu를 생성한다.
+샘플 경로 :
+<a href="./../sample/general/ui/menu/tabMenuSample.html" target="_new">/rui/sample/general/ui/menu/tabMenuSample.html</a>
+<a href="./../sample/general/ui/menu/tabMenuPulldownSample.html" target="_new">/rui/sample/general/ui/menu/tabMenuPulldownSample.html</a>
+</div>
+
+<div class="L-sample">
+sample: 기본적인 형태의 메뉴구성 샘플
+<div class="L-code">
+var menu = new Rui.ui.menu.LTabMenu({
+    dataSet: dataSet,
+    defaultOpenTopIndex: 0,
+    fields: {
+        rootValue: null,
+        parentId: 'parentMenuId',
+        id: 'menuId',
+        label: 'name',
+        order:'seq'
+    }
+});
+
+menu.on("nodeClick", function(e) {
+    var url = e.node.getRecord().get('url');
+    var depth = e.node.getDepth();
+    var hasChild = e.node.hasChild();
+    console.log('url : ' + url + ', depth : ' + depth + ', hasChild? : ' + hasChild);
+});
+
+menu.render("menuDiv");
+</div>
+</div>
+
+</div>
+
+
+<div class="config_expandOnOver">
+<div class="L-description">
+Mouse Click이 아닌 Mouse Over 이벤트에 의해서 하위 메뉴가 펼쳐지도록 설정하는 기능
+</div>
+<div class="L-sample">
+sample: mouse over시 하위 메뉴가 펼쳐지도록 한다.
+<div class="L-code">
+var menu = new Rui.ui.menu.LTabMenu({
+    dataSet: dataSet,
+    defaultOpenTopIndex: -1,
+    expandOnOver: true,
+    collapseWhenOut: false,
+    fields: {
+        rootValue: null,
+        parentId: 'parentMenuId',
+        id: 'menuId',
+        label: 'name',
+        order:'seq'
+    }
+});
+
+menu.render("menuDiv");
+</div>
+</div>
+</div>
+
+</div>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="devon-rui-sample" content="yes" />
+<title>Transaction Manager Basic</title>
+<script type="text/javascript" src="../../../js/rui_base.js"></script>
+<script type="text/javascript" src="../../../js/rui_ext.js"></script>
+<script type='text/javascript' src='../../../resources/rui_config.js'></script>
+<script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+<link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+<script type='text/javascript' class="script-code">
+//<![CDATA[
+var bind = null;
+var dataSet = null;
+var bindRow = 1;
+var tm = null;
+$C(function() {
+    //log 활성화
+    $C('!config').set('$.core.logger.show', [true]);
+    
+    /*<b>*/
+    tm = $C.dataSetManager();
+    /*</b>*/
+   
+    dataSet = $C.dataSet({
+        id:'dataSet',
+        fields:[
+            {id:'id'},
+            {id:'col1'},
+            {id:'col2'},
+            {id:'col3'},
+            {id:'col4'},
+            {id:'col5'},
+            {id:'col6'}
+        ]
+    });
+
+    bind = $C.bind( 
+        {
+            groupId:'frm',
+            dataSet:dataSet,
+            bindInfo: [
+                {id:'id', ctrlId:'id', value:'value'},
+                {id:'col1', ctrlId:'col1', value:'value'},
+                {id:'col3', ctrlId:'col3', value:'value'},
+                {id:'col4', ctrlId:'col4', value:'value'},
+                {id:'col5', ctrlId:'col5', value:'value'},
+                {id:'col6', ctrlId:'col6', value:'value'}
+            ]
+        });
+
+    dataSet.on('update', function(e) {
+        var record = dataSet.getAt(dataSet.getRow());
+        $C('#state').setValue(dataSet.getAt(dataSet.getRow()).state);
+        modifiedPrint(this);
+    });
+
+    dataSet.on('rowPosChanged', function(e) {
+        $C('#state').setValue(dataSet.getAt(e.row).state);
+        modifiedPrint(this);
+    });
+
+    /*
+     * rui_config.js에 기본으로 loadException에러가 탑재되어 있습니다. 공통으로 처리할때에는 failure를 처리할 필요가 없습니다.
+    dataSet.on('loadException', function(e) {
+        alert('error : ' + e.throwObject.message);
+    });
+    */
+   
+    dataSet.load({
+        //url : './../../sample/data/data.json'
+        url: '/consoleLog.dev'
+    });
+ 
+    /*<b>*/
+    tm.on('success', function(e) {
+        $C('#showData').html('no changed');
+        $C.log($C('!message').get('$.base.msg100'));
+        /*
+         * 서버에 저장후 바로 다시 조회해 올 경우
+         * 서버에서 저장 처리후 결과를 조회하여 dataSet의 포멧에 맞는 json으로 리턴해야만 가능합니다.
+         var data = dataSet.getReadData(e);
+         dataSet.loadData(data);
+         */
+    });
+    /*
+     * rui_config.js에 기본으로 failure에러가 탑재되어 있습니다. 공통으로 처리할때에는 failure를 처리할 필요가 없습니다.
+    tm.on('failure', function(e) {
+        alert($C('!message').get('$.base.msg101'));
+    });
+    */
+    /*</b>*/
+
+});
+
+function modifiedPrint(dataSet) {
+    var data = dataSet.serializeModified();
+
+    if(data.length < 1) {
+        $C('#showData').html('no changed');
+        return;
+    }
+
+    $C('#showData').html(data);
+}
+
+//]]>
+</script>
+
+</head>
+<body >
+    <h1>transaction manager basic sample</h1>
+    <h2>LDataSetManager를 사용하는 기본 샘플</h2>
+    <div class="LblockLine"></div>
+    <div>
+        <p>트랜잭션 매니저사용에 대한 기본적인 형태입니다.</p>
+    </div>
+    
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <form id='frm' name='frm' method='post' enctype='application/x-www-form-urlencoded' action='/consoleLog.dev'>
+            <input type='hidden' id='test' name='test' />
+            <input type='text' id='state' name='state' /><br/>
+            <input type='text' id='id' name='id' /><br/>
+            <input type='text' id='col1' name='col1' /><br/>
+            <input type='text' id='col2' name='col2' /><br/>
+            <select id='col3' name='col3' >
+                <option value='all'>ALL</option>
+                <option value='tes3'>TES3</option>
+                <option value='tes4'>TES4</option>
+            </select><br/>
+            <input type='radio' id='col4' name='col4' value='RADIO1'/>RADIO1<br/>
+            <input type='radio' id='col4-2' name='col4' value='RADIO2'/>RADIO2<br/>
+            <input type='checkbox' id='col5' name='col5' value='CHECKBOX1'/>CHECKBOX1<br/>
+            <input type='checkbox' id='col5-2' name='col5' value='CHECKBOX2'/>CHECKBOX2<br/>
+            <textarea id='col6' name='col6' rows="10" cols="50"></textarea><br/>
+            <!--input type='file' id='col7' name='col7' /-->
+            <button onclick='testSubmit()'>submit</button>
+            </form>
+            <a href='javascript:testFirst()'>first</a>
+            <a href='javascript:testPrevious()'>Previous</a>
+            <a href='javascript:testNext()'>next</a>
+            <a href='javascript:testLast()'>last</a>
+            <a href='javascript:testAdd()'>add</a>
+            <a href='javascript:testNew()'>new</a>
+            <a href='javascript:testRemove()'>remove</a><br/>
+            <a href='javascript:testUndo()'>undo</a>
+            <a href='javascript:testUndoAll()'>undoAll</a>
+            <a href='javascript:testUpdater()'>tm</a>
+            <a href='javascript:testFormUpdater()'>form tm</a>
+            <a href='javascript:testDataSetUpdater()'>dataSet tm</a>
+            <a href='javascript:testCommit()'>commit</a>
+            <a href='javascript:testCallLoad()'>call load method</a>
+            <a href='javascript:testSetRow()'>setRow</a>
+            <a href='javascript:testSetState()'>setState</a>
+            <a href='javascript:testLoadDataSet()'>loadDataSet</a>
+            <div id='showData'>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

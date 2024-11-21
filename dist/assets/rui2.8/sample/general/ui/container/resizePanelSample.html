@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="패널(LPanel), 사이즈 조정(Resize), 끌어서 이동(drag)" />
+    <title>Resizable Panel</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_license.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/util/LResize.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/util/LResize.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        body {
+            margin:0;
+            padding:0;
+        }
+        
+        #examplecontainer {
+            padding:10px;
+        }
+    
+        #resizablepanel .bd {
+            overflow:auto;
+            background-color:#fff;
+            padding:10px;
+        }
+    
+        #resizablepanel .ft {
+            height:15px;
+            padding:0;
+        }
+    
+        #resizablepanel .L-resize-handle-br {
+            right:0;
+            bottom:0;
+            height: 8px;
+            width: 8px;
+            position:absolute;
+        }
+    
+        /*  
+            The following CSS is added to prevent scrollbar bleedthrough on
+            Gecko browsers (e.g. Firefox) on MacOS.
+        */
+    
+        /*
+            PLEASE NOTE: It is necessary to toggle the "overflow" property 
+            of the body element between "hidden" and "auto" in order to 
+            prevent the scrollbars from remaining visible after the the 
+            Resizable Panel is hidden.  For more information on this issue, 
+            read the comments in the "container-core.css" file.
+           
+            We use the #reziablepanel_c id based specifier, so that the rule
+            is specific enough to over-ride the .bd overflow rule above.
+        */
+    
+        #resizablepanel_c.hide-scrollbars .L-resize .bd {
+            overflow: hidden;
+        }
+    
+        #resizablepanel_c.show-scrollbars .L-resize .bd {
+            overflow: auto;
+        }
+    
+        /*
+            PLEASE NOTE: It is necessary to set the "overflow" property of
+            the underlay element to "visible" in order for the 
+            scrollbars on the body of a Resizable Panel instance to be 
+            visible.  By default the "overflow" property of the underlay 
+            element is set to "auto" when a Panel is made visible on
+            Gecko for Mac OS X to prevent scrollbars from poking through
+            it on that browser + platform combintation.  For more 
+            information on this issue, read the comments in the 
+            "container-core.css" file.
+        */
+    
+        #resizablepanel_c.show-scrollbars .underlay {
+            overflow: visible;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            // Create a panel Instance, from the 'resizablepanel' DIV standard module markup
+            var panel = new Rui.ui.LPanel({
+                applyTo: 'resizablepanel', 
+                draggable: true,
+                width: 400,
+                height: 250,
+                autofillheight: 'body', // default value, specified here to highlight its use in the example
+                constraintoviewport: true,
+                isDefaultCSS: false,
+                context: ['showbtn', 'tl', 'bl']
+            });
+        
+            /*<b>*/
+            // Create Resize instance, binding it to the 'resizablepanel' DIV 
+            var resize = new Rui.util.LResize({
+                el: 'resizablepanel',
+                attributes: {
+                    handles: ['br'],
+                    autoRatio: true,
+                    minWidth: 300,
+                    minHeight: 100,
+                    status: false 
+                }
+            });
+        
+            // Setup startResize handler, to constrain the resize width/height
+            // if the constraintoviewport configuration property is enabled.
+            resize.on('startResize', function(args) {
+        
+                if (this.cfg.getProperty('constraintoviewport')) {
+                    var Dom = Rui.util.LDom;
+                    var clientRegion = Dom.getClientRegion();
+                    var elRegion = Dom.getRegion(this.element);
+        
+                    resize.set('maxWidth', clientRegion.right - elRegion.left - Rui.ui.LOverlay.VIEWPORT_OFFSET);
+                    resize.set('maxHeight', clientRegion.bottom - elRegion.top - Rui.ui.LOverlay.VIEWPORT_OFFSET);
+                } else {
+                    resize.set('maxWidth', null);
+                    resize.set('maxHeight', null);
+                }
+        
+            }, panel, true);
+        
+            // Setup resize handler to update the Panel's 'height' configuration property 
+            // whenever the size of the 'resizablepanel' DIV changes.
+        
+            // Setting the height configuration property will result in the 
+            // body of the Panel being resized to fill the new height (based on the
+            // autofillheight property introduced in 2.6.0) and the iframe shim and 
+            // shadow being resized also if required (for IE6 and IE7 quirks mode).
+            resize.on('resize', function(args) {
+                var panelHeight = args.height;
+                this.cfg.setProperty('height', panelHeight + 'px');
+            }, panel, true);
+            /*</b>*/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var showBtn = new Rui.ui.LButton('showBtn');
+            showBtn.on('click', function(){
+                panel.show();
+            });
+            
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Resizable Panel</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>Panel의 크기 조정이 가능합니다.</h2>
+            <div class="LblockDesc">
+                <p>Panel 속성 값을 설정하고 resize 객체를 연결하면 크기 조정이 가능합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="examplecontainer">
+                <div id="resizablepanel">
+                    <div class="hd">Resizable Panel</div>
+                    <div class="bd">
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse nulla. Fusce mauris massa, rutrum eu, imperdiet ut, placerat at, nunc. Vestibulum consequat ligula ut lacus. Nulla nec pede. Fusce consequat, augue et eleifend ornare, nibh mi dapibus lorem, ut lacinia turpis eros at eros. Proin laoreet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla velit. Fusce id sem sit amet felis porta mollis. Aliquam erat volutpat. Etiam tortor. Donec dui felis, pretium quis, vulputate et, molestie non, nisi.</p>
+                    </div>
+                    <div class="ft"></div>
+                </div>
+            </div>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="showBtn" >Show Resizable Panel</button>
+        </div>
+    </div>
+</body>
+</html>

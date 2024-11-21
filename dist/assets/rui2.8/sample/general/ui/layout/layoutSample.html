@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="레이아웃메니져(LlayoutManager), 레이아웃(layout)" />
+    <title>Layout</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/layout/rui_layout.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/layout/rui_layout.css" />
+    <script type="text/javascript" src="./../../../../plugins/util/LResize.js"></script>
+    <!-- 샘플에서 LResize css가 필요하나 구조상 프레임워크에 포함하지 않고 샘플에서 별도 추가함
+           해당 싸이트에 맞게 수정이 필요함.   -->
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui_skin2.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        /* body element에 대한 margin/padding은 제거해야 정상 작동한다. */
+        body {
+            margin: 0;
+            padding: 0;
+            color: black;
+        }
+        
+        .LblockMarkupCode {
+            position: relative;
+            height: 100%;
+        }
+
+        #toggle {
+            text-align: center;
+            padding: 1em;
+        }
+        
+        #toggle a {
+            padding: 0 5px;
+            border-left: 1px solid black;
+        }
+        
+        #tRight {
+            border-left: none !important;
+        }
+        
+    </style>
+    <script type="text/javascript" class="script-code">
+        //window onload와 같다고 생각하면 됨.     
+        Rui.onReady(function(){
+            var Dom = Rui.util.LDom, Event = Rui.util.LEvent;
+            
+            //layout 구성요소 정의
+            
+            var layout = new Rui.ui.layout.LLayoutManager({
+                units: [{
+                    position: 'top',
+                    height: 50,
+                    body: 'top1',
+                    header: 'Top',
+                    gutter: '5px',
+                    collapse: true,
+                    resize: true
+                }, {
+                    position: 'right',
+                    header: 'Right',
+                    width: 300,
+                    resize: true,
+                    gutter: '5px',
+                    footer: 'Footer',
+                    collapse: true,
+                    scroll: true,
+                    body: 'right1',
+                    animate: true
+                }, {
+                    position: 'bottom',
+                    header: 'Bottom',
+                    height: 100,
+                    resize: true,
+                    body: 'bottom1',
+                    gutter: '5px',
+                    collapse: true
+                }, {
+                    position: 'left',
+                    header: 'Left',
+                    width: 200,
+                    resize: true,
+                    body: 'left1',
+                    gutter: '5px',
+                    collapse: true,
+                    close: true,
+                    collapseSize: 50,
+                    scroll: true,
+                    animate: true
+                }, {
+                    position: 'center',
+                    body: 'center1'
+                }]
+            });
+            
+            //render
+            layout.on('render', function(){
+                //position이 left인 unit이 close event발생시 처리할 event handler 지정
+                var leftUnit = layout.getUnitByPosition('left');
+                leftUnit.on('close', function(){
+                    closeLeft();
+                });
+            });
+            
+            layout.render();
+            
+            //tLeft/tRight/padRight div click event
+            Rui.get('tLeft').on('click', function(ev){
+                //event bubble을 cancel하고 return value를 false로 설정
+                Event.stopEvent(ev);
+                //해당 unit을 toggle시킴
+                var leftUnit = layout.getUnitByPosition('left');
+                if(leftUnit)
+                    leftUnit.toggle();
+            });
+            
+            Rui.get('tRight').on('click', function(ev){
+                Event.stopEvent(ev);
+                var rightUnit = layout.getUnitByPosition('right');
+                if(rightUnit)
+                    rightUnit.toggle();
+            });
+            
+            Rui.get('padRight').on('click', function(ev){
+                Event.stopEvent(ev);
+                //간격 조정
+                var pad = prompt('CSS gutter to apply: ("2px" or "2px 4px" or any combination of the 4 sides)', layout.getUnitByPosition('right').get('gutter'));
+                layout.getUnitByPosition('right').set('gutter', pad);
+            });
+            
+            var closeLeft = function(){
+                var a = document.createElement('a');
+                a.href = '#';
+                a.innerHTML = 'Add Left Unit';
+                Dom.get('closeLeft').parentNode.appendChild(a);
+                
+                Dom.setStyle('tLeft', 'display', 'none');
+                Dom.setStyle('closeLeft', 'display', 'none');
+                Event.on(a, 'click', function(ev){
+                    Event.stopEvent(ev);
+                    Dom.setStyle('tLeft', 'display', 'inline');
+                    Dom.setStyle('closeLeft', 'display', 'inline');
+                    a.parentNode.removeChild(a);
+                    layout.addUnit(layout.get('units')[3]);
+                    layout.getUnitByPosition('left').on('close', function(){
+                        closeLeft();
+                    });
+                });
+            };
+            
+            Rui.get('closeLeft').on('click', function(ev){
+                Event.stopEvent(ev);
+                layout.getUnitByPosition('left').close();
+            });
+            
+            Rui.get('changeRightContent').on('click', function(ev){
+                Event.stopEvent(ev);
+                //ajax로 content 채울 경우 사용
+                layout.getUnitByPosition('right').bodyHtml("<b>Right 영역 AJAX등을 사용하여 content 채우기</b>");
+            });
+            
+        });
+    </script>
+
+</head>
+<body style="overflow: scroll;">
+    <h1>Layout</h1>
+    <h2>일반적  header, left, center, right, footer 구조의 page layout 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">layout의 header, left, center, right, footer 구조를 설정하는 샘플</div>
+
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id="top1">
+            <p>
+                Top 영역입니다. 6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보 등…
+                Util.LEvent : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception : Error
+                객체 상속, Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request, Async
+                or Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합 관리, Observer
+                이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element :
+                Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장 가능
+                등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop 기능
+                지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성 체크,
+                Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송, form
+                객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader : Log
+                출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+        </div>
+        <div id="bottom1">
+            <p>
+                Bottom 영역입니다. 6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보
+                등… Util.LEvent : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception
+                : Error 객체 상속, Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request,
+                Async or Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합
+                관리, Observer 이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element
+                : Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장
+                가능 등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop
+                기능 지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성
+                체크, Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송,
+                form 객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader
+                : Log 출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+        </div>
+        <div id="right1">
+            <b>Right 영역</b>
+            <p>
+                6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보 등… Util.LEvent
+                : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception : Error 객체 상속,
+                Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request, Async or
+                Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합 관리, Observer
+                이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element :
+                Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장 가능
+                등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop 기능
+                지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성 체크,
+                Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송, form
+                객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader : Log
+                출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+            <p>
+                6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보 등… Util.LEvent
+                : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception : Error 객체 상속,
+                Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request, Async or
+                Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합 관리, Observer
+                이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element :
+                Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장 가능
+                등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop 기능
+                지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성 체크,
+                Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송, form
+                객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader : Log
+                출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+            <p>
+                6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보 등… Util.LEvent
+                : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception : Error 객체 상속,
+                Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request, Async or
+                Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합 관리, Observer
+                이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element :
+                Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장 가능
+                등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop 기능
+                지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성 체크,
+                Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송, form
+                객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader : Log
+                출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+            <p>
+                6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보 등… Util.LEvent
+                : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception : Error 객체 상속,
+                Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request, Async or
+                Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합 관리, Observer
+                이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element :
+                Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장 가능
+                등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop 기능
+                지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성 체크,
+                Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송, form
+                객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader : Log
+                출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+            <p>
+                6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보 등… Util.LEvent
+                : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception : Error 객체 상속,
+                Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request, Async or
+                Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합 관리, Observer
+                이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element :
+                Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장 가능
+                등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop 기능
+                지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성 체크,
+                Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송, form
+                객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader : Log
+                출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+        </div>
+        <div id="left1">
+            <p>
+                Left 영역입니다. 6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보 등…
+                Util.LEvent : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception : Error
+                객체 상속, Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request, Async
+                or Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합 관리, Observer
+                이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element :
+                Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장 가능
+                등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop 기능
+                지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성 체크,
+                Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송, form
+                객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader : Log
+                출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+            <p>
+                Left 영역입니다. 6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보 등…
+                Util.LEvent : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception : Error
+                객체 상속, Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request, Async
+                or Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합 관리, Observer
+                이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element :
+                Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장 가능
+                등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop 기능
+                지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성 체크,
+                Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송, form
+                객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader : Log
+                출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+            <p>
+                Left 영역입니다. 6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보 등…
+                Util.LEvent : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception : Error
+                객체 상속, Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request, Async
+                or Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합 관리, Observer
+                이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element :
+                Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장 가능
+                등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop 기능
+                지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성 체크,
+                Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송, form
+                객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader : Log
+                출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+            <p>
+                Left 영역입니다. 6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보 등…
+                Util.LEvent : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception : Error
+                객체 상속, Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request, Async
+                or Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합 관리, Observer
+                이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element :
+                Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장 가능
+                등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop 기능
+                지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성 체크,
+                Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송, form
+                객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader : Log
+                출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+            <p>
+                Left 영역입니다. 6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보 등…
+                Util.LEvent : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception : Error
+                객체 상속, Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request, Async
+                or Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합 관리, Observer
+                이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element :
+                Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장 가능
+                등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop 기능
+                지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성 체크,
+                Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송, form
+                객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader : Log
+                출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+        </div>
+        <div id="center1">
+            <p id="toggle">
+                <a href="#" id="tRight">Toggle Right</a>
+                <a href="#" id="tLeft">Toggle Left</a>
+                <a href="#" id="closeLeft">Close Left</a>
+                <a href="#" id="padRight">Add Gutter to Right</a>
+            </p>
+            <p>
+                <a href="#" id="changeRightContent">Change Right Content</a>
+            </p>
+            <p>
+                Center 영역입니다. 6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보
+                등… Util.LEvent : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception
+                : Error 객체 상속, Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request,
+                Async or Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합
+                관리, Observer 이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element
+                : Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장
+                가능 등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop
+                기능 지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성
+                체크, Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송,
+                form 객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader
+                : Log 출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+            <p>
+                Center 영역입니다. 6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보
+                등… Util.LEvent : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception
+                : Error 객체 상속, Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request,
+                Async or Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합
+                관리, Observer 이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element
+                : Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장
+                가능 등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop
+                기능 지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성
+                체크, Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송,
+                form 객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader
+                : Log 출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+            <p>
+                Center 영역입니다. 6. Core 기능 목록 Core.Rui : extend, utility, Component 접근, Browser 정보
+                등… Util.LEvent : on(이벤트 연결), createEvent(이벤트 생성), fire(이벤트 호출) 등… Core.Exception
+                : Error 객체 상속, Error Object Type(oType)정보, Stack Trace 정보 Core.Connect : Ajax Request,
+                Async or Sync, Timeout, config.Configuration : DevOn RUI의 환경 정보 관리, 환경정보의 통합
+                관리, Observer 이벤트 처리 message.MessageManager : 메시지 관리, 다국어 지원, 메모리 최소화, 동적 로드 기능 core.Element
+                : Dom객체의 Wrapping, CSS Selector, Event, CSS, 위치정보, Attribute 관리, Method Chain 확장
+                가능 등… 7. ExtBase 설명 animation.Anim : Animation 효과 지원 dd.DragDrop : Drag and Drop
+                기능 지원 data.DataSet : 데이터 관리, 상태 및 변경 정보 관리, 이벤트 처리 widget.form.LForm : 유효성
+                체크, Ajax Submit, 입력 객체 관리 data.LBind : 입력 객체와 DataSet객체 연동 data.Updater : 데이터 전송,
+                form 객체 정보 전송, 데이터 전송 validate.LValidatorManager : 유효성 검사 widget.logger.LogReader
+                : Log 출력 기능, Category 및 객체 정보 지원 widget.Dialog : Dialog관리 (Panel, 출력 메시지 등…) widget.Tooltip
+                : Tooltip 정보 출력 util.Resize : dom객체의 Size 변경 관리
+            </p>
+        </div>
+        </div>
+</div>
+</body>
+</html>

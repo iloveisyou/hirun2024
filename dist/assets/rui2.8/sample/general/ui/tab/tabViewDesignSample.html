@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="탭(LTab), 디자인(Design)" />
+    <title>TabView Design</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/tab/rui_tab.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/tab/rui_tab.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    <style type="text/css">
+        .L-nav li a {
+            width: 120px;
+        }
+        .L-content {
+            padding: 20px;
+            border: 2px solid #C8F145;
+        }
+    </style>
+    <style type="text/css">
+        #tabView {
+            margin-top: 30px;
+        }
+
+        /* a 태그에 링크 없애기 */
+        .L-navset .L-nav li a, .L-navset .L-navset-top .L-nav li a, .L-navset .L-navset-bottom .L-nav li a {
+            text-decoration: none;
+            color: #9C9A9C;
+            background-color: #F7F7F7;
+        }
+
+        /* 헤더 탭 공백 */
+        .L-navset .L-nav li em {
+            padding: 5px 10px;
+        }
+
+        /* 선택된 탭 폰트 굵기 변경*/
+        .L-navset .L-nav .selected a em {
+            font-weight: bold;
+            border-top: 1px solid #94A2AD;
+            color: #56719b;
+        }
+
+        /* 선택된 탭의 헤더 디자인 변경 */
+        .L-navset .L-nav li.selected a {
+            border-top: 1px solid #94A2AD;
+            border-left: 2px solid #94A2AD;
+            border-right: 2px solid #94A2AD;
+            border-bottom: 0px !important;
+        }
+
+        /* 라인 색깔 바꾸기 */
+        .L-navset .L-nav  li a, .L-navset .L-navset-top .L-nav li a {
+            border: 1px solid #DEDBDE;
+            border-bottom: 2px solid #94A2AD;
+        }
+
+        /* 헤더의 하단 라인 변경 */
+        .L-navset .L-nav {
+            /*border-bottom: 2px solid #94A2AD;*/
+        }
+
+        /* 컨텐츠 영역의 외곽선 없애기 */
+        .L-navset .L-content {
+            border: 0px solid #000000;
+            /* 컨텐츠 상단 여백 넣기 */
+            margin-top: 10px;
+        }
+
+        /* 백그라운드 배경색 바꾸기 */
+        .L-navset .L-nav .selected a, .L-navset .L-nav a:hover, .L-navset .L-content {
+            background-color: #fff;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+             
+            var tabView = new Rui.ui.tab.LTabView({
+                contentHeight: 200
+            });
+
+            var otherTabView = new Rui.ui.tab.LTabView({
+                contentHeight: 100
+            });
+            
+            var innerTabView = new Rui.ui.tab.LTabView({
+                contentHeight: 100
+            });
+            
+            tabView.render('tabView');
+            otherTabView.render('otherTabView');
+            innerTabView.render('innerTabView');
+
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>TabView Design</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>탭뷰(TabView) 디자인(Design)을 적용하는 샘플</h2>
+            <div class="LblockDesc">
+                <p>탭뷰(TabView) 사용시에 CSS를 이용하여 탭(Tab) 및 탭 컨텐츠의 디자인(Design)을 변경하는 샘플</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="tabView">
+                <div title="Lorem">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+                </div>
+                <div title="Tab 2">
+                    <p>test 2 탭 부분입니다.</p>
+                </div>
+                <div title="Tab 3">
+                    <p>test 3 탭 부분입니다.</p>
+                    <!--  tab안에 탭 -->
+                    <div id="innerTabView">
+                        <div title="Inside lorem 1">
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+                        </div>
+                        <div title="Inside lorem 2">
+                            <p style="font-weight: bold">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+                        </div>
+                    </div>
+                    <!--  tab안에 탭 -->
+                </div>
+            </div>
+            <div id="otherTabView">
+                <div title="Other lorem 1">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+                </div>
+                <div title="Other lorem 2">
+                    <p style="font-weight: bold">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

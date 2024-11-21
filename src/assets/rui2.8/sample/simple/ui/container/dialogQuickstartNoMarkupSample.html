@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Dialog Quick Start No Markup</title>
+    <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+    <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+    <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+    <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+    <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+    <script type='text/javascript' src='./../../../../plugins/ui/LPager.js'></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    <style type="text/css">
+        body {
+            margin:0;
+            padding:0;
+        }
+            
+        #example {height:30em;}
+        .bd label { display:block;float:left;width:45%;clear:left; }
+        .clear { clear:both; }
+        #resp { margin:10px;padding:5px;border:1px solid #ccc;background:#fff;}
+        #resp li { font-family:monospace }
+        
+    </style>
+    <script type='text/javascript' class="script-code">
+    $C.namespace("Rui.example.container");
+    $C(function() {
+        
+        $C('#show').button();
+        $C('#show').on('click', function(){
+            dialog1.clearInvalid();
+            dialog1.show(true);
+        });
+    
+        $C('#hide').button();
+        $C('#hide').on('click', function(){
+            dialog1.hide(false);
+        });
+        
+        $C('#initialize').button();
+        $C('#initialize').on('click', function(){
+        });
+    
+    
+        // Define various event handlers for Dialog
+        var handleSubmit = function() {
+            this.submit();
+        };
+        
+        var handleCancel = function() {
+            this.cancel(true);
+        };
+        var handleSuccess = function(o) {
+            var response = o.responseText;
+            response = response.split("<!")[0];
+            document.getElementById("resp").innerHTML = response;
+        };
+        var handleFailure = function(o) {
+            alert("Submission failed: " + o.status);
+        };
+    
+        /*<b>*/
+        // Instantiate the Dialog
+        var dialog1 = $C('#dialog1').dialog( 
+            { 
+                width : 600,
+                visible : false, 
+                postmethod:'async',
+                buttons : 
+                    [ 
+                        { text:"Submit", handler:handleSubmit, isDefault:true },
+                        { text:"Cancel", handler:handleCancel } 
+                    ],
+                callback : { 
+                    success: handleSuccess,
+                    failure: handleFailure
+                } 
+            });
+        
+        // Render the Dialog
+        
+        dialog1.render(document.body);
+    
+        dialog1.setHeader('test');
+        dialog1.setBody("<div id='defaultGrid'></div>");
+        /*</b>*/
+    
+        /*********dataSet************/
+        var dataSet2 = $C.dataSet({
+            id: 'dataSet',
+            fields: [
+            { id: 'col1' },
+            { id: 'col2' },
+            { id: 'col3' },
+            { id: 'date1', type: 'date' }
+        ]
+        });            
+    
+        /*********columnModel************/
+        var columnModel2 = $C.columnModel({
+            columns: [
+                $C.stateColumn(),
+                $C.numberColumn(),
+                { field: "col1", label: "Col1" },
+                { field: "col2", sortable: true, align:'center', editor: new Rui.ui.form.LTextBox() },
+                { field: "col3", align: 'right', hidden:true },
+                { field: "date1" , align:'center', renderer: Rui.util.LRenderer.dateRenderer()}]
+        });
+        
+        /*********gridView************/
+        var grid2 = $C('#defaultGrid').grid(
+        {
+            columnModel: columnModel2,
+            dataSet:dataSet2,
+            height:300
+        });
+        
+        /*********pager************/
+        var pager = $C.pager({
+            gridPanel : grid2
+        });                 
+    
+        pager.render();
+        
+        dataSet2.load({
+            url: './../../../../resources/data/data.json',
+            method:"get"
+        });
+    });
+    </script>
+</head>
+<body>
+    <h1>dialog quickstart no markup sample</h1>
+    <h2>dialog의 내용을 스크립트로 생성하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div>다이얼로그의 내용을 스크립트를 통해 생성합니다.</div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+        </div>
+        <div>
+        <button id="show">Show dialog1</button> 
+        <button id="hide">Hide dialog1</button>
+        <button id="initialize">Initialize dialog1</button>
+        </div>
+        <div id="resp">Server response will be displayed in this area</div> 
+    </div>
+</body>
+</html>

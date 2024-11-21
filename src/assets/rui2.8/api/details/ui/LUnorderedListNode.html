@@ -1,0 +1,327 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+tree나 menu 콤포넌트의 node의 최상위 클래스
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_getRecordId">
+<div class="L-description">
+현재 자신의 dataSet에 해당되는 record의 id를 리턴한다.
+</div>
+<div class="L-sample">
+sample: tree의 recordId로 dataSet의 record객체를 얻어온다. getRecord 메소드가 있으므로 굳이 이렇게 처리할 필요는 없다.
+<div class="L-code">
+.........
+tree.render("tree");
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    var id = node.getRecordId();
+    var record = dataSet.get(id);
+});
+</div>
+</div>
+</div>
+
+<div class="method_getParentId">
+<div class="L-description">
+자신의 부모 node에 대한 dataSet에 해당되는 record의 id를 리턴한다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node의 부모 recordId로 dataSet의 record객체를 얻어온다. getParentNode 메소드가 있으므로 굳이 이렇게 처리할 필요는 없다.
+<div class="L-code">
+.........
+tree.render("tree");
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    var id = node.getParentId();
+    var record = dataSet.get(id);
+});
+</div>
+</div>
+</div>
+
+<div class="method_getParentNode">
+<div class="L-description">
+자신의 부모에 해당되는 node를 찾아 리턴한다.
+최상위 node여서 값이 없으면 false를 리턴한다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node의 부모 node를 얻어온다.
+<div class="L-code">
+.........
+tree.render("tree");
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    var parentNode = node.getParentNode();
+});
+</div>
+</div>
+</div>
+
+<div class="method_getRecord">
+<div class="L-description">
+현재 node에 해당되는 dataSet의 record 객체를 리턴한다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node의 record를 얻어온다.
+<div class="L-code">
+.........
+tree.render("tree");
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    var record = node.getRecord();
+});
+</div>
+</div>
+</div>
+
+<div class="method_getRow">
+<div class="L-description">
+현재 node에 해당되는 dataSet의 record index를 리턴한다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node의 record를 얻어온다.
+<div class="L-code">
+.........
+tree.render("tree");
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    var row = node.getRow();
+    var record = dataSet.getAt(row);
+});
+</div>
+</div>
+</div>
+
+<div class="method_isFocus">
+<div class="L-description">
+현재 node가 focus된 상태인지를 리턴한다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node가 focus상태인지를 체크하여 메시지를 출력한다.
+<div class="L-code">
+.........
+tree.render("tree");
+.........
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    if(node.isFocus() == true) {
+        alert('노드가 선택되었습니다.');
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="method_isMarked">
+<div class="L-description">
+현재 node의 상태가 마크되었는지를 리턴한다.
+마크가 되면 해당 node에 L-ul-marked-node css가 탑재된다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node가 mark된 상태인지를 메시지로 출력한다.
+<div class="L-code">
+.........
+tree.render("tree");
+.........
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    if(node.isMarked() == true) {
+        alert('노드가 마크되어 있습니다.');
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="method_mark">
+<div class="L-description">
+현재 node의 상태를 mark 상태로 설정한다.
+mark 메소드가 호출되면 dataSet의 setMark 메소드가 true로 호출되며 현재 node에 해당되는 html dom에 L-ul-marked-node css가 탑재된다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node가 mark된 상태로 설정한다.
+<div class="L-code">
+.........
+tree.render("tree");
+.........
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    node.mark();
+});
+</div>
+</div>
+</div>
+
+<div class="method_mark">
+<div class="L-description">
+현재 node의 상태를 mark 상태를 취소한다.
+mark 메소드가 호출되면 dataSet의 setMark 메소드가 false로 호출되며 현재 node에 해당되는 html dom에 L-ul-marked-node css가 삭제된다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node가 mark된 상태로 취소한다.
+<div class="L-code">
+.........
+tree.render("tree");
+.........
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    node.unmark();
+});
+</div>
+</div>
+</div>
+
+<div class="method_isLast">
+<div class="L-description">
+현재 node가 현재 같은 레벨(sibling)의 마지막 node인지 여부를 리턴한다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node가 같은 레벨의 마지막 노드인지 여부를 체크하여 메시지를 출력한다.
+<div class="L-code">
+.........
+tree.render("tree");
+.........
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    if(node.isLast() == true) {
+        alert('현재 레벨의 마지막 노드입니다.');
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="method_isTop">
+<div class="L-description">
+최상위(root) node인지 여부를 리턴한다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node가 최상위 노드인지 여부를 체크하여 메시지를 출력한다.
+<div class="L-code">
+.........
+tree.render("tree");
+.........
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    if(node.isTop() == true) {
+        alert('현재 레벨의 마지막 노드입니다.');
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="method_isExpand">
+<div class="L-description">
+현재 node가 펼쳐진 상태인지 여부를 리턴한다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node가 펼쳐져 있는지 여부를 체크하여 메시지를 출력한다.
+<div class="L-code">
+.........
+tree.render("tree");
+.........
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    if(node.isExpand() == true) {
+        alert('펼쳐진 노드입니다.');
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="method_isCollaps">
+<div class="L-description">
+현재 node가 닫혀진 상태인지 여부를 리턴한다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node가 닫혀져 있는지 여부를 체크하여 메시지를 출력한다.
+<div class="L-code">
+.........
+tree.render("tree");
+.........
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    if(node.isCollaps() == true) {
+        alert('닫혀진 노드입니다.');
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="method_expand">
+<div class="L-description">
+현재 node를 펼친다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node가 펼친다.
+<div class="L-code">
+.........
+tree.render("tree");
+.........
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    node.expand();
+});
+</div>
+</div>
+</div>
+
+<div class="method_expand">
+<div class="L-description">
+현재 node를 닫는다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node가 닫는다.
+<div class="L-code">
+.........
+tree.render("tree");
+.........
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    node.expand();
+});
+</div>
+</div>
+</div>
+
+<div class="method_collapseAllSibling">
+<div class="L-description">
+자신의 node만 남겨두고 다른 node들은 모두 닫는다.
+</div>
+<div class="L-sample">
+sample: tree의 현재 click된 node만 남겨두고 다른 node들은 모두 닫는다.
+<div class="L-code">
+.........
+tree.render("tree");
+.........
+
+tree.on("labelClick", function(e){
+    var node = e.node;
+    node.collapseAllSibling();
+});
+</div>
+</div>
+</div>
+
+</div>

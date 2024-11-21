@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>TextBox Mask</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type='text/javascript' class="script-code">
+         //log 활성화
+         $C('!config').set('$.core.logger.show', [true]);
+         var col1TextBox = null;
+         $C(function(){
+                $C('!config').set('$.core.logger.show', [true]);                
+                /*<b>*/
+                $C('#textbox1').textBox({
+                    applyTo:'textbox1',
+                    mask: '9999-9999'
+                });
+                /*</b>*/                
+            });            
+        </script> 
+        
+         <script type='text/javascript'>
+            
+            //**************test function 시작*****************
+            
+            function testGetValue() {
+                $C.log(col1TextBox.getValue());
+            }
+            
+            function testSetValue() {
+                $C('#textbox1').setValue('12345678');
+            }
+            
+            function testEnable(){
+                $C('#textbox1').enable();
+            }
+            
+            function testDisable(){
+                $C('#textbox1').disable();
+            }
+            
+            //**************test function   끝*****************
+        </script>
+    </head>
+    <body>
+        <h1>textbox mask sample</h1>
+        <h2>LTextBox의 mask 기능을 구현하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>텍스트 박스에 마스킹을 적용합니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div>
+            <div id="textbox1"></div>
+        </div>
+    </div>
+    <a href='javascript:testGetValue()'>getValue</a>
+    <a href='javascript:testSetValue()'>setValue</a>
+    <a href='javascript:testEnable()'>enable</a>
+    <a href='javascript:testDisable()'>disable</a>
+</div>
+    </body>
+</html>

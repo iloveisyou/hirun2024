@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="버튼(LButton)" />
+    <title>Buttons</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+  
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        var form, button1, button2, button3 = null;
+        Rui.onReady(function(){
+        	
+        	var resultElement = Rui.get('result');
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+             
+            /*<b>*/
+            var simpleBtn = new Rui.ui.LButton('simpleBtn');
+            simpleBtn.on('click', function(){
+            	resultElement.setValue('Simple Button Clicked');
+            });
+            /*</b>*/
+
+            var inputBtn = new Rui.ui.LButton('inputBtn');
+            inputBtn.on('click', function(){
+                resultElement.setValue('Input Button Clicked');
+            });
+
+            var anchorBtn = new Rui.ui.LButton('anchorBtn');
+            anchorBtn.on('click', function(){
+                resultElement.setValue('Input Button Clicked');
+            });
+
+            var divBtn = new Rui.ui.LButton('divBtn');
+            divBtn.on('click', function(){
+                resultElement.setValue('DIV Button Clicked');
+            });
+
+            var spanBtn = new Rui.ui.LButton('spanBtn');
+            spanBtn.on('click', function(){
+                resultElement.setValue('SPAN Button Clicked');
+            });
+            
+            var disabledBtn = new Rui.ui.LButton('disabledBtn');
+            
+            disabledBtn.disable();
+            
+        });
+    </script>
+</head>
+
+<body>
+    <div id='hd'>
+        <h1>Buttons</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>쉽게 사용할 수 있는 LButton. 이중클릭 방지 기능은 기본입니다.</h2>
+            <div class="LblockDesc">
+		        <p>LButton 객체를 생성하기 위한 여러 가지 형태를 제공합니다.</p>
+		        <p>버튼은 기본적으로 더블클릭 방지를 위해 기본적으로 0.5초의 disable time을 가집니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <input type='text' id='result' />
+        </div>
+        <div class="LblockButton" >
+            <button id="simpleBtn" class="basicBtn">Simple Button</button>
+            <input type="button" id="inputBtn" value="Input Button"/>
+            <a href="#" id="anchorBtn">Anchor Button</a>
+            <div id="divBtn">DIV Button</div>
+            <span id="spanBtn">SPAN Button</span>
+            <button id="disabledBtn" >Disabled Button</button>
+        </div>
+    </div>
+</body>
+</html>

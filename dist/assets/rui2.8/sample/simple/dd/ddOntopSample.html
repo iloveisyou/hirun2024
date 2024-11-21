@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Ontop</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/dd/LDDOnTop.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+        <style type="text/css">
+            .dd-demo {
+                position: relative;
+                border: 4px solid #666;
+                text-align: center;
+                color: #fff;
+                cursor: move;
+                height: 60px;
+                width: 60px;
+            } .dd-demo-em {
+                border: 4px solid purple;
+            } #dd-demo-1 {
+                background-color: #6D739A;
+                top: 0px;
+                left: 0px;
+            } #dd-demo-2 {
+                background-color: #566F4E;
+                top: 50px;
+                left: 100px;
+            } #dd-demo-3 {
+                background-color: #7E5B60;
+                top: -150px;
+                left: 200px;
+            }
+        </style>
+        <script type='text/javascript' >
+            $C(function(){
+
+                $C.ddOnTop({
+                    id: 'dd-demo-2'    
+                });
+                $C.ddOnTop({
+                    id: 'dd-demo-3'
+                });
+                $C.ddOnTop({
+                    id: 'dd-demo-1'
+                });
+                
+            });
+        </script>
+ 
+    </head>
+    <body>
+        <h1>dd ontop sample</h1>
+        <h2>객체의 z-index를 제어하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>
+            <p>객체의 z축에 대한 위치의 선후 관계를 설정합니다.</p>
+        </div>
+        <div id="bd">
+            <div class="LblockMarkupCode">
+                <div id="dd-demo-1" class="dd-demo">
+                </div>
+                <div id="dd-demo-2" class="dd-demo">
+                </div>
+                <div id="dd-demo-3" class="dd-demo">
+                </div>
+            
+            </div>
+        </div>
+    </body>
+</html>

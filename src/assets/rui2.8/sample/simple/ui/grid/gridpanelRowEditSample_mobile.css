@@ -1,0 +1,109 @@
+﻿.L-grid-header {
+    display: none;
+}
+.L-grid-body {
+    background-color: #fff;
+}
+.L-grid-body li {
+    height: 40px;
+    border-bottom: 1px solid gray;
+}
+.L-grid-col {
+    display: inline-block;
+    font-size: small;
+    color: gray;
+    padding-right: 20px;
+}
+.L-grid-cell-state, .L-grid-cell-selection, .L-grid-cell-num, .L-grid-cell-value, .L-grid-cell-btn, .L-grid-cell-col6 {
+    display: none;
+}
+.L-grid-cell-col1 {
+    display: block;
+    font-size: large;
+    color: black;
+}
+
+.L-grid-row-editor {
+    height: 100%;
+    background-color: #fff;
+    width: 100%;
+    z-index: 3;
+    overflow-y: scroll;
+}
+
+.L-editgridpanel {
+    position: relative;
+}
+
+.L-grid-row-inline-editor {
+    position: absolute;
+    top: 0;
+}
+
+.L-grid-row-editor-inner {
+    margin: 3px;
+}
+
+.L-grid-row-editor li {
+    min-height: 23px;
+    border-bottom: 3px solid #fff;
+    vertical-align: middle;
+}
+
+.L-grid-row-editor .L-row-editor-label {
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+    width: 20%;
+    height: 100%;
+    padding-right: 7px;
+    text-align: right;
+    border-right: 1px solid #fff;
+    background-color: #D6E7F7;
+    vertical-align: top;
+    min-height: 23px;
+}
+
+.L-radio-group, .L-checkbox-panel {
+    display: inline-block;
+    *display: inline;
+    *zoom: 100%;
+}
+
+.L-radio-panel {
+    display: inline;
+}
+
+.L-grid-row-editor div.L-form-field {
+    margin-left: 10px;            
+}
+
+.L-grid-row-editor div.L-form-field input[type=text], .L-grid-row-editor div.L-form-field textarea {
+    border: 1px solid;
+    height: 18px;
+}
+.L-grid-row-editor .L-row-editor-label-col6 {
+    height: 100px;
+}
+
+.L-grid-cell-col2 {
+    display: inline;
+}
+
+.L-edit-mode .L-grid-body-table .L-grid-cell-selection {
+    display: inline-block;
+    background-image: url(./../../../resources/images/grid/row-check-sprite.gif);
+    width: 20px;
+    height: 20px;
+    display:inline-block;
+    vertical-align:middle;
+    background-position:2px 2px;
+    background-repeat:no-repeat;
+    background-color:transparent;
+    padding: 0px;
+    margin-right: 11px;
+}
+
+.L-edit-mode .L-grid-body-table .L-grid-cell-col1 {
+	display: inline-block;
+}

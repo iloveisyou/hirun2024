@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="데이터셋(LDataSet) 제어" />
+    <title>DataSet</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+    window.onerror = function(message, filename, lineno) {
+        var logMsg = 'message : ' + message + '\r\nfilename : ' + filename + '\r\nlineno : ' + lineno;
+    };
+
+    Rui.onReady(function() {
+        /*******************
+         * 변수 및 객체 선언
+         *******************/
+        /*<b>*/
+        var dataSet = new Rui.data.LJsonDataSet({
+            id: 'dataSet',
+            fields: [
+                { id: 'id' },
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'col4' },
+                { id: 'col5' },
+                { id: 'col6' },
+                { id: 'date1', type: 'date' }
+            ]
+        });
+        /*</b>*/
+
+        var bind = new Rui.data.LBind({
+            groupId: 'frm',
+            dataSet: dataSet,
+            bind: true,
+            bindInfo: [
+                { id: 'id', ctrlId: 'recordId', value: 'value' },
+                { id: 'col1', ctrlId: 'col1', value: 'value' },
+                { id: 'col2', ctrlId: 'col2', value: 'value' },
+                { id: 'col3', ctrlId: 'col3', value: 'value' },
+                { id: 'col4', ctrlId: 'col4', value: 'value' },
+                { id: 'col5', ctrlId: 'col5', value: 'value' },
+                { id: 'col6', ctrlId: 'col6', value: 'value' }
+            ]
+        });
+
+        /*******************
+         * 사용자 이벤트 처리
+         *******************/
+        /*<b>*/
+        dataSet.on('update', function(e) {
+            var modifiedRecords = dataSet.getModifiedRecords();
+            if(modifiedRecords.length < 1) {
+                Rui.getDom('showData').innerHTML = 'no changed';
+                return;
+            }
+
+            var data = '';
+            modifiedRecords.each(function(id) {
+                var record = modifiedRecords.get(id);
+                var changedField = record.getModifiedData();
+                data += Rui.dump(changedField);
+            });
+            Rui.getDom('showData').innerHTML = data;
+        });
+        /*</b>*/
+
+        /********************
+         * 버튼 선언 및 이벤트
+         ********************/
+        var dataSetLoadBtn = new Rui.ui.LButton('dataSetLoadBtn');
+        dataSetLoadBtn.on('click', function(){
+            /*<b>*/
+            dataSet.load({
+                url: './../../../sample/data/data.json'
+            });
+            /*</b>*/
+        });
+
+        var dataSetCommitBtn = new Rui.ui.LButton('dataSetCommitBtn');
+        dataSetCommitBtn.on('click', function(){
+            dataSet.getAt(3).set('col1', 'test1');
+            dataSet.getAt(4).set('col1', 'test2');
+            dataSet.commit();
+        });
+
+        var dataSetUndoBtn = new Rui.ui.LButton('dataSetUndoBtn');
+        dataSetUndoBtn.on('click', function(){
+            dataSet.getAt(0).set('col1', 'test');
+            dataSet.undo(0);
+        });
+
+        var dataSetUndoAllBtn = new Rui.ui.LButton('dataSetUndoAllBtn');
+        dataSetUndoAllBtn.on('click', function(){
+            dataSet.getAt(0).set('col1', 'test1');
+            dataSet.getAt(1).set('col1', 'test2');
+            dataSet.undoAll();
+        });
+
+        var dataSetFirstBtn = new Rui.ui.LButton('dataSetFirstBtn');
+        dataSetFirstBtn.on('click', function(){
+            dataSet.setRow(0);
+        });
+
+        var dataSetLastBtn = new Rui.ui.LButton('dataSetLastBtn');
+        dataSetLastBtn.on('click', function(){
+            dataSet.setRow(dataSet.getCount() - 1);
+        });
+
+        var dataSetPreviousBtn = new Rui.ui.LButton('dataSetPreviousBtn');
+        dataSetPreviousBtn.on('click', function(){
+            var oldRow = dataSet.getRow();
+            if(oldRow > 0)
+                dataSet.setRow(oldRow - 1);
+        });
+
+        var dataSetNextBtn = new Rui.ui.LButton('dataSetNextBtn');
+        dataSetNextBtn.on('click', function(){
+            var oldRow = dataSet.getRow();
+            if(oldRow < dataSet.getCount() - 1)
+                dataSet.setRow(oldRow + 1);
+        });
+
+        var queryBtn = new Rui.ui.LButton('queryBtn');
+        queryBtn.on('click', function(){
+            var queryList = dataSet.query(
+                    function(id, record) {
+                        if(record.get('col4') == 'R2')
+                            return true;
+                    }
+            );
+
+            queryList.each(function(id, record){
+                Rui.log(id);
+            })
+        });
+
+        var filterBtn = new Rui.ui.LButton('filterBtn');
+        filterBtn.on('click', function(){
+            dataSet.filter(
+                function(id, record) {
+                    if(record.get('col4') == 'R2')
+                        return true;
+                }
+            );
+        });
+
+        var clearFilterBtn = new Rui.ui.LButton('clearFilterBtn');
+        clearFilterBtn.on('click', function(){
+            dataSet.clearFilter();
+        });
+
+        var isFilteredBtn = new Rui.ui.LButton('isFilteredBtn');
+        isFilteredBtn.on('click', function(){
+            alert(dataSet.isFiltered());
+        });
+
+        var cloneBtn = new Rui.ui.LButton('cloneBtn');
+        cloneBtn.on('click', function(){
+            var testDataSet = dataSet.clone('testDataSet');
+            Rui.log(testDataSet.getCount());
+        });
+
+        dataSetLoadBtn.click();
+    });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>DataSet</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>데이터셋(LDataSet)을 사용하는 기본 샘플</h2>
+            <div class="LblockDesc">
+		        <p>데이터셋(DataSet)을 사용하는 기본적인 형태입니다.</p>
+		        <p>데이터셋의 이벤트(Event) 등을 정의하여 이벤트와 연결된 여러 액션이 가능합니다.</>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <form id="frm" name="frm" method="post" >
+                <fieldset>
+                    <legend>
+                        Bind form
+                    </legend>
+                    <input type="hidden" id="test" />
+                    <input type="text" id="recordId" />
+                    <input type="text" id="col1" /><br/>
+                    <input type="text" id="col2" />
+                    <select id="col3">
+                        <option value="all">ALL</option>
+                        <option value="R1">TES3</option>
+                        <option value="R2">TES4</option>
+                    </select><br/>
+                    <input type="radio" id="col4" value="R1"/>RADIO1
+                    <input type="radio" id="col4" value="R2"/>RADIO2<br/>
+                    <input type="checkbox" id="col5" value="R1"/>CHECKBOX1<br/>
+                    <textarea id="col6" rows="3" cols="50"></textarea><br/>
+                </fieldset>
+            </form>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="dataSetLoadBtn" >dataSetLoad</button>
+            <button type="button" id="dataSetCommitBtn" >dataSetCommit</button>
+            <button type="button" id="dataSetUndoBtn" >dataSetUndo</button>
+            <button type="button" id="dataSetUndoAllBtn" >dataSetUndoAll</button>
+            <button type="button" id="queryBtn" >query</button>
+            <button type="button" id="filterBtn" >filter</button>
+            <button type="button" id="clearFilterBtn" >clearFilter</button>
+            <button type="button" id="isFilteredBtn" >isFiltered</button>
+            <button type="button" id="cloneBtn" >clone</button>
+            <button type="button" id="dataSetFirstBtn" >dataSetFirst</button>
+            <button type="button" id="dataSetLastBtn" >dataSetLast</button>
+            <button type="button" id="dataSetPreviousBtn" >dataSetPrevious</button>
+            <button type="button" id="dataSetNextBtn" >dataSetNext</button>
+        </div>
+        <div id="showData"></div>
+    </div>
+</body>
+</html>

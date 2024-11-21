@@ -1,0 +1,21 @@
+.L-ul-treeview .L-ul-li-line{
+    background:url("./images/ul/tree/skin2/mid_blank.gif") repeat-y scroll left top transparent;
+}
+.L-ul-treeview-node-image-close-mid{
+    background:url("./images/ul/tree/skin2/mid_plus.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-image-close-last{
+    background:url("./images/ul/tree/skin2/last_plus.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-image-open-mid{
+    background:url("./images/ul/tree/skin2/mid_minus.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-image-open-last{
+    background:url("./images/ul/tree/skin2/last_minus.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-image-mid{
+    background:url("./images/ul/tree/skin2/mid_normal.gif") no-repeat scroll left top transparent;
+}
+.L-ul-treeview-node-image-last{
+    background:url("./images/ul/tree/skin2/last_normal.gif") no-repeat scroll left top transparent;
+}

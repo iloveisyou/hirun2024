@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="Dom 컨트롤, LElement 컨트롤" />
+    <title>Element Control</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #frm label {
+            display: block;
+            float: left;
+            width: 10%;
+            clear: left;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        #demo {
+            background: #ccc;
+            margin-bottom: 1em;
+            height: 30px;
+            width: 30px;
+        }
+
+        .container {
+            height: 260px;
+        }
+
+        .over_test {
+            font-weight: bold;
+        }
+
+        .focus_test {
+            background: #ccc;
+        }
+
+        .click_test {
+            background: red;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        var panelEl = null;
+        
+        Rui.onReady(function(){
+            /*<b>*/
+            panelEl = Rui.get("panel");
+            Rui.get('container').on('click', function(e){
+                Rui.alert(e.target.id + ' dom clicked');
+            });
+            /*</b>*/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+
+            var moveToBtn = new Rui.ui.LButton('moveToBtn');
+            moveToBtn.on('click', function(){
+                Rui.get('demo').moveTo(600, 200, true);
+            });
+
+            var setWidthBtn = new Rui.ui.LButton('setWidthBtn');
+            setWidthBtn.on('click', function(){
+                Rui.get('demo').setWidth(100, true);
+            });
+
+            var setSizeBtn = new Rui.ui.LButton('setSizeBtn');
+            setSizeBtn.on('click', function(){
+                Rui.get('demo').setSize(100, 100, true);
+            });
+
+            var setRegionBtn = new Rui.ui.LButton('setRegionBtn');
+            setRegionBtn.on('click', function(){
+                Rui.get('demo').setRegion({
+                    left: 600,
+                    right: 800,
+                    top: 200,
+                    bottom: 300
+                }, true);
+            });
+
+            var getLRTBBtn = new Rui.ui.LButton('getLRTBBtn');
+            getLRTBBtn.on('click', function(){
+                var demo = Rui.get('demo');
+                var str ='#demo \r\n';
+                str += 'getLeft : ' + demo.getLeft() + '\r\n';
+                str += 'getRight : ' + demo.getRight() + '\r\n';
+                str += 'getTop : ' + demo.getTop() + '\r\n';
+                str += 'getBottom : ' + demo.getBottom() + '\r\n';
+                Rui.alert(str);
+            });
+             
+            var enableBtn = new Rui.ui.LButton('enableBtn');
+            enableBtn.on('click', function(){
+                Rui.get('frm').enable();
+            });
+
+            var disableBtn = new Rui.ui.LButton('disableBtn');
+            disableBtn.on('click', function(){
+                Rui.get('frm').disable();
+            });
+
+            var invalidBtn = new Rui.ui.LButton('invalidBtn');
+            invalidBtn.on('click', function(){
+                Rui.get('col1').invalid();
+            });
+
+            var validBtn = new Rui.ui.LButton('validBtn');
+            validBtn.on('click', function(){
+                Rui.get('col1').valid();
+            });
+
+            var hideBtn = new Rui.ui.LButton('hideBtn');
+            hideBtn.on('click', function(){
+                Rui.get('col2').hide(true);
+            });
+
+            var showBtn = new Rui.ui.LButton('showBtn');
+            showBtn.on('click', function(){
+                Rui.get('col2').show(true);
+            });
+
+            var setValueBtn = new Rui.ui.LButton('setValueBtn');
+            setValueBtn.on('click', function(){
+                var el = Rui.get('col1');
+                el.setValue('ccc');
+            });
+
+            var setValuesBtn = new Rui.ui.LButton('setValuesBtn');
+            setValuesBtn.on('click', function(){
+                var form = new Rui.ui.form.LForm('frm');
+                var obj = {
+                        col1: 'asdfasdf',
+                        col2: 'bbb',
+                        col3: 'tes3'
+                };
+
+                form.setValues(obj);
+            });
+
+            var findParentBtn = new Rui.ui.LButton('findParentBtn');
+            findParentBtn.on('click', function(){
+                var el = Rui.get('panel');
+                Rui.alert(el.findParent('.container').id);
+            });
+
+            var findParentNodeBtn = new Rui.ui.LButton('findParentNodeBtn');
+            findParentNodeBtn.on('click', function(){
+                var el = Rui.get('panel');
+                Rui.alert(el.findParentNode('.container').id);
+            });
+
+            var parentBtn = new Rui.ui.LButton('parentBtn');
+            parentBtn.on('click', function(){
+                var el = Rui.get('frm');
+                Rui.alert(el.parent().id);
+            });
+
+            var clipBtn = new Rui.ui.LButton('clipBtn');
+            clipBtn.on('click', function(){
+                panelEl.clip();
+                Rui.alert(panelEl.getStyle("overflow"));
+            });
+
+            var unclipBtn = new Rui.ui.LButton('unclipBtn');
+            unclipBtn.on('click', function(){
+                panelEl.unclip();
+                Rui.alert(panelEl.getStyle("overflow"));
+            });
+
+            var repaintBtn = new Rui.ui.LButton('repaintBtn');
+            repaintBtn.on('click', function(){
+                panelEl.repaint();
+                Rui.alert("repainted");
+            });
+
+            var noTestRemoveBtn = new Rui.ui.LButton('noTestRemoveBtn');
+            noTestRemoveBtn.on('click', function(){
+                Rui.get('col6').remove();
+            });
+
+            var appendToBtn = new Rui.ui.LButton('appendToBtn');
+            appendToBtn.on('click', function(){
+                var sp2 = Rui.get("col2");
+                var sp3 = Rui.get("col3");
+                sp2.appendTo(sp2.parent(), sp3.dom);
+            });
+
+            var domInsertBeforeBtn = new Rui.ui.LButton('domInsertBeforeBtn');
+            domInsertBeforeBtn.on('click', function(){
+                var frm = Rui.get('frm');
+                var sp1 = document.createElement("input");
+                sp1.type = 'radio';
+                sp1.id = 'radio1';
+                sp1.name = 'radio1';
+                var sp2 = Rui.get("col2");
+                sp2.insertBefore(sp1, sp2.dom);
+            });
+
+            var domInsertAfterBtn = new Rui.ui.LButton('domInsertAfterBtn');
+            domInsertAfterBtn.on('click', function(){
+                var frm = Rui.get('frm');
+                var sp1 = document.createElement("input");
+                sp1.type = 'radio';
+                sp1.id = 'radio2';
+                sp1.name = 'radio2';
+                var sp2 = Rui.get("col2");
+                sp2.insertAfter(sp1, sp2.dom);
+            });
+
+            var htmlCreateElementBtn = new Rui.ui.LButton('htmlCreateElementBtn');
+            htmlCreateElementBtn.on('click', function(){
+                var html = '<li>test1</li><li>test2</li>';
+                var el = Rui.createElements(html);
+                el.appendTo(Rui.get('appendTest'));
+            });
+
+            var marginsBtn = new Rui.ui.LButton('marginsBtn');
+            marginsBtn.on('click', function(){
+                var fieldset = Rui.select('#frm fieldset');
+                if (fieldset.length > 0) {
+                    var ell = fieldset.getAt(0);
+                    var o = ell.getMargins('lr');
+                    Rui.alert('length : ' + o);
+                }
+            });
+
+            var formBtn = new Rui.ui.LButton('formBtn');
+            formBtn.on('click', function(){
+                var str = '';
+                Rui.get('p').appendChild(Rui.get('col1'));
+                str += 'col2 value : ' + Rui.get('col2').getValue() + '\r\n';
+                str += '#col2:first-child,select : ' + Rui.get('p').select('#col2:first-child,select').length + '\r\n';
+                var el = Rui.get('p').select('*');
+                str += 'length : ' + el.length + '\r\n';
+                str += 'length.select : ' + el.select('*').length + '\r\n';
+                str += 'item(0) : ' + el.getAt(0) + '\r\n';
+                Rui.alert(str);
+            });
+
+            var maskBtn = new Rui.ui.LButton('maskBtn');
+            maskBtn.on('click', function(){
+                Rui.get("frm").mask();
+                Rui.get("demo").mask();
+            });
+
+            var unmaskBtn = new Rui.ui.LButton('unmaskBtn');
+            unmaskBtn.on('click', function(){
+                Rui.get("frm").unmask();
+                Rui.get("demo").unmask();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Element Control</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>HTML DOM element 객체를 제어하는 샘플</h2>
+            <div class="LblockDesc">
+                <p>HTML DOM element객체를 액세스 하여 제어합니다. 객체의 ID를 이용하여, 객체를 지정합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div id="demo">
+                Demo
+            </div>
+            <ul id="appendTest"></ul>
+            <div id="container" class="container">
+                <div id="panel">
+                    <form id="frm" name="frm" method="post" action="./../../data/savedCallback.json">
+                        <fieldset>
+                            <legend>
+                                Form Fields
+                            </legend>
+                            <input type="hidden" id="test" name="test" />
+                            <label for="state">
+                                state
+                            </label>
+                            <input type="text" id="state" name="state" />
+                            <br/>
+                            <label for="id">
+                                id
+                            </label>
+                            <input type="text" id="id" name="id" />
+                            <br/>
+                            <label for="col1">
+                                col1
+                            </label>
+                            <input type="text" id="col1" name="col1" />
+                            <br/>
+                            <label for="col2">
+                                col2
+                            </label>
+                            <input type="text" id="col2" name="col2" />
+                            <br/>
+                            <label for="col3">
+                                col3
+                            </label>
+                            <select id="col3" name="col3">
+                                <option value="all">ALL</option>
+                                <option value="tes3">TES3</option>
+                                <option value="tes4">TES4</option>
+                            </select>
+                            <br/>
+                            <div id="bbb">
+                            </div>
+                            <label>
+                                col4
+                            </label>
+                            <input type="radio" id="col4_1" name="col4" value="RADIO1"/>RADIO1<input type="radio" id="col4_2" name="col4" value="RADIO2"/>RADIO2
+                            <br/>
+                            <label>
+                                col5
+                            </label>
+                            <input type="checkbox" id="col5_1" name="col5" value="CHECKBOX1"/>CHECKBOX1<input type="checkbox" id="col5_2" name="col5" value="CHECKBOX2"/>CHECKBOX2
+                            <br/>
+                            <label for="col6">
+                                col6
+                            </label>
+                            <textarea id="col6" name="col6" rows="3" cols="50"></textarea>
+                            <br/>
+                        </fieldset>
+                    </form>
+                    </div>
+                <div id='p'>
+                </div>
+                </div>
+            </div>
+
+            <div class="LblockButton" >
+                <button type="button" id="setWidthBtn" >SetWidth</button>
+                <button type="button" id="setSizeBtn" >SetSize</button>
+                <button type="button" id="setRegionBtn" >SetRegion</button>
+                <button type="button" id="moveToBtn" >MoveTo</button>
+                <button type="button" id="getLRTBBtn" >GetLRTB</button>
+                <br/>
+                <button type="button" id="htmlCreateElementBtn" >createElement</button>
+                <br/>
+                <button type="button" id="enableBtn" >Enable</button>
+                <button type="button" id="disableBtn" >Disable</button>
+                <button type="button" id="invalidBtn" >Invalid</button>
+                <button type="button" id="validBtn" >Valid</button>
+                <button type="button" id="hideBtn" >Hide</button>
+                <button type="button" id="showBtn" >Show</button>
+                <br/>
+                <button type="button" id="setValueBtn" >SetValue</button>
+                <button type="button" id="setValuesBtn" >SetValues</button>
+                <button type="button" id="findParentBtn" >FindParent</button>
+                <button type="button" id="findParentNodeBtn" >FindParentNode</button>
+                <button type="button" id="parentBtn" >Parent</button>
+                <button type="button" id="clipBtn" >Clip</button>
+                <button type="button" id="unclipBtn" >Unclip</button>
+                <br/>
+                <button type="button" id="repaintBtn" >Repaint</button>
+                <button type="button" id="noTestRemoveBtn" >Remove</button>
+                <button type="button" id="appendToBtn" >AppendTo</button>
+                <button type="button" id="domInsertBeforeBtn" >InsertBefore</button>
+                <button type="button" id="domInsertAfterBtn" >InsertAfter</button>
+                <br/>
+                <button type="button" id="marginsBtn" >Margins</button>
+                <button type="button" id="formBtn" >Form</button>
+                <button type="button" id="maskBtn" >mask</button>
+                <button type="button" id="unmaskBtn" >unmask</button>
+            </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+<meta http-equiv="Cache-Control" content="no-cache; no-store; no-save"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=0.1" />
+<title>DevOn RUI DEMO</title>
+
+<script type="text/javascript" src="./js/rui_base.js"></script>
+<script type="text/javascript" src="./js/rui_core.js"></script>
+<script type="text/javascript" src="./js/rui_ui.js"></script>
+<script type="text/javascript" src="./js/rui_form.js"></script>
+<script type="text/javascript" src="./js/rui_grid.js"></script>
+<script type="text/javascript" src="./resources/rui_config.js"></script>
+<script type="text/javascript" src="./resources/rui_license.js"></script>
+<link rel="stylesheet" type="text/css" href="./resources/rui.css"/>
+
+<script type="text/javascript" src="./plugins/menu/rui_menu.js"></script>
+<link rel="stylesheet" type="text/css" href="./plugins/menu/rui_menu.css" />
+
+<link rel="stylesheet" href="resources/rui_ie6.css" type="text/css" />
+
+</style>
+<style type="text/css" >
+    html {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    body {
+        height: 100%;
+        padding: 0;
+        margin: auto;
+        font-family: tahoma,sans-serif;
+        margin: 0px;
+        padding: 0px;
+        font-size: 12px;
+    }
+    #bd {
+        height: 100%;
+    }
+    
+    #menuDiv {
+        position: absolute;
+        width: 230px;
+        left: 0px;
+		z-index: 2;
+		height: 100%;
+        border-right: 1px solid #bababa;
+    }
+    .L-ua-msie7 #contentFrame{
+        width: 100%;
+    }
+    .L-ul-slidemenu {
+        border-bottom: 1px solid #bababa;
+    }
+    .L-ul-slidemenu .L-ul-depth-0 {
+        border: 0;
+    }
+    .L-ul-slidemenu .L-ul-node {
+        padding-top: 5px;
+        padding-bottom: 5px;
+		line-height: 20px !important;
+		height: 20px;
+		border: 0;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-focus-node {
+        margin-left: 0px;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-0 {
+        border: 0;
+        background-color: #fff;
+        font-size: 14px;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-depth-1 {
+        background-color: #f0f0f0;
+        border-bottom: 1px solid #bababa;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-0 {
+        border-bottom: 1px solid #bababa;
+        font-weight: bold;
+        line-height: 36px !important;
+        height: 36px;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-li-div-depth-1 {
+        font-weight: bold;
+        color: #333;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-0.L-ul-has-child-close-mid, .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-0.L-ul-has-child-close-last {
+        background: url("./resources/images/demo/tree_plus_blue.gif") no-repeat 16px;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-0.L-ul-has-child-open-mid, .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-0.L-ul-has-child-open-last {
+        background: url("./resources/images/demo/tree_minus_blue.gif") no-repeat 16px;
+    }
+    .L-ul-slidemenu li .L-ul-node {
+        background: url("./resources/images/demo/tree_last_blue.gif") no-repeat 31px;
+    }
+    .L-ul-slidemenu li .L-ul-node.L-ul-li-div-depth-2 {
+        background: url("./resources/images/demo/tree_last_blue.gif") no-repeat 43px;
+    }
+    .L-ul-slidemenu li .L-ul-has-no-child-mid, .L-ul-slidemenu li .L-ul-has-no-child-last {
+        font-weight: normal !important;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-focus-node {
+        color: #2880b4;
+        font-weight: bold !important;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-0 {
+        padding-left: 28px;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-1.L-ul-has-child-close-mid, .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-1.L-ul-has-child-close-last {
+        background: url("./resources/images/demo/tree_plus_blue.gif") no-repeat 31px 11px;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-1.L-ul-has-child-open-mid, .L-ul-slidemenu .L-ul-li-depth-0 .L-ul-li-div-depth-1.L-ul-has-child-open-last {
+        background: url("./resources/images/demo/tree_minus_blue.gif") no-repeat 31px 11px;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-li-div-depth-1 {
+        padding-left: 43px;
+    }
+    .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-li-div-depth-1.L-ul-has-no-child-mid, .L-ul-slidemenu .L-ul-li-depth-1 .L-ul-li-div-depth-1.L-ul-has-no-child-last {
+        padding-left: 43px; 
+    }
+    .L-ul-slidemenu .L-ul-li-depth-2 .L-ul-li-div-depth-2 {
+        padding-left: 55px;
+    }
+    #frameDiv-forIOS {
+        height: 100%;
+        margin-bottom:-1px;
+        margin-left: 231px;
+    }
+    html.L-ua-safari.L-ua-mobile #frameDiv-forIOS {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    #contentFrame {
+        overflow: hidden; 
+        display: inline-block; 
+        height: 100%;
+        border: 0; 
+        background: transparent;
+    }
+    .L-ul-slidemenu div.L-ul-node {
+        white-space: nowrap;
+    }
+</style>
+
+<script type="text/javascript" >
+var tabView = tree = null;
+
+Rui.onReady(function() {
+    Rui.util.LEvent.addListener(window, "resize", updateLayout, this, true);
+
+    var dataSet = new Rui.data.LJsonDataSet({
+        id: 'dataSet',
+    	method: 'GET',
+        fields: [
+            { id: 'menuId', type:'number' },
+            { id: 'seq', type:'number' },
+            { id: 'parentMenuId', type:'number' },
+            { id: 'name' },
+            { id: 'url' },
+            { id: 'desc'}
+        ]
+    });
+    
+    dataSet.on("rowPosChanged", function (e) {
+        if (e.row > -1) var row = e.row;
+
+        if (row > -1) {
+            var url = dataSet.getNameValue(row, 'url');
+            if(url!=='') {
+                Rui.getDom('contentFrame').src = 'about:blank';
+                Rui.getDom('contentFrame').src = Rui.util.LString.getTimeUrl('./sample/general/' + url);
+            }
+        }
+    });
+    
+    var slide = new Rui.ui.menu.LSlideMenu({
+        onlyOneTopOpen: true,
+        useAnimation: true,
+        defaultOpenTopIndex: 1,
+        dataSet: dataSet,
+        height: 823,
+        useTooltip: true,
+        fields: {
+            rootValue: 0,
+            parentId: 'parentMenuId',
+            id: 'menuId',
+            label: 'name',
+            order: 'seq'
+        }
+    });
+    
+    slide.render('menuDiv');
+
+    dataSet.load({
+        url: "./sample/data/widgetMenu.json"
+    });
+    
+    if(!Rui.get(document.documentElement).hasClass('L-ua-msie7'))
+        updateLayout();
+});
+
+function updateLayout() {
+	var height = Rui.util.LDom.getViewportHeight();
+	var width = Rui.util.LDom.getViewportWidth();
+
+	Rui.getBody().setHeight(height);
+	//tree.setHeight(height - 10);
+	Rui.get('frameDiv-forIOS').setWidth(width - 230);
+    Rui.get('frameDiv-forIOS').setHeight(height);
+	Rui.get('contentFrame').setWidth(width - 230);
+    Rui.get('contentFrame').setHeight(height);
+}
+</script>
+
+</head>
+<body >
+<div id="bd">
+    <div id="menuDiv"></div>
+    <div id="frameDiv-forIOS">
+        <iframe id="contentFrame" frameborder="no" src="./sample/general/demo_home.html"></iframe>
+    </div>
+</div>
+</body>
+</html>
