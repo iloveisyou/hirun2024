@@ -1,0 +1,33 @@
+@charset 'utf-8';
+/* ---------------------------------------------------------
+* FileName : _page.css
+* ProjectName : 하이엠솔루텍 하이런 차세대
+* Description : 페이지 스타일시트 (로그인)
+* Author : zarel
+* Date : 2024.11
+--------------------------------------------------------- */
+
+@use 'variables' as *;
+
+/* login --------------------------------------------------------- */
+
+.pg-login { height:100%;
+    body { height:100%; }
+    .hirun-wrap { display:flex; height:100%; 
+        .visual { display:block; flex:1; position:relative; z-index:10; background-position-y:bottom; }
+        .container { flex:1; display:flex; flex-direction:column; justify-content:center; padding:50px;
+            .header { flex:1; display:flex; flex-direction:column; justify-content:flex-start; padding-bottom:2%;
+                h1 { @include fontB; line-height:24px; font-size:40px; color:$primary; }
+                p { margin-top:26px; @include fontSB; font-size:20px; color:$gray700; }
+            }
+            .footer { flex:1; display:flex; flex-direction:column; justify-content:flex-end; padding-top:3%; 
+                p { @include fontR; font-size:16px; color:$gray; }
+            }
+            .main { 
+                h2 { @include fontB; font-size:40px; color:$gray700; }
+                p { margin-top:20px; @include fontR; line-height:24px; font-size:16px; color:$gray; }
+                .cpnt_login { margin-top:50px; }
+            }
+        }
+    }
+}

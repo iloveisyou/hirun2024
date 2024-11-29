@@ -1,0 +1,13 @@
+[
+    {
+        "metaData": {
+            "dataSetId": "dataSet1"
+        },
+        "records": [
+            {"col":"KIM MJ","col2":"SEOUL","col3":"M","col4":546477,"date1":"2009-08-18"},
+            {"col":"HWANG SJ","col2":"BUSAN","col3":"F","col4":12345,"date1":"2009-08-18"},
+            {"col":"KIM MJ","col2":"SEOUL","col3":"F","col4":983943,"date1":"2009-08-18"},
+            {"col":"KIM MJ","col2":"SEOUL","col3":"M","col4":53323,"date1":"2009-08-18"}
+        ]
+    }
+]

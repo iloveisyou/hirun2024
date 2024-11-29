@@ -1,14 +1,20 @@
-{% set ruiPath='/assets/rui2.8' %}
+{% set ruiPath='/assets/lib/rui2.8' %}
+{% set assPath='/assets' %}
+{% set imgPath='/assets/images' %}
+{% set headTitle = title if title else 'Hi-Run System' %}
+{% set cat = cat if cat else 'cat' %}
+{% set page = page if page else 'page' %}
 {%- macro include(fileName) -%}
     {%- include fileName ignore missing -%}
 {%- endmacro -%}
 {#- // 들여쓰기(Tab Indent) 조정을 위한 macro -#}
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="ct-{{cat}} pg-{{page}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hi run</title>
+    <title>{{headTitle}}</title>
+    <link rel="icon" href="{{imgPath}}/favicon.ico">
 
     <!-- RUI import -->
     <!-- <script type="text/javascript" src="{{ruiPath}}/js/rui_base.js"></script>
@@ -39,12 +45,33 @@
     <link rel="stylesheet" type="text/css" href="{{ruiPath}}/resources/rui.css" />
     <link rel="stylesheet" type="text/css" href="{{ruiPath}}/resources/rui_skin_blue.css" />
     <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/tab/rui_tab.js'></script>
-    <link rel="stylesheet" type="text/css"              href="{{ruiPath}}/plugins/tab/rui_tab.css" />
+    <link rel="stylesheet" type="text/css" href="{{ruiPath}}/plugins/tab/rui_tab.css" />
+    <!-- jquery import -->
+    <script type='text/javascript' src='{{assPath}}/js/lib/jquery-3.7.1.min'></script>
+    <!-- aos import -->
+    <script type='text/javascript' src="{{assPath}}/js/lib/aos@2.3.1/aos.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{assPath}}/js/lib/aos@2.3.1/aos.css" />
+    <!-- all import -->
+    <script type='text/javascript' src='{{assPath}}/js/all.js'></script>
+    <link rel="stylesheet" type="text/css" href="{{assPath}}/css/all.css" />
+
 </head>
 <body>
 
-<div class="wrap">
+<div class="hirun-wrap">
+
+{#- // header,footer 없을경우 -#}
+{% if isNotHeaderFooter == true %}
+    {% filter tabIndent(1) %}
+        {% block wrap %}
+        {% endblock %}
+    {% endfilter %}
+{% else %}
+{#- // header,footer 있을경우 -#}
+
+    {# {% if isNotHeader !== true %} #}
     {{ include('./header.html') | tabIndent(1) }}
+    {# {% endif %} #}
 
     <main>
         {% filter tabIndent(2) %}
@@ -53,7 +80,12 @@
         {% endfilter %}
     </main>
     
+    {# {% if isNotFooter !== true %} #}
     {{ include('./footer.html') | tabIndent(1) }}
+    {# {% endif %} #}
+
+{% endif %}
+
 </div>
 
 </body>

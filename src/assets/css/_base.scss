@@ -1,0 +1,19 @@
+@charset 'utf-8';
+/* ---------------------------------------------------------
+* FileName : _base.css
+* ProjectName : 하이엠솔루텍 하이런 차세대
+* Description : 베이스 스타일시트
+* Author : zarel
+* Date : 2024.11
+--------------------------------------------------------- */
+
+@use 'variables' as *;
+
+.hirun-wrap, .hirun-wrap *, .hirun-wrap ::before, .hirun-wrap ::after { box-sizing:border-box; }
+.hirun-wrap { min-width:1600px; font-family:'LG_Smart_H2.0', sans-serif; font-size:16px; font-weight:400; letter-spacing:-0.5px;
+    ::selection {  color:$white;  background-color:$primary;}
+
+    
+    
+
+}

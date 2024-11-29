@@ -1,0 +1,24 @@
+$assPath: "/assets";
+$imgPath: "/assets/images";
+
+/* color */
+$primary: #BB0841;
+
+$gray: #6C6C6C;
+$gray300: #DEDEDE;
+$gray700: #2A2A2A;
+
+$white: #ffffff;
+
+
+
+/* font */
+@mixin font_lgL { font-family:'LG_Smart_H2.0'; font-weight:300; } 
+@mixin font_lgR { font-family:'LG_Smart_H2.0'; font-weight:400; } 
+@mixin font_lgSB { font-family:'LG_Smart_H2.0'; font-weight:600; } 
+@mixin font_lgB { font-family:'LG_Smart_H2.0'; font-weight:700; } 
+
+@mixin fontL { font-weight:300; }
+@mixin fontR { font-weight:400; }
+@mixin fontSB { font-weight:600; }
+@mixin fontB { font-weight:700; }

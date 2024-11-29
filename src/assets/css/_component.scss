@@ -1,3 +1,27 @@
-html {
-  body { background-color:pink; }
+@charset 'utf-8';
+/* ---------------------------------------------------------
+* FileName : _component.css
+* ProjectName : 하이엠솔루텍 하이런 차세대
+* Description : 컴포넌트 스타일시트
+* Author : zarel
+* Date : 2024.11
+--------------------------------------------------------- */
+
+@use 'variables' as *;
+
+.cpnt_login { display:flex; row-gap:10px; flex-direction:column; justify-content:stretch; width:400px;
+    .loginInput { position:relative; height:46px; border:1px solid $gray300; border-radius:8px;
+        input { width:100%; height:100%; padding:0 18px; border-radius:8px; border:0 solid transparent; @include fontR; font-size:16px; }
+        button { position:absolute; right:19px; top:50%; transform:translateY(-50%); width:16px; height:16px; padding:0 0 0 16px; border-radius:50%; border:0 solid transparent; background-color:$gray300; overflow:hidden;
+            &::before { content:""; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(45deg); width:10px; height:2px; border-radius:1px; background-color:$gray700; }
+            &::after { content:""; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-45deg); width:10px; height:2px; border-radius:1px; background-color:$gray700; }
+        }
+    }
+    .btn_login { height:46px; border-radius:8px; border:0 solid transparent; background-color:$primary; @include fontR; font-size:16px; color:$white; }
+    .option { display:flex; justify-content:flex-end;  
+        button { display:flex; align-items:center; height:38px; margin-right:auto; padding:0 18px; border-radius:8px; border:1px solid $gray700; background-color:transparent; @include fontR; font-size:16px; color:$gray700; }
+        label { display:inline-flex; align-items:center; @include fontR; font-size:16px; color:$gray;
+            input { width:20px; height:20px; margin-right:4px; border-radius:4px; border:1px solid $gray700; }
+        }
+    }
 }

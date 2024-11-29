@@ -1,0 +1,149 @@
+{% extends './_include/layout.html' %}
+
+{% block main %}
+index start12
+<img src="../../assets/img/Frame89.jpg" />
+index end34
+
+<div id="defaultGrid"></div><br />
+<button type="button" id="dataSetLoadBtn">dataSetLoad</button><br />
+<div id="textbox1"></div><br />
+<div id="tab-container"></div>
+<div id="div-content-test">test용 텍스트 입니다.</div>
+<div id="treeDiv1"></div>
+<script>
+    console.log(Rui.ui)
+    var txtBox = new Rui.ui.form.LTextBox({            // LTextBox개체를 선언
+        applyTo: 'textbox1',                           // 해당 DOM Id 위치에 텍스트박스를 적용
+        width: 300,                                    // 텍스트박스 폭을 설정
+        placeholder: 'placeholder 내용이 출력됩니다',     // [옵션] 입력 값이 없을 경우 기본 표시 메시지를 설정
+        invalidBlur: false,                            // [옵션] invalid시 blur를 할 수 있을지 여부를 설정
+        //mask: 9999-999,                                  // [옵션] 입력마스크를 설정 
+        //inputType: Rui.util.LString.PATTERN_TYPE_STRING, // [옵션] 입력문자열로 영문자 입력만 허용
+        //includeChars: '123',                             // [옵션] 입력제한조건 중에서 지정한 문자는 입력 허용
+        attrs: {                                       // [옵션] HTML 기본 속성(attribute) 값들을 설정 
+            tabIndex: 1,
+            maxLength: 10
+        }
+    })
+
+    var tabView = new Rui.ui.tab.LTabView({
+        contentHeight: 300,                          // 콘텐츠영역의 전체 높이 값
+        tabs: [                                      // 탭뷰를 구성할 탭들을 정의
+            {                                        // 첫번째 탭
+                label: 'Tab1',                       // 탭의 제목
+                content: '<div>첫번째 탭입니다.</div>', // 탭 선택시 선택할 내용
+                active: true                         // 탭 생성시 현재의 탭을 선택된 탭으로 설정
+            },
+            {                                        // 두번째 탭
+                id: 'div-content-test',              // 콘텐츠 내용을 별도 DOM Element로 설정
+                label: 'Dom & TreeView'
+            },
+            {
+                label: 'gridview',
+                content: '<div><div id="defaultGrid"></div></div>' // 콘텐츠 내용을 별도 DOM Element로 직접 설정
+            }
+        ]
+    });
+
+    tabView.render('tab-container');    
+</script>
+
+
+22222222222222222222
+<div id="panel">
+    <fieldset>
+        <input type="checkbox" id="cuttlefish1">
+        <input type="checkbox" id="cuttlefish2">
+        <input type="checkbox" id="cuttlefish3">
+        <!-- <div id="peanut"></div> -->
+    </fieldset>
+</div>
+<div class="LblockButton">
+    <button type="button" id="checkBtn">Check</button>
+    <button type="button" id="decheckBtn">Decheck</button>
+    <button type="button" id="showValueBtn">Show Value</button>
+    <button type="button" id="disableBtn">Disable</button>
+    <button type="button" id="enableBtn">Enable</button>
+    <button type="button" id="focusBtn">Focus</button>
+    <button type="button" id="blurBtn">Blur</button>
+</div>
+
+<script>
+    Rui.onReady(function(){
+        /*******************
+         * 변수 및 객체 선언
+         *******************/
+        
+        var cuttlefish1 = new Rui.ui.form.LCheckBox({
+            applyTo: 'cuttlefish1',
+            name: 'appetizer',
+            label: 'Cuttlefish',
+            value: '오징어'
+        });
+        var cuttlefish2 = new Rui.ui.form.LCheckBox({
+            applyTo: 'cuttlefish2',
+            name: 'appetizer',
+            label: 'Cuttlefish',
+            value: '오징어'
+        });
+        var cuttlefish3 = new Rui.ui.form.LCheckBox({
+            applyTo: 'cuttlefish3',
+            name: 'appetizer',
+            label: 'Cuttlefish',
+            value: '오징어'
+        });
+        var peanut = new Rui.ui.form.LCheckBox({
+            applyTo: 'peanut',
+            name: 'appetizer',
+            label: 'Peanut',
+            value: '땅콩'
+        });
+        
+        
+        cuttlefish.on('changed', function(e){
+            Rui.log(e.target.getValue());
+        });
+
+
+        /********************
+         * 버튼 선언 및 이벤트
+         ********************/
+        var checkBtn = new Rui.ui.LButton('checkBtn');
+        checkBtn.on('click', function(){
+            cuttlefish.setValue(true);
+        });
+        
+        var decheckBtn = new Rui.ui.LButton('decheckBtn');
+        decheckBtn.on('click', function(){
+            cuttlefish.setValue(false);
+        });
+
+        var showValueBtn = new Rui.ui.LButton('showValueBtn');
+        showValueBtn.on('click', function(){
+            Rui.alert(cuttlefish.getValue());
+        });
+        
+        var disableBtn = new Rui.ui.LButton('disableBtn');
+        disableBtn.on('click', function(){
+            cuttlefish.disable();
+        });
+        
+        var enableBtn = new Rui.ui.LButton('enableBtn');
+        enableBtn.on('click', function(){
+            cuttlefish.enable();
+        });
+            
+        var focusBtn = new Rui.ui.LButton('focusBtn');
+        focusBtn.on('click', function(){
+            peanut.focus();
+        });
+        
+        var blurBtn = new Rui.ui.LButton('blurBtn');
+        blurBtn.on('click', function(){
+            peanut.blur();
+        });
+        
+    });
+</script>
+{% endblock %}

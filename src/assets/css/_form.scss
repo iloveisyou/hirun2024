@@ -1,0 +1,20 @@
+@charset 'utf-8';
+/* ---------------------------------------------------------
+* FileName : _page.css
+* ProjectName : 하이엠솔루텍 하이런 차세대
+* Description : 페이지 스타일시트 (로그인)
+* Author : zarel
+* Date : 2024.11
+--------------------------------------------------------- */
+
+@use 'variables' as *;
+
+/* button --------------------------------------------------------- */
+
+.a, a:link, a:active, a:visited { text-decoration:none; }
+[class^='btn_'] { cursor:pointer; margin:0; padding:0; border:0 solid transparent; background-color:transparent; }
+
+.btn_headerUtill { display:inline-block; padding-left:38px; width:38px; height:38px; border-radius:50%; border:1px solid $gray300; overflow:hidden; 
+    &.bg-gray { border-color:$gray300; background-color:$gray300; }
+    &.bg-primary { border-color:$primary; background-color:$primary; }
+}

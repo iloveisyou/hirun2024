@@ -1,0 +1,58 @@
+@charset 'utf-8';
+/* ---------------------------------------------------------
+* FileName : _font.css
+* ProjectName : 하이엠솔루텍 하이런 차세대
+* Description : 폰트 스타일시트
+* Author : zarel
+* Date : 2024.11
+--------------------------------------------------------- */
+
+@use 'variables' as *;
+
+/* Font Face */
+@font-face {
+    // font-family: 'LG_Smart_H2.0_L';
+    font-family: 'LG_Smart_H2.0';
+    src: url($assPath + '/font/LGSmHaTL.woff2') format('woff2'),
+    url($assPath + '/font/LGSmHaTL.woff') format('woff'),
+    url($assPath + '/font/LGSmHaTL.ttf') format('truetype');
+    // font-weight: 100;
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    // font-family: 'LG_Smart_H2.0_R';
+    font-family: 'LG_Smart_H2.0';
+    src: url($assPath + '/font/LGSmHaTR.woff2') format('woff2'),
+    url($assPath + '/font/LGSmHaTR.woff') format('woff'),
+    url($assPath + '/font/LGSmHaTR.ttf') format('truetype');
+    // font-weight: 300;
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    // font-family: 'LG_Smart_H2.0_SB';
+    font-family: 'LG_Smart_H2.0';
+    src: url($assPath + '/font/LGSmHaTSB.woff2') format('woff2'),
+    url($assPath + '/font/LGSmHaTSB.woff') format('woff'),
+    url($assPath + '/font/LGSmHaTSB.ttf') format('truetype');
+    // font-weight: 500;
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    // font-family: 'LG_Smart_H2.0_B';
+    font-family: 'LG_Smart_H2.0';
+    src: url($assPath + '/font/LGSmHaTB.woff2') format('woff2'),
+    url($assPath + '/font/LGSmHaTB.woff') format('woff'),
+    url($assPath + '/font/LGSmHaTB.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

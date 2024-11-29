@@ -1,0 +1,83 @@
+@charset 'utf-8';
+/* ---------------------------------------------------------
+* FileName : _layout.css
+* ProjectName : 하이엠솔루텍 하이런 차세대
+* Description : 레이아웃 스타일시트 (공통)
+* Author : zarel
+* Date : 2024.11
+--------------------------------------------------------- */
+
+@use 'variables' as *;
+
+/* header --------------------------------------------------------- */
+html:not(.pg-login) {
+    .hirun-wrap { display:flex; flex-direction:column; min-height:100vh; overflow:hidden; }
+    .header { 
+        .headerInner { display:flex; column-gap:40px; justify-content:flex-start; align-items:center; position:relative; height:100px; padding:0 30px; }
+        .logo { @include fontB; font-size:24px; color:$primary; }
+        .gnb { 
+            &>ul { display:flex; column-gap:10px;
+                &>li { 
+                    &>a { display:inline-flex; align-items:center; height:44px; padding:0 10px; @include fontSB; font-size:20px; color:$gray700; white-space:nowrap; }
+                    &:hover {
+                        &>a { position:relative; @include fontB; color:$primary; 
+                            &::before { content:''; display:block; position:absolute; left:50%; top:-3px; transform:translate(-50%, -50%); width:6px; height:6px; border-radius:50%; background-color:$primary; }
+                            &::after { content:''; display: block; position:absolute; left:0; top:100%; width:100%; height:100px; }
+                        }
+                        .submenu { max-height:1000px; }
+                    }
+                }
+            }
+            .submenu { max-height:0; position:absolute; top:100%; left:0; width:100%; background-color:$primary; transition:all 0.6s; overflow:hidden;
+                dl { display:flex; column-gap:90px; padding:18px 0 30px 255px;
+                    a { display:inline-flex; align-items:center; padding:0 0 0 10px; color:$white; }
+                    dt { height:38px; 
+                        a { height:38px; @include fontSB; font-size:20px; }
+                    }
+                    dd {  
+                        &:first-child { margin-top:13px; }
+                        a { position:relative; height:30px; @include fontR; font-size:16px; 
+                            &:hover { @include fontSB;
+                                &::before { content:''; display:block; position:absolute; right:-15px; top:50%; transform:translate(-50%, -50%); width:6px; height:6px; border-radius:50%; background-color:$white; }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .groupRight { display:flex; column-gap:12px; align-items:center; margin-left:auto; 
+            .welcomeMessage { font-size:16px; color:$gray700; 
+                b { @include fontB; color:$primary; }
+            }
+            .headerUtil { display:inline-flex; column-gap:8px;
+                button {  }
+            }
+        }
+    }
+
+    .footer { width:100%; margin-top:70px; background-color:$gray700; color:$white; 
+        .footerInner { display:flex; width:100%; max-width:1600px; margin:0 auto; padding:50px;
+            .groupLeft { width:650px; }
+            // .groupright { width:600px; margin-left:auto; }
+            .info { line-height:20px;
+                div { display:inline-block; margin-right:20px; }
+                dt { display:inline-block; 
+                    &::after { content:':'; display:inline-block; padding:0 8px 0 4px; }
+                }
+                dd { display:inline-block; }
+            }
+            .copyright { margin-top:20px; }
+            .law { margin-top:20px; }
+            .contact { display:flex; flex-direction:column; justify-content:flex-end; width:600px; margin-left:auto; text-align:right;
+                strong { display:block; padding:7px 0;  font-weight:700; }
+                dl {  
+                    div { margin-top:7px; }
+                    dt { display:inline-block; 
+                        ~ dt { margin-left:10px; }
+                    }
+                    dd { display:inline-block; margin-left:4px; }
+                }
+            }
+        }
+    }
+}

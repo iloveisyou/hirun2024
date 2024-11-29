@@ -1,0 +1,44 @@
+{% set isNotHeaderFooter = true %}
+{% set cat = 'etc' %}
+{% set page = 'login' %}
+{% set title = 'Him Hi-Run System - Login' %}
+{% extends './_include/layout.html' %}
+
+{% block wrap %}
+
+<div class="visual img_login">
+</div>
+<div class="container">
+    <header class="header" data-aos="fade-right" data-aos-delay="0">
+        <h1>HI-RUN SYSTEM</h1>
+        <p>친환경 그린에너지를 실현하는 서비스&유지보수 글로벌 넘버원 기업</p>
+    </header>
+    <main class="main" data-aos="fade-right" data-aos-delay="50">
+        <h2 class="heading">LOGIN</h2>
+        <p class="substr">하이런에 오신것을 환영합니다. <br />본 시스템은 주식회사 하이엠솔루텍 임직원을 위한 시스템으로서 사원번호를 인증받으신 임직원만 이용하실 수 있습니다.</p>
+        <div class="cpnt_login">
+            <div class="loginInput id">
+                <input type="text" placeholder="사원번호" />
+                <button type="button" class="btn btn_input_clear">사원번호 입력창 초기화</button>
+            </div>
+            <div class="loginInput pw">
+                <input type="password" placeholder="비밀번호" />
+                <button type="button" class="btn btn_input_clear">비밀번호 입력창 초기화</button>
+            </div>
+            <button type="button" class="btn btn_login">로그인</button>
+            <div class="option">
+                <button type="button" class="btn btn_searchPassword">비밀번호 찾기</button>
+                <label><input type="checkbox" class="ipt ipt20" /> 사원번호저장</label>
+            </div>
+        </div>
+    </main>
+    <footer class="footer" data-aos="fade-right" data-aos-delay="100">
+        <p>COPYRIGHT ⓒ HIMSOLUTEK. ALL RIGHT RESERVED.</p>
+    </footer>
+</div>
+
+<script>
+AOS.init();
+</script>
+
+{% endblock %}
