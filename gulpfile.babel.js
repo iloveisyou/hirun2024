@@ -123,7 +123,7 @@ function css() {
 }
 
 function img() {
-    return src(paths.src.img, {encoding: false, since: lastRun(img)})
+    return src(paths.src.img + '.{gif,png,jpg,jpeg,svg}', {encoding: false, since: lastRun(img)})
     .pipe(newer(paths.dist.img)) // 변경된 파일만 통과, 변경되지 않는 파일 건너뛰기
     .pipe(imagemin([
         imagemin.gifsicle({interlaced: true}), // gif 무손실
