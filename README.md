@@ -6,11 +6,11 @@
 ## gulp build : 걸프 빌드만
 
 ## gulp deploy : 걸프 git 반영
-```
 #### ㄴ TypeError: Cannot read properties of null (reading '0') 
-####    cd node_modules/gulp-gh-pages/ 
-####    npm install --save gift@0.10.2 
-####    cd ../.. 
+```
+cd node_modules/gulp-gh-pages/ 
+npm install --save gift@0.10.2 
+cd ../.. 
 ```
 
 
