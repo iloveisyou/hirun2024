@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>DragDrop Grid</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+        <style type="text/css">
+
+            #grid1, #grid2 {
+                display: inline-block;
+                *display: inline;
+                *zoom: 100%;
+            }
+            #grid-row-proxy {
+                position: absolute;
+                /*visibility: hidden;*/
+                color: #000;
+                text-align: center;
+                background-color: gray;
+                z-index: 3;
+                border: 1px solid #000;
+            }
+
+        </style>
+        <script type='text/javascript' >
+            $C(function(){
+    
+                var dataSet1 = $C.dataSet({
+                    id: 'dataSet',
+                    fields: [
+                        { id: 'col1' },
+                        { id: 'col2' },
+                        { id: 'col3' },
+                        { id: 'col4' },
+                        { id: 'col5' },
+                        { id: 'col6' },
+                        { id: 'col7' },
+                        { id: 'col8', type: 'number' },
+                        { id: 'code' },
+                        { id: 'value' },
+                        { id: 'date1', type: 'date', defaultValue: new Date() }
+                    ]
+                });
+                
+                var columnModel1 = $C.columnModel({
+                    verticalGroupMerge: true,
+                    columns: [
+                        $C.stateColumn(),
+                        $C.selectionColumn(),
+                        $C.numberColumn(),
+                        { field: "col1", label: "Col1", sortable: true, verticalMerge: true },
+                        { field: "col2", align:'center', width: 120},
+                        { field: "code", align: 'center'},
+                        { field: "col3", align: 'right' },
+                        { field: "col5", align: 'right' },
+                        { field: "col6", label: "Col6", width: 200 },
+                        { field: "col8", label: "Col8", align: 'right' },
+                        { field: "date1" , align:'center' },
+                        { id:'btn', label:'Button', width: 150 }
+                    ]
+                });
+
+                var grid1 = $C('#grid1').grid({
+                    columnModel: columnModel1,
+                    dataSet: dataSet1,
+                    autoWidth: false,
+                    width: 300,
+                    height:300
+                });
+
+                var dataSet2 = dataSet1.clone('dataSet2');
+                
+                var columnModel2 = $C.columnModel({
+                    verticalGroupMerge: true,
+                    columns: [
+                        $C.stateColumn(),
+                        $C.selectionColumn(),
+                        $C.numberColumn(),
+                        { field: "col1", label: "Col1", sortable: true, verticalMerge: true },
+                        { field: "col2", align:'center', width: 120},
+                        { field: "code", align: 'center'},
+                        { field: "col3", align: 'right' },
+                        { field: "col5", align: 'right' },
+                        { field: "col6", label: "Col6", width: 200 },
+                        { field: "col8", label: "Col8", align: 'right' },
+                        { field: "date1" , align:'center' },
+                        { id:'btn', label:'Button', width: 150 }
+                    ]
+                });
+    
+                var grid2 = $C('#grid2').grid({
+                    columnModel: columnModel2,
+                    dataSet: dataSet2,
+                    autoWidth: false,
+                    width: 300,
+                    height:300
+                });
+                
+                dataSet1.load({
+                    url: './../../data/data11.json'
+                });
+                
+                // dd proxy start
+                var ddp = $C.ddProxy({
+                    id: 'grid1',
+                    group: 'default',
+                    attributes: {
+                        dragElId: 'grid-row-proxy',
+                        resizeFrame: false,
+                        useShim: true
+                    }
+                });
+                
+                ddp.clickValidator = function(e) {
+                    if ($C(e.target).findParent('.L-grid-col') == null) {
+                        return false;
+                    }
+                    return true;
+                }
+                
+                ddp.on('dragEvent', function(args) {
+                    var el = $C(this.getDragEl());
+                    var x = $C.event.getPageX(args.e);
+                    var y = $C.event.getPageY(args.e);
+                    el.setXY([x - 5, y - 5]);
+                    
+                    var rowEl = $C(args.e.target).findParent('.L-grid-row');
+                    if(rowEl == null) return;
+                    var proxyEl = $C('#grid-row-proxy').getAt(0);
+                    if(proxyEl.dom.childNodes.length == 0) {
+                        proxyEl.appendChild(rowEl.dom.cloneNode(true));
+                        proxyEl.setWidth(rowEl.getWidth());
+                        proxyEl.setHeight(rowEl.getHeight());
+                    }
+                });
+                
+                ddp.on('dragDropEvent', function(e) {
+                    var proxyEl = $C('#grid-row-proxy').getAt(0);
+                    var rowEl = proxyEl.select('.L-grid-row').getAt(0);
+                    var rowId = 'r' + $C.dom.findStringInClassName(rowEl.dom, 'L-grid-row-r');
+                    var record = dataSet1.get(rowId);
+                    dataSet2.add(record.clone());
+                    proxyEl.html('');
+                });
+                
+                ddp.on('endDragEvent', function(e) {
+                    $C.select('#grid1').setStyle('left', '');
+                    $C.select('#grid1').setStyle('top', '');
+                    $C.select('#grid1').setStyle('position', '');
+                });
+                
+                var ddt = $C.ddTarget({
+                    id: 'grid2'
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <h1>dd circle sample</h1>
+        <h2>원형을 박스에 맞춰지게 움직이는 drag and drop 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>
+            <p>드래그 앤 드랍을 할때, 특정 범위에 맞춰 드랍이 되도록 설정할 수 있습니다.범위는 임의로 지정 가능합니다.</p>
+        </div>
+        <div id="bd">
+            <div class="LblockMarkupCode">
+                <div id="grid1"></div>
+                <div id="grid2"></div>
+                <div id="grid-row-proxy"></div>
+            </div>
+        </div>
+    </body>
+</html>

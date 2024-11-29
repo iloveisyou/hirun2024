@@ -1,0 +1,194 @@
+<script type="text/javascript">
+$S('#faqGrid .L-answer').addClass('L-hide-display');
+$S('#faqGrid .L-question').on('click', function(e){
+    $E(this).parent().select('.L-answer').toggle();
+});
+</script>
+<div id="faqGrid">
+<h2>Grid</h2>
+<ul>
+    <li>
+        <div class="L-question">
+           그리드에서 checkbox와 radio를 화면에 계속 보이게 하고 싶습니다. 
+        </div>
+        <div class="L-answer">
+<pre>그리드의 편집기는 기본적으로 DOM 객체를 생성하지 않습니다. 성능을 위해서 버퍼링 처리 방식의
+그리드를 사용하므로 출력되지 않지만 플러그인을 이용하면 checkbox도 출력이 가능합니다.
+LFixedCheckBoxColumn.js
+gridpanelEditSample.html 참조
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           페이지 처리는 어떻게 하나요? 
+        </div>
+        <div class="L-answer">
+<pre>LPager를 이용하면 쉽게 페이지 처리를 구현할 수 있습니다. 기본적으로 DevOn과 연계되어 있으므로
+DevOn의 경우 따로 설정이 필요 없고 LPager 객체만 생성해주시면 자동으로 연계되고 서버에서는 executePage
+메소드로 처리하시는것만으로 동작합니다. 그외 다른 프레임웤일 경우에는 서버와 파라미터 연계를 위해서
+rui_config.js의 pager 설정부분을 맞춰야 합니다. 이렇게 셋팅이 끝나면 화면에서 페이지를 클릭하던지
+정렬을 하면 LPager는 기존에 조회했던 LDataSet의 조회시 파라미터를 그대로 처리해줍니다.
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드에서 틀 고정은 어떻게 하나요? 
+        </div>
+        <div class="L-answer">
+<pre>클고정은 현재 지원하지 않습니다. 추가 개발 일정에도 현재는 반영되어 있지 않습니다.
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드의 병합은 지원하나요? 
+        </div>
+        <div class="L-answer">
+<pre>병합은 세로병합만 지원합니다. 병합시 그룹 병합이나 개별 병합 모두 지원합니다.
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드의 대량건의 변경시 ie에서 너무 느립니다. 
+        </div>
+        <div class="L-answer">
+<pre>그리드나 트리를 연결한 상태에서 LDataSet의 많은 데이터건을 변경하면 다시 그리는 문제때문에 성능이 저하됩니다. 다만 ie일 경우는 브라우져 자체가 너무 
+느리기때문에 속도를 올릴 수 없습니다. 그래서 코딩 방법을 변경하셔야 합니다. 그리드나 트리에 setSyncDataSet 메소드를 이용하여 해당 콤포넌트들과 연결을 
+끊었다가 LDataSet의 데이터를 변경한후 다시 연결하면 빠르게 작업을 완료 할 수 있습니다. 
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드에서 복사하기/붙여넣기가 지원되나요? 
+        </div>
+        <div class="L-answer">
+<pre>IE와 firefox에서만 지원합니다. 다만, firefox에서도 브라우져 보안 사항때문에 about:config쪽에서 복사하기/붙여넣기와 관련된 항목에 대해서 설정을 해야 합니다.
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드에서 전체 합계와 중간 합계를 지원하나요? 
+        </div>
+        <div class="L-answer">
+<pre>전체 합계에 대해서는 플러그인을 제공합니다. 다만, 중간합계는 현재 지원되지 않으며, db의 쿼리를 통해서 처리하셔야 합니다.
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드에서 컬럼을 동적으로 변경할 수 있나요? 
+        </div>
+        <div class="L-answer">
+<pre>동적으로 변경은 불가능합니다. 다만, 모든 컬럼을 출력하고 LColumn의 hidden 속성을 이용하여 변경 처리는 가능합니다.
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드의 체크항목을 라디오처럼 하나만 선택하게 할 수 있나요? 
+        </div>
+        <div class="L-answer">
+<pre>LSelectionColumn의 속성중에 selectionType을 radio로 주시면 가능합니다.
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           dataSet의 한 row에 두줄의 그리드 라인을 출력할 수 있나요? 
+        </div>
+        <div class="L-answer">
+<pre>기본적으로 두줄은 출력할 수 없습니다. 다만 플러그인중에 LExpandableView.js를 이용하면 두줄과 같은 효과를 낼 수 는 있지만 두번째 줄은 출력만 가능합니다.
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드에서 삭제건을 출력한 상태로 표시할 수 있나요? 
+        </div>
+        <div class="L-answer">
+<pre>현재는 지원되지 않습니다. 2012년에 업그레이드시 처리할 예정입니다.
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           트리 그리드를 지원하나요? 
+        </div>
+        <div class="L-answer">
+<pre>현재는 지원되지 않습니다. 2012년에 업그레이드시 처리할 예정입니다.
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드에서 멀티 헤더를 지원하나요? 
+        </div>
+        <div class="L-answer">
+<pre>지원됩니다. gridpanelMultiheaderSample.html 샘플 참조
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드에서 창에 따라 높이 조정을 동적으로 할 수 있나요?
+        </div>
+        <div class="L-answer">
+<pre>그리드나 트리등 각 콤포넌트들은 width는 자동적으로 부모창에 크기에 따라가게 설정되어 있습니다. (authWidth) 하지만 height는 현재 지원되지 않습니다.
+차후 2011년에 지원 예정입니다. 프로젝트에서 처리하려면 브라우져의 이벤트로 직접 처리하셔야 합니다.
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드에서 컬럼의 조건에 따라서 편집이 가능한지 동적으로 설정할 수 있나요?
+        </div>
+        <div class="L-answer">
+<pre>가능합니다. 조건에 따라서 상태에 따라서 프로젝트별로 다양하게 발생할 수 있지만 rowPosChanged와 update 이벤트를 이용하면 가능합니다.
+gridpanelEditSample.html 샘플 참조
+</pre>      
+        </div>
+    </li>
+
+    <li>
+        <div class="L-question">
+           그리드에서 결과값이 없을 경우 출력되는 '검색 결과가 없습니다.' 문자열을 바꿀 수 있나요?
+        </div>
+        <div class="L-answer">
+<pre>가능합니다. 추가 가이드를 요청하세요.
+</pre>      
+        </div>
+    </li>
+    
+    <li>
+        <div class="L-question">
+           그리드에서 조회시 출력되는 로딩 이미지를 변경할 수 있나요?
+        </div>
+        <div class="L-answer">
+<pre>css를 변경하여 가능합니다.
+L-grid-loading-message css의 background-image를 변경하시면 해당 이미지가 변경됩니다. 
+이미지 크기에 따라서 css에 width와 height등 추가 속성을 부여해야 할 수 도 있습니다. 
+</pre>      
+        </div>
+    </li>
+</ul>
+
+</div>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="RUI bootstrap" />
+    <title>Bootstrap</title>
+
+    <script type="text/javascript">
+        var _BOOTSTRAP_PLUGINS = ['menu', 'tab', 'tree'];
+    </script>
+    
+    <script type="text/javascript" src="./../../rui_sample_context.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_bootstrap.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../plugins/ui/LTooltip.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../plugins/ui/LTooltip.css"/>
+    
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            var scripts = Rui.select('script'),
+                links = Rui.select('link'),
+                html = '', i;
+            
+            for(i = 0, len = scripts.length; i < len; i++ ){
+                html += scripts.getAt(i).dom.src + '\r\n';
+            }
+            
+            for(i = 0, len = links.length; i < len; i++ ){
+                html += links.getAt(i).dom.href + '\r\n';
+            }
+
+            Rui.get('result').html(html);
+
+            new Rui.ui.LTooltip({
+                context: 'result',
+                showmove: true,
+                text: '이 샘플 페이지에 로드된 라이브러리들 목록 입니다.'
+            });
+            
+        });
+    </script>
+
+</head>
+<body>
+    <div id='hd'>
+        <h1>Bootstrap</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>rui_bootstrap.js를 사용하는 샘플</h2>
+            <div class="LblockDesc">
+		        <p>개발자의 개발환경에서는 rui의 dev 모듈을 사용하며, 운영시엔 압축된 min버전의 라이브러리를 사용하도록 자동 전환됩니다.</p>
+		        <p>상단 주소창 URL Query String으로 ?rui_runtime=debug-hold 또는 ?rui_runtime=nodebug 를 적절히 추가해 보세요.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <a href="javascript:reloadPageForDebug()">Debug를 위해 페이지를 refresh 합니다.</a>
+            <pre id="result"></pre>
+            <a href="http://www.dev-on.com/rui/rui2/api/?type=Rui.LBootstrap" >여기에서 사용방법을 확인하세요.</a>
+        </div>
+    </div>
+</body>
+</html>

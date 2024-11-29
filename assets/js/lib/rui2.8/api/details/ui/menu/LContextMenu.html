@@ -1,0 +1,127 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+html context 메뉴를 생성한다.
+이 콤포넌트는 모든 html dom과 객체에 연결 할 수 있다.
+샘플 경로 :
+<a href="./../sample/general/ui/menu/contextMenuSample.html" target="_new">/rui/sample/general/ui/menu/contextMenuSample.html</a>
+<a href="./../sample/general/ui/grid/gridpanelContextMenuSample.html" target="_new">/rui/sample/general/ui/grid/gridpanelContextMenuSample.html</a>
+<a href="./../sample/general/ui/tree/treeviewContextMenuEditSample.html" target="_new">/rui/sample/general/ui/tree/treeviewContextMenuEditSample.html</a>
+</div>
+<div class="L-sample">
+sample: Node를 추가하거나 변경 하는 방법
+<div class="L-code">
+function addTopNode(type, args, obj){
+    var label = window.prompt("추가할 Node Name을 입력하세요 : ", "");
+    var row = tree.addTopNode(label);
+    var newRecord = dataSet.getAt(row);
+    //추가적인 값 변경은 newRecord를 변경하면 된다.
+    //newRecord.set("desc","xxxx");
+}
+
+//tree의 method 사용 (권장)
+function addNode(type, args, obj){
+    var e = args[0];
+    alert(e.target);
+    var label = window.prompt("추가할 Node Name을 입력하세요 : ", "");
+    //부모가 id가 없으면 추가되지 않는다.
+    var row = tree.addChildNode(label);
+    var newRecord = dataSet.getAt(row);
+    newRecord.set("menuSeq",'');
+    //추가적인 값 변경은 newRecord를 변경하면 된다.
+    //newRecord.set("desc","xxxx");
+}
+
+//선택한 node명 수정하기
+function editNodeLabel(){
+    var label = window.prompt("수정할 Node Name을 입력하세요 : ", tree.getNodeLabel());
+    tree.setNodeLabel(label);
+}
+
+//선택한 node 삭제하기
+
+function deleteNode(){
+    tree.deleteNode();
+}
+
+var oContextMenu = new Rui.ui.menu.LContextMenu("mytreecontextmenu", {
+    trigger: "treeDiv1",
+    itemdata: [
+        { text: "Add Top Node", onclick: { fn: addTopNode } }, 
+        { text: "Add Child Node", onclick: { fn: addNode } }, 
+        { text: "Edit Node Label", onclick: { fn: editNodeLabel } }, 
+        { text: "Delete Node", onclick: { fn: deleteNode } }
+    ]
+});
+
+tree = new Rui.ui.tree.LTreeView({
+    dataSet: dataSet,
+    height: 500,
+    width: 300,
+    contextMenu: oContextMenu
+});                
+
+tree.render("treeDiv1");
+</div>
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_trigger">
+<div class="L-description">
+context menu가 출력될 경우의 범위를 지정하는 html dom id
+trigger에 정의된 하위 객체의 html dom에서만 context menu가 작동한다.
+</div>
+<div class="L-sample">
+sample: treeDiv1의 html dom객체만 context menu를 출력한다.
+<div class="L-code">
+var oContextMenu = new Rui.ui.menu.LContextMenu("mytreecontextmenu", {
+    trigger: "treeDiv1",
+    itemdata: [
+        { text: "Add Top Node", onclick: { fn: addTopNode } }, 
+        { text: "Add Child Node", onclick: { fn: addNode } }
+    ]
+});
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_triggerContextMenu">
+<div class="L-description">
+context menu가 출력될때 발생하는 이벤트
+</div>
+<div class="L-sample">
+sample: context menu 출력시 dataSet이 1번 row일 경우 3번째 index의 아이템을 비활성화한다.
+<div class="L-code">
+var oContextMenu = new Rui.ui.menu.LContextMenu("mytreecontextmenu", {
+    trigger: "treeDiv1",
+    itemdata: [
+        { text: "Add Top Node", onclick: { fn: addTopNode } }, 
+        { text: "Add Child Node", onclick: { fn: addNode } }, 
+        { text: "Edit Node Label", onclick: { fn: editNodeLabel } }, 
+        { text: "Delete Node", onclick: { fn: deleteNode } }
+    ]
+});
+
+oContextMenu.on('triggerContextMenu', function(e) {
+    if(dataSet.getRow() == 1) {
+        oContextMenu.getItem(2).disable();
+    } else { 
+        oContextMenu.getItem(2).enable();
+    }
+});
+
+tree = new Rui.ui.tree.LTreeView({
+    dataSet: dataSet,
+    height: 500,
+    width: 300,
+    contextMenu: oContextMenu
+});                
+
+tree.render("treeDiv1");
+</div>
+</div>
+</div>
+
+</div>

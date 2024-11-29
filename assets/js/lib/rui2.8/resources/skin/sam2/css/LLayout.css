@@ -1,0 +1,192 @@
+/* Remove the dotted border on the resize proxy */
+.L-layout .L-resize-proxy {
+    border: none;
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+}
+/* During resize, hide the handles */
+.L-layout .L-resize-resizing .L-resize-handle {
+    visibility: hidden;
+}
+/* Style the div inside the resize proxy */
+.L-layout .L-resize-proxy div {
+    position: absolute;
+    border: 1px solid #808080;
+    background-color: #EDF5FF;
+}
+/* Set the color of the Active resize handle */
+.L-layout .L-resize .L-resize-handle-active {
+    /*background-color: #EDF5FF;*/
+}
+/* Styles for the left handle */
+.L-layout .L-resize-proxy .L-layout-handle-l {
+    width: 5px;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+/* Styles for the right handle */
+.L-layout .L-resize-proxy .L-layout-handle-r {
+    width: 5px;
+    top: 0;
+    right: 0;
+    height: 100%;
+    position: absolute;
+    zoom: 1;
+}
+/* Styles for the bottom handle */
+.L-layout .L-resize-proxy .L-layout-handle-b {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 5px;
+}
+/* Styles for the top handle */
+.L-layout .L-resize-proxy .L-layout-handle-t {
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 5px;
+}
+
+/* Left Collapse button */
+.L-layout .L-layout-unit-left div.L-layout-hd .collapse {
+    background: transparent url(./skin/sam2/images/layout_sprite.png) no-repeat -20px -160px;
+    border: 1px solid #808080;
+}
+/* Left Collapsed Expand Button */
+.L-layout .L-layout-clip-left .collapse {
+    background: transparent url(./skin/sam2/images/layout_sprite.png) no-repeat -20px -140px;
+    border: 1px solid #808080;
+}
+/* Right Collapse Button */
+.L-layout .L-layout-unit-right div.L-layout-hd .collapse {
+    background: transparent url(./skin/sam2/images/layout_sprite.png) no-repeat -20px -200px;
+    border: 1px solid #808080;
+}
+/* Right Collapsed Expand Button */
+.L-layout .L-layout-clip-right .collapse {
+    background: transparent url(./skin/sam2/images/layout_sprite.png) no-repeat -20px -120px;
+    border: 1px solid #808080;
+}
+/* Top Collapse Button */
+.L-layout .L-layout-unit-top div.L-layout-hd .collapse {
+    background: transparent url(./skin/sam2/images/layout_sprite.png) no-repeat -20px -220px;
+    border: 1px solid #808080;
+}
+/* Top Collapsed Expand Button */
+.L-layout .L-layout-clip-top .collapse {
+    background: transparent url(./skin/sam2/images/layout_sprite.png) no-repeat -20px -240px;
+    border: 1px solid #808080;
+}
+/* Bottom Collapse Button */
+.L-layout .L-layout-unit-bottom div.L-layout-hd .collapse {
+    background: transparent url(./skin/sam2/images/layout_sprite.png) no-repeat -20px -260px;
+    border: 1px solid #808080;
+}
+/* Bottom Collapsed Expand Button */
+.L-layout .L-layout-clip-bottom .collapse {
+    background: transparent url(./skin/sam2/images/layout_sprite.png) no-repeat -20px -180px;
+    border: 1px solid #808080;
+}
+/* Close Button */
+.L-layout .L-layout-unit div.L-layout-hd .close {
+    background: transparent url(./skin/sam2/images/layout_sprite.png) no-repeat -20px -100px;
+    border: 1px solid #808080;
+}
+
+/* Give the header a blue backgorund */
+.L-layout .L-layout-hd {
+    background:url(../../../../assets/skins/sam/sprite.png) repeat-x 0 -1400px;
+    border: 1px solid #808080;
+}
+/* Set the background color */
+.L-layout {
+    background-color: #EDF5FF;
+}
+/* Style the text in the header */
+.L-layout .L-layout-unit div.L-layout-hd h2 {
+    font-weight: bold;
+    color: #fff;
+    padding: 3px;
+}
+/* Style the body */
+.L-layout .L-layout-unit div.L-layout-bd {
+    border: 1px solid #808080;
+    border-bottom: none;
+    border-top: none;
+    *border-bottom-width: 0;
+    *border-top-width: 0;
+    background-color: #f2f2f2;
+    text-align: left;
+}
+/* Add a border to the bottom of the body because there is no footer */
+.L-layout .L-layout-unit div.L-layout-bd-noft {
+    border-bottom: 1px solid #808080;
+}
+/* Add a border to the top of the body because there is no header */
+.L-layout .L-layout-unit div.L-layout-bd-nohd {
+    border-top: 1px solid #808080;
+}
+
+/* Style the Clip */
+.L-layout .L-layout-clip {
+    position: absolute;
+    height: 20px;
+    background-color: #EDF5FF;
+    display: none;
+    border: 1px solid #808080;
+}
+/* Style the footer */
+.L-layout div.L-layout-ft {
+    border: 1px solid #808080;
+    border-top: none;
+    *border-top-width: 0;
+    background-color: #f2f2f2;
+}
+
+/* Remove the color from the resize handle */
+.L-layout-unit .L-resize-handle {
+    background-color: transparent;
+}
+/* Reposition the handles */
+.L-layout-unit .L-resize-handle-r {
+    right: 0;
+    top: 0;
+    background-image: none;
+}
+.L-layout-unit .L-resize-handle-l {
+    left: 0;
+    top: 0;
+    background-image: none;
+}
+.L-layout-unit .L-resize-handle-b {
+    right: 0;
+    bottom: 0;
+    background-image: none;
+}
+.L-layout-unit .L-resize-handle-t {
+    right: 0;
+    top: 0;
+    background-image: none;
+}
+/* Add the gripper */
+.L-layout-unit .L-resize-handle-r .L-layout-resize-knob,
+.L-layout-unit .L-resize-handle-l .L-layout-resize-knob {
+    position: absolute;
+    height: 16px;
+    width: 6px;
+    top: 45%;
+    left: 0px;
+    background: transparent url(./skin/sam2/images/layout_sprite.png) no-repeat 0 -5px;
+}
+/* Add the gripper */
+.L-layout-unit .L-resize-handle-t .L-layout-resize-knob,
+.L-layout-unit .L-resize-handle-b .L-layout-resize-knob {
+    position: absolute;
+    height: 6px;
+    width: 16px;
+    left: 45%;
+    background: transparent url(./skin/sam2/images/layout_sprite.png) no-repeat -20px 0;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Pager</title>
+    <script type="text/javascript" src="../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+    <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+    <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+    <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+    <script type="text/javascript" class="script-code">
+
+        $C(function() {
+            $C('#div-target1').pager({
+                totalCount: 300
+            });
+            $C('#div-target1').on("changedPage",function(e){
+                Rui.get('div-value').html("선택한 page : " + e.viewPageNumber);
+            });
+    
+        });
+
+        function updateTotal(){
+            $C('#div-target1').setTotalCount(500);
+        }
+        
+    </script>
+ 
+</head>
+<body>
+    <h1>Pager</h1>
+    <h2>LPager를 구현하는 기본 샘플</h2>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div id="div-target1">
+            </div>
+            <div id="div-target2">
+            </div>
+            <br/>
+            <div id="div-value"></div>
+            <input type="button" value="total count 300으로 변경" onclick="updateTotal();"/>
+        </div>
+    </div>
+</body>
+</html>

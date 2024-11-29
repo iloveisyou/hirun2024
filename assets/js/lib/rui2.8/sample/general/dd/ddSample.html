@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="드래그 드랍(LDragDrop)" />
+    <title>Drag and Drop</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        .dd-demo {
+            position: relative;
+            border: 4px solid #666;
+            text-align: center;
+            color: #fff;
+            cursor: move;
+            height: 60px;
+            width: 60px;
+        } .dd-demo-em {
+            border: 4px solid purple;
+        } #dd-demo-1 {
+            background-color: #6D739A;
+            top: 0px;
+            left: 105px;
+        } #dd-demo-2 {
+            background-color: #566F4E;
+            top: 50px;
+            left: 245px;
+        } #dd-demo-3 {
+            background-color: #7E5B60;
+            top: -100px;
+            left: 385px;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*<b>*/
+            var dd1 = new Rui.dd.LDD({
+                id: 'dd-demo-1'
+            });
+            /*</b>*/
+            var dd2 = new Rui.dd.LDD({
+                id: 'dd-demo-2'
+            });
+            var dd3 = new Rui.dd.LDD({
+                id: 'dd-demo-3'
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id='hd'>
+        <h1>Drag and Drop</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>Drag and Drop의 기본적인 모습 입니다.</h2>
+            <div class="LblockDesc">
+                <p>Drag & Drop의 기본 사용법 입니다. 적용할 객체의 ID를 이용하여 구현합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="dd-demo-1" class="dd-demo">1
+            </div>
+            <div id="dd-demo-2" class="dd-demo">2
+            </div>
+            <div id="dd-demo-3" class="dd-demo">3
+            </div>
+        </div>
+    </div>
+</body>
+</html>

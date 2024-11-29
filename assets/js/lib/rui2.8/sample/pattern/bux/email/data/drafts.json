@@ -1,0 +1,4 @@
+[{"metaData":{"fields":[{"name":"mailId"},{"name":"important"},{"name":"clip"},{"name":"receivers"},{"name":"subject"},{"name":"date"},{"name":"size","dataType":"int"}]},
+"records":[{"mailId":"60","important":"N","clip":"N","receivers":[{"name":"최준호", "email":"jhchoi@test.com"}],"subject":"[FW][RE][FW]Re :이슈 경과 지속적으로 문제 발생되고 있음","date":"2013-05-20","size":24},
+{"mailId":"61","important":"N","clip":"N","receivers":[{"name":"황용인", "email":"yongin@test.com"}],"subject":"[RE]교육 신청 안내","date":"2013-04-18","size":9}]
+}]

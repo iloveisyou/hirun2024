@@ -1,0 +1,291 @@
+/*  -------------------------------------------------------------
+  LG CNS LAF/UI
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  Description:  Common Styles
+  Filename:   common.css
+  Version:    LAF/UI_2.0_2007_R1_20070330
+  ------------------------------------------------------------- */
+  
+@import url("cm_datatable.css");
+@import url("cm_sbox.css");
+@import url("cm_edit.css"); 
+@import url("cm_unit.css"); 
+
+/* Basic Composition : Sub Title, List - Basic
+---------------------------------------------------------*/
+/* Sub Title */
+h2.Lgut {
+margin: 30px 0 5px;
+}
+h3.Lgut {
+margin: 10px 0 2px 10px;
+}
+
+/* List - Basic */
+.Llist-b li {
+background: url("../../../images/pattern/bullet_item02.gif") no-repeat 0 0.6em;
+padding-left: 10px;
+}
+.Llist-b-2th li {
+margin-left: 10px;
+}
+
+.Lclosed, .Lopen{ 
+    cursor: pointer;  
+    font-weight: bold;
+}
+
+/* Form
+---------------------------------------------------------*/
+/* Button */
+.Lbtn-small {
+height:17px;
+padding: 1px 2px 0;
+color:#615C1C;
+background:#E3E1C5;
+border-width: 1px;
+border-style: solid;
+border-color: #DDDAAA #C9C39C #C9C39C #DDDAAA;
+}
+.Lbtn {
+height:20px;
+padding : 2px 8px 1px;
+color:#2359A3;
+background:#F7F7F7;
+border-width: 1px;
+border-style: solid;
+border-color: #D8DEE2 #ACBCC6 #ACBCC6 #D8DEE2;
+}
+.Lbtn-long {
+padding : 2px 1px 1px;
+}
+.Lbtnset {
+margin-top: 10px;
+}
+.Lbtnset input {
+margin-left: 4px;
+}
+
+/* Input */
+input.Ltextf {
+border: 1px solid #CCC;
+padding: 2px 2px 0;
+}
+
+/* 둥근 모서리 상자 (R : right, B : bottom, L : left, T : top*/
+.LroundRB { 
+  background: url("../../../images/rightBottom.gif") no-repeat bottom right;  
+}
+
+.LroundLB { 
+    background: url("../../../images/leftBottom.gif") no-repeat bottom left;  
+}
+
+.LroundRT {
+    background: url("../../../images/rightTop.gif") no-repeat top right;  
+}
+
+.LroundLT {
+    background: url("../../../images/leftTop.gif") no-repeat top left;  
+}
+
+.LbigroundRT {
+    background: url("../../../images/pattern/rightTop.gif") no-repeat top right; 
+} 
+.LbigroundLT {
+    background: url("../../../images/pattern/leftTop.gif") no-repeat top left; 
+}
+
+.LbigroundLB { 
+    background: url("../../../images/pattern/leftBottom.gif") no-repeat bottom left; 
+}
+.LbigroundRB {  
+  background: url("../../../images/pattern/rightBottom.gif") no-repeat bottom right; 
+}
+/* Templete 다운로드 및 프리뷰 관련 */
+.Ltemplate {
+    margin-bottom: 30px;
+}
+
+.Ltemplate span{
+    display: block;
+    float: left;
+    margin-right: 5px;
+}
+.Lemphasis{font-weight:bold;}
+.LmarginTop{margin-top:15px;}
+
+/* title layout start */
+div.icontitle {
+  background-image:     url("/images/title_bullet.gif");
+  background-repeat:    no-repeat;
+  background-position:  0px 1px;
+  padding-left:         20px;
+  COLOR: 				#666666;   
+  FONT-SIZE: 			11pt;    
+  FONT-WEIGHT: 			bold;
+}
+
+div.table_layout{
+   font-size:           12px; 
+   clear:               both;   
+   padding:             0px;
+   margin-bottom:       5px;      
+}
+
+div.button_layout {
+   text-align:          right;
+   padding-bottom:      0px;
+   margin:              7px 0px 2px 0px;
+}
+
+div.table_button_layout {
+	float:               left;
+   text-align:          left;   
+   padding-bottom:      0px;
+   margin:              7px 0px 0px 0px;
+}
+
+div.table_button_layout span.left {
+	float:               left;	    
+   text-align:          left;
+	padding-bottom:      0px;	
+   margin:              0px 0px 0px 0px;
+}
+
+div.table_button_layout span.right {
+   float:               right;     
+   text-align:          right;
+   padding-bottom:      0px;  
+   margin:              0px 0px 2px 0px;
+}
+
+div.paging {
+   width:               100%;
+   margin:              0px 0px 0px 0px;
+}
+
+div.paging span.middle {
+   position:            fixed;
+   text-align:          center;
+   width:               50%;
+}
+
+div.paging span.left {
+   position:            fixed;
+   text-align:          left;
+   width:               25%;
+}
+
+div.paging span.right {
+   position:            fixed;
+   width:               25%;
+}
+
+/* table layout start */
+.table_search_item {
+   height:              25px;
+   padding-left:        5px;   
+   font-weight:         bold ;
+   text-align :         left ;    
+}
+
+.table_item {
+   height:              21px;
+   padding-left:        5px;   
+   font-weight:         bold ;
+   text-align :         left ;    
+}
+
+.table_item_center {
+   height:              21px;
+   padding-left:        0px;
+   padding-right:       0px;   
+   font-weight:         bold ;
+   text-align :         center ;
+}
+
+.table_item_right {
+   height:              21px;   
+   padding-right:       5px;   
+   font-weight:         bold;
+   text-align :         right;
+}
+
+.table_search_data {
+   height:              25px; 
+   padding-left:        5px;   
+   text-align :         left ; 
+}
+
+.table_data {
+   height:              21px; 
+   padding-left:        5px;
+}
+
+.table_data_center {
+   height:              21px;
+   padding-left:        0px;  
+   padding-right:       0px;   
+   text-align :         center ;  
+}
+
+.table_data_right {
+   height:              21px;
+   padding-right:       5px;   
+   text-align :         right ;   
+}
+/* table layout end */
+
+/* Color Cascading Style Sheet */
+
+
+/* table color start */
+.table_layout {
+   border-top: 1px solid #B6B6B6;
+   border-bottom : 1px solid #EDEDED;
+}
+
+.table_search_item {
+   background-color:    #DFE9F2;    
+}                        
+
+.table_item {
+   background-color:    #DFE9F2;    
+}
+
+.table_item_center {
+   background-color:    #DFE9F2;
+}
+
+.table_item_right {
+   background-color:    #DFE9F2;
+}
+
+.table_search_data {
+   background-color:    #FFFFFF;    
+}
+.table_data {
+   background-color:    #FBFBFB;    
+}
+
+.table_data_center {   
+   background-color:    #FFFFFF;     
+}
+
+.table_data_right {
+   background-color:    #FFFFFF;   
+}
+
+.table_data_red {
+   color:                red;    
+}
+.table_bgcolor {
+   background-color:    #D1D1D1	
+}
+/* table color end */
+
+input.checkfile {
+   visibility:             hidden;
+}
+/* file layout end */

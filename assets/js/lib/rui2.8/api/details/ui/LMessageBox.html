@@ -1,0 +1,59 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+window의 alert/confirm/prompt 메시지에 html 태그를 적용하여 출력할 수 있는 기능
+
+샘플 경로 :
+<a href="./../sample/general/ui/container/messageboxSample.html" target="_new">/rui/sample/general/ui/container/messageboxSample.html</a>
+</div>
+<div class="L-sample">
+sample: alert 기본 샘플
+<div class="L-code">
+Rui.alert('DevOn RUI 입니다.');
+</div>
+</div>
+
+<div class="L-sample">
+sample: alert에 handler를 탑재하는 샘플
+<div class="L-code">
+Rui.alert({
+    text: 'DevOn RUI 입니다.',
+    handler: function() {
+        Rui.get('input1').focus();
+    }
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: confirm 기본 샘플
+<div class="L-code">
+Rui.confirm({
+    text: '실행하시겠습니까?',
+    buttons: [
+        { text: '실행합니다.' },
+        { text: '취소' }
+    ],
+    handlerYes: function() {
+        Rui.get('input1').focus();
+    },
+    handlerNo: Rui.emptyFn
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: prompt 기본 샘플
+<div class="L-code">
+Rui.prompt({
+    text: '입력하세요.',
+    handler: function(value) {
+        Rui.get('input1').focus();
+    }
+});
+</div>
+</div>
+
+</div>
+
+</div>

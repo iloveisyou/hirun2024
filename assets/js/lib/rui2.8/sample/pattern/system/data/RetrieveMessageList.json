@@ -1,0 +1,13 @@
+[{
+    "metaData": {
+        "datasetId":"dataSet"
+    },
+    "records": [
+        { "code": "success", "message": "성공" },
+        { "code": "fail", "message": "실패" },
+        { "code": "error", "message": "오류" },
+        { "code": "save", "message": "저장" },
+        { "code": "delete", "message": "삭제" },
+        { "code": "confirm", "message": "확인" }
+    ]
+}]

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-keyword" content="다중 파일 업로드(file upload multiple)" />
+    <title>File Upload Multiple</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LFileBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LFileBox.css" />
+    
+    <script type="text/javascript" src="./fileUploadMultipleSample.js"></script>
+    <link rel="stylesheet" type="text/css" href="./fileUploadMultipleSample.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        var dataSet,
+            addBtn, 
+            deleteBtn, 
+            deleteAllBtn,
+            manager;
+        
+        function doSearch(){
+            dataSet.load({
+                url: '/DevOnOffice/file/retrieveResumeList.rui'
+            });
+        }
+        
+        function doSubmit(){
+            if(!dataSet.isUpdated()){
+                alert('변경된 데이터가 없습니다.');
+                return;
+            }
+            
+            var formEl = Rui.get('frm'),
+                deletedFileSeqsDom = formEl.dom.deletedFileSeqs;
+            deletedFileSeqsDom.value = manager.getDeletedFileSeqs().join(',');
+            
+            Rui.LConnect.setForm('frm', true, false);
+            Rui.LConnect.asyncRequest('post', '/DevOnOffice/file/uploadMultiFile.rui', {
+                upload: function(e){
+                    manager.full();
+                    //alert('uploaded');
+                    manager.reset();
+                    doSearch();
+                }
+            }, null, {isFileUpload: true});
+            manager.startProgress('./fileUploadStatus.jsp');
+        }
+
+        function downloadFile(){
+            var row = dataSet.getRow();
+            if (row < 0){
+                alert('선택된 파일이 없습니다.');
+                return;
+            }
+            var fileSeq = dataSet.getNameValue(row, 'fileSeq');
+               var url = '/Download.dev?fileSeq=' + fileSeq;
+            window.open(url, 'pop', 'height=420,width=445, status=no,toolbar=no,menubar=no,location=no');
+        }
+        
+        Rui.onReady(function(){
+            Rui.getConfig().set('$.core.logger.show', [true]);
+            
+            dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'fileSeq' },
+                    { id: 'fileName' },
+                    { id: 'fileSize' }
+                ]
+            });
+            
+            dataSet.on('load', function(){
+                manager.reset();
+            });
+
+            doSearch();
+            
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                groupMerge: true,
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'fileName', label: 'File', width: 300},
+                    { field: 'fileSize', label: 'Size', width: 100}
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel(
+            {
+                columnModel: columnModel,
+                dataSet:dataSet,
+                autoWidth: true,
+                height:200
+            });
+
+            grid.render('fileGrid');
+
+            frmEl = new Rui.ui.form.LForm('frm');
+            frmEl.on('success', function(e){
+                // upload는 내부적으로 iframe으로 처리하므로 에러 여부에 대해서 서버에서 responseText로 정상인지 에러인지 값을 처리해야 함.
+                alert(e.responseText);
+                frmEl.reset();
+            });
+            
+            manager = new MultiFileUploadManager('frm', 'fileUpload');
+
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                if(dataSet.isUpdated()){
+                    Rui.confirm({
+                        text: '변경된 데이터가 있습니다. 재 조회 하시겠습니까?',
+                        handlerYes: function(){
+                            manager.reset();
+                            doSearch();
+                        }
+                    });
+                }else{
+                    manager.reset();
+                    doSearch();
+                }
+            });
+            
+            addBtn = new Rui.ui.LButton('addBtn');
+            addBtn.on('click', function(){
+                
+                manager.addFile(function(inputEl){
+                    inputEl.on('change', function(e){
+                        var inputDom = e.target,
+                            row = dataSet.getCount(),
+                            fileName = inputDom.value,
+                            fileSize = 0,
+                            idx = fileName.lastIndexOf('\\');
+                        if(idx > -1)
+                            fileName = fileName.substring(idx + 1);
+                        if(!Rui.browser.msie){
+                            fileSize = Math.ceil(inputDom.files[0].size, 2);
+                        }
+                        dataSet.newRecord(row);
+                        var record = dataSet.getAt(row);
+                        record.set('fileSeq', -1);
+                        record.set('fileName', fileName);
+                        record.set('fileSize', fileSize);
+                        inputEl.setStyle('display', 'none');
+                        manager.unlock();
+                        deleteBtn.enable();
+                        deleteAllBtn.enable();
+                    });
+                    deleteBtn.disable();
+                    deleteAllBtn.disable();
+                });
+            });
+
+            deleteBtn = new Rui.ui.LButton('deleteBtn');
+            deleteBtn.on('click', function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    for(var row = dataSet.getCount()-1; row >= 0; row--){
+                        if(dataSet.isMarked(row)){
+                            manager.deleteFile(row, dataSet.getState(row) == 0 ? dataSet.getNameValue(row, 'fileSeq') : null);
+                        }
+                    }
+                    dataSet.removeMarkedRows();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    manager.deleteFile(row, dataSet.getState(row) == 0 ? dataSet.getNameValue(row, 'fileSeq') : null);
+                    dataSet.removeAt(row);
+                }
+                //console.log(manager.getDeletedFileSeqs());
+            });
+
+            deleteAllBtn = new Rui.ui.LButton('deleteAllBtn');
+            deleteAllBtn.on('click', function(){
+                for(var row = dataSet.getCount()-1; row >= 0; row--){
+                    manager.deleteFile(row, dataSet.getState(row) == 0 ? dataSet.getNameValue(row, 'fileSeq') : null);
+                }
+                dataSet.removeAll();
+                //console.log(manager.getDeletedFileSeqs());
+            });
+            
+            var downloadBtn = new Rui.ui.LButton('downloadBtn');
+            downloadBtn.on('click', function(){
+                downloadFile();
+            });
+            
+            var submitBtn = new Rui.ui.LButton('submitBtn');
+            submitBtn.on('click', function(){
+                doSubmit();
+            });
+            
+        });
+        
+        
+    </script>
+
+</head>
+<body>
+    <h1>File Upload Multiple</h1>
+    <h2>멀티 파일 업로드(File Upload Multiple) 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>한번에 여러개의 파일(File)을 서버로 업로드(Upload) 하기위한 UI 예제 입니다. </p>
+        <p>이미 서버에 업로드 되어 있는 파일의 목록이 제공되며 추가 또는 삭제 요청된 파일만을 서버에 전달하여 상황에 맞게 처리 합니다. </p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton">
+            <button type="button" id="searchBtn">searchBtn</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div id="fileUpload">
+                <form id="frm" name="frm" method="post" enctype="multipart/form-data">
+                    <input type='hidden' name='deletedFileSeqs'>
+                    <div id="fileGrid"></div>
+                    <BR>
+                </form>
+                <div class="LblockButton">
+                    <button type="button" id="addBtn">addBtn</button>
+                    <button type="button" id="deleteBtn">deleteBtn</button>
+                    <button type="button" id="deleteAllBtn">deleteAllBtn</button>
+                    <button type="button" id="downloadBtn">downloadBtn</button>
+                    <button type="button" id="submitBtn">submitBtn</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

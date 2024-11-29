@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Handles</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+        <style type="text/css">
+            
+            #playground {
+                position: relative;
+                height: 200px;
+            } .dd-demo {
+                position: absolute;
+                border: 4px solid #666;
+                text-align: center;
+                color: #fff;
+                height: 60px;
+                width: 60px;
+            } .dd-demo .dd-handle {
+                background: #003366;
+                cursor: move;
+            } .dd-demo .dd-multi-handle-1 {
+                background: #336699;
+                float: left;
+                cursor: move;
+            } .dd-demo .dd-multi-handle-2 {
+                background: #336699;
+                float: right;
+                cursor: move;
+            } .dd-outer-handle {
+                position: relative;
+                background: red;
+                cursor: move;
+                height: 20px;
+                width: 3em;
+                text-align: center;
+                top: 0px;
+                left: 200px;
+            } .dd-demo-em {
+                border: 4px solid purple;
+            } #dd-demo-1 {
+                background-color: #6D739A;
+                top: 0px;
+                left: 0px;
+            } #dd-demo-2 {
+                background-color: #566F4E;
+                top: 50px;
+                left: 100px;
+            } #dd-demo-3 {
+                background-color: #7E5B60;
+                top: 20px;
+                left: 200px;
+            }
+        </style>
+        <script type='text/javascript' >
+            $C(function(){
+
+                var dd1 = $C.dd({
+                    id: 'dd-demo-1'
+                });
+                // Configure one or more child element as a drag handle
+                dd1.setHandleElId('dd-handle-1a');
+                dd1.setHandleElId('dd-handle-1b');
+
+                var dd2 = $C.dd({
+                    id: 'dd-demo-2'
+                });
+                dd2.setHandleElId("dd-handle-2");
+
+                var dd3 = $C.dd({
+                    id: 'dd-demo-3'
+                });
+                // A handle that is not child of the source element
+                dd3.setOuterHandleElId("dd-handle-3b");
+                
+            });
+        </script>
+ 
+    </head>
+    <body>
+        <h1>dd handles sample</h1>
+        <h2>특정 포인트로 객체에 움직임을 제어하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>
+            <p>DD 수행시에는 객체 전체가 아닌 포인트를 지정할 수도 있습니다.</p>
+        </div>
+        
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id="playground">
+                    <div id="dd-demo-1" class="dd-demo">
+                        <div id="dd-handle-1a" class="dd-multi-handle-1">
+                            H1
+                        </div>
+                        <div id="dd-handle-1b" class="dd-multi-handle-2">
+                            H2
+                        </div>
+                    </div>
+                    <div id="dd-demo-2" class="dd-demo">
+                        <div id="dd-handle-2" class="dd-handle">
+                            H
+                        </div>
+                    </div>
+                    <div id="dd-handle-3b" class="dd-outer-handle">
+                        Outer
+                    </div>
+                    <div id="dd-demo-3" class="dd-demo">
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </body>
+</html>

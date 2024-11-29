@@ -1,0 +1,40 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="웹소켓,websocket,serversidepush" />
+	
+	<title>WebSocket</title>
+	
+	<script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Websocket</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>HTML5 의 Websocket 을 이용해 통신하는 샘플</h2>
+            <div class="LblockDesc">
+		        <p>변경되는 데이터를 실시간으로 표현하는 화면의 경우 데이터가 변경될때 서버에서 Push 형태로 내려주는 것이 polling 방식보다 더 효율적입니다</p>
+		        <p>HTML5 에서 제공되는 Websocket 을 이용해 Server Side Push 를 구현한 샘플입니다</p>
+		        <p>Websocket 은 브라우저에 따라서는 지원하지 않는 경우도 있으므로 <a href="http://caniuse.com/#feat=websockets" target="_new">이곳</a>에서 지원여부를 확인하십시요. </p>
+		        <p>상세한 구현 샘플은 <a href="./WebsocketSample.zip">여기</a>에서 다운받아 확인하십시요. 이클립스 웹프로젝트이므로 이클립스에서 import 하여 확인하면 됩니다.</p>
+		        <p>Websocket 의 구현을 위해서는 JAVA는 JDK7 이후 버전을 사용해야 하며 WAS에서 Websocket 관련 Annotation 을 구현하여 제공하는지 확인해야 합니다. Tomcat 의 경우 7버전부터 지원됩니다. </p>
+		        <br>
+		        <p>좌우 분할된 페이지가 로딩될때 각각 서버에 연결이 되고 send 버튼 클릭시에 서버로 push 요청이 가면 데이터를 두 페이지에 push 하는 형태로 구성되어 있습니다.</p>
+		        <br>
+		        <p><img src="./websocket.jpg"></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

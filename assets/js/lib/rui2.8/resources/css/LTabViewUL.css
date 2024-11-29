@@ -1,0 +1,109 @@
+/* LTabViewUL
+------------------------------*/
+/********** core **********/
+.L-ul-tabview{}
+.L-ul-tabview-header{}
+.L-ul-tabview-header-tabs{    
+    position:absolute;
+    overflow:hidden;
+}
+.L-ul-tabview-header_btn_prev{
+    position:absolute;
+    left:0;
+    height:19px !important;
+    width:20px;    
+    background-image: url(./images/tab/prev.gif);
+    background-repeat: no-repeat;
+    cursor:hand;
+    cursor:pointer;
+    display:none;
+}
+.L-ul-tabview-header_btn_next{
+    position:absolute;
+    right:0;
+    height:19px !important;
+    width:20px;
+    background-image: url(./images/tab/next.gif);
+    background-repeat: no-repeat;
+    cursor:hand;
+    cursor:pointer;
+    display:none;
+}
+.L-ul-tabview-body{}
+.L-ul-tabview-body-content{
+    background-color:#f4f2b1;
+    border:1px solid silver !important;
+    border-top:0px !important;
+    display:none;
+}
+.L-ul-tabview ul, .L-ul-tabview li{
+    list-style:none outside none;
+}
+.L-ul-tabview li{
+   float:left;
+   white-space:nowrap;
+}
+
+.L-ul-tabview .L-ul-first {
+    /*background 위치를 16px계산해야 한다.*/
+    background-position:0% 16px;
+    background-repeat:repeat-x;
+}
+.L-ul-tabview .L-ul-li-depth-0 .L-ul-li-div-depth-0 {
+    background-repeat:no-repeat;
+}
+.L-ul-tabview .L-ul-li-depth-0 .L-ul-li-div-depth-0 .L-ul-tabview-content {
+    background-position:100% 0%;
+    background-repeat:no-repeat;
+    padding:1px 12px 0px;
+    font-size:11px;
+    text-align:center;
+}
+
+.L-ul-tabview .L-ul-li-depth-1 .L-ul-tabview-content {
+    padding: 0px 8px;
+    font-weight:normal;
+    font-size:medium;
+}
+
+.L-ul-tabview .L-ul-li-depth-0 .L-ul-focus-top-node{
+    background-position: 0% -27px;    
+}
+.L-ul-tabview .L-ul-li-depth-0 .L-ul-focus-top-node .L-ul-tabview-content{
+    background-position: 100% -27px;
+    height:19px;
+}
+.L-ul-tabview .L-ul-focus-node{}
+.L-ul-tabview ul {
+    /*position:absolute;*/
+    width:100%;
+    margin-left:0px;
+    left:0px;
+}
+.L-ul-tabview .L-ul-li-depth-0 ul {
+    top:20px;
+}
+/**************core end***************/
+.L-ul-tabview .L-ul-first {
+    background-image: url(./images/menu/tab/tab_bg.gif);
+}
+.L-ul-tabview .L-ul-li-depth-0 .L-ul-li-div-depth-0 {    
+    background-image: url(./images/menu/tab/tab_l.gif);
+}
+.L-ul-tabview .L-ul-li-depth-0 .L-ul-li-div-depth-0 .L-ul-tabview-content {
+    background-image: url(./images/menu/tab/tab_r.gif);
+    color:#777;
+}
+.L-ul-tabview .L-ul-li-depth-0 .L-ul-focus-top-node .L-ul-tabview-content{
+    color:#927A00;    
+}
+.L-ul-tabview .L-ul-focus-node{
+    color:#927A00;
+}
+.L-ul-tabview .L-ul-li-depth-0 ul {
+    background-color:#f4f2b1;
+}
+
+.L-ul-tabview .L-ul-li-depth-0 li {
+    background: url(./images/menu/tab/tab_divider.gif) no-repeat 0% 100%;
+}

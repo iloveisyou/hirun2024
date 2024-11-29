@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="팝업, Popup" />
+    <title>Popup</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_license.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui_skin_blue.css"/>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui_sample_base.css"/>
+    
+    <script type="text/javascript" >
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col7' },
+                    { id: 'col8' },
+                    { id: 'date1', type: 'date' }
+                ]
+            });
+
+            /*<b>*/
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                groupMerge: true,
+                autoWidth: true,
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', sortable: true, width: 200, vMerge: true},
+                    { field: 'col3', label: 'Col3', sortable: true, width: 60, align: 'center', autoWidth: true,vMerge: true, renderer: function(value){
+                        return '<font color="red">' + value + '</font>';
+                    }},
+                    { field: 'col2', label: 'Col2', sortable: true, width: 130, align: 'center', renderer: function(value){
+                        if(!value || value.length < 13) return value;
+                        return value.substring(0, 6) + '-' + value.substring(6);
+                    }},
+                    { field: 'col7', width: 160, sortable: true, renderer: function(value){
+                        return '<a href="javascript:alert(\'' + value + '\');">' + value + '</a>';
+                    }},
+                    { field: 'col8', width: 80, align: 'right', sortable: true, renderer: 'money'},
+                    { field: 'date1', width: 200, align: 'left'}
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                width: 600,
+                height: 250
+            });
+
+            grid.render('defaultGrid');
+            Rui.log('grid가 화면에 랜더링되었습니다.');
+            /*</b>*/
+           
+            grid.on('cellDblClick', function(e){
+                opener.applyPopupValue(dataSet.getAt(e.row).getValues());
+                window.close();
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            dataSet.load({
+                url: './../../../../sample/data/data.json'
+            });
+
+            //searchBtn.click();
+        });
+    </script>
+    
+</head>
+<body>
+    <div id='hd'>
+        <h1>Popup</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>RUI LPopupTextBox의 팝업 버튼 클릭시의 연계 샘플 입니다.</h2>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,628 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+Element는 event listener들을 쉽게 추가하고, dom method들을 사용하거나 sttribute를 관리하는 wrapper object를 제공한다.
+샘플 경로 :
+<a href="./../sample/general/base/appendSample.html" target="_new">/rui/sample/general/base/appendSample.html</a>
+<a href="./../sample/general/base/elementSample.html" target="_new">/rui/sample/general/base/elementSample.html</a>
+<a href="./../sample/general/base/elementScrollSample.html" target="_new">/rui/sample/general/base/elementScrollSample.html</a>
+인스턴스로 생성된 LUIComponent들은 LElement 메소드를 그대로 이용할 수 없다.
+</div>
+
+<div class="L-sample">
+sample: LCheckBox를 disable한다. 
+<div class="L-code">
+var checkBox1 = new Rui.ui.form.LCheckBox({
+    id: 'checkBox1',
+    applyTo: 'checkBox1',
+    label: '선택'
+});
+
+Rui.get('checkbox1').disable();  <-- 사용 불가
+checkBox1.disable();                <-- 사용 가능
+</div> 
+</div>
+</div>
+<!-- method 시작 -->
+<div class="method_select">
+<div class="L-description">
+CSS Selector로 child 객체를 LElement객체로 만들어 Rui.LElementList로 리턴한다.
+</div>
+<div class="L-sample">
+sample: LBlockDetail id를 가지는 div 하위에 모든 input,select태그와 L-text css를 가지는 객체를 찾아서 disable 시킨다. 
+<div class="L-code">
+Rui.get('LBlockDetail').select('input, select, L-text').disable();
+</div> 
+</div>
+
+<div class="L-sample">
+sample: LBlockDetail id를 가지는 div 하위에 모든 input,select태그와 L-text css를 가지는 객체를 찾아서 each문을 이용하여 disable 시킨다. 
+<div class="L-code">
+Rui.get('LBlockDetail').select('input, select, L-text').each(function(i, item) {
+    item.disable();
+});
+</div> 
+</div>
+
+</div>
+
+<div class="method_query">
+<div class="L-description">
+CSS Selector로 child html 객체를 배열로 리턴한다.
+</div>
+<div class="L-sample">
+sample: LBlockDetail id를 가지는 div 하위에 모든 input,select태그와 L-text css를 가지는 객체를 찾아서 for문으로 내용을 처리한다. 
+<div class="L-code">
+var inputList = Rui.get('LBlockDetail').query('input, select, L-text');
+for(var i = 0 ; i < inputList.length; i++) {
+    var dom = inputList[i];
+...........
+}
+</div> 
+</div>
+</div>
+
+<div class="method_test">
+<div class="L-description">
+CSS Selector로 현재 dom이 selector에 해당되는 객체인지 여부를 리턴한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체가 input 태그인지 여부를 리턴한다. 
+<div class="L-code">
+alert(Rui.get('col1').test('input'));
+</div> 
+</div>
+</div>
+
+<div class="method_on">
+<div class="L-description">
+주어진 event에 대해 listener를 추가한다.
+이것은 DOM이나 customEvent listener들이 될 수 있다.
+frieEvent를 통해 발생한 어떤 event들도 listen될 수 있다.
+모든 handler들은 event object를 받는다. 
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 keydown 이벤트를 연결하여 키 입력시 keyCode값을 출력한다. 
+<div class="L-code">
+Rui.get('col1').on('keydown', function(e) {
+    alert(e.keyCode);
+});
+</div> 
+</div>
+</div>
+
+<div class="method_unOn">
+<div class="L-description">
+event listener를 삭제한다. 
+삭제시에는 type과 on으로 처리시 연결했던 function객체를 인수로 처리해야 한다.
+같은 function객체여야만 삭제된다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 keydown 이벤트를 연결했다가 삭제한다. 
+<div class="L-code">
+var onKeyDown = function(e) {
+    alert(e.keyCode);
+};
+
+Rui.get('col1').on('keydown', onKeyDown);
+
+................
+
+Rui.get('col1').unOn('keydown', onKeyDown);
+</div> 
+</div>
+</div>
+
+<div class="method_addClass">
+<div class="L-description">
+Dom에 css를 추가한다. 
+같은 css는 무시된다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 L-text라는 css를 추가한다. 
+<div class="L-code">
+Rui.get('col1').addClass('L-text');
+</div> 
+</div>
+</div>
+
+<div class="method_hasClass">
+<div class="L-description">
+Dom에 css가 존재하는지 여부를 리턴한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 L-text라는 css가 적용되었느지 여부를 체크한 후 메시지를 출력한다. 
+<div class="L-code">
+if(Rui.get('col1').hasClass('L-text') == true) {
+    alert('L-text css가 적용되었습니다.');
+}
+</div> 
+</div>
+</div>
+
+<div class="method_removeClass">
+<div class="L-description">
+Dom에 적용된 css를 삭제한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 L-text라는 css를 삭제한다. 
+<div class="L-code">
+Rui.get('col1').removeClass('L-text');
+</div> 
+</div>
+</div>
+
+<div class="method_setStyle">
+<div class="L-description">
+Dom에 style을 주는 메소드
+직접적인 style의 디자인을 적용하는것보다 css로 적용하는게 차후 더 유연하다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체를 style의 display로 숨긴다. 
+<div class="L-code">
+Rui.get('col1').setStyle('display', 'none');
+</div> 
+</div>
+</div>
+
+<div class="method_getStyle">
+<div class="L-description">
+Dom에 style을 가져오는 메소드
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체를 style의 display를 비교한다. 
+<div class="L-code">
+if(Rui.get('col1').getStyle('display') == 'none') {
+...........
+}
+</div> 
+</div>
+</div>
+
+<div class="method_setStyles">
+<div class="L-description">
+Dom에 style들을 주는 메소드(json 형 객체)
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 display, position, left의 style 속성을 적용한다. 
+<div class="L-code">
+var styles = {
+    display: 'none',
+    position: 'absolute',
+    left: '-10000px'
+};
+Rui.get('col1').setStyles(styles);
+</div> 
+</div>
+</div>
+
+<div class="method_getStyles">
+<div class="L-description">
+Dom에 style들을 가져오는 메소드(json 형 객체)
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 display, position, left의 style 속성을 가져온다.
+<div class="L-code">
+var styles = {
+    display: '',
+    position: '',
+    left: ''
+};
+styles = Rui.get('col1').setStyles(styles);
+alert(styles.display + ', ' + styles.position + ', ' + styles.left);
+</div> 
+</div>
+</div>
+
+<div class="method_findParent">
+<div class="L-description">
+전달된 simple selector의 match를 위한 현재 node와 parent node를 찾는다.(예: div.some-class or span:first-child)
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체의 상위에 LBlockDetail css를 가지는 부모 객체를 찾아 LElement객체로 리턴한다.
+<div class="L-code">
+var parentEl = Rui.get('col1').findParent('.LBlockDetail');
+</div> 
+</div>
+</div>
+
+<div class="method_findParentNode">
+<div class="L-description">
+전달된 simple selector의 match를 위한 parent node들을 찾는다.(예: div.some-class or span:first-child)
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체의 상위에 LBlockDetail css를 가지는 부모 객체를 찾아 html dom객체로 리턴한다.
+<div class="L-code">
+var parentNode = Rui.get('col1').findParentNode('.LBlockDetail');
+</div> 
+</div>
+</div>
+
+<div class="method_parent">
+<div class="L-description">
+해당 element에 대한 parent node를 가져오고, 부가적으로 일치하는 selector를 찾는다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체의 상위에 바로 상위의 html dom객체를 LElement객체로 리턴한다. 
+<div class="L-code">
+var parentEl = Rui.get('col1').parent();
+</div> 
+</div>
+</div>
+
+<div class="method_insertBefore">
+<div class="L-description">
+현재 dom에 이전 sibling으로 새 node를 삽입한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 이전 sibling으로 새 node를 삽입한다. 
+<div class="L-code">
+var beforeDom = document.createElement('div');
+Rui.get('col1').insertBefore(beforeDom);
+</div> 
+</div>
+</div>
+
+<div class="method_insertAfter">
+<div class="L-description">
+현재 dom에 다음 sibling으로서 새로운 node를 삽입한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 다음 sibling으로서 새로운 node를 삽입한다. 
+<div class="L-code">
+var beforeDom = document.createElement('div');
+Rui.get('col1').insertAfter(beforeDom);
+</div> 
+</div>
+</div>
+
+<div class="method_appendChild">
+<div class="L-description">
+dom객체 하위에 child dom객체를 붙인다.
+인수는 하나의 dom이나 배열을 줄 수 있다. 
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 다음 sibling으로서 새로운 node를 삽입한다. 
+<div class="L-code">
+var dom = document.createElement('div');
+Rui.get('col1').appendChild(dom);
+</div> 
+</div>
+</div>
+
+<div class="method_appendTo">
+<div class="L-description">
+제공된 parent 노드에 HTMLElement를 추가한다. 
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체를 L-blockDetail id를 가지는 객체 하위로 이동한다. 
+<div class="L-code">
+Rui.get('col1').appendTo(Rui.get('L-blockDetail'));
+</div> 
+</div>
+</div>
+
+<div class="method_appendChildByAjax">
+<div class="L-description">
+ajax를 호출하여 해당 결과를 현재 dom객체에 추가한다.
+ajax 호출시에는 호출되는 페이지에는 rui 스크립트나 css는 포함되어서는 안된다.
+이 기능은 포함되는 페이지에서 메모리릭이 발생하면 추적하기 어려우므로 신중하게 구현해야 한다.  
+</div>
+<div class="L-sample">
+sample: result id를 가지는 객체에 test.rui라는 주소로 서버에 요청하여 결과 페이지를 하위에 붙인다. 정상적이면 성공 메시지를 에러이면 에러 메시지를 출력한다. 
+<div class="L-code">
+Rui.get('result').appendChildByAjax({
+    url: './test.rui',
+    success: function(e){
+       alert('성공');
+    },
+    failure: function(e) {
+       alert('에러');
+    }
+});
+</div> 
+</div>
+</div>
+
+<div class="method_setVisibilityMode">
+<div class="L-description">
+visMode가 true면 visibility에 설정 false거나 없으면 display에 설정한다.
+LElement의 기본값은 false로 display속성을 가지고 있다.  
+</div>
+<div class="L-sample">
+sample: result id를 가지는 객체를 display모드에서 visibility 모드로 변경한다. 
+<div class="L-code">
+Rui.get('result').setVisibilityMode(true);
+</div> 
+</div>
+</div>
+
+<div class="method_show">
+<div class="L-description">
+객체를 보이게 설정하는 메소드
+인수로 true를 설정하면 기본 animation 효과를 적용하고 LAnim객체를 생성하여 적용하면 해당 animation 효과가 적용된다.
+animation 효과를 적용하지 않으려면 인수 없이 호출하면 된다.
+</div>
+<div class="L-sample">
+sample: result id 객체를 출력한다. 
+<div class="L-code">
+Rui.get('result').show(true);
+</div> 
+</div>
+<div class="L-sample">
+sample: result id 객체를 animation효과로 출력한다. 
+<div class="L-code">
+Rui.get('result').show(true);
+</div> 
+</div>
+</div>
+
+<div class="method_hide">
+<div class="L-description">
+객체를 안보이게 설정하는 메소드
+인수로 true를 설정하면 기본 animation 효과를 적용하고 LAnim객체를 생성하여 적용하면 해당 animation 효과가 적용된다.
+animation 효과를 적용하지 않으려면 인수 없이 호출하면 된다.
+</div>
+<div class="L-sample">
+sample: result id 객체를 숨긴다. 
+<div class="L-code">
+Rui.get('result').hide();
+</div> 
+</div>
+
+<div class="L-sample">
+sample: result id 객체를 animation효과로 숨긴다. 
+<div class="L-code">
+Rui.get('result').hide(true);
+</div> 
+</div>
+</div>
+
+<div class="method_isShow">
+<div class="L-description">
+객체가 보이는지 여부를 확인하는 메소드
+객체에 L-hide-display or L-hide-visibility css나 style로 visibility가 'hidden'이거나 display가 'none'인지 모두 비교한다.
+</div>
+<div class="L-sample">
+sample: result id를 가지는 객체가 숨겨 있으면 출력한다. 
+<div class="L-code">
+if(Rui.get('result').isShow() == false)
+    Rui.get('result').show();
+</div> 
+</div>
+</div>
+
+<div class="method_getHtml">
+<div class="L-description">
+innerHTML에 html 내용을 리턴하는 메소드
+dom.innerHTML과 같다.
+</div>
+<div class="L-sample">
+sample: result id를 가지는 객체의 innerHTML 문자열을 출력한다. 
+<div class="L-code">
+alert(Rui.get('result').getHtml());
+</div> 
+</div>
+</div>
+
+<div class="method_toggle">
+<div class="L-description">
+출력상태가 show이면 hide로 hide면 show로 변경한다.
+</div>
+<div class="L-sample">
+sample: result id를 가지는 객체를 toggle한다. 
+<div class="L-code">
+Rui.get('result').toggle();
+</div> 
+</div>
+</div>
+
+<div class="method_hover">
+<div class="L-description">
+마우스가 Element에 안밖으로 움직일때 전달된 함수들을 호출하기 위한 event 핸들러를 설정한다.
+단순 css 적용은 addClassOnOver 메소드를 이용하면 편한다.
+</div>
+<div class="L-sample">
+sample: result id를 가지는 객체에 hover시 L-block css를 추가하거나 지운다.  
+<div class="L-code">
+Rui.get('result').hover(
+function(e) {
+    this.addClass('L-block');
+}, 
+function(e) {
+    this.removeClass('L-block');
+});
+</div> 
+</div>
+</div>
+
+<div class="method_addClassOnOver">
+<div class="L-description">
+mouse over시 class 적용
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 over시 L-block css를 추가하거나 지운다.  
+<div class="L-code">
+Rui.get('col1').addClassOnOver('L-block');
+</div> 
+</div>
+</div>
+
+<div class="method_addClassOnFocus">
+<div class="L-description">
+mouse focus시 class 적용
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 focus시 L-focus css를 추가하거나 지운다.  
+<div class="L-code">
+Rui.get('col1').addClassOnFocus('L-focus');
+</div> 
+</div>
+</div>
+
+<div class="method_addClassOnClick">
+<div class="L-description">
+mouse click시 class 적용
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 click시 L-click css를 추가하거나 지운다.  
+<div class="L-code">
+Rui.get('col1').addClassOnClick('L-click');
+</div> 
+</div>
+</div>
+
+<div class="method_replaceClass">
+<div class="L-description">
+oldClassName으로 적용된 css를 newClassName css로 교체한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 L-old-class css를 L-new-class로 교체한다.  
+<div class="L-code">
+Rui.get('col1').replaceClass('L-old-class', 'L-new-class');
+</div> 
+</div>
+</div>
+
+<div class="method_toggleClass">
+<div class="L-description">
+toggle시에 class를 추가하거나 제거한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 L-block css를 추가하거나 제거한다.  
+<div class="L-code">
+Rui.get('col1').toggleClass('L-block');
+</div> 
+</div>
+</div>
+
+<div class="method_getXY">
+<div class="L-description">
+페이지 좌표에 기반한 element의 현재 위치를 가져온다. 
+element는 반드시 페이지 좌표를 가지는 DOM 트리의 부분이어야 한다
+(display:none 혹은 element들이 추가되어 있지 않으면 false를 반환).
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 xy 좌표를 출력한다.  
+<div class="L-code">
+var xy = Rui.get('col1').getXY();
+alert('x : ' + xy[0] + ', y : ' + xy[1]);
+</div> 
+</div>
+</div>
+
+<div class="method_setXY">
+<div class="L-description">
+element가 위치되는 방법에 개의치 않고 페이지 좌표에서 html element의 위치를 설정한다.
+element는 반드시 페이지 좌표를 가지는 DOM 트리의 부분이어야 한다
+(display:none 혹은 element들이 추가되어 있지 않으면 false를 반환).
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체에 xy 좌표로 이동한다.  
+<div class="L-code">
+var xy = [100, 100];
+Rui.get('col1').setXY(xy);
+</div> 
+</div>
+</div>
+
+<div class="method_animate">
+<div class="L-description">
+animation 효과를 적용한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체 상위에서 바운스로 출력되게 하는 animation 효과를 내고 완료되면 메시지를 출력한다.  
+<div class="L-code">
+Rui.get('col1').animate({
+    top: {
+        from: -58,
+        to: 0
+    },
+    method: Rui.fx.LEasing.bounceOut,
+    delay: 2000,
+    callback: function() {
+        alert('이동하였습니다.');
+    }
+});
+</div> 
+</div>
+</div>
+
+<div class="method_setWidth">
+<div class="L-description">
+해당 element의 width를 설정한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체의 width를 100으로 셋팅한다.  
+<div class="L-code">
+Rui.get('col1').setWidth(100);
+</div> 
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체의 width를 100으로 셋팅할때 animation 효과로 적용한다.  
+<div class="L-code">
+Rui.get('col1').setWidth(100, true);
+</div> 
+</div>
+</div>
+
+<div class="method_setHeight">
+<div class="L-description">
+해당 element의 height를 설정한다.
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체의 height를 100으로 셋팅한다.  
+<div class="L-code">
+Rui.get('col1').setHeight(100);
+</div> 
+</div>
+<div class="L-sample">
+sample: col1 id를 가지는 객체의 height를 100으로 셋팅할때 animation 효과로 적용한다.  
+<div class="L-code">
+Rui.get('col1').setHeight(100, true);
+</div> 
+</div>
+</div>
+
+<!-- property 시작 -->
+<div class="property_dom">
+<div class="L-description">
+LElement가 가지고 있는 실제 html dom 객체
+</div>
+<div class="L-sample">
+sample: col1객체를 LElement로 찾아서 innerHTML을 출력한다.
+<div class="L-code">
+alert(Rui.get('col1').dom.innerHTML);
+</div> 
+</div>
+</div>
+
+<div class="property_id">
+<div class="L-description">
+LElement가 가지고 있는 실제 html dom 객체의 id
+id가 없는 html일 경우 자동으로 id를 부여한다. 부여 방식 : Rui.id()
+</div>
+<div class="L-sample">
+sample: col1객체를 LElement로 찾아서 id를 출력한다.
+<div class="L-code">
+alert(Rui.get('col1').id);
+</div> 
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_available">
+<div class="L-description">
+페이지 로드시 dom 객체가 로드되면 수행되는 이벤트
+</div>
+<div class="L-sample">
+sample: 페이지에서 col1객체가 로드되면 메시지를 출력한다.   
+<div class="L-code">
+Rui.get('col1').on('available', function(e) {
+    alert('객체가 로드되었습니다.');
+});
+</div>
+</div>
+</div>
+
+</div>

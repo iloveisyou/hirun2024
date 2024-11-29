@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="날짜(LDateLocale), 지역(Locale), 포맷(Format)" />
+    <title>Date Locale</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet1 = new Rui.data.LJsonDataSet({
+                id: 'dataSet1',
+                fields: [
+                    {id: 'code' },
+                    {id: 'value' }
+                ]
+            });
+
+            var dataSet2 = new Rui.data.LJsonDataSet({
+                id: 'dataSet2',
+                fields: [
+                    {id: 'code' },
+                    {id: 'value' }
+                ]
+            });
+
+            var combo1 = new Rui.ui.form.LCombo({
+                id: 'combo1',
+                dataSet: dataSet1,
+                applyTo: 'combo1'
+            });
+
+            var combo2 = new Rui.ui.form.LCombo({
+                id: 'combo2',
+                dataSet: dataSet2,
+                listWidth: 500,
+                applyTo: 'combo2'
+            });
+
+            /********************
+             * 사용자 정의 함수
+             ********************/
+            var displayDate = function(locale, format){
+                var locale = combo1.getValue();
+                var format = combo2.getValue();
+                if (format) {
+                    /*<b>*/
+                    var sDate = Rui.util.LDate.format(new Date(), {
+                        format: format,
+                        locale: locale
+                    });
+                    Rui.get('spanResult').html('<b>' + sDate + '</b>');
+                    /*</b>*/
+                }
+            }
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            combo1.on('changed', function(e){
+                displayDate();
+            });
+
+            combo2.on('changed', function(e){
+                displayDate();
+            });
+
+            dataSet1.load({
+                url: './../../../sample/data/locale.json'
+            });
+
+            dataSet2.load({
+                url: './../../../sample/data/strftime.json'
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Date Locale</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>날짜(Date)객체의 Locale에 따른 처리를 보여주는 샘플</h2>
+            <div class="LblockDesc">
+                <p>날짜(Date)객체의 locale 및 포맷 설정에 따라 다양하게 날짜/시간을 표시합니다.</div>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <fieldset>
+                <label for="combo1">
+                    locale :
+                </label>
+                <div id="combo1">
+                </div>
+                <label for="combo2">
+                    format :
+                </label>
+                <div id="combo2">
+                </div>
+            </fieldset>
+            <div id="demo">
+                결과(new Date()를 LDate.format적용) : <span id="spanResult"></span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

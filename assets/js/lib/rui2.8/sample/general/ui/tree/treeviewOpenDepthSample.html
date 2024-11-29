@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="트리(LTreeViw), OpenDepth" />
+    <title>OpenDepth</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/menu/rui_menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/menu/rui_menu.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/tree/rui_tree.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/tree/rui_tree.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        #treeView .L-ul {
+            border: 1px solid #dcdcdc;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                focusFirstRow:false,
+                fields: [
+                    { id: 'menuId', type: 'number' },
+                    { id: 'menuSeq', type: 'number' },
+                    { id: 'prntMenuId', type: 'number' },
+                    { id: 'menuName' },
+                    { id: 'menuCode' }
+                ]
+            });
+
+            var treeView = new Rui.ui.tree.LTreeView({
+                dataSet: dataSet,
+                fields: {
+                    rootValue: null,
+                    parentId: 'prntMenuId',
+                    id: 'menuId',
+                    label: 'menuName',
+                    order: 'menuSeq'
+                },
+                width: 300,
+                height: 300,
+                /*<b>*/
+                defaultOpenDepth: -1
+                /*</b>*/
+            });
+
+            treeView.render('treeView');
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            
+            dataSet.load({ url: './../../../../sample/data/treePerformance.json' });
+            
+            var openDepthBtn = new Rui.ui.LButton('openDepthBtn');
+            openDepthBtn.on('click', function(){
+                /*<b>*/
+                treeView.openDepthNode(Rui.get('txtDepth').getValue());
+                /*</b>*/
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>TreeView OpenDepth</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>트리(Tree)의 지정된 Depth의 노드(Node)를 일괄로 열거나 닫는 샘플</h2>
+            <div class="LblockDesc">
+                <p>트리(Tree)의 OpenDepth 기능을 이용하여 특정 Depth의 모든 노드(Node)를 일괄로 펼치(expand)거나 닫을(collapse) 수 있다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <table>
+            <tr>
+                <td>
+                    Depth : <input type="text" id="txtDepth" value="1" placeholder="0~3">
+                    <button type="button" id="openDepthBtn" >Open</button>
+                </td>
+            </tr>
+            <tr>
+                <td><div id="treeView"></div></td>
+            </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

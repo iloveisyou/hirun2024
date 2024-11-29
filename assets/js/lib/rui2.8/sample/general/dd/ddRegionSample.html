@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="드래그 드랍(LDragDrop), LDDRegion, 이동허용범위 Region" />
+    <title>Region</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../plugins/dd/LDDRegion.js"></script>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        .dd-demo {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            cursor: move;
+            height: 60px;
+            width: 60px;
+            padding: 0;
+            margin: 0;
+        } .dd-demo div {
+            border: 1px solid black;
+            height: 58px;
+            width: 58px;
+        } #dd-demo-canvas1 {
+            padding: 55px;
+            background-color: #7E5B60;
+            border: 1px solid black;
+        } #dd-demo-canvas2 {
+            padding: 25px;
+            background-color: #566F4E;
+            border: 1px solid black;
+        } #dd-demo-canvas3 {
+            padding: 15px;
+            background-color: #6D739A;
+            border: 1px solid black;
+        } #dd-demo-1 {
+            background-color: #6D739A;
+            top: 5px;
+            left: 5px;
+        } #dd-demo-2 {
+            background-color: #566F4E;
+            top: 50px;
+            left: 100px;
+        } #dd-demo-3 {
+            background-color: #7E5B60;
+            top: -100px;
+            left: 200px;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*<b>*/
+            var dd1 = new Rui.dd.LDDRegion({
+                id: 'dd-demo-1',
+                attributes: {
+                    cont: 'dd-demo-canvas3'
+                }
+            });
+            /*</b>*/
+            var dd2 = new Rui.dd.LDDRegion({
+                id: 'dd-demo-2',
+                attributes: {
+                    cont: 'dd-demo-canvas2'
+                }
+            });
+            var dd3 = new Rui.dd.LDDRegion({
+                id: 'dd-demo-3',
+                attributes: {
+                    cont: 'dd-demo-canvas1'
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Region</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>drag시 객체의 이동 허용 범위를 제어하는 샘플</h2>
+            <div class="LblockDesc">
+                <p>드래그앤드랍 시 객체가 이동할 수 있는 범위를 제한합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="dd-demo-canvas1">
+                <div id="dd-demo-canvas2">
+                    <div id="dd-demo-canvas3">
+                        <div id="dd-demo-1" class="dd-demo">
+                            <div>
+                                1
+                            </div>
+                        </div>
+                        <div id="dd-demo-2" class="dd-demo">
+                            <div>
+                                2
+                            </div>
+                        </div>
+                        <div id="dd-demo-3" class="dd-demo">
+                            <div>
+                                3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+</body>
+</html>

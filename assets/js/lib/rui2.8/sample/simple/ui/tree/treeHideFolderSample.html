@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Hide Folder</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../plugins/ui/tree/rui_tree.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="common.css" />        
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type="text/javascript" class="script-code">
+            var dataSet, tree;
+            $C(function(){
+                $C('!config').set('$.core.logger.show', [true]);
+                //***********DataSet*****************
+                dataSet = $C.dataSet({
+                    id: 'dataSet'
+                    , fields: [{
+                        id: 'menuId', type:"number"
+                    }, {
+                        id: 'seq',type:"number"
+                    }, {
+                        id: 'parentMenuId',type:"number"
+                    }, {
+                        id: 'name'
+                    }, {
+                        id: 'url'
+                    }]
+                });
+    
+                /*<b>*/
+                dataSet.load({ url: "./../../../../sample/data/menu.json", method: "get" });
+                //**********SlideMenu***************
+                tree = $C.tree({
+                    dataSet: dataSet,
+                    showFolder:false,
+                    //renderer : function(v,record){
+                    //    return '<img src="../../../resources/images/tree/check0.gif" style="width:10px;height:10px;"><font color=\"blue\">' + v + '</font>';
+                    //},
+                    fields: {
+                        rootValue: null
+                        , parentId: 'parentMenuId'
+                        , id: 'menuId'
+                        , label: 'name'
+                        , order:'seq'
+                    }
+                });
+                
+                tree.render("divUl");
+                /*</b>*/
+                  
+                tree.on("nodeClick",function(e){
+                    var node = e.node;
+                });   
+                
+                tree.on("nodeImageClick",function(e){
+                    //+/-그림 click시 발생
+                    var node = e.node;
+                });   
+                
+                tree.on("labelClick",function(e){                    
+                    var node = e.node;                    
+                });    
+                
+                tree.on("checkboxClick",function(e){      
+                    //nodeType:checkbox일 경우  checkbox를 클릭했을 때 발생하는  event              
+                    var node = e.node;                    
+                    var checked = e.checked;
+                });     
+                
+                tree.on("focusChanged",function(e){
+                    //다음 node를 선택했을 때 발생하는 event              
+                    var oldNode = e.oldNode;
+                    var newNode = e.newNode;                    
+                });
+                
+                tree.on("collapse",function(e){
+                    //node collapse               
+                    var node = e.node;                    
+                });
+                
+                tree.on("expand",function(e){
+                    //node expand              
+                    var node = e.node;                    
+                });
+                
+                tree.on("show",function(e){
+                    $C.log("show");
+                });
+                
+                tree.on("hide",function(e){
+                    $C.log("hide");
+                });
+                
+                tree.on("enable",function(e){
+                    $C.log("enable");
+                });
+                
+                tree.on("disable",function(e){
+                    $C.log("disable");
+                });
+                
+                tree.on("destroy",function(e){
+                    $C.log("destroy");
+                });
+
+            });
+            
+        </script>
+         <script type='text/javascript' >
+
+            function testFocusLastest(){
+                dataSet.load({ url: "./../../../../sample/data/menu.json", method: "get" });
+            }
+            
+            function testFocus(){
+                tree.focus();
+            }
+            
+            function testBlur(){
+                tree.blur();
+            }   
+            
+            function testShow(){
+                tree.show();
+            }
+            
+            function testHide(){
+                tree.hide();
+            }         
+                        
+            function testEnable(){
+                tree.enable();
+            }
+            
+            function testDisable(){
+                tree.disable();
+            }
+            
+            function noTestDestroy(){
+                tree.destroy();
+            }
+        </script>
+    </head>
+    <body>
+        <h1>tree Hide Folder Sample</h1>
+        <h2>LTreeView show/hide 이벤트에 대한 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>트리를 핸들링 할 수 있는 여러 method를 테스트 합니다.</div>
+<div id='bd'>
+    <input type="button" value="testFocusLastest" onclick="testFocusLastest();"/>
+    <input type="button" value="testShow" onclick="testShow();"/>
+    <input type="button" value="testHide" onclick="testHide();"/>
+    <input type="button" value="testEnable" onclick="testEnable();"/>
+    <input type="button" value="testDisable" onclick="testDisable();"/>
+    <input type="button" value="testDestroy" onclick="noTestDestroy();"/>
+    <div class="LblockMarkupCode">
+        <div id="divUl">
+        </div>
+    </div>
+</div>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+<script type="text/javascript" class="script-code">
+    Rui.onReady(function(){
+        alert('성공하였습니다.\n이 메시지는 appendData.html 내부의 script에 의해 출력되고 있습니다.');
+    });
+    function onMessageClick() {
+        alert('동적 추가 이후 script 동작에 문제가 없습니다.');
+    }
+</script>
+<style>
+	.LblockMarkupCode {
+	    background-color: cyan;
+	}
+</style>
+<a href="javascript:onMessageClick()">이 텍스트는 appendData.html의 body 입니다.</a>

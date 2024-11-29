@@ -2,19 +2,294 @@
 {
     "gnbData": [
         {
-            "name": "home",
-            "href": "/",
-            "target": "_self"
+            "name": "상담", "href": "/", "target": "_self", "depth1": [
+                { "name": "상담관리", "href": "/", "target": "_self", "depth2": [
+                    { "name": "상담PORTAL(☆)", "href": "/", "target": "_self" },
+                    { "name": "기술상담관리(☆)", "href": "/", "target": "_self" },
+                    { "name": "전화번호관리", "href": "/", "target": "_self" }
+                ]},
+                { "name": "VOC관리", "href": "/l", "target": "_self", "depth2": [
+                    { "name": "VOC관리", "href": "/", "target": "_self" },
+                    { "name": "Claim 관리(☆)", "href": "/", "target": "_self" }
+                ]},
+                { "name": "캠페인관리", "href": "/l", "target": "_self", "depth2": [
+                    { "name": "캠페인실시", "href": "/", "target": "_self" },
+                    { "name": "캠페인관리", "href": "/", "target": "_self" }
+                ]},
+                { "name": "상황관제", "href": "/l", "target": "_self", "depth2": [
+                    { "name": "TMS모니터링 이력", "href": "/", "target": "_self" },
+                    { "name": " 현장 마스터", "href": "/", "target": "_self" },
+                    { "name": "TTMS 고장에러/이상징후 관리", "href": "/", "target": "_self" }
+                ]}
+            ]
         },
         {
-            "name": "intro",
-            "href": "/pages/intro.html",
-            "target": "_self"
+            "name": "서비스업무", "href": "/", "target": "_self", "depth1": [
+                { "name": "서비스업무관리", "href": "/", "target": "_self", "depth2": [
+                    { "name": "출장이관", "href": "/", "target": "_self" },
+                    { "name": "서비스PORTAL", "href": "/", "target": "_self" },
+                    { "name": "접수번호조회", "href": "/", "target": "_self" },
+                    { "name": "무상부품 변경", "href": "/", "target": "_self" },
+                    { "name": "수리비환불(유지보수무상)", "href": "/", "target": "_self" },
+                    { "name": "고객수리이력", "href": "/", "target": "_self" },
+                    { "name": "PUSH메시지 전송", "href": "/", "target": "_self" },
+                    { "name": "PUSH메시지 조회", "href": "/", "target": "_self" },
+                    { "name": "사전견적&amp;거래명세서 관리", "href": "/", "target": "_self" },
+                    { "name": "한국서비스 접수번호조회", "href": "/", "target": "_self" }
+                ]},
+                { "name": "일정관리", "href": "/l", "target": "_self", "depth2": [
+                    { "name": "지역관리", "href": "/", "target": "_self" },
+                    { "name": "운영스케줄관리", "href": "/", "target": "_self" },
+                    { "name": "기사별 서비스건수 관리", "href": "/", "target": "_self" },
+                    { "name": "기사별 서비스 건수관리(pilot)", "href": "/", "target": "_self" },
+                    { "name": "당직일정 관리", "href": "/", "target": "_self" }
+                ]},
+                { "name": "보상관리", "href": "/l", "target": "_self", "depth2": [
+                    { "name": "PL포털(☆)", "href": "/", "target": "_self" },
+                    { "name": "대리점환입", "href": "/", "target": "_self" }
+                ]},
+                { "name": "칠러서비스관리", "href": "/l", "target": "_self", "depth2": [
+                    { "name": "칠러PORTAL", "href": "/", "target": "_self" },
+                    { "name": "납품스케쥴", "href": "/", "target": "_self" }
+                ]},
+                { "name": "총무성관리", "href": "/l", "target": "_self", "depth2": [
+                    { "name": "보유아이템관리", "href": "/", "target": "_self" },
+                    { "name": "신청결재관리", "href": "/", "target": "_self" },
+                    { "name": "운행일지목록", "href": "/", "target": "_self" },
+                    { "name": "정기유니폼관리", "href": "/", "target": "_self" },
+                    { "name": "아이템현황", "href": "/", "target": "_self" },
+                    { "name": "통합결재", "href": "/", "target": "_self" }
+                ]}
+            ]
         },
         {
-            "name": "history",
-            "href": "/pages/history.html",
-            "target": "_self"
+            "name": "자재", "href": "/", "target": "_self", "depth1": [
+                { "name": "주문관리", "href": "/", "target": "_self", "depth2": [
+                    { "name": "자재PORTAL", "href": "/", "target": "_self" },
+                    { "name": "약속관리", "href": "/", "target": "_self" },
+                    { "name": "PO진도관리", "href": "/", "target": "_self" },
+                    { "name": "일괄PO요청", "href": "/", "target": "_self" },
+                    { "name": "판매내역관리", "href": "/", "target": "_self" },
+                    { "name": "통합발주관리", "href": "/", "target": "_self" },
+                    { "name": "시중구매출하관리", "href": "/", "target": "_self" },
+                    { "name": "자동발주관리", "href": "/", "target": "_self" },
+                    { "name": "자재정보", "href": "/", "target": "_self" }
+                ]},
+                { "name": "입출고관리", "href": "/l", "target": "_self", "depth2": [
+                    { "name": "사업부적자반품", "href": "/", "target": "_self" },
+                    { "name": "차용관리", "href": "/", "target": "_self" },
+                    { "name": "출고관리", "href": "/", "target": "_self" },
+                    { "name": "회수품출고", "href": "/", "target": "_self" },
+                    { "name": "입고관리", "href": "/", "target": "_self" },
+                    { "name": "A급 차용자재 관리", "href": "/", "target": "_self" },
+                    { "name": "SE별 A급 차용자재 관리", "href": "/", "target": "_self" },
+                    { "name": "SE별 A급 자재 차용자재 신청", "href": "/", "target": "_self" },
+                    { "name": "A급자재 승인", "href": "/", "target": "_self" }
+                ]},
+                { "name": "재고관리", "href": "/l", "target": "_self", "depth2": [
+                    { "name": "적치장소재고관리", "href": "/", "target": "_self" },
+                    { "name": "폐기관리", "href": "/", "target": "_self" },
+                    { "name": "재물조사", "href": "/", "target": "_self" },
+                    { "name": "폐기승인", "href": "/", "target": "_self" },
+                    { "name": "재고관리리스트", "href": "/", "target": "_self" },
+                    { "name": "자재 실사 조회", "href": "/", "target": "_self" },
+                    { "name": "자재실사 결재", "href": "/", "target": "_self" }
+                ]},
+                { "name": "서브원주문", "href": "/l", "target": "_self", "depth2": [
+                    { "name": "서브원부품주문", "href": "/", "target": "_self" },
+                    { "name": "서브원주문관리", "href": "/", "target": "_self" },
+                    { "name": "서브원출하관리", "href": "/", "target": "_self" },
+                    { "name": "서브원부품등록", "href": "/", "target": "_self" }
+                ]},
+                { "name": "서비스지정점 주문", "href": "/l", "target": "_self", "depth2": [
+                    { "name": "전문점 현장관리 Master", "href": "/", "target": "_self" },
+                    { "name": "서비스지정점 부품요청", "href": "/", "target": "_self" },
+                    { "name": "부품요청내역", "href": "/", "target": "_self" },
+                    { "name": "서비스결과입력", "href": "/", "target": "_self" },
+                    { "name": "서비스결과내역", "href": "/", "target": "_self" }
+                ]}
+
+            ]
+        },
+        {
+            "name": "메인재경터넌스", "href": "/", "target": "_self", "depth1": [
+                { "name": "대행료관리", "href": "/", "target": "_self", "depth2": [
+                    { "name": "칠러 대행료청구", "href": "/", "target": "_self" },
+                    { "name": "외주비정산관리", "href": "/", "target": "_self" },
+                    { "name": "외주비지급조회", "href": "/", "target": "_self" },
+                    { "name": "센터 재료비/외주비 품의요청(신규)", "href": "/", "target": "_self" },
+                    { "name": "본사 외주비 품의요청 (신규)", "href": "/", "target": "_self" },
+                    { "name": "외주비 품의 결재 (신규)", "href": "/", "target": "_self" },
+                    { "name": "외주비 AP전송 (신규)", "href": "/", "target": "_self" },
+                    { "name": "무상대행료청구(신규)", "href": "/", "target": "_self" }
+                ]},
+                { "name": "매출/수금", "href": "/", "target": "_self", "depth2": [
+                    { "name": "수금관리", "href": "/", "target": "_self" },
+                    { "name": "AR확정관리", "href": "/", "target": "_self" },
+                    { "name": "AR확정/확정취소조회", "href": "/", "target": "_self" },
+                    { "name": "AR확정취소 품의관리", "href": "/", "target": "_self" }
+                ]}
+            ]
+        },
+        {
+            "name": "메인터넌스", "href": "/", "target": "_self", "depth1": [
+                { "name": "다지점 관리", "href": "/", "target": "_self", "depth2": [
+                    { "name": "다지점 Master", "href": "/", "target": "_self" },
+                    { "name": "다지점 서비스/세척 관리", "href": "/", "target": "_self" }
+                ]},
+                { "name": "칠러전담현장 관리", "href": "/", "target": "_self", "depth2": [
+                    { "name": "칠러전담PORTAL", "href": "/", "target": "_self" },
+                    { "name": "활동내역", "href": "/", "target": "_self" },
+                    { "name": "전담일정달력", "href": "/", "target": "_self" },
+                    { "name": "계획대비방문실적", "href": "/", "target": "_self" }
+                ]},
+                { "name": "전담현장 관리", "href": "/", "target": "_self", "depth2": [
+                    { "name": "전담 PORTAL", "href": "/", "target": "_self" },
+                    { "name": "활동이력", "href": "/", "target": "_self" },
+                    { "name": "일일활동내역", "href": "/", "target": "_self" },
+                    { "name": "계획대비방문실적", "href": "/", "target": "_self" },
+                    { "name": "전담방문일정", "href": "/", "target": "_self" },
+                    { "name": "일정변경이력", "href": "/", "target": "_self" },
+                    { "name": "유지보수 점검내역", "href": "/", "target": "_self" }
+                ]},
+                { "name": "계약/매출관리", "href": "/", "target": "_self", "depth2": [
+                    { "name": "메인터넌스PORTAL", "href": "/", "target": "_self" },
+                    { "name": "매출관리", "href": "/", "target": "_self" },
+                    { "name": "계약리스트 조회", "href": "/", "target": "_self" },
+                    { "name": "AMC 정기점검 진척관리", "href": "/", "target": "_self" },
+                    { "name": "고객마스터", "href": "/", "target": "_self" },
+                    { "name": "Target 관리", "href": "/", "target": "_self" },
+                    { "name": "소형패키지 마스터 관리", "href": "/", "target": "_self" },
+                    { "name": "소형패키지 현장 상세정보", "href": "/", "target": "_self" }
+                ]},
+                { "name": "세척오더관리", "href": "/", "target": "_self", "depth2": [
+                    { "name": "세척오더달력", "href": "/", "target": "_self" },
+                    { "name": "세척오더조회및승인", "href": "/", "target": "_self" },
+                    { "name": "세척오더등록", "href": "/", "target": "_self" },
+                    { "name": "이전설치달력", "href": "/", "target": "_self" },
+                    { "name": "세척 CAPA 마스터", "href": "/", "target": "_self" },
+                    { "name": "세척 스케줄 관리", "href": "/", "target": "_self" },
+                    { "name": "세척 CAPA 관리", "href": "/", "target": "_self" },
+                    { "name": "오더관리", "href": "/", "target": "_self" },
+                    { "name": "오더조회및승인</a>", "href": "/", "target": "_self" }
+                ]}
+            ]
+        },
+        {
+            "name": "마스터", "href": "/", "target": "_self", "depth1": [
+                { "name": "공통영역", "href": "/", "target": "_self", "depth2": [
+                    { "name": "조직코드 관리", "href": "/", "target": "_self" },
+                    { "name": "사용자 관리", "href": "/", "target": "_self" },
+                    { "name": "휴일관리", "href": "/", "target": "_self" },
+                    { "name": "일반코드 관리", "href": "/", "target": "_self" },
+                    { "name": "업무담당자관리", "href": "/", "target": "_self" },
+                    { "name": "역할메뉴 관리", "href": "/", "target": "_self" },
+                    { "name": "SMS전송관리", "href": "/", "target": "_self" },
+                    { "name": "HIM거래선관리", "href": "/", "target": "_self" },
+                    { "name": "결재담당자관리", "href": "/", "target": "_self" },
+                    { "name": "총무성아이템관리", "href": "/", "target": "_self" },
+                    { "name": "개인정보대량조회", "href": "/", "target": "_self" },
+                    { "name": "보안서약서 양식 관리", "href": "/", "target": "_self" }
+                ]},
+                { "name": "서비스영역", "href": "/", "target": "_self", "depth2": [
+                    { "name": "이관등급관리", "href": "/", "target": "_self" },
+                    { "name": "우편번호 지역관리", "href": "/", "target": "_self" },
+                    { "name": "고객정보 관리", "href": "/", "target": "_self" },
+                    { "name": "카드단말기번호관리", "href": "/", "target": "_self" },
+                    { "name": "고객정보 관리(SBC)", "href": "/", "target": "_self" },
+                    { "name": "조 관리 마스터", "href": "/", "target": "_self" }
+                ]},
+                { "name": "기술영역", "href": "/", "target": "_self", "depth2": [
+                    { "name": "제품코드 관리", "href": "/", "target": "_self" },
+                    { "name": "모델코드 관리", "href": "/", "target": "_self" },
+                    { "name": "제조번호예외 관리", "href": "/", "target": "_self" },
+                    { "name": "제품류코드 관리", "href": "/", "target": "_self" },
+                    { "name": "수리코드관리", "href": "/", "target": "_self" },
+                    { "name": "난수리 부품 Validation", "href": "/", "target": "_self" }
+                ]},
+                { "name": "자재영역", "href": "/", "target": "_self", "depth2": [
+                    { "name": "ITEM 마스터 관리", "href": "/", "target": "_self" },
+                    { "name": "부품분류코드관리", "href": "/", "target": "_self" },
+                    { "name": "SVC BOM 관리", "href": "/", "target": "_self" },
+                    { "name": "시중구매SBOM 등록", "href": "/", "target": "_self" },
+                    { "name": "해외 시중구매부품 등록", "href": "/", "target": "_self" }
+                ]},
+                { "name": "메인터넌스영역", "href": "/", "target": "_self", "depth2": [
+                    { "name": "허브점관리", "href": "/", "target": "_self" },
+                    { "name": "목표/수주예상 관리", "href": "/", "target": "_self" },
+                    { "name": "상품관리", "href": "/", "target": "_self" }
+                ]}
+
+            ]
+        },
+        {
+            "name": "재경현황", "href": "/", "target": "_self", "depth1": [
+                { "name": "메인터넌스현황", "href": "/", "target": "_self", "depth2": [
+                    { "name": "파이프라인현황", "href": "/", "target": "_self" },
+                    { "name": "수주잔현황", "href": "/", "target": "_self" },
+                    { "name": "파이프라인현황2", "href": "/", "target": "_self" },
+                    { "name": "수주예상 변경이력", "href": "/", "target": "_self" }
+                ]},
+                { "name": "재경현황", "href": "/", "target": "_self", "depth2": [
+                    { "name": "SE별매출현황", "href": "/", "target": "_self" },
+                    { "name": "현금일일시재현황", "href": "/", "target": "_self" },
+                    { "name": "미수채권 현황", "href": "/", "target": "_self" },
+                    { "name": "사고채권", "href": "/", "target": "_self" },
+                    { "name": "외주비 현황( 신규 )", "href": "/", "target": "_self" }
+                ]},
+                { "name": "서비스현황", "href": "/", "target": "_self", "depth2": [
+                    { "name": "서비스세부리스트", "href": "/", "target": "_self" },
+                    { "name": "서비스현황", "href": "/", "target": "_self" },
+                    { "name": "재고장현황", "href": "/", "target": "_self" },
+                    { "name": "서비스지표현황", "href": "/", "target": "_self" },
+                    { "name": "시간대별 건수", "href": "/", "target": "_self" },
+                    { "name": "장기미처리 현황", "href": "/", "target": "_self" },
+                    { "name": "CIC 전달 이력", "href": "/", "target": "_self" },
+                    { "name": "LMS리포트현황", "href": "/", "target": "_self" },
+                    { "name": "LMS리포트현황2", "href": "/", "target": "_self" },
+                    { "name": "일일서비스품질지표", "href": "/", "target": "_self" },
+                    { "name": "센터별일일서비스처리현황", "href": "/", "target": "_self" },
+                    { "name": "개인별일일서비스처리현황", "href": "/", "target": "_self" },
+                    { "name": "조별일일서비스처리현황", "href": "/", "target": "_self" },
+                    { "name": "KPI지표현황", "href": "/", "target": "_self" },
+                    { "name": "서비스접수 지연현황", "href": "/", "target": "_self" },
+                    { "name": "KPI지표현황_2021", "href": "/", "target": "_self" }
+                ]},
+                { "name": "자재현황", "href": "/", "target": "_self", "depth2": [
+                    { "name": "품절율현황", "href": "/", "target": "_self" },
+                    { "name": "센터이체율", "href": "/", "target": "_self" },
+                    { "name": "수불실적리스트", "href": "/", "target": "_self" },
+                    { "name": "센터입출고현황", "href": "/", "target": "_self" },
+                    { "name": "기간별재고현황", "href": "/", "target": "_self" },
+                    { "name": "기간별재고상세현황", "href": "/", "target": "_self" },
+                    { "name": "차용관리현황", "href": "/", "target": "_self" },
+                    { "name": "회수반품현황", "href": "/", "target": "_self" },
+                    { "name": "약속미사용", "href": "/", "target": "_self" },
+                    { "name": "자재지표현황", "href": "/", "target": "_self" },
+                    { "name": "수불항번자료", "href": "/", "target": "_self" },
+                    { "name": "사업부 자재지표", "href": "/", "target": "_self" },
+                    { "name": "SE 부품 미사용율 현황", "href": "/", "target": "_self" },
+                    { "name": "A급 자동발주 현황", "href": "/", "target": "_self" },
+                    { "name": "A급 자재 현황", "href": "/", "target": "_self" }
+                ]},
+                { "name": "기술자료", "href": "/", "target": "_self", "depth2": [
+                    { "name": "시방정보", "href": "/", "target": "_self" },
+                    { "name": "원포인트정보", "href": "/", "target": "_self" },
+                    { "name": "업그레이드 정보", "href": "/", "target": "_self" },
+                    { "name": "기술자료 게시판", "href": "/", "target": "_self" },
+                    { "name": "매뉴얼정보", "href": "/", "target": "_self" },
+                    { "name": "CS교육자료 게시판", "href": "/", "target": "_self" }
+                ]},
+                { "name": "구분손익", "href": "/", "target": "_self", "depth2": [
+                    { "name": "사업별 구분손익 결과", "href": "/", "target": "_self" },
+                    { "name": "배부율관리", "href": "/", "target": "_self" },
+                    { "name": "구분손익 코드관리", "href": "/", "target": "_self" },
+                    { "name": "해외 구분손익 결과", "href": "/", "target": "_self" },
+                    { "name": "해외 법인별 배부율", "href": "/", "target": "_self" },
+                    { "name": "해외 법인별 환율", "href": "/", "target": "_self" }
+                ]}
+
+            ]
         }
     ]
 }

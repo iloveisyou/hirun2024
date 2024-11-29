@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="텍스트박스(LTextBox), 원격 자동완성기능(remote autocomplete), 필터(filter)" />
+    <title>Textbox Auto Complete (Using filterUrl)</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style>
+    .L-textbox {
+        position: relative;
+        *height: 20px;
+    }
+    .L-textbox input {
+        *margin-left: 0px;
+        *position: absolute;
+        *left: 0px;
+        *top: 0px;
+    }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*<b>*/
+            var txtBox = new Rui.ui.form.LTextBox({
+                id: 'textbox1',
+                applyTo: 'textbox1',
+                placeholder: 'type Value..',
+                autoComplete: true,
+                filterMode: 'remote',
+                filterUrl: './textboxUrlFilterSample.jsp'
+            });
+            /*</b>*/
+        });
+    </script>
+</head>
+<body >
+    <div id='hd'>
+        <h1>Textbox Auto Complete (Using filterUrl)</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>텍스트박스(LTextBox)의 데이터를 서버에 filterUrl을 이용하여 자동완성(Auto Complete)을 구현한 기능</h2>
+            <div class="LblockDesc">
+                <p>텍스트박스(LTextBox)에서 매 순간 서버에 filterUrl의 데이터를 요청하여 자동완성(Auto Complete) 기능을 구현합니다.</div>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div class="L-sample-panel">
+                <label for="textbox1">자동완성</label>
+                <input id="textbox1" name="textbox1">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

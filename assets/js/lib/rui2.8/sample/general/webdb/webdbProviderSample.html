@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="웹디비,Webdb,LWebStorage,쿠키,cookie,localStorage" />
+    <title>Webdb Storage</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            /*<b>*/
+            // 브라우저가 localStorage를 지원하면 localStorage로 처리하고 없으면 cookie로 처리한다.
+            var m = new Rui.webdb.LWebStorage();
+            /*</b>*/
+            
+            Rui.get('message').setValue(m.get('test') || '');
+            Rui.get('message').on('change', function(){
+            	m.set('test', this.getValue());
+            	Rui.util.LDom.toast('WebStorage에 변경된 값이 저장되었습니다.');
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var showBtn = new Rui.ui.LButton('showBtn');
+            showBtn.on('click', function(){
+            	var message = m.get('test');
+            	if(!message){
+            		Rui.util.LDom.toast('WebStorage에 저장된 값이 없습니다.');
+            	}else{
+                    Rui.alert('저장된 메시지 : ' + message);
+            	}
+            });
+            
+            var removeBtn = new Rui.ui.LButton('removeBtn');
+            removeBtn.on('click', function(){
+                m.remove('test');
+                Rui.get('message').setValue('');
+                Rui.util.LDom.toast('WebStorage에 저장된 값을 삭제하였습니다.');
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Webdb Storage</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>객체의 상태정보를 관리하는 LWebStorage객체를 보여주는 샘플</h2>
+            <div class="LblockDesc">
+                <p>객체에 대한 매니저 객체를 생성하여 상태정보를 관리하거나 조회합니다.</div>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div>
+            <p>아래 INPUT Box에 입력된 값은 WebStorage에 현재 저장되어 있는 값 입니다. 변경하시면 WebStorage의 값이 변경됩니다.</p>
+        </div>
+        <div>
+            <input type="text" id="message"></input>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="showBtn" >ShowValue</button>
+            <button type="button" id="removeBtn" >removeBtn</button>
+        </div>
+        <div class="LblockMarkupCode">
+        </div>
+    </div>
+</body>
+</html>

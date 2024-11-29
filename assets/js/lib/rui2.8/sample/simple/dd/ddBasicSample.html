@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Basic</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <style type="text/css">
+
+            .dd-demo {
+                position: relative;
+                border: 4px solid #666;
+                text-align: center;
+                color: #fff;
+                cursor: move;
+                height: 60px;
+                width: 60px;
+            } .dd-demo-em {
+                border: 4px solid purple;
+            } #dd-demo-1 {
+                background-color: #6D739A;
+                top: 0px;
+                left: 105px;
+            } #dd-demo-2 {
+                background-color: #566F4E;
+                top: 50px;
+                left: 245px;
+            } #dd-demo-3 {
+                background-color: #7E5B60;
+                top: -150px;
+                left: 385px;
+            }
+
+        </style>
+        <script type='text/javascript'>
+            
+            $C(function(){
+
+                $C.dd({
+                    id: 'dd-demo-1'
+                });
+                $C.dd({
+                    id: 'dd-demo-2'
+                });
+                $C.dd({
+                    id: 'dd-demo-3'
+                });
+
+            });
+
+        </script>
+  
+    </head>
+    <body>
+        <h1>dd basic sample</h1>
+        <h2>Drag and Drop의 기본 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>
+            <p>Drag & Drop의 기본 사용법 입니다. 적용할 객체의 ID를 이용하여 구현합니다.</p>
+        </div>
+        <div id="bd">
+            <div class="LblockMarkupCode">
+                <div id="dd-demo-1" class="dd-demo">1
+                </div>
+                <div id="dd-demo-2" class="dd-demo">2
+                </div>
+                <div id="dd-demo-3" class="dd-demo">3
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

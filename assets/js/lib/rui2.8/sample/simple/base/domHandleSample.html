@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Make table </title>
+
+<script type="text/javascript" src="../../../js/rui_base.js"></script>
+<script type="text/javascript" src="../../../js/rui_ext.js"></script>
+<script type='text/javascript' src='../../../resources/rui_config.js'></script>
+<script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+
+<link rel="stylesheet" type="text/css" media="screen" href="../../../resources/rui.css" charset="utf-8" />
+
+<script type="text/javascript">
+
+$C(function() {
+    
+    var btnAddRow = $C.button('btnAddRow');
+    btnAddRow.on('click', function(e) {
+        var tableEl = $C('#sample').appendChild('<tr><td>test</td></tr>');
+    });
+
+    var btnDelete = $C.button('btnDelete');
+    btnDelete.on('click', function(e) {
+        $C('#sample').select('tr:last-child').remove();
+
+    });
+});
+
+</script>
+</head>
+
+<body>
+<!-- ******************** PAGE BLOCK: CONTENT ******************** -->
+    <div id="LblockMain" class="LblockMain">
+    <div id="LGridPanel" ></div>
+     <div class="LblockButton" >
+       <table id="sample" style="height:300px;width:500px" border="1"></table>
+        <button type="button" id="btnAddRow" >Add Row</button>
+        <button type="button" id="btnDelete" >Delete Row</button>
+    </div>
+</div>
+</body>
+</html>
+

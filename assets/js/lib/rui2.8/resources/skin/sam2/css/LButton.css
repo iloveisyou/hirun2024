@@ -1,0 +1,89 @@
+.L-button{
+    display:-moz-inline-box;
+    display:inline-block;
+    vertical-align:text-bottom;
+}
+
+.L-button .first-child{
+    display:block;
+    *display:inline-block;
+}
+
+.L-button button,.L-button a{
+    display:block;
+    *display:inline-block;
+    border:none;
+    margin:0;
+}
+
+.L-button button{
+    background-color:transparent;
+    *overflow:visible;
+    cursor:pointer;
+}
+
+.L-button a{
+    text-decoration:none;
+}
+
+.L-button{
+    border-width:1px 0;
+    border-style:solid;
+    border-color:#ADC4D9;
+    margin:auto .25em;
+    background-color:#DFE8F1;
+}
+
+.L-button .first-child{
+    border-width:0 1px;
+    border-style:solid;
+    border-color:#ADC4D9;
+    margin:0 -1px;
+    *position:static;
+    *left:-1px;
+    _margin:0;
+    _position:static;
+}
+
+.L-button button,.L-button a{
+    padding:0 5px;
+    *padding:0 12px;
+    font-size:100%;
+    line-height:2;
+    *line-height:1.5;
+    min-height:1.5em;
+    *min-height:auto;
+    color:#2359A3;
+}
+
+.L-button a{
+    *line-height:1.875;
+    *padding-bottom:1px;
+}
+
+.L-button-focus{
+    border-color:#7D98B8;
+    background-position:0 -1300px;
+}
+
+.L-button-focus .first-child{
+    border-color:#7D98B8;
+}
+
+.L-button-focus button,.L-button-focus a{
+    color:#000;
+}
+
+.L-button-disabled{
+    border-color:#ccc;
+    background-position:0 -1500px;
+}
+
+.L-button-disabled .first-child{
+    border-color:#ccc;
+}
+
+.L-button-disabled button,.L-button-disabled a{
+    color:#A6A6A6;
+    cursor:default;
+}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Design Basic</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+    <style type="text/css" >
+        .L-grid-col {
+            background-color:#e7e7e7;
+        }
+        
+        .L-grid-body .L-grid-cell-col3 {
+            background-color:#e7e7e0;
+        }
+        
+        .L-grid-cell-editable {
+            background-color:#fff;
+        }
+        
+        .L-button#searchBtn {
+            background: #DFE8F1 url(../../../../resources/skin/sam2/images/search_btn.gif) center left no-repeat;
+            padding: 0 .1px;
+            width: 80px;
+            *margin-left: 4em;   /* IE only */
+            *padding: 0 1.10px;  /* IE only */
+        }
+        
+        .L-button#searchBtn button {
+            padding-left: 22px;
+        }
+        
+        .LblockGrid {
+            width: 70%;
+            float: left;
+        }
+        
+        .LblockDetail {
+            width: 30%;
+            float: right;
+        }
+        
+        .L-grid-header-checkBox {
+            background-position: 2px 2px;
+        }
+        
+        .L-grid-row .L-grid-col-btn {
+            padding: 1px 3px 0px 3px;
+        }
+
+
+        
+        /* 그리드의 좌우 라인 제거 */
+        .L-grid-panel .L-panel {
+            border-width: 1px 0 1px 0;
+        }
+        
+        /* 그리드 상단 라인 색 변경 */
+        .L-grid-panel .L-panel {
+            border-top: 2px solid #49B3D2;
+        }
+        
+        /* 그리드 첫번째 헤더 상단 라인 제거 */
+        .L-grid-header table tr.L-grid-header-row-first td {
+            border-top: none !important;
+        }
+        
+        /* 그리드 헤더 배경색 변경 */
+        .L-grid-header {
+            background-color:#EFF7FF;
+            border-bottom-width: 3px;
+        }
+        
+        /* 그리드 헤더 폰트 변경 */
+        .L-grid-header a {
+            font-weight: normal;
+        }
+        
+        /* 그리드  cell 상하좌우 여백 */
+        .L-grid-header-row .L-grid-header-inner, .L-grid-row .L-grid-cell-inner {
+            padding: 7px 3px 6px 5px;
+        }
+        
+        /* 에디터 그리드에 맞추기 */
+        .L-editor-panel .bd, .L-editor-panel .L-panel {
+            height: 93%;
+        }
+        
+        /* 에디터 그리드에 맞추기 */
+        .L-editor-panel .L-panel {
+            border-top: 1px solid #49B3D2;
+        }
+
+        /* 하단 그리드 라인 설정 */
+        .L-grid-panel .L-panel {
+            border-bottom: 2px solid #49B3D2;
+        }
+
+
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        $C(function() {
+
+            var col1Combo = $C.combo({
+               listWidth:200,
+               rendererField: 'value', 
+               url:'./../../../../sample/data/code.json'
+            });
+
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'col4' },
+                { id: 'col5' },
+                { id: 'col6' },
+                { id: 'col7' },
+                { id: 'col8', type: 'number', defaultValue: 1000 },
+                { id: 'code' },
+                { id: 'value' },
+                { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+
+            dataSet.on('update', function(e) {
+                //dataSet.setNameValue(e.row, 'col2', 'aaaa');
+            });
+            
+            var tm = $C.dataSetManager();            
+            
+            tm.on('success', function(e) {
+                // 페이지에서는 log가 아니라 alert을 써야 함.
+                $C.log($C('!message').get('$.base.msg100'));
+            });
+    
+            var popuButton = $C.button({
+                label:'>>'
+            });
+            
+            var col1EditableRenderer = function(value, p, record, row, i) {
+                if(record.state == $C('!record').STATE_INSERT) {
+                    p.css.push('L-grid-cell-editable');
+                }
+                return value;
+            }
+            
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.selectionColumn(),
+                    $C.stateColumn(),
+                    $C.numberColumn(),
+                    { field: "col1", label: "Col1", sortable: true, editor: $C.textBox(), renderer: col1EditableRenderer },
+                    { field: "col2", align:'center', editor: $C.textBox({ mask: '(999) 999-9999', maskValue: true }) },
+                    { field: "code", align: 'center', rendererField: 'value', editor: col1Combo },
+                    { field: "col3", align: 'right', editor: $C.radioGroup({
+                        items:[
+                            {
+                                label : 'R1',
+                                value:'R1'
+                            },
+                            {
+                                label : 'R2',
+                                value:'R2',
+                                checked:true
+                            }
+                        ]
+                    }) },
+                    { field: "col5", align: 'right', editor: $C.checkBox({
+                        bindValues : ['R1', '']
+                    }) },
+                    { field: "col6", label: "Col6", width: 200, editor: $C.textArea() },
+                    { field: "col8", label: "Col8", align: 'right', editor: $C.numberBox(), renderer:$C.renderer.moneyRenderer() },
+                    { field: "date1" , align:'center', editor: $C.dateBox(), renderer: $C.renderer.dateRenderer() },
+                    { id:'btn', field:'col1', label:'Button', renderer: function(val, p, record, row, i){
+                        return "<button type='button' class='L-grid-button'>" + val + "</button>";
+                    }}
+                    ]
+            });
+
+            var validatorManager = $C.validatorManager({
+                validators:[
+                {id:'searchSelectedUserGrpId', validExp:'그룹:true'},
+                { id: 'col1', validExp:'Col1:true'},
+                { id: 'col2', validExp:'Col2:true'},
+                { id: 'col3', validExp:'Col3:true'},
+                { id: 'col6', validExp:'Col6:true'},
+                { id: 'col8', validExp:'Col8:true:number&maxNumber=20000'},
+                { id: 'code', validExp:'Code:true'},
+                { id: 'date1', validExp:'Date1:true'}
+                ]
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                height:300
+            });
+            
+            var view = grid.getView();
+
+            grid.on("cellClick", function(e){
+                
+                var column = columnModel.getColumnAt(e.col);
+                if(column.id == 'btn')
+                    alert(e.row + ' 버튼 실행');
+                else
+                    $C.log("cellClick : row " + e.row + ", col " + e.col);
+            });
+
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json',
+                    method: "get"
+                });
+            });
+            searchBtn.click();
+        });
+        
+    </script>
+
+</head>
+<body>
+    <h1>gridpanel design sample</h1>
+    <h2>LGridPanel에서 디자인(design)을 변경하는 방법을 설명하는 샘플 (grid)</h2>
+<div id='bd'>
+    <div class="LblockButton">
+        <button type="button" id="searchBtn" >Search</button>
+    </div>
+    <div class="LblockMarkupCode">
+    
+        <div>
+            <div id="aaa" class="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

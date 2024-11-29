@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="애니메이션(LAnim), 스크롤(LScrollAnim), 부드럽게 스크롤" />
+    <title>Smooth Scrolling</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../plugins/fx/LScrollAnim.js"></script>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #demo {
+            height: 100px;
+            width: 250px;
+            overflow: auto;
+            margin: 10px 10px 10px 10px;
+            border: 1px solid #aaa;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var scroll = null;
+        Rui.onReady(function(){
+            /*<b>*/
+            scroll = new Rui.fx.LScrollAnim({
+                el: 'demo',
+                attributes: {
+                    scroll: {
+                        to: [0, 200]
+                    }
+                }
+            });
+            /*</b>*/
+            
+            Rui.get('demo-run').on('click', function(){
+                scroll.animate();
+            });
+            
+            Rui.log("The example has finished loading; as you interact with it, you'll see log messages appearing here.", "info", "example");
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Smooth Scrolling</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>스크롤을 부드럽게 움직이게 하는 animation효과</h2>
+            <div class="LblockDesc">
+                <p>스크롤을 자동으로 움직입니다. 현재 스크롤된 위치에서 지정된 값만큼 자동으로 움직입니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div id="demo">
+                <p>
+                    Sed pretium leo a quam. Sed placerat cursus odio. Duis varius mauris luctus enim. Sed augue. Vivamus malesuada pretium orci. In hac habitasse platea dictumst. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent et ante. Praesent convallis. Pellentesque sit amet leo. Ut convallis. Curabitur tincidunt, ipsum facilisis ultricies bibendum, eros dolor venenatis odio, id rutrum purus sem ac sem. Donec vel enim. Quisque purus. Vivamus fringilla, nibh sit amet blandit suscipit, dui arcu viverra magna, id consectetuer dui orci tincidunt neque. Morbi eget libero. Phasellus tempor. Duis dapibus. Pellentesque nisi arcu, mollis in, euismod non, fermentum sit amet, neque.
+                </p>
+            </div>
+        </div>
+        <button id="demo-run">
+            run
+        </button>
+    </div>
+</body>
+</html>

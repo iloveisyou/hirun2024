@@ -1,0 +1,141 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+prototype에 추가된 메소드 외에도 Rui.util.LDate객체를 이용하여 더 많은 기능을 사용할 수 있다.
+<a href="../sample/general/base/prototypeSample.html" target="_new">/rui/sample/general/base/prototypeSample.html</a>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_format">
+<div class="L-description">
+날짜를 포멧을 적용한 문자로 리턴한다.
+</div>
+<div class="L-sample">
+sample: 날짜를 %X 포멧이 적용된 문자로 리턴한다. 각 %X 등 포멧 정보는 Api의 Rui.util.LDate객체를 참조한다.  
+<div class="L-code">
+var a = new Date(2010, 4, 14, 15, 59, 16);
+var v = a.format('%X');
+리턴 : '2010-05-14 15:59:16'
+</div> 
+</div>
+</div>
+
+<div class="method_add">
+<div class="L-description">
+Date객체에 날짜 나 시간의 추가하거나 뺀 Date객체를 리턴한다. 
+</div>
+<div class="L-sample">
+sample: Date객체에 하루를 뺀 Date 객체를 리턴한다.
+<div class="L-code">
+var date1 = new Date(2013, 5, 24);
+var date2 = date1.add('D', -1);
+리턴 : new Date(2013, 5, 23)
+</div> 
+</div>
+
+<div class="L-sample">
+sample: Date객체에 1시간을 추가한 Date 객체를 리턴한다.
+<div class="L-code">
+var date1 = new Date(2013, 5, 24, 12, 1, 1);
+var date2 = date1.add('H', 1);
+리턴 : new Date(2013, 5, 24, 13, 1, 1)
+</div> 
+</div>
+</div>
+
+<div class="method_equals">
+<div class="L-description">
+두개의 Date객체의 날짜를 비교하여 boolea값으로 리턴한다. 
+</div>
+<div class="L-sample">
+sample: 두개의 Date객체의 날짜를 비교하여 boolea값으로 리턴한다.
+<div class="L-code">
+var date1 = new Date(2013, 5, 24);
+var isCompare = date1.equals(new Date(2013, 5, 24);
+리턴 : true
+</div> 
+</div>
+</div>
+
+<div class="method_compareTo">
+<div class="L-description">
+두개의 Date객체의 날짜를 비교하여 int값으로 리턴한다. 
+</div>
+<div class="L-sample">
+sample: 두개의 Date객체의 날짜를 int값으로 리턴한다.
+<div class="L-code">
+var date1 = new Date(2013, 5, 24);
+var isCompare = date1.compareTo(new Date(2013, 5, 24);
+리턴 : 0
+</div> 
+</div>
+</div>
+
+<div class="method_clone">
+<div class="L-description">
+날짜를 복사하여 Date객체로 리턴한다. 
+</div>
+<div class="L-sample">
+sample: 날짜를 복사하여 Date객체로 리턴한다.
+<div class="L-code">
+var date1 = new Date(2013, 5, 24);
+var newDate = date1.clone();
+리턴 : new Date(2013, 5, 24)
+</div> 
+</div>
+</div>
+
+<div class="method_between">
+<div class="L-description">
+날짜객체가 두개의 날짜 사이에 있는지 비교하여 리턴한다. 
+</div>
+<div class="L-sample">
+sample: 해당 날짜가 4월과 6월 사이인지를 비교하여 리턴한다.
+<div class="L-code">
+var date1 = new Date(2013, 5, 24);
+var isBetween = date1.between(new Date(2013, 4, 24), new Date(2013, 6, 24));
+리턴 : true
+</div> 
+</div>
+</div>
+
+<div class="method_compareString">
+<div class="L-description">
+Date객체를 문자열 날짜와 비교하여 리턴한다. 
+</div>
+<div class="L-sample">
+sample: Date날짜가 '20130624' 문자와 같은지 비교한다.
+<div class="L-code">
+var date1 = new Date(2013, 5, 24);
+var isBetween = date1.compareString('20130624');
+리턴 : true
+</div> 
+</div>
+
+<div class="L-sample">
+sample: Date날짜가 '20130624120101' 문자와 같은지 비교한다.
+<div class="L-code">
+var date1 = new Date(2013, 5, 24, 12, 1, 1);
+var isBetween = date1.compareString('20130624120101', { format: '%X' });
+리턴 : true
+</div> 
+</div>
+</div>
+
+<div class="method_getFirstDayOfWeek">
+<div class="L-description">
+지정한 숫자에 해당되는 요일에 맞는 Date 객체를 리턴한다. 날짜가 이전이 될 수 도 있고 이후가 될 수 도 있음.
+0 = Sun, 1 = Mon ... 6 = Sat
+</div>
+<div class="L-sample">
+sample: 해당 날짜가 4월과 6월 사이인지를 비교하여 리턴한다.
+<div class="L-code">
+var date1 = new Date(2013, 4, 24);
+var isBetween = date1.getFirstDayOfWeek(1);
+리턴 : new Date(2013, 4, 20)
+</div> 
+</div>
+</div>
+
+</div>

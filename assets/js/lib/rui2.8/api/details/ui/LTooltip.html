@@ -1,0 +1,52 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+HTML Dom객체나 그리드에 툴팁을 출력할 수 있는 기능을 제공한다.
+
+샘플 경로 :
+<a href="./../sample/general/ui/container/tooltipSample.html" target="_new">/rui/sample/general/ui/container/tooltipSample.html</a>
+</div>
+
+<div class="L-sample">
+sample: 기본 샘플
+<div class="L-code">
+var tooltip = new Rui.ui.LTooltip({
+    context: 'link',
+    text: 'This is A Link.'
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: 그리드에 툴팁을 적용하는 샘플
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    columns: [
+        { field: 'col1', label: 'Col1', width: 150, vMerge: true, renderer: function(val, p, record){
+            p.tooltip = (val !== 'Bertha G. Carr');
+            p.tooltipText = (val == 'Felix U. Hill') ? val + ' ' + record.get('col2') : val + ' ' + record.get('col2');
+            return val;
+        } },
+        .....
+    ]
+});
+
+var gridTooltip = new Rui.ui.LTooltip({
+    showmove: true
+});
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    viewConfig: {
+        tooltip: gridTooltip
+    },
+    width: 600,
+    height: 300
+});
+</div>
+</div>
+
+</div>
+
+</div>

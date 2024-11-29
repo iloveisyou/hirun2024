@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=0.1" />
+<title>DevOn RUI Tutorials</title>
+
+<script type="text/javascript" src="./../../js/rui_base.js"></script>
+<script type="text/javascript" src="./../../js/rui_core.js"></script>
+<script type="text/javascript" src="./../../resources/rui_config.js"></script>
+<script type="text/javascript" src="./../../resources/rui_license.js"></script>
+<link rel="stylesheet" type="text/css" href="./../../resources/rui.css"/>
+
+<style type="text/css" >
+    html {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    body {
+        height: 100%;
+        padding: 0;
+        margin: auto;
+        font-family: tahoma,sans-serif;
+        margin: 0px;
+        padding: 0px;
+        font-size: 12px;
+    }
+    #bd {
+        height: 100%;
+    }
+    
+    #listDiv {
+        position: absolute;
+        left: 0px;
+        width: 230px;
+        height: 100%;
+        border-right: 1px solid #bababa;
+        background-color: #f0f0f0;
+    }
+    #listDiv ul {
+        padding: 0px;
+        margin: 0px;
+        list-style-type: none;
+    }
+    #listDiv ul li {
+        padding: 13px 20px;
+        border-bottom: 1px solid #bababa;
+        background-color: #fff;
+    }
+    #listDiv ul li a {
+        color: #333;
+        text-decoration: none;
+        padding-left: 15px;
+        background: url('.././../resources/images/demo/icon_leftMenu_blue.gif') no-repeat 0px 2px;
+    }
+    #listDiv ul li a.selected {
+        color: #2880b4;
+        font-weight: bold;
+    }
+    #contentFrame {
+        background-color: #fff;
+    }
+    
+    #frameDiv-forIOS {
+        height: 100%;
+        margin-bottom:-1px;
+        margin-left: 230px;
+    }
+    html.L-ua-safari.L-ua-mobile #frameDiv-forIOS {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    #contentFrame {
+        overflow: hidden; 
+        display: inline-block; 
+        height: 100%;
+        border: 0;
+        background: transparent;
+    }
+</style>
+    
+<script type="text/javascript" class="script-code">
+Rui.onReady(function() {
+    Rui.util.LEvent.addListener(window, "resize", updateLayout, this, true);
+    
+    var beforeSelected;
+    Rui.select('#listDiv a').on('click', function(e){
+        if(beforeSelected)
+            beforeSelected.removeClass('selected');
+        beforeSelected = Rui.get(e.target).addClass('selected');
+    });
+    
+    updateLayout();
+});
+
+function updateLayout() {
+    var height = Rui.util.LDom.getViewportHeight();
+    var width = Rui.util.LDom.getViewportWidth();
+    
+    Rui.getBody().setHeight(height);
+    Rui.get('frameDiv-forIOS').setWidth(width - 230);
+    Rui.get('frameDiv-forIOS').setHeight(height);
+    Rui.get('contentFrame').setWidth(width - 230);
+    Rui.get('contentFrame').setHeight(height);
+}
+</script>
+
+</head>
+<body >
+<div id="bd">
+    <div id="listDiv">
+        <ul>
+            <li><a href="./step1.html" target="contentFrame" >Hello RUI</a></li>
+            <li><a href="./step2.html" target="contentFrame" >개발환경 구성</a></li>
+            <li><a href="./step3.html" target="contentFrame" >DOM 제어하기</a></li>
+            <li><a href="./step5.html" target="contentFrame" >DataSet 사용하기</a></li>
+            <li><a href="./step6.html" target="contentFrame" >Grid 사용하기</a></li>
+            <li><a href="./step7.html" target="contentFrame" >Form Field 사용하기</a></li>
+            <li><a href="./step8.html" target="contentFrame" >TabView 사용하기</a></li>
+        </ul>
+    </div>
+    <div id="frameDiv-forIOS">
+        <iframe id="contentFrame" name="contentFrame" frameborder="no" src="./../../sample/general/demo_home.html"></iframe>
+    </div>
+</div>
+</body>
+</html>

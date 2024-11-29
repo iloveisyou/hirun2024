@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Shim</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/dd/LDDPlayer.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+        <style type="text/css">
+            #demo {
+                height: 100px;
+                width: 100px;
+                border: 1px solid black;
+                cursor: move;
+                float: right;
+            }
+            #ifrm {
+                width: 400px;
+                height: 300px;
+            }
+        </style>
+        <script type='text/javascript' class="script-code">
+        (function() {
+            var Dom = $C.dom,
+                Event = $C.event;
+
+                $C(function() {
+                    /*<b>*/
+                    //Create the DDProxy Instance
+                    var dd = $C.ddProxy({
+                        id: 'demo',
+                        attributes: {
+                            //Don't resize the frame
+                            resizeFrame: false
+                        }
+                    });
+                    /*</b>*/
+                    //On startDrag let's change the proxy's size and color
+                    dd.on('startDragEvent', function() {
+                        Dom.setStyle(this.getDragEl(), 'height', '20px');
+                        Dom.setStyle(this.getDragEl(), 'width', '100px');
+                        Dom.setStyle(this.getDragEl(), 'backgroundColor', 'blue');
+                        Dom.setStyle(this.getDragEl(), 'color', 'white');
+                        this.getDragEl().innerHTML = 'Custom Proxy';
+                    });
+                    
+                    /*<b>*/
+                    Event.on('shim', 'click', function(e) {
+                        var tar = Event.getTarget(e);
+                        var value = tar.value;
+                        if (value == 'off' || value == 'Shim Off') {
+                            //Turn on the shim
+                            dd.useShim = true;
+                            tar.value = 'on';
+                            tar.innerHTML = 'Shim On';
+                            Dom.get('debugShim').disabled = false;
+                        } else {
+                            //Turn off the shim
+                            dd.useShim = false;
+                            tar.value = 'off';
+                            tar.innerHTML = 'Shim Off';
+                            Dom.get('debugShim').disabled = true;
+                        }
+                    });
+                    /*</b>*/
+
+                    Event.on('debugShim', 'click', function(e) {
+                        var tar = Event.getTarget(e);
+                        var value = tar.value;
+                        if (value == 'off' || value == 'Debug Off') {
+                            //Turn on debugging the shim
+                            Rui.dd.LDDM._debugShim = true;
+                            tar.value = 'on';
+                            tar.innerHTML = 'Debug On';
+                        } else {
+                            //Turn off debugging the shim
+                            Rui.dd.LDDM._debugShim = false;
+                            tar.value = 'off';
+                            tar.innerHTML = 'Debug Off';
+                        }
+                    });
+                });
+        })();
+        </script>
+    </head>
+    <body >
+        <h1>dd shim sample</h1>
+        <h2>drag and drop시 도착 객체에 넣을 수 있는지 여부를 제어하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>
+            <p>드래그 앤 드랍시에 드랍하려는 객체가 도착하는 위치에 있는 객체로의 접근 여부를 결정할 수 있습니다.</p>
+            <p>화면에서 특정 범위를 DD 하지 못하도록 막고자 할 때 사용됩니다.</p>
+        </div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <button id="shim" value="off">Shim Off</button> 
+                <button id="debugShim" value="off" disabled="disabled">Debug Off</button>
+                <div id="demo">Drag Me</div>
+                <iframe id="ifrm" src="./assets/blank.htm"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

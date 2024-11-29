@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="대화상자(dialog), 노마크업(No Markup)" />
+    <title>Dialog No Markup</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+    Rui.onReady(function() {
+
+        /*******************
+         * 변수 및 객체 선언
+         *******************/
+
+        // Instantiate the Dialog
+        var dialog1 = new Rui.ui.LDialog( {
+            id: 'dialog1',
+            width : 600,
+            visible : false,
+            postmethod:'async',
+            header: 'No Markup Dialog',
+            body: '<div id="defaultGrid"></div>',
+            buttons : [
+                { text:'Submit', handler: function() {
+                        var waitPanel = new Rui.ui.LWaitPanel();
+                        waitPanel.show();
+                        this.submit();
+                        waitPanel.hide();
+    
+                    }, isDefault:true },
+                { text:'Cancel', handler: function() {
+                        this.cancel();
+                    }
+                }
+            ]
+        });
+
+        dialog1.on('render', function() {
+            dialog1.dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                focusFirstRow: 0,
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'date1', type: 'date' }
+                ]
+            });
+            
+            dialog1.dataSet.on('load', function(e){
+                grid.focus();
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1' },
+                    { field: 'col2', sortable: true, align:'center', editor: new Rui.ui.form.LTextBox() },
+                    { field: 'col3', align: 'right', hidden:true },
+                    { field: 'date1' , align:'center', renderer: Rui.util.LRenderer.dateRenderer()}]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dialog1.dataSet,
+                autoWidth: true,
+                height: 300
+            });
+            grid.render('defaultGrid');
+        });
+
+        dialog1.on('show', function() {
+            dialog1.dataSet.load({
+                url: './../../../../sample/data/data.json'
+            });
+        });
+
+        /********************
+         * 버튼 선언 및 이벤트
+         ********************/
+        var showBtn = new Rui.ui.LButton('showBtn');
+        showBtn.on('click', function(){
+            if(!dialog1.isRendered()) {
+                /*<b>*/
+                dialog1.render(document.body);
+                /*</b>*/
+            }else{
+	            dialog1.clearInvalid();
+            }
+            dialog1.show();
+        });
+
+    });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Dialog No Markup</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>Markup이 없이 다이얼로그(Dialog) 내부를 구성합니다.</h2>
+            <div class="LblockDesc">
+                <p>Dialog의 컨텐츠를 HTML Markup을 사용하지 않고 RUI Script만으로 생성합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="showBtn" >Show No Markup Dialog</button>
+        </div>
+    </div>
+</body>
+</html>

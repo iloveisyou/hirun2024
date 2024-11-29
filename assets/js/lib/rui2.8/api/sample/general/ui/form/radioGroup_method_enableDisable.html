@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="radio,enable,disable,isDisabled,활성화,비활성화" />
+    <title>radioGroup enable/disable 설정 </title>
+    
+    <script type="text/javascript" src="./../../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../../resources/rui.css" />
+    
+    <!--  샘플용 스크립트 -->
+    <script type="text/javascript" src="./../../../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            var radioGroup = new Rui.ui.form.LRadioGroup({
+                applyTo: 'radio1',
+                name: 'col1',
+                width: 200,
+                items: [{label: 'R1', value: 'R1'},
+                    {label: 'R2', value: 'R2'}
+                ]
+            });
+
+            Rui.get('enableBtn').on('click', function(){
+                /*<b>*/
+                radioGroup.enable();
+                /*</b>*/
+            }); 
+
+            Rui.get('disableBtn').on('click', function(){
+                /*<b>*/
+                radioGroup.disable();
+                /*</b>*/
+            }); 
+        });
+    </script>
+</head>
+<body>
+    <h1>radioGroup enable/disable 설정</h1>
+    <h2>radioGroup의 사용 여부를 설정하는 함수 enable/disable</h2>
+    <div class="LblockLine"></div>
+    <div>radioGroup의 사용 여부 설정을 enable/disable 함수를 통해 설정할 수 있습니다.</div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                <fieldset>
+                    <label for="radio1">col1</label>
+                    <div id="radio1"></div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="LblockButton">
+            <div id="enableBtn" class="LsampleButton">enable</div>
+            <div id="disableBtn" class="LsampleButton">disable</div>
+        </div>
+    </div>
+</body>    
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="멀티 콤보(LMultiCombo)" />
+    <title>Multi Combo</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LMultiCombo.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LMultiCombo.css" />
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            /*<b>*/
+            var combo = new Rui.ui.form.LMultiCombo({
+                applyTo: 'code',
+                name: 'code',
+                url: './../../../../sample/data/code.json'
+            });
+            /*</b>*/
+
+            combo.on('changed', function(e){
+                Rui.log(combo.getValue());
+            });
+
+            var dataSet = combo.getDataSet();
+
+            dataSet.on('load', function(e){
+                Rui.log('combo data loading complete.');
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var setValueBtn = new Rui.ui.LButton('setValueBtn');
+            setValueBtn.on('click', function(){
+                combo.setValue('code1');
+            });
+            
+            var getValueBtn = new Rui.ui.LButton('getValueBtn');
+            getValueBtn.on('click', function(){
+               Rui.alert(combo.getValue());
+            });
+            
+            var invalidBtn = new Rui.ui.LButton('invalidBtn');
+            invalidBtn.on('click', function(){
+                combo.invalid();
+            });
+
+            var validBtn = new Rui.ui.LButton('validBtn');
+            validBtn.on('click', function(){
+                combo.valid();
+            });
+            
+            var readonlyBtn = new Rui.ui.LButton('readonlyBtn');
+            readonlyBtn.on('click', function(){
+                combo.setEditable(false);
+            });
+            
+            var editableBtn = new Rui.ui.LButton('editableBtn');
+            editableBtn.on('click', function(){
+                combo.setEditable(true);
+            });
+            
+            var disableBtn = new Rui.ui.LButton('disableBtn');
+            disableBtn.on('click', function(){
+                combo.disable();
+            });
+            
+            var enableBtn = new Rui.ui.LButton('enableBtn');
+            enableBtn.on('click', function(){
+                combo.enable();
+            });
+             
+            var focusBtn = new Rui.ui.LButton('focusBtn');
+            focusBtn.on('click', function(){
+                combo.focus();
+            });
+            
+            var blurBtn = new Rui.ui.LButton('blurBtn');
+            blurBtn.on('click', function(){
+                combo.blur();
+            });
+            
+            var setMarkAllBtn = new Rui.ui.LButton('setMarkAllBtn');
+            setMarkAllBtn.on('click', function(){
+                combo.getDataSet().setMarkAll(true);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Multi Combo</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>멀티선택콤보(LMultiCombo)의 기본 샘플</h2>
+            <div class="LblockDesc">
+		        <p>멀티선택콤보(LMultiCombo)에 대한 기본적인 형태입니다.</p>
+		        <p>LMultiCombo는 LCombo가 하나의 단건을 선택할 수 있는 기능을 멀티건으로 선택할 수 있게 구현한 Combo 입니다.</p>
+		        <p>LMultiCombo가 여러 건을 처리하기 위해서는 Array가 아닌 문자열로 처리합니다. 이유는 다음과 같습니다.</p>
+		        <p> - LDataSet과 LBind의 값 연동시 값 type이 string, number, date 형만 존재하므로 배열로 처리할 수 없음.</p>
+		        <p> - form submit시 서버에 request 로 전송되는 파라미터는 배열을 전송할 수 없으므로 문자열로 처리되어야 함.</p><br/>
+		        <p>값을 셋팅할 때는 setValue 메소드로 호출되고 호출 시 인수로는 separator(',') 문자열을 구분자로 사용합니다.</p>
+		        <p>값을 리턴할 때는 getValue 메소드를 호출하고 호출된 값을 상황에 따라 배열로 변경할 경우에는 문자열의 split 메소드로 인수로는 separator(',') 문자열로 배열을 만들 수 있습니다.</p>
+		        <p>콤보에서는 setRow나 setSelectedIndex가 적용되나 LMultiCombo는 setValue와 데이터셋에 있는 setMark/setMarkAll 메소드를 통해서만 값이 적용됩니다.</p>
+		        <p>※ 그리드와 연동되는 멀티콤보는 반드시 rendererField 속성을 적용하셔야 합니다 일반 콤보는 그리드 데이터셋의 맞는 값을 찾기 위해 한번의 for문을 사용하여 부담이 적지만</p>
+		        <p>멀티콤보는 한 셀의 값을 찾기 위해서 두번의 for문을 수행되어야 하기 때문에 IE8 기준에서는 성능 저하가 심하게 발생할 수 있습니다. </p>
+		        <p>성능저하 방지를 위해서 속도가 빠른 서버 기술을 이용하시기 바랍니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <fieldset>
+                <label for="code">Combo</label>
+                <div id="code"></div>
+            </fieldset>
+            <div class="LblockButton" >
+                <button type="button" id="setValueBtn" >Set Value</button>
+                <button type="button" id="getValueBtn" >Get Value</button>
+                <button type="button" id="invalidBtn" >Invalid</button>
+                <button type="button" id="validBtn" >Valid</button>
+                <button type="button" id="readonlyBtn" >Readonly</button>
+                <button type="button" id="editableBtn" >Editable</button>
+                <button type="button" id="disableBtn" >Disable</button>
+                <button type="button" id="enableBtn" >Enable</button>
+                <button type="button" id="focusBtn">Focus</button>
+                <button type="button" id="blurBtn">Blur</button>
+                <button type="button" id="setMarkAllBtn">setMarkAll</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

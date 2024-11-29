@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>DateBox</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../resources/locale/lang-en_US.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui_skin1.css" />
+        <script type='text/javascript' class="script-code">
+
+            $C(function(){
+                /*<b>*/
+                //space는 input과 달력 아이콘간의 간격, rui_config.js에 설정하면 된다.
+                $C('#div_datebox').dateBox({
+                    //valueFormat: '%Y.%m.%d',
+                    defaultValue: new Date()
+                });
+                /*</b>*/
+                
+                $C('#div_datebox').on('changed', function(e){
+                    Rui.log('datebox Value : ' + this.getValue() + ',datebox form value : ' + this.hiddenInputEl.getValue());
+                });
+                
+                $C('#div_datebox').on('focus', function(e){
+                    Rui.log('focused !');
+                });
+                
+                $C('#div_datebox').on('blur', function(e){
+                    Rui.log('blured !');
+                });
+                
+                var validatorManager = $C.validatorManager({
+                    validators:[{ 
+                        id: 'div_datebox', 
+                        validExp: '날짜:true:minDate=20081111'
+                    }]
+                });
+                
+                button = Rui.get('btn');
+                button.on('click', function(){
+                    if(validatorManager.validateGroup('frm') == false) {
+                        alert('유효하지 않습니다.\r\n' + validatorManager.getMessageList().join('\r\n') );
+                    }
+                });
+               
+            });
+            
+
+            function testSetVisibilityMode(){
+                $C('#div_datebox').setVisibilityMode(false);
+            }
+
+            function testValid(){
+                $C('#div_datebox').valid();
+            }
+
+            function testInvalid(){
+                $C('#div_datebox').invalid();
+            }
+
+            function testFocus(){
+                $C('#div_datebox').focus();
+            }
+
+            function testBlur(){
+                $C('#div_datebox').blur();
+            }
+
+            function testSetWidth(){
+                $C('#div_datebox').setWidth(130);
+            }
+
+            function testGetWidth(){
+                Rui.log($C('#div_datebox').getWidth());
+            }
+
+            function testSetValue(){
+                var date = new Date();
+                $C('#div_datebox').setValue(date);
+            }
+
+            function testSetEditable(){
+                $C('#div_datebox').setEditable(false);
+            }
+
+            function testDisable(){
+                $C('#div_datebox').disable();
+            }
+
+            function testEnable(){
+                $C('#div_datebox').enable();
+            }
+
+            function testHide(){
+                $C('#div_datebox').hide();
+            }
+
+            function testShow(){
+                $C('#div_datebox').show();
+            }
+
+            function noTestDestroy(){
+                $C('#div_datebox').destroy();
+            }
+            
+        </script>
+        
+    </head>
+    <body>
+        <h1>datebox sample</h1>
+        <h2>LDateBox의 기본 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>기본적인 dateBox 구조 입니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id='panel' >
+                    <form id='frm' name='frm' method='post'>
+                        <fieldset>
+                            <label for="div_datebox">
+                                DateBox
+                            </label>
+                            <input type="text" id="div_datebox" name="div_datebox">
+                            <button type="button" id="btn" value="check">check</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <a href='javascript:testEnable()'>Enable</a>
+            <a href='javascript:testDisable()'>Disable</a>
+            <a href='javascript:testSetEditable()'>SetEditable</a>
+            <a href='javascript:testShow()'>Show</a>
+            <a href='javascript:testHide()'>Hide</a>
+            <a href='javascript:testSetVisibilityMode()'>setVisibilityMode</a>
+            <a href='javascript:testValid()'>Valid</a>
+            <a href='javascript:testInvalid()'>Invalid</a>
+            <a href='javascript:testFocus()'>Focus</a>
+            <a href='javascript:testBlur()'>Blur</a>
+            <a href='javascript:noTestDestroy()'>Destroy</a>
+            <a href='javascript:testSetWidth()'>SetWidth</a>
+            <a href='javascript:testGetWidth()'>GetWidth</a>
+            <a href='javascript:testSetValue()'>SetValue</a>
+        </div>
+    </body>
+</html>

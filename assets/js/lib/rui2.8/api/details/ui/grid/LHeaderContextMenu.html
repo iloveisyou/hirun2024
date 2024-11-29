@@ -1,0 +1,50 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+그리드에 기본적인 컨텍스트 메뉴를 붙인다.
+컨텍스트 메뉴에는 틀고정, 컬럼 자동 넓이 조정, 정렬, 필터 등 다양한 기능이 포함되어 있다.
+
+샘플 경로 :
+<a href="./../sample/general/ui/grid/gridpanelEditSample.html" target="_new">/rui/sample/general/ui/grid/gridpanelEditSample.html</a>
+</div>
+
+<div class="L-sample">
+sample: 기본 샘플
+<div class="L-code">
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    headerTools: true,
+    width: 600,
+    height: 420
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: 컨텍스트 메뉴의 종류를 선별적으로 적용하는 샘플
+<div class="L-code">
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    headerTools: true,
+    headerToolOptions: {
+        useSaveExcel: true,
+        useFreezeColumn: true,
+        useDataSort: true,
+        useAutoAllUpdateColumnFit: true,
+        useAutoUpdateColumnsAutoWidth: true,
+        useDataFilterClear: true,
+        useDataFilter: true,
+        useUpdateColumnFit: true,
+        useBrowserRecommand: true
+    },
+    width: 600,
+    height: 420
+});
+</div>
+</div>
+
+</div>
+
+</div>

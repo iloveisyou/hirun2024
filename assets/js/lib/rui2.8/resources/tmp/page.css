@@ -1,0 +1,443 @@
+/* button
+---------------------------------------------------------*/
+#LblockButton {
+	overflow:hidden;
+	background: url(/images/bg_button.gif) repeat-x left top;
+	padding-top:10px;
+}
+#LblockButton input {
+	float:right;
+	margin-left:5px;
+	padding: 0 5px 0 5px;
+	height:20px;
+	color:#000;
+	background-color:#EFEFEF;
+	border-top:1px solid #BFBFBF;
+	border-bottom:1px solid #9D9D9D;
+	border-left:1px solid #BFBFBF;
+	border-right:1px solid #9D9D9D;
+	cursor:pointer;cursor:hand;
+}
+/* detail
+---------------------------------------------------------*/
+.LblockDetail * {
+	vertical-align:middle;
+}
+.LblockDetail table {
+	width:100%;
+	border-collapse:collapse;
+}
+.LblockDetail table caption {
+	display:none;
+}
+.LblockDetail th {
+	border:1px solid #CCCCCC;
+	height:25px;
+	padding:0 5px;
+}
+.LblockDetail td {
+	border:1px solid #CCCCCC;
+	height:25px;
+	padding:0 5px;
+}
+.LblockDetail th {
+	background-color:#EEEEEE;
+	font-size:1em;
+	font-weight:bold;
+	color: #000;
+}
+/* list
+---------------------------------------------------------*/
+/* listInfo
+---------------------------------------------------------*/
+/* listFilter
+---------------------------------------------------------*/
+.LblockListFilter * {
+	vertical-align:bottom;
+}
+
+/* listTable
+---------------------------------------------------------*/
+.LblockListTable {
+}
+.LblockListTable * {
+	vertical-align:middle;
+}
+.LblockListTable table {
+	border-collapse:collapse;
+	width:100%;
+	border-bottom:1px solid #CCCCCC;
+}
+.LblockListTable th {
+	height:25px;
+	padding-right:5px;
+	text-align:center;
+	font-size:1em;
+}
+.LblockListTable td {
+	border:1px solid #CCCCCC;
+	height:25px;
+	padding-right:5px;
+	text-align:center;
+	font-size:1em;
+}
+.LblockListTable th {
+	border:1px solid #CCCCCC;
+	background-color:#EEEEEE;
+	font-size:1em;
+	font-weight:bold;
+	color: #000;
+}
+.LblockListTable tr.colored {
+	background-color:#F0F3F8;
+}
+.LblockListTable tr.selected {
+	background-color:#AABBCC;
+}
+.LblockListTable input.Lbutton {	
+	padding: 0 5px 0 5px;
+	height:18px;
+	color:#000;
+	background-color:#F0EFDD;
+	border-top:1px solid #CFC7A3;
+	border-bottom:1px solid #AEA27C;
+	border-left:1px solid #CFC7A3;
+	border-right:1px solid #AEA27C;
+	font-size:0.9em;
+	cursor:pointer;cursor:hand;
+}
+
+.LblockListTable input.Lcheckbox {
+}
+.LblockListTable input.Lradio {
+}
+.LblockListTable input.Ltext {
+	border:1px solid #CCC;
+}
+.LblockListTable select {
+	border:1px solid #CCC;
+}
+.LblockListTable textArea {
+	border:1px solid #CCC;
+}
+/* listPaging
+---------------------------------------------------------*/
+.LblockListPaging {
+	text-align:center;
+	font-family: tahoma,sans-serif;
+	font-size:0.9em;
+}
+.LblockListPaging * {
+	vertical-align:middle;
+	padding-left: 3px;
+}
+.LblockListPaging img {
+	padding-bottom: 0px;
+}
+.LblockListPaging a {
+	color:#000;
+}
+.LblockListPaging span {
+	font-weight:bold;
+	color:#000;
+}
+.LblockListPaging a:link {
+	color:#000;
+}
+.LblockListPaging a:visited {
+	color:#000;
+}
+.LblockListPaging a:hover {
+	color:#000;
+}
+.LblockListPaging a:active {
+	color:#000;
+}
+.LblockListPaging a.first {
+	font-weight:bold;
+}
+.LblockListPaging a.last {
+	font-weight:bold;
+}
+/* pageLocation
+---------------------------------------------------------*/
+#LblockPageLocation {
+	font-size:0.9em;
+	padding: 7px 0px 0px 0px;
+}
+#LblockPageLocation a {
+	color:#000;
+}
+#LblockPageLocation span {
+	background: none;
+	color: #000;
+	font-weight:bold;
+}
+/* pageSubtitle
+---------------------------------------------------------*/
+.LblockPageSubtitle h2 {
+	color:#124598;
+	font-size:1em;
+	font-weight:bold;
+	padding:1px 0px 0px 10px;
+	background: url(/images/bullet_subTitle.gif) no-repeat 0 40%;
+}
+/* pageTitle
+---------------------------------------------------------*/
+#LblockPageTitle {
+	background: url(/images/bg_pageTitle.gif) no-repeat scroll left top;
+}
+#LblockPageTitle h1 {
+	font-size:1.1em;
+	padding: 5px 0px 0px 10px;
+	height: 30px;
+	color: #000;
+	background: url(/images/bg_pageTitle_right.gif) no-repeat scroll right top;
+}
+/* search
+---------------------------------------------------------*/
+#LblockSearch {
+	background-color: #F7F7F7;
+	border: solid 2px #DFDFDF;
+}
+#LblockSearch * {
+	vertical-align:middle;
+	z-index:3;
+}
+#LblockSearch > div {
+	position:relative;
+	display:inline-block;
+	width: 100%
+}
+#LblockSearch div div {
+}
+#LblockSearch div div form {
+	padding:5px 10px;
+	vertical-align:middle;
+}
+#LblockSearch table {
+	width:100%
+}
+#LblockSearch table td {
+	vertical-align:middle;
+	padding:2px;
+}
+#LblockSearch table td.label {
+	text-align:right;
+}
+#LblockSearch table td.input {
+	padding-right:10px;
+}
+#LblockSearch .btn {
+	position:absolute;
+	right:10px;
+	bottom:10px;	
+	width:62px;
+	height:18px;
+	color:#000;
+	background-color:#FAF1AC;
+	border-top:1px solid #D8CE77;
+	border-bottom:1px solid #B5A73A;
+	border-left:1px solid #D8CE77;
+	border-right:1px solid #B5A73A;
+	cursor:pointer;cursor:hand;
+}
+/* subbutton
+---------------------------------------------------------*/
+.LblockSubbutton {
+	overflow:hidden;
+	height: 22px;
+}
+.LblockSubbutton input {
+	float:right;
+	margin-left:5px;
+	padding: 0 5px 0 5px;
+	height:20px;
+	color:#000;
+	background-color:#EFEFEF;
+	border-top:1px solid #BFBFBF;
+	border-bottom:1px solid #9D9D9D;
+	border-left:1px solid #BFBFBF;
+	border-right:1px solid #9D9D9D;
+	cursor:pointer;cursor:hand;
+}
+/* smallbutton
+---------------------------------------------------------*/
+.LblockSmallButton input {
+	padding: 0 5px 0 5px;
+	height:18px;
+	color:#000;
+	background-color:#F0EFDD;
+	border-top:1px solid #CFC7A3;
+	border-bottom:1px solid #AEA27C;
+	border-left:1px solid #CFC7A3;
+	border-right:1px solid #AEA27C;
+	font-size:0.9em;
+	cursor:pointer;cursor:hand;
+}
+
+/* tab
+---------------------------------------------------------*/
+.LblockTab {
+	height:20px;
+	overflow:hidden;
+	background:url(/images/tab_bg.gif) repeat-x left bottom;
+}
+.LblockTab li {
+	float:left;
+	margin-right:4px;
+	background:url(/images/tab_l.gif) no-repeat scroll 0%;
+}
+.LblockTab li.current {
+	background-image:url(/images/tab_l_on.gif);
+}
+.LblockTab li span {
+	float:left;
+	display:block;
+	line-height:20px;
+	padding:0px 20px 0;
+	background:url(/images/tab_r.gif) no-repeat right top;
+}
+.LblockTab li.current span {
+	background-image:url(/images/tab_r_on.gif);
+}
+.LblockTab li span a {
+	color:#000;
+	text-decoration:none;
+}
+.LblockTab li.current span {
+	font-weight:bold;
+	color:#FFF;
+}
+.LblockTab li span a:link {
+	color:#124598;
+}
+.LblockTab li span a:visited {
+	color:#124598;
+}
+.LblockTab li span a:hover {
+	color:#124598;
+	text-decoration:none;
+}
+.LblockTab li span a:active {
+	color:#124598;
+	text-decoration:none;
+}
+/* tabArea
+---------------------------------------------------------*/
+
+/* shuttle
+---------------------------------------------------------*/
+.LblockShuttleIcon div {
+	position:relative;
+	top:100px;
+}
+/* model search
+---------------------------------------------------------*/
+.LblockModelSearch {
+	border-top:2px solid #DFDFDF;
+	border-bottom:2px solid #DFDFDF;
+	background-color:#F7F7F7;
+	padding:5px 0 5px 0;
+	height:20px
+}
+.LblockModelSearch * {
+	vertical-align:middle;
+}
+.LblockModelSearch span {
+	padding-left:10px;
+}
+/* model name
+---------------------------------------------------------*/
+.LblockModelName {
+	padding:5px 0 5px 0;
+	border-top:2px solid #DFDFDF;
+	border-bottom:2px solid #DFDFDF;
+	background-color:#F7F7F7;
+	height:20px
+}
+.blockModelName * {
+	vertical-align:middle;
+}
+.LblockModelName span {
+	font-weight:bold;
+}
+
+/* language
+---------------------------------------------------------*/
+#LblockLanguage {
+	text-align:right;
+}
+
+/* tree
+---------------------------------------------------------*/
+.LblockTree {
+	border:1px solid #CCCCCC;
+}
+.LblockTree span {
+	color:#000;
+}
+.LblockTree a:link {
+	color:#000;
+}
+.LblockTree a:visited {
+	color:#000;
+}
+.LblockTree a:hover {
+	color:#000;
+}
+.LblockTree a:active {
+	color:#000;
+}
+.LblockTree ul li {
+	padding:3px 0px 3px 10px;
+}
+.LblockTree ul li ul li {
+	padding:3px 0px 3px 20px;
+}
+.LblockTree ul li span.opened {
+	display:block;
+	font-weight:bold;
+	padding-left:30px;
+	background:url(/images/tree_opened.gif) no-repeat 17px 35%;
+}
+.LblockTree ul li span.closed {
+	display:block;
+	font-weight:bold;
+	padding-left:30px;
+	background:url(/images/tree_closed.gif) no-repeat 17px 35%;
+}
+.LblockTree ul li span.node {
+	display:block;
+	padding-left:30px;
+	background:url(/images/tree_node.gif) no-repeat 17px 35%;
+}
+.LblockTree ul li span.current {
+	display:block;
+	padding-left:30px;
+	background:url(/images/tree_node.gif) no-repeat 17px 35%;
+	background-color:#DDD;
+}
+
+/* essential text
+---------------------------------------------------------*/
+.essential {
+	color: red;
+	font-weight:bold;
+}
+/* dimmed input
+---------------------------------------------------------*/
+.dimmed {
+	background-color: #EEEEEE;
+	border: solid 1px #DFDFDF;
+	color:#7E7E7E;
+}
+
+#LblockButton div {
+	float:right;
+}
+
+#LblockSearch .L-button {
+	float:right;
+	margin:0 20px 0 0;
+}

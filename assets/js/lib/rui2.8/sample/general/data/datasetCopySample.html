@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>DataSet Copy</title>
+    <meta name="devon-rui-keyword" content="데이터셋 복사, 레코드 복사, 데이터셋 입력 성능,LDataSet" />
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+    window.onerror = function(message, filename, lineno) {
+        var logMsg = 'message : ' + message + '\r\nfilename : ' + filename + '\r\nlineno : ' + lineno;
+        alert(logMsg, 'error', 'Global');
+    };
+    
+    var bind = null;
+    var dataSet = null;
+    Rui.onReady(function() {
+        dataSet = new Rui.data.LJsonDataSet({
+            id:'dataSet',
+            fields:[
+                {id:'id'},
+                {id:'col1'},
+                {id:'col2'},
+                {id:'col3'},
+                {id:'col4'},
+                {id:'col5'},
+                {id:'col6'}
+            ]
+        });
+        
+        var dataSet2 = new Rui.data.LJsonDataSet({
+            id:'dataSet',
+            fields:[
+                {id:'id'},
+                {id:'col1'},
+                {id:'col2'},
+                {id:'col3'},
+                {id:'col4'},
+                {id:'col5'},
+                {id:'col6'}
+            ]
+        });
+        
+        dataSet.on('dataChanged', function(e) {
+            if(e.eventType === 1)
+                alert('복사 완료 : ' + dataSet2.getCount());
+        });
+        
+        dataSet.on('load', function(){
+            alert('복사 시작');
+            /*<b>*/
+            dataSet.batch(function(){
+                for(var i = 0, len = dataSet.getCount(); i < len; i++) {
+                    var r = dataSet.getAt(i).clone();
+                    dataSet2.add(r);
+                }
+            });
+        /*</b>*/
+        })
+       
+        // 데이터셋 로딩 시에는 비동기화(async)를 일반적으로 사용한다.(기본값 false)
+        dataSet.load({
+            url: './../../../sample/data/large/largeData10000.txt'
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div id='hd'>
+        <h1>DataSet Copy</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>두개의 데이터셋(LDataSet)을 사용하여 내용을 복사(copy)</h2>
+            <div class="LblockDesc">
+		        <p>하나의 데이터셋(DataSet)에서 다른 한쪽으로 내용을 복사(Copy)하는 예제입니다.</p>
+		        <p>데이터셋에 총 10000건을 복사하는 시간을 출력합니다.</p>
+		        <p>batch 메소드로 복사 성능이 높습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode"></div>
+        <div>Ctrl + Shift + F12를 누르시면 디버그 콘솔이 열립니다.</div>
+        <div>콘솔 상단의 catalog중 Debug를 check하시면 command 실행이나 클릭 등의 수행결과를 확인하실 수 있습니다. </div><br>
+    </div>
+</body>
+</html>

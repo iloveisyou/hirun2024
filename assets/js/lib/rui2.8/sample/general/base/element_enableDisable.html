@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="Dom enable,disable,isDisabled,활성화,비활성화" />
+    <title>Element Enable Or Disable</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui_sample_import.css"/>
+    
+    <style type="text/css">
+        #frm label {
+            display: block;
+            float: left;
+            width: 10%;
+            clear: left;
+        } 
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+        	var button = new Rui.ui.LButton({
+        		applyTo: 'button1', 
+        		label: 'enableDisable'
+        	}); 
+        	
+        	button.render(); 
+        	/*<b>*/
+        	var form = new Rui.ui.form.LForm('frm');
+        	button.on('click', function(){
+				if (form.isDisable()) {
+					form.enable();
+					button.setLabel('disable'); 
+				}
+				else {
+					form.disable();
+					button.setLabel('enable'); 
+				}
+        	}); 
+        	/*</b>*/
+        	
+        });
+    </script>
+
+</head>
+<body>
+    <h1>Element Enable Or Disable</h1>
+    <h2>HTML Dom element 활성(enable) or 비활성(disable)기능을 제공하는 샘플입니다.</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">frm에 해당하는 모드 객체들에 대해서 활성(enable) or 비활성(diable) 기능을 저어합니다.</div>
+    <div id='bd'>
+        <div>
+            <div id="container" class="container">
+                <div id="panel">
+                    <form class="LblockMarkupCode" id="frm" name="frm" method="post" action="./../../data/savedCallback.json">
+                        <fieldset>
+                            <legend>로그인 폼</legend>
+                            <input type="hidden" id="test" name="test" />
+                            <label for="state">state</label>
+                            <input type="text" id="state" name="state" />
+                            <br/>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>    
+              <div id="button1" class="L-button2"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Code dialog</title>
+<script type='text/javascript' >
+$C(function() {
+    try {
+    var parent = window.getParent();
+    if(parent.lastParams.code) $C('#codeSearch').setValue(parent.lastParams.code);
+    
+    var codeDataSet = $C.dataSet({
+        id: 'codeDataSet',
+        fields: [
+            { id: 'code' },
+            { id: 'value' }
+        ]
+    });
+    
+    parent.dialogDataSet = codeDataSet;
+    
+    codeDataSet.on('rowPosChanged', function(e){
+        if(e.row < 0) return;
+        codeDataSet.clearMark();
+        codeDataSet.setMark(e.row, true);
+    }, this, true);
+    
+    var loadDataSet = function(params, sync) {
+        codeDataSet.load({
+            url: './../../../sample/data/code.json',
+            params: params
+        });
+    };
+
+    var columnModel = $C.columnModel({
+        columns: [
+            $C.selectionColumn({selectionType: 'radio'}),
+            $C.numberColumn(),
+            { field: "code", label: "Code", sortable: true},
+            { field: "value", label: "Value", sortable: true }
+            ]
+    });
+
+    $C('#codeDialogGrid').grid({
+        columnModel: columnModel,
+        dataSet: codeDataSet,
+        width: 300,
+        height:300
+    });
+    
+    $C('#codeDialogGrid').on('cellDblClick', function(e){
+        if(e.row < 0) return;
+        parent.applyDialog();
+    });
+
+    var searchBtn = $C('#codeSearchBtn').button();
+    
+    searchBtn.on('click', function(e){
+        var params = $C.dom.getValues('input, select', 'blockSearchCode');
+        loadDataSet(params);
+    }, this, true);
+    
+    parent.dialog.on('hide', function(e){
+        codeDataSet.clearData();
+    });
+    
+    parent.handleApply = function() {
+        if(codeDataSet.getRow() < 0) {
+            $C.alert('항목을 선택하세요.');
+            return false;
+        }
+                        
+        this.inputCodeEl.setValue(codeDataSet.getNameValue(codeDataSet.getRow(), 'code'));
+        
+        return true;
+    }
+    }catch(e) {
+        alert(e.message + ' ' + e.lineNumber + ' ' + e.fileName);
+    }
+});
+</script>
+</head>
+<body>
+<div id="blockSearchCode" class="LblockSearch">
+    <input type="text" id="codeSearch" name="code">
+    <button type="button" id="codeSearchBtn">Search</button>
+</div>
+<div class="LblockGrid">
+    <div id="codeDialogGrid"></div>
+</div>
+</body>
+</html>

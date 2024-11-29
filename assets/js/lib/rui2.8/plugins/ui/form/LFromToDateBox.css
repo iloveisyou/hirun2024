@@ -1,0 +1,45 @@
+/* LFileBox
+****************************************/
+div.L-fromtodatebox {
+    position: relative;
+    white-space: nowrap;
+}
+.L-fromtodatebox .L-datebox, .L-fromtodatebox .L-datebox.L-invalid {
+	border: 0;
+}
+.L-fromtodatebox.L-invalid {
+    border: 1px solid #dd7870;
+}
+.L-fromtodatebox a.icon {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 20px;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    background: transparent url(../../../resources/images/datebox/cal.png) no-repeat 0 0;
+    background-position: 50% 50%;
+}
+.L-date-separator {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1; 
+    width: 15px;
+    text-align: center;
+}
+.L-fromtodatebox-calendar {
+    position: absolute;
+}
+.L-fromtodatebox-calendar .L-panel {
+    border: 1px solid #BCBCBC;
+}
+.L-fromtodatebox-calendar .L-title {
+    display: none;
+}
+.L-grid-panel .L-fromtodatebox {
+    overflow: hidden;
+}
+.L-fromtocalendar-panel {
+    *height: 230px;
+}

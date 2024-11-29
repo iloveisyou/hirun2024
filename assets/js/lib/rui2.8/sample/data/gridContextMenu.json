@@ -1,0 +1,225 @@
+[{
+    "message": "",
+    "metaData": {
+        "dataSetId": "MENU",
+        "totalCount": "24"
+    },
+    "records": [
+        {
+            "depth": 0,
+            "desc": "",
+            "menuId": 1,
+            "name": "Core",
+            "parentMenuId": null,
+            "seq": 1,
+            "url": ""
+        },
+        {
+            "depth": 1,
+            "desc": "",
+            "menuId": 2,
+            "name": "animation",
+            "parentMenuId": 1,
+            "seq": 1,
+            "url": ""
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 3,
+            "name": "Attributes",
+            "parentMenuId": 2,
+            "seq": 1,
+            "url": "/rui2/sample/general/fx/animationAttributesSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 4,
+            "name": "Basic",
+            "parentMenuId": 2,
+            "seq": 2,
+            "url": "/rui2/sample/general/fx/animationBasicSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 5,
+            "name": "Chaining",
+            "parentMenuId": 2,
+            "seq": 3,
+            "url": "/rui2/sample/general/fx/animationChainingSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 6,
+            "name": "Color",
+            "parentMenuId": 2,
+            "seq": 4,
+            "url": "/rui2/sample/general/fx/animationColorsSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 7,
+            "name": "Control",
+            "parentMenuId": 2,
+            "seq": 5,
+            "url": "/rui2/sample/general/fx/animationControlSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 8,
+            "name": "Easing",
+            "parentMenuId": 2,
+            "seq": 6,
+            "url": "/rui2/sample/general/fx/animationEasingSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 9,
+            "name": "From",
+            "parentMenuId": 2,
+            "seq": 7,
+            "url": "/rui2/sample/general/fx/animationFromSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 10,
+            "name": "Motion",
+            "parentMenuId": 2,
+            "seq": 8,
+            "url": "/rui2/sample/general/fx/animationMotionSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 11,
+            "name": "Scroll",
+            "parentMenuId": 2,
+            "seq": 9,
+            "url": "/rui2/sample/general/fx/animationScrollSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 12,
+            "name": "Unit",
+            "parentMenuId": 2,
+            "seq": 10,
+            "url": "/rui2/sample/general/fx/animationUnitsSample.html"
+        },
+        {
+            "depth": 1,
+            "desc": "",
+            "menuId": 13,
+            "name": "base",
+            "parentMenuId": 1,
+            "seq": 2,
+            "url": ""
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 14,
+            "name": "base element",
+            "parentMenuId": 13,
+            "seq": 1,
+            "url": "/rui2/sample/general/base/baseSample.html"
+        },
+        {
+            "depth": 1,
+            "desc": "",
+            "menuId": 15,
+            "name": "config",
+            "parentMenuId": 1,
+            "seq": 3,
+            "url": ""
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 16,
+            "name": "Basic",
+            "parentMenuId": 15,
+            "seq": 1,
+            "url": "/rui2/sample/general/config/configurationSample.html"
+        },
+        {
+            "depth": 1,
+            "desc": "",
+            "menuId": 17,
+            "name": "core",
+            "parentMenuId": 1,
+            "seq": 4,
+            "url": ""
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 18,
+            "name": "Browser",
+            "parentMenuId": 17,
+            "seq": 1,
+            "url": "/rui2/sample/general/core/browserSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 19,
+            "name": "Connect tests",
+            "parentMenuId": 17,
+            "seq": 2,
+            "url": "/rui2/sample/general/core/connectSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 20,
+            "name": "Rui",
+            "parentMenuId": 17,
+            "seq": 3,
+            "url": "/rui2/sample/general/core/duSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 21,
+            "name": "Element Basic",
+            "parentMenuId": 17,
+            "seq": 4,
+            "url": "/rui2/sample/general/core/elementSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 22,
+            "name": "Element Scroll",
+            "parentMenuId": 17,
+            "seq": 5,
+            "url": "/rui2/sample/general/core/elementScrollSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 23,
+            "name": "Exception",
+            "parentMenuId": 17,
+            "seq": 6,
+            "url": "/rui2/sample/general/core/exceptionSample.html"
+        },
+        {
+            "depth": 2,
+            "desc": "icon-gen",
+            "menuId": 24,
+            "name": "JSON",
+            "parentMenuId": 17,
+            "seq": 7,
+            "url": "/rui2/sample/general/core/jsonSample.html"
+        }
+    ]
+}]

@@ -1,0 +1,27 @@
+<script type="text/javascript">
+$S('#faqDialog .L-answer').addClass('L-hide-display');
+$S('#faqDialog .L-question').on('click', function(e){
+    $E(this).parent().select('.L-answer').toggle();
+});
+</script>
+<div id="faqDialog">
+<h2>Dialog</h2>
+<ul>
+
+    <li>
+        <div class="L-question">
+           LDialog의 팝업을 구성하는데 팝업의 내용을 다른 페이지에서 가지고 올 수 있나요? 
+        </div>
+        <div class="L-answer">
+<pre>LDialog는 프로젝트 상황에 따라 크게 2가지를 지원합니다. 기본 LDialog, LFrameDialog를 이용할 수 있습니다. LFrameDialog는 iframe을 내부적으로
+탑재하고 있어서 dialog 내부의 다른 페이지를 포함 할 수 있지만 부모창의 값에 대한 제어와 로딩 완료 시점 제어 등 초기에 쉽게 접근할 수 있는 반면 응용에서는
+더 어려워집니다. 또한 iframe은 웹 표준 기술도 아니므로 권장하지 않습니다. LDialog를 이용하여 다른 페이지를 가지고 오는 방식은 LElement의 appendChildByAjax 메소드를
+통해서 현 페이지에 팝업 페이지를 붙이는 방식으로 구현할 수 있습니다. ajax로 호출하여 현재 부모 페이지에 붙이는 방식이므로 부모창의 값에 대한 제어나 로딩 완료 시점 제어등
+하나의 페이지에서 다양하게 응용을 할 수 있습니다.
+commonDialogSample.html 샘플 참조 
+</pre>
+        </div>
+    </li>
+
+</ul>
+</div>

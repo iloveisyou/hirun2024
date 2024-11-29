@@ -1,0 +1,106 @@
+<div>
+<div class="class_description">
+html form object와 dataSet을 연결하는 객체
+html form 객체가 RUI form object인지 일반 html dom 객체인지 판단하여 내부적으로 처리된다.
+
+Rui form object를 사용하지 않는 form input 객체의 경우 LBind와 연동시에는 반드시 setValue로 값을 변경해야만 
+LDataSet과 동기화 된다. 아래와 같은 코딩이 들어가면 LBind와 연동되지 않는다.
+
+※ LBind와 동기화 안되는 예
+document.getElementById('col2').checked = false; <== dom으로 값을 변경한 경우
+$('#col3').val('aaa');   <= jquery로 값을 변경할 경우
+
+정상적인 예
+Rui.get('col2').setValue(true);
+Rui.get('col3').setValue('aaa');
+ 
+샘플 경로 :
+<a href="./../sample/general/data/bindSample.html" target="_new">/rui/sample/general/data/bindSample.html</a>
+<div class="L-sample">
+sample: LBind를 생성하는 기본 샘플  
+<div class="L-code">
+bind = new Rui.data.LBind({
+    groupId: 'LdetailInformation',
+    dataSet: dataSet,
+    bind: true,
+    bindInfo: [
+        {id:'code', ctrlId:'col1', value:'value'},
+        {id:'value', ctrlId:'col1', value:'text'},
+        {id:'col2', ctrlId:'col2', value:'html'}
+    ]
+});
+</div>
+</div>
+</div>
+<!-- config 시작 -->
+<div class="config_bindInfo">
+<div class="L-description">
+Bind객체 정보
+※ bind 범위 시점은 LBind객체가 생성될 때 groupId에 하위에 포함된 객체를 범위로 캐쉬한다. groupId의 하위에 포함된 form(input, select등...)객체를 LBind가 생성된 후에 
+생성하면 bind되지 않는다. 이때는 bind객체에 rebind 메소드를 호출해야 한다.
+groupId : bind하고자 하는 범위를 지정하는 태그명으로 dom의 id를 부여한다. div의 id나 form객체의 id등 dom의 id는 어떤 것이든 상관없다.
+dataSet : bindInfo에 포함된 각 id 필드를 가지는 dataSet
+bind : 현재 true만 지원한다.
+bindInfo : id는 dataSet이 가지는 field정보의 id이고 ctrlId는 연결하고자 하는 dom객체의 id나 name속성의 이름으로 우선순위는 name이 id보다 높다.
+    value는 3가지 속성을 가지고 있으며 value, text, html을 가지고 있다. value는 값으로 처리되고 text는 콤보와 연결되 display field값과 맵핑되고
+    html은 단순 출력용으로 ctrlId에 해당되는 dom에 innerHTML로 단순 출력을 한다.
+</div>
+<div class="L-sample">
+sample: col1 콤보 객체를 dataSet의 code, value 필드와 바인드하고 col2 spane객체를 innerHTMl로 출력한다.  
+<div class="L-code">
+bind = new Rui.data.LBind(
+{
+    groupId: 'LdetailInformation',
+    dataSet: dataSet,
+    bind: true,
+    bindInfo: [
+        {id:'code', ctrlId:'col1', value:'value'},
+        {id:'value', ctrlId:'col1', value:'text'},
+        {id:'col2', ctrlId:'col2', value:'html'}
+    ]
+});
+</div>
+</div>
+</div>
+
+<div class="config_selector">
+<div class="L-description">
+bind 객체를 찾는 selector 문장
+기본적으로 groupId에 하위에 있는 input, select, textarea, span[id]에 해당되는 객체만 바인드하지만 필요에 따라서 변경이 가능하다.
+</div>
+<div class="L-sample">
+sample: 기본 바인드 selector외에 class가 L-text로 되어 있는 항목도 바인드한다.
+<div class="L-code">
+bind = new Rui.data.LBind(
+{
+    groupId: 'LdetailInformation',
+    dataSet: dataSet,
+    bind: true,
+    selector: 'input,select,textarea,span[id],.L-text',
+    bindInfo: [
+        {id:'col1', ctrlId:'col1', value:'value'},
+        {id:'col1', ctrlId:'col1', value:'text'},
+        {id:'col2', ctrlId:'col2', value:'html'}
+    ]
+});
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_rebind">
+<div class="L-description">
+groupId에 있는 객체들을 다시 bind 시킨다.
+bind된 하위 객체들이 동적으로 생성될 경우 하위 객체를 LBind에 다시 등록한다.
+</div>
+<div class="L-sample">
+sample: 리바인드 메소드를 호출한다.
+<div class="L-code">
+bind.rebind();
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<!-- property 시작 -->
+</div>

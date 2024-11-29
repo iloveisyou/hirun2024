@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="툴팁(LTooltip)" />
+    <title>Tooltip</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/LTooltip.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LTooltip.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        #divTooltip { 
+           background:orange;
+           height:200px; 
+        }
+        #tooltip2 {
+            width: 200px;
+            white-space: inherit;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            /*<b>*/
+            var tooltip1 = new Rui.ui.LTooltip({
+                context: 'anchorTooltip',
+                text: 'This is A Link.'
+            });
+        
+            var tooltip2 = new Rui.ui.LTooltip({
+            	id: 'tooltip2',
+                context: 'divTooltip',
+                autodismissdelay: 3000,
+                showmove: true,
+                text: 'My text was set using the "text" configuration property'
+            });
+            /*</b>*/
+            
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var setTextBtn = new Rui.ui.LButton('setTextBtn');
+            setTextBtn.on('click', function(){
+                /*<b>*/
+                tooltip2.setText('툴팁 텍스트 내용이 변경되었습니다.');
+                /*</b>*/
+                Rui.alert('툴팁 텍스트 내용이 변경되었습니다.');
+            });
+        });
+    </script>
+</head>
+<body >
+    <div id='hd'>
+        <h1>Tooltip</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>툴팁(Tooltip)을 사용하는 간단한 예제들 입니다.</h2>
+            <div class="LblockDesc">
+		        <p>툴팁(Tooltip)을 사용하는 간단한 두가지 예제입니다.</p>
+		        <p>동적으로 Tooltip의 Text를 변경할 수 있으며, 빠르게 또는 느리게 나타나거나 마우스를 따라다니며 보여지기도 합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <p><a id="anchorTooltip" href="http://www.Rui.com/" title="Do you know RUI?">Hover over me to see a RUI Tooltip!</a></p>
+            <p id="divTooltip">Hover over me to see a RUI Tooltip!</p>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="setTextBtn" >setText</button>
+        </div>
+    </div>
+</body>
+</html>

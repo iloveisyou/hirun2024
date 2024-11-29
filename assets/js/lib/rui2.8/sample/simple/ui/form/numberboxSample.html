@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Number Box</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type='text/javascript' class="script-code">
+            //log 활성화
+            $C('!config').set('$.core.logger.show', [true]);
+            $C(function(){
+            
+                var oneData = {
+                    code: 'code1',
+                    value: 'CODE1'
+                };
+                
+                /*<b>*/
+                $C('#numberbox1').numberBox({
+                    applyTo: 'numberbox1',
+                    minValue: -10,
+                    maxValue: 9999,
+                    decimalPrecision: 1,
+                });
+                /*</b>*/
+                
+                $C('#numberbox1').on('changed', function(e){
+                    $C.log('Value : ' + this.getValue());
+                });
+                
+                $C('#numberbox1').on('focus', function(e){
+                    $C.log('focus');
+                });
+                
+                $C('#numberbox1').on('blur', function(e){
+                    $C.log('blur');
+                });
+                
+                $C('#numberbox1').on('show', function(e){
+                    $C.log('show');
+                });
+                
+                $C('#numberbox1').on('hide', function(e){
+                    $C.log('hide');
+                });
+                
+                $C('#numberbox1').on('keydown', function(e){
+                    //$C.log('keydown');
+                });
+                
+                $C('#numberbox1').on('keyup', function(e){
+                    //$C.log('keyup');
+                });
+                
+                $C('#numberbox1').on('keypress', function(e){
+                    //$C.log('keypress');
+                });
+                
+            });
+        </script>
+        
+        <script type='text/javascript' class="script-code">
+
+            function testSetVisibilityMode(){
+                $C('#numberbox1').setVisibilityMode(false);
+            }
+            
+            function testGetValue(){
+                $C.log($C('#numberbox1').getValue());
+            }
+            
+            function testValid(){
+                $C('#numberbox1').valid();
+            }
+            
+            function testInvalid(){
+                $C('#numberbox1').invalid();
+            }
+            
+            function testFocus(){
+                $C('#numberbox1').focus();
+            }
+            
+            function testBlur(){
+                $C('#numberbox1').blur();
+            }
+            
+            function testSetWidth(){
+                $C('#numberbox1').setWidth('30px');
+            }
+            
+            function testGetWidth(){
+                $C.log($C('#numberbox1').getWidth());
+            }
+            
+            function testSetEditable(){
+                $C('#numberbox1').setEditable(false);
+            }
+            
+            function testDisable(){
+                $C('#numberbox1').disable();
+            }
+            
+            function testEnable(){
+                $C('#numberbox1').enable();
+            }
+            
+            function testShow(){
+                $C('#numberbox1').show();
+            }
+            
+            function testHide(){
+                $C('#numberbox1').hide();
+            }
+            
+            function noTestDestroy(){
+                $C('#numberbox1').destroy();
+            }
+            
+        </script>
+    </head>
+    <body>
+        <h1>numberbox sample</h1>
+        <h2>LNumberBox를 구현한 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>버튼을 통해 숫자값을 조절할 수 있는 넘버 박스의 기본적인 형태입니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id='panel'>
+                    <label for="numberbox1">
+                        col1
+                    </label>
+                    <input type="text" id="numberbox1" name="numberbox1">
+        </div>
+    </div>
+    <a href='javascript:testGetValue()'>GetValue</a>
+    <a href='javascript:testEnable()'>Enable</a>
+    <a href='javascript:testDisable()'>Disable</a>
+    <a href='javascript:testSetEditable()'>SetEditable</a>
+    <a href='javascript:testShow()'>Show</a>
+    <a href='javascript:testHide()'>Hide</a>
+    <a href='javascript:testSetVisibilityMode()'>setVisibilityMode</a>
+    <a href='javascript:testValid()'>Valid</a>
+    <a href='javascript:testInvalid()'>Invalid</a>
+    <a href='javascript:testFocus()'>Focus</a>
+    <a href='javascript:testBlur()'>Blur</a>
+    <a href='javascript:noTestDestroy()'>Destroy</a>
+    <a href='javascript:testSetWidth()'>SetWidth</a>
+    <a href='javascript:testGetWidth()'>GetWidth</a>
+</div>
+    </body>
+</html>

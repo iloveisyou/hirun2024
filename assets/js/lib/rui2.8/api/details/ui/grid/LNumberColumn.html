@@ -1,0 +1,21 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+그리드의 데이터 순번을 출력하는 컬럼 
+</div>
+
+<div class="L-sample">
+sample: LNumberColumn에 순번을 데이터셋의 순번 필드로 적용한다.
+<div class="L-code">
+var columnModel = new Rui.ui.grid.LColumnModel({
+    defaultSortable: true,
+    columns: [
+        new Rui.ui.grid.LNumberColumn( { mappingField: 'numField' }),
+        { field: "col2" }
+    ]
+});
+</div>
+</div>
+</div>
+
+</div>

@@ -1,0 +1,24 @@
+<script type="text/javascript">
+$S('#faqDom .L-answer').addClass('L-hide-display');
+$S('#faqDom .L-question').on('click', function(e){
+    $E(this).parent().select('.L-answer').toggle();
+});
+</script>
+<div id="faqDom">
+<h2>Dom</h2>
+<ul>
+
+    <li>
+        <div class="L-question">
+           jquery에 dom selector를 지원하나요? 
+        </div>
+        <div class="L-answer">
+<pre>jquery나 prototype과 같은 오픈 소스에서 제공되는 dom selector도 RUI에서 제공됩니다. 다만 타 프레임웤은 단순 function기본의 프레임웤이므로 $() 메소드 하나를
+통해서 접근하지만 RUI는 $E와 $S 두가지 방식으로 접근해야 합니다. $E(element)는 id로 접근하는 방식이고 $S(selector)는 dom selector로 접근하는 방식입니다.
+baseSample.html 샘플 참조 
+</pre>
+        </div>
+    </li>
+
+</ul>
+</div>

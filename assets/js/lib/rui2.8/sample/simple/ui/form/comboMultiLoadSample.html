@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Combo Multi Load</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/ui/form/LComboLoader.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" >
+
+        <script type='text/javascript' class="script-code">
+            var combo1 = null; 
+            var comboDataSet03 = null; 
+            $C(function(){
+                $C('!config').set('$.core.logger.show', [true]);
+
+                /*<b>*/
+                combo1 = $C.combo({
+                    id: 'code01Combo',
+                    applyTo: 'code01Combo',
+                    params: 'code01Combo=0014&abcd=def'
+                });
+
+                var loader = $C.comboLoader({
+                    emptyText: '전체',
+                    listWidth: 120
+                });
+
+                // 콤보데이터 로딩을 위하여 서버측 cmd 호출시에는 같이 제공되는
+                // 서버측 cmd인 RetrieveMultiComboCmd.java 파일을 참고.
+                loader.load({
+                    url: './../../../data/codeMultipleLoad.json',
+                    comboInfo: [
+                        combo1, 
+                        { id: 'code02Combo', applyTo: 'code02Combo', emptyText: '선택하세요.', params: 'code02Combo=0015&abc1=def' },
+                        { id: 'code03Combo', applyTo: 'code03Combo', listWidth: 300, params: 'code03Combo=0022&abc2=def2' },
+                        { applyTo: 'code04Combo', params: 'code04Combo=0029&abc3=def3' },
+                        { applyTo: 'code05Combo', params: 'code05Combo=0035&abc3=def3' },
+                        { applyTo: 'code06Combo', params: 'code06Combo=0038' },
+                        { applyTo: 'code07Combo', params: 'code07Combo=0043' },
+                        { applyTo: 'code08Combo', params: 'code08Combo=0049' },
+                        { applyTo: 'code09Combo', params: 'code09Combo=0059' },
+                        { applyTo: 'code10Combo', params: 'code10Combo=0064' },
+                        { applyTo: 'code11Combo', params: 'code11Combo=0065' },
+                        { applyTo: 'code12Combo', params: 'code12Combo=0066' },
+                        { applyTo: 'code13Combo', params: 'code13Combo=0068' },
+                        { applyTo: 'code14Combo', params: 'code14Combo=0081' },
+                        { applyTo: 'code15Combo', params: 'code15Combo=0083' },
+                        { applyTo: 'code16Combo', params: 'code16Combo=0090' },
+                        { applyTo: 'code17Combo', params: 'code17Combo=0093' },
+                        { applyTo: 'code18Combo', params: 'code18Combo=0095' },
+                        { applyTo: 'code19Combo', params: 'code19Combo=0112' },
+                        { applyTo: 'code20Combo', params: 'code20Combo=0114' },
+                        { applyTo: 'code21Combo', params: 'code21Combo=0115' },
+                        { applyTo: 'code22Combo', params: 'code22Combo=0122' },
+                        { applyTo: 'code23Combo', params: 'code23Combo=0136' },
+                        { applyTo: 'code24Combo', params: 'code24Combo=0146' },
+                        { applyTo: 'code25Combo', params: 'code25Combo=0169' },
+                        { applyTo: 'code26Combo', params: 'code26Combo=0175' },
+                        { applyTo: 'code27Combo', params: 'code27Combo=0180' },
+                        { applyTo: 'code28Combo', params: 'code28Combo=0187' },
+                        { applyTo: 'code29Combo', params: 'code29Combo=0204' },
+                        { applyTo: 'code30Combo', params: 'code30Combo=0292' }
+                    ]
+                });
+                /*</b>*/
+                
+                var combo03 = loader.getCombo('code03Combo');
+                combo03.on('changed', function(e) {
+                    Rui.log("changed event~!!");
+                });
+
+                comboDataSet03 = combo03.getDataSet();
+                comboDataSet03.on('rowPosChanged', function(e) {
+                    Rui.log("rowPosChanged event~!!");
+                });
+            });
+            
+        </script>
+      
+    </head>
+    <body>
+        <h1>combo multi load sample</h1>
+        <h2>LCombo Multi loading 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>LCombo 객체를 동시에 여러개를 멀티로 생성 및 로딩하는 샘플입니다.<br>사용시 같이 제공되는 서버측 cmd 샘플도 같이 참고하시기 바랍니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id='panel'>
+            <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                <fieldset>
+                    <label for="code01Combo">code01</label>              
+                    <select id="code01Combo" name="code01Combo"></select>
+                    <label for="code02Combo">code02</label>              
+                    <select id="code02Combo" name="code02Combo"></select>
+                    <label for="code03Combo">code03</label>              
+                    <select id="code03Combo" name="code03Combo"></select>
+                    <label for="code04Combo">code04</label>              
+                    <select id="code04Combo" name="code04Combo"></select>
+                    <label for="code05Combo">code05</label>              
+                    <select id="code05Combo" name="code05Combo"></select>
+                    <br>                                                 
+                    <label for="code06Combo">code06</label>              
+                    <select id="code06Combo" name="code06Combo"></select>
+                    <label for="code07Combo">code07</label>              
+                    <select id="code07Combo" name="code07Combo"></select>
+                    <label for="code08Combo">code08</label>              
+                    <select id="code08Combo" name="code08Combo"></select>
+                    <label for="code09Combo">code09</label>              
+                    <select id="code09Combo" name="code09Combo"></select>
+                    <label for="code10Combo">code10</label>              
+                    <select id="code10Combo" name="code10Combo"></select>
+                    <br>                                                 
+                    <label for="code11Combo">code11</label>              
+                    <select id="code11Combo" name="code11Combo"></select>
+                    <label for="code12Combo">code12</label>              
+                    <select id="code12Combo" name="code12Combo"></select>
+                    <label for="code13Combo">code13</label>              
+                    <select id="code13Combo" name="code13Combo"></select>
+                    <label for="code14Combo">code14</label>              
+                    <select id="code14Combo" name="code14Combo"></select>
+                    <label for="code15Combo">code15</label>              
+                    <select id="code15Combo" name="code15Combo"></select>
+                    <br>                                                 
+                    <label for="code16Combo">code16</label>              
+                    <select id="code16Combo" name="code16Combo"></select>
+                    <label for="code17Combo">code17</label>              
+                    <select id="code17Combo" name="code17Combo"></select>
+                    <label for="code18Combo">code18</label>              
+                    <select id="code18Combo" name="code18Combo"></select>
+                    <label for="code19Combo">code19</label>              
+                    <select id="code19Combo" name="code19Combo"></select>
+                    <label for="code20Combo">code20</label>              
+                    <select id="code20Combo" name="code20Combo"></select>
+                    <br>                                                 
+                    <label for="code21Combo">code21</label>              
+                    <select id="code21Combo" name="code21Combo"></select>
+                    <label for="code22Combo">code22</label>              
+                    <select id="code22Combo" name="code22Combo"></select>
+                    <label for="code23Combo">code23</label>              
+                    <select id="code23Combo" name="code23Combo"></select>
+                    <label for="code24Combo">code24</label>              
+                    <select id="code24Combo" name="code24Combo"></select>
+                    <label for="code25Combo">code25</label>              
+                    <select id="code25Combo" name="code25Combo"></select>
+                    <br>                                                
+                    <label for="code26Combo">code26</label>              
+                    <select id="code26Combo" name="code26Combo"></select>
+                    <label for="code27Combo">code27</label>              
+                    <select id="code27Combo" name="code27Combo"></select>
+                    <label for="code28Combo">code28</label>              
+                    <select id="code28Combo" name="code28Combo"></select>
+                    <label for="code29Combo">code29</label>              
+                    <select id="code29Combo" name="code29Combo"></select>
+                    <label for="code30Combo">code30</label>              
+                    <select id="code30Combo" name="code30Combo"></select>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <!--  
+    <a href='javascript:testSetValue()'>setValue</a>
+    <a href='javascript:testForceSelection()'>ForceSelection</a>
+    <a href='javascript:testChangeDataSetRow()'>ChangeDataSetRow</a>
+    <a href='javascript:testGetBindColVal()'>GetBindColVal</a>
+    <a href='javascript:testSetSelectedIndex()'>SetSelectedIndex</a>
+    <a href='javascript:testSetBindValue()'>SetBindValue</a>
+    <a href='javascript:testInvalid()'>invalid</a>
+    <a href='javascript:testRemove()'>remove</a>
+    <a href='javascript:testSetAddEmptyText()'>SetAddEmptyText</a>
+    <a href='javascript:testQueryString()'>QueryString</a>
+    <a href='javascript:testSetDataSet()'>setDataSet</a>
+    <a href='javascript:testEnable()'>enable</a>
+    <a href='javascript:testDisable()'>disable</a>
+    -->
+</div>
+
+    </body>
+</html>

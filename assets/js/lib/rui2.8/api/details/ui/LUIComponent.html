@@ -1,0 +1,380 @@
+<div>
+    
+<div class="class_description">
+<div class="L-description">
+UI Component들이 상속받는 추상 클래스로서 자바스크립트 특성상 생성에 제약을 할 순 없지만 직접 생성되지 않는 추상 클래스이다.
+</div>
+</div>
+    
+<!-- config 시작 -->
+<div class="config_disabled">
+<div class="L-description">
+초기 생성후 disabled 여부. true는 disable 상태이고 false는 enable 상태이다.
+</div>
+<div class="L-sample">
+sample: TextBox 생성시 disable상태로 생성한다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1',
+    applyTo:'textbox1',
+    disabled: true
+});
+</div>
+</div>
+</div>
+
+<div class="config_applyTo">
+<div class="L-description">
+객체를 render할 위치를 지정한다. 생성자 옵션이기때문에 생성시에 해당 html dom 객체의 id를 바로 찾아서 생성한다.
+applyTo는 지정된 id의 html dom객체 자체를 콤포넌트로 만들지만 renderTo는 id의 html dom객체 하위에 만든다.
+renderTo는 원 html dom객체를 그대로 유지한다.
+render 이벤트가 발생한다.
+</div>
+<div class="L-sample">
+sample: textbox1이라는 id를 가지는 객체에 textbox를 생성한다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1',
+    applyTo:'textbox1'
+});
+</div>
+</div>
+</div>
+
+<div class="config_renderTo">
+<div class="L-description">
+객체를 renderTo html dom 객체 하위에 dom객체를 생성한다. 생성자 옵션이기때문에 생성시에 해당 html dom 객체의 id를 바로 찾아서 생성한다.
+render 이벤트가 발생한다.
+</div>
+<div class="L-sample">
+sample: textbox1이라는 id를 가지는 객체하위에 textbox를 생성한다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1',
+    renderTo:'textbox1'
+});
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_render">
+<div class="L-description">
+객체를 Render하는 메소드로 render시 appendToNode의 객체가 존재하지 않으면 에러가 발생한다.
+render 이벤트가 발생한다.
+</div>
+<div class="L-sample">
+sample: TextBox 생성시 disable상태로 생성한다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1'
+});
+
+textBox.render('textBox');
+</div>
+</div>
+</div>
+
+<div class="method_destroy">
+<div class="L-description">
+객체를 destroy하는 메소드
+destroy 이벤트가 발생한다.
+</div>
+<div class="L-sample">
+sample: 생성된 TextBox를 dom이나 메모리에서 없앤다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1'
+});
+......
+textBox.destroy();
+</div>
+</div>
+</div>
+
+<div class="method_setVisibilityMode">
+<div class="L-description">
+visMode가 true면 visibility에 설정 false거나 없으면 display에 설정한다.
+show or hide를 할 경우 html 특성상 display 속성이나 visibility 속성을 선택할 수 있는데
+기본 속성은 visibility이다. visibility는 객체도 화면에서 보이지 않게 하지만 해당 위치의 자리도 
+없앤다. 하지만 display는 자리는 존재하고 보이지만 않게 한다.
+기본값은 false로 display로 처리되며 style로 적용되는게 아닌 css(L-hide-display)로 적용된다.
+true일 경우 visibility로 처리되며 css(L-hide-visibility)로 적용된다.
+</div>
+<div class="L-sample">
+sample: 생성된 TextBox를 dom이나 메모리에서 없앤다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1'
+});
+......
+textBox.setVisibilityMode(true);
+</div>
+</div>
+</div>
+
+<div class="method_enable">
+<div class="L-description">
+객체를 사용 가능하게 하는 메소드
+생성자의 disabled속성이나 disable 메소드를 통해 disable 상태의 객체를 enable상태로 변경한다.
+</div>
+<div class="L-sample">
+sample: disabled상태의 TextBox를 enable 상태로 만든다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1',
+    disabled: true
+});
+......
+textBox.enable();
+</div>
+</div>
+</div>
+
+<div class="method_disable">
+<div class="L-description">
+객체를 사용 불가능하게 하는 메소드
+enable 상태의 객체를 disable상태로 변경한다.
+</div>
+<div class="L-sample">
+sample: enable상태의 TextBox를 disable 상태로 만든다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1'
+});
+......
+textBox.disable();
+</div>
+</div>
+</div>
+
+<div class="method_show">
+<div class="L-description">
+객체를 보이게 설정하는 메소드
+메소드 인수가 true일 경우에는 기본 animation 효과가 탑재된다. 
+또한 anim객체를 인수로 설정하면 해당 animation효과를 처리후 출력한다.
+</div>
+<div class="L-sample">
+sample: 숨겨있는 textBox1객체를 출력한다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1'
+});
+textBox.hide();
+......
+textBox.show();
+</div>
+</div>
+
+<div class="L-sample">
+sample: 숨겨있는 textBox1객체를 출력할때 animation효과를 낸다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1'
+});
+textBox.hide(true);
+......
+textBox.show(true);
+</div>
+</div>
+</div>
+
+<div class="method_hide">
+<div class="L-description">
+객체를 안보이게 설정하는 메소드
+메소드 인수가 true일 경우에는 기본 animation 효과가 탑재된다. 
+또한 anim객체를 인수로 설정하면 해당 animation효과를 처리후 출력한다.
+</div>
+<div class="L-sample">
+sample: textBox1객체를 숨긴다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1'
+});
+......
+textBox.hide();
+</div>
+</div>
+
+<div class="L-sample">
+sample: textBox1객체를 숨길때 animation효과를 낸다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1'
+});
+......
+textBox.hide(true);
+</div>
+</div>
+</div>
+
+<div class="method_getContainer">
+<div class="L-description">
+컨테이너 객체를 리턴하는 메소드
+</div>
+<div class="L-sample">
+sample: textBox의 컨테이너 객체를 얻는다.
+<div class="L-code">
+var textBox = new Rui.ui.form.LTextBox({
+    id:'textbox1'
+});
+......
+var el = textBox.getContainer();
+</div>
+</div>
+</div>
+<!-- event 시작 -->
+<div class="event_disable">
+<div class="L-description">
+disable 메소드가 호출되면 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: textBox1 객체가 disable되면 textBox2도 disable 시킨다.  
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id:'textbox1',
+    applyTo:'textbox1'
+});
+textBox1.on('disable', function(e) {
+    textBox2.disable();
+});
+</div>
+</div>
+</div>
+
+<div class="event_enable">
+<div class="L-description">
+enable 메소드가 호출되면 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: textBox1 객체가 enable되면 textBox2도 enable 시킨다.  
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id:'textbox1',
+    applyTo:'textbox1'
+});
+textBox1.on('enable', function(e) {
+    textBox2.enable();
+});
+</div>
+</div>
+</div>
+
+<div class="event_show">
+<div class="L-description">
+show 메소드가 호출되면 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: textBox1 객체가 show되면 textBox2도 show시킨다.  
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id:'textbox1',
+    applyTo:'textbox1'
+});
+textBox1.on('show', function(e) {
+    textBox2.show();
+});
+</div>
+</div>
+</div>
+
+<div class="event_hide">
+<div class="L-description">
+hide 메소드가 호출되면 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: textBox1 객체가 hide되면 textBox2도 hide시킨다.  
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id:'textbox1',
+    applyTo:'textbox1'
+});
+textBox1.on('hide', function(e) {
+    textBox2.hide();
+});
+</div>
+</div>
+</div>
+
+<div class="event_focus">
+<div class="L-description">
+focus 메소드가 호출되면 수행하는 이벤트  
+</div>
+<div class="L-sample">
+sample: textBox1 객체가 focus되면 값을 비교해여 값이 'aaa'이면 blur 시킨다.  
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id:'textbox1',
+    applyTo:'textbox1'
+});
+textBox1.on('focus', function(e) {
+    if(textBox1.getValue() == 'aaa') {
+        textBox1.blur();
+        return;
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="event_blur">
+<div class="L-description">
+blur 메소드가 호출되면 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: textBox1 객체가 blur되면 값을 비교해여 값이 'aaa'이면 메시지를 출력하면 focus한다.  
+<div class="L-code">
+var textBox1 = new Rui.ui.form.LTextBox({
+    id:'textbox1',
+    applyTo:'textbox1'
+});
+textBox1.on('blur', function(e) {
+    if(textBox1.getValue() == 'aaa') {
+        alert('aaa는 입력할 수 없습니다.');
+        textBox1.focus();
+        return;
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="event_render">
+<div class="L-description">
+render 메소드가 호출되면 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: grid가 render되면 메시지를 출력한다. render이벤트는 render메소드가 호출되기전에 선언되어야 한다.
+<div class="L-code">
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height:300
+});
+
+grid.on('render', function(e) {
+    alert('검색 버튼을 눌러주세요.');
+});
+
+grid.render('gridDom');
+</div>
+</div>
+</div>
+
+<div class="event_destroy">
+<div class="L-description">
+destroy 메소드가 호출되면 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: grid가 destroy되면 div를 hide 시킨다.  
+<div class="L-code">
+grid.on('destroy', function(e) {
+    Rui.select('.L-blockDetail').hide();
+});
+.....
+grid.destroy();
+</div>
+</div>
+</div>
+
+</div>

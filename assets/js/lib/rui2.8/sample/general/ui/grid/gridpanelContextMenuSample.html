@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Context Menu</title>
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 컨텍스트메뉴(LContextMenu)" />
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/menu/rui_menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/menu/rui_menu.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+          /*******************
+          * 변수 및 객체 선언
+          *******************/
+          //context menu활성화 될 경우 선택된 행의 recordId
+          var copiedRow = -1;
+          var  dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'menuId', type: 'number'},
+                    { id: 'seq', type: 'number' },
+                    { id: 'parentMenuId', type: 'number' },
+                    { id: 'name' },
+                    { id: 'url' },
+                    { id: 'desc' },
+                    { id: 'depth', type: 'number'}
+                ]
+            });
+
+            /*<b>*/
+            var oContextMenu = new Rui.ui.menu.LContextMenu( {
+                applyTo: 'gridContextMenu',
+                trigger: 'defaultGrid',
+                zindex : 100,
+                itemdata: [
+                    { text: '그룹 복사하기', onclick: { fn: copyItem } },
+                    { text: '위에 붙여넣기', disabled: true, onclick: { fn: pasteItemUp } },
+                    { text: '아래에 붙여넣기', disabled: true, onclick: { fn: pasteItemDown } },
+                    { text: '그룹 삭제하기', onclick: { fn: deleteItem } }
+                ]
+            });
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            oContextMenu.on('triggerContextMenu', function(){
+                var oTarget = oContextMenu.contextEventTarget;
+
+                var view = grid.getView();
+                var gridRow = view.findRow(oTarget);
+                if(gridRow === false || gridRow < 0) {
+                    this.cancel(false);
+                    return;
+                }
+                // 현재 row를 선택
+                dataSet.setRow(gridRow);
+
+                var selectedRecord = dataSet.getAt(gridRow);
+                //최상위와 최하위는 작업을 할 수 없다.
+                var depth = selectedRecord.get('depth');
+                var disable = true;
+                if (depth == 0 || depth == 2) {
+                    this.cancel(false);
+                    return;
+                }
+                //메뉴설 활성화 비활성화
+                var items = oContextMenu.getItems();
+                var disableItem = false;
+                for (var i = 0; i < items.length; i++) {
+                    disableItem = !disable;
+                    //menu item에서 1,2번이 붙여넣기다.  복사한게 없으면 붙여넣을것도 없다.
+                    if(copiedRow < 0 && (i == 1 || i == 2) )
+                        disableItem = true;
+                    if(disableItem == true)items[i].disable(); else items[i].enable();
+                }
+            });
+            /*</b>*/
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'name', renderer: function(v, p, record){
+                            var html = v;
+                            var depth = record.get('depth');
+                            var minusImg = '<img src="images/minus.gif" style="border:0" />&nbsp;';
+                            var space = '';
+                            for (var i = 0; i <= depth; i++) {
+                                if (i != 0)
+                                    space += '&nbsp;&nbsp;&nbsp;&nbsp;';
+                            }
+                            //depth 2(마지막)은 minus image가 없다.
+                            if (depth < 2)
+                                html = minusImg + html;
+                            html = space + html;
+                            return html;
+                        }
+                    },
+                    { field: 'url', width: 300 }, 
+                    { field: 'desc' },
+                    { field: 'depth' },
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+
+            dataSet.load({
+                url: './../../../../sample/data/gridContextMenu.json'
+            });
+
+            /********************
+            * 사용자 정의 함수
+            ********************/
+            function copyItem(){
+                copiedRow = dataSet.getRow();
+            }
+
+            function pasteItem(isUp){
+                if (copiedRow < 0) return;
+                //1. 복사할 record의 복사본 만들기
+                var row = dataSet.getRow();
+                var copiedRecored = dataSet.getAt(copiedRow);
+                var records = new Array();
+                records.push(copiedRecored.clone());
+                //자식 넣기
+                var rowCount = dataSet.getCount();
+                var parentMenuId = copiedRecored.get('menuId');
+                var depth = -1;
+                //자식 record 가져오기
+                for (var i = copiedRow + 1; i < rowCount; i++) {
+                    var record = dataSet.getAt(i);
+                    //자식이 순서대로 있다고 가정하고 depth가 달라지면 끝낸다.
+                    if (parentMenuId == record.get('parentMenuId')) {
+                        records.push(record.clone());
+                    } else break;
+                }
+                var startRow = row;
+                //2. 붙여넣기
+                if (isUp == false) {
+                    //현재 group 밑에 붙여 넣기
+                    //1.현재 group의 다음 group시작 index를 알아야 한다.
+                    startRow = -1;
+                    for (var i = row + 1; i < rowCount; i++) {
+                        depth = dataSet.getAt(i).get('depth');
+                        if (depth == 0 || depth == 1) {
+                            startRow = i;
+                            break;
+                        }
+                    }
+                    if (startRow < 0 || startRow >= rowCount) startRow = rowCount;
+                }
+                //다음 그룹의 시작 index에 insert 한다.
+                for (var i = records.length-1; i >= 0; i--) {
+                    dataSet.insert(startRow, records[i]);
+                }
+                copiedRow = -1;
+            }
+
+            function pasteItemUp(){
+                pasteItem(true);
+            }
+
+            function pasteItemDown(){
+                pasteItem(false);
+            }
+
+            function deleteItem(){
+                var row = dataSet.getRow();
+                if (row < 0) return;
+
+                var selectedRecord = dataSet.getAt(row);
+                //자식부터 삭제한 후 자신을 삭제한다.  index기준으로 삭제하므로 제일 밑의 자식부터 삭제한다.
+                var rowCount = dataSet.getCount();
+                var parentMenuId = selectedRecord.get('menuId');
+                //index 삭제
+                for(var i = (row + 1) ;i < dataSet.getCount();i++){
+                    var record = dataSet.getAt(i);
+                    //자식이 순서대로 있다고 가정하고 depth가 달라지면 끝낸다.
+                    if (parentMenuId == record.get('parentMenuId')) {
+                        dataSet.removeAt(i--);
+                    } else break;
+                }
+                dataSet.removeAt(row);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Context Menu</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid)의 Context Menu를 사용하는 샘플 (grid)</h2>
+            <div class="LblockDesc">
+		        <p>그리드(Grid)에 Context Menu를 연결하여 사용합니다. 특정 그리드(Grid) 셀(Cell)에 Context Menu가 적용되도록 할 수 있습니다.</p>
+		        <p>그리드(Grid)의 2번 row의 "animation" 컬럼에서 마우스 오른쪽 버튼을 클릭해 보세요.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+        <div id="gridContextMenu"></div>
+        <div class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Common dialog sample</title>
+
+<script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+<script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+<script type='text/javascript' src='./../../../../plugins/ui/calendar/LCalendar.js'></script>
+<script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+<script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+<link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" >
+
+<script type='text/javascript' src='./../../../../plugins/ui/LCommonPanel.js' ></script>
+<script type='text/javascript' src='./../../../../plugins/ui/LCommonDialog.js' ></script>
+<link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LCommonDialog.css" />
+
+<style type="text/css">
+    body {
+        margin:0;
+        padding:0;
+    }
+        
+</style>
+<script type='text/javascript' class="script-code">
+
+$C(function() {
+    /*<b>*/
+    var commonCodePopup = $C.commonCodeDialog({
+        id: 'commCodePopup'
+    });
+    commonCodePopup.render('commCodePopup');
+    /*</b>*/
+
+    var dataSet = $C.dataSet({
+        id: 'dataSet',
+        fields: [
+        { id: 'code' }
+        ]
+    });
+
+    dataSet.on('update', function(e) {
+        $C.log('update column : ' + e.colId);
+        var modifiedRecords = dataSet.getModifiedRecords();
+        if(modifiedRecords.length < 1) {
+            $C('#showData').html('no changed');
+            return;
+        }
+
+        var data = '';
+        modifiedRecords.each(function(id) {
+            var record = modifiedRecords.get(id);
+            data += $C.dump(record.getModifiedData())
+        });
+        $C('#showData').html(data);
+    });
+
+    var bind = $C.bind(
+    {
+        groupId: 'LblockSearch',
+        dataSet: dataSet,
+        bind: true,
+        bindInfo: [
+            {id:'code', ctrlId:'commCodePopupCode', value:'value'}
+        ]
+    });
+    
+    dataSet.load({
+        url: './../../../../resources/data/data11.json',
+        cache: false
+    });
+
+});
+
+</script>
+</head>
+<body>
+<h1>common dialog sample</h1>
+<h2>공통 다이얼로그를 만들어서 사용하는 샘플</h2>
+<div class="LblockLine"></div>
+<div>공통 다이얼로그를 사용하여 팝업을 구성합니다. 팝업 화면의 구조 및 내용은 재구성 가능합니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id="LblockMainBody">
+            <div id="LblockSearch">
+                <div style="text-align: right;">
+                    <table summary="사원 검색조건">
+                        <tbody>
+                            <tr>
+                                <!-- 공통코드 팝업 -->
+                                <th><label for="commCodeBox">공통 코드 입력</label></th>
+                                <td>
+                                    <div id="commCodePopup"></div>
+                                </td>
+                                <td><button type="button" id="searchBtn" >Search</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+            <div id="LblockDetail01" >업무화면</div><!-- LblockDetail01 -->
+        </div>
+        <div id='showData'></div>
+        <!-- LblockMainBody -->
+    </div>
+</div>
+</body>
+</html>

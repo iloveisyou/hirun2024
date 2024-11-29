@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="List Paging (LPager)" />
+    <title>Pager</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../plugins/ui/LPager.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../plugins/ui/LPager.css" />
+    
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        #divOutput {
+            height: 20px;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            
+            /*<b>*/
+            var pager = new Rui.ui.LPager({
+                totalCount: 300,
+                pageNumber: 12
+            });
+            pager.render('divPager');
+            /*</b>*/
+            
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            pager.on('changed',function(e){
+                Rui.get('divOutput').html('현재 페이지: ' + e.pageNumber);
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var goBtn = new Rui.ui.LButton('goBtn');
+            goBtn.on('click', function(){
+                pager.goPage(22);
+            });
+
+            var changeTotalCountBtn = new Rui.ui.LButton('changeTotalCountBtn');
+            changeTotalCountBtn.on('click', function(){
+                pager.setTotalCount(500);
+            });
+            
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Pager</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>페이징(LPager) 예제</h2>
+            <div class="LblockDesc">
+		        <p>페이징(LPager)의 기본 모습입니다.</p>
+		        <p>페이지가 변경될 경우  changedPage 이벤트를 통해 변경된 페이지 번호를 알 수 있으며,</p> 
+		        <p>Total Count를 변경하여 페이징 범위를 변경할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="divPager"></div>
+            <div id="divOutput"></div>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="goBtn" >Page 이동 (22 pages)</button>
+            <button type="button" id="changeTotalCountBtn" >Pager total count 변경 (50 pages)</button>
+        </div>
+    </div>
+</body>
+</html>

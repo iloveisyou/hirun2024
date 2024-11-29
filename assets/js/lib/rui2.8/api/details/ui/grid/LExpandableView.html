@@ -1,0 +1,27 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+그리드의 row별로 펼쳐지게 할 수 있는 그리드 뷰로써 펼칠때 원하는 포멧으로 출력이 가능하다.
+단 LGridView를 상속받고 있으므로 대량건 처리는 불가능하다.(ie8기준 최대 300건)
+
+샘플 경로 :
+<a href="./../sample/general/ui/grid/gridpanelExpandableRowSample.html" target="_new">/rui/sample/general/ui/grid/gridpanelExpandableRowSample.html</a>
+</div>
+
+<div class="L-sample">
+sample: 기본 샘플이다.
+<div class="L-code">
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 420,
+    view: new Rui.ui.grid.LExpandableView({
+        dataSet: dataSet,
+        columnModel: columnModel
+    })
+});
+</div>
+</div>
+</div>
+
+</div>

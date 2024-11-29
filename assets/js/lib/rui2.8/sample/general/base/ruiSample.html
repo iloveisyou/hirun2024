@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="Rui 상속" />
+    <title>Rui Object</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var getNamespaceBtn = new Rui.ui.LButton('getNamespaceBtn');
+                getNamespaceBtn.on('click', function(){
+                Rui.namespace('Rui.Test');
+                var ns = typeof Rui.Test;
+                Rui.alert("Rui.Test Name Space :" + ns, "warn", "Dom");
+                return ns;
+            });
+
+            var getExtendNamespaceBtn = new Rui.ui.LButton('getExtendNamespaceBtn');
+            getExtendNamespaceBtn.on('click', function(){
+                //namespace 정의
+                Rui.namespace('Rui.namespacetest');
+                //Rui.namespacetest에서 SuperTest class 정의
+                Rui.namespacetest.SuperTest = function(){
+                    this.attr1 = 'super_attr1';
+                };
+                //Test class 정의
+                Rui.namespacetest.Test = function(){
+                    //부모의 constructor를 호출해야 한다.
+                    Rui.namespacetest.Test.superclass.constructor.call(this);
+                };
+                //Test가 SuperTest 상속 받도록 설정, Rui.extend를 사용.
+                Rui.extend(Rui.namespacetest.Test, Rui.namespacetest.SuperTest, {
+                    attr2: 'bbbb',
+                    message: function(){
+                        return 'test';
+                    }
+                });
+                
+                var t = new Rui.namespacetest.Test();
+                //Test를 생성후 SuperTest의 attr1이 접근이 된다.
+                Rui.alert("t.attr1 : " + t.attr1);
+                return t.attr1;
+            });
+
+            var getEventBtn = new Rui.ui.LButton('getEventBtn');
+            getEventBtn.on('click', function(){
+                Rui.namespace('Rui.namespacetest');
+                Rui.namespacetest.SuperTest1 = function(){
+                    this.attr1 = 'super_attr1';
+                    this.createEvent('test');
+                    this.test = function(){
+                        var resultData = this.fireEvent('test', {
+                            id: 'test',
+                            name: 'testName'
+                        });
+                        Rui.alert("event result data : " + resultData);
+                    }
+                };
+                
+                Rui.extend(Rui.namespacetest.SuperTest1, Rui.util.LEventProvider, {});
+                
+                var idData = null;
+                var nameData = null;
+                var t = new Rui.namespacetest.SuperTest1();
+                t.on("test", function(a){
+                    idData = a.id;
+                    return true;
+                });
+                
+                t.on("test", function(a){
+                    nameData = a.name;
+                    return true;
+                });
+                
+                t.test();
+                
+                Rui.alert("idData : " + idData + ", nameData : " + nameData);
+                
+                return nameData;
+            });
+
+            var getDomBtn = new Rui.ui.LButton('getDomBtn');
+            getDomBtn.on('click', function(){
+                var result = typeof Rui.getDom('divObj');
+                Rui.alert("typeof Rui.getDom('divObj') : " + result);
+                return result;
+            });
+
+            var getDocBtn = new Rui.ui.LButton('getDocBtn');
+            getDocBtn.on('click', function(){
+                var result = typeof Rui.getDoc();
+                Rui.alert("typeof Rui.getDoc() : " + result);
+                return result;
+            });
+            
+            var ajaxBtn = new Rui.ui.LButton('ajaxBtn');
+            ajaxBtn.on('click', function(){
+                Rui.ajax({
+                    params: { aaa: 'aaa' }, 
+                    url: './../../data/data.json',
+                    success: function(e) {
+                        alert('데이터를 정상적으로 가지고 왔습니다.');
+                    },
+                    failure: function(e) {
+                        alert('데이터를 가지고 오는데 실패했습니다.');
+                    }
+                })
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Rui Object</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>Rui 객체에서 지원하는 상속(extend), 네임스페이스(namespace), 이벤트(event) 등을 사용하는 샘플 </h2>
+            <div class="LblockDesc">
+                <p>사용자가 직접 객체를 상속받거나 정의할 수 있습니다. 객체에는 속성과 이벤트들이 포함됩니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <h3>Rui methods</h3>
+            <ul>
+                <li>isNull : Rui.isNull(null) => true</li>
+                <li>isUndefined : Rui.isUndefined(undefined) => true</li>
+                <li>isObject : Rui.isObject({}) => true</li>
+                <li>isFunction : Rui.isFunction(new Function() {}) => true</li>
+                <li>isBoolean : Rui.isBoolean(true) => true</li>
+                <li>isString : Rui.isString('') => true</li>
+                <li>isArray : Rui.isArray(new Array()) => true</li>
+                <li>isNumber : Rui.isNumber(1) => true</li>
+                <li>isEmpty : Rui.isEmpty('') => true</li>
+                <li>emptyFn : Rui.emptyFn() => 빈 Function</li>
+                <li>applyObject : Rui.applyObject({}, { test: ''} ) => { test: '' }</li>
+                <li>applyIf : Rui.applyIf({ test1: '', test2: '222'}, { test2: 'bbb', test3: 'ccc' }) => { test1: '', test2: '222', test3: 'ccc'}</li>
+                <li>merge : Rui.merge({ test1: '', test2: '222'}, { test2: 'bbb', test3: 'ccc' }) => { test1: '', test2: 'bbb', test3: 'ccc'}</li>
+                <li>getDom : Rui.getDom('getDomBtn') => HTMLElement</li>
+                <li>getDoc : Rui.getDoc() => document Rui.LElement</li>
+                <li>getBody : Rui.getBody() => document.body Rui.LElement</li>
+                <li>ajax : Rui.ajax({ url: 'test.ajax' }) => 서버 호출</li>
+                <li>id : Rui.id() => 화면 고유 아이디</li>
+                <li>select : Rui.select('button') => button태그들이 담아 있는 Rui.LElementList</li>
+                <li>query : Rui.query('button') => button태그들이 담아 있는 배열</li>
+                <li>dump : Rui.dump({ test: 'aaa' }) => '{ test: 'aaa' }' 객체 정보 문자열</li>
+                <li>createElements : Rui.createElements('&lt;div&gt;test&lt;/div&gt;') => 태그를 생성한 Rui.LElementList</li>
+            </ul>
+        </div>
+        <div>아래 버튼을 각각 클릭하여 method 수행결과를 확인하실 수 있습니다. </div>
+        <div class="LblockButton" >
+            <button type="button" id="getNamespaceBtn" >getNamespace</button>
+            <button type="button" id="getExtendNamespaceBtn" >getExtendNamespace</button>
+            <button type="button" id="getEventBtn" >getEvent</button>
+            <button type="button" id="getDomBtn" >getDom</button>
+            <button type="button" id="getDocBtn" >getDoc</button>
+            <button type="button" id="ajaxBtn" >ajax</button>
+        </div>
+    </div>
+</body>
+</html>

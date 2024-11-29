@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Custom Edit</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        var newBtn = null;
+        var deleteBtn = null;
+
+        $C(function() {
+            var editorCombo = $C.combo({
+               listWidth: 200,
+               rendererField: 'value',
+               url:'./../../../../sample/data/code.json'
+            });
+            var codeTextBox = $C.textBox(); 
+            
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'col4' },
+                { id: 'col5' },
+                { id: 'col6' },
+                { id: 'col7' },
+                { id: 'col8', type: 'number' },
+                { id: 'code' },
+                { id: 'code' },
+                { id: 'value' },
+                { id: 'date1', type: 'date' }
+                ]
+            });
+            
+            /*<b>*/
+            
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.selectionColumn(),
+                    $C.stateColumn(),
+                    $C.numberColumn(),
+                    { field: "col1", label: "Col1", sortable: true, editor: $C.textBox() },
+                    { field: "code", sortable: false, align:'center', width: 300, editor: codeTextBox }
+                    ]
+            });
+            /*</b>*/
+            
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                width: 600,
+                height:300
+            });
+
+            var sm = grid.getSelectionModel();
+            sm.on('selectCell', function(e){
+                var column = columnModel.getColumnAt(e.col);
+                var colId = column.getId();
+                if (colId == "code") {
+                    if (dataSet.getAt(e.row).get(colId) == "code4") {
+                        column.setEditor(editorCombo);
+                    }
+                    else {
+                        column.setEditor(codeTextBox);
+                    }
+                }
+            });
+
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json'
+                });
+            });
+
+            $C('#newBtn').button();
+            $C('#newBtn').on("click", function(){
+                var row = dataSet.newRecord();
+                var record = dataSet.getAt(row);
+                record.set("col1", "Junee");
+                record.set("col2", "(02) 6363-7009");
+                record.set("col3", "R2");
+                record.set("date1", new Date());
+            });
+
+            $C('#deleteBtn').button();
+            $C('#deleteBtn').on("click", function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRow();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+            
+            searchBtn.click();
+        });
+    </script>
+       
+</head>
+<body>
+    <h1>gridpanel custom edit sample</h1>
+    <h2>LGridPanel에서 편집시 Editor를 값에 따라 동적으로 구현하는 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div>그리드의 컬럼을 값에 따라 콤보, 텍스트 에디터 등으로 다양하게 편집 되도록 동적으로 설정합니다.</div>
+<div id='bd'>
+    <button type="button" id="searchBtn" >Search</button>
+    <button type="button" id="newBtn" >NEW</button>
+    <button type="button" id="deleteBtn" >delete</button>
+    <div class="LblockMarkupCode">
+        <div id="defaultGrid" ></div>
+    </div>
+</div>
+</body>

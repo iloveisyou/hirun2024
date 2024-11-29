@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="devon-rui-sample" content="yes" />
+<title>Message Box</title>
+<script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+<script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+<script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+<script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+<script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+<link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+<style type="text/css">
+    body {
+        margin:0;
+        padding:0;
+    }
+        
+    #example {height:30em;}
+    .bd label { display:block;float:left;width:45%;clear:left; }
+    .clear { clear:both; }
+    #resp { margin:10px;padding:5px;border:1px solid #ccc;background:#fff;}
+    #resp li { font-family:monospace }
+    
+</style>
+<script type='text/javascript' class="script-code">
+$C(function() {
+    /*<b>*/
+    $C('#alert').button();
+    $C('#alert').on('click', function(){
+        $C.alert({
+            text: 'DevOn RUI 입니다.',
+            handler: function() {
+                $C('#aaa').focus();
+            }
+        });
+    });
+    
+    $C('#confirm').button();
+    $C('#confirm').on('click', function(){
+        $C.confirm({
+            text: '실행하시겠습니까?',
+            handlerYes: function() {
+                $C.alert('yes');
+            },
+            handlerNo: function() {
+                $C.alert('no');
+            }
+        })
+    });
+    
+    $C('#prompt').button();
+    $C('#prompt').on('click', function(){
+        $C.prompt({
+            text: '입력하세요.',
+            handler: function(value) {
+                $C('#aaa').setValue(value);
+            }
+        })
+    });
+    /*</b>*/
+   
+    /*
+     * LTextBox에서 keydown 이벤트를 통해 $C.alert()호출시에
+     * 이벤트가 정상작동 하지 않는 현상 발생.
+     * $C.util.LEvent.stopEvent(e); 이벤트로 처리 가능하나 추후 확인 필요한 부분
+     *  
+    var aaa = new $C.textBox({
+        applyTo: 'aaa'
+    });
+            
+    aaa.on('keydown', function(e) {
+        $C.util.LEvent.stopEvent(e);
+
+        if(e.keyCode == 13) {
+            $C.alert({
+                text: 'DevOn RUI 입니다.',
+                handler: function() {
+                    $C.get('aaa').setValue('123456');
+                }
+            });
+        }
+    });
+    */
+});
+</script>
+</head>
+<body>
+    <h1>messagebox sample</h1>
+    <h2>$C.confirm, $C.alert을 구현한 샘플</h2>
+    <div class="LblockLine"></div>
+    <div>alert, confirm 팝업을 구성합니다.</div>
+<div id='bd'>
+    <input type="text" id="aaa">
+    <div class="LblockMarkupCode">
+        <div>
+            <button id="alert">alert MessageBox</button> 
+            <button id="confirm">confirm MessageBox</button>
+            <button id="prompt">prompt MessageBox</button>            
+        </div>
+    </div>
+</div>
+</body>
+</html>

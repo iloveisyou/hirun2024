@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Edit Combo Grid Basic</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+    <!--[if ie]>
+    <style type="text/css">
+    html {
+        overflow: scroll;
+        overflow-x: auto;
+    }
+    </style>
+    <![endif]-->
+    <style type="text/css" >
+        .L-grid-col {
+            background-color:#e7e7e7;
+        }
+        
+        .L-grid-col-col3 {
+            background-color:#e7e7e0;
+        }
+        
+        .L-grid-cell-editable {
+            background-color:#fff;
+        }
+        
+        .L-button#searchBtn {
+            background: #DFE8F1 url(../../../../resources/skin/sam2/images/search_btn.gif) center left no-repeat;
+            padding: 0 .1px;
+            width: 80px;
+            *margin-left: 4em;   /* IE only */
+            *padding: 0 1.10px;  /* IE only */
+        }
+        
+        .L-button#searchBtn button {
+            padding-left: 22px;
+        }
+        
+        .LblockGrid {
+            width: 70%;
+            float: left;
+        }
+        
+        .LblockDetail {
+            width: 30%;
+            float: right;
+        }
+        
+        .L-grid-header-checkBox {
+            background-position: 2px 2px;
+        }
+        
+        .L-grid-row .L-grid-col-btn {
+            padding: 1px 3px 0px 3px;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        $C(function() {
+            $C('!config').set('$.core.logger.show', [true]);
+
+            var col1Combo = $C.combo({
+                rendererField: 'value', 
+                listWidth:200
+            });
+            
+            // focus로 처리하는 방법
+            // 장점 : 콤보의 데이터의 갱신을 위해 다른 이벤트를 처리할 필요 없음.
+            // 단점 : focus시에 목록이 바로 나오지 않고 delay 될 수 있음.
+            col1Combo.on('focus', function(){
+                col1Combo.getDataSet().load({
+                    url: './../../../../sample/data/code.json'
+                });
+                col1Combo.setValue(dataSet.getNameValue(dataSet.getRow(), 'code'));
+            });
+
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'code' },
+                { id: 'value' }
+                ]
+            });
+            
+            /*
+            // 데이터 변경으로 처리하는 방법
+            // 장점 : 콤보 출력시 delay없이 바로 출력됨
+            // 단점 : 모든 row 위치 이동시마다 combo의 데이터셋을 갱신하여 서버에 부하 발생
+            var updateComboList = function(e){
+                var params = {
+                    code: dataSet.getNameValue(e.row, 'code')
+                };
+                col1Combo.getDataSet().load({
+                    url: './../../../../sample/data/code.json',
+                    params: params
+                });
+            };
+            
+            dataSet.on('update', updateComboList);
+            dataSet.on('rowPosChange', updateComboList);
+            */
+
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.selectionColumn(),
+                    $C.stateColumn(),
+                    $C.numberColumn(),
+                    { field: "code", align: 'center', editor: col1Combo }
+                    ]
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                width: 750,
+                height:300
+            });
+            
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json'
+                });
+            });
+
+            searchBtn.click();
+
+          
+        });
+        
+    </script>
+   
+</head>
+<body>
+    <h1>gridpanel edit combo sample</h1>
+    <h2>LGridpanel에서 LCombo의 동적 로드(load)를 구현하는 샘플 (grid)</h2>
+<div id='bd'>
+    <div class="LblockButton">
+        <button type="button" id="searchBtn" >Search</button>
+    </div>
+    <div class="LblockMarkupCode">
+    
+        <div>
+            <div id="aaa" class="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

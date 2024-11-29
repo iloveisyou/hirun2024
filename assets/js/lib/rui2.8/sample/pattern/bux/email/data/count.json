@@ -1,0 +1,13 @@
+[{
+"metaData":{"fields":[
+{"name":"inbox","dataType":"int"},
+{"name":"sent","dataType":"int"},
+{"name":"important","dataType":"int"},
+{"name":"unread","dataType":"int"},
+{"name":"drafts","dataType":"int"},
+{"name":"junk","dataType":"int"},
+{"name":"trash","dataType":"int"}
+]},
+"records":[
+{"inbox":"8", "sent":"0", "important":"0", "unread":"0", "drafts":"0", "junk":"4", "trash":"3"}
+]}]

@@ -1,0 +1,55 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+그리드에서 cell를 선택시 cell의 흐름 제어를 하는 객체
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_selectCell">
+<div class="L-description">
+그리드에서 cell 선택시 발생하는 이벤트
+</div>
+<div class="L-sample">
+sample: 그리드의 cell이 선택되면 메시지를 출력한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+
+var selectionModel = grid.getSelectionModel();
+selectionModel.on('selectCell', function(e) {
+    alert('[' + e.row + ':' + e.col + ']이 선택되었습니다.');
+});
+</div>
+</div>
+</div>
+
+<div class="event_deselectCell">
+<div class="L-description">
+그리드에서 cell 선택 취소시 발생하는 이벤트
+</div>
+<div class="L-sample">
+sample: 그리드의 cell이 선택이 취소되면 메시지를 출력한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+
+var selectionModel = grid.getSelectionModel();
+selectionModel.on('deselectCell', function(e) {
+    alert('[' + e.row + ':' + e.col + ']이 취소되었습니다.');
+});
+</div>
+</div>
+</div>
+
+</div>

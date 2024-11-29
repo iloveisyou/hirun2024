@@ -1,0 +1,28 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+기본 그리드는 buffer 방식으로 성능위주의 그리드이므로 표현에 제한이 따른다.
+그러나 LGridView는 모든 row를 html dom을 생성하므로서 원하는 포멧으로 출력이 가능하다.
+단 LGridView를 상속받고 있으므로 대량건 처리는 불가능하다.(ie8기준 최대 300건)
+
+샘플 경로 :
+<a href="./../sample/general/ui/grid/gridpanelGridViewSample.html" target="_new">/rui/sample/general/ui/grid/gridpanelGridViewSample.html</a>
+</div>
+
+<div class="L-sample">
+sample: 기본 샘플이다.
+<div class="L-code">
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 420,
+    view: new Rui.ui.grid.LGridView({
+        dataSet: dataSet,
+        columnModel: columnModel
+    })
+});
+</div>
+</div>
+</div>
+
+</div>

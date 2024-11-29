@@ -1,0 +1,1261 @@
+<div>
+<div class="class_description">
+콤포넌트와 연계된 데이터를 처리하는 객체
+fields의 경우에는 각 객체의 type을 정확하게 명시하지 않으면 예측할 수 없는 에러가 발생하므로 
+반드시 type을 정확하게 명시한다. 단 type이 선언되지 않으면 기본적으로 'string' 타입이므로 'string' 타임은 제외
+number 타입으로 정의하고 서버에서 string 타입으로 리턴할 경우 에러가 발생할 수 있다. 스크립트 성능으로 로딩시에는 타입 체크를 하지 않는다.
+
+서버에서 단순하게 한건의 row만 읽어오는 LDataSet은 불필요하게 성능이나 메모리를 증가시킨다.
+이런 처리는 Rui.ajax 메소드를 이용하여 처리하는게 훨씬 효율적이다. (LDataSet은 관리 모듈이 많으므로 cost가 높음)
+
+날짜 처리 방법
+    서버에서 받아온 날짜를 처리하는 java의 json 변환 모듈(json 라이브러리) Date형 객체를 생성하지 않고 무조건 날짜 포멧의 문자형으로 리턴한다.(YYYY-MM-DD)
+    로딩시 읽어온 데이터를 date타입으로 변환을 하려면 rui_config.js의 dataSet영역에 아래와 같이 정의되어 있다.
+ 
+	    readFieldFormater: { date: Rui.util.LFormat.stringToTimestamp },
+	    writeFieldFormater: { date: Rui.util.LRenderer.dateRenderer('%Y%m%d%H%M%S') }
+
+    readFieldFormater는 서버에서 데이터를 읽어올 경우 타입에 맞게 변환처리를 하는 function을 수행한다.
+    writeFieldFormater는 변경건 데이터를 서버에 전송하기전에 변환 처리를 하는 function을 수행한다.
+
+    위에 정의된 stringToTimestamp는 기본적으로 yyyy-MM-dd형 포멧과 yyyy-MM-dd HH:mm:ss.ms형 포멧으로 date형 변환 처리를 한다.
+
+에러 처리 방법
+    에러가 발생하면 loadException 이벤트가 발생한다.
+    하지만 일반적으로 에러 처리는 거의 공통사항이므로 rui_config.js에 dataSet에 해당되는 
+    기본 속성으로 defaultFailureHandler값이 true로 적용되어 있다. true가 적용되면 rui_config.js에 loadExceptionHandler function이 수행되어
+    공통적으로 에러 처리를 할 수 있다.
+    공통 에러처리를 제외하고 생성할 경우에는 생성자에 loadExceptionHandler을 false로 적용하면 된다.
+    
+성능 문제
+IE8에서 성능 이슈가 발생하면 LJsonDataSet대신에 LDelimiterDataSet를 사용한다. LDelimiterDataSet은 성능에 최적화되어 서버에서 받아온 데이터를 사용하기전까지
+받아온 문자열을 그대로 배열로 가지고 있고 데이터셋에서 getAt 메소드가 수행될 때 변경되지 않은 문자열을 LRecord로 만들어 성능은 높이고 메모리는 줄일 수 있다.
+
+IE에서 대량건 처리로 인해 서버에서 가지고 올 경우 스크립트가 오래 걸려 중단할지 여부를 묻는 메시지가 출력될 경우 ladyLoad 속성을 이용하거나 MS에서 제공하는 
+패치를 이용하여 근본적으로 메시지 출력을 막을 수 있다.
+
+아래의 패치를 적용할 경우 개발자가 스크립트를 잘 못 구현할 경우 무한루프가 발생하면 브라우저가 다운될 수 있다.
+MS 패치 : <a href="http://www.dev-on.com/rui/MicrosoftFixit50403.msi" target="_new">MicrosoftFixit50403.msi</a>
+
+샘플 경로 :
+<a href="./../sample/general/data/datasetSample.html" target="_new">/rui/sample/general/data/dataSetSample.html</a>
+<a href="./../sample/general/data/bindSample.html" target="_new">/rui/sample/general/data/bindSample.html</a>
+<a href="./../sample/general/data/datasetManagerSample.html" target="_new">/rui/sample/general/data/datasetManagerSample.html</a>
+<div class="L-sample">
+sample1: dataSet을 생성하는 기본 샘플
+<div class="L-code">
+dataSet = new Rui.data.LJsonDataSet({
+    id: 'dataSet',
+    fields: [
+        { id: 'col1' }, // 없으면 기본 type이 string으로 처리
+        { id: 'col2', type: 'number' },
+        { id: 'col3', type: 'date', defaultValue: new Date()},
+        { id: 'col4', type: 'string' }
+    ]
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample1: 공통 에러 핸들러를 사용하지 않고 에러 처리하는 샘플,
+loadExceptionHandler값을 false로 주지않고 loadException 이벤트를 탑재하면 공통 에러 메시지와 
+아래의 loadException 이벤트 탑재 처리가 동시에 수행되어 에러 처리가 두번 발생한다.
+<div class="L-code">
+dataSet = new Rui.data.LJsonDataSet({
+    id: 'dataSet',
+    loadExceptionHandler: false,
+    fields: [
+        { id: 'col1' }
+    ]
+});
+
+dataSet.on('loadException', function(e) {
+    // 에러 발생
+});
+</div>
+</div>
+</div>
+<!-- config 시작 -->
+<div class="config_fields">
+<div class="L-description">
+DataSet의 기본 필드들을 정의한다.
+</div>
+<div class="L-sample">
+sample1: dataSet을 생성하는 기본 샘플
+<div class="L-code">
+dataSet = new Rui.data.LJsonDataSet({
+    id: 'dataSet',
+    fields: [
+        { id: 'col1' }, // 없으면 기본 type이 string으로 처리
+        { id: 'col2', type: 'number' },
+        { id: 'col3', type: 'date', defaultValue: new Date()},
+        { id: 'col4', type: 'string' }
+    ]
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample2: 필드 동적으로 만드는 방법
+<div class="L-code">
+var fields = [];
+fields.push({ id: 'col1' });
+fields.push({ id: 'col2' });
+dataSet = new Rui.data.LJsonDataSet({
+    id: 'dataSet',
+    fields: fields
+});
+</div>
+</div>
+    
+<div class="L-sample">
+sample3: ※서버의 날짜값이 string(YYYYMMDD)로 저장되어 있어도 dataSet의 type은 'date'형으로 처리하세요.
+date형으로 처리한 후 서버 저장 포멧에 따라서 rui_config.js의 아래의 내용중 Rui.util.LFormat객체를 이용하여 맞춥니다.
+이걸 string으로 처리할 경우 다른 콤포넌트와 연계시 더 복잡한 상황이 만들어집니다.
+    
+rui_config.js파일중
+<div class="L-code">
+dataSet: {
+    defaultProperties: {
+        defaultFailureHandler: true,
+        isClearUnFilterChangeData: false,
+        readFieldFormater: { date : Rui.util.LFormat.stringToDate, string: Rui.util.LString.nvl }, // 서버에서 읽어올 경우 포멧 
+        writeFieldFormater: { date : Rui.util.LRenderer.dateRenderer('%Y%m%d') } <-- 서버로 전송할 경우 포멧
+    },
+</div>
+Rui.util.LFormat.stringToDate : 서버의 'YYYY-MM-DD'형 문자에 맞춰있습니다. RUI포멧: '%Y-%m-%d'
+Rui.util.LFormat.stringToDateByTypeQ : 서버의 'YYYYMMDD'형 문자에 맞춰있습니다. RUI포멧: '%Y%m%d'
+</div>
+
+</div>
+
+<div class="config_focusFirstRow">
+<div class="L-description">
+DataSet의 기본적으로 로딩이 되면 데이터가 있을 경우 0번 row로 이동한다.
+기본적으로 이동되는걸 막으려면 focusFirstRow속성을 false로 주면된다. 이때 로딩이 되면 row는 -1로 이동한다.
+</div>
+<div class="L-sample">
+sample: DataSet을 로딩후 config에서 정의한 위치가 아닌 -1 위치로 유지한다.
+<div class="L-code">
+dataSet = new Rui.data.LJsonDataSet({
+    id: 'dataSet',
+    focusFirstRow: false,
+    fields: [
+	    { id: 'col1' },
+	    { id: 'col2'},
+	    { id: 'col3'}
+    ]
+});    
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_insert">
+<div class="L-description">
+DataSet에 레코드는 이동하지 않고 신규건을 insert 한다. newRecord보다 이벤트가 적게 실행되므로 성능이 월등히 높다.
+</div>
+
+<div class="L-sample">
+sample: 레코드 insert시 상태를 변경한 후 추가한다.
+<div class="L-code">
+var data = {
+    code: 'code1',
+    value: '코드1'
+};
+var record = dataSet.createRecord(data);
+record.setState(Rui.util.LRecord.STATE_INSERT);
+dataSet.insert(2, record);
+record.set('code', '코드1변경');
+</div>
+※ record의 set메소드는 데이터셋에 insert후 처리해야 합니다.
+※ 잘못된 예) dataSet1.insert(dataSet2.getAt(1)); 자바스크립트의 레퍼런스 참조로 예측 못하는 이상 증상이 발생한다.
+※ 올바른 예) dataSet1.insert(dataSet2.getAt(1).clone()); clone 기능을 이용하여 insert한다.
+</div>
+</div>    
+    
+<div class="method_add">
+<div class="L-description">
+DataSet에 레코드는 이동하지 않고 신규건을 add 한다. newRecord보다 이벤트가 적게 실행되므로 성능이 월등히 높다.
+</div>
+
+<div class="L-sample">
+sample: 레코드 add시 상태를 변경한 후 추가한다.
+<div class="L-code">
+var data = {
+    code: 'code1',
+    value: '코드1'
+};
+var record = dataSet.createRecord(data);
+record.setState(Rui.util.LRecord.STATE_INSERT);
+dataSet.add(record);
+record.set('code', '코드1변경');
+</div>
+※ record의 set메소드는 데이터셋에 add후 처리해야 합니다.
+※ 잘못된 예) dataSet1.add(dataSet2.getAt(1)); 자바스크립트의 레퍼런스 참조로 예측 못하는 이상 증상이 발생한다.
+※ 올바른 예) dataSet1.add(dataSet2.getAt(1).clone()); clone 기능을 이용하여 add한다.
+</div>
+</div>    
+
+<div class="method_addAll">
+<div class="L-description">
+DataSet에 레코드는 이동하지 않고 신규건을 addAll 한다. newRecord보다 이벤트가 적게 실행되므로 성능이 월등히 높다.
+</div>
+
+<div class="L-sample">
+sample: 여러건의 데이터를 데이터셋에 추가한다.
+<div class="L-code">
+var records = [];
+for(var i = 1 ; i <= 10; i++) {
+    var data = {
+        code: 'code' + i,
+        value: '코드' + i
+    };
+
+    records.push(dataSet.createRecord(data));
+}
+dataSet.addAll(records);
+</div>
+</div>
+</div>
+    
+<div class="method_removeAt">
+<div class="L-description">
+LDataSet의 현재 row를 삭제 처리한다. 삭제건으로 처리되므로 LDataSetManager에서 updateDataSet시 삭제건으로 넘어간다.
+</div>
+<div class="L-sample">
+sample: 현재의 레코드를 삭제한다.
+<div class="L-code">
+dataSet.removeAt(dataSet.getRow());
+</div>
+</div>
+</div>    
+
+<div class="method_removeAll">
+<div class="L-sample">
+sample: 전체 레코드를 삭제한다.
+<div class="L-code">
+dataSet.removeAll();
+</div>
+</div>
+</div>
+
+<div class="method_clearData">
+<div class="L-description">
+dataSet의 내용을 완전히 초기화한다. 변경건도 사라진다.
+</div>
+<div class="L-sample">
+sample: 변경 상태의 데이터를 모두 지우고 초기화한다.
+<div class="L-code">
+dataSet.clearData();
+</div>
+</div>
+</div>
+
+<div class="method_get">
+<div class="L-description">
+레코드 id로 레코드 객체를 리턴한다.
+</div>
+<div class="L-sample">
+sample: 레코드 id로 레코드 객체를 리턴한다.
+<div class="L-code">
+var record = dataSet.get(recorodId);
+</div>
+</div>
+</div>
+
+<div class="method_getAt">
+<div class="L-description">
+현재의 위치로 레코드를 리턴한다.
+</div>
+<div class="L-sample">
+sample: 현재의 위치로 레코드를 리턴한다.
+<div class="L-code">
+    var record = dataSet.getAt(dataSet.getRow());
+</div>
+</div>
+</div>
+
+<div class="method_indexOfKey">
+<div class="L-description">
+레코드 아이디로 현재위 row값을 리턴한다.
+</div>
+<div class="L-sample">
+sample: 레코드 아이디로 현재위 row값을 리턴한다.
+<div class="L-code">
+    var row = dataSet.indexOfKey(recordId);
+</div>
+</div>
+</div>    
+
+<div class="method_findRow">
+<div class="L-description">
+값으로 특정 컬럼의 row 위치를 리턴한다.
+</div>
+<div class="L-sample">
+sample: 값으로 특정 컬럼의 row 위치를 리턴한다.
+<div class="L-code">
+var row = dataSet.findRow('col1', 'code1');
+var record = dataSet.getAt(row);
+</div>
+</div>
+<div class="L-sample">
+sample: 10번째 row를 시작위치로 지정하여 검색
+<div class="L-code">
+var row = dataSet.findRow('col1', 'code1', 10);
+var record = dataSet.getAt(row);
+</div>
+</div>
+</div>
+
+<div class="method_getFieldIndex">
+<div class="L-description">
+컬럼 아이디에 해당되는 인텍스를 리턴한다.
+</div>
+<div class="L-sample">
+sample: 컬럼 아이디에 해당되는 인텍스를 리턴한다.  
+<div class="L-code">
+var index = dataSet.getFieldIndex('col1');
+</div>
+</div>
+</div>
+
+<div class="method_getFieldById">
+<div class="L-description">
+컬럼 아이디에 해당되는 Field객체를 리턴한다.
+</div>
+<div class="L-sample">
+sample: 컬럼 아이디에 해당되는 Field객체를 리턴한다.
+<div class="L-code">
+var field = dataSet.getFieldById('col1');
+alert(field.type);
+</div>
+</div>
+</div>
+
+<div class="method_load">
+<div class="L-description">
+서버에서 데이터를 읽어와서 채운다.
+</div>
+<div class="L-sample">
+sample: 서버에서 데이터를 읽어와서 채운다.
+<div class="L-code">
+    dataSet.load({
+        url: 'test.rui',
+        params: {
+            col1: 'code1'
+        }
+    });
+</div>
+</div>
+<div class="L-sample">
+sample: 타임아웃을 30초로 지정하는 방법
+<div class="L-code">
+    dataSet.load({
+        url: 'test.rui',
+        params: {
+            col1: 'code1'
+        },
+        timeout: 30
+    });
+</div>
+</div>        
+</div>
+
+<div class="method_getReadData">
+<div class="L-description">
+    ajax를 통해 얻어온 json형식의 데이터를 dataSet의 id에 맞는 데이터로 읽어와 rui 형 data객체로 리턴하는 메소드.
+    형식 :
+    {
+        records: [
+            { col1: 'code1', col2: 'code2' }
+        ]
+    }
+</div>
+<div class="L-sample">
+sample: 서버에서 ajax로 읽어온 데이터를 json객체로 변환한다.
+<div class="L-code">
+    var data = dataSet.getReadData(e);
+    alert(data.records[0].col1);
+</div>
+</div>
+</div>
+
+<div class="method_newRecord">
+<div class="L-description">
+신규 레코드를 생성한 후 해당 위치의 레코드 객체를 리턴한다.
+</div>
+<div class="L-sample">
+sample: 신규 레코드를 생성한 후 해당 위치의 레코드 객체를 리턴한다.
+<div class="L-code">
+var row = dataSet.newRecord();
+var record = dataSet.getAt(row);
+</div>
+</div>
+</div>
+
+<div class="method_createRecord">
+<div class="L-description">
+newRecord 메소드로 호출하는것 보다 createRecord 메소드로 record 객체를 생성해서 add로 처리하는게 성능이 높다.
+</div>
+<div class="L-sample">
+sample: 레코드 객체를 생성하여 데이터셋에 추가한다.
+<div class="L-code">
+var data = {
+    code: 'code1',
+    value: '코드1'
+};
+var record = dataSet.createRecord(data);
+dataSet.add(record);
+</div>
+</div>
+</div>
+
+<div class="method_loadData">
+<div class="L-description">
+json형 객체로 데이터셋에 로딩한다.
+</div>
+<div class="L-sample">
+sample: json형 객체로 데이터셋에 로딩한다.
+<div class="L-code">
+var data = {
+    records: [
+	    { code: 'code1', value: '코드1' },
+	    { code: 'code2', value: '코드2' }
+    ]
+};
+dataSet.loadData(data);
+</div>
+</div>
+<div class="L-sample">
+sample: 모든 데이터를 insert 상태로 바꾸는 기능
+<div class="L-code">
+var data = {
+    records: [
+	    { code: 'code1', value: '코드1' },
+	    { code: 'code2', value: '코드2' }
+    ]
+};
+dataSet.loadData(data, { state: Rui.data.LRecord.STATE_INSERT } );
+</div>
+</div>
+</div>
+
+<div class="method_getCount">
+<div class="L-description">
+    데이터셋에 들어있는 데이터의 실제 건수
+</div>
+<div class="L-sample">
+sample: 데이터셋에 들어있는 데이터의 실제 건수를 리턴한다. 
+<div class="L-code">
+var count = dataSet.getCount();
+</div>
+</div>
+</div>
+
+<div class="method_getModifiedRecords">
+<div class="L-description">
+데이터셋에 들어있는 데이터의 실제 건수
+</div>
+<div class="L-sample">
+sample: 데이터셋에 변경된 레코드들의 json 객체 정보를 리턴한다.
+<div class="L-code">
+var modifiedRecords = dataSet.getModifiedRecords();
+for(var i = 0 ; i < modifiedRecords.length; i++) {
+    var record = modifiedRecords.getAt(i);
+    var obj = record.getValues();
+    alert(obj.col1);
+}
+</div>
+</div>
+</div>
+
+<div class="method_serialize">
+<div class="L-description">
+현재 가지고 있는 모든 데이터를 문자열로 리턴한다.
+</div>
+<div class="L-sample">
+sample: 현재 데이터셋의 정보로 서버에 전송할 문자열을 리턴한다.
+<div class="L-code">
+var sDataSet = dataSet.serialize();
+alert(sDataSet);
+</div>
+</div>
+</div>
+
+<div class="method_serializeModified">
+<div class="L-description">
+현재 가지고 있는 모든 데이터중 변견된 record에 대해서 문자열로 리턴한다.
+</div>
+<div class="L-sample">
+sample: 현재 가지고 있는 모든 데이터중 변견된 record에 대해서 문자열로 리턴한다.
+<div class="L-code">
+var sDataSet = dataSet.serializeModified();
+alert(sDataSet);
+</div>
+</div>
+</div>
+
+<div class="method_undo">
+<div class="L-description">
+1번 row의 데이터를 변경되기전의 데이터로 복원시킨다. 복원시 undo 이벤트가 발생한다.
+</div>
+<div class="L-sample">
+sample: 1번 row의 데이터를 변경되기전의 데이터로 복원시킨다. 복원시 undo 이벤트가 발생한다.
+<div class="L-code">
+dataSet.undo(1);
+</div>
+</div>
+</div>
+
+<div class="method_undoAll">
+<div class="L-description">
+전체 데이터를 변경되기전의 데이터로 복원시킨다. 복원시 dataChanged 이벤트가 발생한다.
+</div>
+<div class="L-sample">
+sample: 전체 데이터를 변경되기전의 데이터로 복원시킨다. 복원시 dataChanged 이벤트가 발생한다.
+<div class="L-code">
+dataSet.undoAll();
+</div>
+</div>
+</div>
+
+<div class="method_isRowInserted">
+<div class="L-description">
+1번row의 위치는 insert상태인지 여부를 true or false로 리턴한다.
+</div>
+<div class="L-sample">
+sample: 1번row의 위치는 insert상태인지 여부를 true or false로 리턴한다.
+<div class="L-code">
+var row = 1; 
+if(dataSet.isRowInserted(row) == true) {
+    
+}
+</div>
+</div>
+</div>
+
+<div class="method_isRowUpdated">
+<div class="L-description">
+1번row의 위치는 update상태인지 여부를 true or false로 리턴한다.
+</div>
+<div class="L-sample">
+sample: 1번row의 위치는 update상태인지 여부를 true or false로 리턴한다.
+<div class="L-code">
+var row = 1; 
+if(dataSet.isRowUpdated(row) == true) {
+    
+}
+</div>
+</div>
+</div>
+
+<div class="method_isRowModified">
+<div class="L-description">
+1번row의 위치는 insert나 update상태인지 여부를 true or false로 리턴한다.
+</div>
+<div class="L-sample">
+sample: 1번row의 위치는 insert나 update상태인지 여부를 true or false로 리턴한다.
+<div class="L-code">
+var row = 1; 
+if(dataSet.isRowModified(row) == true) {
+    
+}
+</div>
+</div>
+</div>
+
+<div class="method_isUpdated">
+<div class="L-description">
+데이터셋에 변경건(insert or update or delete)이 존재하는지 여부를 리턴한다.
+</div>
+<div class="L-sample">
+sample: 데이터셋에 변경건(insert or update or delete)이 존재하는지 여부를 리턴한다.
+<div class="L-code">
+if(dataSet.isUpdated() == true) {
+    alert('변경건이 존재합니다.');
+    return;
+}
+</div>
+</div>
+</div>
+
+<div class="method_setMark">
+<div class="L-description">
+row의 상태를 mark 상태로 바꾼다.
+마크상태가 true가 되면 데이터셋과 연결된 그리드는 LSelectionColumn에 해당되는 row위치는 check상태로 바뀐다.
+체크트리일 경우에는 row에 해당되는 node도 check상태로 바뀐다.
+mark상태로 바뀌면 dataSet의 marked 이벤트가 호출된다.
+</div>
+<div class="L-sample">
+sample: 데이터셋의 1번 row의 상태를 mark 상태로 바꾼다.
+<div class="L-code">
+var row = 1;
+dataSet.setMark(row, true);
+</div>
+</div>
+</div>
+
+<div class="method_setDemarkExcept">
+<div class="L-description">
+지정된 row외의 DataSet에 선택된 row를 선택 false로 설정한다.
+row의 위치를 제외한 모든 항목을 unmark상태로 셋팅한다.
+지정된 row는 marked 이벤트 호출시 e.isSelect는 true가 그외 모든 항목은 false로 호출된다.
+</div>
+<div class="L-sample">
+sample: 데이터셋의 1번 row의 상태를 mark 상태로 바꾼다.
+<div class="L-code">
+var row = 1;
+dataSet.setDemarkExcept(row);
+</div>
+</div>
+</div>
+
+<div class="method_isMarked">
+<div class="L-description">
+DataSet의 row 위치가 마크되어 있는지 리턴한다.
+</div>
+<div class="L-sample">
+sample: 데이터셋의 row위치가 mark상태인지를 확인하여 true or false로 리턴한다.
+<div class="L-code">
+var row = 1;
+if(dataSet.isMarked(row) == true) {
+
+}
+</div>
+</div>
+</div>
+
+<div class="method_setMarkRange">
+<div class="L-description">
+DataSet을 sInx부터 eInx까지 마크한다.
+</div>
+<div class="L-sample">
+sample: 데이터셋의 3번째 row부터 10번째 row 위치까지 mark상태로 변경한다.
+<div class="L-code">
+var startRow = 3;
+var endRow = 10;
+dataSet.setMarkRange(startRow, endRow, true);
+</div>
+</div>
+</div>
+
+<div class="method_setMarkAll">
+<div class="L-description">
+DataSet을 전체의 마크를 설정한다.
+</div>
+<div class="L-sample">
+sample: 데이터셋에 모든 row를 unmark상태로 만든다. 호출시 allMarked 이벤트가 발생한다. 
+false상태로 호출되면 연결된 콤포넌트(그리드, 트리등..)의 check항목은 선택된 항목은 체크가 취소된다. 
+<div class="L-code">
+dataSet.setMarkAll(false);
+</div>
+</div>
+</div>
+
+<div class="method_clearMark">
+<div class="L-description">
+DataSet에 선택된 모든 마크 정보를 지운다.
+</div>
+<div class="L-sample">
+sample: 데이터셋에 모든 row를 unmark상태로 만든다. 호출시 allMarked 이벤트가 발생한다. 
+setMarkAll보다 한번에 전체 처리가 되므로 더 빠르다. 
+<div class="L-code">
+dataSet.clearMark();
+</div>
+</div>
+</div>
+
+<div class="method_removeMarkedRows">
+<div class="L-description">
+DataSet에 마크된 row를 모두 삭제한다.
+</div>
+<div class="L-sample">
+sample: 데이터셋에 mark된 record들을 모두 삭제건으로 만든다. 실제 mark된 row 항목들을 removeAt 메소드로 호출한거와 동일하게 처리된다.  
+<div class="L-code">
+dataSet.removeMarkedRows();
+</div>
+</div>
+</div>
+
+<div class="method_filter">
+<div class="L-description">
+DataSet에 filter를 적용한다. function의 리턴값이 true일 경우의 데이터만 남는다. filter시 dataChanged 이벤트가 발생한다.
+filter가 되면 연결된 UI 콤포넌트(그리드, 트리, 메튜, 탭 등...)는 각 항목들은 모두 숨겨진다.
+filter 적용시 추가된 레코드에 대해서는 clearFilter나 다시 filter를 수행할 때 가장 마지막으로 추가됩니다. 
+</div>
+<div class="L-sample">
+sample: 데이터셋에 col4 컬럼에 해당되는 데이터가 R2값일 경우로 필터한다. 이럴 경우 그리드와 연결되어 있다면 col4컬럼이 R2에 해당되는 데이터만 출력된다.   
+<div class="L-code">
+dataSet.filter(
+   function(id, record) {
+       if(record.get('col4') == 'R2')
+           return true;
+   }
+);
+</div>
+</div>
+</div>
+
+<div class="method_clearFilter">
+<div class="L-description">
+DataSet에 적용된 filter를 지운다. filter시 dataChanged 이벤트가 발생한다.
+</div>
+<div class="L-sample">
+sample: 데이터셋에 filter된 내용을 복원한다.   
+<div class="L-code">
+dataSet.clearFilter();
+</div>
+</div>
+</div>
+
+<div class="method_isFiltered">
+<div class="L-description">
+DataSet에 filter가 적용되었는지 여부
+</div>
+<div class="L-sample">
+sample: DataSet에 filter가 적용되었는지 여부를 검사한다.   
+<div class="L-code">
+if(dataSet.isFiltered() == true) {
+    alert('필터링된 데이터가 존재합니다.');
+}
+</div>
+</div>
+</div>
+
+<div class="method_getTotalCount">
+<div class="L-description">
+서버에서 리턴한 DataSet의 총 갯수를 리턴한다. getCount 메소드는 실제 데이터의 건수이고 getTotalCount는 서버에서 페이징된 db의 전체 건수이다.
+페이징 처리를 안 할 경우에는 getTotalCount는 0건으로 리턴한다.
+</div>
+<div class="L-sample">
+sample: 페이징된 서버의 전체 건수를 alert으로 출력한다.   
+<div class="L-code">
+alert('전체 건수는 ' + dataSet.getTotalCount() + '건입니다.');
+</div>
+</div>
+</div>
+
+<div class="method_setState">
+<div class="L-description">
+row 위치 데이터의 상태를 변경한다.
+</div>
+<div class="L-sample">
+sample: 3번 row의 상태를 insert상태로 만든다.   
+<div class="L-code">
+var row = 3;
+dataSet.setState(row, Rui.data.LRecord.STATE_INSERT);
+</div>
+</div>
+</div>
+
+<div class="method_getState">
+<div class="L-description">
+DataSet의 row 위치 데이터의 상태를 반환한다.
+</div>
+<div class="L-sample">
+sample: 3번 row가 insert상태인지를 판단한다.   
+<div class="L-code">
+var row = 3;
+if(dataSet.getState(row) == Rui.data.LRecord.STATE_INSERT) {
+
+}
+</div>
+</div>
+</div>
+
+<div class="method_clone">
+<div class="L-description">
+DataSet를 newId객체로 복사하여 리턴한다.
+</div>
+<div class="L-sample">
+sample: 기존 데이터과 동일한 구조를 가지는 dataSet2라는 id를 가지는 새로운 데이터셋을 만든다.   
+<div class="L-code">
+var dataSet2 = dataSet.clone('dataSet2');
+</div>
+</div>
+</div>
+
+<div class="method_getValue">
+<div class="L-description">
+DataSet의 row와 col의 값을 리턴한다.
+</div>
+<div class="L-sample">
+sample: 1번 row에 3번 index의 컬럼에 해당되는 값을 얻어온다.   
+<div class="L-code">
+var row = 1;
+var col = 3; 
+var value = dataSet.getValue(row, col);
+</div>
+</div>
+</div>
+
+<div class="method_getNameValue">
+<div class="L-description">
+DataSet의 row와 col의 값을 리턴한다.
+</div>
+<div class="L-sample">
+sample: 1번 row에 col1이라는 id를 가지는 컬럼에 해당되는 값을 얻어온다.   
+<div class="L-code">
+var row = 1;
+var colId = 'col1'; 
+var value = dataSet.getNameValue(row, colId);
+</div>
+</div>
+</div>
+
+<div class="method_setValue">
+<div class="L-description">
+DataSet의 row와 col의 값을 셋팅한다. 값이 셋팅되면 update 이벤트가 발생한다.
+</div>
+<div class="L-sample">
+sample: 1번 row에 3번 index의 컬럼에 해당되는 위치에 '값3'이라는 값을 넣는다.   
+<div class="L-code">
+var row = 1;
+var col = 3; 
+var value = '값3';
+dataSet.setValue(row, col, value);
+</div>
+</div>
+</div>
+
+<div class="method_setNameValue">
+<div class="L-description">
+DataSet의 row와 colId의 값을 셋팅한다. 값이 셋팅되면 update 이벤트가 발생한다.
+</div>
+<div class="L-sample">
+sample: 1번 row에 col1이라는 id를 가지는 컬럼에 해당되는 위치에 '값3'이라는 값을 넣는다.   
+<div class="L-code">
+var row = 1;
+var colId = 'col1'; 
+var value = '값3';
+dataSet.setNameValue(row, colId, value);
+</div>
+</div>
+</div>
+
+<div class="method_setFields">
+<div class="L-description">
+DataSet의 전체 필드를 변경한다.
+</div>
+<div class="L-sample">
+sample: fields의 모든 항목을 변경한다.   
+<div class="L-code">
+var fields = [
+    { id: 'id' },
+    { id: 'col1' },
+    { id: 'col2' },
+    { id: 'col3' }
+]; //Array
+dataSet1.setFields(fields);
+</div>
+</div>
+</div>
+
+<div class="method_batch">
+<div class="L-description">
+DataSet의 batch 메소드로 호출하면 수행후 dataUpdated 이벤트가 발생한다.
+</div>
+<div class="L-sample">
+sample: dataSet에 5건의 데이터를 추가한 후 마지막 row로 이동한다.
+<div class="L-code">
+int cnt = 5;
+dataSet.batch(function(){
+    for(var i = 0 ; i < cnt; i++) {
+        var r = dataSet.createRecord({
+            col1: 'Junee5',
+            col2: '(02) 6363-7009',
+            col3: 'Junee5',
+            col4: 'Junee5',
+            col5: 'Junee5'
+        });
+        dataSet.add(r);
+    }
+});
+dataSet.setRow(dataSet.getCount() - 1);
+</div>
+</div>
+</div>
+
+<div class="method_setRow">
+<div class="L-description">
+현재 DataSet의 Position을 바꾼다.
+position이 바뀌게 되면 rowPosChanged 이벤트가 발생한다.
+rowPosChanged 이벤트는 이동이 완료된 후 발생하므로 이동전에 유효성 체크를 하려면 canRowPosChange 이벤트에서 제어하면 된다.
+상황에 따라 dataSet의 load 이벤트에서 setRow를 할 경우에는 이동을 하지 않는다.
+이유는 dataSet 자체가 load후에 기본으로 rui_config.js에 focusFirstRow 속성이 0으로 되어 있다.
+이 속성이 적용되어 load후 setRow가 0으로 발생하므로 load 이벤트 안에서 호출 된 setRow는 무시된다.
+load 이벤트안에서 setRow를 할 경우에는 LDataSet의 생성자 속성에 focusFirstRow를 -1로 주면 원하는 row로 이동할 수 있다.
+</div>
+<div class="L-sample">
+sample: DataSet의 load 이벤트 안에서 setRow를 하는 방법
+<div class="L-code">
+var dataSet = new Rui.data.LJsonDataSet({
+    id: 'dataSet',
+    focusFirstRow: -1,
+    fields: [
+    ......
+    ]
+});
+dataSet.on('load', function(e) {
+    dataSet.setRow(100);
+});
+dataSet.load({
+    url: 'test.rui'
+});
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+
+<div class="event_dataChanged">
+<div class="L-description">
+데이터 전체의 구조가 변경될 경우 수행하는 이벤트 sort, filter ...등
+</div>
+<div class="L-sample">
+sample: 데이터셋이 filter가 되면 alert을 출력한다.    
+<div class="L-code">
+dataSet.on('dataChanged', function(e) {
+    alert('필터가 적용되었습니다.');
+});
+
+dataSet.filter(
+   function(id, record) {
+       if(record.get('col4') == 'R2')
+           return true;
+   }
+);
+</div>
+</div>
+</div>
+
+<div class="event_add">
+<div class="L-description">
+데이터가 추가될 경우 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: 데이터셋이 add되면 col1의 필드에 '값1'을 셋팅한다. add후데 record의 값을 바꾸면 update이벤트도 발생한다.
+<div class="L-code">
+dataSet.on('add', function(e) {
+    var record = e.record;
+    record.set('col1', '값1');
+});
+
+var data = {
+    code: 'code1',
+    value: '코드1',
+    col1: null
+};
+var record = dataSet.createRecord(data);
+record.setState(Rui.util.LRecord.STATE_INSERT);
+dataSet.add(record);
+</div>
+</div>
+</div>
+
+<div class="event_update">
+<div class="L-description">
+데이터가 수정될 경우 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: 데이터셋에 col1의 컬럼에 '값1'이 바뀌면 col2의 컬럼도 '값2'로 변경한다.
+update 이벤트 처리시 무한 무프가 발생할 수 있으니 주의한다.
+<div class="L-code">
+dataSet.on('update', function(e) {
+    if(e.colId == 'col1') {
+        var record = e.record;
+        record.set('col2', '값2');
+    }
+});
+var row = 1;
+var colId = 'col1';
+var value = '값1';
+dataSet.setNameValue(row, colId, value);
+</div>
+</div>
+
+<div class="L-sample">
+sample: 데이터셋에 col1의 컬럼에 '값1'이 원본값과 동일한지 비교한다.
+<div class="L-code">
+dataSet.on('update', function(e) {
+    if(e.originValue == e.value) {
+        alert('값이 복원되었습니다.');
+        return;
+    }
+});
+var row = 1;
+var colId = 'col1';
+var value = '값1';
+dataSet.setNameValue(row, colId, value);
+</div>
+</div>
+</div>
+
+<div class="event_remove">
+<div class="L-description">
+데이터가 삭제될 경우 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: 데이터셋에 1번 row가 삭제될 경우 1번 row의 record의 값을 백업한다.
+<div class="L-code">
+dataSet.on('remove', function(e) {
+    var record = e.record;
+    var backupValues = record.getValues();
+});
+var row = 1;
+dataSet.removeAt(row);
+</div>
+</div>
+</div>
+
+<div class="event_beforeLoad">
+<div class="L-description">
+load이 발생하기전 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: load전 현재 데이터를 백업한다.
+<div class="L-code">
+dataSet.on('beforeLoad', function(e) {
+    var backupDataSet = dataSet.clone('backupDataSet');
+});
+dataSet.load({
+    url: 'test.rui'
+});
+</div>
+</div>
+</div>
+
+<div class="event_beforeLoad">
+<div class="L-description">
+load이 발생하기전 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: load전 현재 데이터를 백업한다.
+<div class="L-code">
+dataSet.on('beforeLoad', function(e) {
+    var backupDataSet = dataSet.clone('backupDataSet');
+});
+dataSet.load({
+    url: 'test.rui'
+});
+</div>
+</div>
+</div>
+
+<div class="event_load">
+<div class="L-description">
+load 메소드가 실행되면 호출되는 이벤트
+</div>
+<div class="L-sample">
+sample: dataSet에 로드되면 3번 row로 이동한다.
+<div class="L-code">
+dataSet.on('load', function(e) {
+    dataSet.setRow(3);
+});
+dataSet.load({
+    url: 'test.rui'
+});
+</div>
+</div>
+</div>
+
+<div class="event_loadException">
+<div class="L-description">
+load딩시 에러가 발생했을 경우 호출되는 이벤트
+loadException은 http status값이 200~300 사이가 아니면 에러로 간주한다. 서버에서 에러가 발생되면 
+http status를 에러로 설정되어야 한다.
+서버 에러 코드:
+response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+
+loadException은 rui_config.js에 기본적으로 셋팅되어 있다.
+defaultFailureHandler값이 true이면 rui_config.js에 있는 loadExceptionHandler에 있는 function이 호출된다.
+기본속성으로 true이므로 모든 dataSet은 loadExceptionHandler function이 호출되게 셋팅되어 있다.
+
+dataSet: {
+    defaultProperties: {
+        defaultFailureHandler: true,
+        ............
+    },
+    loadExceptionHandler : function(e) {
+        ............
+        여기서 메시지 출력이나 세션이 끊어지면 로그인 페이지로 이동 등 코딩을 추가하면 된다. 
+    }
+
+</div>
+<div class="L-sample">
+sample: dataSet에 로드되면 에러 메시지를 출력한다.
+<div class="L-code">
+dataSet.on('loadException', function(e) {
+    alert('에러가 발생했습니다.');
+});
+dataSet.load({
+    url: 'test.rui'
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: 세션이 끊어지면 로그인 페이지로 이동한다. 세션이 끊어진 문제에 대해서 서버에서 에러 코드(ERR001)를 리턴한다.
+<div class="L-code">
+dataSet.on('loadException', function(e) {
+    if(e.responseText == 'ERR001') {
+        alert('세션이 끊어졌습니다. 로그인 페이지로 이동합니다.');
+        top.document.location = '/login.dev';
+    } else {
+        alert('에러가 발생했습니다.');
+    }
+});
+dataSet.load({
+    url: 'test.rui'
+});
+</div>
+</div>
+</div>
+
+<div class="event_canRowPosChange">
+<div class="L-description">
+Row가 변경되지전에 변경을 해도 되는지 체크하는 이벤트. 일반적으로 유효성 체크로 사용
+function에서 리턴값이 false일 경우에는 dataSet의 row가 이동하지 않는다.
+</div>
+<div class="L-sample">
+sample: row가 이동되기전에 유효성을 체크한다. vm은 LValidatorManager이다.
+<div class="L-code">
+dataSet.on('canRowPosChange', function(e) {
+    if(e.row < 0) return;
+    if (vm.validateDataSet(dataSet, dataSet.getRow()) == false) {
+        Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>') );
+        return false;
+    }
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: row가 이동되기전에 값과 이동전의 값을 비교한다.
+<div class="L-code">
+dataSet.on('canRowPosChange', function(e) {
+    if(e.row < 0) return;
+    var record = dataSet.getAt(e.row);
+    var oldRecord = dataSet.getAt(e.oldRow);
+    if(record.get('col1') != oldRecord.get('col1')) {
+        .....
+    }
+});
+</div>
+</div>
+</div>
+
+<div class="event_canMarkable">
+<div class="L-description">
+row를 선택하기전에 선택이 가능한지 확인하는 이벤트. 
+function에서 리턴값이 false일 경우에는 dataSet의 row는 선택되지 않는다.
+</div>
+<div class="L-sample">
+sample: 3번 row가 선택되지 않는다.
+<div class="L-code">
+dataSet.on('canMarkable', function(e) {
+    if(e.row == 3) return false;
+});
+</div>
+</div>
+</div>
+
+<div class="event_rowPosChanged">
+<div class="L-description">
+Row의 변경이 된 후 수행하는 이벤트
+</div>
+<div class="L-sample">
+sample: dataSet1의 dataSet에 row위 위치가 바뀌면 dataSet1의 모든 record의 값을 파라미터로 dataSet2의 dataSet을 로드한다. 마스터 디테일 그리드 형식 처리
+<div class="L-code">
+dataSet1.on('rowPosChanged', function(e) {
+    if(e.row < 0) return;
+    var params = dataSet1.getAt(e.row).getValues();
+    dataSet2.load({
+        url: 'test.rui',
+        params: params
+    });
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: dataSet1의 dataSet에 row위 위치가 바뀌면 LCombo의 dataSet의 값을 col1 필드값으로 로드한다.
+<div class="L-code">
+var dataSet2 = combo.getDataSet();
+dataSet1.on('rowPosChanged', function(e) {
+    if(e.row < 0) return;
+    var col1Value = dataSet1.getNameValue(e.row, 'col1');
+    dataSet2.load({
+        url: 'test.rui',
+        params: {   
+            col1: col1Value
+        }
+    });
+});
+</div>
+</div>
+</div>
+
+<div class="event_undo">
+<div class="L-description">
+undo시 발생하는 이벤트
+</div>
+<div class="L-sample">
+sample: dataSet1의 dataSet이 undo가 수행되면 dataSet2의 dataSet도 undo한다.
+<div class="L-code">
+dataSet1.on('undo', function(e) {
+    dataSet2.undo(dataSet2.getRow());
+});
+
+dataSet1.undo(dataSet1.getRow());
+</div>
+</div>
+</div>
+
+<div class="event_marked">
+<div class="L-description">
+setMark 메소드 호출시 발생하는 이벤트
+mark되면 e.isSelect값이 true가 설정되고 unmark되면 e.isSelect값이 false로 설정된다.
+</div>
+<div class="L-sample">
+sample: 그리드에서 LSelectionColumn에 해당되는 컬럼이 mark되면 dataSet1의 col1에 해당되는 컬럼의 값이 '값1' 일경우 메시지를 출력후 unmark한다.
+<div class="L-code">
+dataSet.on('marked', function(e) {
+    if(e.isSelect === true && dataSet.getNameValue(e.row, 'col1') == '값1') {
+        dataSet.setMark(e.row, false);
+        alert('col1값이 값1이면 선택할 수 없습니다.');
+        return;
+    }
+});
+</div>
+</div>
+<div class="L-sample">
+sample: 그리드에서 하나의 row만 mark되고 다른 row은 모두 unmark 시킨다.
+<div class="L-code">
+dataSet.on('marked', function(e) {
+    dataSet.clearMark();
+    dataSet.setMark(e.row, e.isSelect);
+});
+</div>
+</div>
+</div>
+
+<div class="event_allMarked">
+<div class="L-description">
+setMarkAll메소드나 clearMark 메소드가 호출되면 발생하는 이벤트
+</div>
+<div class="L-sample">
+sample: 모드 unmark되면 메시지를 출력한다.
+<div class="L-code">
+dataSet1.on('allMarked', function(e) {
+    if(e.isSelect == false) {
+        alert('반드시 하나의 항목은 선택되어야 합니다.');
+    }
+});
+
+</div>
+</div>
+</div>
+
+</div>

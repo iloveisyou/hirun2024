@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="파일 박스(LFileBox), 파일업로드, 동적(Dynamic) 추가" />
+    <title>FileBox Dynamic</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LFileBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LFileBox.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        /*IE7 Hack*/
+        *+html .L-filebox-text {
+            margin-left: -40px;
+            width: 223px;
+        }
+        *+html .L-filebox-button {
+            height: 20px;
+            width: 77px;
+        }
+        /*IE6 Hack*/
+        * html .L-filebox-text {
+            margin-left: -40px;
+            width: 223px;
+        }
+        * html .L-filebox-button {
+            height: 20px;
+            width: 77px;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var lastFileBox;
+            var form1 = new Rui.ui.form.LForm('frm');
+            form1.on('success', function(e){
+                Rui.alert('파일을 업로드 하였습니다.');
+                form1.reset();
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var addBtn = new Rui.ui.LButton('addBtn');
+            addBtn.on('click', function(){
+                
+                var ulEl = Rui.get('fileList');
+                var liEl = Rui.createElements('<li></li>');
+                liEl.appendTo(ulEl);
+                var fileName = 'test' + ulEl.dom.childNodes.length;
+
+                /*<b>*/
+                var fileBox = new Rui.ui.form.LFileBox({
+                    fileName: fileName,
+                    width: 300
+                });
+                fileBox.render(liEl);
+                /*</b>*/
+                
+                var aEl = Rui.createElements('<a href="#">Delete</a>');
+                liEl.appendChild(aEl);
+                aEl.on('click', function(e){
+                    fileBox.destroy();
+                    Rui.get(e.target).findParent('li').removeNode();
+                });
+                
+                lastFileBox = fileBox;
+            });
+
+            var resetBtn = new Rui.ui.LButton('resetBtn');
+            resetBtn.on('click', function(){
+                form1.reset();
+            });
+            
+            var submitBtn = new Rui.ui.LButton('submitBtn');
+            submitBtn.on('click', function(){
+                form1.submit();
+            });
+
+            addBtn.click();
+            
+        });
+    </script>
+
+</head>
+<body>
+    <div id='hd'>
+        <h1>FileBox Dynamic</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>파일박스(LFileBox)를 이용한 멀티 업로드(Multi Upload) 샘플 입니다.</h2>
+            <div class="LblockDesc">
+		        <p>파일 업로드(File Upload)를 위해 제공되는 파일박스(LFileBox)와 LForm을 사용한 예제 입니다.</p>
+		        <p>여러개의 LFileBox를 동적으로 추가한 후 LForm을 이용하여 Submit하면 서버로 파일이 전송됩니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <form id="frm" name="frm" method="post" enctype="multipart/form-data" action="./../../../data/data.jsp">
+                <caption>Add 버튼을 클릭하면 FileBox가 추가됩니다.</caption>
+                <ul id="fileList"></ul>
+            </form>
+            <div class="LblockButton" >
+                <button type="button" id="addBtn" >Add</button>
+                <button type="button" id="resetBtn" >Reset</button>
+                <button type="button" id="submitBtn" >Submit</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

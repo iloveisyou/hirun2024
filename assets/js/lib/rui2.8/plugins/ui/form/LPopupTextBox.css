@@ -1,0 +1,33 @@
+/* LPopupTextBox
+------------------------------*/
+div.L-popuptextbox {
+    position: relative;
+}
+.L-popuptextbox a.icon {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 20px;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    background: transparent url(./../../../resources/images/button/popup.gif) no-repeat 0 4px;
+    background-position: 50% 50%;
+}
+.L-popuptextbox .L-hidden-field {
+    display: none;
+}
+.L-cal-container {
+    display: none;
+    z-index: 999;
+    position: absolute; 
+}
+.L-editor-panel div.L-popuptextbox {
+    vertical-align: top;
+}
+.L-editor-panel div.L-popuptextbox input {
+    height: 18px;
+    padding: 0px;
+    margin: 0px;
+    vertical-align: top;
+}

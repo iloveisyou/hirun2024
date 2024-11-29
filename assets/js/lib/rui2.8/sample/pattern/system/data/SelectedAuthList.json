@@ -1,0 +1,8 @@
+[{
+    "metaData": {
+        "datasetId":"dataSet"
+    },
+    "records": [
+        { "localecode": "US", "authCode": "A001", "authNm": "Administrator", "rmk": "Administrator", "userId": "admin" }
+    ]
+}]

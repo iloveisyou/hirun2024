@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-keyword" content="enable,disable,isDisabled,활성화,비활성화" />
+        <title>Element enable or disable sample</title>
+        
+        <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+        <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+        <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+        <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+        <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+        <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+        
+        <!--  샘플용 스크립트 -->
+        <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+        <link rel="stylesheet" type="text/css" href="./../../../resources/rui_sample_import.css"/>
+        <!-- 샘플에서만 사용하는 css-->
+        <style type="text/css">
+            #frm label {
+                display: block;
+                float: left;
+                width: 10%;
+                clear: left;
+            } 
+        </style>
+        
+        <script type="text/javascript" class="script-code">
+            Rui.onReady(function(){
+            	
+            	/*<b>*/
+            	var form = new Rui.ui.form.LForm('frm');
+            	Rui.get('enableDisableLink').on('click', function(){
+    				if (form.isDisable()) {
+    					form.enable();
+    					Rui.get('enableDisableLink').html('testDisable');
+    				}
+    				else {
+    					form.disable();
+    					Rui.get('enableDisableLink').html('testEnable');
+    				}
+            	}); 
+            	/*</b>*/
+            	
+            });
+        </script>
+
+    </head>
+    <body>
+        <h1>Element enable or disable sample</h1>
+        <h2>element enable or disable기능을 제공하는 샘플입니다.</h2>
+        <div class="LblockLine"></div>
+        <div>frm에 해당하는 모드 객체들에 대해서 enable or diable기능을 저어합니다.</div>
+        <div id='bd'>
+            <div>
+                <div id="container" class="container">
+                    <div id="panel">
+                        <form class="LblockMarkupCode" id="frm" name="frm" method="post" action="/consoleLog.dev">
+                            <fieldset>
+                                <legend>로그인 폼</legend>
+                                <input type="hidden" id="test" name="test" />
+                                <label for="state">state</label>
+                                <input type="text" id="state" name="state" />
+                                <br/>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>    
+                <a href="#" id="enableDisableLink">EnableDisable</a>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<div>
+    
+<div class="class_description">
+<div class="L-description">
+시스템 화면의 기능을 처음 접속한 사용자에게 알려주는 기능을 제공할 수 있다.
+페이지 성능 및 개발와 가이드 소스를 구분하고 가이드의 상태까지 관리해준다.
+또한 debug 옵션을 통해서 좌표 계산을 쉽게 할 수 있다. 
+debug 속성이 true로 적용되면 무조건 출력되므로 개발시점에서는 true로 적용하고 완성이된 후에는 false로 적용하면 상태가 적용된다.
+개발자 가이드 소스는 guideManagerSample_guide.js 파일에 포함되어 있다.
+
+사용 객체
+LGuideManager: LGuide를 상속받은 객체를 사용하지 여부를 결정한다.
+LGuide : 개발자가 상속받아 작성할 가이드 객체
+LFocusNotification : 사용자에게 알림을 출력할 객체로 좌표를 부여하여 출력한다.
+
+개발자 Guide 작성 방법 
+guide용 스크립트은 별도로 작성해야 하면 네이밍 규칙은 아래와 같다.
+pageName: 전체 시스템에서 중복되지 않는 고유 코드명
+파일명 : pageName + '_guide.js'
+pageUrl : jsp를 바로 호출할 경우에는 해당 jsp 파일 위치와 동일한 경로에 파일이 위치해야 하며,
+            서블릿을 통한 jsp를 호출 할 경우에는 url이 맞지 않으므로 pageUrl 속성을 추가해야 한다.
+LGuide객체의 클래스명 : 클래스명은 아래와 같다. 첫번째 클래스명의 글자는 대문자로 해야 한다.
+    Rui.ui.guide.[GuideManagerSample]
+
+개발 규칙
+LGuide객체를 상속받으면 무조건 onReady 메소드를 구현해야 한다.
+개발자 guide 객체를 생성한 후 onReady에서 기능별로 메소드를 호출한다. 
+
+LGuide를 상속 받아 구현 하는 개발자 클래스는 super에 있는 getInt 메소드는 한번 호출 할 경우마다 1씩 증가하게 되고 getBoolean 메소드를 호출하면 무조건 true로 설정된다.
+
+구현할 메소드 만들기 (개발자_guide.js 내부)
+    loadPage: function() {
+         if(this.getInt('loadPage') == 0) {   <== getInt 메소드가 호출되면 내부적으로 1씩 증가한다.
+             this.doLoadPage();
+         };
+    }
+
+LFocusNotification 작성
+LFocusNotification 작성시 좌표로 우치를 지정한다.
+view : 사용자한테 알려줄 위치의 좌표를 region 객체값으로 적용한다.
+dialog : 알림 dialog를 출력할 좌표를 region 객체값으로 적용한다.
+text : 출력할 메시지를 정의한다.
+
+    var r = { top: 120, left: 5, right: 520, bottom: 220};
+    var d = Rui.util.LObject.clone(r);
+    d.top += 130;
+    d.bottom = d.top + 180;
+    var focusNotification1 = new Rui.ui.LFocusNotification({ 
+        text: '이 가이드는 한번만 출력되며, 다음번에는 출력되지 않습니다.',
+        view: r,
+        dialog: d }
+    );
+    focusNotification1.render(document.body);
+
+LFocusNotification의 좌표를 지정할 경우에는 매번 LGuideManager의 clear 메소드를 호출하면 된다.
+하지만 매번 초기화하여 개발하기 어렵기 때문에 debug 속성을 true로 적용하면 getInt와 getBoolean가 기본값으로 리턴되므로 무조건 출력된다. 
+<div class="L-sample">
+sample1: LGuideManager을 생성하는 기본 샘플
+샘플 경로 :
+<a href="./../sample/general/ui/guideManagerSample.html" target="_new">/rui/sample/general/ui/guideManagerSample.html</a>
+<div class="L-code">
+var guideManager = new Rui.ui.LGuideManager({ pageName: 'guideManagerSample', debug: false });
+</div>
+</div>
+</div>
+</div>
+
+</div>

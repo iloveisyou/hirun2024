@@ -1,0 +1,17 @@
+[{
+    "message": "",
+    "metaData": {
+        "dataSetId": "Table",
+        "totalCount": "2"
+    },
+    "records": [
+        {
+            "value": "ko",
+            "text": "ko"
+        },
+        {
+            "value": "en",
+            "text": "en"
+        }
+    ]
+}]

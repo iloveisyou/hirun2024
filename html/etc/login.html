@@ -1,0 +1,99 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko" class="ct-etc pg-login">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Him Hi-Run System - Login</title>
+    <link rel="icon" href="/assets/images/favicon.ico">
+
+    <!-- RUI import -->
+    <!-- <script type="text/javascript" src="/assets/lib/rui2.8/js/rui_base.js"></script>
+    <script type="text/javascript" src="/assets/lib/rui2.8/js/rui_core.js"></script>
+    <script type="text/javascript" src="/assets/lib/rui2.8/js/rui_ui.js"></script>
+    <script type="text/javascript" src="/assets/lib/rui2.8/js/rui_form.js"></script>
+    <script type="text/javascript" src="/assets/lib/rui2.8/js/rui_grid.js"></script>
+    <script type="text/javascript" src="/assets/lib/rui2.8/resources/rui_config.js"></script>
+    <script type="text/javascript" src="/assets/lib/rui2.8/resources/rui_license.js"></script> -->
+    <!-- <script type="text/javascript" src="/assets/lib/rui2.8/plugins/ui/LTooltip.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/lib/rui2.8/plugins/ui/LTooltip.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="/assets/lib/rui2.8/resources/rui.css" /> -->
+    <script language="JavaScript" type="text/javascript" src='/assets/lib/rui2.8/js/rui_base.js'></script>
+    <script language="JavaScript" type="text/javascript" src='/assets/lib/rui2.8/js/rui_core.js'></script>
+    <script language="JavaScript" type="text/javascript" src='/assets/lib/rui2.8/js/rui_ui.js'></script>
+    <script language="JavaScript" type="text/javascript" src='/assets/lib/rui2.8/js/rui_form.js'></script>
+    <script language="JavaScript" type="text/javascript" src='/assets/lib/rui2.8/js/rui_grid.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/lib/rui2.8/plugins/ui/LLoadPage.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/lib/rui2.8/resources/rui_config.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/lib/rui2.8/resources/locale/lang-ko_KR.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/lib/rui2.8/resources/locale/lang-en_US.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/lib/rui2.8/plugins/ui/grid/LGridView.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/lib/rui2.8/plugins/ui/grid/LGridPanelExt.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/lib/rui2.8/plugins/ui/grid/LGridStatusBar.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/lib/rui2.8/plugins/ui/grid/LTableView.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/lib/rui2.8/plugins/ui/LFrameDialog.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/lib/rui2.8/resources/rui_config.js'></script>
+    <link rel="stylesheet" type="text/css" href="/assets/lib/rui2.8/resources/rui.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/lib/rui2.8/resources/rui_skin_blue.css" />
+    <script language="JavaScript" type='text/javascript' src='/assets/lib/rui2.8/plugins/tab/rui_tab.js'></script>
+    <link rel="stylesheet" type="text/css" href="/assets/lib/rui2.8/plugins/tab/rui_tab.css" />
+    <!-- jquery import -->
+    <script type='text/javascript' src='/assets/js/lib/jquery-3.7.1.min'></script>
+    <!-- aos import -->
+    <script type='text/javascript' src="/assets/js/lib/aos@2.3.1/aos.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/js/lib/aos@2.3.1/aos.css" />
+    <!-- all import -->
+    <script type='text/javascript' src='/assets/js/all.js'></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/all.css" />
+
+</head>
+<body>
+
+<div class="hirun-wrap">
+    <div class="visual img_login">
+    </div>
+    <div class="container">
+        <header class="header" data-aos="fade-right" data-aos-delay="0">
+            <h1>HI-RUN SYSTEM</h1>
+            <p>친환경 그린에너지를 실현하는 서비스&유지보수 글로벌 넘버원 기업</p>
+        </header>
+        <main class="main" data-aos="fade-right" data-aos-delay="50">
+            <h2 class="heading">LOGIN</h2>
+            <p class="substr">하이런에 오신것을 환영합니다. <br />본 시스템은 주식회사 하이엠솔루텍 임직원을 위한 시스템으로서 사원번호를 인증받으신 임직원만 이용하실 수 있습니다.</p>
+            <div class="cpnt_login">
+                <div class="loginInput id">
+                    <input type="text" placeholder="사원번호" />
+                    <button type="button" class="btn btn_input_clear">사원번호 입력창 초기화</button>
+                </div>
+                <div class="loginInput pw">
+                    <input type="password" placeholder="비밀번호" />
+                    <button type="button" class="btn btn_input_clear">비밀번호 입력창 초기화</button>
+                </div>
+                <button type="button" class="btn btn_login">로그인</button>
+                <div class="option">
+                    <button type="button" class="btn btn_searchPassword">비밀번호 찾기</button>
+                    <label><input type="checkbox" class="ipt ipt20" /> 사원번호저장</label>
+                </div>
+            </div>
+        </main>
+        <footer class="footer" data-aos="fade-right" data-aos-delay="100">
+            <p>COPYRIGHT ⓒ HIMSOLUTEK. ALL RIGHT RESERVED.</p>
+        </footer>
+    </div>
+
+    <script>
+    AOS.init();
+    </script>
+
+
+        
+
+
+</div>
+
+</body>
+</html>

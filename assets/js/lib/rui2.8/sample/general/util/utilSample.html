@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="String, Number, Date 유틸리티" />
+    <title>Utility</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            var convertToHungarianBtn = new Rui.ui.LButton('convertToHungarianBtn');
+            convertToHungarianBtn.on('click', function(){
+                var c = Rui.get('camel');
+                var val = c.getValue();
+                /*<b>*/
+                var h = Rui.util.LString.camelToHungarian(val);
+                /*</b>*/
+                Rui.alert(h);
+            });
+
+            var lPadBtn = new Rui.ui.LButton('lPadBtn');
+            lPadBtn.on('click', function(){
+                var aaa = '1';
+                /*<b>*/
+                aaa = Rui.util.LString.lPad(aaa, '0', 7);
+                /*</b>*/
+                Rui.alert(aaa);
+            });
+
+            var rPadBtn = new Rui.ui.LButton('rPadBtn');
+            rPadBtn.on('click', function(){
+                var aaa = '1';
+                /*<b>*/
+                aaa = Rui.util.LString.rPad(aaa, '0', 7);
+                /*</b>*/
+                new Date().format('%x');
+                Rui.alert(aaa);
+            });
+
+            var roundBtn = new Rui.ui.LButton('roundBtn');
+            roundBtn.on('click', function(){
+                /*<b>*/
+                Rui.alert(Rui.util.LNumber.round(10.171, 1));
+                /*</b>*/
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Utility</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>유틸리티 util(LPad, RPad, Round 등) 관련 모음</h2>
+            <div class="LblockDesc">
+		        <p>문자 및 숫자를 핸들링 할 수 있는 여러 유틸리티들을 제공한다.</p>
+		        <p>해당 기능들중에 기본 javascript 객체인 prototype으로도 제공된다. api 참조</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="convertToHungarianBtn" >camel to hungarian</button>
+            <button type="button" id="lPadBtn" >lPad</button>
+            <button type="button" id="rPadBtn" >rPad</button>
+            <button type="button" id="roundBtn" >round</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <input id="camel"/> => <span id="hungarian"></span>
+        </div>
+    </div>
+</body>
+</html>

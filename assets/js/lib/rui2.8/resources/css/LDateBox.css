@@ -1,0 +1,37 @@
+/* LDateBox
+------------------------------*/
+div.L-datebox {
+	position: relative;
+}
+.L-datebox a.icon {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 20px;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    background: transparent url(./images/datebox/cal.png) no-repeat 0 0;
+    background-position: 50% 50%;
+}
+.L-datebox .L-hidden-field {
+    display: none;
+}
+.L-cal-container {
+    display: none;
+    z-index: 999;
+    position: absolute; 
+}
+.L-editor-panel div.L-datebox {
+    vertical-align: top;
+}
+.L-editor-panel div.L-datebox input {
+    height: 18px;
+    padding: 0px;
+    margin: 0px;
+    vertical-align: top;
+}
+/* for iOS safari */
+.L-ua-safari.L-ua-mobile .L-datebox.L-form-field {
+	border: 0;
+}

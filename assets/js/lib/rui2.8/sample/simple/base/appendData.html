@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>base element</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <script type="text/javascript" class="script-code">
+            var loadPage = null;
+            $C(function(){
+                alert($C("#result").getAt(0).dom + ' 테스트');
+            })
+            
+            function test() {
+                alert(22);
+            }
+        </script>
+        <style>
+            #result {
+                background-color: red;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="result" ><a href="javascript:test()">메롱</a></div>
+    </body>
+</html>

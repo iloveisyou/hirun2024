@@ -1,0 +1,25 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+일반 HTML 태그에 선택시 자동으로 TextArea가 적용되어 편집이 가능하게 하는 기능 
+
+샘플 경로 :
+<a href="./../sample/general/ui/inlineeditorSample.html" target="_new">/rui/sample/general/ui/inlineeditorSample.html</a>
+</div>
+<div class="L-sample">
+sample: 기본 샘플
+<div class="L-code">
+var edior = new Rui.ui.LInlineEditor({
+    applyTo : "editor",
+    enterStopEdit: false,
+    field: new Rui.ui.form.LTextArea()
+});
+
+edior.on('stopEdit', function(e) {
+    alert(e.field.getValue());
+});
+</div>
+</div>
+</div>
+
+</div>

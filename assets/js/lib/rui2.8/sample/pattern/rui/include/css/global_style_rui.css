@@ -1,0 +1,280 @@
+/* Block : skipLink
+---------------------------------------------------------*/
+#LblockSkipLink {
+	position:absolute; width:0; height:0; font-size:0; line-height:0; overflow:hidden; visibility:hidden;
+}
+/* Block : wrapper
+---------------------------------------------------------*/
+#LblockWrapper {
+}
+* html #LblockWrapper {
+	height:1%;
+}
+*:first-child+html #LblockWrapper {
+	min-height:1%;
+}
+/* Block : header
+---------------------------------------------------------*/
+#LblockHeader {
+	background:url(../images/header_bg.gif) repeat-x;
+}
+
+/* Block : headerIn
+---------------------------------------------------------*/
+#LblockHeaderIn {
+	background:url(../images/topMenu_tab_bg_right.gif) no-repeat right top;
+}
+
+/* Block : topLogo
+---------------------------------------------------------*/
+#LblockTopLogo a {
+}
+
+/* Block : welcome
+---------------------------------------------------------*/
+#LblockWelcome {
+	text-align:right;
+	color:#808080;
+	padding-left:15px;
+}
+#LblockWelcome span {
+	font-weight:bold;
+	color:#0076b5;
+	padding-left:15px;
+}
+#LblockWelcome a {
+	position:absolute;
+	display:block;
+	top:-4px;
+	right:-55px;
+	background:url(../images/logout.gif) no-repeat;
+	padding-top:20px;
+	overflow:hidden;
+	height:0px;
+	width:51px;
+}
+
+/* Block : supportMenu
+---------------------------------------------------------*/
+#LblockSupportMenu li {
+	display:inline;
+	padding:0px 9px 0px 10px;
+	font-size:1em;
+	font-family: tahoma,sans-serif;
+	background:url(../images/supportMenu_bar.gif) no-repeat right 40%;
+}
+#LblockSupportMenu li a {
+	color:#7e7e7e;
+	text-decoration:none;
+}
+#LblockSupportMenu li a:hover {
+	color:#C2316C;
+}
+
+/* Block : totalSearch
+---------------------------------------------------------*/
+#LblockTotalSearch {
+	padding:2px 0 0px 5px;
+	color:#D7F5F2;
+	background:url(../images/totalSearch_input.gif) no-repeat left 2px;
+}
+#LblockTotalSearch label {
+	display:none;
+}
+#LblockTotalSearch input.Ltext {
+	width:104px;
+	font-size:0.9em;
+	padding-right:5px;
+	border:none;
+	background:transparent;
+}
+#LblockTotalSearch .Limage {
+	vertical-align:top;
+}
+
+/* Block : topMenu
+---------------------------------------------------------*/
+#LblockTopMenu {
+	background:url(../images/topMenu_tab_bg_left.gif) no-repeat left top;
+	white-space:nowrap;
+}
+#LblockTopMenu .L-ul-tabmenu {
+	width:930px;
+	padding-left:55px;
+	height: 60px;
+	overflow: hidden;
+	margin-top: 7px;
+}
+#LblockTopMenu li {
+	float:left;
+	font-weight:bold;
+	background:url(../images/topMenu_divisionBar.gif) no-repeat left center;
+}
+
+#LblockTopMenu .L-ul-tabmenu-content {
+	color: #fff;
+	cursor: pointer;
+}
+
+#LblockTopMenu .L-ul-depth-1 {
+	margin-top: 15px;
+}
+
+#LblockTopMenu .L-ul-depth-1 li {
+	background: none;
+	font-weight: normal;
+}
+
+#LblockTopMenu .L-ul-depth-1 .L-ul-tabmenu-content {
+	color: #7f7f7f;
+}
+
+#LblockTopMenu .L-ul-focus-top-node .L-ul-tabmenu-content {
+	color: #ffeb7e;
+}
+
+/* Block : left
+---------------------------------------------------------*/
+#LblockLeft {
+
+}
+
+/* Block : leftTitle
+---------------------------------------------------------*/
+#LblockLeftTitle {
+}
+#LblockLeftTitle h1 {
+	padding-top:10px;
+	padding-left:25px;
+	line-height:36px;
+	color:#e1528d;
+	font-size:1.1em;
+	background:url(../images/leftTitle_bg.gif) no-repeat left top;
+}
+
+/* Block : leftMenuStyle
+---------------------------------------------------------*/
+#LblockLeftMenuStyle {
+	line-height:15px;
+}
+#LblockLeftMenuStyle img {
+	vertical-align:top;
+	cursor:pointer;
+}
+
+/* Block : leftMenu
+---------------------------------------------------------*/
+/* --------- tree menu --------- */
+#LblockLeftMenu.LtreeMenu {
+}
+* html #LblockLeftMenu.LtreeMenu {
+	height:1%;
+}
+*:first-child+html #LblockLeftMenu.LtreeMenu {
+	min-height:1%;
+}
+#LblockLeftMenu.LtreeMenu ul {
+	display:none;
+}
+#LblockLeftMenu.LtreeMenu ul {
+	padding-top:3px;
+	padding-right:5px;
+}
+#LblockLeftMenu.LtreeMenu a:link,
+#LblockLeftMenu.LtreeMenu a:visited { text-decoration:none; color:black; }
+#LblockLeftMenu.LtreeMenu a:hover, 
+#LblockLeftMenu.LtreeMenu a:focus { text-decoration:none; color:black; }
+#LblockLeftMenu.LtreeMenu li.Lcurrent a {
+	color:#489CCA;
+	font-weight:bold;
+}
+#LblockLeftMenu.LtreeMenu li.Lcurrent li a,
+#LblockLeftMenu.LtreeMenu li.Lcurrent li li a {
+	color:#000;
+	font-weight:normal;
+}
+.LtreeDragged a:link, .LtreeDragged a:visited { text-decoration:none; color:black; }
+.LtreeDragged a:hover, .LtreeDragged a:focus { text-decoration:none; color:black; }
+span.LtreeDragItem span {
+	padding-left:2px;
+}
+.LtreeDragged {
+	border:1px dashed #bbb;
+	background:#fff;
+}
+.LtreeDragged * {
+	vertical-align:middle;
+}
+.LtreeDragged a:link, .LtreeDragged a:visited { text-decoration:none; color:black; }
+.LtreeDragged a:hover, .LtreeDragged a:focus { text-decoration:none; color:black; }
+.LtreeClone {
+	background-color:#eef;
+}
+.LtreeBoundLine {
+	height:2px;
+	background-color:#555;
+}
+
+/* Block : body
+---------------------------------------------------------*/
+div#LblockBody {
+	padding:10px 10px 10px 227px;
+}
+body#LblockBody {
+	padding:10px 10px 10px 15px;
+}
+
+/* Block : popupBody
+---------------------------------------------------------*/
+#LblockPopupBody {
+	padding:20px;
+}
+
+/* Block : footer
+---------------------------------------------------------*/
+#LblockFooter {
+	padding-top:0px;
+	color:#a0a0a0;
+	font-size:1em;
+	background:url(../images/footer_bg.gif) repeat-x left top;
+	text-align:left;
+}
+body#LblockFooter {
+	font-size:0.7em;
+}
+
+/* Block : footerIn
+---------------------------------------------------------*/
+#LblockFooterIn {
+}
+
+/* Block : footerLogo
+---------------------------------------------------------*/
+#LblockFooterLogo {
+}
+
+/* Block : footerCopyright
+---------------------------------------------------------*/
+#LblockFooterCopyright span {
+	line-height:21px;
+}
+
+/* Block : footerMenu
+---------------------------------------------------------*/
+#LblockFooterMenu li {
+	display:inline;
+	padding:0px 7px 0px 10px;
+	font-size:0.9em;
+	background:url(../images/supportMenu_bar.gif) no-repeat 0 50%;
+}
+#LblockFooterMenu li.Lfirst {
+	background:none;
+}
+#LblockFooterMenu li a {
+	line-height:21px;
+	color:#A0A0A0;
+	text-decoration:none;
+}
+#LblockFooterMenu li a:hover {
+	color:#FF7BB1;
+}

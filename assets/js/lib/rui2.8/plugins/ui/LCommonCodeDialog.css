@@ -1,0 +1,19 @@
+.Popup, .Popup input {
+    position: relative;
+}
+
+.Popup .Popup-icon {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: bottom;
+	position: relative;
+    width:25px;
+    height:20px;
+    *height:21px;
+    border: 0;
+    margin:0;
+    padding: 0;
+    background:transparent url(../../resources/skin/sam2/images/search_btn.gif) no-repeat 0 0;
+    cursor:pointer;
+}

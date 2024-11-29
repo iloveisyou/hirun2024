@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Combo basic</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type='text/javascript' class="script-code">
+            var dataSet = null;
+            $C(function(){
+                /*<b>*/
+                $C('#combo1').combo({
+                    id: 'combo1',
+                    //editable: true,
+                    //useEmptyText: false,
+                    //defaultValue: 'code2',
+                    //selectedIndex: -1,
+                    url: './../../../data/code.json'
+                });
+                
+                /*</b>*/
+                dataSet = $C('#combo1').getDataSet();
+               
+                $C('#combo1').on('changed', function(e){
+                    $C.log('dataset row index : ' + dataSet.getRow());
+                    $C.log('dataset bindValue : ' + this.getValue());
+                });
+                
+                $C('#combo1').on('focus', function(e){
+                    $C.log('Focused !');
+                });
+                
+                $C('#combo1').on('blur', function(e){
+                    $C.log('Blured !');
+                });
+                
+            });
+            
+        </script>
+       
+    </head>
+    <body>
+        <h1>combo basic sample</h1>
+        <h2>LCombo의 기본 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>기본적인 콤보 형태입니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id='panel'>
+            <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                <fieldset>
+                    <label for="combo1">
+                        col1
+                    </label>
+                    <select id="combo1" name="combo1">
+                    </select>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <a href='javascript:testSetValue()'>setValue</a>
+    <a href='javascript:testForceSelection()'>ForceSelection</a>
+    <a href='javascript:testChangeDataSetRow()'>ChangeDataSetRow</a>
+    <a href='javascript:testGetBindColVal()'>GetBindColVal</a>
+    <a href='javascript:testSetSelectedIndex()'>SetSelectedIndex</a>
+    <a href='javascript:testSetBindValue()'>SetBindValue</a>
+    <a href='javascript:testInvalid()'>invalid</a>
+    <a href='javascript:testRemove()'>remove</a>
+    <a href='javascript:testSetAddEmptyText()'>SetAddEmptyText</a>
+    <a href='javascript:testQueryString()'>QueryString</a>
+    <a href='javascript:testSetDataSet()'>setDataSet</a>
+    <a href='javascript:testEnable()'>enable</a>
+    <a href='javascript:testDisable()'>disable</a>
+</div>
+    </body>
+</html>

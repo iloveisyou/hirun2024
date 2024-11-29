@@ -1,0 +1,169 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+그리드에서 row를 선택시 row의 흐름 제어를 하는 객체
+그리드는 LGridPanel을 기본으로 생성할 경우 LRowSelectionModel이 탑재되고 LGridPanel에서는 LCellSelectionModel이 탑재된다.
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_lock">
+<div class="L-description">
+그리드의 row나 cell의 선택을 안되게 막는 메소드
+각 cell 단위를 제어하는게 아닌 그리드의 모든 항목을 선택할 수 없다.
+</div>
+<div class="L-sample">
+sample: 그리드의 모든 선택을 막는다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+.................
+var selectionModel = grid.getSelectionModel();
+selectionModel.lock();
+</div>
+</div>
+</div>
+
+<div class="method_unlock">
+<div class="L-description">
+그리드의 row나 cell의 선택을 안되게 막혀 있던 기능을 다시 선택되게 하는 메소드
+</div>
+<div class="L-sample">
+sample: 그리드의 모든 선택을 막는다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+.................
+var selectionModel = grid.getSelectionModel();
+selectionModel.unlock();
+</div>
+</div>
+</div>
+
+<div class="method_isLocked">
+<div class="L-description">
+그리드의 모든 row나 cell이 선택이 가능한지 여부를 리턴하는 메소드
+</div>
+<div class="L-sample">
+sample: 그리드의 선택 여부를 확인하여 메시지를 출력한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+.................
+var selectionModel = grid.getSelectionModel();
+alert(selectionModel.isLocked());
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+<div class="event_selectRow">
+<div class="L-description">
+그리드에서 row 선택시 발생하는 이벤트
+</div>
+<div class="L-sample">
+sample: 그리드의 row가 선택되면 메시지를 출력한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+
+var selectionModel = grid.getSelectionModel();
+selectionModel.on('selectRow', function(e) {
+    alert(e.row + '가 선택되었습니다.');
+});
+</div>
+</div>
+</div>
+
+<div class="event_deselectRow">
+<div class="L-description">
+그리드에서 row 선택 취소시 발생하는 이벤트
+</div>
+<div class="L-sample">
+sample: 그리드의 row가 선택이 취소되면 메시지를 출력한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+
+var selectionModel = grid.getSelectionModel();
+selectionModel.on('deselectRow', function(e) {
+    alert(e.row + '이 취소되었습니다.');
+});
+</div>
+</div>
+</div>
+
+<div class="event_selectCell">
+<div class="L-description">
+그리드에서 cell 선택시 발생하는 이벤트
+※ row의 insert/update 등 상태에 따라서 로직을 처리할 경우에는 이 이벤트로 처리해서는 안된다. (rowPosChanged 이벤트에서 구현해야 한다.)
+  이 이벤트는 cell을 선택해야만 발생하므로 클립보드에서 복수 라인 붙여넣기 같은 기능이 수행될 경우 이벤트가 발생하지 않으므로 row의 상태가 바뀌지 않아 개발자 로직 구현이 적용되지 않는다.
+</div>
+<div class="L-sample">
+sample: 그리드의 cell이 선택되면 메시지를 출력한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+
+var selectionModel = grid.getSelectionModel();
+selectionModel.on('selectCell', function(e) {
+    alert('[' + e.row + ':' + e.col + ']이 선택되었습니다.');
+});
+</div>
+</div>
+</div>
+
+<div class="event_deselectCell">
+<div class="L-description">
+그리드에서 cell 선택 취소시 발생하는 이벤트
+</div>
+<div class="L-sample">
+sample: 그리드의 cell이 선택이 취소되면 메시지를 출력한다.
+<div class="L-code">
+var grid = new Rui.ui.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    height: 300
+});
+
+grid.render('grid');
+
+var selectionModel = grid.getSelectionModel();
+selectionModel.on('deselectCell', function(e) {
+    alert('[' + e.row + ':' + e.col + ']이 취소되었습니다.');
+});
+</div>
+</div>
+</div>
+
+</div>

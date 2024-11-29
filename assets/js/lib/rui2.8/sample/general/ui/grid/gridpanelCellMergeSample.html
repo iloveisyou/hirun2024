@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Grid Cell Merge</title>
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 머지(merge), 셀병합" />
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+            
+            /*<b>*/
+            // vMerge, hMerge
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                        { field: 'col1', label: 'Col1', sortable: true, vMerge: true, hMerge: true },
+                        { field: 'col1', label: 'Col1', sortable: true, vMerge: true, hMerge: true },
+                        { field: 'col2', align: 'center', width: 120, vMerge: true, hMerge: true },
+                        { field: 'code', align: 'center', vMerge: true, hMerge: true },
+                        { field: 'col3', align: 'right', vMerge: true, hMerge: true },
+                        { field: 'col5', align: 'center', width: 200, vMerge: true, hMerge: true },
+                        { field: 'col6', label: 'Col6', width: 200, vMerge: true, hMerge: true },
+                        { field: 'col8', label: 'Col8', align: 'right', sortable: true, vMerge: true, hMerge: true },
+                        { field: 'date1', align: 'center', vMerge: true, hMerge: true }
+                    ]
+            });
+
+            /*</b>*/
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+            
+             /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data11.json'
+                });
+            });
+            
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData();
+            });
+                        
+            loadPage.hide();
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <h1>Grid Cell Merge</h1>
+    <h2>그리드(Grid)의 Cell Merge기능</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>그리드(Grid)의 vMerge 세로 병합(vertical merge), hMerge 가로 병합(horizontal merge) 기능을 이용하여 병합(merge) 기능을 수행한다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >Search</button>
+            <button type="button" id="clearBtn" >clear</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div class="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+        </div>
+        <div id='showData'>
+        </div>
+    </div>
+<script type="text/javascript">
+var loadPage = new Rui.ui.LLoadPage();
+loadPage.show();
+</script>
+</body>
+</html>

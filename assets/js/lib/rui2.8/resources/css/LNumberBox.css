@@ -1,0 +1,17 @@
+/* LNumberBox
+------------------------------*/
+div.L-numberbox {
+    position: relative;
+}
+.L-grid-panel input {
+	border-width : 0px;
+}
+.L-editor-panel div.L-numberbox {
+    height:17px;
+    *height:20px;
+    vertical-align: top;
+}
+.L-editor-panel div.L-numberbox input {
+    height:17px;
+    *height:20px;
+}

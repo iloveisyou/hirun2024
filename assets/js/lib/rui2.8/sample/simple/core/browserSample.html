@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Browser</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+        <script type='text/javascript' class="script-code">
+            //<![CDATA[
+            var logData = null;
+            $C(function(){
+                /*<b>*/
+                logData = 'msie : ' + $C.browser.msie + '<br/>';
+                logData += 'msie678 : ' + $C.browser.msie678 + '<br/>';
+                logData += 'msie9 : ' + $C.browser.msie9 + '<br/>';
+                logData += 'safari : ' + $C.browser.safari + '<br/>';
+                logData += 'opera : ' + $C.browser.opera + '<br/>';
+                logData += 'mozilla : ' + $C.browser.mozilla + '<br/>';
+                logData += '<br/>';
+                
+                logData += 'window : ' + $C.platform.window + '<br/>';
+                logData += 'mac : ' + $C.platform.mac + '<br/>';
+                logData += '<br/>';
+                
+                logData += 'secure : ' + $C.isSecure + '<br/>';
+                logData += 'version : ' + $C.browser.version + '<br/>';
+                
+                logData += 'webkit : ' + $C.browser.webkit + '<br/>';
+                logData += 'gecko : ' + $C.browser.gecko + '<br/>';
+                
+                logData += 'userAgent : ' + navigator.userAgent.toLowerCase();
+                /*</b>*/
+               
+                $C.log(logData);
+                $C('#result').html(logData);
+
+            });
+            //]]>
+        </script>
+    </head>
+    <body>
+        <h1>browser sample</h1>
+        <h2>브라우져에 관련 정보를 얻어오는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>브라우저에 관련된 각종 정보를 액세스합니다.</div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id='result'></div>
+            </div>
+        </div>
+    </body>
+</html>

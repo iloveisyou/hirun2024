@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="devon-rui-sample" content="yes" />
+<title>Inline Editor</title>
+<script type="text/javascript" src='./../../../js/rui_base.js'></script>
+<script type='text/javascript' src='./../../../js/rui_ext.js'></script>
+<script type="text/javascript" src='./../../../plugins/ui/LInlineEditor.js'></script>
+<script type="text/javascript" src='./../../../plugins/util/simpleSyntax.js'></script>
+<script type='text/javascript' src='./../../../resources/rui_config.js'></script>
+<link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" >
+<style type="text/css">
+    body {
+        margin: 0px;
+        padding: 0px;
+    }
+    
+    .L-inline-editor {
+        position: absolute;
+        margin: 0px;
+        padding: 0px;
+    }
+    
+    #editor {
+        border: 1px solid red;
+    }
+    
+    .L-inline-editor textarea {
+        font-size: 12px;        
+    }
+</style>
+<script type='text/javascript' class="script-code">
+var form = null;
+var button1 = null;
+var button2 = null;
+var button3 = null; 
+$C(function() {
+    $C('#editor').inlineEditor({
+        enterStopEdit: false,
+        field: $C.textArea()
+    });
+    
+    $C('#editor').on('stopEdit', function(e) {
+        alert(e.field.getValue());
+    });
+});
+    
+</script>
+
+</head>
+<body >
+    <h1>inline editor sample</h1>
+    <h2>LInlineEditor를 구현하는 샘플</h2>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+        <table style="border:1px solid gray; ">
+        <tr>
+            <th>편집 가능</th>
+            <td>
+                <pre id='editor'>
+    애국가 1절
+    
+    동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세.
+    
+    무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세
+    
+     
+    
+    애국가 2절
+    
+    남산 위에 저 소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세.
+    
+    무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세
+    
+     
+    
+    애국가 3절
+    
+    가을 하늘 공활한데 높고 구름 없이 밝은 달은 우리 가슴 일편 단심일세.
+    
+    무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세
+    
+     
+    
+    애국가 4절
+    
+    이 기상과 이 맘으로 충성을 다하여 괴로우나 즐거우나 나라 사랑하세.
+    
+    무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세
+                </pre>
+            </td>
+        </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

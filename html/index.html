@@ -1,207 +1,287 @@
+
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hi run</title>
+    <title>HI-RUN Mock-up List</title>
+    <link rel="icon" href="/assets/images/favicon.ico">
 
     <!-- RUI import -->
-    <!-- <script type="text/javascript" src="/assets/rui2.8/js/rui_base.js"></script>
-    <script type="text/javascript" src="/assets/rui2.8/js/rui_core.js"></script>
-    <script type="text/javascript" src="/assets/rui2.8/js/rui_ui.js"></script>
-    <script type="text/javascript" src="/assets/rui2.8/js/rui_form.js"></script>
-    <script type="text/javascript" src="/assets/rui2.8/js/rui_grid.js"></script>
-    <script type="text/javascript" src="/assets/rui2.8/resources/rui_config.js"></script>
-    <script type="text/javascript" src="/assets/rui2.8/resources/rui_license.js"></script> -->
-    <!-- <script type="text/javascript" src="/assets/rui2.8/plugins/ui/LTooltip.js"></script>
-    <link rel="stylesheet" type="text/css" href="/assets/rui2.8/plugins/ui/LTooltip.css" /> -->
-    <!-- <link rel="stylesheet" type="text/css" href="/assets/rui2.8/resources/rui.css" /> -->
-    <script language="JavaScript" type="text/javascript" src='/assets/rui2.8/js/rui_base.js'></script>
-    <script language="JavaScript" type="text/javascript" src='/assets/rui2.8/js/rui_core.js'></script>
-    <script language="JavaScript" type="text/javascript" src='/assets/rui2.8/js/rui_ui.js'></script>
-    <script language="JavaScript" type="text/javascript" src='/assets/rui2.8/js/rui_form.js'></script>
-    <script language="JavaScript" type="text/javascript" src='/assets/rui2.8/js/rui_grid.js'></script>
-    <script language="JavaScript" type='text/javascript' src='/assets/rui2.8/plugins/ui/LLoadPage.js'></script>
-    <script language="JavaScript" type='text/javascript' src='/assets/rui2.8/resources/rui_config.js'></script>
-    <script language="JavaScript" type='text/javascript' src='/assets/rui2.8/resources/locale/lang-ko_KR.js'></script>
-    <script language="JavaScript" type='text/javascript' src='/assets/rui2.8/resources/locale/lang-en_US.js'></script>
-    <script language="JavaScript" type='text/javascript' src='/assets/rui2.8/plugins/ui/grid/LGridView.js'></script>
-    <script language="JavaScript" type='text/javascript' src='/assets/rui2.8/plugins/ui/grid/LGridPanelExt.js'></script>
-    <script language="JavaScript" type='text/javascript' src='/assets/rui2.8/plugins/ui/grid/LGridStatusBar.js'></script>
-    <script language="JavaScript" type='text/javascript' src='/assets/rui2.8/plugins/ui/grid/LTableView.js'></script>
-    <script language="JavaScript" type='text/javascript' src='/assets/rui2.8/plugins/ui/LFrameDialog.js'></script>
-    <script language="JavaScript" type='text/javascript' src='/assets/rui2.8/resources/rui_config.js'></script>
-    <link rel="stylesheet" type="text/css" href="/assets/rui2.8/resources/rui.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/rui2.8/resources/rui_skin_blue.css" />
-    <script language="JavaScript" type='text/javascript' src='/assets/rui2.8/plugins/tab/rui_tab.js'></script>
-    <link rel="stylesheet" type="text/css"              href="/assets/rui2.8/plugins/tab/rui_tab.css" />
+    <!-- <script type="text/javascript" src="/assets/js/lib/rui2.8/js/rui_base.js"></script>
+    <script type="text/javascript" src="/assets/js/lib/rui2.8/js/rui_core.js"></script>
+    <script type="text/javascript" src="/assets/js/lib/rui2.8/js/rui_ui.js"></script>
+    <script type="text/javascript" src="/assets/js/lib/rui2.8/js/rui_form.js"></script>
+    <script type="text/javascript" src="/assets/js/lib/rui2.8/js/rui_grid.js"></script>
+    <script type="text/javascript" src="/assets/js/lib/rui2.8/resources/rui_config.js"></script>
+    <script type="text/javascript" src="/assets/js/lib/rui2.8/resources/rui_license.js"></script> -->
+    <!-- <script type="text/javascript" src="/assets/js/lib/rui2.8/plugins/ui/LTooltip.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/js/lib/rui2.8/plugins/ui/LTooltip.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="/assets/js/lib/rui2.8/resources/rui.css" /> -->
+    <script language="JavaScript" type="text/javascript" src='/assets/js/lib/jquery-3.7.1.js'></script>
+
+    <!-- <script language="JavaScript" type="text/javascript" src='/assets/js/lib/rui2.8/js/rui_base.js'></script>
+    <script language="JavaScript" type="text/javascript" src='/assets/js/lib/rui2.8/js/rui_core.js'></script>
+    <script language="JavaScript" type="text/javascript" src='/assets/js/lib/rui2.8/js/rui_ui.js'></script>
+    <script language="JavaScript" type="text/javascript" src='/assets/js/lib/rui2.8/js/rui_form.js'></script>
+    <script language="JavaScript" type="text/javascript" src='/assets/js/lib/rui2.8/js/rui_grid.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/js/lib/rui2.8/plugins/ui/LLoadPage.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/js/lib/rui2.8/resources/rui_config.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/js/lib/rui2.8/resources/locale/lang-ko_KR.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/js/lib/rui2.8/resources/locale/lang-en_US.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/js/lib/rui2.8/plugins/ui/grid/LGridView.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/js/lib/rui2.8/plugins/ui/grid/LGridPanelExt.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/js/lib/rui2.8/plugins/ui/grid/LGridStatusBar.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/js/lib/rui2.8/plugins/ui/grid/LTableView.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/js/lib/rui2.8/plugins/ui/LFrameDialog.js'></script>
+    <script language="JavaScript" type='text/javascript' src='/assets/js/lib/rui2.8/resources/rui_config.js'></script>
+    <link rel="stylesheet" type="text/css" href="/assets/js/lib/rui2.8/resources/rui.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/js/lib/rui2.8/resources/rui_skin_blue.css" />
+    <script language="JavaScript" type='text/javascript' src='/assets/js/lib/rui2.8/plugins/tab/rui_tab.js'></script>
+    <link rel="stylesheet" type="text/css"              href="/assets/js/lib/rui2.8/plugins/tab/rui_tab.css" /> -->
+
+    <style>
+        html body { font-family:'LG_Smart_H2.0'; color:#515151; }
+        h1 { padding:3px 5px; background-color:#d80546; font-family: 'LG_Smart_H2.0_L'; font-weight:100; color:#ffffff; }
+        .mockupTable h2 { margin:30px 0 10px 0; padding:5px; font-size:14px; font-weight:400; /*background-color:#d80546; color:#fff;*/ }
+        .mockupTable table { width:100%; border:0; border-collapse:collapse; }
+        .mockupTable table thead th { padding:5px 0; background-color:#515151; background-color:#f0d1d9; text-align:center; font-weight:400; }
+        .mockupTable table thead th:nth-child(1) { width:50px; }
+        .mockupTable table thead th:nth-child(2) { width:100px; }
+        .mockupTable table thead th:nth-child(3), .mockupTable table thead th:nth-child(4), .mockupTable table thead th:nth-child(5), .mockupTable table thead th:nth-child(6) { width:8%; }
+        .mockupTable table thead th:nth-child(8), .mockupTable table thead th:nth-child(9), .mockupTable table thead th:nth-child(10) { width:8%; }
+        .mockupTable table thead th:nth-child(7) { width:15%; }
+        .mockupTable table tbody td { padding:5px 0; border-bottom:1px solid gray; text-align:center; }
+        .mockupTable table tbody tr:hover { background-color:#f7f7f7; }
+        /* .mockupTable table tbody tr.normal { }
+        .mockupTable table tbody tr.working { background-color:#ffefef; }
+        .mockupTable table tbody tr.success { background-color:#effff8; } */
+        .summaryTable { border:0; border-collapse:collapse; width:100%; border:1px solid gray; }
+        .summaryTable caption { padding-bottom:10px; white-space:nowrap; }
+        .summaryTable caption span { display:inline-block; padding:3px 20px; }
+        .summaryTable thead th + th, .summaryTable tbody td + td { border-left:1px solid gray; } 
+        .summaryTable thead th {  }
+        .summaryTable tbody td { text-align:center; }
+        .summaryTable caption .total { font-weight:700; background-color:#2a2a2a; color:white; }
+        .summaryTable caption .normal { font-weight:700; background-color:#08ba70; color:white; }
+        .summaryTable caption .working { font-weight:700; background-color:#BB0841; color:white; }
+        .summaryTable caption .success { font-weight:700; background-color:#0873ba; color:white; }
+        .summaryTable .total { font-weight:700; color:#2a2a2a; }
+        .summaryTable .normal { font-weight:700; color:#08ba70; }
+        .summaryTable .working { font-weight:700; color:#BB0841; }
+        .summaryTable .success { font-weight:700; color:#0873ba; }
+    </style>
 </head>
 <body>
 
 <div class="wrap">
     <header>
-        <h1>하이런 사이트</h1>
-        <nav>
-            <a href="/" target="_self">home</a>
-            <a href="/pages/intro.html" target="_self">intro</a>
-            <a href="/pages/history.html" target="_self">history</a>
-        </nav>
+        <h1>HI-RUN Publishing Mock-up List <small>V.20241125</small></h1>
+        <table class="summaryTable">
+            <caption><span class="total">전체: <b></b></span> / <span class="normal">작업전: <b></b></span> / <span class="working">작업중: <b></b></span> / <span class="success">작업완료: <b></b></span></caption>
+            <thead><tr></tr></thead>
+            <tbody><tr></tr></tbody>
+        </table>
     </header>
 
     <main>
-        index start12
-        <img src="../../assets/img/Frame89.jpg" />
-        index end34
+        <div class="mockupTable common">
+            <h2>00. 공통 UI</h2>
+            <table>
+            </table>
+        </div>
 
-        <div id="defaultGrid"></div><br />
-        <button type="button" id="dataSetLoadBtn">dataSetLoad</button><br />
-        <div id="textbox1"></div><br />
-        <div id="tab-container"></div>
-        <div id="div-content-test">test용 텍스트 입니다.</div>
-        <div id="treeDiv1"></div>
-        <script>
-            console.log(Rui.ui)
-            var txtBox = new Rui.ui.form.LTextBox({            // LTextBox개체를 선언
-                applyTo: 'textbox1',                           // 해당 DOM Id 위치에 텍스트박스를 적용
-                width: 300,                                    // 텍스트박스 폭을 설정
-                placeholder: 'placeholder 내용이 출력됩니다',     // [옵션] 입력 값이 없을 경우 기본 표시 메시지를 설정
-                invalidBlur: false,                            // [옵션] invalid시 blur를 할 수 있을지 여부를 설정
-                //mask: 9999-999,                                  // [옵션] 입력마스크를 설정 
-                //inputType: Rui.util.LString.PATTERN_TYPE_STRING, // [옵션] 입력문자열로 영문자 입력만 허용
-                //includeChars: '123',                             // [옵션] 입력제한조건 중에서 지정한 문자는 입력 허용
-                attrs: {                                       // [옵션] HTML 기본 속성(attribute) 값들을 설정 
-                    tabIndex: 1,
-                    maxLength: 10
-                }
-            })
+        <div class="mockupTable main">
+            <h2>01. 메인 및 공통/기타 페이지</h2>
+            <table>
+            </table>
+        </div>
 
-            var tabView = new Rui.ui.tab.LTabView({
-                contentHeight: 300,                          // 콘텐츠영역의 전체 높이 값
-                tabs: [                                      // 탭뷰를 구성할 탭들을 정의
-                    {                                        // 첫번째 탭
-                        label: 'Tab1',                       // 탭의 제목
-                        content: '<div>첫번째 탭입니다.</div>', // 탭 선택시 선택할 내용
-                        active: true                         // 탭 생성시 현재의 탭을 선택된 탭으로 설정
-                    },
-                    {                                        // 두번째 탭
-                        id: 'div-content-test',              // 콘텐츠 내용을 별도 DOM Element로 설정
-                        label: 'Dom & TreeView'
-                    },
-                    {
-                        label: 'gridview',
-                        content: '<div><div id="defaultGrid"></div></div>' // 콘텐츠 내용을 별도 DOM Element로 직접 설정
+        <div class="mockupTable cat01">
+            <h2>02. GNB 카테고리 - 상담</h2>
+            <table>
+            </table>
+        </div>
+        
+        <div class="mockupTable cat02">
+            <h2>03. GNB 카테고리 - 서비스업무</h2>
+            <table>
+            </table>
+        </div>
+        
+        <div class="mockupTable cat03">
+            <h2>04. GNB 카테고리 - 자재</h2>
+            <table>
+            </table>
+        </div>
+        
+        <div class="mockupTable cat04">
+            <h2>05. GNB 카테고리 - 재경</h2>
+            <table>
+            </table>
+        </div>
+        
+        <div class="mockupTable cat05">
+            <h2>06. GNB 카테고리 - 메인터넌스</h2>
+            <table>
+            </table>
+        </div>
+        
+        <div class="mockupTable cat06">
+            <h2>07. GNB 카테고리 - 마스터</h2>
+            <table>
+            </table>
+        </div>
+        
+        <div class="mockupTable cat07">
+            <h2>08. GNB 카테고리 - 리포트</h2>
+            <table>
+            </table>
+        </div>
+    </main>
+    <script>
+
+        const jsonURL = '/assets/json/mockup.json';
+        const theadArr = ['No', 'id', '1Depth', '2Depth', 'Name', 'File', 'Path', 'Status', 'Working Date', 'Last Date', 'Etc'];
+        let total = 0, normal = 0, working = 0, success = 0;
+        function trs(v, target, cat) {
+            let thead = '<thead>';
+            for(let i=0;i<theadArr.length;i++){ thead += `<th>${theadArr[i]}</th>`; }
+            thead += '</thead>';
+            $(v).find('table').prepend(thead);
+            $.getJSON(jsonURL,(json)=> {
+                const data = json[0].records.filter(tr=> tr['1Depth'] === cat);
+                total += data.length;
+                normal += data.filter(item=> item['Status'] === '작업전').length;
+                working += data.filter(item=> item['Status'] === '작업중').length;
+                success += data.filter(item=> item['Status'] === '작업완료').length;
+                $(v).find('table').append('<tbody></tbody>');
+                for(let i=0;i<data.length;i++){
+                    let tr = data[i];
+                    let sta = tr['Status'] == '작업완료' ? 'success' : tr['Status'] == '작업중' ? 'working' : 'normal';
+                    let tbody = `<tr class="${sta}"> <td>${i+1}</td>`;
+                    for(let j=1;j<theadArr.length;j++){
+                        if(theadArr[j] == 'File'){ tbody += `<td><a href="${tr['Path'] + tr[theadArr[j]]}" target="_blank">${tr[theadArr[j]]}</a></td>`;
+                        }else{ tbody += `<td>${tr[theadArr[j]]}</td>`; }
                     }
+                    tbody += '</tr>';
+                    $(v).find('table tbody').append(tbody);
+                    $('.summaryTable thead tr').append(`<th>${cat}</th>`)
+                    $('.summaryTable tbody tr').append(`<td><b class="total" title="전체">${data.length}</b> / <b class="normal" title="작업전">${data.filter(item=> item['Status'] === '작업전').length}</b> / <b class="working" title="작업중">${data.filter(item=> item['Status'] === '작업중').length}</b> / <b class="success" title="작업완료">${data.filter(item=> item['Status'] === '작업완료').length}</b></td>`);
+                }
+                $('.summaryTable caption .total b').html(total);
+                $('.summaryTable caption .normal b').html(normal);
+                $('.summaryTable caption .working b').html(working);
+                $('.summaryTable caption .success b').html(success);
+            });
+            
+        }
+        
+        $('.mockupTable').each((i,v)=>{
+            $(v).hasClass('common') && trs(v, 'common', 'UI컴포넌트');
+            $(v).hasClass('main') && trs(v, 'main', '공통');
+            $(v).hasClass('cat01') && trs(v, 'cat01', '상담');
+            $(v).hasClass('cat02') && trs(v, 'cat02', '서비스업무');
+            $(v).hasClass('cat03') && trs(v, 'cat03', '자재');
+            $(v).hasClass('cat04') && trs(v, 'cat04', '재경');
+            $(v).hasClass('cat05') && trs(v, 'cat05', '메인터넌스');
+            $(v).hasClass('cat06') && trs(v, 'cat06', '마스터');
+            $(v).hasClass('cat07') && trs(v, 'cat07', '리포트');
+        });
+
+        function summary() {
+            $.getJSON('/assets/json/mockup.json',(json)=> {
+                // $('.summaryTable')
+                console.log(json);
+            });
+        }
+
+       
+        // Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            /*var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8' },
+                    { id: 'col9' },
+                    // { id: 'col8', type: 'number'},
+                    // { id: 'code' },
+                    // { id: 'value' },
+                    // { id: 'date1', type: 'date' }
                 ]
             });
 
-            tabView.render('tab-container');    
-        </script>
-
-
-        22222222222222222222
-        <div id="panel">
-            <fieldset>
-                <input type="checkbox" id="cuttlefish1">
-                <input type="checkbox" id="cuttlefish2">
-                <input type="checkbox" id="cuttlefish3">
-                <!-- <div id="peanut"></div> -->
-            </fieldset>
-        </div>
-        <div class="LblockButton">
-            <button type="button" id="checkBtn">Check</button>
-            <button type="button" id="decheckBtn">Decheck</button>
-            <button type="button" id="showValueBtn">Show Value</button>
-            <button type="button" id="disableBtn">Disable</button>
-            <button type="button" id="enableBtn">Enable</button>
-            <button type="button" id="focusBtn">Focus</button>
-            <button type="button" id="blurBtn">Blur</button>
-        </div>
-
-        <script>
-            Rui.onReady(function(){
-                /*******************
-                 * 변수 및 객체 선언
-                 *******************/
-                
-                var cuttlefish1 = new Rui.ui.form.LCheckBox({
-                    applyTo: 'cuttlefish1',
-                    name: 'appetizer',
-                    label: 'Cuttlefish',
-                    value: '오징어'
-                });
-                var cuttlefish2 = new Rui.ui.form.LCheckBox({
-                    applyTo: 'cuttlefish2',
-                    name: 'appetizer',
-                    label: 'Cuttlefish',
-                    value: '오징어'
-                });
-                var cuttlefish3 = new Rui.ui.form.LCheckBox({
-                    applyTo: 'cuttlefish3',
-                    name: 'appetizer',
-                    label: 'Cuttlefish',
-                    value: '오징어'
-                });
-                var peanut = new Rui.ui.form.LCheckBox({
-                    applyTo: 'peanut',
-                    name: 'appetizer',
-                    label: 'Peanut',
-                    value: '땅콩'
-                });
-                
-                
-                cuttlefish.on('changed', function(e){
-                    Rui.log(e.target.getValue());
-                });
-
-
-                /********************
-                 * 버튼 선언 및 이벤트
-                 ********************/
-                var checkBtn = new Rui.ui.LButton('checkBtn');
-                checkBtn.on('click', function(){
-                    cuttlefish.setValue(true);
-                });
-                
-                var decheckBtn = new Rui.ui.LButton('decheckBtn');
-                decheckBtn.on('click', function(){
-                    cuttlefish.setValue(false);
-                });
-
-                var showValueBtn = new Rui.ui.LButton('showValueBtn');
-                showValueBtn.on('click', function(){
-                    Rui.alert(cuttlefish.getValue());
-                });
-                
-                var disableBtn = new Rui.ui.LButton('disableBtn');
-                disableBtn.on('click', function(){
-                    cuttlefish.disable();
-                });
-                
-                var enableBtn = new Rui.ui.LButton('enableBtn');
-                enableBtn.on('click', function(){
-                    cuttlefish.enable();
-                });
-                    
-                var focusBtn = new Rui.ui.LButton('focusBtn');
-                focusBtn.on('click', function(){
-                    peanut.focus();
-                });
-                
-                var blurBtn = new Rui.ui.LButton('blurBtn');
-                blurBtn.on('click', function(){
-                    peanut.blur();
-                });
-                
+            
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                groupMerge: true,
+                autoWidth: true,
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: '1depth', sortable: true, width: 200},
+                    { field: 'col2', label: '2depth', sortable: true, width: 200},
+                    { field: 'col3', label: '3depth', sortable: true, width: 200},
+                    { field: 'col4', label: 'name', sortable: true, width: 200},
+                    { field: 'col5', label: 'file', sortable: true, width: 200},
+                    { field: 'col6', label: 'status', sortable: true, wSSidth: 200},
+                    { field: 'col7', label: 'working date', sortable: true, width: 200},
+                    { field: 'col8', label: 'modify date', sortable: true, width: 200},
+                    { field: 'col9', label: 'etc', sortable: true, width: 200},
+                    // { field: 'col3', label: 'status', sortable: true, width: 60, align: 'center', autoWidth: true, renderer: function(value){
+                    //     return '<font color="red">' + value + '</font>';
+                    // }},
+                    // { field: 'col2', label: 'Col2', sortable: true, width: 130, align: 'center', renderer: function(value){
+                    //     if(!value || value.length < 13) return value;
+                    //     return value.substring(0, 6) + '-' + value.substring(6);
+                    // }},
+                    // { field: 'col7', width: 160, sortable: true, renderer: function(value){
+                    //     return '<a href="javascript:alert(\'' + value + '\');">' + value + '</a>';
+                    // }},
+                    // { field: 'col8', width: 80, align: 'right', sortable: true, renderer: 'money'},
+                    // { field: 'date1', width: 200, align: 'left'}
+                ]
             });
-        </script>
 
-                
-    </main>
-    
-    <footer>
-        <p>copyright 2024</p>
-        <p>copyright 2024.</p>
-    </footer>
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                width: 600,
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+            Rui.log('grid가 화면에 랜더링되었습니다.');
+            dataSet.load({
+                url: '../../assets/json/mockup.json'
+            });*/
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            /*var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                Rui.log('grid의 데이터를 로드합니다.');
+                dataSet.load({
+                    url: './../../../../sample/data/data.json'
+                });
+            });*/
+        // });
+    </script>
+    <footer><p>COPYRIGHT 2011 LG ELECTRONICS. ALL RIGHTS RESERVED. </p></footer>
 </div>
 
 </body>

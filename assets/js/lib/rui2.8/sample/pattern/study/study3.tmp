@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RUI Study P2 Master/Detail [n:n] Sample</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel="stylesheet" type="text/css" href="./../rui/include/css/base_rui.css" />
+<link rel="stylesheet" type="text/css" href="./../rui/include/css/global_layout_rui.css" />
+<link rel="stylesheet" type="text/css" href="./../rui/include/css/global_style_rui.css" />
+<link rel="stylesheet" type="text/css" href="./../rui/include/css/page_layout_rui.css" />
+<link rel="stylesheet" type="text/css" href="./../rui/include/css/page_style_rui.css" />
+
+<script type="text/javascript" src="./../../../js/rui_base-debug.js"></script>
+<script type="text/javascript" src="./../../../js/rui_core-debug.js"></script>
+<script type="text/javascript" src="./../../../js/rui_ui-debug.js"></script>
+<script type="text/javascript" src="./../../../js/rui_form-debug.js"></script>
+<script type="text/javascript" src="./../../../js/rui_grid-debug.js"></script>
+<script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+<link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+<link rel="stylesheet" type="text/css" href="./../rui/include/css/rui_skin.css"/>
+
+<style type="text/css">
+.LblockMiddle {
+    height: 180px;
+    margin-bottom: 15px;
+}
+    
+.LblockGrid, .LblockDetail {
+    width: 49%;
+    float: left;
+}
+
+.LblockDetail {
+    float: right;
+}
+</style>
+
+<script type="text/javascript">
+//<![CDATA[
+	Rui.onReady(function() {
+        /*******************
+         * 변수 및 객체 선언
+         *******************/
+        
+        // 검색 영역 콤보 생성 영역
+        var querycenterCodeCombo = new Rui.ui.form.LCombo({
+            id: 'centerCode',
+            applyTo: 'centerCode',
+            url: './data/retrieveCenterList.rui',
+            displayField: 'name'
+        });
+
+        var dm = new Rui.data.LDataSetManager();
+
+        var centerDataSet = new Rui.data.LJsonDataSet({
+            id:'centerDataSet',
+            fields: [
+                { id: 'code' },
+                { id: 'name' },
+                { id: 'chief' },
+                { id: 'address' },
+                { id: 'phone' }
+            ]
+        });
+
+        var vm = new Rui.validate.LValidatorManager({
+            validators: [
+                { id: 'code', validExp: '센터코드:true:number&length=5' },
+                { id: 'name', validExp: '센터:true:maxByteLength=20' },
+                { id: 'chief', validExp: '센터장:true' },
+                { id: 'address', validExp: '주소:true' },
+                { id: 'phone', validExp: '전화번호:true' }
+            ]
+        });
+
+        var centerColumnModel = new Rui.ui.grid.LColumnModel({
+            defaultSortable: true,
+            columns: [
+                new Rui.ui.grid.LStateColumn(),
+                { field: 'code', label: '센터코드', align: 'center', editor: new Rui.ui.form.LTextBox() },
+                { field: 'name', label: '센터', align: 'center', width: 150, editor: new Rui.ui.form.LTextBox() },
+                { field: 'chief', label: '센터장', align: 'center', editor: new Rui.ui.form.LTextBox() },
+                { field: 'address', label: '주소', width: 150, editor: new Rui.ui.form.LTextBox() },
+                { field: 'phone', label: '전화번호', editor: new Rui.ui.form.LTextBox() }
+            ]
+        });
+
+        var centerGrid = new Rui.ui.grid.LGridPanel({
+            columnModel: centerColumnModel,
+            autoWidth: true,
+            width: 700,
+            height: 150,
+            dataSet: centerDataSet
+        });
+
+        centerGrid.render('centerGrid');
+        
+        var bind = new Rui.data.LBind({
+            groupId: 'LblockDetail01',
+            dataSet: centerDataSet,
+            bind: true,
+            bindInfo: [
+                { id: 'code', ctrlId: 'centerCode', value: 'value' },
+                { id: 'name', ctrlId: 'centerName', value: 'value' },
+                { id: 'chief', ctrlId: 'centerChief', value: 'value' },
+                { id: 'address', ctrlId: 'centerAddress', value: 'value' },
+                { id: 'phone', ctrlId: 'centerPhone', value: 'value' }
+            ]
+        });
+
+
+        var regionDataSet = new Rui.data.LJsonDataSet({
+            id: 'regionDataSet',
+            fields: [
+                { id: 'code' },
+                { id: 'regionCode' },
+                { id: 'name' },
+                { id: 'chief' },
+                { id: 'address' }
+            ]
+        });
+
+        var regionVm = new Rui.validate.LValidatorManager({
+            validators: [
+                { id: 'code', validExp: '센터코드:true:number&length=5' },
+                { id: 'regionCode', validExp: '지역코드:true:number&length=5' },
+                { id: 'name', validExp: '지역:true:maxByteLength=20' },
+                { id: 'chief', validExp: '사무소장:true' },
+                { id: 'address', validExp: '주소:true' }
+            ]
+        });
+
+        var regionColumnModel = new Rui.ui.grid.LColumnModel({
+            defaultSortable: true,
+            columns: [
+                new Rui.ui.grid.LStateColumn(),
+                { field: 'regionCode', label: '지역코드', editor: new Rui.ui.form.LTextBox() },
+                { field: 'name', label: '지역', editor: new Rui.ui.form.LTextBox() },
+                { field: 'chief', label: '사무소장', width: 200, editor: new Rui.ui.form.LTextBox() },
+                { field: 'address', label: '주소', width: 200, editor: new Rui.ui.form.LTextBox() }
+            ]
+        });
+
+        var regionGrid = new Rui.ui.grid.LGridPanel({
+            columnModel: regionColumnModel,
+            autoWidth: true,
+            width: 700,
+            height: 250,
+            dataSet: regionDataSet
+        });
+
+        regionGrid.render('regionGrid');
+        
+        /*******************
+         * 사용자 이벤트 처리
+         *******************/
+
+        centerDataSet.on('rowPosChanged', function(e) {
+            if(e.row >= 0) {
+                if(centerDataSet.isRowInserted(e.row)) {
+                    regionDataSet.clearData();
+                } else {
+                    var params = centerDataSet.getAt(e.row).getValues();
+                    regionDataSet.load({
+                        url: './data/retrieveRegionList.rui',
+                        params: params
+                    });
+                }
+            } else {
+                regionDataSet.clearData();
+            }
+        });
+
+        dm.on('beforeUpdate', function(e){
+            if(vm.validateDataSet(centerDataSet) == false) {
+                Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>') );
+                return false;
+            }
+
+            if(regionVm.validateDataSet(regionDataSet) == false) {
+                Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + regionVm.getMessageList().join('<br>') );
+                return false;
+            }
+        });
+
+        dm.on('success', function() {
+            Rui.alert(Rui.getMessageManager().get('$.base.msg100'));
+        });
+
+        /********************
+         * 버튼 선언 및 이벤트
+         ********************/
+        var btnSearch = new Rui.ui.LButton('btnSearch');
+        btnSearch.on('click', function() {
+            var params = Rui.util.LDom.getFormValues('LblockSearch');
+            
+            centerDataSet.load({
+                url: './data/retrieveCenterList.rui',
+                params: params
+            });
+        });
+
+        var btnAdd1 = new Rui.ui.LButton('btnAdd1');
+        btnAdd1.on('click', function() {
+            centerDataSet.newRecord();
+        });
+
+        var btnDelete1 = new Rui.ui.LButton('btnDelete1');
+        btnDelete1.on('click', function() {
+            if(centerDataSet.getRow() < 0) {
+                Rui.alert('Center 그리드의 현재 선택된 행이 없습니다.');
+                return;
+            }
+            centerDataSet.removeAt(centerDataSet.getRow());
+        });
+
+        var btnUndo1 = new Rui.ui.LButton('btnUndo1');
+        btnUndo1.on('click', function() {
+            if(centerDataSet.getRow() < 0) {
+                Rui.alert('Center 그리드의 현재 선택된 행이 없습니다.');
+                return;
+            }
+            centerDataSet.undo(centerDataSet.getRow());
+        });
+
+
+        var btnAdd2 = new Rui.ui.LButton('btnAdd2');
+        btnAdd2.on('click', function() {
+            var centerCode = centerDataSet.getNameValue(centerDataSet.getRow(), 'code');
+            if(centerCode == '') {
+                Rui.alert('센터코드를 입력하세요.');
+                return;
+            }
+            var row = regionDataSet.newRecord();
+            regionDataSet.setNameValue(row, 'code', centerCode);
+        });
+
+        var btnDelete2 = new Rui.ui.LButton('btnDelete2');
+        btnDelete2.on('click', function() {
+            if(regionDataSet.getRow() < 0) {
+                Rui.alert('Region 그리드의 현재 선택된 행이 없습니다.');
+                return;
+            }
+            regionDataSet.removeAt(regionDataSet.getRow());
+        });
+
+        var btnUndo2 = new Rui.ui.LButton('btnUndo2');
+        btnUndo2.on('click', function() {
+            if(regionDataSet.getRow() < 0) {
+                Rui.alert('Region 그리드의 현재 선택된 행이 없습니다.');
+                return;
+            }
+            regionDataSet.undo(regionDataSet.getRow());
+        });
+
+        var btnSave = new Rui.ui.LButton('btnSave');
+        btnSave.on('click', function() {
+            dm.updateDataSet({
+                dataSets: [ centerDataSet, regionDataSet ],
+                url: './data/cudCenterRegion.rui'
+            });
+        });
+	});
+//]]>
+</script>
+</head>
+
+<body id="LblockBody">
+<div id="LblockPageHeader">
+    <div id="LblockPageTitle">
+    <h1>RUI Patten P4-4 Master/Detail [n:n]</h1>
+    </div>
+    <div id="LblockPageLocation">
+        <ul>
+            <li class="Lfirst"><span><a href="/" target="_top">HOME</a></span></li>
+            <li class="Llast"><span><a href="#">P4-4. Master/Detail(n:n)</a></span></li>
+        </ul>
+    </div><!-- LblockPageLocation -->   
+</div><!-- LblockPageTitle -->
+
+<div id="LblockMainBody">
+    <form name="aform" method="post" action="/jsp/uip/rui/pt044.jsp">
+        <div id="LblockSearch">
+            <table summary="사원 검색조건">
+                <caption>사원 검색조건</caption>
+                <tbody>
+                    <tr>
+                        <th><label for="centerCode">센터</label></th>
+                        <td><div id="centerCode" ></div></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" id="btnSearch"  class="LBtnSearch" >Search</button>
+        </div>
+    </form>
+    
+    <div class="LblockMiddle" >
+        <div class="LblockGrid">
+            <div id="centerGrid" ></div>
+        </div>
+        <div id="LblockDetail01" class="LblockDetail">
+            <table summary="사원 상세정보">
+                <caption>사원 상세정보</caption>
+                <tbody>
+                    <tr>
+                        <th width="100"><label for="num">센터코드</label></th>
+                        <td width="150"><input type="text" id="centerCode" /></td>
+                    </tr>
+                    <tr>
+                        <th width="100"><label for="num">센터</label></th>
+                        <td width="150"><input type="text" id="centerName" /></td>
+                    </tr>
+                    <tr>
+                        <th width="100"><label for="num">센터장</label></th>
+                        <td width="150"><input type="text" id="centerChief" /></td>
+                    </tr>
+                    <tr>
+                        <th width="100"><label for="num">주소</label></th>
+                        <td width="150"><input type="text" id="centerAddress" /></td>
+                    </tr>
+                    <tr>
+                        <th width="100"><label for="num">전화번호</label></th>
+                        <td width="150"><input type="text" id="centerPhone" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><!-- LblockDetail01 -->
+        <div class="LblockButton Lclear">
+            <button type="button" id="btnAdd1" >행추가</button>
+            <button type="button" id="btnDelete1" >삭제</button>
+            <button type="button" id="btnUndo1" >취소</button>
+        </div><!-- LblockButton -->
+    </div>
+    <div id="LblockDetail02" >
+        <div id="regionGrid" ></div>
+        <div id="LblockButton">
+            <button type="button" id="btnAdd2" >행추가</button>
+            <button type="button" id="btnDelete2" >삭제</button>
+            <button type="button" id="btnUndo2" >취소</button>
+        </div><!-- LblockButton -->
+    </div><!-- LblockDetail02 -->
+
+    <div id="LblockButton">
+        <button type="button" id="btnSave" >저장</button>
+    </div><!-- LblockButton -->
+
+</div><!-- LblockMainBody -->
+</body>
+</html>

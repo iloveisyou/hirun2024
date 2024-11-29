@@ -1,0 +1,1329 @@
+[{
+    "message": "",
+    "metaData": {
+        "dataSetId": "MENU",
+        "totalCount": "165"
+    },
+    "records": [
+        {
+            "desc": "",
+            "menuId": 1,
+            "name": "Core",
+            "parentMenuId": null,
+            "seq": 1,
+            "url": ""
+        },
+        {
+            "desc": "",
+            "menuId": 2,
+            "name": "animation",
+            "parentMenuId": 1,
+            "seq": 1,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 3,
+            "name": "Attributes",
+            "parentMenuId": 2,
+            "seq": 1,
+            "url": "/rui2/sample/general/fx/animationAttributesSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 4,
+            "name": "Basic",
+            "parentMenuId": 2,
+            "seq": 2,
+            "url": "/rui2/sample/general/fx/animationBasicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 5,
+            "name": "Chaining",
+            "parentMenuId": 2,
+            "seq": 3,
+            "url": "/rui2/sample/general/fx/animationChainingSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 6,
+            "name": "Color",
+            "parentMenuId": 2,
+            "seq": 4,
+            "url": "/rui2/sample/general/fx/animationColorsSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 7,
+            "name": "Control",
+            "parentMenuId": 2,
+            "seq": 5,
+            "url": "/rui2/sample/general/fx/animationControlSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 8,
+            "name": "Easing",
+            "parentMenuId": 2,
+            "seq": 6,
+            "url": "/rui2/sample/general/fx/animationEasingSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 9,
+            "name": "From",
+            "parentMenuId": 2,
+            "seq": 7,
+            "url": "/rui2/sample/general/fx/animationFromSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 10,
+            "name": "Motion",
+            "parentMenuId": 2,
+            "seq": 8,
+            "url": "/rui2/sample/general/fx/animationMotionSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 11,
+            "name": "Scroll",
+            "parentMenuId": 2,
+            "seq": 9,
+            "url": "/rui2/sample/general/fx/animationScrollSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 12,
+            "name": "Unit",
+            "parentMenuId": 2,
+            "seq": 10,
+            "url": "/rui2/sample/general/fx/animationUnitsSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 13,
+            "name": "base",
+            "parentMenuId": 1,
+            "seq": 2,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 14,
+            "name": "base element",
+            "parentMenuId": 13,
+            "seq": 1,
+            "url": "/rui2/sample/general/base/baseSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 15,
+            "name": "base prototype sample",
+            "parentMenuId": 13,
+            "seq": 2,
+            "url": "/rui2/sample/general/base/prototypeSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 16,
+            "name": "config",
+            "parentMenuId": 1,
+            "seq": 3,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 17,
+            "name": "Basic",
+            "parentMenuId": 16,
+            "seq": 1,
+            "url": "/rui2/sample/general/config/configurationSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 18,
+            "name": "core",
+            "parentMenuId": 1,
+            "seq": 4,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 19,
+            "name": "Browser",
+            "parentMenuId": 18,
+            "seq": 1,
+            "url": "/rui2/sample/general/core/browserSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 20,
+            "name": "Connect tests",
+            "parentMenuId": 18,
+            "seq": 2,
+            "url": "/rui2/sample/general/core/connectSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 21,
+            "name": "Rui",
+            "parentMenuId": 18,
+            "seq": 3,
+            "url": "/rui2/sample/general/core/duSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 22,
+            "name": "Element Basic",
+            "parentMenuId": 18,
+            "seq": 4,
+            "url": "/rui2/sample/general/core/elementSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 23,
+            "name": "Element Scroll",
+            "parentMenuId": 18,
+            "seq": 5,
+            "url": "/rui2/sample/general/core/elementScrollSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 24,
+            "name": "Event Test",
+            "parentMenuId": 18,
+            "seq": 6,
+            "url": "/rui2/sample/general/core/eventSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 25,
+            "name": "Exception",
+            "parentMenuId": 18,
+            "seq": 7,
+            "url": "/rui2/sample/general/core/exceptionSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 26,
+            "name": "JSON",
+            "parentMenuId": 18,
+            "seq": 8,
+            "url": "/rui2/sample/general/core/jsonSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 27,
+            "name": "data",
+            "parentMenuId": 1,
+            "seq": 5,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 28,
+            "name": "Bind Basic",
+            "parentMenuId": 27,
+            "seq": 1,
+            "url": "/rui2/sample/general/data/bindBasicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 29,
+            "name": "DataSet Tests",
+            "parentMenuId": 27,
+            "seq": 2,
+            "url": "/rui2/sample/general/data/datasetBasicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 30,
+            "name": "JSON DataSet Tests",
+            "parentMenuId": 27,
+            "seq": 3,
+            "url": "/rui2/sample/general/data/jsondatasetBasicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 31,
+            "name": "JSON load event",
+            "parentMenuId": 27,
+            "seq": 4,
+            "url": "/rui2/sample/general/data/jsondatasetLoadeventSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 32,
+            "name": "DataSet performance test",
+            "parentMenuId": 27,
+            "seq": 5,
+            "url": "/rui2/sample/general/data/performanceTestSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 33,
+            "name": "Transaction Manager Basic",
+            "parentMenuId": 27,
+            "seq": 6,
+            "url": "/rui2/sample/general/data/transactionmanagerBasicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 34,
+            "name": "Transaction Manager multi dataSet",
+            "parentMenuId": 27,
+            "seq": 7,
+            "url": "/rui2/sample/general/data/transactionmanagerMultidatasetSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 35,
+            "name": "Transaction Manager Tests",
+            "parentMenuId": 27,
+            "seq": 8,
+            "url": "/rui2/sample/general/data/transactionmanagerUpdaterSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 36,
+            "name": "XmlDataSet Sample",
+            "parentMenuId": 27,
+            "seq": 9,
+            "url": "/rui2/sample/general/data/xmldatasetBasicSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 37,
+            "name": "dd",
+            "parentMenuId": 1,
+            "seq": 6,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 38,
+            "name": "Basic",
+            "parentMenuId": 37,
+            "seq": 2,
+            "url": "/rui2/sample/general/dd/ddBasicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 39,
+            "name": "Circle",
+            "parentMenuId": 37,
+            "seq": 3,
+            "url": "/rui2/sample/general/dd/ddCircleSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 40,
+            "name": "Group",
+            "parentMenuId": 37,
+            "seq": 4,
+            "url": "/rui2/sample/general/dd/ddGroupsSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 41,
+            "name": "Handles",
+            "parentMenuId": 37,
+            "seq": 5,
+            "url": "/rui2/sample/general/dd/ddHandlesSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 42,
+            "name": "Ontop",
+            "parentMenuId": 37,
+            "seq": 6,
+            "url": "/rui2/sample/general/dd/ddOntopSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 43,
+            "name": "Proxy",
+            "parentMenuId": 37,
+            "seq": 7,
+            "url": "/rui2/sample/general/dd/ddProxySample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 44,
+            "name": "Region",
+            "parentMenuId": 37,
+            "seq": 8,
+            "url": "/rui2/sample/general/dd/ddRegionSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 45,
+            "name": "Reorder",
+            "parentMenuId": 37,
+            "seq": 9,
+            "url": "/rui2/sample/general/dd/ddReorderSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 46,
+            "name": "Shim",
+            "parentMenuId": 37,
+            "seq": 10,
+            "url": "/rui2/sample/general/dd/ddShimSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 47,
+            "name": "message",
+            "parentMenuId": 1,
+            "seq": 8,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 48,
+            "name": "Basic",
+            "parentMenuId": 47,
+            "seq": 1,
+            "url": "/rui2/sample/general/message/messageManagerBasicSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 49,
+            "name": "state",
+            "parentMenuId": 1,
+            "seq": 9,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 50,
+            "name": "Provider Sample",
+            "parentMenuId": 49,
+            "seq": 1,
+            "url": "/rui2/sample/general/webdb/stateProviderSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 51,
+            "name": "util",
+            "parentMenuId": 1,
+            "seq": 10,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 52,
+            "name": "Date Locale",
+            "parentMenuId": 51,
+            "seq": 1,
+            "url": "/rui2/sample/general/util/datelocaleSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 53,
+            "name": "Date",
+            "parentMenuId": 51,
+            "seq": 2,
+            "url": "/rui2/sample/general/util/dateSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 54,
+            "name": "Dom Selector filter",
+            "parentMenuId": 51,
+            "seq": 3,
+            "url": "/rui2/sample/general/util/domselectorFilterSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 55,
+            "name": "Dom Selector Query",
+            "parentMenuId": 51,
+            "seq": 4,
+            "url": "/rui2/sample/general/util/domselectorQuerySample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 56,
+            "name": "Dom Selector Select",
+            "parentMenuId": 51,
+            "seq": 5,
+            "url": "/rui2/sample/general/util/domselectorSelectSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 57,
+            "name": "Event",
+            "parentMenuId": 51,
+            "seq": 6,
+            "url": "/rui2/sample/general/util/eventSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 58,
+            "name": "Formater Test",
+            "parentMenuId": 51,
+            "seq": 7,
+            "url": "/rui2/sample/general/util/formaterSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 59,
+            "name": "moveMonitorSample",
+            "parentMenuId": 51,
+            "seq": 8,
+            "url": "/rui2/sample/general/util/moveMonitorSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 60,
+            "name": "Utility",
+            "parentMenuId": 51,
+            "seq": 9,
+            "url": "/rui2/sample/general/util/utilSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 61,
+            "name": "validate",
+            "parentMenuId": 1,
+            "seq": 11,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 62,
+            "name": "Validate",
+            "parentMenuId": 61,
+            "seq": 1,
+            "url": "/rui2/sample/general/validate/validateSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 63,
+            "name": "ui",
+            "parentMenuId": null,
+            "seq": 12,
+            "url": ""
+        },
+        {
+            "desc": "",
+            "menuId": 64,
+            "name": "calendar",
+            "parentMenuId": 63,
+            "seq": 1,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 65,
+            "name": "Basic",
+            "parentMenuId": 64,
+            "seq": 1,
+            "url": "/rui2/sample/general/ui/calendar/calendarSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 66,
+            "name": "New Basic (Beta)",
+            "parentMenuId": 64,
+            "seq": 2,
+            "url": "/rui2/sample/general/ui/calendar/newCalendarSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 67,
+            "name": "container",
+            "parentMenuId": 63,
+            "seq": 2,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 68,
+            "name": "Common dialog sample",
+            "parentMenuId": 67,
+            "seq": 1,
+            "url": "/rui2/sample/general/ui/container/commonDialogSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 69,
+            "name": "Dialog Quick Start",
+            "parentMenuId": 67,
+            "seq": 2,
+            "url": "/rui2/sample/general/ui/container/dialogGridSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 70,
+            "name": "Dialog Quick Start Async",
+            "parentMenuId": 67,
+            "seq": 3,
+            "url": "/rui2/sample/general/ui/container/dialogQuickstartAsyncSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 71,
+            "name": "Dialog Quick Start No Markup",
+            "parentMenuId": 67,
+            "seq": 4,
+            "url": "/rui2/sample/general/ui/container/dialogQuickstartNoMarkupSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 72,
+            "name": "Dialog Quick Start",
+            "parentMenuId": 67,
+            "seq": 5,
+            "url": "/rui2/sample/general/ui/container/dialogQuickstartSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 73,
+            "name": "Common dialog sample",
+            "parentMenuId": 67,
+            "seq": 6,
+            "url": "/rui2/sample/general/ui/container/frameDialogSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 74,
+            "name": "Key Listener",
+            "parentMenuId": 67,
+            "seq": 7,
+            "url": "/rui2/sample/general/ui/container/keylistenerSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 75,
+            "name": "Message Box",
+            "parentMenuId": 67,
+            "seq": 8,
+            "url": "/rui2/sample/general/ui/container/messageboxSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 76,
+            "name": "Module",
+            "parentMenuId": 67,
+            "seq": 9,
+            "url": "/rui2/sample/general/ui/container/moduleSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 77,
+            "name": "Overlay Manager",
+            "parentMenuId": 67,
+            "seq": 10,
+            "url": "/rui2/sample/general/ui/container/overlaymanagerSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 78,
+            "name": "Overlay",
+            "parentMenuId": 67,
+            "seq": 11,
+            "url": "/rui2/sample/general/ui/container/overlaySample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 79,
+            "name": "Panel Loading",
+            "parentMenuId": 67,
+            "seq": 12,
+            "url": "/rui2/sample/general/ui/container/panelLoadingSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 80,
+            "name": "Panel resize",
+            "parentMenuId": 67,
+            "seq": 13,
+            "url": "/rui2/sample/general/ui/container/panelResizeSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 81,
+            "name": "Panel basic",
+            "parentMenuId": 67,
+            "seq": 14,
+            "url": "/rui2/sample/general/ui/container/panelSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 82,
+            "name": "Panel Skin 1",
+            "parentMenuId": 67,
+            "seq": 15,
+            "url": "/rui2/sample/general/ui/container/panelskin1Sample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 83,
+            "name": "Panel Skin 2",
+            "parentMenuId": 67,
+            "seq": 16,
+            "url": "/rui2/sample/general/ui/container/panelskin2Sample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 84,
+            "name": "Simple Dialog Quick Start",
+            "parentMenuId": 67,
+            "seq": 17,
+            "url": "/rui2/sample/general/ui/container/simpledialogQuickstartSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 85,
+            "name": "Tooltip Multi",
+            "parentMenuId": 67,
+            "seq": 18,
+            "url": "/rui2/sample/general/ui/container/tooltipMultiSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 86,
+            "name": "Tooltip basic",
+            "parentMenuId": 67,
+            "seq": 19,
+            "url": "/rui2/sample/general/ui/container/tooltipSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 87,
+            "name": "form",
+            "parentMenuId": 63,
+            "seq": 3,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 88,
+            "name": "Basic Combo basic",
+            "parentMenuId": 87,
+            "seq": 1,
+            "url": "/rui2/sample/general/ui/form/basicComboSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 89,
+            "name": "CheckBox Group",
+            "parentMenuId": 87,
+            "seq": 2,
+            "url": "/rui2/sample/general/ui/form/checkboxgroupSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 90,
+            "name": "CheckBox",
+            "parentMenuId": 87,
+            "seq": 3,
+            "url": "/rui2/sample/general/ui/form/checkboxSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 91,
+            "name": "Combo Array",
+            "parentMenuId": 87,
+            "seq": 4,
+            "url": "/rui2/sample/general/ui/form/comboArraySample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 92,
+            "name": "Combo basic",
+            "parentMenuId": 87,
+            "seq": 5,
+            "url": "/rui2/sample/general/ui/form/comboBasicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 93,
+            "name": "Combo dynamic create",
+            "parentMenuId": 87,
+            "seq": 6,
+            "url": "/rui2/sample/general/ui/form/comboDynamicCreateSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 94,
+            "name": "Combo Markup",
+            "parentMenuId": 87,
+            "seq": 7,
+            "url": "/rui2/sample/general/ui/form/comboMarkupSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 95,
+            "name": "Combo Remote",
+            "parentMenuId": 87,
+            "seq": 8,
+            "url": "/rui2/sample/general/ui/form/comboRemoteSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 96,
+            "name": "DateBox readonly textbox",
+            "parentMenuId": 87,
+            "seq": 9,
+            "url": "/rui2/sample/general/ui/form/dateboxReadonlyTextboxSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 97,
+            "name": "DateBox",
+            "parentMenuId": 87,
+            "seq": 10,
+            "url": "/rui2/sample/general/ui/form/dateboxSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 98,
+            "name": "File Upload Sample",
+            "parentMenuId": 87,
+            "seq": 11,
+            "url": "/rui2/sample/general/ui/form/fileUploadDialogSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 99,
+            "name": "File Upload Sample",
+            "parentMenuId": 87,
+            "seq": 12,
+            "url": "/rui2/sample/general/ui/form/fileUploadSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 100,
+            "name": "Number Box",
+            "parentMenuId": 87,
+            "seq": 13,
+            "url": "/rui2/sample/general/ui/form/newNumberboxSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 101,
+            "name": "Number Box",
+            "parentMenuId": 87,
+            "seq": 14,
+            "url": "/rui2/sample/general/ui/form/numberboxSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 102,
+            "name": "Radio Group",
+            "parentMenuId": 87,
+            "seq": 15,
+            "url": "/rui2/sample/general/ui/form/radiogroupSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 103,
+            "name": "Radio",
+            "parentMenuId": 87,
+            "seq": 16,
+            "url": "/rui2/sample/general/ui/form/radioSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 104,
+            "name": "Simple Form",
+            "parentMenuId": 87,
+            "seq": 17,
+            "url": "/rui2/sample/general/ui/form/simpleformSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 105,
+            "name": "Textarea",
+            "parentMenuId": 87,
+            "seq": 18,
+            "url": "/rui2/sample/general/ui/form/textareaSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 106,
+            "name": "TextBox Basic",
+            "parentMenuId": 87,
+            "seq": 19,
+            "url": "/rui2/sample/general/ui/form/textboxBasicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 107,
+            "name": "TextBox Mask",
+            "parentMenuId": 87,
+            "seq": 20,
+            "url": "/rui2/sample/general/ui/form/textboxMaskSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 108,
+            "name": "Textbox Remote",
+            "parentMenuId": 87,
+            "seq": 21,
+            "url": "/rui2/sample/general/ui/form/textboxRemoteSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 109,
+            "name": "Time Box",
+            "parentMenuId": 87,
+            "seq": 22,
+            "url": "/rui2/sample/general/ui/form/timeboxSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 110,
+            "name": "gridview",
+            "parentMenuId": 63,
+            "seq": 4,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 111,
+            "name": "Grid Basic",
+            "parentMenuId": 110,
+            "seq": 1,
+            "url": "/rui2/sample/general/ui/grid/gridpanelBasicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 112,
+            "name": "Bufferd grid",
+            "parentMenuId": 110,
+            "seq": 2,
+            "url": "/rui2/sample/general/ui/grid/gridpanelBuffergridviewSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 113,
+            "name": "Grid Color",
+            "parentMenuId": 110,
+            "seq": 3,
+            "url": "/rui2/sample/general/ui/grid/gridpanelColorSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 114,
+            "name": "Summary Column",
+            "parentMenuId": 110,
+            "seq": 4,
+            "url": "/rui2/sample/general/ui/grid/gridpanelColumnSummarySample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 115,
+            "name": "Context Menu",
+            "parentMenuId": 110,
+            "seq": 5,
+            "url": "/rui2/sample/general/ui/grid/gridpanelContextMenuSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 116,
+            "name": "Custom Edit",
+            "parentMenuId": 110,
+            "seq": 6,
+            "url": "/rui2/sample/general/ui/grid/gridpanelCustomEditSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 117,
+            "name": "Design Basic",
+            "parentMenuId": 110,
+            "seq": 7,
+            "url": "/rui2/sample/general/ui/grid/gridpanelDesignSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 118,
+            "name": "Edit Combo Grid Basic",
+            "parentMenuId": 110,
+            "seq": 8,
+            "url": "/rui2/sample/general/ui/grid/gridpanelEditComboSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 119,
+            "name": "Edit Many Column",
+            "parentMenuId": 110,
+            "seq": 9,
+            "url": "/rui2/sample/general/ui/grid/gridpanelEditManyColumnsSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 120,
+            "name": "Edit Many Column and Tab",
+            "parentMenuId": 110,
+            "seq": 10,
+            "url": "/rui2/sample/general/ui/grid/gridpanelEditManyColumnsTabSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 121,
+            "name": "Edit Performance",
+            "parentMenuId": 110,
+            "seq": 11,
+            "url": "/rui2/sample/general/ui/grid/gridpanelEditPerformanceSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 122,
+            "name": "Edit Basic",
+            "parentMenuId": 110,
+            "seq": 12,
+            "url": "/rui2/sample/general/ui/grid/gridpanelEditSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 123,
+            "name": "Format",
+            "parentMenuId": 110,
+            "seq": 13,
+            "url": "/rui2/sample/general/ui/grid/gridpanelFormatSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 124,
+            "name": "Multi Header",
+            "parentMenuId": 110,
+            "seq": 14,
+            "url": "/rui2/sample/general/ui/grid/gridpanelMultiheaderSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 125,
+            "name": "Pager",
+            "parentMenuId": 110,
+            "seq": 15,
+            "url": "/rui2/sample/general/ui/grid/gridpanelPagerSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 126,
+            "name": "Pager select first load page",
+            "parentMenuId": 110,
+            "seq": 16,
+            "url": "/rui2/sample/general/ui/grid/gridpanelPagerSelectFirstLoadPageSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 127,
+            "name": "Excel download",
+            "parentMenuId": 110,
+            "seq": 17,
+            "url": "/rui2/sample/general/ui/grid/gridpanelSaveExcelSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 128,
+            "name": "Selection Model",
+            "parentMenuId": 110,
+            "seq": 18,
+            "url": "/rui2/sample/general/ui/grid/gridpanelSelectionmodelSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 129,
+            "name": "Summary",
+            "parentMenuId": 110,
+            "seq": 19,
+            "url": "/rui2/sample/general/ui/grid/gridpanelSummaryBasicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 130,
+            "name": "Summary ext",
+            "parentMenuId": 110,
+            "seq": 20,
+            "url": "/rui2/sample/general/ui/grid/gridpanelSummaryExtSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 131,
+            "name": "Table GridView",
+            "parentMenuId": 110,
+            "seq": 21,
+            "url": "/rui2/sample/general/ui/grid/gridpanelTableTypeSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 132,
+            "name": "Edit Basic",
+            "parentMenuId": 110,
+            "seq": 22,
+            "url": "/rui2/sample/general/ui/grid/gridpanelValidateSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 133,
+            "name": "layout",
+            "parentMenuId": 63,
+            "seq": 5,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 134,
+            "name": "Full Page Layout",
+            "parentMenuId": 133,
+            "seq": 1,
+            "url": "/rui2/sample/general/ui/layout/layoutSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 135,
+            "name": "logger",
+            "parentMenuId": 63,
+            "seq": 6,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 136,
+            "name": "Logger",
+            "parentMenuId": 135,
+            "seq": 1,
+            "url": "/rui2/sample/general/ui/logger/loggerSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 137,
+            "name": "menu",
+            "parentMenuId": 63,
+            "seq": 7,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 138,
+            "name": "Context Menu",
+            "parentMenuId": 137,
+            "seq": 1,
+            "url": "/rui2/sample/general/ui/menu/contextMenuSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 139,
+            "name": "SlideMenu",
+            "parentMenuId": 137,
+            "seq": 2,
+            "url": "/rui2/sample/general/ui/menu/slideDesignSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 140,
+            "name": "SlideMenu",
+            "parentMenuId": 137,
+            "seq": 3,
+            "url": "/rui2/sample/general/ui/menu/slideSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 141,
+            "name": "TabMenu",
+            "parentMenuId": 137,
+            "seq": 4,
+            "url": "/rui2/sample/general/ui/menu/tabMenuSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 142,
+            "name": "tabview",
+            "parentMenuId": 63,
+            "seq": 8,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 143,
+            "name": "Auto Adding Child",
+            "parentMenuId": 142,
+            "seq": 1,
+            "url": "/rui2/sample/general/ui/tab/tabViewAutoAddChildSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 144,
+            "name": "Auto Adding Child",
+            "parentMenuId": 142,
+            "seq": 2,
+            "url": "/rui2/sample/general/ui/tab/tabViewAutoAddChildSample2.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 145,
+            "name": "TabView Basic",
+            "parentMenuId": 142,
+            "seq": 3,
+            "url": "/rui2/sample/general/ui/tab/tabViewBasicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 146,
+            "name": "TabView by DataSet ",
+            "parentMenuId": 142,
+            "seq": 4,
+            "url": "/rui2/sample/general/ui/tab/tabViewDataSetSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 147,
+            "name": "TabView with Slide Menu",
+            "parentMenuId": 142,
+            "seq": 5,
+            "url": "/rui2/sample/general/ui/tab/tabViewDataSetSubMenuSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 148,
+            "name": "TabView Sample - 개발중",
+            "parentMenuId": 142,
+            "seq": 6,
+            "url": "/rui2/sample/general/ui/tab/tabViewSample.html"
+        },
+        {
+            "desc": "",
+            "menuId": 149,
+            "name": "treeview",
+            "parentMenuId": 63,
+            "seq": 9,
+            "url": ""
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 150,
+            "name": "Checkbox",
+            "parentMenuId": 149,
+            "seq": 1,
+            "url": "/rui2/sample/general/ui/tree/treeCheckboxSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 151,
+            "name": "Child Records",
+            "parentMenuId": 149,
+            "seq": 2,
+            "url": "/rui2/sample/general/ui/tree/treeChildRecordSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 152,
+            "name": "Context Menu Edit",
+            "parentMenuId": 149,
+            "seq": 3,
+            "url": "/rui2/sample/general/ui/tree/treeContextMenuEditSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 153,
+            "name": "Basic",
+            "parentMenuId": 149,
+            "seq": 4,
+            "url": "/rui2/sample/general/ui/tree/treeDesignSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 154,
+            "name": "Dynamic",
+            "parentMenuId": 149,
+            "seq": 5,
+            "url": "/rui2/sample/general/ui/tree/treeDynamicSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 155,
+            "name": "Hide Folder",
+            "parentMenuId": 149,
+            "seq": 6,
+            "url": "/rui2/sample/general/ui/tree/treeHideFolderSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 156,
+            "name": "tree inline editor sample",
+            "parentMenuId": 149,
+            "seq": 7,
+            "url": "/rui2/sample/general/ui/tree/treeInlineEditorSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 157,
+            "name": "Basic",
+            "parentMenuId": 149,
+            "seq": 8,
+            "url": "/rui2/sample/general/ui/tree/treeSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 158,
+            "name": "UnorderListBase",
+            "parentMenuId": 149,
+            "seq": 9,
+            "url": "/rui2/sample/general/ui/tree/unorderListBaseSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 159,
+            "name": "UnorderList",
+            "parentMenuId": 149,
+            "seq": 10,
+            "url": "/rui2/sample/general/ui/tree/unorderListSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 160,
+            "name": "Button",
+            "parentMenuId": 63,
+            "seq": 10,
+            "url": "/rui2/sample/general/ui/buttonSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 161,
+            "name": "Inline Editor",
+            "parentMenuId": 63,
+            "seq": 11,
+            "url": "/rui2/sample/general/ui/inlineeditorSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 162,
+            "name": "Pager Design",
+            "parentMenuId": 63,
+            "seq": 12,
+            "url": "/rui2/sample/general/ui/pagerDesignSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 163,
+            "name": "Pager",
+            "parentMenuId": 63,
+            "seq": 13,
+            "url": "/rui2/sample/general/ui/pagerSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 164,
+            "name": "scroller basic",
+            "parentMenuId": 63,
+            "seq": 14,
+            "url": "/rui2/sample/general/ui/scrollerSample.html"
+        },
+        {
+            "desc": "icon-gen",
+            "menuId": 165,
+            "name": "Wait Panel",
+            "parentMenuId": 63,
+            "seq": 15,
+            "url": "/rui2/sample/general/ui/waitpanelSample.html"
+        }
+    ]
+}]

@@ -1,0 +1,131 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+날짜를 입력하는 LDateBox
+LDateBox는 출력을 위한 mask 작용된 input태그와 실제 값을 가지는 hidden 속성이 적용된 input로 구성되어 있다.
+LDateBox는 기본적으로 date형 객체를 권장한다. string형으로 처리할 경우 기능에 섞여 코딩 오류를 유발한다.
+서버에서 데이터가 string(8)자리로 되어 있다 하더라고 dataSet과 연동하려면 dataSet의 type을 date형으로 정의하고
+rui_config.js의 readFieldFormater, writeFieldFormater를 이용하여 자동으로 date형 객체로 변환하게 셋팅한다.
+
+샘플 경로 :
+<a href="./../sample/general/ui/form/dateboxSample.html" target="_new">/rui/sample/general/ui/form/dateboxSample.html</a>
+</div>
+<div class="L-sample">
+sample: 기본 샘플이다.
+<div class="L-code">
+var datebox = new Rui.ui.form.LDateBox({
+    applyTo: 'datebox'
+});
+</div>
+</div>
+
+<div class="L-sample">
+sample: 날짜 포멧을 [-]에서 [.]으로 변경하는 방법
+다국어로 처리되는 포멧을 지정하기 위해서는 lang-XX_XX.js 파일(모든 다국어 파일)에 아래와 같이 추가해야 한다.
+<div class="L-code">
+Rui.util.LDateLocale['ko_KR'] = Rui.merge(Rui.util.LDateLocale['ko_KR'], {
+        a: configLocale.shortDayInWeek,
+        A: configLocale.dayInWeek,
+        b: configLocale.shortMonthInYear,
+        B: configLocale.monthInYear1Char
+});
+
+를 아래와 같이 변경한다.
+
+Rui.util.LDateLocale['ko_KR'] = Rui.merge(Rui.util.LDateLocale['ko_KR'], {
+        a: configLocale.shortDayInWeek,
+        A: configLocale.dayInWeek,
+        b: configLocale.shortMonthInYear,
+        B: configLocale.monthInYear1Char,
+        x: '%Y.%m.%d',    <---- 소문자 x와 대문자 X를 추가해야 한다.
+        X: '%Y.%m.%d %T'
+});
+</div>
+</div>
+
+</div>
+
+<!-- config 시작 -->
+<div class="config_valueFormat">
+<div class="L-description">
+mask를 제외한 실제 값의 format을 지정하는 속성, form submit시 적용되는 format
+다국어를 지원하더라도 실제 서버의 db값은 같은 값으로 처리되어야 하므로 기본값을 유지한다.
+</div>
+<div class="L-sample">
+sample: valueFormat을 '%Y%m%d'로 바꾼다.
+<div class="L-code">
+var dateBox1 = new Rui.ui.form.LDateBox({
+    id:'dateBox1',
+    applyTo:'dateBox1',
+    valueFormat: '%Y%m%d'
+});
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_setValue">
+<div class="L-description">
+날짜값을 반영한다.
+</div>
+<div class="L-sample">
+sample: dateBox1객체에 오늘 날짜를 입력한다.
+<div class="L-code">
+var dateBox1 = new Rui.ui.form.LDateBox({
+    id:'dateBox1',
+    applyTo:'dateBox1'
+});
+
+dateBox1.setValue(new Date());
+</div>
+</div>
+
+<div class="L-sample">
+sample: dateBox1객체에 오늘 날짜의 일주일 전 날짜를 입력한다.
+<div class="L-code">
+var dateBox1 = new Rui.ui.form.LDateBox({
+    id:'dateBox1',
+    applyTo:'dateBox1'
+});
+
+dateBox1.setValue(new Date().add('D', -7));
+</div>
+</div>
+</div>
+
+<div class="method_getValue">
+<div class="L-description">
+입력된 날짜 가져오기
+</div>
+<div class="L-sample">
+sample: dateBox1객체에 오늘 날짜를 '%Y/%m/%d' 문자열로 출력한다.
+<div class="L-code">
+var dateBox1 = new Rui.ui.form.LDateBox({
+    id:'dateBox1',
+    applyTo:'dateBox1'
+});
+
+var date = dateBox1.getValue();
+alert(date.format('%Y/%m/%d'));
+</div>
+</div>
+
+<div class="L-sample">
+sample: dateBox1객체에 값과 오늘 날짜가 같은지 여부를 체크하여 메시지를 출력한다.
+<div class="L-code">
+var dateBox1 = new Rui.ui.form.LDateBox({
+    id:'dateBox1',
+    applyTo:'dateBox1'
+});
+
+if(new Date().compareTo(dateBox1.getValue()) {
+    alert('같은 날짜입니다.');
+}
+</div>
+</div>
+</div>
+
+<!-- event 시작 -->
+
+<!-- property 시작 -->
+</div>

@@ -1,0 +1,31 @@
+[
+    {
+        "metaData": {
+            "dataSetId": "search2Ds"
+        },
+        "records": [
+             {"text":"LG옵티머스 G Pro"},
+             {"text":"LG옵티머스 LTE3"},
+             {"text":"Nexus 4"},
+             {"text":"옵티머스 Vu2"},
+             {"text":"LG옵티머스 G"},
+             {"text":"인피니아 47LM"},
+             {"text":"인피니아 32LA"},
+             {"text":"인피니아 42LN"},
+             {"text":"인피니아 32CS"},
+             {"text":"인피니아 42LA"},
+             {"text":"트롬6모션 FR2558"},
+             {"text":"트롬6모션 F1352"},
+             {"text":"트롬6모션 F4999"},
+             {"text":"트롬 F1925"},
+             {"text":"디오스 R-S802"},
+             {"text":"디오스 R-U913"},
+             {"text":"디오스 R-S852"},
+             {"text":"디오스 R-T872"},
+             {"text":"디오스 R-S769"},
+             {"text":"디오스 R-T783"},
+             {"text":"휘센 FQ166"},
+             {"text":"휘센 SC066"}
+        ]
+    }
+]

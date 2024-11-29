@@ -1,0 +1,380 @@
+/* Block : pageTitle
+---------------------------------------------------------*/
+#LblockPageTitle {
+	background:url(../images/pageTitle_bg.gif) repeat-x left bottom;
+}
+#LblockPageTitle h1 {
+	font-size:1.1em;
+	padding:8px 0px 0px 0px;
+	color:#333;
+}
+
+/* Block : pageSubtitle
+---------------------------------------------------------*/
+.LblockPageSubtitle h2 {
+	color:#333;
+	font-size:1em;
+	font-weight:bold;
+	padding:1px 0px 0px 21px;
+	background:url(../images/leftMenu_blt.gif) no-repeat -5px 50%;
+}
+
+/* Block : pageLocation
+---------------------------------------------------------*/
+#LblockPageLocation {
+	font-size:0.9em;
+	padding:10px 0px 0px 0px;
+	color:#939393;
+}
+#LblockPageLocation li {
+	display:inline;
+	margin-left:4px;
+}
+#LblockPageLocation li span {
+	color:#0076B5;
+	padding-left:11px;
+	background:url(../images/pageLocation_separater.gif) no-repeat left top;
+}
+#LblockPageLocation li.Lfirst span {
+	background:none;
+}
+#LblockPageLocation li span a {
+	color:#727271;
+}
+
+/* Block : bodyMain
+---------------------------------------------------------*/
+
+/* Block : search
+---------------------------------------------------------*/
+#LblockSearch {
+	background-color:#ffffff;
+}
+#LblockSearch {
+	position:relative;
+	width:100%;
+}
+#LblockSearch {
+	padding-bottom:29px;
+}
+#LblockSearch table caption {
+	display:none;
+}
+#LblockSearch table {
+	border-collapse:collapse;
+	width:100%;
+	border-top:solid 1px #c9c9c9;
+	border-bottom:solid 1px #c9c9c9;
+}
+#LblockSearch table th {
+	color:#7f7f7f;
+	text-align:center;
+	white-space:nowrap; 
+	font-weight:normal;
+	padding: 5px 25px;
+	background-color:#f7f7f7;
+	border-bottom:solid 1px #c9c9c9;
+}
+#LblockSearch table td {
+	padding:0px 10px 0px 5px;
+	border-bottom:solid 1px #c9c9c9;
+}
+#LblockSearch input.Limage {
+	position:absolute;
+	right:0px;
+	bottom:0px;
+}
+
+/* Block : listTable
+---------------------------------------------------------*/
+.LblockListTable .Lwrapper {
+	position:relative;
+	width:100%;
+}
+.LblockListTable .LblockListInfo {
+	position:relative;
+	height:26px;
+	border-top:solid 1px #c9c9c9;
+}
+.LblockListTable .LblockListInfo span.Ltotal {
+	position:absolute;
+	left:2px;
+	bottom:2px;
+}
+.LblockListTable .LblockListInfo span.Lsearch {
+	position:absolute;
+	right:2px;
+	bottom:2px;
+}
+.LblockListTable table {
+	border-collapse:collapse;
+	border-top:solid 2px #E1528D;
+	border-bottom:solid 1px #c9c9c9;
+	width:100%;
+}
+.LblockListTable table caption {
+	display:none;
+}
+.LblockListTable table th,
+.LblockListTable table td {
+	height:28px;
+	padding:0px 5px;
+	white-space:nowrap; 
+	border:1px solid #e8e8e8;
+	text-align:center;
+}
+.LblockListTable table th {
+	background-color:#f6f6f6;
+	font-weight:bold;
+}
+.LblockListTable table tbody tr.Lhover {
+	background:#eed;
+}
+.LblockListTable ul {
+	text-align:center;
+	font-family: tahoma,sans-serif;
+	font-size:0.9em;
+	margin:7px 0px 15px;
+	padding-bottom:7px;
+	border-bottom:solid 1px #c9c9c9;
+}
+.LblockListTable li {
+	display:inline;
+	margin-left:5px;
+}
+.LblockListTable li span {
+	font-weight:bold;
+	color:#f1aa00;
+}
+.LblockListTable li a {
+	font-weight:normal;
+	color:#666;
+}
+.LblockListTable li a:hover,
+.LblockListTable li a:active {
+	color:#E17A0D;
+}
+.LblockListTable li.Lbegin a,
+.LblockListTable li.Lend a {
+	font-weight:bold;
+}
+.LblockListTable a.Lbtn3 { margin-right:2px; }
+a.Lbtn3,
+a.Lbtn3 * { height:17px; line-height:18px; position:relative; margin:0; padding:0; display:inline-block; text-decoration:none !important; border:0; font-family: tahoma,sans-serif; font-size:12px; white-space:nowrap; background:url(../images/btn_bg3.gif) no-repeat; vertical-align:top; overflow:visible; color:#fff; }
+a.Lbtn3 * { padding:0 5px 0 1px; background-position:right top; left:4px; cursor:pointer; }
+
+/* Block : detail
+---------------------------------------------------------*/
+.LblockDetail table {
+	width:100%;
+	border-collapse:collapse;
+}
+.LblockDetail table caption {
+	display:none;
+}
+.LblockDetail th,
+.LblockDetail td {
+	border:solid 1px #c9c9c9;
+	height:28px;
+	padding:0 10px 0 5px;
+}
+.LblockDetail th {
+	background-color:#f7f7f7;
+	font-weight:bold;
+	text-align:center;
+	white-space:nowrap; 
+}
+.LblockDetail td textarea {
+	margin:2px;
+}
+
+/* Block : tab
+---------------------------------------------------------*/
+.LblockTab {
+	background:url(../images/tab_bg.gif) repeat-x left bottom;
+	margin-bottom:7px; 
+}
+.LblockTab li {
+	float:left;
+	margin-right:5px;
+	background:url(../images/tab_l.gif) no-repeat;
+}
+.LblockTab li.Lcurrent {
+	background-position:left -33px;
+}
+.LblockTab li span {
+	display:block;
+	background:url(../images/tab_r.gif) no-repeat right top;
+}
+.LblockTab li.Lcurrent span {
+	background-position:right -33px;
+}
+.LblockTab li span a {
+	display:block;
+	line-height:24px;
+	color:#7f7f7f;
+	text-decoration:none;
+	padding:8px 25px 0px;
+}
+.LblockTab li.Lcurrent span a:link,
+.LblockTab li.Lcurrent span a:visited {
+	font-weight:bold;
+	color:#ffc539;
+}
+.LblockTab li span a:link,
+.LblockTab li span a:visited {
+	color:#7f7f7f;
+}
+.LblockTab li span a:hover,
+.LblockTab li span a:active {
+	color:#f1aa00;
+}
+.LblockTab li.Lcurrent span a:hover,
+.LblockTab li.Lcurrent span a:active {
+	color:#f1aa00;
+}
+
+/* Block : tabArea
+---------------------------------------------------------*/
+/* Block : tree
+---------------------------------------------------------*/
+.LblockTree {
+	border:1px solid #c9c9c9;
+	padding:5px;
+}
+.LblockTree a {
+	text-decoration:none;
+}
+.LblockTree a:link, .LblockTree a:visited {
+	color:#7F7F7F;
+}
+
+/* Block : content
+---------------------------------------------------------*/
+.LblockContent {
+	padding-left:5px;
+}
+.LblockContent ul {
+	margin:5px 0;
+}
+.LblockContent li {
+	padding-left:10px;
+	background:url(../images/content_blt.gif) no-repeat left 5px;
+}
+
+/* Block : content2
+---------------------------------------------------------*/
+.LblockContent2 {
+	padding-left:10px;
+}
+.LblockContent2 ul {
+	margin:5px 0;
+}
+.LblockContent2 li {
+	padding-left:7px;
+	background:url(../images/content2_blt.gif) no-repeat left 7px;
+}
+
+/* Block : comment
+---------------------------------------------------------*/
+.LblockComment {
+	color:#e00;
+}
+
+/* Block : button
+---------------------------------------------------------*/
+
+.LBtnSearch button {
+	color: #454545;
+}
+
+.LBtnSearch {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+#LblockButton, .LblockButton {
+	position:relative;
+	background:url(../images/button_bg.gif) repeat-x left top;
+	padding-top:10px;
+	text-align:right;
+}
+* html #LblockButton, * html .LblockButton {
+	height:1%;
+}
+#LblockButton span.Lleft, .LblockButton span.Lleft {
+	position:absolute;
+	left:0;
+}
+#LblockButton a.Lbtn, .LblockButton a.Lbtn {
+	margin-right:8px;
+}
+
+a.Lbtn,
+a.Lbtn * { height:22px; line-height:23px; position:relative; margin:0; padding:0; display:inline-block; text-decoration:none !important; border:0; font-family: tahoma,sans-serif;font-size:12px; font-weight:bold; white-space:nowrap; background:url(../images/btn_bg1.gif) no-repeat; vertical-align:top; overflow:visible; color:#7F7F7F; }
+a.Lbtn * { padding:0 14px 0 11px; background-position:right top; left:4px; cursor:pointer; }
+
+/* Block : subbutton
+---------------------------------------------------------*/
+.LblockSubbutton {
+	text-align:right;
+}
+.LblockSubbutton a.Lbtn2  {
+	margin-right:8px;
+}
+a.Lbtn2,
+a.Lbtn2 * { height:22px; line-height:23px; position:relative; margin:0; padding:0; display:inline-block; text-decoration:none !important; border:0; font-family: tahoma,sans-serif;font-size:12px; font-weight:bold; white-space:nowrap; background:url(../images/btn_bg2.gif) no-repeat; vertical-align:top; overflow:visible; color:#7F7F7F; }
+a.Lbtn2 * { padding:0 14px 0 11px; background-position:right top; left:4px; cursor:pointer; }
+
+/* Block : shuttleButton
+---------------------------------------------------------*/
+.LblockShuttleButton p {
+	margin-bottom:6px;
+}
+.LblockShuttleButton img {
+	cursor:pointer;
+}
+
+/* Block : error
+---------------------------------------------------------*/
+#LblockError {
+	padding:28px 20px 28px 115px;
+	border:5px solid #E0E0E0;
+	background:url(../images/error.gif) no-repeat 25px 32px;
+}
+#LblockError div {
+	padding:4px 20px;
+	border-left:1px solid #E0E0E0;
+}
+#LblockError h1 {
+	width:100%;
+	overflow:hidden;
+	height:0;padding-top:21px;
+	margin-bottom:15px;
+	background:url(../images/error_text.gif) no-repeat;
+}
+#LblockError p {
+	line-height:20px;
+}
+
+/* Block : inform
+---------------------------------------------------------*/
+#LblockInform {
+	padding:28px 20px 28px 115px;
+	border:5px solid #E0E0E0;
+	background:url(../images/inform.gif) no-repeat 25px 32px;
+}
+#LblockInform div {
+	padding:4px 20px;
+	border-left:1px solid #E0E0E0;
+}
+#LblockInform h1 {
+	width:100%;
+	overflow:hidden;
+	height:0;padding-top:21px;
+	margin-bottom:15px;
+	background:url(../images/inform_text.gif) no-repeat;
+}
+#LblockInform p {
+	line-height:20px;
+}

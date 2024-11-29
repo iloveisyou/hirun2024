@@ -1,0 +1,13 @@
+.L-notification-container {
+    position: fixed;
+    width: 230px;
+    top: 0px;
+    right: 20px;
+}
+.L-notification {
+    font-weight: bold;
+}
+.L-notification {
+    height: 50px;
+    padding: 3px 0px;
+}

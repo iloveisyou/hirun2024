@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="대화상자(dialog), IFrame Dialog" />
+    <title>Frame Dialog</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/LFrameDialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LFrameDialog.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LPopupTextBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LPopupTextBox.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+
+            /*<b>*/
+            var handleSubmit = function(){
+                var frameWindow = this.getFrameWindow(); //Dialog 내부 Content에 접근할 때 사용할 수 있는 Dialog내 IFrame의 window 객체
+                var content = frameWindow.DialogContent; //Dialog의 IFrame내부에 생성된 DialogContent 객체
+                if(content){
+                	var objs = content.getMarked('col1');
+                	if(objs.length > 0)
+                		   popupTextBox.setValue(objs.join(', '));
+                }
+                this.submit(true);
+            };
+            
+            var frameDialog = new Rui.ui.LFrameDialog({
+                id: 'frameDialog', 
+                title: '선택하세요',
+                width: 800,
+                height: 400,
+                modal: true,
+                visible: false,
+                buttons: [ 
+                        { text: 'Apply', handler: handleSubmit, isDefault: true },
+                        { text: 'Close', handler: function(){
+                            this.cancel();
+                        } } 
+                    ]
+            });
+            frameDialog.render(document.body);
+
+            var openDialog = function(url){
+                frameDialog.setUrl(url || './frameDialogContent.html');
+                frameDialog.show();
+            }
+            /*</b>*/
+
+            var popupTextBox = new Rui.ui.form.LPopupTextBox({
+                applyTo: 'popupTextBox',
+                width: 300,
+                editable: true,
+                placeholder: 'Rovert',
+                enterToPopup: true
+            });
+            
+            
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+             
+            popupTextBox.on('popup', function(e){
+            	openDialog('./frameDialogContent.html?param=' + e.displayValue);
+            });
+
+            var setUrlBtn = new Rui.ui.LButton('setUrlBtn');
+            setUrlBtn.on('click', function(e){
+            	openDialog('http://m.naver.com');
+            });
+            
+            var setWidthBtn = new Rui.ui.LButton('setWidthBtn');
+            setWidthBtn.on('click', function(e){
+                frameDialog.setWidth(500);
+                openDialog();
+            });
+            
+            var setHeightBtn = new Rui.ui.LButton('setHeightBtn');
+            setHeightBtn.on('click', function(e){
+                frameDialog.setHeight(250);
+                openDialog();
+            });
+        });
+        
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Frame Dialog</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>IFrame을 사용하는 Dialog</h2>
+            <div class="LblockDesc">
+                <p>Dialog 내부 컨텐츠를 IFrame을 이용하여 새로운 페이지로 구성합니다</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="popupTextBox"></div>
+        </div>
+        <div class="LblockButton" >
+            <button type="button" id="setWidthBtn" >Open width 500</button>
+            <button type="button" id="setHeightBtn" >Open height 250</button>
+            <button type="button" id="setUrlBtn" >Open other URL</button>
+        </div>
+    </div>
+</body>
+</html>

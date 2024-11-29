@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>base element</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+        <script type="text/javascript" class="script-code">
+            $C(function(){
+                var xy = $C('.LblockButton input').setStyle('position', 'absolute').setXY([100, 100]).getXY();
+                alert(xy);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>base sample</h1>
+        <h2>dom의 기본 기능을 확장하고 dom selector를 통해 다수의 dom 객체를 동시에 제어할 수 있는 샘플</h2>
+        <div class="LblockButton" >
+            <input type="text" id="searchBtn" >Search
+            <input type="text" id="newBtn" >NEW
+            <input type="text" id="insertBtn" >insert
+            <input type="text" id="updateBtn" >update
+            <input type="text" id="deleteBtn" >delete
+            <input type="text" id="saveBtn" >save
+            <input type="text" id="undoBtn" >undo
+            <input type="text" id="undoAllBtn" >undoAll
+            <input type="text" id="clearBtn" >clear
+            <input type="text" id="d1Btn" >d1
+            <input type="text" id="d2Btn" >d2
+        </div>
+    </body>
+</html>

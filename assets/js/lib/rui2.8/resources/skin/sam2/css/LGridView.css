@@ -1,0 +1,44 @@
+.L-grid-header {
+    background-color: #F7fbff;
+    background-image:url("./images/grid/header-row-background3.png");
+}
+
+.L-grid-header table td {    
+    border-right : #CCCCCC 1px solid !important;
+    /*multi header*/
+    border-top : #CCCCCC 1px solid !important;
+    padding-right: 0px;
+    border-left-width: 0px;
+}
+
+.L-grid-header-over{
+    background-color:#f1f4f9;
+}
+
+.L-grid-header a{
+    color:#2359A3;
+}
+
+.L-grid-cell-sortable a {
+    text-decoration: underline;
+}
+
+.L-grid-row-selected .L-grid-cell-editable {
+    background-color: #eFDAB7 !important;
+}
+
+.L-grid-body .L-grid-cell-selected {
+    background-color: #cFdFF0 !important;
+}
+
+.L-grid-panel {
+	position:relative;
+}
+
+.L-grid-panel .L-panel .bd {
+    padding: 0px;
+}
+
+.L-editor-panel {
+    padding: 0px;
+}

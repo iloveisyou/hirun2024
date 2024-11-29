@@ -1,0 +1,20 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+setTimeout을 대체하여 Task를 지연시켜 실행할 수 있는 지원 유틸리티 
+</div>
+<div class="L-sample">
+sample: inputField에 key를 입력하면 지연된 타스크에 의해서 inputField에 입력된 데이터의 길이를 검사한다.
+<div class="L-code">
+var task = new Rui.util.LDelayedTask(function(){
+    alert(Rui.getDom('inputField').value.length);
+});
+
+Rui.get('inputField').on('keypress', function(){
+    task.delay(500);
+});
+</div> 
+</div>
+</div>
+
+</div>

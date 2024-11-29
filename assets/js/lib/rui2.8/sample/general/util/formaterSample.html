@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="포멧, 변환" />
+    <title>Formater</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        label {
+            width: 100px;
+            display: inline-block;
+            *display: inline;
+            *zoom: 100%;
+            text-align: right;
+        }
+        
+        #panel{
+            width:500px;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                dataIndex: 2,
+                fields: [
+                    { id: 'time' },
+                    { id: 'date' },
+                    { id: 'money' },
+                    { id: 'weight' },
+                    { id: 'len' },
+                    { id: 'rate' }
+                ]
+            });
+
+            var bind = new Rui.data.LBind({
+                groupId: 'frm',
+                dataSet: dataSet,
+                bind: true,
+                bindInfo: [
+                    { id: 'time', ctrlId: 'time', value: 'value' },
+                    { id: 'date', ctrlId: 'date', value: 'value' },
+                    { id: 'money', ctrlId: 'money', value: 'value' },
+                    { id: 'weight', ctrlId: 'weight', value: 'value' },
+                    { id: 'len', ctrlId: 'len', value: 'value' },
+                    { id: 'rate', ctrlId: 'rate', value: 'value' }
+                ]
+            });
+
+            // Combo1 - time
+            var col1Combo = new Rui.ui.form.LCombo({
+                applyTo: 'combo1',
+                forceSelection: true,
+                defaultValue: '%T'
+            });
+
+            // Combo2 - date
+            var col2Combo = new Rui.ui.form.LCombo({
+                applyTo: 'combo2',
+                forceSelection: true,
+                defaultValue: '%x'
+            });
+
+            var col3Combo = new Rui.ui.form.LCombo({
+                applyTo: 'combo3',
+                forceSelection: true,
+                defaultValue: ''
+            });
+
+            // Combo4 - weight
+            var col4Combo = new Rui.ui.form.LCombo({
+                applyTo: 'combo4',
+                forceSelection: true,
+                defaultValue: 'kg'
+            });
+
+            // Combo5 - length // length문자를 dom의 id나 name으로 사용하면 안됨.(length는 javascript 배열 기본 키워드)
+            var col5Combo = new Rui.ui.form.LCombo({
+                applyTo: 'combo5',
+                forceSelection: true,
+                defaultValue: 'm'
+            });
+
+            // Combo6 - rate
+            var col6Combo = new Rui.ui.form.LCombo({
+                applyTo: 'combo6',
+                forceSelection: true,
+                defaultValue: '%'
+            });
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+            dataSet.on('load', function() {
+                var record = dataSet.getAt(0);
+                Rui.get('time').setValue(record.get('time'));
+            });
+
+            col1Combo.on('changed', function(e){
+                dataSet.undo(0);
+                var record = dataSet.getAt(dataSet.getRow());
+                /*<b>*/
+                var newVal = Rui.util.LFormat.timeFormat(record.get('time'), {format:this.getValue()});
+                Rui.get('timeResult').html(newVal);
+                /*</b>*/
+            });
+
+            col2Combo.on('changed', function(e){
+                dataSet.undo(1);
+                var record = dataSet.getAt(dataSet.getRow());
+                /*<b>*/
+                var newVal = Rui.util.LFormat.dateToString(record.get('date').toDate('%Y%m%d'), {format:this.getValue()});
+                Rui.get('dateResult').html(newVal);
+                /*</b>*/
+            });
+
+            col3Combo.on('changed', function(e){
+                dataSet.undo(2);
+                var record = dataSet.getAt(dataSet.getRow());
+                /*<b>*/
+                var newVal = Rui.util.LFormat.moneyFormat(record.get('money'), this.getValue());
+                Rui.get('moneyResult').html(newVal);
+                /*</b>*/
+            });
+
+            col4Combo.on('changed', function(e){
+                dataSet.undo(3);
+                var record = dataSet.getAt(dataSet.getRow());
+                /*<b>*/
+                var newVal = Rui.util.LFormat.weightFormat(record.get('weight'), this.getValue(), true);
+                Rui.get('weightResult').html(newVal);
+                /*</b>*/
+            });
+
+            col5Combo.on('changed', function(e){
+                dataSet.undo(4);
+                var record = dataSet.getAt(dataSet.getRow());
+                /*<b>*/
+                var newVal = Rui.util.LFormat.lengthFormat(record.get('len'), this.getValue(), true, 1);
+                Rui.get('lengthResult').html(newVal);
+                /*</b>*/
+            });
+
+            col6Combo.on('changed', function(e){
+                //dataSet.undo(5);
+                var record = dataSet.getAt(dataSet.getRow());
+                /*<b>*/
+                var newVal = Rui.util.LFormat.rateFormat(record.get('rate'), this.getValue(), true, 1);
+                Rui.get('rateResult').html(newVal);
+                /*</b>*/
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.undoAll();
+            });
+
+            dataSet.load({
+                url: './../../../sample/data/data.json'
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Formater</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>값의 다양한 format방법을 보여주는 샘플</h2>
+            <div class="LblockDesc">
+		        <p>여러 가지 값에 대한 다양한 formater 지정을 통해 값의 표시 방법을 지정할 수 있습니다.</p>
+		        <p>Date type의 데이터를 다루는데 도움이 되는 function을 제공하는 static Date 클래스 </p>
+		        <p>java.sql.date의 toString은 yyyy-MM-dd로 return이 되므로 이에 대응</p>
+		        <p>&lt;dl&gt;</p>
+		        <p> &lt;dt&gt;oConfig.format의 약어 내용은 아래와 같다.&lt;/dt&gt;</p>
+		        <p> &lt;dd&gt;strftime에 정의된 format을 지원한다.&lt;/dd&gt;</p>
+		        <p>&lt;/dl&gt;</p>
+		        <p>strftime은 http://www.opengroup.org/onlinepubs/007908799/xsh/strftime.html에</p>
+		        <p>오픈 그룹에 의해 정의된 여러가지 format 지정자들을 가지고 있다. </p>
+		        <p>PHP는 http://www.php.net/strftime에 정의된 자체의 몇가지 항목들을 추가한다.</p>
+		        <p>이러한 자바스크립트 구현은 모든 PHP 지정자와 몇가지를 더 지원한다.</p>
+		        <p>arg \%a - 현재 locale의 요일의 단축표시 ex) ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']</p>
+		        <p>arg \%A - 현재 locale의 요일 표시 ex) ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']</p>
+		        <p>arg \%b - 현재 locale의 달의 단축표시 ex) ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']</p>
+		        <p>arg \%B - 현재 locale의 달 표시 ex) ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']</p>
+		        <p>arg \%c - 현재 locale의 선호되는 날짜와 시간 표시 ex) 미국 : %a %d %b %Y %T %Z, 한국 : %Y년 %b %d %a %T %Z</p>
+		        <p>arg \%C - century number 현재 년도를 100으로 나누고 정수로 만든값으로 00~99</p>
+		        <p>arg \%d - 달의 일을 표시하는 값으로 01 ~ 31을 표시</p>
+		        <p>arg \%D - %m/%d/%y와 같다.</p>
+		        <p>arg \%e - %d와 비슷하나 1자리수의 경우 0대신이 공백이 들어간다. ' 1' ~ '31'</p>
+		        <p>arg \%F - %Y-%m-%d와 같다. (ISO 8601 date format)</p>
+		        <p>arg \%g - Two digit representation of the year going by ISO-8601:1988 standards (see %V)</p>
+		        <p>arg \%G - The full four-digit version of %g</p>
+		        <p>arg \%h - %b와 같다.</p>
+		        <p>arg \%H - 24-hour 00 ~ 23</p>
+		        <p>arg \%I - 12-hour 01 ~ 12</p>
+		        <p>arg \%j - 년중 몇번째 일인지 표시 001 ~ 366</p>
+		        <p>arg \%k - 24-hour 0 ~ 23</p>
+		        <p>arg \%l - 12-hour 1 ~ 12 </p>
+		        <p>arg \%m - month 01 ~ 12</p>
+		        <p>arg \%M - minute 00 ~ 59</p>
+		        <p>arg \%n - 줄바꿈문자</p>
+		        <p>arg \%p - 현재 locale의 `AM', `PM'</p>
+		        <p>arg \%P - %p와 같으나 소문자 'am', 'pm'</p>
+		        <p>arg \%q - 입력용 format으로 년월일을 표시하며 기본 %Y%m%d이다.</p>
+		        <p>arg \%Q - 입력용 format으로 년월일시분초를 표시하면 기본 %Y%m%d%H%M%S이다. </p>
+		        <p>arg \%r - %p를 붙인 12시간제 시간 표시 %I:%M:%S %p와 같다.</p>
+		        <p>arg \%R - 24시간 표시 %H:%M와 같다.</p>
+		        <p>arg \%s - Unix Epoch Time timestamp, 1970-01-01 00:00:00 UTC이후의 초 ex) 305815200는 September 10, 1979 08:40:00 AM이다.</p>
+		        <p>arg \%S - 초 00 ~ 59</p>
+		        <p>arg \%t - tab문자</p>
+		        <p>arg \%T - 현재시간 %H:%M:%S와 같다.</p>
+		        <p>arg \%u - 요일을 숫자로 표시 1이 월요일이다.  1 ~ 7</p>
+		        <p>arg \%U - 지정한 년의 주번호 첫번째 일요일 부터 한주로 계산한다.</p>
+		        <p>arg \%V - 지정한 년의 주번호(ISO 8601:1988) 첫번째 월요일 부터 한주로 계산한다.  단 첫주는 적어도 4일이상이 되어야 한다. 01~53</p>
+		        <p>arg \%w - 요일을 숫자로 표시 0이 일요일이다.  0 ~ 6</p>
+		        <p>arg \%W - 지정한 년의 주번호 첫번째 월요일 부터 한주로 계산.</p>
+		        <p>arg \%x - 현재 locale의 기본 년월일 format ex) 2010-05-14, 14/05/10</p>
+		        <p>arg \%X - 현재 locale의 시간 ex) 2010-05-14 15:59:16</p>
+		        <p>arg \%y - century를 뺀 년도 00 ~ 99</p>
+		        <p>arg \%Y - century를 포함한 년도 ex) 2010</p>
+		        <p>arg \%z - time zone(UTC) 약어 또는 전체 명 ex) -0500 또는 EST for Eastern Time</p>
+		        <p>arg \%Z - time zone name / abbreviation</p>
+		        <p>arg \%% - a literal `\%' character   </p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <form id="frm">
+                <fieldset>
+                    <label for="time">Time</label>
+                    <input type=text id="time" name="time" />
+                    <label for="combo1">col1</label>
+                    <select id="combo1">
+                        <option value="%T">%H:%M:%S</option>
+                        <option value="%R">%H:%M</option>
+                    </select>
+                    <span id="timeResult"></span>
+                </fieldset>
+                <fieldset>
+                    <label for="date">Date</label>
+                    <input type=text id="date" name="date" />
+                    <label for="combo2">col2</label>
+                    <select id="combo2">
+                        <option value="%x">locale</option>
+                        <option value="%c">%Y년 %b %d %a %T %Z</option>
+                        <option value="%D">%m/%d/%y</option>
+                        <option value="%F">%Y-%m-%d</option>
+                    </select>
+                    <span id="dateResult"></span>
+                </fieldset>
+                <fieldset>
+                    <label for="money">Money</label>
+                    <input type=text id="money" name="money" />
+                    <label for="combo3">col3</label>
+                    <select id="combo3">
+                        <option value="ko_KR">ko_KR</option>
+                        <option value="en_US">en_US</option>
+                    </select>
+                    <span id="moneyResult"></span>
+                </fieldset>
+                <fieldset>
+                    <label for="weight">Weight</label>
+                    <input type=text id="weight" name="weight" />
+                    <label for="combo4">col4</label>
+                    <select id="combo4">
+                        <option value="kg">kg</option>
+                        <option value="g">g</option>
+                        <option value="t">t</option>
+                    </select>
+                    <span id="weightResult"></span>
+                </fieldset>
+                <fieldset>
+                    <label for="len">Length</label>
+                    <input type=text id="len" name="len" />
+                    <label for="combo5">col5</label>
+                    <select id="combo5">
+                        <option value="m">m</option>
+                        <option value="cm">cm</option>
+                        <option value="mm">mm</option>
+                    </select>
+                    <span id="lengthResult"></span>
+                </fieldset>
+                <fieldset>
+                    <label for="rate">Rate</label>
+                    <input type=text id="rate" name="rate" />
+                    <label for="combo6">col6</label>
+                    <select id="combo6">
+                        <option value="%">%</option>
+                        <option value="%%">%%</option>
+                    </select>
+                    <span id="rateResult"></span>
+                </fieldset>
+                <div>
+                    <button type="button" id="clearBtn" >clear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

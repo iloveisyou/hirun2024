@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Combo dynamic create</title>
+        <script type="text/javascript" src='./../../../../js/rui_base.js'></script>
+        <script type='text/javascript' src='./../../../../js/rui_ext.js'></script>
+        <script type='text/javascript' src='./../../../../resources/rui_config.js'></script>        
+        <script type="text/javascript" src='./../../../../plugins/ui/form/LBasicCombo.js'></script>
+        <script type="text/javascript" src='./../../../../plugins/util/simpleSyntax.js'></script>
+        <script type='text/javascript' src='./../../../../sample/general/rui_sample.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+        <script type='text/javascript' class="script-code">
+            //log 활성화
+            $C('!config').set('$.core.logger.show', [true]);
+            var dataSet = null;
+            var col1Combo = null;
+            var comboList = [];
+            $C(function(){
+                /*<b>*/
+                col1Combo = createCombo();
+            });
+            
+        </script>
+        <script type='text/javascript' class="script-code">
+
+            
+            function createCombo() {
+
+                var col1Combo = $C('#combo1').basicCombo({
+                    id: 'combo1',
+                    url: './../../../data/code.json'
+                });
+                
+                return col1Combo;
+            }
+            
+            function testAdd() {
+                var parent = col1Combo.parent();
+                var newCombo = createCombo();
+                newCombo.render(document.body);
+                comboList.push(newCombo);
+                parent.appendChild(newCombo);
+            }
+            
+            function testDelete() {
+                var newCombo = comboList.pop();
+                if(newCombo) newCombo.destroy();
+            }
+            
+        </script>
+        <!--*********************************JsUnit Test용 소스   끝********************************-->
+    </head>
+    <body>
+        <h1>combo dynamic create sample</h1>
+        <h2>LCombo를 동적으로 생성하는 샘플</h2>
+        <div class="LblockLine"></div>
+        <div>콤보 객체를 선언한 이후에 콤보에 사용할 데이터를 동적으로 연결합니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id='panel'>
+            <form id='frm' name='frm' method='post' action='/consoleLog.dev'>
+                <fieldset>
+                    <label for="combo1">
+                        col1
+                    </label>
+                    <div id="combo1">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <a href='javascript:testAdd()'>add</a>
+    <a href='javascript:testDelete()'>delete</a>
+</div>
+    </body>
+</html>

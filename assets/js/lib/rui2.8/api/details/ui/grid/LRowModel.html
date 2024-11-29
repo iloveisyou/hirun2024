@@ -1,0 +1,28 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+그리드의 row별로 css를 탑재하고자 할 경우에 사용한다. 
+
+샘플 경로 :
+<a href="./../sample/general/ui/grid/gridpanelColorSample.html" target="_new">/rui/sample/general/ui/grid/gridpanelColorSample.html</a>
+</div>
+
+<div class="L-sample">
+sample: 기본 샘플이다.
+<div class="L-code">
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    rowModel: new Rui.ui.grid.LRowModel({
+        renderer: function(css, row, record) {
+            if(row == 3) css.push('bgcolor-red');
+        }
+    }),
+    dataSet: dataSet,
+    width: 500,
+    height: 300
+});
+</div>
+</div>
+</div>
+
+</div>

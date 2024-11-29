@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="UnorderedList" />
+    <title>UnorderedList</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/tree/rui_tree.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/tree/rui_tree.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'menuId', type: 'number' },
+                    { id: 'seq', type: 'number' },
+                    { id: 'parentMenuId', type: 'number' },
+                    { id: 'name' },
+                    { id: 'url' }
+                ]
+            });
+
+            /*<b>*/
+            var list = new Rui.ui.LUnorderedList({
+                dataSet: dataSet,
+                fields: {
+                    rootValue: null,
+                    parentId: 'parentMenuId',
+                    id: 'menuId',
+                    label: 'name',
+                    order: 'seq'
+                }
+            });
+
+            list.render('list');
+            /*</b>*/
+
+            dataSet.load({ url: './../../../../sample/data/menu.json' });
+        });
+    </script>
+</head>
+<body>
+    <h1>UnorderedList</h1>
+    <h2>UnorderedList 형태의 트리(Tree)형 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>UnorderedList 형태의 트리(Tree)형 목록(List) 입니다. LUnorderedList는 LTreeView의 부모이기도 합니다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="list"></div>
+        </div>
+    </div>
+</body>
+</html>

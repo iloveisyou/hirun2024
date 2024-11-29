@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE> New Document </TITLE>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+    <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+    <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+    <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+    <script class="script-code">
+        $C(function(){
+    
+            $C('#aaa').hide();
+            
+            var reMon = $C.resizeMonitor();
+            reMon.monitor($C('#bbb').getAt(0).dom);
+            reMon.on("contentResized", function(e) {
+                alert('resized');
+            });
+            
+            $C('#btnShow').button();
+            $C('#btnShow').on('click', function(e){
+                $C('#aaa').show();
+            });
+            
+            $C('#btnHide').button();
+            $C('#btnHide').on('click', function(e){
+                $C('#aaa').hide();
+            });
+        
+        });
+    </script>
+</HEAD>
+<BODY>
+    <div id='aaa'>
+        <div id="bbb">
+            test
+        </div>
+    </div>
+    <button id="btnShow">show</button>
+    <button id="btnHide">hide</button>
+</BODY>
+</HTML>

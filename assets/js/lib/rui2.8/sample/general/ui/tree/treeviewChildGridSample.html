@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="트리(LTreeViw), 자식노드(Childs), 그리드(Grid) " />
+    <title>Child Grid</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/tree/rui_tree.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/tree/rui_tree.css" />
+    
+    <script type="text/javascript" src="./../../../../plugins/data/LDataSetView.js"></script>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #treeView .L-ul {
+            border: 1px solid #dcdcdc;
+        }
+        #treeView, #gridWrapper {
+            float: left;
+        }
+        .LblockMarkupCode {
+            float: bottom;
+        }
+        #bd {
+            height: 350px;
+        }
+        h3 {
+            margin: 0px !important;
+            padding-left: 10px !important;
+        }
+        #gridWrapper {
+            margin-left: 20px;
+            width: 600px;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+        	
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'menuId', type:'number' }, 
+                    { id: 'seq',type:'number' }, 
+                    { id: 'parentMenuId',type:'number' }, 
+                    { id: 'name' }, 
+                    { id: 'url' }
+                ]
+            });
+
+            /*<b>*/
+            var dataSetView = new Rui.data.LDataSetView({
+                sourceDataSet: dataSet
+            });
+            /*</b>*/
+
+            var treeView = new Rui.ui.tree.LTreeView({
+                dataSet: dataSet,
+                width: 200,
+                height: 300,
+                fields: {
+                    rootValue: null,
+                    parentId: 'parentMenuId', 
+                    id: 'menuId',
+                    label: 'name',
+                    order:'seq'
+                }
+            });
+            treeView.render('treeView');
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+	                new Rui.ui.grid.LStateColumn(),
+					{ field: 'parentMenuId', label: '부모 메뉴ID', width: 80 }, 
+					{ field: 'menuId', label: '메뉴ID', width: 50 },
+					{ field: 'seq', label: '순서', align: 'right', width: 40, editor: new Rui.ui.form.LNumberBox()},
+					{ field: 'name', label: '메뉴명', width: 80 }, 
+					{ field: 'url', label: 'URL', autoWidth: true }, 
+				]
+            });
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSetView,
+                autoWidth: true,
+                height: 280
+            });
+            grid.render('grid');
+            
+            
+            /********************
+             * 사용자 정의 함수
+             ********************/
+             
+            /*<b>*/
+            function setDataView(row) {
+                var parentId;
+                if (row > -1) {
+                    parentId = dataSet.getAt(row).get('menuId');
+                } else {
+                    //root처리
+                    parentId = null;
+                    dataSet.setRow(-1);
+                }
+
+                dataSetView.loadView(function(recordId, record){
+                    //자기자신 제외
+                    if (record.get('menuId') !== parentId && record.get('parentMenuId') === parentId)
+                        return true;
+                    else
+                        return false;
+                });
+            }
+            /*</b>*/
+            
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+             /*<b>*/
+            dataSet.on('rowPosChanged', function (e) {
+                if (e.row > -1) setDataView(e.row);
+            });
+
+            dataSet.on('load', function () {
+                setDataView();
+            });
+            /*</b>*/
+
+            dataSet.load({
+                url: './../../../../sample/data/menu.json'
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>TreeView Child Grid</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>트리(Tree)의 선택된 노드(Node)의 모든 자식노드를 그리드(Grid)에 출력</h2>
+            <div class="LblockDesc">
+                <p>트리(Tree)에 현재 선택된 노드(Node)의 모든 자식노드들을 LDataSetView를 이용하여 그리드(Grid)에 간편하게 출력할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="contentWrapper">
+                <div id="treeView"></div>
+            </div>
+        </div>
+        <div id="gridWrapper">
+            <h3>선택된 Node의 자식 목록</h3>
+            <div id="LblockGrid">
+              <div id="grid"></div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

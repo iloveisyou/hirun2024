@@ -1,0 +1,39 @@
+/* LButton
+------------------------------*/
+.L-button {
+    display: -moz-inline-box; /* Gecko */
+    display: inline-block; /* IE, Opera and Safari */
+}
+.L-button button {
+    display: block;
+    *display: inline-block; /* IE */
+    margin: 0;
+    border: 1px solid #999999;
+    background-color: #fff;
+    *overflow: visible; /* Remove superfluous padding for IE */
+    cursor: pointer;
+}
+.L-button .first-child {
+    display: block;
+    *display: inline-block; /* IE */
+}
+.L-button.L-disabled button {
+    cursor: default;
+    border: 1px solid #BCBDC0;
+    color: #BCBDC0;
+}
+/* L-popup-button
+------------------------------*/
+.L-popup-button {
+    float:left;
+}
+.L-popup-button-icon {
+    width:17px;
+    height:17px;
+    border: 0;
+    background:transparent url(./images/button/popup.png) no-repeat 0 0;
+    cursor:pointer;
+    top:0px;
+    right: 0px;
+    float:right;
+}

@@ -1,0 +1,21 @@
+[
+    {
+        "metaData": {
+            "dataSetId": "user"
+        },
+        "records": [
+                {"userId":"demo2","userName":"홍길동","deposit":30000000,"credit": 1200000}
+        ]
+    },
+
+    {
+        "metaData": {
+            "dataSetId": "userAddr"
+        },
+        "records": [
+                {"addrType":"1","zipCode":"100-100","addr1":"서울시 금천구 가산동472-1","addr2":"서울시 영등포구 여의도동 394-3","destination":"서울시 강서구 개포동 222","deliveryType":"1","phone1":"010-8450-0258","phone2":"010-5527-5171","userId":"demo2"},
+                {"addrType":"2","zipCode":"200-100","addr1":"서울시 금천구 가산동472-1","addr2":"서울시 영등포구 여의도동 394-3","destination":"서울시 강서구 반포동 777","deliveryType":"2","phone1":"010-8450-0114","phone2":"010-5527-0114","userId":"demo2"}
+        ]
+    }
+
+]

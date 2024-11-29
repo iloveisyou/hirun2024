@@ -1,0 +1,123 @@
+[{
+    "message": "return message and value and so on...",
+    "metaData": {
+        "datasetId": "dataset1",
+        "recordId": "id",
+        "recordState": "state",
+        "totalCount": 100
+    },
+    "records": [
+        {
+            "assets": 183026060,
+            "balance": 8131.12,
+            "company": "company1",
+            "date": "07-25",
+            "monthSum": 1844838
+        },
+        {
+            "assets": 183026060,
+            "balance": 123.01,
+            "company": "company2",
+            "date": "7-25",
+            "monthSum": 123123
+        },
+        {
+            "assets": 183026060,
+            "balance": 534.1,
+            "company": "company3",
+            "date": "7-10",
+            "monthSum": 531454
+        },
+        {
+            "assets": 183026060,
+            "balance": 22,
+            "company": "company4",
+            "date": "7-1",
+            "monthSum": 324
+        },
+        {
+            "assets": 183026060,
+            "balance": 454,
+            "company": "company5",
+            "date": "0325",
+            "monthSum": 5342543
+        },
+        {
+            "assets": 183026060,
+            "balance": 233,
+            "company": "company6",
+            "date": "025",
+            "monthSum": 4654
+        },
+        {
+            "assets": 183026060,
+            "balance": 2343,
+            "company": "company7",
+            "date": "200,907,25",
+            "monthSum": 1844243
+        },
+        {
+            "assets": 183026060,
+            "balance": 2,
+            "company": "company8",
+            "date": "2009-07-25",
+            "monthSum": 243
+        },
+        {
+            "assets": 183026060,
+            "balance": 944,
+            "company": "company9",
+            "date": "3-4",
+            "monthSum": 4838
+        },
+        {
+            "assets": 183026060,
+            "balance": 234,
+            "company": "company10",
+            "date": "08,4",
+            "monthSum": 25543
+        },
+        {
+            "assets": 183026060,
+            "balance": 23,
+            "company": "company11",
+            "date": "2,9",
+            "monthSum": 243
+        },
+        {
+            "assets": 183026060,
+            "balance": 3546,
+            "company": "company12",
+            "date": "3-4",
+            "monthSum": 53452
+        },
+        {
+            "assets": 183026060,
+            "balance": 924,
+            "company": "company13",
+            "date": "10,0",
+            "monthSum": 5454
+        },
+        {
+            "assets": 183026060,
+            "balance": 23,
+            "company": "company14",
+            "date": "3-4-8",
+            "monthSum": 955
+        },
+        {
+            "assets": 183026060,
+            "balance": 2344,
+            "company": "company15",
+            "date": "3-04-7",
+            "monthSum": 875567
+        },
+        {
+            "assets": 183026060,
+            "balance": 22,
+            "company": "company16",
+            "date": "3-5-6",
+            "monthSum": 9833
+        }
+    ]
+}]

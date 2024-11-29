@@ -1,0 +1,145 @@
+/* LLayout
+------------------------------*/
+.L-layout-loading {
+	visibility: hidden;
+}
+
+body.L-layout {
+	overflow: hidden;
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+
+.L-layout-doc {
+	position: relative;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
+
+.L-layout-unit {
+	height: 50px;
+	width: 50px;
+	padding: 0;
+	margin: 0;
+	float: none;
+	z-index: 0;
+}
+
+.L-layout-unit-top {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.L-layout-unit-left {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.L-layout-unit-right {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.L-layout-unit-bottom {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+
+.L-layout-unit-center {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.L-layout div.L-layout-hd {
+	position: absolute;
+	top: 0;
+	left: 0;
+	zoom: 1;
+	width: 100%;
+}
+
+.L-layout div.L-layout-bd {
+	position: absolute;
+	top: 0;
+	left: 0;
+	zoom: 1;
+	width: 100%;
+}
+
+.L-layout .L-layout-noscroll div.L-layout-bd {
+	overflow: hidden;
+}
+
+.L-layout .L-layout-scroll div.L-layout-bd {
+	overflow: auto;
+}
+
+.L-layout div.L-layout-ft {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	zoom: 1;
+}
+
+.L-layout .L-layout-unit div.L-layout-hd h2 {
+	text-align: left;
+}
+
+.L-layout .L-layout-unit div.L-layout-hd .collapse {
+	cursor: pointer;
+	height: 13px;
+	position: absolute;
+	right: 2px;
+	top: 2px;
+	width: 17px;
+	font-size: 0;
+}
+
+.L-layout .L-layout-unit div.L-layout-hd .close {
+	cursor: pointer;
+	height: 13px;
+	position: absolute;
+	right: 2px;
+	top: 2px;
+	width: 17px;
+	font-size: 0;
+}
+
+.L-layout .L-layout-unit div.L-layout-hd .collapse-close {
+	right: 25px;
+}
+
+.L-layout .L-layout-clip {
+	position: absolute;
+	height: 20px;
+	background-color: #c0c0c0;
+	display: none;
+}
+
+.L-layout .L-layout-clip .collapse {
+	cursor: pointer;
+	height: 13px;
+	position: absolute;
+	right: 2px;
+	top: 2px;
+	width: 17px;
+	font-size: 0px;
+}
+
+.L-layout .L-layout-wrap {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+}

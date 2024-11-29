@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="대화상자(dialog), 비동기호출(async)" />
+    <title>Dialog Async Request</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css">
+        #example {
+            height:30em;
+        }
+        .bd label { 
+            display:block;
+            float:left;
+            width:45%;
+            clear:left; 
+        }
+        .clear { 
+            clear:both;
+        }
+        #resp {
+            margin:10px;
+            padding:5px;
+            border:1px solid #ccc;
+            background:#fff;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var validatorManager = new Rui.validate.LValidatorManager({
+                validators:[
+                    {id: 'firstname', validExp: 'First Name:true:maxByteLength=30'},
+                    {id: 'lastname', validExp: 'Last Name:true:maxByteLength=30'},
+                    {id: 'email', validExp: 'email:true:email'},
+                    {id: 'state', validExp: 'State:true'},
+                    {id: 'radiobuttons', validExp: 'Radio buttons:true:groupRequire=radiobuttons'},
+                    {id: 'cbarray', validExp: 'Multi checkbox:true:groupRequire=cbarray'},
+                    {id: 'textarea', validExp: 'Text area:true:maxByteLength=100'}
+                ]
+            });
+        
+            /*<b>*/
+            // Define various event handlers for Dialog
+            var handleSubmit = function() {
+                if(validatorManager.validateGroup('dialog1') != true) {
+                    Rui.alert(Rui.getMessageManager().get('$.base.msg052') + '<br>' + validatorManager.getMessageList().join('<br>'));
+                	return;
+                }
+                this.submit(true);
+            };
+            
+            var handleCancel = function() {
+                this.cancel(true);
+            };
+            var handleSuccess = function(o) {
+                var response = o.responseText;
+                response = response.split('<!')[0];
+                document.getElementById('resp').innerHTML = response;
+            };
+            var handleFailure = function(o) {
+                alert('Submission failed: ' + o.status);
+            };
+        
+            // Instantiate the Dialog
+            var dialog1 = new Rui.ui.LDialog({ 
+                applyTo: 'dialog1', 
+                width: 400,
+                visible: false, 
+                postmethod: 'async',
+                buttons: [ 
+                        { text:'Submit', handler:handleSubmit, isDefault:true },
+                        { text:'Cancel', handler:handleCancel } 
+                    ],
+                callback: { 
+                    success: handleSuccess,
+                    failure: handleFailure
+                } 
+            });
+            
+            /*</b>*/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var showBtn = new Rui.ui.LButton('showBtn');
+            showBtn.on('click', function(){
+                dialog1.clearInvalid();
+                dialog1.show(true);
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Markup Dialog Async Request</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>dialog를 마크업으로 생성하여 aync로 서버에 요청하는 샘플</h2>
+            <div class="LblockDesc">
+                <p>준비된 마크업으로 Dialog를 생성한 후 submit시 서버에 정보를 POST합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="showBtn" >show Dialog</button>
+        </div>
+        <div>
+        <div class="LblockMarkupCode">
+            <div id="dialog1">
+                <div class="hd">Please enter your information</div>
+                <div class="bd">
+                    <form name="frm" method="post" action="./../../../data/savedCallback.json">
+                        <label for="firstname">First Name:</label><input type="text" id="firstname" name="firstname" />
+                        <label for="lastname">Last Name:</label><input type="text" id="lastname" name="lastname" />
+                        <label for="email">E-mail:</label><input type="text" id="email" name="email" /> 
+                    
+                        <label for="state">State:</label>
+                        <select multiple="multiple" id="state" name="state">
+                            <option value="California">California</option>
+                            <option value="New Jersey">New Jersey</option>
+                            <option value="New York">New York</option>
+                        </select> 
+                    
+                        <div class="clear"></div>
+                    
+                        <label >Radio buttons:</label>
+                        <input type="radio" id="radiobuttons1" name="radiobuttons" value="1" /> 1
+                        <input type="radio" id="radiobuttons2" name="radiobuttons" value="2" /> 2
+                        
+                        <div class="clear"></div>
+                    
+                        <label for="check">Single checkbox:</label><input type="checkbox" id="check" name="check" value="1" /> 1
+                        
+                        <div class="clear"></div>
+                    
+                        <label >Multi checkbox:</label>
+                        <input type="checkbox" id="cbarray1" name="cbarray" value="1" /> 1
+                        <input type="checkbox" id="cbarray2" name="cbarray" value="2" /> 2
+                            
+                        <label for="textarea">Text area:</label><textarea id="textarea" name="textarea" rows="3" cols="25"></textarea>
+                    
+                        <div class="clear"></div>
+                    </form>
+               </div>
+            </div>
+        </div>
+        <div id="resp">Server response will be displayed in this area</div> 
+    </div>
+</body>
+</html>

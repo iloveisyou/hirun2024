@@ -1,0 +1,31 @@
+/* LCombo
+------------------------------*/
+.L-selection {
+    position: absolute;
+    display: inline-block;
+    min-height: 16px;
+    min-width: 16px;
+    background-image: url(./../../../resources/images/grid/row-check-sprite.gif);
+    background-position:2px 0px;
+    background-repeat:no-repeat;
+    background-color:transparent;
+    padding: 0px;
+    margin-right: 11px;
+    cursor: pointer;
+}
+.L-combo-list-wrapper.L-multi-combo .L-marked .L-selection {
+    background-position: -23px 0px;
+}
+
+html.L-ua-msie7 .L-combo-list-wrapper.L-multi-combo .L-list.L-marked .L-selection {
+	background-position: -25px 0px;
+}
+
+html.L-ua-msie7 .L-combo-list-wrapper.L-multi-combo .L-list .L-selection {
+    background-position: 0px 0px;
+    display: inline-block;
+    margin-left: -20px;
+}
+.L-combo-list-wrapper.L-multi-combo .L-display-field {
+    margin-left: 20px;
+}

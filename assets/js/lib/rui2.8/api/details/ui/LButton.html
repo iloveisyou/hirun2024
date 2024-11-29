@@ -1,0 +1,52 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+LButton은 기본적으로 더블클릭 방지 기능이 적용되어 있다.
+
+샘플 경로 :
+<a href="./../sample/general/ui/buttonSample.html" target="_new">/rui/sample/general/ui/buttonSample.html</a>
+</div>
+<div class="L-sample">
+sample: 기본 샘플
+<div class="L-code">
+var searchBtn = new Rui.ui.LButton('searchBtn');
+searchBtn.on('click', function(){
+
+});
+</div>
+</div>
+</div>
+
+<!-- method 시작 -->
+<div class="method_setButtons">
+<div class="L-description">
+LDialog에 객체 생성시 선언했던 버튼을 변경한다.
+</div>
+
+<div class="L-sample">
+sample: LDialog의 버튼을 변경한다.
+<div class="L-code">
+var dialog1 = new Rui.ui.LDialog( {
+    id: 'dialog1',
+    width : 600,
+    visible : false,
+    header: 'No Markup Dialog',
+    body: '<div id="defaultGrid"></div>',
+    buttons : [
+        { text:'Submit', handler:handleSubmit, isDefault:true },
+        { text:'Cancel', handler:handleCancel }
+    ]
+});
+
+dialog1.render(document.body);
+
+......
+dialog1.setButtons([
+    { text:'test', handler:handleSubmit, isDefault:true },
+    { text:'Cancel', handler:handleCancel }
+]);
+</div>
+</div>
+</div>    
+
+</div>

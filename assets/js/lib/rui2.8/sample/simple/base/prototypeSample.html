@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>base prototype sample</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <script type="text/javascript" class="script-code">
+            $C(function(){
+                var s = ' my name is jun-hee,hong ';
+                var s1 = '1';
+                var s2 = '20101015';
+                var xml = '<?xml version="1.0" encoding="UTF-8"?><project name="devon-framework" ></project>';
+                alert('[' + s + '] => ' + s.trim());
+                alert('[' + s1 + '] => ' + s1.lPad('0', 3));
+                alert('[' + s1 + '] => ' + s1.rPad('0', 3));
+                alert('[' + s2 + '] => ' + s2.toDate('%q'));
+                alert('[' + xml + '] => ' + xml.toXml());
+                
+                var date1 = new Date();
+                var date2 = date1.add('D', 1);
+                alert(date1.compareTo(date2));
+                var date2 = date1.add('H', 1);
+                alert(date1.equals(date2));
+                alert(date1 + ' => format(yyyy-mm-dd) ' + date2.format('%x'));
+                alert(date1 + ' clone => ' + date1.clone());
+            })
+        </script>
+ 
+    </head>
+    <body>
+        <h1>prototype sample</h1>
+        <h2>string, date객체의 prototype을 확장하여 편의를 제공하는 샘플로 더욱 다양한 prototype을 사용할수 있음.</h2>
+        <div id='divObj'>
+            <h2>string prototype</h2>
+            <ul>
+                <li>trim : s.trim(' my name is jun-hee,hong ');</li>
+                <li>lPad : s1.lPad('0', 3);</li>
+                <li>rPad : s1.rPad('0', 3);</li>
+                <li>toDate : s1.toDate('%q');</li>
+                <li>toXml : s1.toXml();</li>
+            </ul>
+            
+            <h2>date prototype</h2>
+            <ul>
+                <li>add : date.add('D', 1);</li>
+                <li>compareTo : date1.compareTo(date2)</li>
+                <li>equals : date2.equals(date2)</li>
+                <li>format : date.format('%x')</li>
+                <li>clone : date.clone()</li>
+            </ul>
+        </div>
+    </body>
+</html>

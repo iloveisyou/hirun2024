@@ -1,0 +1,51 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+기본으로 제공되는 달력을 이용할수 있으며, 디자인을 변경하거나 달력내 컨텐츠를 추가할수 있다. 
+
+샘플 경로 :
+<a href="./../sample/general/ui/calendar/calendarSample.html" target="_new">/rui/sample/general/ui/calendar/calendarSample.html</a>
+<a href="./../sample/general/ui/calendar/calendarHolidaySample.html" target="_new">/rui/sample/general/ui/calendar/calendarHolidaySample.html</a>
+</div>
+<div class="L-sample">
+sample: 기본 달력을 생성한 후 달력의 날짜를 선택할경우의 이벤트를 받는다.
+<div class="L-code">
+var calendar1 = new Rui.ui.calendar.LCalendar({
+    applyTo: 'calendar1Container',
+    pagedate: '8/2009',
+    navigator: true,
+    close:true,
+    title:'Choose a date.'
+});
+
+calendar1.on('select', function(e){
+    alert('선택한날짜:' + e.date.format('%A %c'));
+});
+calendar1.on('deselect', function(e){
+    alert('선택해제한날짜:' + e.date.format('%A %c'));
+});
+
+calendar1.render();
+</div>
+</div>
+</div>
+
+<!-- config 시작 -->
+<div class="config_today">
+<div class="L-description">
+오늘 날짜를 다른 날짜로 변경한다.
+</div>
+<div class="L-sample">
+sample1: 오늘 날짜를 시스템 날짜로 변경하는 방법
+<div class="L-code">
+var calendar1 = new Rui.ui.calendar.LCalendar({
+    applyTo: 'calendar1Container',
+    today: new Date(시스템 년, 시스템 월(-1), 시스템 날짜),
+    close:true,
+    title:'Choose a date.'
+});
+</div>
+</div>
+</div>
+
+</div>

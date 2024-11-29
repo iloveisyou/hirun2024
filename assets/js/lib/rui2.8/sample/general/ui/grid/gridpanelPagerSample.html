@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 페이지(LPager)" />
+    <title>Paging</title>
+    
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />    
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/LPager.js"></script>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LHeaderContextMenu.css"/>
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LPager.css" />
+    
+    <style type="text/css">
+        .L-panel .ft {
+            padding: 0px;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'date1', type: 'date' }
+                ]
+            });            
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+            	autoWidth: true,
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', editor: new Rui.ui.form.LTextBox() },
+                    { field: 'col2', sortable: true, align: 'center' },
+                    { field: 'col3', align: 'right', hidden:true },
+                    { field: 'date1' , align: 'center', renderer: Rui.util.LRenderer.dateRenderer()}
+                ]
+            });
+            
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                headerTools: true,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 340
+            });
+            
+            /*<b>*/
+            var pager = new Rui.ui.LPager({
+                gridPanel: grid
+            });
+            
+            pager.on('beforeChange', function(e){
+                //Rui.alert('current pageNumber : ' + this.pageNumber + ', new pageNumber : ' + e.pageNumber);
+            });
+            
+            pager.on('changed', function(e){
+                Rui.alert('Page No. ' + e.pageNumber);
+            });
+
+            pager.render();
+            /*</b>*/
+            grid.render('defaultGrid');
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+            	//pager 사용시엔 DataSet.load 를 사용하여야 합니다. DataSetManager의 loadDataSet 기능은 사용할 수 없습니다. 
+                dataSet.load({
+                    url: './../../../../sample/data/gridPager.json'
+                });
+            });
+            
+            var nextPageBtn = new Rui.ui.LButton('nextPageBtn');
+            nextPageBtn.on('click', function(){
+                pager.moveNextPage();
+            });
+            
+            searchBtn.click();
+        });
+        </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Paging</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid)에서도 페이저(Pager)를 이용하여 페이징(Paging)을 처리할 수 있습니다.</h2>
+            <div class="LblockDesc">
+                <p>그리드(Grid)는 페이징(Paging) 처리를 할 필요 없습니다. 하지만 업무의 요구에 따라 Paging을 하셔야 한다면 사용하실 수 있습니다. </p>
+                <p>Pager 사용시엔 DataSet.load() 를 사용하여야 합니다. DataSetManager.loadDataSet() 기능은 지원하지 않습니다.  </p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >Search</button>
+            <button type="button" id="nextPageBtn" >next page</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+</body>
+</html>

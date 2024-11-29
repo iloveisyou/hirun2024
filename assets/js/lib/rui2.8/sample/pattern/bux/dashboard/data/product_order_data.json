@@ -1,0 +1,13 @@
+[
+    {
+        "metaData": {
+            "dataSetId": "productOrder"
+        },
+        "records": [
+                {   "productId":" ","productName":" ","companyName":"","productType":" ","todaySaleQty": 0,"todaySaleRate":0,"stockQty":0,"factoryPrice":0,"salePrice":0,"orderDate":" ","orderQty":0,"eventItem":"N","sellerName":" "}
+              
+
+        ]
+    }
+
+]

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="devon-rui-sample" content="yes" />
+<title>DataSet performance test</title>
+    <script type="text/javascript" src="../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+    <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+    <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+    <link rel="stylesheet" type="text/css" href="../../../resources/rui.css" />
+    
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        $C(function() {
+            //log 활성화
+            $C('!config').set('$.core.logger.show', [true]);
+            $C('!config').set('$.core.logger.expand', [true]);
+
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'date' },
+                { id: 'monthSum', type: 'float' },
+                { id: 'balance', type: 'float' },
+                { id: 'assets', type: 'float' }
+            ]
+            });
+            
+            dataSet.on('load', function(){
+                $C.log('data load end');
+            });
+            
+            $C('#searchBtn').button();
+            $C('#searchBtn').on("click", function(){
+                $C.log('data load start');
+                /*<b>*/
+                dataSet.load({
+                    url: './../../../sample/data/large/largeData' + $C('#dataCount').getValue() + '.json',
+                    method: "get"
+                });
+                /*</b>*/
+            });
+        });
+
+
+    </script>
+
+</head>
+<body>
+    <h1>performance test sample</h1>
+    <h2>dataset의 성능을 체크하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div>
+        <p>데이터셋으로 대량의 데이터를 로딩하는 성능을 테스트합니다.</p>
+        <p>데이터 로딩에 소요되는 시간을 확인하기 위해서는 log 콘솔을 확인합니다.</p>
+        <p>화면 조회 성능과 연관되는 샘플은 Gridview의 Edit Performance를 참고하십시오.</p>
+    </div>
+    
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <select id="dataCount">
+                <option value="1000">1000건</option>
+                <option value="10000">10000건</option>
+                <option value="50000">50000건</option>
+            </select>
+            <button type="button" id="searchBtn" >Search</button>
+            <div id="defaultGrid" ></div>
+        </div>
+    </div>
+</body>
+</html>

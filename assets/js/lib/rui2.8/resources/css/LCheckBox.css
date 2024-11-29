@@ -1,0 +1,19 @@
+/* LCheckBox
+------------------------------*/
+.L-form-field.L-checkbox-panel {
+    border: 0;
+}
+.L-form-field.L-checkbox-group {
+    border: 0;
+}
+.L-checkbox-panel.L-invalid label {
+    background: none;
+}
+.L-editor-panel .L-checkbox-group {
+    vertical-align: top;
+}
+.L-editor-panel .L-checkbox-panel {
+    float:left;
+    text-align: center;
+    vertical-align: top;
+}

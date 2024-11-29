@@ -1,0 +1,34 @@
+[
+    {
+        "message": "return message and value and so on...",
+        "metaData": {
+            "dataSetId": "dataset1",
+            "fields": [
+                {
+                    "dataType": "int",
+                    "defaultValue": "0",
+                    "name": "col1"
+                },
+                {
+                    "dataType": "date",
+                    "name": "col2"
+                },
+                {
+                    "dataType": "string",
+                    "name": "col3"
+                },
+                {"name": "col4"},
+                {"name": "col5"},
+                {"name": "col6"},
+                {"name": "code"},
+                {"name": "value"},
+                {"name": "date1"}
+            ],
+            "recordId": "id",
+            "recordState": "state",
+            "totalCount": 243
+        },
+        "records": [
+        ]
+    }
+]

@@ -1,0 +1,43 @@
+<div>
+<div class="class_description">
+<div class="L-description">
+그리드 하단에 고정되게 출력되는 합계를 출력한다.
+
+샘플 경로 :
+<a href="./../sample/general/ui/grid/gridpanelSummarySample.html" target="_new">/rui/sample/general/ui/grid/gridpanelSummarySample.html</a>
+</div>
+
+<div class="L-sample">
+sample: 기본 샘플
+<div class="L-code">
+var sumColumns = ['balance', 'monthSum', 'assets'];
+var summary = new Rui.ui.grid.LTotalSummary();
+
+summary.on('renderTotalCell', summary.renderer({
+    label: {
+        id: 'date',
+        text: 'Total',
+    }, 
+    columns: {
+        monthSum: { type: 'sum', renderer: 'money' },
+        balance: { type: 'sum', renderer: 'money' },
+        assets: { type: 'avg', renderer: function(val) { return Rui.util.LNumber.round(val, 2) + '%'; } }
+    }
+}));
+
+var grid = new Rui.ui.grid.LGridPanel({
+    columnModel: columnModel,
+    dataSet: dataSet,
+    viewConfig: {
+        plugins: [ summary ]
+    },
+    width: 600,
+    height: 400
+});
+
+grid.render('defaultGrid');
+</div>
+</div>
+</div>
+
+</div>
