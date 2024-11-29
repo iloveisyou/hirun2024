@@ -1,7 +1,21 @@
 # hirun2024
+===========
 
-- gulp : 걸프 퍼블 작업모드
-- gulp deploy : 걸프 git 반영
+## gulp : 걸프 퍼블 작업모드
+
+## gulp build : 걸프 빌드만
+
+## gulp deploy : 걸프 git 반영
+#### ㄴ TypeError: Cannot read properties of null (reading '0')
+####    cd node_modules/gulp-gh-pages/
+####    npm install --save gift@0.10.2
+####    cd ../..
+
+
+
+
+
+
 
 *상담
 -상담관리
