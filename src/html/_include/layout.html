@@ -1,6 +1,6 @@
-{% set ruiPath='../../../assets/lib/rui2.8' %}
 {% set assPath='../../../assets' %}
 {% set imgPath='../../../assets/images' %}
+{% set ruiPath='../../../assets/js/lib/rui2.8' %}
 {% set headTitle = title if title else 'Hi-Run System' %}
 {% set cat = cat if cat else 'cat' %}
 {% set page = page if page else 'page' %}
@@ -9,7 +9,7 @@
 {%- endmacro -%}
 {#- // 들여쓰기(Tab Indent) 조정을 위한 macro -#}
 <!DOCTYPE html>
-<html lang="ko" class="ct-{{cat}} pg-{{page}}">
+<html lang="ko" class="ct-{{cat}} pg-{{page}} lo-{{page if (isNotHeaderFooter==true and not(cat=='ui')) else 'default'}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,8 +24,6 @@
     <script type="text/javascript" src="{{ruiPath}}/js/rui_grid.js"></script>
     <script type="text/javascript" src="{{ruiPath}}/resources/rui_config.js"></script>
     <script type="text/javascript" src="{{ruiPath}}/resources/rui_license.js"></script> -->
-    <!-- <script type="text/javascript" src="{{ruiPath}}/plugins/ui/LTooltip.js"></script>
-    <link rel="stylesheet" type="text/css" href="{{ruiPath}}/plugins/ui/LTooltip.css" /> -->
     <!-- <link rel="stylesheet" type="text/css" href="{{ruiPath}}/resources/rui.css" /> -->
     <script language="JavaScript" type="text/javascript" src='{{ruiPath}}/js/rui_base.js'></script>
     <script language="JavaScript" type="text/javascript" src='{{ruiPath}}/js/rui_core.js'></script>
@@ -41,13 +39,16 @@
     <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/ui/grid/LGridStatusBar.js'></script>
     <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/ui/grid/LTableView.js'></script>
     <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/ui/LFrameDialog.js'></script>
-    <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/resources/rui_config.js'></script>
     <link rel="stylesheet" type="text/css" href="{{ruiPath}}/resources/rui.css" />
     <link rel="stylesheet" type="text/css" href="{{ruiPath}}/resources/rui_skin_blue.css" />
     <script language="JavaScript" type='text/javascript' src='{{ruiPath}}/plugins/tab/rui_tab.js'></script>
     <link rel="stylesheet" type="text/css" href="{{ruiPath}}/plugins/tab/rui_tab.css" />
+
+    <script type="text/javascript" src="{{ruiPath}}/plugins/ui/LTooltip.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ruiPath}}/plugins/ui/LTooltip.css" />
+    
     <!-- jquery import -->
-    <script type='text/javascript' src='{{assPath}}/js/lib/jquery-3.7.1.min'></script>
+    <script type='text/javascript' src='{{assPath}}/js/lib/jquery-3.7.1.min.js'></script>
     <!-- aos import -->
     <script type='text/javascript' src="{{assPath}}/js/lib/aos@2.3.1/aos.js"></script>
     <link rel="stylesheet" type="text/css" href="{{assPath}}/js/lib/aos@2.3.1/aos.css" />
@@ -73,7 +74,7 @@
     {{ include('./header.html') | tabIndent(1) }}
     {# {% endif %} #}
 
-    <main>
+    <main class="main">
         {% filter tabIndent(2) %}
             {% block main %}
             {% endblock %}

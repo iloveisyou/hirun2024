@@ -10,10 +10,25 @@
 @use 'variables' as *;
 
 .hirun-wrap, .hirun-wrap *, .hirun-wrap ::before, .hirun-wrap ::after { box-sizing:border-box; }
-.hirun-wrap { min-width:1600px; font-family:'LG_Smart_H2.0', sans-serif; font-size:16px; font-weight:400; letter-spacing:-0.5px;
+.hirun-wrap { min-width:1600px; font-family:'LG_Smart_H2.0', sans-serif; font-size:16px; font-weight:400; letter-spacing:-0.5px; color:$gray700;
     ::selection {  color:$white;  background-color:$primary;}
 
     
     
 
+}
+
+
+
+html.pg-ui { font-family:'LG_Smart_H2.0'; color:#515151;
+    .hirun-wrap {  }
+    h1 { margin-left:0px; padding:3px 5px; background-color:#d80546; font-family: 'LG_Smart_H2.0_L'; font-weight:100; color:#ffffff; }
+    h2 { margin:0px 0 0px 0px; padding:5px; font-size:20px; font-weight:400; background-color:#2a2a2a; color:#fff; 
+        &::before { content:"-"; display:inline-block; }
+    }
+    section { padding:30px;
+        h3 { margin-left:-10px; padding:10px 0px;
+            ~ h3 { margin-top:30px; }  
+        }
+    }
 }

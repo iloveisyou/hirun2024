@@ -1,8 +1,10 @@
 $assPath: "/assets";
 $imgPath: "/assets/images";
+$fontPath: "/assets/fonts";
 
 /* color */
 $primary: #BB0841;
+// 0881bb
 
 $gray: #6C6C6C;
 $gray300: #DEDEDE;
@@ -22,3 +24,4 @@ $white: #ffffff;
 @mixin fontR { font-weight:400; }
 @mixin fontSB { font-weight:600; }
 @mixin fontB { font-weight:700; }
+

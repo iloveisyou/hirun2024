@@ -9,12 +9,40 @@
 
 @use 'variables' as *;
 
-/* button --------------------------------------------------------- */
+.hirun-wrap {
 
-.a, a:link, a:active, a:visited { text-decoration:none; }
-[class^='btn_'] { cursor:pointer; margin:0; padding:0; border:0 solid transparent; background-color:transparent; }
 
-.btn_headerUtill { display:inline-block; padding-left:38px; width:38px; height:38px; border-radius:50%; border:1px solid $gray300; overflow:hidden; 
-    &.bg-gray { border-color:$gray300; background-color:$gray300; }
-    &.bg-primary { border-color:$primary; background-color:$primary; }
+    /* button --------------------------------------------------------- */
+
+    .a, a:link, a:active, a:visited { text-decoration:none; }
+    [class^='btn_'] { cursor:pointer; margin:0; padding:0; border:0 solid transparent; background-color:transparent; }
+    input { outline:none; }
+
+    .btn_headerUtill { display:inline-block; padding-left:38px; width:38px; height:38px; border-radius:50%; border:1px solid $gray300; overflow:hidden; 
+        &.bg-gray { border-color:$gray300; background-color:$gray300; }
+        &.bg-primary { border-color:$primary; background-color:$primary; }
+    }
+
+    /* input --------------------------------------------------------- */
+
+    .loginInput { position:relative; height:46px; border:1px solid $gray300; border-radius:8px;
+        &:hover { border:1px solid $gray; }
+        input { width:100%; height:100%; padding:0 18px; border-radius:8px; border:0 solid transparent; @include fontR; font-size:16px; 
+            &:focus { border:1px solid $gray700;
+                + button { animation:an-SBounce .3s ease-out; animation-fill-mode:forwards; }
+            }   
+        }
+        button { position:absolute; right:19px; top:50%; transform:translateY(-50%) scale(0); width:16px; height:16px; padding:0 0 0 16px; border-radius:50%; border:0 solid transparent; background-color:$gray300; overflow:hidden;
+            &::before { content:""; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(45deg); width:10px; height:2px; border-radius:1px; background-color:$gray700; }
+            &::after { content:""; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-45deg); width:10px; height:2px; border-radius:1px; background-color:$gray700; }
+        }
+    }
+    .btn_login { height:46px; border-radius:8px; border:0 solid transparent; background-color:$primary; @include fontR; font-size:16px; color:$white; 
+        &:hover { box-shadow:0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12); }
+        &:active { filter:brightness(1.1); }
+        &:after { content:''; display:block; position:absolute; top:50%; left:50%; width:5px; height:5px; border-radius:50%; background:#ffffff50; transform-origin:50% 50%; transform:scale(100%) trnaslate(-50%); }
+        &:focus:not(:active):after { animation:an-btnActive .3s ease-out; }
+    }
+
+
 }

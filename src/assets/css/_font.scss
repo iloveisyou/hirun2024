@@ -13,9 +13,9 @@
 @font-face {
     // font-family: 'LG_Smart_H2.0_L';
     font-family: 'LG_Smart_H2.0';
-    src: url($assPath + '/font/LGSmHaTL.woff2') format('woff2'),
-    url($assPath + '/font/LGSmHaTL.woff') format('woff'),
-    url($assPath + '/font/LGSmHaTL.ttf') format('truetype');
+    src: url($fontPath + '/LGSmHaTL.woff2') format('woff2'),
+    url($fontPath + '/LGSmHaTL.woff') format('woff'),
+    url($fontPath + '/LGSmHaTL.ttf') format('truetype');
     // font-weight: 100;
     font-weight: 300;
     font-style: normal;
@@ -25,9 +25,9 @@
 @font-face {
     // font-family: 'LG_Smart_H2.0_R';
     font-family: 'LG_Smart_H2.0';
-    src: url($assPath + '/font/LGSmHaTR.woff2') format('woff2'),
-    url($assPath + '/font/LGSmHaTR.woff') format('woff'),
-    url($assPath + '/font/LGSmHaTR.ttf') format('truetype');
+    src: url($fontPath + '/LGSmHaTR.woff2') format('woff2'),
+    url($fontPath + '/LGSmHaTR.woff') format('woff'),
+    url($fontPath + '/LGSmHaTR.ttf') format('truetype');
     // font-weight: 300;
     font-weight: 400;
     font-style: normal;
@@ -37,9 +37,9 @@
 @font-face {
     // font-family: 'LG_Smart_H2.0_SB';
     font-family: 'LG_Smart_H2.0';
-    src: url($assPath + '/font/LGSmHaTSB.woff2') format('woff2'),
-    url($assPath + '/font/LGSmHaTSB.woff') format('woff'),
-    url($assPath + '/font/LGSmHaTSB.ttf') format('truetype');
+    src: url($fontPath + '/LGSmHaTSB.woff2') format('woff2'),
+    url($fontPath + '/LGSmHaTSB.woff') format('woff'),
+    url($fontPath + '/LGSmHaTSB.ttf') format('truetype');
     // font-weight: 500;
     font-weight: 600;
     font-style: normal;
@@ -49,9 +49,9 @@
 @font-face {
     // font-family: 'LG_Smart_H2.0_B';
     font-family: 'LG_Smart_H2.0';
-    src: url($assPath + '/font/LGSmHaTB.woff2') format('woff2'),
-    url($assPath + '/font/LGSmHaTB.woff') format('woff'),
-    url($assPath + '/font/LGSmHaTB.ttf') format('truetype');
+    src: url($fontPath + '/LGSmHaTB.woff2') format('woff2'),
+    url($fontPath + '/LGSmHaTB.woff') format('woff'),
+    url($fontPath + '/LGSmHaTB.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;

@@ -1,0 +1,36 @@
+@charset 'utf-8';
+/* ---------------------------------------------------------
+* FileName : _anmation.css
+* ProjectName : 하이엠솔루텍 하이런 차세대
+* Description : 애니메이션 스타일시트
+* Author : zarel
+* Date : 2024.11
+--------------------------------------------------------- */
+
+@use 'variables' as *;
+
+// gnb 마우스 오버시
+@keyframes an-YBounce {
+    0% {transform:translate(-50%, 10px); opacity:0; }
+    20% { transform:translate(-50%, -13px); opacity:1; }
+    40% { transform:translate(-50%, 10px); }
+    60% { transform:translate(-50%, -9px); }
+    75% { transform:translate(-50%, 5px); }
+    90% { transform:translate(-50%, -3px); }
+    100% { transform:translate(-50%, 0px); }
+}
+
+
+// 
+@keyframes an-SBounce {
+    0% { transform:translateY(-50%) scale(0); opacity:0; }
+    50% { transform:translateY(-50%) scale(140%); opacity:1; }
+    100% { transform:translateY(-50%) scale(100%); }
+}
+
+// 
+@keyframes an-btnActive {
+    0% { transform:scale(100%) trnaslate(-50%); opacity:1; }
+    50% { transform:scale(200%) trnaslate(-50%); }
+    100% { transform:scale(100%) trnaslate(-50%); opacity:0; }
+}

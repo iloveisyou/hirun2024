@@ -10,18 +10,18 @@
 @use 'variables' as *;
 
 /* header --------------------------------------------------------- */
-html:not(.pg-login) {
-    .hirun-wrap { display:flex; flex-direction:column; min-height:100vh; overflow:hidden; }
-    .header { 
-        .headerInner { display:flex; column-gap:40px; justify-content:flex-start; align-items:center; position:relative; height:100px; padding:0 30px; }
-        .logo { @include fontB; font-size:24px; color:$primary; }
+html.lo-default {
+    .hirun-wrap { display:flex; flex-direction:column; min-height:100vh; /*overflow:hidden;*/ }
+    .header { position:sticky; left:0; top:0; z-index:50;
+        .headerInner { display:flex; column-gap:40px; justify-content:flex-start; align-items:center; position:relative; width:100%; min-width:1600px; height:100px; padding:0 30px; border-bottom:1px solid $primary; background-color:rgba(255,255,255,.85) }
+        .logo { background-color:transparent; @include fontB; font-size:24px; color:$primary; }
         .gnb { 
             &>ul { display:flex; column-gap:10px;
                 &>li { 
                     &>a { display:inline-flex; align-items:center; height:44px; padding:0 10px; @include fontSB; font-size:20px; color:$gray700; white-space:nowrap; }
                     &:hover {
                         &>a { position:relative; @include fontB; color:$primary; 
-                            &::before { content:''; display:block; position:absolute; left:50%; top:-3px; transform:translate(-50%, -50%); width:6px; height:6px; border-radius:50%; background-color:$primary; }
+                            &::before { content:''; display:block; position:absolute; transform-origin:50% 50%; left:50%; top:-3px; transform:translate(-50%, -50%); width:6px; height:6px; border-radius:50%; background-color:$primary; animation:an-YBounce 1s ease-out; }
                             &::after { content:''; display: block; position:absolute; left:0; top:100%; width:100%; height:100px; }
                         }
                         .submenu { max-height:1000px; }

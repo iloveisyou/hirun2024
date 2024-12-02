@@ -1,0 +1,134 @@
+{% set isNotHeaderFooter = true %}
+{% set cat = 'ui' %}
+{% set page = 'ui' %}
+{% set title = 'Hi-Run System - ui' %}
+{% extends './_include/layout.html' %}
+
+{% block wrap %}
+<h1>FORM 요소</h1>
+<h2>input type text</h2>
+
+<section>
+    <h3>- 직접태그 input</h3>
+    <input type="text" id="inputTextSample01" />
+    <script>
+    Rui.onReady(()=>{
+        var inputTextSample01 = new Rui.ui.form.LTextBox({  // LTextBox개체를 선언
+            applyTo: 'inputTextSample01',  //       해당 DOM Id 위치에 텍스트박스를 적용
+            placeholder: '인풋텍스트샘플01박스에 입력해 주세요.',  // [옵션] 입력 값이 없을 경우 기본 표시 메시지를 설정
+            // defaultValue: '인풋텍스트샘플의 기본값',               // [옵션] 입력 값
+            // disabled: true,                                        // [옵션] 인풋박스 disabled 처리
+            // width:300,                                             // [옵션] 텍스트박스 폭을 설정
+            // mask: 9999-999,                                        // [옵션] 입력마스크를 설정 
+            // inputType: Rui.util.LString.PATTERN_TYPE_STRING,       // [옵션] 입력문자열로 영문자 입력만 허용
+            // includeChars: '한글',                                   // [옵션] 입력제한조건 중에서 지정한 문자는 입력 허용
+            // attrs: {                                               // [옵션] HTML 기본 속성(attribute) 값들을 설정 
+            //     tabIndex: 0,
+            //     maxLength: 10
+            // }
+        });
+    });
+    </script>
+</section>
+
+<section>
+    <h3>-부모태그 div</h3>
+    <div type="text" id="inputTextSample02"></div>
+    <script>
+    Rui.onReady(()=>{
+        var inputTextSample01 = new Rui.ui.form.LTextBox({  // LTextBox개체를 선언
+            applyTo: 'inputTextSample02',  //       해당 DOM Id 위치에 텍스트박스를 적용
+            placeholder: '인풋텍스트샘플02박스에 입력해 주세요.',  // [옵션] 입력 값이 없을 경우 기본 표시 메시지를 설정
+            // defaultValue: '인풋텍스트샘플의 기본값',               // [옵션] 입력 값
+            // disabled: true,                                        // [옵션] 인풋박스 disabled 처리
+            // width:300,                                             // [옵션] 텍스트박스 폭을 설정
+            // mask: 9999-999,                                        // [옵션] 입력마스크를 설정 
+            // inputType: Rui.util.LString.PATTERN_TYPE_STRING,       // [옵션] 입력문자열로 영문자 입력만 허용
+            // includeChars: '한글',                                   // [옵션] 입력제한조건 중에서 지정한 문자는 입력 허용
+            // attrs: {                                               // [옵션] HTML 기본 속성(attribute) 값들을 설정 
+            //     tabIndex: 0,
+            //     maxLength: 10
+            // }
+        });
+    });
+    </script>
+</section>
+
+
+
+
+
+
+    </li>
+    {# <li>
+        <label>HTML Checkbox</label>
+        <input type="checkbox"> <label>선택</label>
+    </li>
+    <li>
+        <label>HTML Radio</label>
+        <input type="radio"> <label>선택</label>
+    </li>
+    <li>
+        <label>HTML Select</label>
+        <select>
+        <option value="">선택하세요.</option>
+        <option value="1">첫번째</option>
+        <option value="2">두번째</option>
+        <option value="3">세번째</option>
+        </select>
+    </li>
+    <li>
+        <label>HTML Textarea</label>
+        <textarea>textarea의 출력 내용</textarea>
+    </li>
+    <li id="L-gen6">
+        <label>LTextBox</label>
+        <div id="textbox" class="L-textbox L-fixed L-form-field" style="width: 298px;"><input type="text" id="L-gen9" name="textbox" class="L-display-field L-instance" placeholder="placeholder 내용이 출력됩니다" style="width: 294px;"></div>
+    </li>
+    <li id="L-gen10">
+        <label>LCheckBox</label>
+        <div id="checkBox" class="L-checkbox-panel L-fixed L-form-field" style="width: 100px;"><input id="L-gen11" type="checkbox" name="checkBox" class="L-instance" style="" value="Y"><label for="L-gen11" class="L-label">선택</label></div>
+    </li>
+    <li id="L-gen12">
+        <label>LRadio</label>
+        <div id="radio" class="L-radio-panel L-fixed L-form-field"><input id="L-gen13" type="radio" name="radio" class="L-instance" style="" value="Y"><label for="L-gen13" class="L-label">선택</label></div>
+    </li>
+    <li id="L-gen14">
+        <label>LCombo</label>
+        <div id="combo" class="L-combo L-fixed L-form-field" style="width: 98px;"><input type="text" id="L-gen17" class="L-display-field" readonly="" style="width: 73px;"><input type="hidden" name="code" id="L-gen18" class="L-instance L-hidden-field" value="code3"><div class="icon" id="L-gen19"></div></div>
+    </li>
+    <li>
+        <label>LMultiCombo</label>
+        <div id="multiCode" class="L-combo L-fixed L-form-field L-multi-combo" style="width: 98px;"><input type="text" id="L-gen23" class="L-display-field" readonly="" placeholder="선택하세요." style="width: 73px;"><input type="hidden" name="code" id="L-gen24" class="L-instance L-hidden-field" value="code1,code3"><div class="icon" id="L-gen25"></div></div>
+    </li>
+    <li id="L-gen28">
+        <label>LDateBox</label>
+        <div id="datebox" class="L-datebox L-fixed L-form-field" style="width: 88px;"><input type="text" id="L-gen31" class="L-display-field" placeholder="yyyy-mm-dd" style="width: 63px;"><input type="hidden" name="datebox" id="L-gen32" class="L-instance L-hidden-field"><a class="icon" id="L-gen34" tabindex="0" style="cursor: pointer;"></a></div>
+    </li>
+    <li id="L-gen35">
+        <label>LMonthBox</label>
+        <div id="monthbox" class="L-monthbox L-fixed L-form-field" style="width: 78px;"><input type="text" id="L-gen38" class="L-display-field" placeholder="yyyy-mm" style="width: 53px;"><input type="hidden" name="monthbox" id="L-gen39" class="L-instance L-hidden-field"><a class="icon" id="L-gen41" tabindex="0" style="cursor: pointer;"></a></div>
+    </li>
+    <li id="L-gen42">
+        <label>LTimeBox</label>
+        <div id="timebox" class="L-timebox L-fixed L-form-field" style="width: 48px;"><input type="text" id="L-gen45" name="timebox" class="L-display-field L-instance" placeholder="시:분" style="width: 34px;"><div class="icon" id="L-gen46"><div class="L-spin-up" id="L-gen47" tabindex="0" style="cursor: pointer;"></div><div id="L-gen48" class="L-spin-down" tabindex="0" style="cursor: pointer;"></div></div></div>
+    </li>
+    <li id="L-gen49">
+        <label>LNumberbox</label>
+        <div id="numberbox" class="L-numberbox L-fixed L-form-field" style="width: 208px;"><input type="text" id="L-gen52" class="L-display-field" max="10000" min="-10" placeholder="-10 부터 10,000까지 입력 하세요." style="width: 204px;"><input type="hidden" name="numberbox" class="L-instance L-hidden-field" id="L-gen53" value=""></div>
+    </li>
+    <li>
+        <label>LPopupTextBox</label>
+        <div id="popuptextbox" class="L-popuptextbox L-fixed L-form-field" style="width: 98px;"><input type="text" id="L-gen55" class="L-display-field" style="width: 73px;"><input type="hidden" name="popuptextbox" id="L-gen56" class="L-instance L-hidden-field"><a class="icon" id="L-gen57" tabindex="0" style="cursor: pointer;"></a></div>
+    </li>
+    <li id="L-gen58">
+        <label>LTextArea</label>
+        <div id="textarea" class="L-textarea L-fixed L-form-field" style="width: 298px; height: 98px;"><textarea id="L-gen60" name="textarea" class="L-display-field L-instance" placeholder="Placeholder 입니다. 내용을 입력해주세요." style="width: 298px; height: 98px;"></textarea></div>
+    </li>
+    <li>
+        <label>LFromToDateBox</label>
+        <div id="divFromTo" class="L-fromtodatebox L-fixed L-form-field"><input type="hidden" name="divFromTo" id="L-gen61" class="L-instance L-hidden-field"><div id="L-gen62" class="L-datebox L-fixed L-form-field startDateBox" style="width: 90px;"><input type="text" id="L-gen66" class="L-display-field" placeholder="yyyy-mm-dd" style="width: 65px;"><input type="hidden" name="divFromToStartDate" id="L-gen67" class="L-instance L-hidden-field" value="20241129"><a class="icon" id="L-gen69" tabindex="0" style="cursor: pointer;"></a></div><div id="L-gen64" class="L-date-separator">~</div><div id="L-gen63" class="L-datebox L-fixed L-form-field endDateBox" style="width: 90px;"><input type="text" id="L-gen71" class="L-display-field" placeholder="yyyy-mm-dd" style="width: 65px;"><input type="hidden" name="divFromToEndDate" id="L-gen72" class="L-instance L-hidden-field"><a class="icon" id="L-gen74" tabindex="0" style="cursor: pointer;"></a></div></div>
+    </li> #}
+</ul>
+
+{% endblock %}

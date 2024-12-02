@@ -46,7 +46,7 @@ function clean() {
     return del([di]);
 }
 function cleanDeploy() {
-    del(['apply.publish']);
+    del(['.publish']);
 }
 
 async function html() {
