@@ -66,52 +66,74 @@
         <div class="mockupTable cat07"> <h2>08. GNB 카테고리 - 리포트</h2> <table> </table> </div>
     </main>
     <script>
-        const jsonURL = '{{assPath}}/json/mockup.json';
+    
+        const jsonURL = '../assets/json/mockup.json';
+        
+        function ajaxData(url, method) {
+            return new Promise(function(resolve, reject){
+                let xhr = new XMLHttpRequest();
+                xhr.onload = () => { 
+                    if(xhr.status == 200) {
+                        let result = xhr.responseText;
+                        resolve(result);
+                    } else { reject(xhr) }
+                }
+                xhr.open(method , url, true);
+                xhr.send();
+            });
+        }
+
         const theadArr = ['No', 'id', '1Depth', '2Depth', 'Name', 'File', 'Path', 'Status', 'Working Date', 'Last Date', 'Etc'];
         let total = 0, normal = 0, working = 0, success = 0;
-        function trs(v, target, cat) {
+        
+        function trs(v, res, target, cat) {
             let thead = '<thead>';
             for(let i=0;i<theadArr.length;i++){ thead += `<th>${theadArr[i]}</th>`; }
             thead += '</thead>';
             $(v).find('table').prepend(thead);
-            $.getJSON(jsonURL,(json)=> {
-                const data = json[0].records.filter(tr=> tr['1Depth'] === cat);
-                total += data.length;
-                normal += data.filter(item=> item['Status'] === '작업전').length;
-                working += data.filter(item=> item['Status'] === '작업중').length;
-                success += data.filter(item=> item['Status'] === '작업완료').length;
-                $(v).find('table').append('<tbody></tbody>');
-                for(let i=0;i<data.length;i++){
-                    let tr = data[i];
-                    let sta = tr['Status'] == '작업완료' ? 'success' : tr['Status'] == '작업중' ? 'working' : 'normal';
-                    let tbody = `<tr class="${sta}"> <td>${i+1}</td>`;
-                    for(let j=1;j<theadArr.length;j++){
-                        if(theadArr[j] == 'File'){ tbody += `<td><a href="${tr['Path'] + tr[theadArr[j]]}" target="_blank">${tr[theadArr[j]]}</a></td>`;
-                        }else{ tbody += `<td>${tr[theadArr[j]]}</td>`; }
-                    }
-                    tbody += '</tr>';
-                    $(v).find('table tbody').append(tbody);
-                    $('.summaryTable thead tr').append(`<th>${cat}</th>`)
-                    $('.summaryTable tbody tr').append(`<td><b class="total" title="전체">${data.length}</b> / <b class="normal" title="작업전">${data.filter(item=> item['Status'] === '작업전').length}</b> / <b class="working" title="작업중">${data.filter(item=> item['Status'] === '작업중').length}</b> / <b class="success" title="작업완료">${data.filter(item=> item['Status'] === '작업완료').length}</b></td>`);
+            // $.getJSON(jsonURL,(json)=> {
+            // const data = json[0].records.filter(tr=> tr['1Depth'] === cat);
+            // console.log(JSON.parse(JSON.stringify(res)))
+            const data = JSON.parse(res)[0].records.filter(tr=> tr['1Depth'] === cat);
+            total += data.length;
+            normal += data.filter(item=> item['Status'] === '작업전').length;
+            working += data.filter(item=> item['Status'] === '작업중').length;
+            success += data.filter(item=> item['Status'] === '작업완료').length;
+            $(v).find('table').append('<tbody></tbody>');
+            for(let i=0;i<data.length;i++){
+                let tr = data[i];
+                let sta = tr['Status'] == '작업완료' ? 'success' : tr['Status'] == '작업중' ? 'working' : 'normal';
+                let tbody = `<tr class="${sta}"> <td>${i+1}</td>`;
+                for(let j=1;j<theadArr.length;j++){
+                    if(theadArr[j] == 'File'){ tbody += `<td><a href="${tr['Path'] + tr[theadArr[j]]}" target="_blank">${tr[theadArr[j]]}</a></td>`;
+                    }else{ tbody += `<td>${tr[theadArr[j]]}</td>`; }
                 }
-                $('.summaryTable caption .total b').html(total);
-                $('.summaryTable caption .normal b').html(normal);
-                $('.summaryTable caption .working b').html(working);
-                $('.summaryTable caption .success b').html(success);
-            });
+                tbody += '</tr>';
+                $(v).find('table tbody').append(tbody);
+                $('.summaryTable thead tr').append(`<th>${cat}</th>`)
+                $('.summaryTable tbody tr').append(`<td><b class="total" title="전체">${data.length}</b> / <b class="normal" title="작업전">${data.filter(item=> item['Status'] === '작업전').length}</b> / <b class="working" title="작업중">${data.filter(item=> item['Status'] === '작업중').length}</b> / <b class="success" title="작업완료">${data.filter(item=> item['Status'] === '작업완료').length}</b></td>`);
+            }
+            $('.summaryTable caption .total b').html(total);
+            $('.summaryTable caption .normal b').html(normal);
+            $('.summaryTable caption .working b').html(working);
+            $('.summaryTable caption .success b').html(success);
+            // });
         }
         
-        $('.mockupTable').each((i,v)=>{
-            $(v).hasClass('common') && trs(v, 'common', 'UI컴포넌트');
-            $(v).hasClass('main') && trs(v, 'main', '공통');
-            $(v).hasClass('cat01') && trs(v, 'cat01', '상담');
-            $(v).hasClass('cat02') && trs(v, 'cat02', '서비스업무');
-            $(v).hasClass('cat03') && trs(v, 'cat03', '자재');
-            $(v).hasClass('cat04') && trs(v, 'cat04', '재경');
-            $(v).hasClass('cat05') && trs(v, 'cat05', '메인터넌스');
-            $(v).hasClass('cat06') && trs(v, 'cat06', '마스터');
-            $(v).hasClass('cat07') && trs(v, 'cat07', '리포트');
+        ajaxData(jsonURL,'GET').then(function(res){
+            $('.mockupTable').each((i,v)=>{
+            $(v).hasClass('common') && trs(v, res, 'common', 'UI컴포넌트');
+            $(v).hasClass('main') && trs(v, res, 'main', '공통');
+            $(v).hasClass('cat01') && trs(v, res, 'cat01', '상담');
+            $(v).hasClass('cat02') && trs(v, res, 'cat02', '서비스업무');
+            $(v).hasClass('cat03') && trs(v, res, 'cat03', '자재');
+            $(v).hasClass('cat04') && trs(v, res, 'cat04', '재경');
+            $(v).hasClass('cat05') && trs(v, res, 'cat05', '메인터넌스');
+            $(v).hasClass('cat06') && trs(v, res, 'cat06', '마스터');
+            $(v).hasClass('cat07') && trs(v, res, 'cat07', '리포트');
         });
+        });
+        
 
     </script>
     <footer><p>COPYRIGHT 2011 LG ELECTRONICS. ALL RIGHTS RESERVED. </p></footer>

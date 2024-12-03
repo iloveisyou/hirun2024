@@ -1,6 +1,6 @@
-{% set assPath='../../../assets' %}
-{% set imgPath='../../../assets/images' %}
-{% set ruiPath='../../../assets/js/lib/rui2.8' %}
+{% set assPath='../../assets' %}
+{% set imgPath='../../assets/images' %}
+{% set ruiPath='../../assets/js/lib/rui2.8' %}
 {% set headTitle = title if title else 'Hi-Run System' %}
 {% set cat = cat if cat else 'cat' %}
 {% set page = page if page else 'page' %}
@@ -74,12 +74,16 @@
     {{ include('./header.html') | tabIndent(1) }}
     {# {% endif %} #}
 
+    <!-- ************************************************************************************************ -->
+    <!-- *****************************************  main start  ***************************************** -->
     <main class="main">
         {% filter tabIndent(2) %}
             {% block main %}
             {% endblock %}
         {% endfilter %}
     </main>
+    <!-- ************************************************************************************************ -->
+    <!-- *****************************************   main end   ***************************************** -->
     
     {# {% if isNotFooter !== true %} #}
     {{ include('./footer.html') | tabIndent(1) }}
