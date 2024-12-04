@@ -21,7 +21,7 @@
 
 
 html.pg-ui { font-family:'LG_Smart_H2.0'; color:#515151;
-    .hirun-wrap {  }
+    .hirun-wrap { min-width:100% !important; }
     h1 { margin-left:0px; padding:3px 5px; background-color:#d80546; font-family: 'LG_Smart_H2.0_L'; font-weight:100; color:#ffffff; }
     h2 { margin:0px 0 0px 0px; padding:5px; font-size:20px; font-weight:400; background-color:#2a2a2a; color:#fff; 
         &::before { content:"-"; display:inline-block; }
@@ -29,6 +29,9 @@ html.pg-ui { font-family:'LG_Smart_H2.0'; color:#515151;
     section { padding:30px;
         h3 { margin-left:-10px; padding:10px 0px;
             ~ h3 { margin-top:30px; }  
+            ~ p { font-size:14px; color:$gray; margin-top:10px; margin-bottom:10px; 
+                ~ p { margin-top:20px; }
+            }
         }
     }
 }
