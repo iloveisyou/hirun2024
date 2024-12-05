@@ -6,8 +6,8 @@
             {
                 "id": "UI-001",
                 "1Depth": "UI컴포넌트",
-                "2Depth": "레이아웃",
-                "Name": "헤더",
+                "2Depth": "layout",
+                "Name": "header",
                 "File": "header.html",
                 "Path": "./ui/",
                 "Status": "작업중",
@@ -18,8 +18,8 @@
             {
                 "id": "UI-002",
                 "1Depth": "UI컴포넌트",
-                "2Depth": "레이아웃",
-                "Name": "푸터",
+                "2Depth": "layout",
+                "Name": "footer",
                 "File": "footer.html",
                 "Path": "./ui/",
                 "Status": "작업중",
@@ -28,11 +28,23 @@
                 "Etc": "-"
             },
             {
-                "id": "UI-002",
+                "id": "UI-003",
                 "1Depth": "UI컴포넌트",
                 "2Depth": "FROM",
                 "Name": "INPUT",
                 "File": "input.html",
+                "Path": "./ui/",
+                "Status": "작업중",
+                "Working Date": "2024-11-25",
+                "Last Date": "-",
+                "Etc": "-"
+            },
+            {
+                "id": "UI-004",
+                "1Depth": "UI컴포넌트",
+                "2Depth": "FROM",
+                "Name": "COMBO",
+                "File": "combo.html",
                 "Path": "./ui/",
                 "Status": "작업중",
                 "Working Date": "2024-11-25",
