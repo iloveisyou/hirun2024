@@ -6,11 +6,11 @@
 
 
 <!DOCTYPE html>
-<html lang="ko" class="pj-hirun ct-etc pg-login lo-login">
+<html lang="ko" class="pj-hirun ct-ui pg-ui lo-default">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Him Hi-Run System - Login</title>
+    <title>Hi-Run System - ui</title>
     <link rel="icon" href="../../images/favicon.png">
 
     <!-- RUI import -->
@@ -57,40 +57,81 @@
 <body>
 
 <div class="hirunWrap">
-    <div class="visual img_login">
-    </div>
-    <div class="container">
-        <header class="header" data-aos="fade-right" data-aos-delay="0">
-            <h1>HI-RUN SYSTEM</h1>
-            <p>친환경 그린에너지를 실현하는 서비스&유지보수 글로벌 넘버원 기업</p>
-        </header>
-        <main class="main" data-aos="fade-right" data-aos-delay="50">
-            <h2 class="heading">LOGIN</h2>
-            <p class="substr">하이런에 오신것을 환영합니다. <br />본 시스템은 주식회사 하이엠솔루텍 임직원을 위한 시스템으로서 사원번호를 인증받으신 임직원만 이용하실 수 있습니다.</p>
-            <div class="cpnt_login">
-                <div class="loginInput id">
-                    <input type="text" placeholder="사원번호" />
-                    <button type="button" class="btn btn_input_clear">사원번호 입력창 초기화</button>
-                </div>
-                <div class="loginInput pw">
-                    <input type="password" placeholder="비밀번호" />
-                    <button type="button" class="btn btn_input_clear">비밀번호 입력창 초기화</button>
-                </div>
-                <button type="button" class="btn btn_login">로그인</button>
-                <div class="option">
-                    <button type="button" class="btn btn_searchPassword">비밀번호 찾기</button>
-                    <label><input type="checkbox" class="ipt ipt20" /> 사원번호저장</label>
-                </div>
-            </div>
-        </main>
-        <footer class="footer" data-aos="fade-right" data-aos-delay="100">
-            <p>COPYRIGHT ⓒ HIMSOLUTEK. ALL RIGHT RESERVED.</p>
-        </footer>
-    </div>
+    <h1>Grid 요소</h1>
+    <h2>레이아웃 및 화면을 구성을 도와주는 컴포넌트</h2>
 
-    <script>
-    AOS.init();
-    </script>
+
+
+
+    <section>
+        <h3>- Grid - row (가로,default)</h3>
+
+        <p>grid 1열</p>
+        <!-- ***************************************** source start ***************************************** -->
+        <div class="cp_grid isBorder isPadding">
+            <div>내용</div>
+        </div>
+        <!-- *****************************************  source end  ***************************************** -->
+
+        <p>grid 2열</p>
+        <!-- ***************************************** source start ***************************************** -->
+        <div class="cp_grid isBorder isPadding">
+            <div>내용</div>
+            <div>내용</div>
+        </div>
+        <!-- *****************************************  source end  ***************************************** -->
+
+        <p>grid 3열</p>
+        <!-- ***************************************** source start ***************************************** -->
+        <div class="cp_grid isBorder isPadding">
+            <div>내용</div>
+            <div>내용</div>
+            <div>내용</div>
+        </div>
+        <!-- *****************************************  source end  ***************************************** -->
+
+        <p>grid 4열</p>
+        <!-- ***************************************** source start ***************************************** -->
+        <div class="cp_grid isBorder isPadding">
+            <div>내용</div>
+            <div>내용</div>
+            <div>내용</div>
+            <div>내용</div>
+        </div>
+        <!-- *****************************************  source end  ***************************************** -->
+
+        <p>grid 5열</p>
+        <!-- ***************************************** source start ***************************************** -->
+        <div class="cp_grid isBorder isPadding">
+            <div>내용</div>
+            <div>내용</div>
+            <div>내용</div>
+            <div>내용</div>
+            <div>내용</div>
+        </div>
+        <!-- *****************************************  source end  ***************************************** -->
+    </section>
+
+    <section>
+        <h3>- Grid - column (세로, default)</h3>
+
+        <p>grid 1행</p>
+        <!-- ***************************************** source start ***************************************** -->
+        <div class="cp_grid isBorder isPadding isColumn">
+            <div>내용</div>
+        </div>
+        <!-- *****************************************  source end  ***************************************** -->
+
+        <p>grid 2행</p>
+        <!-- ***************************************** source start ***************************************** -->
+        <div class="cp_grid isBorder isPadding isColumn">
+            <div>내용</div>
+            <div>내용</div>
+        </div>
+        <!-- *****************************************  source end  ***************************************** -->
+
+    </section>
+
 
 
         
