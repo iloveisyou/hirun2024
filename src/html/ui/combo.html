@@ -1,0 +1,39 @@
+{% set isNotHeaderFooter = true %}
+{% set cat = 'ui' %}
+{% set page = 'ui' %}
+{% set title = 'Hi-Run System - ui' %}
+{% extends './_include/layout.html' %}
+
+{% block wrap %}
+<h1>FORM 요소</h1>
+<h2>combo (select) 박스</h2>
+
+
+
+
+<section>
+    <h3>- Combo - default</h3>
+
+    <p>RUI > form > Combo</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_combo">
+        <div id="comboSample01_01"></div>
+    </div>
+
+    <script>
+    Rui.onReady(()=>{
+        var comboSample01_01 = new Rui.ui.form.LCombo({  
+            applyTo: 'comboSample01_01',
+            name: 'code',
+            defaultValue: 'code2',
+            //expandCount: 5,
+            url: '{{ruiSample}}/sample/data/code.json'
+        });
+        uiRUI(comboSample01_01); // uiux에서 컨트롤하기 위한 fn
+    });
+    </script>
+    <!-- *****************************************  source end  ***************************************** -->
+
+
+
+{% endblock %}

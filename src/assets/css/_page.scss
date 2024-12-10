@@ -8,12 +8,14 @@
 --------------------------------------------------------- */
 
 @use 'variables' as *;
+@use 'image' as *;
+
 
 /* login --------------------------------------------------------- */
 
-.pg-login { height:100%;
+.pj-hirun.pg-login { height:100%;
     body { height:100%; }
-    .hirun-wrap { display:flex; height:100%; 
+    .hirunWrap { display:flex; height:100%; 
         .visual { display:block; flex:1; position:relative; z-index:10; background-position-y:bottom; }
         .container { flex:1; display:flex; flex-direction:column; justify-content:center; padding:50px;
             .header { flex:1; display:flex; flex-direction:column; justify-content:flex-start; padding-bottom:2%;

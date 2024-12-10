@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 키보드(keyboard)" />
+    <title>Keyword</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css" >
+        .LblockMarkupCode {
+            position: relative;
+            height: 400px;
+        }
+        
+        #defaultGrid {
+            height: 100%;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var col1TextBox = new Rui.ui.form.LTextBox();
+
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'value' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                autoWidth: true,
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', editor: col1TextBox },
+                    { field: 'col2', align: 'center', width: 120 },
+                    { field: 'code', align: 'center' },
+                    { field: 'col3', align: 'right' },
+                    { field: 'col5', align: 'center' },
+                    { field: 'col6', label: 'Col6', width: 200 },
+                    { field: 'col8', label: 'Col8', align: 'right', renderer:Rui.util.LRenderer.moneyRenderer() },
+                    { field: 'date1' , align: 'center', renderer: 'date' },
+                    { field: 'col7', label: 'Popup', renderer: 'popup' }
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoHeight: true,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                width: 600,
+                height: 317
+            });
+            
+            grid.on('keydown', function(e) {
+                if(e.keyCode == 114) {
+                    Rui.util.LEvent.stopEvent(e);
+                    alert('F3번 키보드가 눌렸습니다. ');
+                }
+            });
+
+            grid.render('defaultGrid');
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    params: 'test=aaa',
+                    url: './../../../../sample/data/data11.json'
+                });
+            });
+
+            loadPage.hide();
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <h1>Keyword</h1>
+    <h2>그리드(Grid)의 키보드 기능을 제공하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>셀(Cell)을 선택한 후 키보드(Keyboard)만으로 이동할 수 있습니다. (편집/Edit 상태가 아닐 경우)</p>
+        <p>→ : 우측셀로 이동</p>
+        <p>← : 좌측셀로 이동</p>
+        <p>↑ : 위셀로 이동(편집상태일 경우에도 이동)</p>
+        <p>↓ : 아래셀로 이동(편집상태일 경우에도 이동)</p>
+        <p>Page Up : 위쪽 페이지 이동(편집상태일 경우에도 이동)</p>
+        <p>Page Down : 아래쪽 페이지 이동(편집상태일 경우에도 이동)</p>
+        <p>Home : 첫번째 컬럼으로 이동</p>
+        <p>End : 마지막 컬럼으로 이동</p>
+        <p>Tab : 우측 셀로 이동(편집상태일 경우에도 이동)</p>
+        <p>Enter or F2 : 셀 편집 모드</p>
+        <p>Ctrl + A : 셀 전체 선택</p>
+        <p>Ctrl + Shift A : 셀 전체 선택 취소</p>
+        <p>Shift + Cell Click : 셀 범위 선택</p>
+        <p>Ctrl + C : 선택된 셀 복사(Cell Copy)</p>
+        <p>Ctrl + V : 선택된 셀 붙여넣기(Cell Paste)</p>
+        <p>keydown/keypress/keyup 이벤트 : 어떤 키 관련 프로젝트용으로 구현 가능합니다.</p>
+        <p>그리드(Grid)를 선택하신 후 F3번 키보드를 눌러보세요.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >search</button> 
+        </div>
+        <div class="LblockMarkupCode">
+            <div class="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+        </div>
+
+    </div>
+<script type="text/javascript">
+var loadPage = new Rui.ui.LLoadPage();
+loadPage.show();
+</script>
+</body>
+</html>

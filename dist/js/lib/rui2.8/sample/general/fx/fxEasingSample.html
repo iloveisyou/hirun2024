@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="애니메이션(LAnim), LEasing, 고무줄, 탄력, 크기조정" />
+    <title>Easing</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #demo {
+            background: #ccc;
+            margin-bottom: 1em;
+            overflow: hidden;
+            width: 400px;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var anim = null;
+        Rui.onReady(function(){
+            /*<b>*/
+            anim = new Rui.fx.LAnim({
+                el: 'demo',
+                attributes: {
+                    width: {
+                        to: 50
+                    }
+                },
+                duration: 2.5,
+                method: Rui.fx.LEasing.elasticOut
+            });
+            /*</b>*/
+           
+            Rui.get('demo-run').on('click', function(){
+                anim.animate();
+            });
+            
+            Rui.log("The example has finished loading; as you interact with it, you'll see log messages appearing here.", "info", "example");
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Easing</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>객체를 다이나믹하게 움직이는 animation효과</h2>
+            <div class="LblockDesc">
+                <p>객체를 좀 더 다이나믹하게 움직이게 합니다. 주기 값을 변경하여, 조정 가능합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="demo">
+                Demo
+            </div>
+        </div>
+        <button id="demo-run">
+            run
+        </button>
+    </div>
+</body>
+</html>

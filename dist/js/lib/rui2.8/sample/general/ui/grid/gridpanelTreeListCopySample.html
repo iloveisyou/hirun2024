@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Tree Grid Row Copy</title>
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 레코드 복사(Copy)" />
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LTreeGridSelectionModel.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LTreeGridView.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LTreeGridView.css"/>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css" >
+        #bd {
+            height: 350px;
+        }
+        .LblockGrid.left {
+            float: left;
+        }
+        .LblockGrid.right {
+            float: left;
+        }
+        .LblockMarkupCode .LblockButton {
+            float: left;
+            width: 200px;
+            text-align: center;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        var loadPage = null;
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet1',
+                fields: [
+                    { id: 'id' },
+                    { id: 'parentId' },
+                    { id: 'depth', type: 'number', defaultValue: 0 },
+                    { id: 'seq' },
+                    { id: 'name' },
+                    { id: 'url' },
+                    { id: 'desc' }
+                ]
+            });
+
+            var dataSet2 = new Rui.data.LJsonDataSet({
+                id: 'dataSet2',
+                fields: [
+                    { id: 'id' },
+                    { id: 'parentId' },
+                    { id: 'depth', type: 'number', defaultValue: 0 },
+                    { id: 'seq' },
+                    { id: 'name' },
+                    { id: 'url' },
+                    { id: 'desc' }
+                ]
+            });
+
+            var columns = [
+                new Rui.ui.grid.LSelectionColumn(),
+                { id: 'rowId', label: 'id', width: 50, sortable: false, align: 'left', renderer : function(val, param, record, row, i) {
+                    return record.id;
+                } },
+                { id: 'pId', label: 'pid', width : 50, sortable: false, align: 'left', renderer : function(val, param, record, row, i) {
+                    return record.pId;
+                } },
+                { field: 'id', label: 'id', width: 200 },
+                { field: 'depth', label: 'depth' },
+                { id: 'show', label: 'Show', renderer: function(val, p, record) {
+                    return record.getAttribute('_show') + '';
+                } },
+                { id: 'expand', label: 'Expand', renderer: function(val, p, record) {
+                    return record.getAttribute('_expand') + '';
+                } }
+            ];
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: columns
+            });
+
+            var columnModel2 = new Rui.ui.grid.LColumnModel({
+                columns: columns
+            });
+
+            // 한 LColumnModel을 두 그리드에 같이 쓰면 안됨(디버그 용도라서 임시로 씀)
+            var treeGridView = new Rui.ui.grid.LTreeGridView({
+                defaultOpenDepth: -1,
+                columnModel: columnModel,
+                dataSet: dataSet,
+                fields: {
+                    depthId: 'depth'
+                },
+                treeColumnId: 'id'
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                view: treeGridView,
+                selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+                width: 400,
+                height: 300
+            });
+
+            var treeGridView2 = new Rui.ui.grid.LTreeGridView({
+                defaultOpenDepth: -1,
+                columnModel: columnModel2,
+                dataSet: dataSet2,
+                fields: {
+                    depthId: 'depth'
+                },
+                treeColumnId: 'id'
+            });
+
+            var grid2 = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel2,
+                dataSet: dataSet2,
+                view: treeGridView2,
+                selectionModel: new Rui.ui.grid.LTreeGridSelectionModel(),
+                width: 400,
+                height: 300
+            });
+
+            grid.render('leftGrid');
+            grid2.render('rightGrid');
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/gridTree.json'
+                });
+            });
+
+            var leftBtn = new Rui.ui.LButton('leftBtn');
+            leftBtn.on('click', function(){
+                /*<b>*/
+                dataSet2.clearData();
+                /*</b>*/
+            });
+
+            var rightBtn = new Rui.ui.LButton('rightBtn');
+            rightBtn.on('click', function(){
+                // 중복체크나 로직은 구현해야함.
+                /*<b>*/
+                dataSet.batch(function() {
+                    for (var i = 4; i < 7; i++) {
+                        var r = dataSet.getAt(i).getValues();
+                        dataSet2.insert(i - 4, dataSet.createRecord(r));
+                    }
+                });
+                /*</b>*/
+            });
+
+            loadPage.hide();
+            searchBtn.click();
+        });
+        </script>
+</head>
+<body>
+    <h1>Tree Grid Row Copy</h1>
+    <h2>트리 리스트(TreeGrid)의 레코드 복사(Record Copy) 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>트리 그리드(TreeGrid)에서 다른 그리드로 레코드(Record) 데이터를 복사(Copy)하는 방법을 제공하는 샘플</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >Search</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div class="LblockGrid left">
+                <div id="leftGrid"></div>
+            </div>
+            <div class="LblockButton">
+                <button type="button" id="leftBtn" >left</button>
+                <button type="button" id="rightBtn" >right</button>
+            </div>
+            <div class="LblockGrid right">
+                <div id="rightGrid"></div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+loadPage = new Rui.ui.LLoadPage();
+loadPage.show();
+</script>
+</body>
+</html>

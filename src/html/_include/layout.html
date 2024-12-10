@@ -1,17 +1,18 @@
-{% set assPath='../../assets' %}
-{% set imgPath='../../assets/images' %}
-{% set ruiPath='../../assets/js/lib/rui2.8' %}
+{# 경로변경 {% set assPath='../../assets' %} #}
+{% set assPath='../../' %}
+{% set imgPath='../../images/newHiRun' %}
+{% set ruiPath='../../js/lib/rui2.8' %}
 {% set headTitle = title if title else 'Hi-Run System' %}
 {% set cat = cat if cat else 'cat' %}
 {% set page = page if page else 'page' %}
-{% set ruiSample = '../../assets/js/lib/rui2.8' %}
+{% set ruiSample = '../../js/lib/rui2.8' %}
 
 {%- macro include(fileName) -%}
     {%- include fileName ignore missing -%}
 {%- endmacro -%}
 {#- // 들여쓰기(Tab Indent) 조정을 위한 macro -#}
 <!DOCTYPE html>
-<html lang="ko" class="ct-{{cat}} pg-{{page}} lo-{{page if (isNotHeaderFooter==true and not(cat=='ui')) else 'default'}}">
+<html lang="ko" class="pj-hirun ct-{{cat}} pg-{{page}} lo-{{page if (isNotHeaderFooter==true and not(cat=='ui')) else 'default'}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,7 +62,7 @@
 </head>
 <body>
 
-<div class="hirun-wrap">
+<div class="hirunWrap">
 
 {#- // header,footer 없을경우 -#}
 {% if isNotHeaderFooter == true %}
@@ -84,8 +85,8 @@
             {% endblock %}
         {% endfilter %}
     </main>
-    <!-- ************************************************************************************************ -->
     <!-- *****************************************   main end   ***************************************** -->
+    <!-- ************************************************************************************************ -->
     
     {# {% if isNotFooter !== true %} #}
     {{ include('./footer.html') | tabIndent(1) }}

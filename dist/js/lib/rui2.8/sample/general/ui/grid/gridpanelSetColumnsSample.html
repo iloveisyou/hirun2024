@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Grid setColumns</title>
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 컬럼 변경(LColumnModel)" />
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+    
+        Rui.onReady(function() {
+        	
+        	var seedCombo = new Rui.ui.form.LCombo({
+        		applyTo: 'seed',
+        		useEmptyText: false
+        	});
+        	
+        	var fields = [];
+        	for(var i = 0; i < 100; i++){
+        		fields.push({id: 'col' + (i+1)});
+        	}
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: fields
+            });
+            
+            var getColumns = function(){
+                var seed = parseInt(seedCombo.getValue(), 10);
+                var columns = [];
+                for(var i = seed; i < seed+20; i++) {
+                    columns.push({ field: 'col'+i });
+                }
+                return columns;
+            }
+            var columnModel = new Rui.ui.grid.LColumnModel({
+            	defaultWidth: 60,
+            	autoWidth: true,
+                columns: getColumns()
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/gridManyColumns.json',
+                });
+            });
+
+            seedCombo.on('changed', function(){
+                /*<b>*/
+                columnModel.setColumns({columns: getColumns()});
+                /*</b>*/
+            });
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <h1>Grid setColumns</h1>
+    <h2>그리드(Grid)의 모든 컬럼(Column)을 변경하는 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>그리드(Grid)의 모든 컬럼(Column)을 변경하는 샘플입니다.</p>
+    </div>
+    <div id="bd">
+	    <div class="LblockMarkupCode">
+		    <div class="LblockButton" >
+		        <button type="button" id="searchBtn" >Search</button>
+                <select id="seed">
+                    <option value="1">1 ~ 20</option>
+                    <option value="21">21 ~ 40</option>
+                    <option value="41">41 ~ 60</option>
+                    <option value="61">61 ~ 80</option>
+                    <option value="81">81 ~ 100</option>
+                </select>
+		    </div>
+	        <div class="LblockGrid">
+	            <div id="defaultGrid"></div>
+	        </div>
+	    </div>
+	</div>
+</body>
+</html>

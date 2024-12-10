@@ -8,20 +8,47 @@
 --------------------------------------------------------- */
 
 @use 'variables' as *;
+@use 'image' as *;
 
-.cpnt_login { display:flex; row-gap:10px; flex-direction:column; justify-content:stretch; width:400px;
-    .loginInput { position:relative; height:46px; border:1px solid $gray300; border-radius:8px;
-        // input { width:100%; height:100%; padding:0 18px; border-radius:8px; border:0 solid transparent; @include fontR; font-size:16px; }
-        // button { position:absolute; right:19px; top:50%; transform:translateY(-50%); width:16px; height:16px; padding:0 0 0 16px; border-radius:50%; border:0 solid transparent; background-color:$gray300; overflow:hidden;
-        //     &::before { content:""; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(45deg); width:10px; height:2px; border-radius:1px; background-color:$gray700; }
-        //     &::after { content:""; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-45deg); width:10px; height:2px; border-radius:1px; background-color:$gray700; }
-        // }
-    }
-    // .btn_login { height:46px; border-radius:8px; border:0 solid transparent; background-color:$primary; @include fontR; font-size:16px; color:$white; }
-    .option { display:flex; justify-content:flex-end;  
-        button { display:flex; align-items:center; height:38px; margin-right:auto; padding:0 18px; border-radius:8px; border:1px solid $gray700; background-color:transparent; @include fontR; font-size:16px; color:$gray700; }
-        label { display:inline-flex; align-items:center; @include fontR; font-size:16px; color:$gray;
-            input { width:20px; height:20px; margin-right:4px; border-radius:4px; border:1px solid $gray700; }
+.pj-hirun{
+    .cp_login { display:flex; row-gap:10px; flex-direction:column; justify-content:stretch; width:400px;
+        .loginInput { position:relative; height:46px; border:1px solid $gray300; border-radius:8px;
+            // input { width:100%; height:100%; padding:0 18px; border-radius:8px; border:0 solid transparent; @include fontR; font-size:16px; }
+            // button { position:absolute; right:19px; top:50%; transform:translateY(-50%); width:16px; height:16px; padding:0 0 0 16px; border-radius:50%; border:0 solid transparent; background-color:$gray300; overflow:hidden;
+            //     &::before { content:""; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(45deg); width:10px; height:2px; border-radius:1px; background-color:$gray700; }
+            //     &::after { content:""; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-45deg); width:10px; height:2px; border-radius:1px; background-color:$gray700; }
+            // }
         }
+        // .btn_login { height:46px; border-radius:8px; border:0 solid transparent; background-color:$primary; @include fontR; font-size:16px; color:$white; }
+        .option { display:flex; justify-content:flex-end;  
+            button { display:flex; align-items:center; height:38px; margin-right:auto; padding:0 18px; border-radius:8px; border:1px solid $gray700; background-color:transparent; @include fontR; font-size:16px; color:$gray700; }
+            label { display:inline-flex; align-items:center; @include fontR; font-size:16px; color:$gray;
+                input { width:20px; height:20px; margin-right:4px; border-radius:4px; border:1px solid $gray700; }
+            }
+        }
+    }
+
+    .cp_grid { display:flex; width:100%;
+        > * { flex:1; }
+        &.isColumn { flex-direction:column; 
+            > * + * { border-left-width:0 !important; border-top:1px solid $gray300; }
+        }
+        &.isPadding > * { padding:20px; }
+        &.isBorder { border:1px solid $gray300; 
+            > * + * { border-left:1px solid $gray300; }
+        }
+        &:has(:nth-child(1)) > * { flex-basis:calc(100 / 1 ); }
+        &:has(:nth-child(2)) > * { flex-basis:calc(100 / 2 ); }
+        &:has(:nth-child(3)) > * { flex-basis:calc(100 / 3 ); }
+        &:has(:nth-child(4)) > * { flex-basis:calc(100 / 4 ); }
+        &:has(:nth-child(5)) > * { flex-basis:calc(100 / 5 ); }
+        &:has(:nth-child(6)) > * { flex-basis:calc(100 / 6 ); }
+        &:has(:nth-child(7)) > * { flex-basis:calc(100 / 7 ); }
+        &:has(:nth-child(8)) > * { flex-basis:calc(100 / 8 ); }
+        &:has(:nth-child(9)) > * { flex-basis:calc(100 / 9 ); }
+        &:has(:nth-child(10)) > * { flex-basis:calc(100 / 10 ); }
+        &:has(:nth-child(11)) > * { flex-basis:calc(100 / 11 ); }
+        &:has(:nth-child(12)) > * { flex-basis:calc(100 / 12 ); }
+
     }
 }

@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), Marked" />
+    <title>Marked</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css" >
+        /*.L-grid-row .L-grid-cell-editable {
+            background-color:#fff;
+        }*/
+
+        .L-button#searchBtn {
+        }
+
+        .L-button#searchBtn button {
+            background: url(../../../../resources/skin/sam2/images/search_btn.gif) center left no-repeat transparent;
+            background-color: #f3f2f2;
+            padding-left: 30px;
+        }
+
+        .LblockGrid {
+            width: 70%;
+            height: 100%;
+            float: left;
+        }
+
+        .LblockDetail {
+            width: 28%;
+            float: right;
+        }
+
+        .L-grid-row .L-grid-col-btn {
+            padding: 1px 3px 0px 3px;
+        }
+
+        .L-grid-header table td.L-grid-cell-last, .L-grid-col-line .L-grid-row table td.L-grid-cell-last {
+            border-right-color: #fff !important;
+        }
+
+        .LblockMarkupCode {
+            position: relative;
+            height: 400px;
+        }
+        
+        #defaultGrid {
+            height: 100%;
+        }
+
+        .L-panel .L-grid-header-tool-dialog {
+            overflow: auto;
+        }
+        
+        .L-popup-button-icon {
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                canMarkableEvent: true,
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' }
+                ]
+            });
+            
+            dataSet.on('load', function(){
+                dataSet.batch(function() {
+                    for(var i = 0, len = dataSet.getCount(); i < len; i++) {
+                        var r = dataSet.getAt(i);
+                        if(r.get('col5') != 'R1') {
+                            dataSet.setState(i, Rui.data.LRecord.STATE_UPDATE);
+                            dataSet.setMark(i, true);
+                        }
+                    }
+                });
+            });
+            
+            dataSet.on('update', function(e) {
+                if(e.colId == 'col5') {
+                    var v = dataSet.getNameValue(e.row, e.colId);
+                    if(v != 'R1') {
+                        dataSet.setMark(e.row, true);
+                    }
+                }
+            });
+
+            dataSet.on('canMarkable', function(e){
+                if(e.row == 3) return false;
+            });
+
+            /*<b>*/
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1' },
+                    { field: 'col2', label: 'Col2' },
+                    { field: 'col3', label: 'Col3' },
+                    { field: 'col4', label: 'Col4' },
+                    { field: 'col5', label: 'Col5', editor: new Rui.ui.form.LCheckBox({
+                        bindValues : ['R1', '']
+                    }) }
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoHeight: true,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                width: 600,
+                height: 317
+            });
+
+            grid.render('defaultGrid');
+
+            /*</b>*/
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data11.json'
+                });
+            });
+
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData();
+            });
+
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <h1>Marked</h1>
+    <h2>그리드(Grid)를 조회한 후 DataSet의 값과 비교하여 같은 값이면 row를 선택(mark)하는 Grid 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>DataSet을 조회한 후 load 이벤트를 통해서 col5의 값이 R1이 아니면 row를 선택(mark)하는 샘플입니다.</p>
+        <p>Col5에 체크박스 값을 변경할 때에도 실시작으로 반영됩니다.</p>
+        <p>초기 로드시 상태를 저장을 위해 상태를 변경할 수 도 있습니다.</p>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >search</button>
+            <button type="button" id="clearBtn" >clear</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div class="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

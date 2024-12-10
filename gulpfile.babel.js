@@ -34,9 +34,10 @@ const ghPages = require('gulp-gh-pages'); // 자동배포
 const sr = './src';
 const di = './dist';
 const as = '/assets';
+const as2 = ''; // 경로변경
 const paths = { // src.html만 함수에서 경로 추가 제어
     src:  { html: sr + '/html', css: sr + as + '/css', img: sr + as + '/images/**/*', js: sr + as + '/js', font: sr + as + '/fonts', },
-    dist: { html: di + '/html', css: di + as + '/css', img: di + as + '/images', js: di + as + '/js', font: di + as + '/fonts', },
+    dist: { html: di + '/html', css: di + as2 + '/css', img: di + as2 + '/images', js: di + as2 + '/js', font: di + as2 + '/fonts', },
 }
 
 
@@ -62,7 +63,7 @@ async function html() {
     };
 
     // _gnb.json 파일 적용을 위한 변수
-    const gnbJson = {...JSON.parse(fs.readFileSync(di + as + '/json/gnb.json'))};
+    const gnbJson = {...JSON.parse(fs.readFileSync(di + as2 + '/json/gnb.json'))};
     const datafile = () => {
         return gnbJson;
     }
@@ -93,15 +94,15 @@ function js() {
         '!' + paths.src.js + '/lib/**/*', 
     ]) 
     .pipe(sourcemaps.init({loadMaps: true})) // 소스맵 초기화
-    .pipe( bro({transform: [ // 트랜스파일 시작
-        babelify.configure({ presets: ["@babel/preset-env"] }), // ES6 이상의 문법을 일반 브라우저가 코드를 이해 할 수 있도록 변환
-        ["uglifyify", { global: true }], // 코드 최소화 및 난독화
-    ]}))
-    .pipe(sourcemaps.write('./')) // 소스맵 작성
-    .pipe(minify({ // 트랜스파일된 코드 압축 및 min 파일 생성
-        ext: {min: '.min.js'}, // 축소된 파일을 출력하는 파일 이름의 접미사 설정
-        iignoreFiles: ['-min.js'] //해당 파일과  일치하는 파일들은 축소하지 않음
-    }))
+    // .pipe( bro({transform: [ // 트랜스파일 시작
+    //     babelify.configure({ presets: ["@babel/preset-env"] }), // ES6 이상의 문법을 일반 브라우저가 코드를 이해 할 수 있도록 변환
+    //     ["uglifyify", { global: true }], // 코드 최소화 및 난독화
+    // ]}))
+    // .pipe(sourcemaps.write('./')) // 소스맵 작성
+    // .pipe(minify({ // 트랜스파일된 코드 압축 및 min 파일 생성
+    //     ext: {min: '.min.js'}, // 축소된 파일을 출력하는 파일 이름의 접미사 설정
+    //     iignoreFiles: ['-min.js'] //해당 파일과  일치하는 파일들은 축소하지 않음
+    // }))
     .pipe(dest(paths.dist.js))
 }
 
@@ -137,7 +138,7 @@ function img() {
 }
 
 function lib() {
-    return src(paths.src.js +'/lib/**/*')
+    return src(paths.src.js +'/lib/**/*', { encoding: false })
     .pipe(dest(paths.dist.js + '/lib/'))
 }
 
@@ -148,7 +149,7 @@ function font() {
 
 function datas() {
     return src(sr + as + '/json/**/*')
-    .pipe(dest(di + as + '/json'))
+    .pipe(dest(di + as2 + '/json'))
 }
 
 function watcher() {

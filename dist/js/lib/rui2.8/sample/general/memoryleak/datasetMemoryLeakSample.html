@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>data Memory leak</title>
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <script type="text/javascript" src="./../../../plugins/ui/grid/LEditButtonColumn.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui_skin1.css"/>
+    
+    <style type="text/css" >
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.getConfig().set('$.core.logger.show', [true]);
+        Rui.onReady(function() {
+            Rui.get(agentInfo).html(navigator.userAgent.toLowerCase());
+            var isStart = false;
+            var isNotice = false;
+            //var dataSet = new Rui.data.LDelimiterDataSet({
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                loadCache: true,
+                fields: [
+                    {id:'headerId'},
+                    {id:'lineId'},
+                    {id:'refLineId'},
+                    {id:'orderNo'},
+                    {id:'quoteNumber'},
+                    {id:'orderNumber'},
+                    {id:'lineNo'},
+                    {id:'orderTypeName'},
+                    {id:'orderTypeId'},
+                    {id:'headerStatus'},
+                    {id:'headerStatusName'},
+                    {id:'lineStatus'},
+                    {id:'oeLineStatus'},
+                    {id:'holdCnt'},
+                    {id:'orderSourceName'},
+                    {id:'orderSourceId'},
+                    {id:'orderEntryDate'},
+                    {id:'orderBookDate'},
+                    {id:'fulfillmentDate'},
+                    {id:'orderCategoryCode'},
+                    {id:'lineType'},
+                    {id:'lineTypeId'},
+                    {id:'lineCategoryCode'},
+                    {id:'salesOrganizationId'},
+                    {id:'salesOrganizationCode'},
+                    {id:'salesOrganizationName'},
+                    {id:'customerShortName'},
+                    {id:'customerFullName'},
+                    {id:'customerId'},
+                    {id:'customerCode'},
+                    {id:'shipToOrgId'},
+                    {id:'shipToCode'},
+                    {id:'shipToName'},
+                    {id:'billToOrgId'},
+                    {id:'billToCode'},
+                    {id:'billToName'},
+                    {id:'departmentName'},
+                    {id:'customerPoDate'},
+                    {id:'quoteExpireDate'},
+                    {id:'quoteDate'},
+                    {id:'custPoNumber'},
+                    {id:'invoiceNo'},
+                    {id:'invoiceLineNo'},
+                    {id:'customerTrxLineId'},
+                    {id:'invoiceDate'},
+                    {id:'reqArrivalDateFrom'},
+                    {id:'reqArrivalDateTo'},
+                    {id:'promiseDate'},
+                    {id:'paymentTermName'}, 
+                    {id:'paymentTermId'}
+                ]
+            });
+            
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    {field:'headerId'},
+                    {field:'lineId'},
+                    {field:'refLineId'},
+                    {field:'orderNo'},
+                    {field:'quoteNumber'},
+                    {field:'orderNumber'},
+                    {field:'lineNo'},
+                    {field:'orderTypeName'},
+                    {field:'orderTypeId'},
+                    {field:'headerStatus'},
+                    {field:'headerStatusName'},
+                    {field:'lineStatus'},
+                    {field:'oeLineStatus'},
+                    {field:'holdCnt'},
+                    {field:'orderSourceName'},
+                    {field:'orderSourceId'},
+                    {field:'orderEntryDate'},
+                    {field:'orderBookDate'},
+                    {field:'fulfillmentDate'},
+                    {field:'orderCategoryCode'},
+                    {field:'lineType'},
+                    {field:'lineTypeId'},
+                    {field:'lineCategoryCode'},
+                    {field:'salesOrganizationId'},
+                    {field:'salesOrganizationCode'},
+                    {field:'salesOrganizationName'},
+                    {field:'customerShortName'},
+                    {field:'customerFullName'},
+                    {field:'customerId'},
+                    {field:'customerCode'},
+                    {field:'shipToOrgId'},
+                    {field:'shipToCode'},
+                    {field:'shipToName'},
+                    {field:'billToOrgId'},
+                    {field:'billToCode'},
+                    {field:'billToName'},
+                    {field:'departmentName'},
+                    {field:'customerPoDate'},
+                    {field:'quoteExpireDate'},
+                    {field:'quoteDate'},
+                    {field:'custPoNumber'},
+                    {field:'invoiceNo'},
+                    {field:'invoiceLineNo'},
+                    {field:'customerTrxLineId'},
+                    {field:'invoiceDate'},
+                    {field:'reqArrivalDateFrom'},
+                    {field:'reqArrivalDateTo'},
+                    {field:'promiseDate'},
+                    {field:'paymentTermName'}, 
+                    {field:'paymentTermId'}
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                width: 600,
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+            
+            dataSet.on('load', function(e) {
+                //alert(dataSet.getCount());
+                //delete dataSet.data;
+                //dataSet.clearData();
+                if(isNotice == true)
+                    alert(1);
+                Rui.get('showData').html(parseInt(Rui.get('showData').getHtml()) + 1);
+                if(isStart === true) {
+                    Rui.later(500, window, function() {
+                        searchBtn.click();
+                    });
+                }
+            });
+            var oldData = null;
+            var searchBtn = new Rui.ui.LButton("searchBtn");
+            searchBtn.on("click", function(){
+                //dataSet.clearData();
+                /*
+                Rui.ajax({
+                    //url: './../../../sample/data/large/delimiterData10000.txt',
+                    url: './../../../sample/data/large/data10000.json',
+                    success: function(e) {
+                        var responseText = e.responseText;
+                        if(oldData != responseText) {
+                            var data = dataSet.getReadData(e);
+                            dataSet.loadData(data);
+                        }
+                    }
+                });
+                */
+                dataSet.load({
+                    //url: './../../../sample/data/large/treeGriddata100000.json'
+                    url: './../../../sample/data/large/data10000.json'
+                    //url: './../../../sample/data/large/delimiterData10000.txt'
+                    //url: './../../../sample/data/large/largeData50000.json'
+                });
+            });
+            
+            var setStartBtn = new Rui.ui.LButton('setStartBtn');
+            setStartBtn.on('click', function(){
+                isStart = true;
+                searchBtn.click();
+            });
+            
+            var setEndBtn = new Rui.ui.LButton('setEndBtn');
+            setEndBtn.on('click', function(){
+                isStart = false;
+            });
+            
+            var noticeBtn = new Rui.ui.LButton("noticeBtn");
+            noticeBtn.on("click", function(){
+                isNotice = true;
+            });
+
+        });
+            
+        </script>
+
+</head>
+<body>
+    <h1>dataset memory leak test</h1>
+    <h2>dataset memory leak test 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div> 데이터셋의 메모리릭 체크 샘플</div>
+    <div id='bd'>
+    <div id='agentInfo'></div>
+    <div class="LblockButton" >
+        <button type="button" id="setStartBtn" >start</button>
+        <button type="button" id="setEndBtn" >end</button>
+    </div>
+    
+    <div class="LblockMarkupCode">
+        <div id="aaa" class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+    <div class="LblockButton" >
+        <button type="button" id="searchBtn" >Search</button>
+        <button type="button" id="noticeBtn" >Notice</button>
+    </div>
+    <div id='showData'>0</div>
+</div>
+</body>
+</html>

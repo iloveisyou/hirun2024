@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Grid Row/Column Background Color</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+    <style type="text/css" >
+        .bgcolor-red {
+            background-color: red;
+        }
+        
+        .bgcolor-orange {
+            background-color: orange;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        $C(function() {
+            //log 활성화
+            $C('!config').set('$.core.logger.show', [true]);
+            $C.log("start !!");
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'date1', type: 'date' }
+            ]
+            });
+
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.selectionColumn(),
+                    $C.stateColumn(),
+                    $C.numberColumn(),
+                    { field: "col1", label: "Col1", sortable:true, width:500 },
+                    /*<b>*/
+                    { field: "col2", align:'center' , renderer: function(v, p){
+                        p.css.push('bgcolor-orange');
+                        return '<a href=\'javascript:testFunction(\"aa bb cc\");\'>' + v + '</a>';
+                    }},
+                    { field: "col3", align: 'right', hidden:true },
+                    { field: "date1" , align:'center', renderer: function(v){
+                        return '<font color="red">' + v + '</font>';
+                    }}]
+                    /*</b>*/
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet:dataSet,
+                skipRowCellEvent: true,
+                height:300
+            });
+
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json'
+                });
+            });
+
+            $C('#clearBtn').button();
+            $C('#clearBtn').on("click", function(){
+                dataSet.clearData();
+            });
+            
+            //searchBtn.click();
+           
+        });        
+        
+    </script>
+   
+</head>
+<body>
+    <h1>Grid Row/Column Background Color Sample</h1>
+    <h2>Grid의 cell 색상을 변경하는 샘플 (grid/renderer)</h2>
+    <div class="LblockLine"></div>
+    <div>Grid의 row 또는 column에 배경색을 지정 할수 있으며, css나 font tag등을 이용 할 수도 있습니다. </div>
+<div id='bd'>
+    <button type="button" id="searchBtn" >Search</button>
+    <button type="button" id="clearBtn" >clear</button>
+    <div class="LblockMarkupCode">    
+        <div id="defaultGrid"></div>
+    </div>
+</div>
+</body>
+

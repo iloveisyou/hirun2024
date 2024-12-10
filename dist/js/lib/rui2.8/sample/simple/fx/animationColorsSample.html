@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="devon-rui-sample" content="yes" />
+        <title>Color</title>
+        <script type="text/javascript" src="../../../js/rui_base.js"></script>
+        <script type="text/javascript" src="../../../js/rui_ext.js"></script>
+        <script type='text/javascript' src='../../../resources/rui_config.js'></script>
+        <script type='text/javascript' src='../../../plugins/fx/LColorAnim.js'></script>
+        <script type="text/javascript" src='../../../plugins/fx/LColorAnim.js'></script>
+        <script type="text/javascript" src='../../../plugins/util/simpleSyntax.js'></script>
+        <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+        <style type="text/css">
+            #demo {
+                background: #ccc;
+                margin-bottom: 1em;
+                height: 100px;
+                width: 100px;
+            }
+        </style>
+        <script type='text/javascript' class="script-code">
+            var anim = null;
+            $C(function(){
+                /*<b>*/
+                anim = $C.colorAnim({
+                    el: 'demo',
+                    attributes: {
+                        color: {
+                            to: '#06e'
+                        },
+                        backgroundColor: {
+                            to: '#e06'
+                        }
+                    }
+                });
+                
+                $C('#demo-run').on('click', function(){
+                    anim.animate();
+                });
+                /*</b>*/
+                
+                $C.log("The example has finished loading; as you interact with it, you'll see log messages appearing here.", "info", "example");
+
+            });
+        </script>
+
+    </head>
+    <body>
+        <h1>animation colors sample</h1>
+        <h2>색깔을 변화시키는 animation효과</h2>
+        <div class="LblockLine"></div>
+        <div>
+            <p>객체의 컬러를 동적으로 변경합니다. 컬러값은 RGB 값을 사용할 수 있습니다.</p>
+        </div>
+        <div id='bd'>
+            <div class="LblockMarkupCode">
+                <div id="demo">
+                    Demo
+                </div>
+            </div>
+            <button id="demo-run">
+                run
+            </button>
+        </div>
+    </body>
+</html>

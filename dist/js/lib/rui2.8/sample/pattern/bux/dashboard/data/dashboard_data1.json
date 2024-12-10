@@ -1,0 +1,68 @@
+﻿[
+    {
+        "metaData": {
+            "dataSetId": "dataSet1"
+        },
+        "records": [
+            {"depth":0,"dataType":0,"companyName":"LG","productName":"","monthSaleQty":58,"monthRefundsQty":41,"monthPoorQty":9,"weekSaleQty1":9,"weekRefundsQty1":11,"weekPoorQty1":2,"weekSaleQty2":15,"weekRefundsQty2":13,"weekPoorQty2":1,"weekSaleQty3":17,"weekRefundsQty3":9,"weekPoorQty3":1,"weekSaleQty4":17,"weekRefundsQty4":8,"weekPoorQty4":5,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"LG","productName":"LG옵티머스 G Pro","monthSaleQty":13,"monthRefundsQty":8,"monthPoorQty":3,"weekSaleQty1":0,"weekRefundsQty1":3,"weekPoorQty1":0,"weekSaleQty2":9,"weekRefundsQty2":5,"weekPoorQty2":1,"weekSaleQty3":4,"weekRefundsQty3":0,"weekPoorQty3":1,"weekSaleQty4":0,"weekRefundsQty4":0,"weekPoorQty4":1,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"LG","productName":"LG옵티머스 LTE3","monthSaleQty":15,"monthRefundsQty":6,"monthPoorQty":2,"weekSaleQty1":0,"weekRefundsQty1":2,"weekPoorQty1":1,"weekSaleQty2":4,"weekRefundsQty2":2,"weekPoorQty2":0,"weekSaleQty3":3,"weekRefundsQty3":1,"weekPoorQty3":0,"weekSaleQty4":8,"weekRefundsQty4":1,"weekPoorQty4":1,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"LG","productName":"Nexus 4","monthSaleQty":1,"monthRefundsQty":12,"monthPoorQty":2,"weekSaleQty1":0,"weekRefundsQty1":3,"weekPoorQty1":1,"weekSaleQty2":1,"weekRefundsQty2":3,"weekPoorQty2":0,"weekSaleQty3":0,"weekRefundsQty3":3,"weekPoorQty3":0,"weekSaleQty4":0,"weekRefundsQty4":3,"weekPoorQty4":1,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"LG","productName":"옵티머스 Vu2","monthSaleQty":11,"monthRefundsQty":7,"monthPoorQty":1,"weekSaleQty1":2,"weekRefundsQty1":3,"weekPoorQty1":0,"weekSaleQty2":1,"weekRefundsQty2":0,"weekPoorQty2":0,"weekSaleQty3":5,"weekRefundsQty3":1,"weekPoorQty3":0,"weekSaleQty4":3,"weekRefundsQty4":3,"weekPoorQty4":1,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"LG","productName":"LG옵티머스 G","monthSaleQty":18,"monthRefundsQty":8,"monthPoorQty":1,"weekSaleQty1":7,"weekRefundsQty1":0,"weekPoorQty1":0,"weekSaleQty2":0,"weekRefundsQty2":3,"weekPoorQty2":0,"weekSaleQty3":5,"weekRefundsQty3":4,"weekPoorQty3":0,"weekSaleQty4":6,"weekRefundsQty4":1,"weekPoorQty4":1,"tooltip":""},
+            {"depth":0,"dataType":0,"companyName":"삼성","productName":"","monthSaleQty":66,"monthRefundsQty":45,"monthPoorQty":14,"weekSaleQty1":15,"weekRefundsQty1":8,"weekPoorQty1":3,"weekSaleQty2":15,"weekRefundsQty2":15,"weekPoorQty2":2,"weekSaleQty3":9,"weekRefundsQty3":14,"weekPoorQty3":4,"weekSaleQty4":27,"weekRefundsQty4":8,"weekPoorQty4":5,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"삼성","productName":"Galaxy S4","monthSaleQty":13,"monthRefundsQty":7,"monthPoorQty":2,"weekSaleQty1":0,"weekRefundsQty1":1,"weekPoorQty1":0,"weekSaleQty2":9,"weekRefundsQty2":3,"weekPoorQty2":0,"weekSaleQty3":0,"weekRefundsQty3":0,"weekPoorQty3":1,"weekSaleQty4":4,"weekRefundsQty4":3,"weekPoorQty4":1,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"삼성","productName":"Galaxy Note2","monthSaleQty":16,"monthRefundsQty":9,"monthPoorQty":3,"weekSaleQty1":4,"weekRefundsQty1":1,"weekPoorQty1":1,"weekSaleQty2":2,"weekRefundsQty2":4,"weekPoorQty2":0,"weekSaleQty3":3,"weekRefundsQty3":4,"weekPoorQty3":1,"weekSaleQty4":7,"weekRefundsQty4":0,"weekPoorQty4":1,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"삼성","productName":"Galaxy III","monthSaleQty":8,"monthRefundsQty":11,"monthPoorQty":2,"weekSaleQty1":2,"weekRefundsQty1":2,"weekPoorQty1":0,"weekSaleQty2":1,"weekRefundsQty2":4,"weekPoorQty2":1,"weekSaleQty3":1,"weekRefundsQty3":5,"weekPoorQty3":0,"weekSaleQty4":4,"weekRefundsQty4":0,"weekPoorQty4":1,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"삼성","productName":"Galaxy Note","monthSaleQty":14,"monthRefundsQty":4,"monthPoorQty":4,"weekSaleQty1":2,"weekRefundsQty1":1,"weekPoorQty1":1,"weekSaleQty2":3,"weekRefundsQty2":2,"weekPoorQty2":1,"weekSaleQty3":4,"weekRefundsQty3":1,"weekPoorQty3":1,"weekSaleQty4":5,"weekRefundsQty4":0,"weekPoorQty4":1,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"삼성","productName":"Galaxy Pop","monthSaleQty":15,"monthRefundsQty":14,"monthPoorQty":3,"weekSaleQty1":7,"weekRefundsQty1":3,"weekPoorQty1":1,"weekSaleQty2":0,"weekRefundsQty2":2,"weekPoorQty2":0,"weekSaleQty3":1,"weekRefundsQty3":4,"weekPoorQty3":1,"weekSaleQty4":7,"weekRefundsQty4":5,"weekPoorQty4":1,"tooltip":""},
+            {"depth":0,"dataType":0,"companyName":"팬택","productName":"","monthSaleQty":68,"monthRefundsQty":35,"monthPoorQty":8,"weekSaleQty1":15,"weekRefundsQty1":5,"weekPoorQty1":3,"weekSaleQty2":14,"weekRefundsQty2":14,"weekPoorQty2":2,"weekSaleQty3":29,"weekRefundsQty3":6,"weekPoorQty3":1,"weekSaleQty4":10,"weekRefundsQty4":10,"weekPoorQty4":2,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"팬택","productName":"Vega Iron","monthSaleQty":22,"monthRefundsQty":5,"monthPoorQty":1,"weekSaleQty1":1,"weekRefundsQty1":1,"weekPoorQty1":1,"weekSaleQty2":8,"weekRefundsQty2":3,"weekPoorQty2":0,"weekSaleQty3":8,"weekRefundsQty3":1,"weekPoorQty3":0,"weekSaleQty4":5,"weekRefundsQty4":0,"weekPoorQty4":0,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"팬택","productName":"Vega S5","monthSaleQty":21,"monthRefundsQty":7,"monthPoorQty":1,"weekSaleQty1":7,"weekRefundsQty1":1,"weekPoorQty1":1,"weekSaleQty2":0,"weekRefundsQty2":4,"weekPoorQty2":0,"weekSaleQty3":9,"weekRefundsQty3":1,"weekPoorQty3":0,"weekSaleQty4":5,"weekRefundsQty4":1,"weekPoorQty4":0,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"팬택","productName":"Vega R3","monthSaleQty":11,"monthRefundsQty":12,"monthPoorQty":3,"weekSaleQty1":2,"weekRefundsQty1":1,"weekPoorQty1":0,"weekSaleQty2":0,"weekRefundsQty2":3,"weekPoorQty2":1,"weekSaleQty3":9,"weekRefundsQty3":3,"weekPoorQty3":1,"weekSaleQty4":0,"weekRefundsQty4":5,"weekPoorQty4":1,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"팬택","productName":"Vega Racer2","monthSaleQty":14,"monthRefundsQty":11,"monthPoorQty":3,"weekSaleQty1":5,"weekRefundsQty1":2,"weekPoorQty1":1,"weekSaleQty2":6,"weekRefundsQty2":4,"weekPoorQty2":1,"weekSaleQty3":3,"weekRefundsQty3":1,"weekPoorQty3":0,"weekSaleQty4":0,"weekRefundsQty4":4,"weekPoorQty4":1,"tooltip":""},
+            {"depth":0,"dataType":0,"companyName":"애플","productName":"","monthSaleQty":109,"monthRefundsQty":57,"monthPoorQty":4,"weekSaleQty1":24,"weekRefundsQty1":21,"weekPoorQty1":1,"weekSaleQty2":29,"weekRefundsQty2":13,"weekPoorQty2":1,"weekSaleQty3":29,"weekRefundsQty3":9,"weekPoorQty3":1,"weekSaleQty4":27,"weekRefundsQty4":14,"weekPoorQty4":1,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"애플","productName":"iPhone5 16GB","monthSaleQty":19,"monthRefundsQty":11,"monthPoorQty":0,"weekSaleQty1":5,"weekRefundsQty1":4,"weekPoorQty1":0,"weekSaleQty2":6,"weekRefundsQty2":2,"weekPoorQty2":0,"weekSaleQty3":2,"weekRefundsQty3":3,"weekPoorQty3":0,"weekSaleQty4":6,"weekRefundsQty4":2,"weekPoorQty4":0,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"애플","productName":"iPhone5 32GB","monthSaleQty":23,"monthRefundsQty":7,"monthPoorQty":1,"weekSaleQty1":2,"weekRefundsQty1":4,"weekPoorQty1":0,"weekSaleQty2":9,"weekRefundsQty2":1,"weekPoorQty2":0,"weekSaleQty3":3,"weekRefundsQty3":1,"weekPoorQty3":0,"weekSaleQty4":9,"weekRefundsQty4":1,"weekPoorQty4":1,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"애플","productName":"iPhone5 64GB","monthSaleQty":22,"monthRefundsQty":8,"monthPoorQty":0,"weekSaleQty1":9,"weekRefundsQty1":0,"weekPoorQty1":0,"weekSaleQty2":5,"weekRefundsQty2":4,"weekPoorQty2":0,"weekSaleQty3":6,"weekRefundsQty3":1,"weekPoorQty3":0,"weekSaleQty4":2,"weekRefundsQty4":3,"weekPoorQty4":0,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"애플","productName":"iPhone4S 16GB","monthSaleQty":18,"monthRefundsQty":15,"monthPoorQty":0,"weekSaleQty1":7,"weekRefundsQty1":4,"weekPoorQty1":0,"weekSaleQty2":6,"weekRefundsQty2":4,"weekPoorQty2":0,"weekSaleQty3":5,"weekRefundsQty3":3,"weekPoorQty3":0,"weekSaleQty4":0,"weekRefundsQty4":4,"weekPoorQty4":0,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"애플","productName":"iPhone4S 32GB","monthSaleQty":18,"monthRefundsQty":7,"monthPoorQty":0,"weekSaleQty1":1,"weekRefundsQty1":4,"weekPoorQty1":0,"weekSaleQty2":3,"weekRefundsQty2":2,"weekPoorQty2":0,"weekSaleQty3":5,"weekRefundsQty3":1,"weekPoorQty3":0,"weekSaleQty4":9,"weekRefundsQty4":0,"weekPoorQty4":0,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"애플","productName":"iPhone4S 64GB","monthSaleQty":9,"monthRefundsQty":9,"monthPoorQty":3,"weekSaleQty1":0,"weekRefundsQty1":5,"weekPoorQty1":1,"weekSaleQty2":0,"weekRefundsQty2":0,"weekPoorQty2":1,"weekSaleQty3":8,"weekRefundsQty3":0,"weekPoorQty3":1,"weekSaleQty4":1,"weekRefundsQty4":4,"weekPoorQty4":0,"tooltip":""},
+            {"depth":0,"dataType":0,"companyName":"HTC","productName":"","monthSaleQty":29,"monthRefundsQty":12,"monthPoorQty":3,"weekSaleQty1":4,"weekRefundsQty1":5,"weekPoorQty1":2,"weekSaleQty2":8,"weekRefundsQty2":3,"weekPoorQty2":0,"weekSaleQty3":10,"weekRefundsQty3":0,"weekPoorQty3":1,"weekSaleQty4":7,"weekRefundsQty4":4,"weekPoorQty4":0,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"HTC","productName":"HTC ONE","monthSaleQty":17,"monthRefundsQty":6,"monthPoorQty":1,"weekSaleQty1":4,"weekRefundsQty1":3,"weekPoorQty1":1,"weekSaleQty2":3,"weekRefundsQty2":3,"weekPoorQty2":0,"weekSaleQty3":3,"weekRefundsQty3":0,"weekPoorQty3":0,"weekSaleQty4":7,"weekRefundsQty4":0,"weekPoorQty4":0,"tooltip":""},
+            {"depth":1,"dataType":1,"companyName":"HTC","productName":"HTC Sensation XL","monthSaleQty":12,"monthRefundsQty":6,"monthPoorQty":2,"weekSaleQty1":0,"weekRefundsQty1":2,"weekPoorQty1":1,"weekSaleQty2":5,"weekRefundsQty2":0,"weekPoorQty2":0,"weekSaleQty3":7,"weekRefundsQty3":0,"weekPoorQty3":1,"weekSaleQty4":0,"weekRefundsQty4":4,"weekPoorQty4":0,"tooltip":""}
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "dataSet2"
+        },
+        "records": [
+            {"field01":"R251939859","field02":"20130521","field03":"A551939859","field04":"FR2558MC1Z","field06":"트롬 F1925","field05":"접수중"},
+            {"field01":"R252345467","field02":"20130521","field03":"A567487813","field04":"TV_42LN5400","field06":"디오스 R-S802","field05":"접수중"},
+            {"field01":"R250416891","field02":"20130523","field03":"A563040406","field04":"TV_32LA6100","field06":"인피니아 32LA","field05":"접수중"},
+            {"field01":"R254570427","field02":"20130523","field03":"A563040406","field04":"R-S769MHWE","field06":"디오스 R-S769","field05":"접수중"},
+            {"field01":"R251083079","field02":"20130524","field03":"A554094776","field04":"LG_201303F260","field06":"LG옵티머스 LTE3","field05":"접수중"},
+            {"field01":"R254097150","field02":"20130526","field03":"A555199129","field04":"LG_201209F180","field06":"LG옵티머스 G","field05":"접수중"},
+            {"field01":"R253961939","field02":"20130529","field03":"A556225752","field04":"R-T872MBHGL","field06":"디오스 R-T872","field05":"접수중"},
+            {"field01":"R257363220","field02":"20130529","field03":"A556225752","field04":"SC066BBW","field06":"휘센 SC066","field05":"접수중"}
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "dataSet3"
+        },
+        "records": [
+            {"field01":"성동지점","field02":"20130525","field03":"신한","field04":4590000,"field05":"일시불","field06":"333-22-555555"},
+            {"field01":"성동지점","field02":"20130527","field03":"우리","field04":3780000,"field05":"일시불","field06":"4444-666-787878"}
+        ]
+    },
+    {
+        "metaData": {
+            "dataSetId": "dataSet4"
+        },
+        "records": [
+            {"field01":"성동지점","field02":"201305","field03":7000000,"field04":2500000}        
+        ]
+    }
+]

@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>data Memory leak</title>
+    
+    <style type="text/css" >
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var ddd = [];
+        function test() {
+            var a;
+            for(var i = 0 ; i < 5000000; i++) {
+                a = {};
+                a.a = a;
+            }
+        }
+            
+        </script>
+
+</head>
+<body>
+    <a href="javascript:test()">a</a>
+</body>
+</html>

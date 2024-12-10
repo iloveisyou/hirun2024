@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="애니메이션(LMotionAnim), 크기 조정" />
+    <title>Smaller</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #demo {
+            background: #ccc;
+            margin-bottom: 1em;
+            height: 70px;
+            width: 200px;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var openAnim = null;
+        Rui.onReady(function(){
+            var xy;
+            var containerEl = Rui.get('container'),
+                demo = Rui.get('demo'),
+                xy = containerEl.getXY(),
+                size = demo.getHeight(),
+                bounce = 20;
+            
+            /*<b>*/
+            openAnim = new Rui.fx.LMotionAnim({
+                el: 'demo',
+                attributes: {
+                    points: {
+                        control: [[xy[0], xy[1] + bounce]],
+                        from: [xy[0], xy[1] - size],
+                        to: [xy[0], xy[1]]
+                    }
+                },
+                duration: 0.7
+            });
+            closeAnim = new Rui.fx.LMotionAnim({
+                el: 'demo',
+                attributes: {
+                    points: {
+                        control: [[xy[0], xy[1] - bounce]],
+                        to: [xy[0], xy[1] - size]
+                    }
+                },
+                duration: 0.3
+            });
+            /*</b>*/
+            Rui.get('showBtn').on('click', function(){
+                openAnim.animate();
+            });
+            Rui.get('hideBtn').on('click', function(){
+                closeAnim.animate();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Smaller</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>객체의 크기를 늘리거나 줄여주는 fx 효과</h2>
+            <div class="LblockDesc">
+			    <p>기본적인 애니메이션의 동작 형태입니다. 수직, 수평 방향으로 동시에 지정된 픽셀 위치로 애니메이션을 진행할 수 있습니다.</p>
+			    <p>원하는 속성 설정 후 애니메이션 객체를 생성하여 실행합니다.</p>
+            </div>
+        </div>
+    </div>
+	<div id='bd'>
+	    <div class="LblockMarkupCode">
+	        <div id="container" style="position: absolute; width:200px; height: 80px; border: 0px solid; top: 0px; right: 0px; overflow:hidden; ">
+	        <div id="demo" style="position: absolute; top: -70px">
+	            이 팁을 활용해보세요. 궁금증이 해결됩니다.
+	        </div>
+	        </div>
+	    </div>
+	    <button id="showBtn">show</button>
+	    <button id="hideBtn">hide</button>
+	</div>
+</body>
+</html>

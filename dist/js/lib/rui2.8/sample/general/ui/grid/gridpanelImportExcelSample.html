@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 엑셀(Import Excel)" />
+    <title>Excel Import</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridView.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridPanelExt.js"></script>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/form/LFileBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/form/LFileBox.css" />
+    <script type="text/javascript" src="./../../../../plugins/ui/LFileUploadDialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LFileUploadDialog.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function(){
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+             var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' }, 
+                    { id: 'col2' }, 
+                    { id: 'col3' }, 
+                    { id: 'col4' }, 
+                    { id: 'date1', type: 'date' }, 
+                    { id: 'col8', type: 'number' }
+                ]
+            });
+
+            /*<b>*/
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                freezeColumnId: 'col2',
+                groupMerge: true,
+                columns: [
+                    new Rui.ui.grid.LStateColumn(), 
+                    new Rui.ui.grid.LNumberColumn(),
+                    { id: '3-0' },
+                    { field: 'col1', width: 100, label: '3-1', hMerge: true, vMerge: true, sortable: true, groupId: '3-0', editor: new Rui.ui.form.LTextBox() },
+                    { field: 'col2', sortable: false, align: 'center', width: 130, editor: new Rui.ui.form.LTextBox(), hMerge: true, vMerge: true, sortable: true, label: '4-1', groupId: '3-0' },
+                    { id: '5-0' },
+                    { field: 'col3', align: 'right', groupId: '5-0', hMerge: true, vMerge: true, editor: new Rui.ui.form.LTextBox(), label: '5-1' },
+                    { field: 'col4', align: 'right', groupId: '5-0', hMerge: true, vMerge: true, editor: new Rui.ui.form.LTextBox(), label: '5-1-1' },
+                    { field: 'date1', align: 'center', renderer: function(v){ return '<font color="red">' + v + '</font>'; }, groupId: '5-0', editor: new Rui.ui.form.LTextBox(), label: '6-1' },
+                    { id: '7-1', groupId: '5-0' },
+                    { field: 'col8', label: '8-2', align: 'right', editor: new Rui.ui.form.LNumberBox({ decimalPrecision: 2, minValue: -1, maxValue: 10000 }), renderer: Rui.util.LRenderer.moneyRenderer(), groupId: '7-1' }
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                width: 800,
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+            /*</b>*/
+
+            var fileUploadDialog = new Rui.ui.LFileUploadDialog({
+                url: './../../../data/data.jsp'
+            });
+
+            fileUploadDialog.render(document.body);
+
+            fileUploadDialog.on('validate', function(){
+                var fileBox = this.getFileBox();
+                var value = fileBox.getValue();
+                var ext = value.substring(value.lastIndexOf('.') + 1);
+                if(ext != 'xls') {
+                    return true;
+                    Rui.alert('엑셀 파일만 등록 가능합니다. [xls]');
+                    return false;
+                }
+                return true;
+            });
+
+            fileUploadDialog.on('success', function(e){
+                var responseText = e.conn.responseText;
+
+                var data = dataSet.getReadData(e.conn);
+                dataSet.loadData(data);
+            
+                var value = e.value;
+                alert('파일을 업로드 했습니다.');
+            });
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var clearBtn = new Rui.ui.LButton('clearBtn');
+            clearBtn.on('click', function(){
+                dataSet.clearData();
+            });
+            
+            var importExcelBtn = new Rui.ui.LButton('importExcelBtn');
+            importExcelBtn.on('click', function(){
+               fileUploadDialog.show();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Excel import</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid)의 엑셀 임포트(Excel import)를 간편하게 처리할 수 있습니다.</h2>
+            <div class="LblockDesc">
+                <p>아무 엑셀 파일(Excel File)이나 선택하시면 샘플이므로 데이터를 그대로 읽어옵니다. </p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+    <div class="LblockButton">
+        <button type="button" id="clearBtn">clear</button>
+        <button type="button" id="importExcelBtn">Excel import</button>
+     </div>
+        <br/>
+        <div class="LblockMarkupCode">
+            <div id="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

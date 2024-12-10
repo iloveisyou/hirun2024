@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 컬럼 폭 데이터 맞춤(ColumnFit)" />
+    <title>Column fit</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css"/>
+    
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LHeaderContextMenu.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css" >
+        .LblockMarkupCode {
+            position: relative;
+            height: 400px;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                remainRemoved: true,
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'value' },
+                    { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                defaultSortable: true,
+                autoWidth: true,
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', width: 200 },
+                    { field: 'col2', align: 'center', width: 120 },
+                    { field: 'code', align: 'center' },
+                    { field: 'col3', align: 'right' },
+                    { field: 'col5', align: 'center' },
+                    { field: 'col6', label: 'Col6', width: 200 },
+                    { field: 'col8', label: 'Col8', align: 'right' },
+                    { field: 'date1' , align: 'center', renderer: 'date' },
+                    { field: 'col7', label: 'Popup',renderer: 'popup' }
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                headerTools: true,
+                autoWidth: true,
+                autoHeight: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                width: 800,
+                height: 317
+            });
+
+            grid.render('defaultGrid');
+
+            /*******************
+             * 사용자 이벤트 처리
+             *******************/
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    params: 'test=aaa',
+                    url: './../../../../sample/data/data11.json'
+                });
+            });
+            
+            var setCol1ColumnFitBtn = new Rui.ui.LButton('setCol1ColumnFitBtn');
+            setCol1ColumnFitBtn.on('click', function(){
+                var view = grid.getView();
+                /*<b>*/
+                view.updateColumnFit(3);
+                /*</b>*/
+            });
+
+            var setAllColumnFitBtn = new Rui.ui.LButton('setAllColumnFitBtn');
+            setAllColumnFitBtn.on('click', function(){
+                var view = grid.getView();
+                for(var i = 0, len = columnModel.getColumnCount(true); i < len; i++) {
+                    view.updateColumnFit(i);
+                }
+            });
+
+            loadPage.hide();
+            searchBtn.click();
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Column fit</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid) 컬럼 폭 데이터 맞춤 조정 샘플 (grid)</h2>
+            <div class="LblockDesc">
+		        <p>그리드(Grid) 컬럼(Column)의 넓이(width)를 데이터 기준으로 조정하는 샘플입니다.</p>
+		        <p>그리드(Grid)의 헤더 툴바를 이용해서도 폭 데이터 맞춤 조정 기능을 사용할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockButton" >
+            <button type="button" id="searchBtn" >search</button>
+            <button type="button" id="setCol1ColumnFitBtn" >col1컬럼 맞춤</button>
+            <button type="button" id="setAllColumnFitBtn" >전체컬럼 맞춤</button>
+        </div>
+        <div class="LblockMarkupCode">
+            <div class="LblockGrid">
+                <div id="defaultGrid"></div>
+            </div>
+        </div>
+    </div>
+	<script type="text/javascript">
+	var loadPage = new Rui.ui.LLoadPage();
+	//loadPage.show();
+	</script>
+</body>
+</html>

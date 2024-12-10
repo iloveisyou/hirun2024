@@ -8,10 +8,12 @@
 --------------------------------------------------------- */
 
 @use 'variables' as *;
+@use 'image' as *;
+
 
 /* header --------------------------------------------------------- */
-html.lo-default {
-    .hirun-wrap { display:flex; flex-direction:column; min-height:100vh; /*overflow:hidden;*/ }
+.pj-hirun.lo-default {
+    .hirunWrap { display:flex; flex-direction:column; min-height:100vh; /*overflow:hidden;*/ }
     .header { position:sticky; left:0; top:0; z-index:50;
         .headerInner { display:flex; column-gap:40px; justify-content:flex-start; align-items:center; position:relative; width:100%; min-width:1600px; height:100px; padding:0 30px; border-bottom:1px solid $primary; background-color:rgba(255,255,255,.85) }
         .logo { background-color:transparent; @include fontB; font-size:24px; color:$primary; }

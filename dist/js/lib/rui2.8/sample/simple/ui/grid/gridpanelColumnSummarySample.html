@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Grid Column Summary</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+    <style>
+        .grid-bg-color-sum {
+            background-color: lightyellow;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        $C(function() {
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'date', type: 'date' },
+                { id: 'monthSum', type: 'float' },
+                { id: 'balance', type: 'float' },
+                { id: 'assets', type: 'float' }
+            ]
+            });
+
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.stateColumn(),
+                    $C.numberColumn(),
+                    { field: "date", label: "Date", width:80, align:'center', renderer : "date" },
+                    { field: "monthSum", align:'right', renderer : "money", sumType:'sum'},
+                    { field: "balance", align: 'right', renderer : "money", sumType:'sum'},
+                    /*<b>*/
+                    { id: "difference", width:120, align:'right', renderer : function(val, p, record, row, i){
+                            p.css.push('grid-bg-color-sum'); 
+                            return $C.number.usMoney(record.get('monthSum') - record.get('balance'));
+                        }, sumType:'sum'},
+                    { id: "rate", width:60, align:'right', renderer : function(val, p, record, row, i){
+                            p.css.push('grid-bg-color-sum');
+                            return $C.number.round((record.get('monthSum') - record.get('balance')) / record.get('monthSum') * 100, 2) + '%';
+                        }},
+                    /*</b>*/
+                    { field: "assets", width:120, align:'right', renderer : "money" }
+                    ]
+            });
+            
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet:dataSet,
+                height:300
+            });
+            
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/gridColumnSummary.json'
+                });
+            });
+
+            $C('#clearBtn').button();
+            $C('#clearBtn').on("click", function(){
+                dataSet.clearData();
+            });
+            
+            
+            searchBtn.click();
+            
+        });
+
+    </script>
+
+</head>
+<body>
+    <h1>Grid Column Summary Sample</h1>
+    <h2>LGridPanel에서 column의 합계를 구현하는 샘플 (grid/가로 합계)</h2>
+    <div class="LblockLine"></div>
+    <div>그리드에서 컬럼의 합계를 구합니다. 컬럼별 사칙연산 가능합니다.</div>
+<div id='bd'>
+    <button type="button" id="searchBtn" >Search</button>
+    <button type="button" id="clearBtn" >clear</button>
+    <div class="LblockMarkupCode">    
+        <div id="defaultGrid"></div>
+    </div>
+</div>
+</body>
+

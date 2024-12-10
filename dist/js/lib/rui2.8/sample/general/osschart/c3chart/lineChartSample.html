@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="차트, 라인차트, line chart" />
+    <title>Line Chart</title>
+	
+	<script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../c3.min.js"></script>
+    <script type="text/javascript" src="./../d3.v3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../c3.min.css" />
+    
+    
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+    Rui.onReady(function(){
+    	/*<b>*/
+        var chart = c3.generate({
+            bindto: "#linechart",
+            data: {
+                columns: [
+                    ['data1', 30, 200, 100, 400, 150, 250],
+                    ['data2', 50, 20, 150, 60, 15, 25]
+                ]
+            }
+        });
+        /*</b>*/
+        
+        /********************
+        * 버튼 선언 및 이벤트
+        ********************/
+        var splineBtn = new Rui.ui.LButton('splineBtn');
+        splineBtn.on('click', function(){
+            chart.transform('spline');	
+        });
+        
+        var lineBtn = new Rui.ui.LButton('lineBtn');
+        lineBtn.on('click', function(){
+            chart.transform('line');	
+        });
+        
+        var areaBtn = new Rui.ui.LButton('areaBtn');
+        areaBtn.on('click', function(){
+            chart.transform('area');	
+        });
+   });
+        
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Line Chart</h1>
+	    <div class="LblockLine"></div>
+	    <div class="LblockSubj">
+		    <h2>선으로 표현되는 차트</h2>
+		    <div class="LblockDesc">
+		        <p></p>
+		    </div>
+	    </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div class="blockCalendar">
+                <div id="linechart"></div>
+            </div>
+        </div>
+        <div class="LblockButton" style="padding: 10px 0 0 10px; clear:both;">
+            <button type="button" id="splineBtn">spline</button>
+            <button type="button" id="lineBtn">line</button>
+            <button type="button" id="areaBtn">area</button>
+        </div>
+    </div>
+</body>
+</html>

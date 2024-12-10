@@ -1,0 +1,433 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>Row Edit</title>
+    <script type="text/javascript" src='./../../../../dujsf-m/js/rui_base.js'></script>
+    <script type='text/javascript' src='./LViewportManager.js'></script>
+    
+<!--
+<script type="text/javascript" src="./../../../../js/rui_ext.js"></script>    
+<script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+<script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>    
+<script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+<link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" >
+<link rel="stylesheet" type="text/css" href="./../../../../resources/rui_skin1.css" >
+<link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css">
+ -->
+
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+<link rel="stylesheet" type="text/css" href="./../../../../dujsf-m/sample/css/base.css" />
+<link rel="stylesheet" type="text/css" href="./../../../../dujsf-m/sample/css/header_layout_2.css" />
+<link rel="stylesheet" type="text/css" href="./../../../../dujsf-m/sample/css/content_layout.css" />
+<link rel="stylesheet" type="text/css" href="./../../../../dujsf-m/sample/css/footer_layout_2.css" />
+<link rel="stylesheet" type="text/css" href="./../../../../dujsf-m/sample/css/header_style.css" />
+<link rel="stylesheet" type="text/css" href="./../../../../dujsf-m/sample/css/content_style.css" />
+<link rel="stylesheet" type="text/css" href="./../../../../dujsf-m/sample/css/footer_style.css" />
+<script type="text/javascript" src="./../../../../dujsf-m/js/rui_mobile.js"></script>
+<link rel="stylesheet" type="text/css" href="./../../../../dujsf-m/resources/rui_mobile_core.css" />
+<script type="text/javascript" src="./../../../../dujsf-m/resources/rui_config.js"></script>
+<!-- link rel="stylesheet" type="text/css" href="./gridpanelRowEditSample_mobile.css" / -->
+
+    <style type="text/css">
+
+        .viewport-clean {
+            display: none !important;
+        }
+        
+        .LblockMarkupCode {
+            position: relative;
+            height: 300px;
+        }
+        
+        .L-grid-row .L-grid-col-btn {
+            padding: 1px 3px 0px 3px;
+        }
+        
+        .LblockSearch td {
+            padding: 5px;
+        }
+
+    </style>
+    
+    <script type="text/javascript" >
+        var dataSet = null;
+        var dataSet1 = null;
+        var viewport = null;
+        $C(function() {
+            viewport = new Rui.ui.LViewportManager({
+                viewportTypes: [{
+                    id: 'vp-pc'
+                }, {
+                    id: 'vp-mobile',
+                    onReady: function() {
+                        viewport.add($C('.LblockSearch').getAt(0), '#LblockContent');
+                        viewport.add($C('.LblockGrid').getAt(0), '#LblockContent');
+                        viewport.add($C('.LblockButton').getAt(0), '#LblockContent');
+                    }
+                }, {
+                    id: 'vp-tablet'
+                }, {
+                    id: 'vp-tv'
+                }]
+            });
+            
+            viewport.render();
+        });
+        
+        $C(function() {
+            $C('!config').set('$.core.logger.show', [true]);
+/*
+            var col1Combo = $C.combo({
+               listWidth:200,
+               rendererField: 'value',
+               width: 300,
+               url:'./../../../../sample/data/code.json'
+            });
+*/
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'col4' },
+                { id: 'col5' },
+                { id: 'col6' },
+                { id: 'col7' },
+                { id: 'col8', type: 'number' },
+                { id: 'code' },
+                { id: 'value' },
+                { id: 'date1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+            
+            //dataSet.addTrigger(col1Combo);
+
+            /*
+            dataSet.on('load', function(e) {
+                dataSet.setRow(0);
+                grid.showEdit();
+            });
+            */
+            
+            dataSet.on('canRowPosChange', function(e){
+                /*
+                if (vm.validateDataSet(dataSet, dataSet.getRow()) == false) {
+                    $C.alert($C('!message').get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>') );
+                    return false;
+                }*/
+            });
+            
+            var tm = $C.dataSetManager();            
+            
+            tm.on('success', function(e) {
+                // 페이지에서는 log가 아니라 alert을 써야 함.
+                $C.log($C('!message').get('$.base.msg100'));
+            });
+    
+            var col1EditableRenderer = function(value, p, record, row, i) {
+                if(record.state == $C('!record').STATE_INSERT) {
+                    p.css.push('L-grid-cell-editable');
+                }
+                return value;
+            }
+            
+            var col2Renderer = function(value, p) {
+                if($C.object.isEmpty(value) == false)
+                    value = value.substring(0, 6) + '-' + value.substring(6);
+                return value;
+            }
+            /*
+            var vm = $C.validatorManager({
+                validators:[
+                {id:'searchSelectedUserGrpId', validExp:'그룹:true'},
+                { id: 'col1', validExp:'Col1:true:maxByteLength=50&minByteLength=5'},
+                { id: 'col2', validExp:'Col2:true'},
+                { id: 'col3', validExp:'Col3:true'},
+                { id: 'col6', validExp:'Col6:true'},
+                { id: 'col8', validExp:'Col8:true:number&maxNumber=20000'},
+                { id: 'code', validExp:'Code:true'},
+                { id: 'date1', validExp:'Date1:true'}
+                ]
+            });
+            */
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.stateColumn(),
+                    $C.selectionColumn(),
+                    $C.numberColumn(),
+                    { field: "col1", label: "Col1", sortable: true, editor: $C.textBox({ width: 300 }), renderer: col1EditableRenderer },
+                    { field: "col2", align:'center', width: 120, editor: $C.textBox({ mask: '999999-9999999', width: 300 }), renderer: col2Renderer },
+                    //{ field: "code", align: 'center', editor: col1Combo },
+                    { field: "col3", align: 'right', editor: $C.radioGroup({
+                        items:[
+                            {
+                                label : 'R1',
+                                value:'R1'
+                            },
+                            {
+                                label : 'R2',
+                                value:'R2',
+                                checked:true
+                            }
+                        ],
+                        width: 300
+                    }) },
+                    { field: "col5", align: 'center', editor: $C.checkBox({
+                        bindValues : ['R1', ''],
+                        width: 300
+                    }) },
+                    { field: "col6", label: "Col6", width: 200, editor: $C.textArea({ height: 100, width: 300 }) },
+                    { field: "col8", label: "Col8", align: 'right', editor: $C.numberBox({decimalPrecision: 2, minValue: -1, maxValue: 10000, width: 300 }) },
+                    { field: "date1" , align:'center', editor: $C.dateBox({ width: 300 }) },
+                    $C.editButtonColumn({
+                        field: 'value', label:'Popup', width: 300
+                    }),
+                    { id:'btn', label:'Button', width: 150, renderer: function(val, p, record, row, i){
+                        return "<button type='button' class='L-grid-button'>" + record.get('col1') + "</button>";
+                    }}
+                    ]
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                height:400,
+                rowEditor: true,
+                editable: false,
+                viewConfig : {
+                    //listType: 'ul'
+                }
+            });
+            
+            var view = grid.getView();
+            
+            grid.on("cellClick", function(e){
+                var column = columnModel.getColumnAt(e.col);
+                if(column.id == 'btn')
+                    alert(e.row + ' 버튼 실행');
+                else
+                    $C.log("cellClick : row " + e.row + ", col " + e.col);
+            });
+
+            grid.on("popup", function(e){
+                alert('popup click row : ' + e.row + ', col : ' + e.col);
+            });
+
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data11.json',
+                    cache: false
+                });
+            });
+
+            $C('#editBtn').button();
+            $C('#editBtn').on("click", function(){
+                if(grid.isEditable()) grid.setEditable(false);
+                else grid.setEditable(true);
+            });
+
+            $C('#newBtn').button();
+            $C('#newBtn').on("click", function(){
+                var row = dataSet.newRecord();
+            });
+
+            $C('#insertBtn').button();
+            $C('#insertBtn').on("click", function(){                
+                if(dataSet.getRow() < 0) return;
+                var row = dataSet.newRecord(dataSet.getRow());
+                if (row !== false) {
+                    var record = dataSet.getAt(row);
+                    record.set("col1", "Junee5");
+                    record.set("col2", "(02) 6363-7009");
+                    record.set("col3", "R1");
+                }
+            });
+
+            $C('#updateBtn').button();
+            $C('#updateBtn').on("click", function(){
+                var row = dataSet.getRow();
+                if(row < 0) return;
+                var record = dataSet.getAt(row);
+                record.set("col2", null);
+                record.set("col3", "R2");
+                record.set("col8", 1);
+                record.set("code", 'code9');
+            });
+
+            $C('#undoBtn').button();
+            $C('#undoBtn').on("click", function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    for(var i = 0 ; i < dataSet.getCount() ; i++) {
+                        if(dataSet.isMarked(i))
+                            dataSet.undo(i);
+                    }
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.undo(row);
+                }
+            });
+            
+            $C('#undoAllBtn').button();
+            $C('#undoAllBtn').on("click", function(){
+                dataSet.undoAll();
+            });
+            
+            $C('#deleteBtn').button();
+            $C('#deleteBtn').on("click", function(){
+                if(dataSet.getMarkedCount() > 0) {
+                    dataSet.removeMarkedRow();
+                } else {
+                    var row = dataSet.getRow();
+                    if(row < 0) return;
+                    dataSet.removeAt(row);
+                }
+            });
+            
+            $C('#saveBtn').button();
+            $C('#saveBtn').on("click", function(){
+                if(dataSet.isUpdated() == false) {
+                    alert($C('!message').get('$.base.msg102'));
+                    return;
+                }
+                
+                if(vm.validateDataSet(dataSet) == false) {
+                    $C.alert($C('!message').get('$.base.msg052') + '<br>' + vm.getMessageList().join('<br>') );
+                    return;
+                }
+
+                tm.updateDataSet({
+                    dataSets:[dataSet], 
+                    url:'/consoleLog.dev'
+                });
+
+            });
+            
+            $C('#clearBtn').button();
+            $C('#clearBtn').on("click", function(){
+                dataSet.clearData();
+            });
+            
+            $C.log('step 4');
+            searchBtn.click();
+        });
+            
+        </script>
+
+</head>
+<body>
+    <div>
+        <h1>gridpanel edit sample</h1>
+        <h2>LGridPanel의 기본 샘플 (grid)</h2>
+        <div class="LblockLine"></div>
+        <div> 편집이 가능한 그리드의 기본 형태입니다. 그리드 안에는 텍스트 에디터, radio, check, combo, popup 등이 가능하며,<br>
+        버튼을 연결할 수 있습니다. 같은 값의 셀을 합쳐서 보이게 하는 compress 기능도 제공합니다.</div>
+    </div>
+    <div id='bd'>
+    <div class="LblockSearch" >
+        <table>
+            <tr>
+                <th><label for="col1">Col1</label></th>
+                <td><input type="text" id="col1"></td>
+                <th><label for="col2">Col2</label></th>
+                <td><input type="text" id="col2"></td>
+                <td><button type="button" id="searchBtn" >Search</button></td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="LblockMarkupCode">
+        <div class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+
+        <div class="LblockButton" >
+            <button type="button" id="editBtn" >Edit</button>
+            <button type="button" id="newBtn" >NEW</button>
+            <button type="button" id="insertBtn" >insert</button>
+            <button type="button" id="updateBtn" >update</button>
+            <button type="button" id="deleteBtn" >delete</button>
+            <button type="button" id="saveBtn" >save</button>
+            <button type="button" id="undoBtn" >undo</button>
+            <button type="button" id="undoAllBtn" >undoAll</button>
+            <button type="button" id="clearBtn" >clear</button>
+        </div>
+    </div>
+
+</div>
+<div class="vp-mobile">
+    <div id="LblockHeader">
+        <div id="LblockHeaderTop">
+            <div id="LblockTopLogo">
+                <a href="#"><img src="images/topLogo.png" alt="사이트 상단 로고" /></a>
+            </div>
+            <div id="LblockTopMenuTitle">
+                <a href="#">Title</a>
+            </div>
+            <div id="LblockTopLink">
+                <a href="#" class="Lsearch">검색</a>
+                <a href="#" class="LtotalView">전체보기</a>
+            </div>
+        </div>
+        <div id="LblockTopMenu">
+            <ul>
+                <li class="Lcurrent">
+                    <span><a href="#">Menu1</a></span>
+                </li>
+                <li>
+                    <span><a href="#">Menu2</a></span>
+                </li>
+                <li>
+                    <span><a href="#">Menu3</a></span>
+                </li>
+                <li>
+                    <span><a href="#">Menu4</a></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- end LblockHeader -->
+    
+    <div id="LblockContent">
+    </div>
+
+    <!-- end LblockContent -->
+    <div id="LblockFooter">
+        <div id="LblockFooterMenu">
+            <ul>
+                <li>
+                    <a href="#">Menu1</a>
+                </li>
+                <li>
+                    <a href="#">Menu2</a>
+                </li>
+                <li>
+                    <a href="#">Menu3</a>
+                </li>
+                <li>
+                    <a href="#">Menu4</a>
+                </li>
+            </ul>
+        </div>
+        <div id="LblockFooterButton">
+            <a href="#">홈으로</a>
+            <a href="#">로그인</a>
+        </div>
+        <div id="LblockFooterCopyright">
+            <span>Copyright 2011 LG CNS All right reserved.</span>
+        </div>
+    </div>
+</div>
+
+<div class="vp-tablet">
+</div>
+
+<div class="vp-tv">
+</div>
+</body>
+</html>

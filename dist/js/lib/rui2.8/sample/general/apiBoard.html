@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=0.1" />
+<title>API 검색기</title>
+
+<script type="text/javascript" src="./../../js/rui_base.js"></script>
+<script type="text/javascript" src="./../../js/rui_core.js"></script>
+<script type="text/javascript" src="./../../js/rui_ui.js"></script>
+<script type="text/javascript" src="./../../js/rui_form.js"></script>
+<script type="text/javascript" src="./../../js/rui_grid.js"></script>
+<script type="text/javascript" src="./../../resources/rui_config.js"></script>
+<link rel="stylesheet" type="text/css" href="./../../resources/rui.css" />
+
+<script type="text/javascript" src="./../../resources/rui_license.js"></script>
+<script type="text/javascript" src="APIXmlDataSet.js"></script>
+<script type="text/javascript" src="./../../plugins/ui/LLoadPage.js"></script>
+<link rel="stylesheet" type="text/css" href="./../../plugins/ui/LLoadPage.css"/>
+<style>
+    body {
+        color: #313131;
+        font-family: tahoma,sans-serif;
+        font-size:12px;
+        font-size-adjust:none;
+        font-style:normal;
+        font-variant:normal;
+        font-weight:normal;
+        height: 100%;
+        margin: 12px 23px 12px 16px;
+        background-color: #313131;
+        min-width: 1280px;
+    }
+    
+    .L-combo input, .L-textbox input {
+        padding: 0px;
+    }
+    
+    .L-combo div.icon {
+        height: 16px;
+    }
+    
+    .L-button button {
+        padding: 2px 5px;
+    }
+    
+    .layout_ul {
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .layout_ul .L-grid-header a:hover {
+        color: #c8f145;
+        font-weight: bold;
+    }
+
+    .layout_ul .L-grid-header a {
+        color: #c8f145;
+        font-weight: bold;
+    }
+    
+    a:hover {
+        color: #fff;
+    }
+
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+    
+    #searchType {
+        margin-right: 10px;
+    }
+    
+    #searchKeyword {
+        margin-right: 8px;
+    }
+
+    #searchDiv {
+        text-align: right;
+        margin-bottom: 14px;
+        padding: 0px;
+        background: url(./../../api/images/search.png) no-repeat 45px;
+    }
+    
+    #searchDiv .L-button {
+    }
+    
+    .content {
+        vertical-align: top;
+        width: 335px;
+        display: inline-block;
+        float: left;
+        height:100%;
+    }
+    
+    .frame {
+        float: left;
+        display: inline-block;
+        border: 0px solid gray;
+        margin-left: 16px;
+        height: 100%;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    #apiFrame {
+        width:100%;
+        height:90%;
+        overflow: hidden; 
+        display: inline-block; 
+        border: 0; 
+        background: transparent;
+    }
+    
+    .LdetailHead {
+        padding:10px 5px 5px 5px;
+        font-weight:bold;
+        color: #c8f145;
+    }
+    .LdetailInformation{
+        padding:0 5px 5px 10px;
+        line-height:1.4em;
+        color: #fff;
+    }
+    
+    .L-textbox-list-wrapper .L-list {
+        padding: 8px 5px;
+        border-bottom: 1px solid #cccccc;
+    }
+    div.L-textbox {
+        border: 1px solid #B5B8C8;
+        height: 17px;
+    }
+    .L-textbox input {
+        border: 0px;
+        height: 17px;
+    }
+    button {
+        color: #fff;
+    }
+    
+    .L-button {
+        background-color: #8f8f8f;
+    }
+    
+    #defaultGrid {
+        padding: 0px 11px 8px 18px;
+        margin: 12px 0px 0px 0px;
+        background-color: #3c3c3c;
+    }
+    
+    #defaultGrid .L-panel {
+        border: 0px solid #313131;
+    }
+    
+    .L-grid-panel .L-panel .bd .L-grid {
+	  background-color: #3c3c3c;
+	}
+    
+    .L-grid-header-row .L-grid-header-inner {
+        padding: 6px 0px;
+    }
+    
+    .L-grid-col-line .L-grid-row td.L-grid-cell {
+        border-right: 1px solid #3c3c3c;
+        border-bottom: 1px solid #3c3c3c;
+    }
+    .L-grid-row-even {
+        background-color: #3c3c3c;
+    }
+    .L-grid-row-odd {
+        background-color: #313131;
+    }
+    
+    .L-grid-header {
+        background-color: #3c3c3c;
+        color: #c8f145;
+        border-bottom: #313131 1px solid;
+    }
+    .L-grid-header-row {
+        background-color: #3c3c3c;
+    }
+    .L-grid-header-row td {
+        border-right: 1px solid #3c3c3c;
+        border-bottom: 1px solid #3c3c3c;
+    }
+    .L-grid-body {
+        color: #fff;
+    }
+    .L-grid-row-over {
+        background-color: #858e7d !important;
+    }
+    .L-grid-row-selected, .L-grid-body .L-grid-cell-selected {
+        background-color: #313131 !important;
+        border-color: #3c3c3c !important;
+        color: #c8f145;
+    }
+    .L-grid-row-selected a {
+        color: #c8f145;
+    }
+    .layout-desc {
+        margin-top: 18px;
+    }
+    .L-grid-panel.L-panel .bd .L-grid {
+        background-color: #3c3c3c;
+    }
+</style>
+<script type="text/javascript">
+    var dataSet = null;
+    Rui.onReady(function() {
+        Rui.util.LEvent.addListener(window, "resize", updateLayout, this, true);
+
+        var combo = new Rui.ui.form.LCombo({
+            applyTo: 'searchType',
+            emptyText: '전체'
+        });
+
+        var searchKeywordDs = new Rui.data.LJsonDataSet({
+            id: 'searchKeywordDs',
+            fields: [
+                { id: 'value' }
+            ]
+        });
+
+        var searchTextBox = new Rui.ui.form.LTextBox({
+            applyTo: 'searchKeyword',
+            width: 100,
+            autoComplete: true,
+            dataSet: searchKeywordDs,
+            filterMode: 'local',
+            filterFn: function(id, record) {
+                var val2 = record.get(this.displayField);
+                if(val2 != '') {
+                    if(val2.toLowerCase().indexOf(this.getValue().toLowerCase()) >= 0)
+                        return true;
+                }
+            }
+        });
+        
+        combo.on('changed', function(e) {
+            switch(e.value){
+
+            }
+        });
+
+        dataSet = new Rui.data.LJsonDataSet({
+            id: 'dataSet',
+            fields: [
+            { id: 'docType', type: 'number' },
+            { id: 'title' },
+            { id: 'description' },
+            { id: 'type' },
+            { id: 'objectType' },
+            { id: 'keywords' },
+            { id: 'url' }
+        ]
+        });
+        
+        var jsonDataSet = new Rui.data.LJsonDataSet({
+            id: 'dataSet',
+                fields: [
+                { id: 'menuId',type:"number"}
+                , { id: 'seq', type: 'number'}
+                , { id: 'parentMenuId',type:"number"}
+                , { id: 'name'}
+                , { id: 'url'}
+                , { id: 'desc'}
+                , { id: 'keywords'}
+                ]
+        });
+
+        var columnModel = new Rui.ui.grid.LColumnModel({
+            columns: [
+                { field: "type", label: "종류", sortable:true, width:80},
+                { field: "title", label: "제목", sortable:true, width:140, renderer: function(val, p, record, row, i) {
+                    p.style = 'cursor:pointer;';
+                    return '<a href="#">' + val + '</a>';
+                }},
+                { id:'btn', label:'구분', width: 67, renderer: function(val, p, record, row, i){
+                    return record.get('docType') == 2 ? 'Sample' : 'API';
+                }}
+                ]
+        });
+
+        var grid = new Rui.ui.grid.LGridPanel({
+            columnModel: columnModel,
+            dataSet:dataSet,
+            autoWidth: true,
+            height:450
+        });
+
+        grid.render('defaultGrid');
+
+        grid.on("cellClick", function(e){
+            var column = columnModel.getColumnAt(e.col, true);
+            if(column.id == 'title') {
+                var url = dataSet.getNameValue(e.row, 'url');
+                if(Rui.util.LObject.isEmpty(url) == false) {
+                    $E('apiFrame').dom.src = 'about:blank';
+                    $E('apiFrame').dom.src = url;
+                } else {
+                    alert('api가 존재하지 않습니다.');
+                }
+            }
+        });
+        
+        grid.on("cellDblClick", function(e){
+            var url = dataSet.getNameValue(e.row, 'url');
+            if(Rui.util.LObject.isEmpty(url) == false) {
+                $E('apiFrame').dom.src = 'about:blank';
+                $E('apiFrame').dom.src = url;
+            }
+        });
+        
+        var searchBtn = new Rui.ui.LButton("searchBtn");
+        searchBtn.on("click", function(){
+            var searchType = combo.getValue();
+            var searchKeyword = searchTextBox.getValue().toUpperCase();
+            var searchKeyword = searchKeyword.split(' ');
+            var searchGroup = searchType == '' ? ['type', 'title', 'description', 'keywords'] : [searchType];
+            dataSet.filter(function(id, record){
+                for(var i = 0 ; i < searchGroup.length ; i++) {
+                    var value = record.get(searchGroup[i]);
+                    if(Rui.util.LObject.isEmpty(value)) continue;
+                    for(var j = 0 ; j < searchKeyword.length ; j++) {
+                        var isAccept = value.toUpperCase().indexOf(searchKeyword[j]) > -1;
+                        if(isAccept == false) break;
+                    }
+                    if(isAccept == true) return true;
+                }
+                return false;
+            });
+            Rui.ajax({
+                url: './regKeyword.jsp?searchType=' + searchType + '&keyword=' + encodeURIComponent(searchTextBox.getValue()),
+                success: function() {
+                },
+                failure: function(e) {
+                    alert('error : ' + e.responseText);
+                }
+            });
+        });
+        
+        $E('searchKeyword').on('keydown', function(e){
+           if(e.keyCode == 13) searchBtn.click(); 
+        });
+
+        bind = new Rui.data.LBind({
+            groupId: 'layout',
+            dataSet: dataSet,
+            bind: true,
+            bindInfo: [
+                {id:'description', ctrlId:'description', value:'html'},
+                {id:'keywords', ctrlId:'keywords', value:'html'}
+            ]
+        });
+
+        jsonDataSet.on('load', function(){
+            dataSet.batch(function() {
+                for(var i = 0, len = jsonDataSet.getCount() ; i < len ; i++) {
+                    var record = jsonDataSet.getAt(i);
+                    if(Rui.util.LObject.isEmpty(record.get('desc'))) continue;
+                    var keyword = record.get('keywords');
+                    if(!(Rui.util.LObject.isEmpty(keyword))) {
+                        searchKeywordDs.add(searchKeywordDs.createRecord({ code: keyword, value: keyword }), { ignoreEvent: true });
+                    }
+                    var row = dataSet.newRecord();
+                    dataSet.setNameValue(row, 'docType', 2);
+                    dataSet.setNameValue(row, 'title', record.get('name'));
+                    dataSet.setNameValue(row, 'description', record.get('desc'));
+                    dataSet.setNameValue(row, 'type', record.get('name'));
+                    dataSet.setNameValue(row, 'objectType', record.get('name'));
+                    dataSet.setNameValue(row, 'url', record.get('url'));
+                    dataSet.setNameValue(row, 'keywords', record.get('keywords'));
+                }
+            })
+            dataSet.commit();
+            dataSet.clearFilter();
+            dataSet.setRow(0);
+            searchKeywordDs.commit();
+            loadPage.hide();
+        });
+
+        Rui.ajax({
+            url: './../../api/apiData.json',
+            success: function(e){
+                datas = eval(e.responseText);
+                var records = [];
+                for(var i  = 0 ; i < datas.length ; i++) {
+                    var url = '../../api/index.html?type=' + datas[i].type ;
+                    
+                    for(var j = 0 ; j < datas[i].configs.length; j++) {
+                        if(datas[i].configs[j].description) {
+                            var o = {
+                                docType: 1,
+                                title: datas[i].configs[j].name,
+                                description: datas[i].configs[j].description,
+                                type: 'config',
+                                objectType: datas[i].configs[j].description,
+                                url: url + '_' + datas[i].configs[j].name,
+                                classType: datas[i].type
+                            }
+                            records.push(o);
+                        }                    
+                    }
+
+                    for(var j = 0 ; j < datas[i].propertys.length; j++) {
+                        if (datas[i].propertys[j].description) {
+                            var o = {
+                                docType: 1,
+                                title: datas[i].propertys[j].name,
+                                description: datas[i].propertys[j].description,
+                                type: 'property',
+                                objectType: datas[i].propertys[j].description,
+                                url: url + '_' + datas[i].propertys[j].name,
+                                classType: datas[i].type
+                            }
+                            records.push(o);
+                        }
+                    }
+
+                    for(var j = 0 ; j < datas[i].events.length; j++) {
+                        if (datas[i].events[j].description) {
+                            var o = {
+                                docType: 1,
+                                title: datas[i].events[j].name,
+                                description: datas[i].events[j].description,
+                                type: 'event',
+                                objectType: datas[i].events[j].description,
+                                url: url + '_' + datas[i].events[j].name,
+                                classType: datas[i].type
+                            }
+                            records.push(o);
+                        }
+                    }
+                    for(var j = 0 ; j < datas[i].methods.length; j++) {
+                        if (datas[i].methods[j].description) {
+                            var o = {
+                                docType: 1,
+                                title: datas[i].methods[j].name,
+                                description: datas[i].methods[j].description,
+                                type: 'method',
+                                objectType: datas[i].methods[j].description,
+                                url: url + '_' + datas[i].methods[j].name,
+                                classType: datas[i].type
+                            }
+                            records.push(o);
+                        }
+                    }
+                }
+
+                dataSet.loadData({
+                    records: records
+                }, { add: true})
+                
+                jsonDataSet.load({ url: './../../sample/data/apiBoard.json'});
+            }
+        });
+        updateLayout();
+    });
+
+    function updateLayout() {
+        var height = Rui.util.LDom.getViewportHeight();
+        var width = Rui.util.LDom.getViewportWidth();
+        Rui.getBody().setHeight(height - 20);
+        Rui.select('.frame').setWidth(width - 390);
+        Rui.select('.frame').setHeight(height - 20);
+        Rui.get('apiFrame').setHeight(height - 20);
+    }
+
+</script>
+</head>
+<body>
+<div class="content" >
+    <ul class="layout_ul" id="layout">
+        <li class="layout_li" id="searchDiv">
+            <select id="searchType">
+                <option value="type">종류</option>
+                <option value="title">제목</option>
+                <option value="description">설명</option>
+                <option value="keywords">태그</option>
+            </select>
+            <input type="text" id="searchKeyword" value="">
+            <button type="button" id="searchBtn" >Search</button>
+        </li>
+        <li class="layout_li">
+            <span id="total"></span>
+        </li>
+        <li class="layout_li">
+            <div id="defaultGrid"></div>
+        </li>
+        <li class="layout_li layout-desc">
+            <div class="LdetailHead">
+                <span id="tagHead">- TAG</span>
+            </div>
+            <div class="LdetailInformation">
+                <span id="keywords"></span>
+            </div>
+        </li>
+        <li class="layout_li">
+            <div class="LdetailHead">
+                <span id="descHead">- 상세설명</span>
+            </div>
+            <div class="LdetailInformation">
+                <span id="description"></span>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="frame" >
+    <iframe id="apiFrame" src="./../../api/index.html" frameborder="no" ></iframe>
+</div>
+<script type="text/javascript">
+loadPage = new Rui.ui.LLoadPage();
+loadPage.show();
+</script>
+</body>
+</html>

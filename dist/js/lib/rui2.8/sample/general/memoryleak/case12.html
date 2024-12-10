@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>scroller basic</title>
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <style type="text/css">
+        #test1 {
+            width: 250px;
+            height: 250px;
+            background-color: #aaaaaa;
+        }
+        #test2 {
+            width: 200px;
+            height: 200px;
+            background-color: #bbbbbb;
+        }
+        #test3 {
+            width: 150px;
+            height: 150px;
+            background-color: #cccccc;
+        }
+        #test4{
+            width: 100px;
+            height: 100px;
+            background-color: #dddddd;
+        }
+        #testnew{
+            width: 250px;
+            height: 250px;
+            background-color: #ffffff;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+
+var Event = {
+    addListener: function(el, sType, fn, obj, override, capture){
+        var wrappedFn = function(ev) {
+            return fn.call(el, ev);
+        };
+        el.wrappedFn = wrappedFn;
+        el.attachEvent(sType, wrappedFn);
+    }
+}
+function test4() {
+    var fn = function(){
+    }
+    Event.addListener(document.getElementById('test2'), 'mousewheel', fn, this, true );
+    document.getElementById('test1').innerHTML = '';
+}
+
+    </script>
+</head>
+<body>
+    <div id="test1" onclick="test4()">
+        <div id="test2" >
+            <div id="test3" >
+                <div id="test4"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

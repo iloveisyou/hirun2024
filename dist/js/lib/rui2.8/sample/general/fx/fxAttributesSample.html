@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="애니메이션(LAnim), 크기 조정" />
+    <title>Smaller</title>
+
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+
+    <style type="text/css">
+        #demo {
+            background: #ccc;
+            margin-bottom: 1em;
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var anim = null;
+        Rui.onReady(function(){
+            /*<b>*/
+            anim = new Rui.fx.LAnim({
+                el: 'demo',
+                attributes: {
+                    height: {
+                        to: 50
+                    },
+                    width: {
+                        to: 50
+                    }
+                }
+            });
+            /*</b>*/
+            
+            Rui.get('demo-run').on('click', function(){
+                anim.animate();
+            });
+
+            anim.on('start', function(){
+                Rui.log('start');
+            });
+            anim.on('tween', function(){
+                Rui.log('tween');
+            });
+            anim.on('complete', function(){
+                Rui.log('complete');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Smaller</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>객체의 크기를 늘리거나 줄여주는 fx 효과</h2>
+            <div class="LblockDesc">
+			    <p>기본적인 애니메이션의 동작 형태입니다. 수직, 수평 방향으로 동시에 지정된 픽셀 위치로 애니메이션을 진행할 수 있습니다.</p>
+			    <p>원하는 속성 설정 후 애니메이션 객체를 생성하여 실행합니다.</p>
+            </div>
+        </div>
+    </div>
+	<div id='bd'>
+	    <div class="LblockMarkupCode">
+	        <div id="demo">
+	            Demo
+	        </div>
+	    </div>
+	    <button id="demo-run">run</button>
+	</div>
+</body>
+</html>

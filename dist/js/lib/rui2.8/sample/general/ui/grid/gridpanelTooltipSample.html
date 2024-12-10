@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 툴팁(LTooltip)" />
+    <title>Tooltip</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/LTooltip.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LTooltip.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <style>
+        .L-grid-cell-inner {
+            text-overflow: ellipsis;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'tooltip' },
+                    { id: 'datetime1', type: 'date', defaultValue: new Date() }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+            	defaultSortable: true,
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col3', align: 'center', width: 70, vMerge: true, renderer: function(val, p, record, row){
+                        /*<b>*/
+                        p.tooltipText = val == 'R1' ? '임원' : '직원';
+                        /*</b>*/
+                        return val;
+                    } },
+                    { field: 'col1', label: 'Col1', width: 120, renderer: function(val, p, record, row){
+                        /*<b>*/
+                        p.tooltip = row % 2 == 0; //홀수 행에만 tooltip 적용
+                        p.tooltipText = '홀수 행에만 적용된 tooltip 텍스트 입니다.';
+                        /*</b>*/
+                        return val;
+                    } },
+                    { field: 'col6', align: 'left', width: 200, renderer: function(val, p, record, row){
+                        /*<b>*/
+                        p.tooltipText = val;
+                        /*</b>*/
+                        return val;
+                    } },
+                    { field: 'datetime1', label: 'Date', align: 'left'},
+                    { field: 'col8', label: 'Col8', align: 'right', /*<b>*/tooltipText: '컬럼 전체 적용된 tooltip 텍스트입니다.' /*</b>*/, renderer: 'money'}
+                ]
+            });
+
+            /*<b>*/
+            var gridTooltip = new Rui.ui.LTooltip({
+                showmove: true
+            });
+            /*</b>*/
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                /*<b>*/
+                viewConfig: {
+                    tooltip: gridTooltip
+                },
+                /*</b>*/
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data.json'
+                });
+            });
+
+            var setTooltipBtn = new Rui.ui.LButton('setTooltipBtn');
+            setTooltipBtn.on('click', function(){
+            	var datetime = dataSet.getNameValue(1, 'datetime1');
+                grid.setCellConfig(1, 'datetime1', 'tooltipText', '추가된 tooltip 입니다.<br><br>' + datetime);
+            });
+
+            var removeTooltipBtn = new Rui.ui.LButton('removeTooltipBtn');
+            removeTooltipBtn.on('click', function(){
+                grid.setCellConfig(1, 'datetime1', 'tooltipText', null);
+            });
+
+            searchBtn.click();
+        });
+        </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Tooltip</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid)에 멋진 툴팁(Tooltip)을 이용하여 가치를 높이세요.</h2>
+            <div class="LblockDesc">
+		        <p>그리드(Grid)에서 간편하게 툴팁(Tooltip)을 표현 할 수 있습니다. 그리드의 랜더러(renderer)를 이용하여 툴팁(Tooltip)을 여러 형태로 표현할 수 있으며, 변경도 가능합니다.</p>
+		        <p>아래 샘플의 그리드 위 표시된 셀(Cell)에 마우스 포인터를 올려보세요.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+    <div class="LblockButton" >
+        <button type="button" id="searchBtn" >Search</button>
+        <button type="button" id="setTooltipBtn" >Set Tooltip ("Date" Column row 1)</button>
+        <button type="button" id="removeTooltipBtn" >Remove Tooltip</button>
+    </div>
+    <div class="LblockMarkupCode">
+        <div class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

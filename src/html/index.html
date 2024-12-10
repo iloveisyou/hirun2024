@@ -1,6 +1,7 @@
-{% set ruiPath='../assets/js/lib/rui2.8' %}
-{% set imgPath='../assets/images' %}
-{% set assPath='../assets' %}
+{% set ruiPath='../js/lib/rui2.8' %}
+{% set imgPath='../images/newHiRun' %}
+{# 경로변경 {% set assPath='../assets' %} #}
+{% set assPath='..' %}
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -67,7 +68,8 @@
     </main>
     <script>
     
-        const jsonURL = (window.location.host.leength == 0) ? '../assets/json/mockup.json' : 'https://iloveisyou.github.io/hirun2024/assets/json/mockup.json';
+        const jsonURL = (window.location.host.length > 0) ? '{{assPath}}/json/mockup.json' : 'https://iloveisyou.github.io/hirun2024/json/mockup.json';
+        console.log(jsonURL);
         function ajaxData(url, method) {
             return new Promise(function(resolve, reject){
                 let xhr = new XMLHttpRequest();
@@ -109,9 +111,9 @@
                 }
                 tbody += '</tr>';
                 $(v).find('table tbody').append(tbody);
-                $('.summaryTable thead tr').append(`<th>${cat}</th>`)
-                $('.summaryTable tbody tr').append(`<td><b class="total" title="전체">${data.length}</b> / <b class="normal" title="작업전">${data.filter(item=> item['Status'] === '작업전').length}</b> / <b class="working" title="작업중">${data.filter(item=> item['Status'] === '작업중').length}</b> / <b class="success" title="작업완료">${data.filter(item=> item['Status'] === '작업완료').length}</b></td>`);
             }
+            $('.summaryTable thead tr').append(`<th>${cat}</th>`)
+            $('.summaryTable tbody tr').append(`<td><b class="total" title="전체">${data.length}</b> / <b class="normal" title="작업전">${data.filter(item=> item['Status'] === '작업전').length}</b> / <b class="working" title="작업중">${data.filter(item=> item['Status'] === '작업중').length}</b> / <b class="success" title="작업완료">${data.filter(item=> item['Status'] === '작업완료').length}</b></td>`);
             $('.summaryTable caption .total b').html(total);
             $('.summaryTable caption .normal b').html(normal);
             $('.summaryTable caption .working b').html(working);

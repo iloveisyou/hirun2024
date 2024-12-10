@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="탭뷰(LTabView), 탭의 label" />
+    <title>TabView Label</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/tab/rui_tab.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/tab/rui_tab.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    <style type="text/css">
+        .L-nav li a {
+            width: 120px;
+            height: 33px;
+        }
+        .L-content {
+            padding: 20px;
+            border: 2px solid #C8F145;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        var tabView;
+        
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+             
+            /*<b>*/
+            tabView = new Rui.ui.tab.LTabView({
+                contentHeight: 200,
+                tabs: [
+                    {
+                        label: 'Lorem',
+                        content: '<div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</div>'
+                    }, {
+                        label: 'Anchor <img src="./../../../../resources/images/tab/leaf.gif" style="border:0;" onclick="tabIconClick(1);"/>',
+                        content: '탭의 아이콘을 클릭해보세요.'
+                    }
+                ]
+            });
+            tabView.render('tabView');
+            /*</b>*/
+            
+        });
+
+        function tabIconClick(idx){
+            alert(tabView.getTab(idx).getLabel());
+        }
+    </script>
+
+</head>
+<body>
+    <div id='hd'>
+        <h1>TabView Label</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>탭뷰(TabView)의 탭 레이블(Label)</h2>
+            <div class="LblockDesc">
+                <p>탭뷰(TabView)의 탭 레이블(Label)에 사용자 정의된(Custom) 이미지(Image) 등을 추가하여 사용 가능합니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="tabView"></div>
+        </div>
+    </div>
+</body>
+</html>

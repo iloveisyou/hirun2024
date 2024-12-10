@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>scroller basic</title>
+    <script type="text/javascript" src="/lib/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css" />
+    <style type="text/css">
+        #test1 {
+            width: 250px;
+            height: 250px;
+            background-color: #aaaaaa;
+        }
+        #test2 {
+            width: 200px;
+            height: 200px;
+            background-color: #bbbbbb;
+        }
+        #test3 {
+            width: 150px;
+            height: 150px;
+            background-color: #cccccc;
+        }
+        #test4{
+            width: 100px;
+            height: 100px;
+            background-color: #dddddd;
+        }
+        #testnew{
+            width: 250px;
+            height: 250px;
+            background-color: #ffffff;
+        }
+    </style>
+
+    <script type="text/javascript" class="script-code">
+
+function test1() {
+    // iframe 자체에서는 릭이 발생하지만 전체 페이지가 변경되면 릭이 사라진다.
+    document.getElementById('test1').innerHTML = '';
+}
+
+    </script>
+</head>
+<body>
+    <div id="test1" onclick="test1()">
+        <div id="test2">
+            <iframe id="test2" src="./case2.html">
+            </iframe>
+        </div>
+    </div>
+</body>
+</html>

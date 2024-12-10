@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Selection Model</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        $C(function() {
+            //log 활성화
+            $C('!config').set('$.core.logger.show', [true]);
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'col1' },
+                { id: 'col2' },
+                { id: 'col3' },
+                { id: 'date1', type: 'date' }
+            ]
+            });
+            
+            /*<b>*/
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.stateColumn(),
+                    /*
+                    $C.selectionColumn({
+                        label: ' ',
+                        renderer: function(val, p, record, row, i) {
+                            if(row == 3) {
+                                dataSet.setMark(row, false);
+                                return '';
+                            } 
+                            return '<div class="L-grid-row-checkBox" style="width:21px" ></div>';
+                        }
+                    }),
+                    */
+                    $C.numberColumn(),
+                    { field: "col1", label: "Col1" },
+                    { field: "col2", sortable: false, align:'center' },
+                    { field: "col3", align: 'right', hidden:true },
+                    { field: "date1" , align:'center', renderer: function(v){
+                        return '<font color="red">' + v + '</font>';
+                    }}]
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet:dataSet,
+                height:300
+            });
+            
+            /*</b>*/
+
+            grid.on("render",function(){$C.log("grid rendered");});
+
+            dataSet.load({
+                url: './../../../../sample/data/2000LineData.json'
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <h1>gridpanel Selectionmodel Sample</h1>
+    <h2>LGridPanel 의 LColumnModel 설정에 대한 샘플 </h2>
+    <div class="LblockLine"></div>
+    <div>그리드 생성시 컬럼별 모델에 설정을 변경합니다.</div>
+<div id='bd'>
+    <div class="LblockMarkupCode">
+        <div id="defaultGrid"></div>
+    </div>
+</div>
+</body>
+</html>

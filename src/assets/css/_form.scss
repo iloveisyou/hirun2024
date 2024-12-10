@@ -8,8 +8,9 @@
 --------------------------------------------------------- */
 
 @use 'variables' as *;
+@use 'image' as *;
 
-.hirun-wrap {
+.pj-hirun {
 
 
     /* button --------------------------------------------------------- */
@@ -47,32 +48,68 @@
 
 }
 
-[class*='ipt'] {
-    .L-form-field { border-radius:8px; overflow:hidden; }
-    input { font-size:16px;
-        &::placeholder { font-size:inherit; }
+[class*='fm_'] { font-size:16px;
+    &::placeholder { font-size:inherit; }
+
+    // input type [ text ] & date // .L-form-field {  }
+    &.fm_input:has(input[type=text]) { @include inputWrap; 
+        input[type=text] { @include inputTransparent; }
     }
-    &.ipt_text { position:relative; height:46px; 
+
+    &.fm_date:has(:not(input[type=hidden])) { @include inputWrap; 
+        input[type=text] { @include inputTransparent; }
+        label { display:inline; left:16px; top:-12px; z-index:10; height:20px; padding:2px; font-size:12px; background-color:#ffffff; line-height:20px; }
+        a.icon { display:block; position:absolute; right:0; top:0; z-index:20; width:44px; height:44px; @include icon_form_date; }
+        
+        .L-form-field {
+            input { z-index:15; }
+            a.icon { display:block; position:absolute; right:0; top:0; z-index:20; width:44px; height:44px; @include icon_form_date;  }
+            // &::before { left:0; width:100%; height:100%; border-top-color:$gray700; border-right-color:$gray700; transition:width .25s ease-out, height .25s ease-out .25s; }
+            // &::after { right:0; width:100%; height:100%; border-bottom-color:$gray700; border-left-color:$gray700; transition:right .25s ease-out .75s, border-color 0s ease-out .5s, width .25s ease-out .5s, height .25s ease-out .75s; }
+            + label { display:inline; left:16px; top:-12px; z-index:10; height:20px; padding:2px; font-size:12px; background-color:#ffffff; line-height:20px; }
+        }
+    }
+
+    &.fm_check { @include checkWrap; }
+    &.fm_checkGroup { 
+        .L-form-field { @include checkWrap;  }
+    }
+
+    &.fm_radio { @include radioWrap; }
+    &.fm_radioGroup { 
+        .L-form-field { @include radioWrap; }
+    }
+    
+    &.fm_combo { position:relative; height:46px; border-radius:8px;
         .L-form-field { width:100% !important; height:100%; border-radius:8px; overflow:hidden;
             &::before { content:''; display:block; position:absolute; left:4px; top:0; z-index:5; width:0; height:0; border-radius:8px; border:1px solid transparent; background-color:transparent; }
             &::after { content:''; display:block; position:absolute; right:4px; bottom:0; z-index:5; width:0; height:0; border-radius:8px; border:1px solid transparent; background-color:transparent;  }
-            &:has(input:focus) { 
+            input:not([type=hidden]) { @include inputbox; }
+        }
+        &.is-focus, &.is-value { 
+            .L-form-field {
                 &::before { left:0; width:100%; height:100%; border-top-color:$gray700; border-right-color:$gray700; transition:width .25s ease-out, height .25s ease-out .25s; }
                 &::after { right:0; width:100%; height:100%; border-bottom-color:$gray700; border-left-color:$gray700; transition:right .25s ease-out .75s, border-color 0s ease-out .5s, width .25s ease-out .5s, height .25s ease-out .75s; }
-                + label { display:inline-block; left:16px; top:-12px; z-index:10; width:auto; height:20px; padding:2px; font-size:12px; background-color:#ffffff; line-height:20px; }
-            }
-            &:has(input:valid) { 
-                &::before { left:0; width:100%; height:100%; border-top-color:$gray700; border-right-color:$gray700; transition:width .25s ease-out, height .25s ease-out .25s; }
-                &::after { right:0; width:100%; height:100%; border-bottom-color:$gray700; border-left-color:$gray700; transition:right .25s ease-out .75s,  border-color 0s ease-out .5s, width .25s ease-out .5s, height .25s ease-out .75s; }
-                + label { right:0; display:inline-block; left:16px; top:-12px; z-index:10; width:auto; height:20px; padding:2px; font-size:12px; background-color:#ffffff; line-height:20px; }
-            }
-        }
-        label { position:absolute; left:0; top:0; width:100%; height:100%; padding:0 0 0 16px; line-height:46px; color:$gray; transition:all .3s ease-in-out; }
-        input { position:relative; z-index:10; width:100% !important; height:100%; padding:0 0 0 16px; background-color:transparent; 
-            // &:focus + label { top:-10px; height:26px; font-size:14px; }
-        }
+                + label { display:inline; left:16px; top:-12px; z-index:10; height:20px; padding:2px; font-size:12px; background-color:#ffffff; line-height:20px; }
 
+                .L-hidden-field { @include hide; }
+            }
+        }
     }
 }
 
-.L-textbox-list-wrappe { border-radius:8px; border:1px solid $gray300; }
+/* input - Textbox Auto Complete (Fixed List) */
+.L-textbox-list-wrapper, .L-textbox-list-wrapper *, .L-textbox-list-wrapper ::before, .L-textbox-list-wrapper ::after { box-sizing:border-box; }
+div.L-textbox-list-wrapper { border-radius:8px; border:1px solid $gray300; 
+    .L-list { padding:5px 16px; }
+}
+
+/* combo */
+.L-combo-list-wrapper, .L-combo-list-wrapper *, .L-combo-list-wrapper ::before, .L-combo-list-wrapper ::after { box-sizing:border-box; }
+div.L-combo-list-wrapper { border-radius:8px; border:1px solid $gray300; 
+    .L-list { padding:5px 16px; }
+}
+
+
+/* input - DateBox */
+.L-cal-container { padding-top:15px !important; border-radius:8px; }

@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="devon-rui-keyword" content="memory leak, 메모리릭" />
+    <title>Memory leak</title>
+    <script type="text/javascript" src="./../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <script type="text/javascript" src="./../../../plugins/ui/grid/LEditButtonColumn.js"></script>
+    <script type="text/javascript" src="./../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../resources/rui.css"/>
+    <script type="text/javascript" src="./../../../sample/general/rui_sample.js"></script>
+    
+    <style type="text/css" >
+        /*.L-grid-row .L-grid-cell-editable {
+            background-color:#fff;
+        }*/
+       
+       body {
+           margin: 0;
+       }
+        
+        .L-button#searchBtn button {
+            background: url(../../../resources/skin/sam2/images/search_btn.gif) center left no-repeat;
+            background-color: #f3f2f2;
+            padding-left: 22px;
+        }
+        
+        .LblockGrid {
+            width: 70%;
+            float: left;
+        }
+        
+        .L-grid-row .L-grid-col-btn {
+            padding: 1px 3px 0px 3px;
+        }
+        
+        .L-grid-header table td.L-grid-cell-last, .L-grid-col-line .L-grid-row table td.L-grid-cell-last {
+            border-right-color: #fff !important;
+        }
+        
+        .LblockMarkupCode {
+            position: relative;
+            height: 300px;
+        }
+        
+        .LblockMarkupCode p {
+            margin-top: 12px !important;
+        }
+
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        Rui.onReady(function() {
+            dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    {id:'headerId'},
+                    {id:'lineId'},
+                    {id:'refLineId'},
+                    {id:'orderNo'},
+                    {id:'quoteNumber'},
+                    {id:'orderNumber'},
+                    {id:'lineNo'},
+                    {id:'orderTypeName'},
+                    {id:'orderTypeId'},
+                    {id:'headerStatus'},
+                    {id:'headerStatusName'},
+                    {id:'lineStatus'},
+                    {id:'oeLineStatus'},
+                    {id:'holdCnt'},
+                    {id:'orderSourceName'},
+                    {id:'orderSourceId'},
+                    {id:'orderEntryDate', type:'date'},
+                    {id:'orderBookDate', type:'date'},
+                    {id:'fulfillmentDate'},
+                    {id:'orderCategoryCode'},
+                    {id:'lineType'},
+                    {id:'lineTypeId'},
+                    {id:'lineCategoryCode'},
+                    {id:'salesOrganizationId'},
+                    {id:'salesOrganizationCode'},
+                    {id:'salesOrganizationName'},
+                    {id:'customerShortName'},
+                    {id:'customerFullName'},
+                    {id:'customerId'},
+                    {id:'customerCode'},
+                    {id:'shipToOrgId'},
+                    {id:'shipToCode'},
+                    {id:'shipToName'},
+                    {id:'billToOrgId'},
+                    {id:'billToCode'},
+                    {id:'billToName'},
+                    {id:'departmentName'},
+                    {id:'customerPoDate'},
+                    {id:'quoteExpireDate'},
+                    {id:'quoteDate'},
+                    {id:'custPoNumber'},
+                    {id:'invoiceNo'},
+                    {id:'invoiceLineNo'},
+                    {id:'customerTrxLineId'},
+                    {id:'invoiceDate'},
+                    {id:'reqArrivalDateFrom'},
+                    {id:'reqArrivalDateTo'},
+                    {id:'promiseDate'},
+                    {id:'paymentTermName'}, 
+                    {id:'paymentTermId'}
+                ]
+            });
+
+            var popuButton = new Rui.ui.LButton({
+                label:'>>'
+            });
+            
+            var col2Renderer = function(value, p, record, row, i) {
+                if (value == '7602111111113') {
+                    // 셀의 편집여부를 결정한다.
+                    p.editable = false;
+                    //p.style = 'background-color:orange;';
+                }
+                if(Rui.util.LObject.isEmpty(value) == false)
+                    value = value.substring(0, 6) + '-' + value.substring(6);
+                return value;
+            }
+            
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                //groupMerge: true,
+                //freezeColumnId: 'aaa',
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { id: "aaa", label: "Left id", vMerge: true, renderer: function(val, p, record){
+                        return record.id;
+                    } },
+                    {field:'headerId'},
+                    {field:'lineId'},
+                    {field:'orderEntryDate', renderer: 'date'},
+                    {field:'orderBookDate', renderer: 'date'},
+                    {field:'refLineId'},
+                    {field:'orderNo'},
+                    {field:'quoteNumber'},
+                    {field:'orderNumber'},
+                    {field:'lineNo'},
+                    {field:'orderTypeName'},
+                    {field:'orderTypeId'},
+                    {field:'headerStatus'},
+                    {field:'headerStatusName'},
+                    {field:'lineStatus'},
+                    {field:'oeLineStatus'},
+                    {field:'holdCnt'},
+                    {field:'orderSourceName'},
+                    {field:'orderSourceId'},
+                    {field:'fulfillmentDate'},
+                    {field:'orderCategoryCode'},
+                    {field:'lineType'},
+                    {field:'lineTypeId'},
+                    {field:'lineCategoryCode'},
+                    {field:'salesOrganizationId'},
+                    {field:'salesOrganizationCode'},
+                    {field:'salesOrganizationName'},
+                    {field:'customerShortName'},
+                    {field:'customerFullName'},
+                    {field:'customerId'},
+                    {field:'customerCode'},
+                    {field:'shipToOrgId'},
+                    {field:'shipToCode'},
+                    {field:'shipToName'},
+                    {field:'billToOrgId'},
+                    {field:'billToCode'},
+                    {field:'billToName'},
+                    {field:'departmentName'},
+                    {field:'customerPoDate'},
+                    {field:'quoteExpireDate'},
+                    {field:'quoteDate'},
+                    {field:'custPoNumber'},
+                    {field:'invoiceNo'},
+                    {field:'invoiceLineNo'},
+                    {field:'customerTrxLineId'},
+                    {field:'invoiceDate'},
+                    {field:'reqArrivalDateFrom'},
+                    {field:'reqArrivalDateTo'},
+                    {field:'promiseDate'},
+                    {field:'paymentTermName'}, 
+                    {field:'paymentTermId'}
+                    ]
+            });
+
+             var grid = new Rui.ui.grid.LGridPanel({
+                 columnModel: columnModel,
+                 dataSet: dataSet,
+                 autoToEdit: true,
+                 width: 850,
+                 height:250
+             });
+
+            grid.render('defaultGrid');
+            
+           var loop = 0;
+           var isLoop = false;
+           dataSet.on('load', function(){
+               Rui.get('showData').html(loop);
+               if(isLoop == false) return;
+               if(loop++ < 1000){
+                    Rui.later(3000, window, function() {
+                        searchBtn.click();
+                    });
+               }
+           });
+           
+            var searchBtn = new Rui.ui.LButton("searchBtn");
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../sample/data/large/data10000.json'
+                });
+            });
+            
+            var setStartBtn = new Rui.ui.LButton('setStartBtn');
+            setStartBtn.on('click', function(){
+                searchBtn.click();
+                isLoop = true;
+            });
+            var laterFn;
+            var setEndBtn = new Rui.ui.LButton('setEndBtn');
+            setEndBtn.on('click', function(){
+                isLoop = false;
+            });
+            
+            Rui.log('step 4');
+
+        });
+            
+        </script>
+
+</head>
+<body>
+    <div id='hd'>
+        <h1>Grid Memory Leak Test</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>LGridPanel의 Memory leack 테스트 샘플 (grid)</h2>
+            <div class="LblockDesc">
+		        <p>start 버튼을 누르면 10000건 기준으로 계속 반복 로딩합니다.</p>
+		        <p>윈도우의 작업관리자로 브라우저의 메모리를 모니터링 해보세요. 1000번을 반복하여도 ie8 기준 200메가를 넘지 않으면 memory leak이 없음을 확인할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id='bd'>
+	    <div class="LblockButton" >
+	        <button type="button" id="setStartBtn" >start</button>
+	        <button type="button" id="setEndBtn" >end</button>
+	    </div>
+	    <div class="LblockMarkupCode">
+	        <p><span id='showData'>0</span>건 조회됨</p>
+	        <div class="LblockButton" >
+	            <button type="button" id="searchBtn" >Search</button>
+	        </div>
+	        <div class="LblockGrid">
+	            <div id="defaultGrid"></div>
+	        </div>
+	    </div>
+    </div>
+</body>
+</html>

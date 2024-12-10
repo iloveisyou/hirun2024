@@ -1,6 +1,18 @@
-$assPath: "../../assets";
-$imgPath: "../../assets/images";
-$fontPath: "../../assets/fonts";
+@charset 'utf-8';
+/* ---------------------------------------------------------
+* FileName : _variables.css
+* ProjectName : 하이엠솔루텍 하이런 차세대
+* Description : 변수 스타일시트
+* Author : zarel
+* Date : 2024.11
+--------------------------------------------------------- */
+
+@use 'image' as *;
+
+// 경로변경 $assPath: "../../assets";
+$assPath: "../..";
+$imgPath: "../../images/newHiRun";
+$fontPath: "../../fonts";
 
 /* color */
 $primary: #BB0841;
@@ -15,13 +27,71 @@ $white: #ffffff;
 
 
 /* font */
-@mixin font_lgL { font-family:'LG_Smart_H2.0'; font-weight:300; } 
-@mixin font_lgR { font-family:'LG_Smart_H2.0'; font-weight:400; } 
-@mixin font_lgSB { font-family:'LG_Smart_H2.0'; font-weight:600; } 
-@mixin font_lgB { font-family:'LG_Smart_H2.0'; font-weight:700; } 
+@mixin font { font-family:'LG_Smart_H2.0', sans-serif; font-weight:400; } 
+@mixin font_lgL { font-family:'LG_Smart_H2.0', sans-serif; font-weight:300; } 
+@mixin font_lgR { font-family:'LG_Smart_H2.0', sans-serif; font-weight:400; } 
+@mixin font_lgSB { font-family:'LG_Smart_H2.0', sans-serif; font-weight:600; } 
+@mixin font_lgB { font-family:'LG_Smart_H2.0', sans-serif; font-weight:700; } 
 
 @mixin fontL { font-weight:300; }
 @mixin fontR { font-weight:400; }
 @mixin fontSB { font-weight:600; }
 @mixin fontB { font-weight:700; }
+
+
+/* display */
+@mixin hide { position:absolute; width:1px; height:1px; clip:rect(-1px, -1px, -1px, -1px); margin:0; padding:0; overflow:hidden; }
+@mixin show { position:static; width:auto; height:auto; clip:auto; margin:0; padding:0; overflow:visible; }
+@mixin none { display:none; }
+
+
+
+
+/* form */
+@mixin inputbox { position:relative; z-index:25; width:100% !important; height:100%; padding:0 0 0 16px; background-color:transparent; }
+@mixin inputWrap { position:relative; width:100% !important; height:46px; border-radius:8px; border:1px solid $gray; 
+    label { position:absolute; left:0; top:0; z-index:10; width:fit-content; height:100%; padding:0 0 0 16px; line-height:46px; color:$gray; transition:all .3s ease-in-out; white-space:nowrap; }
+    &::before { content:''; display:block; position:absolute; left:4px; top:0; z-index:5; width:0; height:0; border-radius:8px; border:1px solid transparent; background-color:transparent; }
+    &::after { content:''; display:block; position:absolute; right:4px; bottom:0; z-index:5; width:0; height:0; border-radius:8px; border:1px solid transparent; background-color:transparent;  }
+    &.is-focus, &.is-value { 
+        label { display:inline; left:16px; top:-12px; z-index:10; height:20px; padding:2px; font-size:12px; background-color:#ffffff; line-height:20px; }
+        &::before { left:0; width:100%; height:100%; border-top-color:$gray700; border-right-color:$gray700; transition:width .25s ease-out, height .25s ease-out .25s; }
+        &::after { right:0; width:100%; height:100%; border-bottom-color:$gray700; border-left-color:$gray700; transition:right .25s ease-out .75s, border-color 0s ease-out .5s, width .25s ease-out .5s, height .25s ease-out .75s; }
+    }
+}
+@mixin inputTransparent { position:relative; z-index:15; width:100% !important; height:100%; padding:0 0 0 16px; background-color:transparent; }
+
+@mixin checkWrap { position:relative; cursor:pointer; 
+    &:not(:last-child) { margin-right:30px; }
+    > * { cursor:pointer; }
+    input { @include hide; 
+        + label { display:inline-block; min-height:20px; padding-left:26px; padding-top:2px;
+            &::before { content:''; display:inline-block; position:absolute; left:0; top:50%; transform:translateY(-50%); width:20px; height:20px; margin-right:4px; border-radius:4px; border:1px solid $gray300; vertical-align:middle; overflow:hidden; }
+        }
+        &:checked {
+            + label {
+                &::before { @include icon_form_checkbox; background-color:$primary; border-color:$primary; }
+            }
+        }
+    }
+    
+}
+
+@mixin radioWrap { position:relative; cursor:pointer; 
+    &:not(:last-child) { margin-right:30px; }
+    > * { cursor:pointer; }
+    input { @include hide; 
+        + label { display:inline-block; min-height:24px; padding-left:30px; padding-top:3px;
+            &::before { content:''; display:inline-block; position:absolute; left:0; top:50%; transform:translateY(-50%); width:24px; height:24px; margin-right:4px; border-radius:50%; border:1px solid $gray300; vertical-align:middle; overflow:hidden; }
+            &::after { content:''; display:inline-block; position:absolute; left:6px; top:50%; transform:translateY(-50%); width:0; height:0; margin-right:4px; border-radius:50%; background-color:$primary; vertical-align:middle; overflow:hidden; }
+        }
+        &:checked {
+            + label {
+                &::before { border-color:$primary; }
+                &::after { width:12px; height:12px; }
+            }
+        }
+    }
+    
+}
 

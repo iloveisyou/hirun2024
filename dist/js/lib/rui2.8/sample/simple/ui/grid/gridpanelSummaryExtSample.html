@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <title>Summary ext</title>
+    <script type="text/javascript" src="../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="../../../../js/rui_ext.js"></script>
+    <script type="text/javascript" src="../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../resources/rui.css" />
+    <script type='text/javascript' src='./../../../../plugins/ui/grid/LGridPanelExt.js'></script>
+    <script type='text/javascript' src='./../../../../plugins/ui/grid/LTotalSummary.js'></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LTotalSummary.css" />
+    <script type="text/javascript" src="../../../../plugins/util/simpleSyntax.js"></script>
+    <style type="text/css" >
+        .L-grid-row .L-grid-bg-color-sum {
+            background-color:#d1f141;
+        }
+    </style>
+    <script type="text/javascript" class="script-code">
+        var dataSet = null;
+        $C(function() {
+            dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'company'},
+                { id: 'date', type: 'date' },
+                { id: 'monthSum', type: 'number' },
+                { id: 'balance', type: 'number' },
+                { id: 'assets', type: 'number' }
+            ]
+            });
+
+            var columnModel = $C.columnModel({
+                columns: [
+                    $C.stateColumn(),
+                    $C.numberColumn(),
+                    { field: "company", label: "Company", sortable:true, width:100},
+                    { field: "date", label: "Date", width:100, align:'center', renderer : "date" },
+                    { field: "monthSum", align:'right', renderer : "money", sumType:'sum', editor: $C.numberBox()},
+                    { field: "balance", align: 'right', renderer : "money", sumType:'sum', editor: $C.numberBox()},
+                    { id: "difference", width:120, align:'right', renderRow: true, renderer : function(val, p, record){
+                            p.css.push('L-grid-bg-color-sum'); 
+                            var calVal = record.get('monthSum') - record.get('balance');
+                            return $C.number.usMoney(calVal);
+                        }, sumType:'sum'},
+                    { id: "rate", width:60, align:'right', renderRow: true, renderer : function(val, p, record){
+                            p.css.push('L-grid-bg-color-sum');
+                            var calVal = (record.get('monthSum') - record.get('balance')) / record.get('monthSum') * 100;
+                            return $C.number.round(calVal, 2) + '%';
+                        }, sumType: 'avg'},
+                    { field: "assets", width:120, align:'right', renderer : "money" }
+                    ]
+            });
+            
+            var sumColumns = ['balance', 'monthSum', 'assets'];
+            var summary = $C.totalSummary();
+            summary.on('renderTotalCell', function(e){
+                if(e.col == 2) {
+                    e.value = 'Total';
+                } else {
+                    var column = columnModel.getColumnAt(e.col);
+                    if ($C.array.contains(sumColumns, column.getId())) {
+                        // dataSet의 컬럼이 존재할 경우 
+                        e.value = $C.format.moneyFormat(dataSet.sum(column.getId()));
+                    } else if (column.getId() == 'difference') {
+                        // dataSet의 컬럼이 없고 GridView에만 존재할 경우 
+                        var value = 0;
+                        for (var row = 0; row < dataSet.getCount(); row++) {
+                            var record = dataSet.getAt(row);
+                            var calVal = record.get('monthSum') - record.get('balance');
+                            value += calVal;
+                        }
+                        
+                        e.value = $C.format.moneyFormat(value);
+                    } else if (column.getId() == 'rate') {
+                        // dataSet의 컬럼이 없고 GridView에만 존재할 경우 
+                        var value = 0;
+                        for (var row = 0; row < dataSet.getCount(); row++) {
+                            var record = dataSet.getAt(row);
+                            var calVal = (record.get('monthSum') - record.get('balance')) / record.get('monthSum') * 100;
+                            value += $C.number.round(calVal, 2);
+                        }
+                        
+                        value = value > 0 ? value / dataSet.getCount() : 0;
+                        
+                        e.value = $C.number.round(value, 2) + '%';
+                    } 
+                } 
+            });
+
+            var grid = $C('#defaultGrid').grid({
+                columnModel: columnModel,
+                dataSet:dataSet,
+                viewConfig : {
+                    plugins: [summary]
+                },
+//                autoWidth: false,
+//                width: 500,
+                height:300
+            });
+            
+            var gridView = grid.getView();
+
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/gridSummary.json'
+                });
+            });
+            
+            $C('#editBtn').button();
+            $C('#editBtn').on("click", function(){
+                dataSet.setValue(0, 3, 1000);
+            });
+            
+            $C('#saveExcelBtn').button();
+            $C('#saveExcelBtn').on("click", function(){
+                grid.saveExcel('한글테스트_' + new Date().format('%Y%m%d') + '.xls');
+                
+            });
+                        
+            searchBtn.click();
+        });
+    </script>
+
+</head>
+<body>
+    <h1>gridpanel Summary Sample</h1>
+    <h2>LGridPanel에서 각 column 값에 대한 Summary  샘플 </h2>
+    <div class="LblockLine"></div>
+    <div>그리드의 각 컬럼별로 summary 값을 표시합니다.</div>
+<div id='bd'>
+    <button type="button" id="searchBtn" >Search</button>
+    <button type="button" id="editBtn" >Edit</button>
+    <button type="button" id="saveExcelBtn">Excel download</button>
+    <div class="LblockMarkupCode">
+        <div id="defaultGrid"></div>
+    </div>
+</div>
+</body>
+

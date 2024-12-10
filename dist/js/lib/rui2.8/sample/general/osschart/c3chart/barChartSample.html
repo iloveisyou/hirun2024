@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-keyword" content="차트, 바차트, bar chart" />
+    <title>Bar Chart</title>
+	
+	<script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    
+    <script type="text/javascript" src="./../c3.min.js"></script>
+    <script type="text/javascript" src="./../d3.v3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../c3.min.css" />
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+    
+    <script type="text/javascript" class="script-code">
+    Rui.onReady(function(){
+ 		/*<b>*/
+        var chart = c3.generate({
+            bindto: "#barchart",
+            data: {
+                columns: [
+                    ['data1', 30, 200, 100, 400, 150, 250],
+                    ['data2', 50, 20, 150, 60, 15, 25],
+                    ['data3', -230, 200, 200, -300, 250, 250]
+                ],
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.5
+                }
+            }
+        });
+ 		/*</b>*/
+        
+        /********************
+        * 버튼 선언 및 이벤트
+        ********************/
+        var stackBtn = new Rui.ui.LButton('stackBtn');
+        stackBtn.on('click', function(){
+        	chart.groups([['data1', 'data2', 'data3']]);	
+        });
+        
+        var barBtn = new Rui.ui.LButton('barBtn');
+        barBtn.on('click', function(){
+        	chart.groups([]);	
+        });
+        
+        var colorBtn = new Rui.ui.LButton('colorBtn');
+        colorBtn.on('click', function(){
+        	chart.data.colors({
+                data1: d3.rgb('#ff0000'),
+                data2: d3.rgb('#00ff00'),
+                data3: d3.rgb('#0000ff')
+            });	
+        });
+        
+        var hideLegendBtn = new Rui.ui.LButton('hideLegendBtn');
+        hideLegendBtn.on('click', function(){
+        	chart.legend.hide('data1');
+        });
+        
+        var showLegendBtn = new Rui.ui.LButton('showLegendBtn');
+        showLegendBtn.on('click', function(){
+        	chart.legend.show('data1');
+        });
+   });        
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Bar Chart</h1>
+	    <div class="LblockLine"></div>
+	    <div class="LblockSubj">
+		    <h2>막대로 표현되는 차트</h2>
+		    <div class="LblockDesc">
+		        <p></p>
+		    </div>
+	    </div>
+    </div>
+    <div id='bd'>
+        <div class="LblockMarkupCode">
+            <div class="blockCalendar">
+                <div id="barchart"></div>
+            </div>
+        </div>
+        <div class="LblockButton" style="padding: 10px 0 0 10px; clear:both;">
+            <button type="button" id="stackBtn">stack</button>
+            <button type="button" id="barBtn">bar</button>
+            <button type="button" id="colorBtn">color change</button>
+            <button type="button" id="hideLegendBtn">hide legend</button>
+            <button type="button" id="showLegendBtn">show legend</button>
+        </div>
+    </div>
+</body>
+</html>

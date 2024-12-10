@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<!-- !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Tree list grid basic</title>
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ext.js"></script>
+    <script type='text/javascript' src='./../../../../plugins/ui/grid/LTreeGridSelectionModel.js'></script>
+    <script type='text/javascript' src='./../../../../plugins/ui/grid/LTreeGridView.js'></script>
+    <script type='text/javascript' src='./../../../../plugins/ui/grid/LTotalSummary.js'></script>
+    <script type="text/javascript" src="./../../../../plugins/util/simpleSyntax.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LTreeGridView.css" >
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LTotalSummary.css" />    
+    
+    <style type="text/css" >
+        .LblockGrid li.left, .LblockGrid li.right {
+            display: inline-block;
+            *display: inline;
+            *zoom: 100%;
+        }
+        .LblockButton {
+            margin: 20px 0px 0px;
+        }
+        
+        .L-grid-cell-inner {
+            height: 19px;
+        }
+        
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+
+        $C('!config').set('$.core.logger.show', [true]);
+        $C(function() {
+            var dataSet = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'id' },
+                { id: 'parentId' },
+                { id: 'depth', type: 'number', defaultValue: 0 },
+                { id: 'seq' },
+                { id: 'name' },
+                { id: 'url' },
+                { id: 'desc' }
+                ]
+            });
+
+            var dataSet2 = $C.dataSet({
+                id: 'dataSet',
+                fields: [
+                { id: 'id' },
+                { id: 'parentId' },
+                { id: 'depth', type: 'number', defaultValue: 0 },
+                { id: 'seq' },
+                { id: 'name' },
+                { id: 'url' },
+                { id: 'desc' }
+                ]
+            });
+            
+            /*<b>*/
+           
+            var columns = [
+                $C.selectionColumn(),
+                {id : 'rowId', label : 'id', width : 50, sortable : false, align : 'left', 
+                renderer : function(val, param, record, row, i) {
+                    return record.id;
+                }},
+                {id : 'pId', label : 'pid', width : 50, sortable : false, align : 'left',
+                renderer : function(val, param, record, row, i) {
+                    return record.pId;
+                }},
+                { field: "id", label: "id", width: 200 },
+                { field: "depth", label: "depth" },
+                { id: "show", label: "Show", renderer: function(val, p, record) { 
+                    return record.getAttribute('_show') + ''; 
+                } },
+                { id: "expand", label: "Expand", renderer: function(val, p, record) { 
+                    return record.getAttribute('_expand') + ''; 
+                } },
+                { field: "parentId", label: "parentId" },
+                { field: "seq", label: "seq", editor: $C.textBox() }
+                ];
+
+            var columnModel = $C.columnModel({
+                freezeColumnId: 'id',
+                columns: columns
+            });
+
+            var columnModel2 = $C.columnModel({
+                freezeColumnId: 'id',
+                columns: columns
+            });
+
+            // 한 LColumnModel을 두 그리드에 같이 쓰면 안됨(디버그 용도라서 임시로 씀)            
+            var treeGridView = $C.treeGridView({
+                defaultOpenDepth: -1,
+                columnModel: columnModel,
+                dataSet: dataSet,
+                fields: {
+                    depthId: 'depth'
+                },
+                treeColumnId: 'id'
+            });
+
+            var grid = $C('#leftGrid').grid({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                view: treeGridView,
+                selectionModel: $C.tGridSelectionModel(),
+                autoWidth: false,
+                width: 400,
+                height: 300
+            });
+
+            var treeGridView2 = $C.treeGridView({
+                defaultOpenDepth: -1,
+                columnModel: columnModel2,
+                dataSet: dataSet2,
+                fields: {
+                    depthId: 'depth'
+                },
+                treeColumnId: 'id'
+            });
+
+            var grid2 = $C('#rightGrid').grid({
+                columnModel: columnModel2,
+                dataSet: dataSet2,
+                view: treeGridView2,
+                selectionModel: $C.tGridSelectionModel(),
+                autoWidth: false,
+                width: 400,
+                height: 300
+            });
+
+            var searchBtn = $C('#searchBtn').button();
+            searchBtn.on("click", function(){
+                dataSet.load({
+                    url: './../../../../sample/data/gridTree.json'
+                });
+            });
+
+            $C('#leftBtn').button();
+            $C('#leftBtn').on("click", function(){
+                dataSet2.clearData();
+            });
+
+            $C('#rightBtn').button();
+            $C('#rightBtn').on("click", function(){
+                // 중복체크나 로직은 구현해야함.
+                for (var i = 4; i < 7; i++) {
+                    var r = dataSet.getAt(i).getValues();
+                    dataSet2.insert(i - 4, dataSet.createRecord(r));
+                }
+            });
+
+
+            $C.log('step 4');
+            searchBtn.click();
+            });
+            
+        </script>
+</head>
+<body>
+    <h1>tree list grid sample</h1>
+    <h2>트리 리스트 그리드 기본 샘플 (grid)</h2>
+    <div class="LblockLine"></div>
+    <div> 트리처럼 보여주는 리스트형 그리드. 그리드에 펼침/닫힘과 같은 기능만 제공된다.</div>
+    <div id='bd'>
+    <div class="LblockButton" >
+        <button type="button" id="expandBtn" >expand 18</button>
+        <button type="button" id="collapseBtn" >collapse 15</button>
+        <button type="button" id="expandDepthBtn" >expand depth 1</button>
+        <button type="button" id="getPreSiblingRowBtn" >getPreSiblingRow</button>
+        <button type="button" id="getNextSiblingRowBtn" >getNextSiblingRow</button>
+        <button type="button" id="getChildRowsBtn" >getChildRows</button>
+        <button type="button" id="getAllChildRowsBtn" >getAllChildRows</button>
+        <button type="button" id="debugSyncBtn" >debug sync</button>
+        <button type="button" id="searchBtn" >Search</button>
+        <button type="button" id="insertBtn" >insert</button>
+        <button type="button" id="childInsertBtn" >child insert</button>
+        <button type="button" id="updateBtn" >update</button>
+        <button type="button" id="deleteBtn" >delete</button>
+        <button type="button" id="saveBtn" >save</button>
+        <button type="button" id="undoBtn" >undo</button>
+        <button type="button" id="undoAllBtn" >undoAll</button>
+        <button type="button" id="clearBtn" >clear</button>
+    </div>
+
+    <div class="LblockMarkupCode">
+        <div class="LblockGrid">
+            <ul>
+                <li class="left">
+                    <div id="leftGrid"></div>
+                </li>
+                <li class="left"><button type="button" id="leftBtn" >left</button>
+                <button type="button" id="rightBtn" >right</button>
+                </li>
+                <li class="right">
+                    <div id="rightGrid"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

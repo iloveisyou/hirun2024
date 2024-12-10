@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="devon-rui-sample" content="yes" />
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 선택(LSelectionModel)" />
+    <title>Dynamic Select Mark</title>
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css" />
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>   
+        
+    <style>
+    .L-grid-row-checkBox-disabled {
+        background: url(./../../../../resources/images/grid/row-mark-sprite.gif) transparent -48px 0px no-repeat;
+    }
+    .L-grid-row-marked .L-grid-row-checkBox-disabled {
+        background: url(./../../../../resources/images/grid/row-mark-sprite.gif) transparent -73px 0px no-repeat;
+    }
+    </style>
+    
+    <script type="text/javascript" class="script-code">
+        Rui.onReady(function() {
+          /*******************
+           * 변수 및 객체 선언
+           *******************/
+           var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                /*<b>*/
+                canMarkableEvent: true,
+                /*</b>*/
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'date1', type: 'date' }
+                ]
+            });
+            
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1', width:150 },
+                    { field: 'col2', sortable: false, align: 'center' },
+                    { field: 'col3', align: 'right', hidden: true },
+                    { field: 'date1' , align: 'center', width: 280 }
+                 ]
+            });
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                height: 250
+            });
+            grid.render('defaultGrid');
+
+            /*******************
+            * 사용자 이벤트 처리
+            *******************/
+            
+            /*<b>*/
+            dataSet.on('load', function(e) {
+                dataSet.setMark(4, true, true);
+            });
+            
+            dataSet.on('canMarkable', function(e) {
+                if(e.row == 3 || e.row == 4) 
+                    return false;
+            });
+            /*</b>*/
+
+            dataSet.load({
+                url: './../../../../sample/data/data.json'
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='hd'>
+        <h1>Dynamic Select Mark</h1>
+        <div class="LblockLine"></div>
+        <div class="LblockSubj">
+            <h2>그리드(Grid)의 선택 마크(Select Mark)를 원하시는 뺄 수 있습니다.</h2>
+            <div class="LblockDesc">
+                <p>그리드(Grid)의 선택마크(select mark)가 필요 없는 row들을 간단히 제외시킬수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="bd">
+        <div class="LblockMarkupCode">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+</body>
+</html>

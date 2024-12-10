@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Grid Row Up Down</title>
+    <meta name="devon-rui-keyword" content="그리드(LGridPanel), 레코드(Record), 이동(Move)" />
+
+    <script type="text/javascript" src="./../../../../js/rui_base.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_core.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_ui.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_form.js"></script>
+    <script type="text/javascript" src="./../../../../js/rui_grid.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/LLoadPage.js"></script>
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LHeaderContextMenu.js"></script>
+    <script type="text/javascript" src="./../../../../resources/rui_config.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./../../../../resources/rui.css"/>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/LLoadPage.css"/>
+
+    <script type="text/javascript" src="./../../../../plugins/ui/grid/LGridStatusBar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../../../plugins/ui/grid/LGridStatusBar.css"/>
+
+    <script type="text/javascript" src="./../../../../sample/general/rui_sample.js"></script>
+
+    <script type="text/javascript" class="script-code">
+        var loadPage = null;
+        Rui.onReady(function() {
+            /*******************
+             * 변수 및 객체 선언
+             *******************/
+            var dataSet = new Rui.data.LJsonDataSet({
+                id: 'dataSet',
+                fields: [
+                    { id: 'col1' },
+                    { id: 'col2' },
+                    { id: 'col3' },
+                    { id: 'col4' },
+                    { id: 'col5' },
+                    { id: 'col6' },
+                    { id: 'col7' },
+                    { id: 'col8', type: 'number' },
+                    { id: 'code' },
+                    { id: 'value' },
+                    { id: 'date1', type: 'date' }
+                ]
+            });
+
+            var columnModel = new Rui.ui.grid.LColumnModel({
+                columns: [
+                    new Rui.ui.grid.LStateColumn(),
+                    new Rui.ui.grid.LSelectionColumn(),
+                    new Rui.ui.grid.LNumberColumn(),
+                    { field: 'col1', label: 'Col1' },
+                    { field: 'col2', align:'center', width: 120 },
+                    { field: 'code', align: 'center' },
+                    { field: 'col3', align: 'right' },
+                    { field: 'col8', label: 'Col8', align: 'right', renderer: Rui.util.LRenderer.moneyRenderer() },
+                    { field: 'date1' , align:'center', renderer: Rui.util.LRenderer.dateRenderer() }
+                ]
+            });
+
+            var grid = new Rui.ui.grid.LGridPanel({
+                columnModel: columnModel,
+                dataSet: dataSet,
+                autoWidth: true,
+                // LGridStatusBar는 샘플용으로 사용
+                footerBar: new Rui.ui.grid.LGridStatusBar(),
+                width: 400,
+                height: 300
+            });
+
+            grid.render('defaultGrid');
+
+            /********************
+             * 버튼 선언 및 이벤트
+             ********************/
+            var searchBtn = new Rui.ui.LButton('searchBtn');
+            searchBtn.on('click', function(){
+                dataSet.load({
+                    url: './../../../../sample/data/data11.json'
+                });
+            });
+
+            var upBtn = new Rui.ui.LButton('upBtn');
+            upBtn.on('click', function(){
+                /*<b>*/
+                var row = dataSet.getRow();
+                if(row < 1) return;
+
+                var record1 = dataSet.getAt(row - 1);
+                var record2 = dataSet.getAt(row);
+                var record1Data = record1.getValues();
+                record1.setValues(record2.getValues());
+                record2.setValues(record1Data);
+                dataSet.setRow(row - 1);
+                /*</b>*/
+            });
+
+            var downBtn = new Rui.ui.LButton('downBtn');
+            downBtn.on('click', function(){
+                /*<b>*/
+                var row = dataSet.getRow();
+                if((row + 2) > dataSet.getCount()) return;
+                var record1 = dataSet.getAt(row);
+                var record2 = dataSet.getAt(row + 1);
+                var record2Data = record2.getValues();
+                record2.setValues(record1.getValues());
+                record1.setValues(record2Data);
+                dataSet.setRow(row + 1);
+                /*</b>*/
+            });
+
+            loadPage.hide();
+            searchBtn.click();
+        });
+        </script>
+</head>
+<body>
+    <h1>Grid Row Up Down</h1>
+    <h2>그리드(Grid)의 레코드 상하(Up/Down) 이동(Move) 샘플</h2>
+    <div class="LblockLine"></div>
+    <div class="LblockDesc">
+        <p>그리드(Grid)의 row의 데이터를 위로(Up) 혹은 아래로(Down) 이동(Move)하는 샘플.</p>
+    </div>
+    <div id="bd">
+    <div class="LblockButton" >
+        <button type="button" id="searchBtn" >Search</button>
+        <button type="button" id="upBtn" >Up</button>
+        <button type="button" id="downBtn" >Down</button>
+    </div>
+    <div class="LblockMarkupCode">
+        <div id="aaa" class="LblockGrid">
+            <div id="defaultGrid"></div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript'>
+loadPage = new Rui.ui.LLoadPage();
+loadPage.show();
+</script>
+</body>
+</html>
