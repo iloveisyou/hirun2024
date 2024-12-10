@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hi-Run System - ui</title>
-    <link rel="icon" href="../../images/favicon.png">
+    <link rel="icon" href="../../images/newHiRun/favicon.png">
 
     <!-- RUI import -->
     <!-- <script type="text/javascript" src="../../js/lib/rui2.8/js/rui_base.js"></script>
@@ -69,15 +69,13 @@
 
         <p>RUI > form > TextBox</p>
         <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_text">
-            <input type="text" id="inputTextSample01_1" />
-            <label for="inputTextSample01_1">일반 텍스트 인풋박스</label>
-        </div>
+        <div class="fm_input" id="inputTextSample01_1"></div>
 
         <script>
         Rui.onReady(()=>{
             var inputTextSample01_1 = new Rui.ui.form.LTextBox({  
                 applyTo: 'inputTextSample01_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
+                label: '일반 텍스트 인풋박스',  // label 추가
                 // placeholder: '인풋텍스트샘플01박스에 입력해 주세요.',  // [옵션] 입력 값이 없을 경우 기본 표시 메시지를 설정
                 // defaultValue: '인풋텍스트샘플의 기본값',               // [옵션] 입력 값
                 // disabled: true,                                        // [옵션] 인풋박스 disabled 처리
@@ -97,15 +95,13 @@
 
         <p>RUI > form > Textbox Auto Complete (Fixed List)</p>
         <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_text">
-            <input type="text" id="inputTextSample02_1" />
-            <label for="inputTextSample02_1">자동완성 텍스트 인풋박스 ('"코드" 또는 "데이터"')</label>
-        </div>
+        <div class="fm_input" id="inputTextSample02_1"></div>
 
         <script>
         Rui.onReady(()=>{
             var inputTextSample02_1 = new Rui.ui.form.LTextBox({ 
-                applyTo: 'inputTextSample02_1',
+                applyTo: 'inputTextSample02_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
+                label: `자동완성 텍스트 인풋박스 ('"코드" 또는 "데이터"')`,  // label 추가
                 // width: 200,
                 // placeholder: '"코드" 또는 "데이터"',
                 autoComplete : true,
@@ -119,16 +115,14 @@
 
         <p>RUI > form > TextBox Mask</p>
         <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_text">
-            <input type="text" id="inputTextSample03_1" />
-            <label for="inputTextSample03_1">마스크 인풋박스 (휴대폰 번호)</label>
-        </div>
+        <div class="fm_input" id="inputTextSample03_1"></div>
 
         <script>
         Rui.onReady(()=>{
             let inputTextSample03_1 = new Rui.ui.form.LTextBox({ 
                 applyTo: 'inputTextSample03_1',
                 mask: '999-9999-9999',
+                label: '마스크 인풋박스 (휴대폰 번호)',  // label 추가
             });
             uiRUI(inputTextSample03_1);
         });
@@ -151,15 +145,13 @@
 
         <p>RUI > form > DateBox</p>
         <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_text stDate">
-            <input type="text" id="inputDateSample01_1" />
-            <label for="inputDateSample01_1">날짜입력 인풋박스</label>
-        </div>
+        <div class="fm_date" id="inputDateSample01_1"></div>
 
         <script>
         Rui.onReady(()=>{
             let inputDateSample01_1 = new Rui.ui.form.LDateBox({ 
                 applyTo: 'inputDateSample01_1',
+                label: '날짜입력 인풋박스',  // label 추가 
                 //mask: '99-99-9999',
                 //displayValue: '%d-%m-%Y',
                 //defaultValue: new Date(),
@@ -182,58 +174,61 @@
     <section>
         <h3>- input [type=checkbox] - Checkbox</h3>
 
-        <p>RUI > form > Checkbox - label 직접입력 (js에서 label 제거)</p>
+        <p>RUI > form > <b>Checkbox</b> - <b>개별제어</b>, <b>label</b> js로 입력 (html 태그에서 label 제거)</p>
+        <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
         <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_checkbox">
-            <label><input type="checkbox" id="inputCheckboxSample01_1" />일반 체크박스01_1</label>
-            <label><input type="checkbox" id="inputCheckboxSample01_2" />일반 체크박스01_2</label>
-        </div>
+        <div class="fm_check" id="inputCheckboxSample01_1"></div>
+        <div class="fm_check" id="inputCheckboxSample01_2"></div>
 
         <script>
         Rui.onReady(()=>{
             let inputCheckboxSample01_1 = new Rui.ui.form.LCheckBox({ 
                 applyTo: 'inputCheckboxSample01_1',
                 name: 'inputCheckboxSample01',
-                // label: '일반 체크박스01_1',
+                label: '일반 체크박스01_1',
                 // value: '오징어'
             });
             uiRUI(inputCheckboxSample01_1); // uiux에서 컨트롤하기 위한 fn
-            
+
             let inputCheckboxSample01_2 = new Rui.ui.form.LCheckBox({ 
                 applyTo: 'inputCheckboxSample01_2',
                 name: 'inputCheckboxSample01',
-                // label: '일반 체크박스01_2',
-                // value: '오징어2'
+                label: '일반 체크박스01_2',
+                // value: '오징어'
             });
             uiRUI(inputCheckboxSample01_2); // uiux에서 컨트롤하기 위한 fn
         });
         </script>
         <!-- *****************************************  source end  ***************************************** -->
 
-        <p>RUI > form > Checkbox - label js로 입력 (html 태그에서 label 제거)</p>
+        <p>RUI > form > <b>CheckBox Group</b> - <b>구룹제어</b>, <b>items(label)</b> js로 입력 (html 태그에서 label 제거)</p>
+        <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
         <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_checkbox">
-            <input type="checkbox" id="inputCheckboxSample02_1" />
-            <input type="checkbox" id="inputCheckboxSample02_2" />
-        </div>
+        <div class="fm_checkGroup" id="inputCheckboxSample02_1"></div>
 
         <script>
         Rui.onReady(()=>{
-            let inputCheckboxSample02_1 = new Rui.ui.form.LCheckBox({ 
+            let inputCheckboxSample02_1 = new Rui.ui.form.LCheckBoxGroup({ 
                 applyTo: 'inputCheckboxSample02_1',
                 name: 'inputCheckboxSample02',
                 label: '일반 체크박스02_1',
-                // value: '오징어'
+                items: [
+                    {
+                        label: 'Apple',
+                        name: 'fruits',
+                        value: 'apple'
+                    }, {
+                        label: 'Grape',
+                        checked: true,
+                        value: 'Grape'
+                    }, {
+                        label: 'Strawberry',
+                        checked: true,
+                        value: 'Strawberry'
+                    }
+                ]
             });
             uiRUI(inputCheckboxSample02_1); // uiux에서 컨트롤하기 위한 fn
-
-            let inputCheckboxSample02_2 = new Rui.ui.form.LCheckBox({ 
-                applyTo: 'inputCheckboxSample02_2',
-                name: 'inputCheckboxSample02',
-                label: '일반 체크박스02_2',
-                // value: '오징어'
-            });
-            uiRUI(inputCheckboxSample02_2); // uiux에서 컨트롤하기 위한 fn
         });
         </script>
         <!-- *****************************************  source end  ***************************************** -->
@@ -250,27 +245,26 @@
     <section>
         <h3>- input [type=radio] - Radio</h3>
 
-        <p>RUI > form > Radio - label 직접입력 (js에서 label 제거)</p>
+        <p>RUI > form > <b>Radio</b> - <b>개별제어</b>, <b>label</b> js로 입력 (html 태그에서 label 제거)</p>
+        <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
         <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_radio">
-            <label><input type="radio" id="inputRadioSample01_1" />일반 라디오01_1</label>
-            <label><input type="radio" id="inputRadioSample01_2" />일반 라디오01_2</label>
-        </div>
+        <div class="fm_radio" id="inputRadioSample01_1"></div>
+        <div class="fm_radio" id="inputRadioSample01_2"></div>
 
         <script>
         Rui.onReady(()=>{
             let inputRadioSample01_1 = new Rui.ui.form.LRadio({ 
                 applyTo: 'inputRadioSample01_1',
                 name: 'inputRadioSample01',
-                // label: '일반 라디오01_1',
+                label: '일반 라디오01_1',
                 // value: '창'
             });
             uiRUI(inputRadioSample01_1); // uiux에서 컨트롤하기 위한 fn
-
+            
             let inputRadioSample01_2 = new Rui.ui.form.LRadio({ 
                 applyTo: 'inputRadioSample01_2',
                 name: 'inputRadioSample01',
-                // label: '일반 라디오01_1',
+                label: '일반 라디오01_2',
                 // value: '창'
             });
             uiRUI(inputRadioSample01_2); // uiux에서 컨트롤하기 위한 fn
@@ -278,30 +272,32 @@
         </script>
         <!-- *****************************************  source end  ***************************************** -->
 
-        <p>RUI > form > Radio - label js로 입력 (html 태그에서 label 제거)</p>
+        <p>RUI > form > <b>Radio Group</b> - <b>구룹제어</b>, <b>items(label)</b> js로 입력 (html 태그에서 label 제거)</p>
+        <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
         <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_radio">
-            <input type="radio" id="inputRadioSample02_1" />
-            <input type="radio" id="inputRadioSample02_2" />
-        </div>
+        <div class="fm_radioGroup" id="inputRadioSample02_1"></div>
 
         <script>
         Rui.onReady(()=>{
-            let inputRadioSample02_1 = new Rui.ui.form.LRadio({ 
+            let inputRadioSample02_1 = new Rui.ui.form.LRadioGroup({ 
                 applyTo: 'inputRadioSample02_1',
                 name: 'inputRadioSample02',
-                label: '일반 라디오02_1',
-                // value: '창'
+                items : [
+                    {
+                        // label : '<font style="color:red">Rock</font>',
+                        label : 'Rock',
+                        name : 'rpsGame',
+                        value : 'rock'
+                    }, {
+                        label : 'Paper',
+                        value : 'paper'
+                    }, {
+                        label : 'Scissors',
+                        value : 'scissors'
+                    }
+                ]
             });
             uiRUI(inputRadioSample02_1); // uiux에서 컨트롤하기 위한 fn
-            
-            let inputRadioSample02_2 = new Rui.ui.form.LRadio({ 
-                applyTo: 'inputRadioSample02_2',
-                name: 'inputRadioSample02',
-                label: '일반 라디오02_2',
-                // value: '창'
-            });
-            uiRUI(inputRadioSample02_2); // uiux에서 컨트롤하기 위한 fn
         });
         </script>
         <!-- *****************************************  source end  ***************************************** -->
