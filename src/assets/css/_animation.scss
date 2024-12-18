@@ -12,7 +12,7 @@
 
 
 // gnb 마우스 오버시
-@keyframes an-YBounce {
+/* @keyframes an-YBounce {
     0% {transform:translate(-50%, 10px); opacity:0; }
     20% { transform:translate(-50%, -13px); opacity:1; }
     40% { transform:translate(-50%, 10px); }
@@ -20,18 +20,47 @@
     75% { transform:translate(-50%, 5px); }
     90% { transform:translate(-50%, -3px); }
     100% { transform:translate(-50%, 0px); }
+} */
+// gnb depth1
+@keyframes an-YBounce {
+    0% {transform:translate(-50%, 10px); opacity:0; }
+    50% { transform:translate(-50%, -13px); opacity:1; }
+    90% { transform:translate(-50%, 2px); }
+    100% { transform:translate(-50%, 0px); }
+}
+// gnb depth3
+@keyframes an-XBounce {
+    0% { right:100%; }
+    50% { right:-25px; }
+    90% { right:-13px; }
+    100% { right:-15px; }
 }
 
 
-// 
+// gnb depth1
 @keyframes an-SBounce {
     0% { transform:translateY(-50%) scale(0); opacity:0; }
     50% { transform:translateY(-50%) scale(140%); opacity:1; }
     100% { transform:translateY(-50%) scale(100%); }
 }
 
-// 
+// gnb depth3
 @keyframes an-btnActive {
     0% { transform:scale(100%) translate(-50%, -50%); opacity:1; }
     100% { transform:scale(10000%) translate(-50%, -50%); opacity:1; }
+}
+
+@keyframes an-headerUtil {
+    0% { transform-origin:center right 20px; }
+    10% { transform-origin:center right 20px; }
+    20% { border-radius:8px; transform-origin:center right 20px; }
+    80% { width:auto; padding:0 10px 0 38px; border-radius:8px; transform-origin:center right 20px; }
+    100% { width:auto; padding:0 10px 0 38px; border-radius:8px; border-color:$gray700; transform-origin:center right 20px; }
+}
+
+@keyframes an-alarm {
+    // 0% { transform:scale(1) rotation(0deg);}
+    0% { transform:scale(1.1) rotate(15deg); }
+    50% { transform:scale(1) rotate(0); }
+    100% { transform:scale(1.1) rotate(-15deg); }
 }

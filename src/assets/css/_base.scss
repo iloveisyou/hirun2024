@@ -15,6 +15,7 @@
 .pj-hirun { font-family:'LG_Smart_H2.0', sans-serif; font-size:16px; font-weight:400; letter-spacing:-0.5px; color:$gray700;
     .hirunWrap { min-width:1600px; }
     ::selection {  color:$white;  background-color:$primary;}
+    a { color:inherit; }
 
 }
 
@@ -25,6 +26,12 @@
     h1 { margin-left:0px; padding:3px 5px;  @include fontL; color:$white; }
     h2 { margin:0px 0 0px 0px; padding:5px; font-size:20px; @include fontL; background-color:$gray700; color:$white; 
         &::before { content:"-"; display:inline-block; }
+        + ul { padding:20px; 
+            li {
+                &::before { content:'* '; display:inline-block; }
+                + li { margin-top:10px; }
+            }
+        }
     }
     section { padding:30px;
         h3 { margin-left:-10px; padding:10px 0px; font-weight:700; color:$gray700;

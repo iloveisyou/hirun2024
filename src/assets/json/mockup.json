@@ -37,7 +37,7 @@
                 "Status": "작업중",
                 "Working Date": "2024-11-25",
                 "Last Date": "-",
-                "Etc": "-"
+                "Etc": "input(text,date,checkbox,radio)"
             },
             {
                 "id": "UI-004",
@@ -49,7 +49,7 @@
                 "Status": "작업중",
                 "Working Date": "2024-11-25",
                 "Last Date": "-",
-                "Etc": "-"
+                "Etc": "select ui"
             },
             {
                 "id": "UI-000",
@@ -61,7 +61,7 @@
                 "Status": "작업중",
                 "Working Date": "2024-11-25",
                 "Last Date": "-",
-                "Etc": "-"
+                "Etc": "화면 분할 (가로, 세로)"
             },
             
             
@@ -85,6 +85,18 @@
                 "Name": "메인",
                 "File": "main.html",
                 "Path": "./etc/",
+                "Status": "작업중",
+                "Working Date": "2024-11-25",
+                "Last Date": "-",
+                "Etc": "-"
+            },
+            {
+                "id": "CO-003",
+                "1Depth": "공통",
+                "2Depth": "샘플",
+                "Name": "자재_입출고관리_출고관리",
+                "File": "initializeShipManagement.html",
+                "Path": "./sample/",
                 "Status": "작업중",
                 "Working Date": "2024-11-25",
                 "Last Date": "-",

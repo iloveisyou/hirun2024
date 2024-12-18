@@ -7,15 +7,15 @@
 {% block wrap %}
 <h1>FORM 요소</h1>
 <h2>input 박스</h2>
-<p>placeholder 사용하지 않음, 대신 label로 대체</p>
-<p>uiRUI함수 추가 필수</p>
-
+<ul>
+    <li>uiRUI(mui객체)함수 추가 필수</li>
+    <li>placeholder 사용하지 않음, 대신 label로 대체 (날짜선택은 제외)</li>
+    <li>날짜/시간 선택 박스(LDateTimeBox) 사용하지 않아 숨김</li>
+</ul>
 <section>
     <h3>- input [type=text] - TextBox</h3>
 
-
-
-    <p>RUI > form > TextBox</p>
+    <p>RUI > form > TextBox / LTextBox</p>
     <!-- ***************************************** source start ***************************************** -->
     <div class="fm_input" id="inputTextSample01_1"></div>
 
@@ -23,7 +23,7 @@
     Rui.onReady(()=>{
         var inputTextSample01_1 = new Rui.ui.form.LTextBox({  
             applyTo: 'inputTextSample01_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
-            label: '일반 텍스트 인풋박스',  // label 추가
+            label: '디폴트 텍스트 인풋박스',  // label 추가
             // placeholder: '인풋텍스트샘플01박스에 입력해 주세요.',  // [옵션] 입력 값이 없을 경우 기본 표시 메시지를 설정
             // defaultValue: '인풋텍스트샘플의 기본값',               // [옵션] 입력 값
             // disabled: true,                                        // [옵션] 인풋박스 disabled 처리
@@ -41,14 +41,32 @@
     </script>
     <!-- *****************************************  source end  ***************************************** -->
 
-    <p>RUI > form > Textbox Auto Complete (Fixed List)</p>
+    <p>RUI > form > TextBox Mask / LTextBox</p>
+    <p>텍스트박스(TextBox)에 마스크(mask)를 적용합니다.</p>
     <!-- ***************************************** source start ***************************************** -->
     <div class="fm_input" id="inputTextSample02_1"></div>
 
     <script>
     Rui.onReady(()=>{
-        var inputTextSample02_1 = new Rui.ui.form.LTextBox({ 
-            applyTo: 'inputTextSample02_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
+        let inputTextSample02_1 = new Rui.ui.form.LTextBox({ 
+            applyTo: 'inputTextSample02_1',
+            mask: '999-9999-9999',
+            label: '마스크 인풋박스 (휴대폰 번호)',  // label 추가
+        });
+        uiRUI(inputTextSample02_1);
+    });
+    </script>
+    <!-- *****************************************  source end  ***************************************** -->
+
+    <p>RUI > form > Textbox Auto Complete (Fixed List) json데이터 / LTextBox</p>
+    <p>텍스트박스(LTextBox)에서 고정된 목록 데이터를 이용하여 자동완성(Auto Complete) 기능을 구현합니다.</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_input" id="inputTextSample03_1"></div>
+
+    <script>
+    Rui.onReady(()=>{
+        var inputTextSample03_1 = new Rui.ui.form.LTextBox({ 
+            applyTo: 'inputTextSample03_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
             label: `자동완성 텍스트 인풋박스 ('"코드" 또는 "데이터"')`,  // label 추가
             // width: 200,
             // placeholder: '"코드" 또는 "데이터"',
@@ -56,23 +74,29 @@
             filterMode: 'local',
             url: '{{ruiSample}}/sample/data/code.json'
         });
-        uiRUI(inputTextSample02_1); // uiux에서 컨트롤하기 위한 fn
+        uiRUI(inputTextSample03_1); // uiux에서 컨트롤하기 위한 fn
     });
     </script>
     <!-- *****************************************  source end  ***************************************** -->
 
-    <p>RUI > form > TextBox Mask</p>
+    <p>RUI > form > Textbox Auto Complete (Using filterUrl) / LTextBox</p>
+    <p>텍스트박스(LTextBox)에서 매 순간 서버에 filterUrl의 데이터를 요청하여 자동완성(Auto Complete) 기능을 구현합니다.</p>
     <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_input" id="inputTextSample03_1"></div>
+    <div class="fm_input" id="inputTextSample04_1"></div>
 
     <script>
     Rui.onReady(()=>{
-        let inputTextSample03_1 = new Rui.ui.form.LTextBox({ 
-            applyTo: 'inputTextSample03_1',
-            mask: '999-9999-9999',
-            label: '마스크 인풋박스 (휴대폰 번호)',  // label 추가
+        var inputTextSample04_1 = new Rui.ui.form.LTextBox({ 
+            id: 'inputTextSample04_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
+            applyTo: 'inputTextSample04_1',
+            label: `자동완성 텍스트 인풋박스 ('"Value"')`,  // label 추가
+            // placeholder: 'type Value..',
+            autoComplete: true,
+            filterMode: 'remote',
+            // filterUrl: 'http://www.dev-on.com/rui/rui2/sample/general/ui/form/textboxUrlFilterSample.jsp'
+            filterUrl: '{{assPath}}/json/rui2_sample_ganeral_ui_form_textboxUrlFilterSample.json'
         });
-        uiRUI(inputTextSample03_1);
+        uiRUI(inputTextSample04_1); // uiux에서 컨트롤하기 위한 fn
     });
     </script>
     <!-- *****************************************  source end  ***************************************** -->
@@ -89,9 +113,90 @@
 
 
 <section>
+    <h3>- input [type=text] - PopupTextBox</h3>
+
+    <p>RUI > form > PopupTextBox / LPopupTextBox</p>
+    <p>LPopupTextBox.js / LPopupTextBox.css 별도로 추가</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_number" id="inputPopupTextBoxSample01_1"></div>
+
+    <script>
+    Rui.onReady(()=>{
+        let applyPopupValue;
+        let inputPopupTextBoxSample01_1 = new Rui.ui.form.LPopupTextBox({
+            applyTo: 'inputPopupTextBoxSample01_1',
+            label: '날짜입력 인풋박스',  // label 추가 
+            enterToPopup: true,
+            useHiddenValue: true,
+            editable: true
+        });
+        applyPopupValue = function(popupValue){
+            inputPopupTextBoxSample01_1.setValue(popupValue.col2);
+            inputPopupTextBoxSample01_1.setDisplayValue(popupValue.col1);
+        }
+
+        // 이벤트 처리
+        inputPopupTextBoxSample01_1.on('popup', function(e){
+            let displayValue = e.displayValue;
+            Rui.log('value : ' + e.value + ', displayValue : ' + displayValue);
+            
+            let popup = window.open('http://www.dev-on.com/rui/rui2/sample/general/ui/form/popupWindow.html?displayValue=' + displayValue, 'popup', 'width=800,height=400,toolbar=no,status=yes');
+            popup.focus();
+            inputPopupTextBoxSample01_1.blur();
+        });
+
+        uiRUI(inputPopupTextBoxSample01_1); // uiux에서 컨트롤하기 위한 fn
+    });
+
+    </script>
+    <!-- *****************************************  source end  ***************************************** -->
+</section>
+
+
+
+<!-- ************************************************************************************************* -->
+<!-- ***************************************** source border ***************************************** -->
+<!-- ************************************************************************************************* -->
+
+
+
+<section>
+    <h3>- input [type=text] - NumberBox</h3>
+
+    <p>RUI > form > NumberBox / LNumberBox</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_popup" id="inputNumberBoxSample01_1"></div>
+
+    <script>
+    Rui.onReady(()=>{
+        let inputNumberBoxSample01_1 = new Rui.ui.form.LNumberBox({
+            applyTo: 'inputNumberBoxSample01_1',
+            label: '제목, -10 부터 10,000까지 입력 하세요.',  // label 추가 
+            // placeholder: '-10 부터 10,000까지 입력 하세요.',
+            minValue: -10,
+            maxValue: 10000,
+            decimalPrecision: 2,
+            // width: 210, // 사용하지앖음, 설정해도 안됨, css에서 제어
+        });
+        uiRUI(inputNumberBoxSample01_1); // uiux에서 컨트롤하기 위한 fn
+    });
+
+    </script>
+    <!-- *****************************************  source end  ***************************************** -->
+</section>
+
+
+
+<!-- ************************************************************************************************* -->
+<!-- ***************************************** source border ***************************************** -->
+<!-- ************************************************************************************************* -->
+
+
+
+<section>
     <h3>- input [type=text] - DateBox</h3>
 
-    <p>RUI > form > DateBox</p>
+    <p>RUI > form > DateBox / LDateBox</p>
     <!-- ***************************************** source start ***************************************** -->
     <div class="fm_date" id="inputDateSample01_1"></div>
 
@@ -99,13 +204,83 @@
     Rui.onReady(()=>{
         let inputDateSample01_1 = new Rui.ui.form.LDateBox({ 
             applyTo: 'inputDateSample01_1',
-            label: '날짜입력 인풋박스',  // label 추가 
+            label: '날짜선택 인풋박스',  // label 추가 
             //mask: '99-99-9999',
             //displayValue: '%d-%m-%Y',
             //defaultValue: new Date(),
             //dateType: 'string',
         });
         uiRUI(inputDateSample01_1); // uiux에서 컨트롤하기 위한 fn
+    });
+    </script>
+    <!-- *****************************************  source end  ***************************************** -->
+    
+    <p>RUI > form > TimeBox / LMonthBox</p>
+    <p>LMonthCalendar.js / LMonthBox.js / LMonthBox.css 별도로 추가</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_date" id="inputDateSample02_1"></div>
+
+    <script>
+    Rui.onReady(()=>{
+        let inputDateSample02_1 = new Rui.ui.form.LMonthBox({ 
+            applyTo: 'inputDateSample02_1',
+            label: '월선택 인풋박스',  // label 추가 
+            placeholder: 'yyyy-mm',
+            defaultValue: null
+        });
+        uiRUI(inputDateSample02_1); // uiux에서 컨트롤하기 위한 fn
+    });
+    </script>
+    <!-- *****************************************  source end  ***************************************** -->
+    
+    <p>RUI > form > Timebox / LTimeBox</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_date" id="inputDateSample03_1"></div>
+    <script>
+    Rui.onReady(()=>{
+        let inputDateSample03_1 = new Rui.ui.form.LTimeBox({ 
+            applyTo: 'inputDateSample03_1',
+            label: '시간선택 인풋박스',  // label 추가 
+            placeholder: '시:분',
+        });
+        uiRUI(inputDateSample03_1); // uiux에서 컨트롤하기 위한 fn
+    });
+    </script>
+    <!-- *****************************************  source end  ***************************************** -->
+    
+    {# <p>RUI > form > DateTimeBox / LDateTimeBox</p>
+    <p>LDateTimeBox.js / LDateTimeBox.css 별도로 추가</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_date" id="inputDateSample04_1"></div>
+
+    <script>
+    Rui.onReady(()=>{
+        let inputDateSample04_1 = new Rui.ui.form.LDateTimeBox({ 
+            applyTo: 'inputDateSample04_1',
+            label: '날짜+시간선택 인풋박스',  // label 추가 
+            placeholder: 'yyyy-MM-dd HH:mm:ss',
+        });
+        uiRUI(inputDateSample04_1); // uiux에서 컨트롤하기 위한 fn
+    });
+    </script>
+    <!-- *****************************************  source end  ***************************************** --> #}
+
+    <p>RUI > form > DateTimeBox / LFromToDateBox</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_date" id="inputDateSample05_1"></div>
+
+    <script>
+    Rui.onReady(()=>{
+        let inputDateSample05_1 = new Rui.ui.form.LFromToDateBox({ 
+            applyTo: 'inputDateSample05_1',
+            label: '기간선택 인풋박스',  // label 추가 
+            // calendarConfig : {
+            //     mindate: '08/12/2018',
+            //     maxdate: '08/22/2018'
+            // },
+            startDate: new Date()
+        });
+        uiRUI(inputDateSample05_1); // uiux에서 컨트롤하기 위한 fn
     });
     </script>
     <!-- *****************************************  source end  ***************************************** -->
@@ -124,6 +299,7 @@
 
     <p>RUI > form > <b>Checkbox</b> - <b>개별제어</b>, <b>label</b> js로 입력 (html 태그에서 label 제거)</p>
     <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
+    {# <p>그리드나 Bind와 연동하지 않으면 굳이 사용할 필요는 없습니다.</p> #}
     <!-- ***************************************** source start ***************************************** -->
     <div class="fm_check" id="inputCheckboxSample01_1"></div>
     <div class="fm_check" id="inputCheckboxSample01_2"></div>
@@ -151,6 +327,7 @@
 
     <p>RUI > form > <b>CheckBox Group</b> - <b>구룹제어</b>, <b>items(label)</b> js로 입력 (html 태그에서 label 제거)</p>
     <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
+    <!-- <p>일반적일 경우에는 사용할 필요는 없습니다.</p> -->
     <!-- ***************************************** source start ***************************************** -->
     <div class="fm_checkGroup" id="inputCheckboxSample02_1"></div>
 
@@ -195,6 +372,7 @@
 
     <p>RUI > form > <b>Radio</b> - <b>개별제어</b>, <b>label</b> js로 입력 (html 태그에서 label 제거)</p>
     <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
+    <p>하나로 사용할 경우는 없으므로 라디오그룹(RadioGroup)을 사용하세요.</p>
     <!-- ***************************************** source start ***************************************** -->
     <div class="fm_radio" id="inputRadioSample01_1"></div>
     <div class="fm_radio" id="inputRadioSample01_2"></div>
@@ -222,6 +400,7 @@
 
     <p>RUI > form > <b>Radio Group</b> - <b>구룹제어</b>, <b>items(label)</b> js로 입력 (html 태그에서 label 제거)</p>
     <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
+    <!-- <p>그리드(Grid)의 편집기로 사용하지 않으면 HTML 기본 태그로 사용하여도 됩니다.</p> -->
     <!-- ***************************************** source start ***************************************** -->
     <div class="fm_radioGroup" id="inputRadioSample02_1"></div>
 

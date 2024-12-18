@@ -51,4 +51,24 @@
         &:has(:nth-child(12)) > * { flex-basis:calc(100 / 12 ); }
 
     }
+
+    .cp_dialog { position:fixed; left:0; top:0; z-index:100; width:100%; height:100%; 
+        &:not(.is-active) { 
+            &::before { @include hide; opacity:0; }
+            .cpInner { @include hide; left:50%; transform:translate(-50%, 100vh); }
+        }
+        &::before { content:''; display:block; width:100%; height:100%; background-color:#000000D9; color:$white; opacity:1; transition:opacity 1s ease-in-out; }
+        .cpInner { display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:650px; min-width:650px; max-width:100%; height:auto; min-height:150px; max-height:100%; padding:30px; border-radius:24px; background-color:$white; transition:transform .6s ease-in-out .2s; }
+        .cpHeader { display:flex; align-items:center; height:24px;
+            .heading {  
+                strong { font-size:18px; @include fontSB; }
+            }
+            .bt_close { position:relative; width:24px; height:24px; margin-left:auto; margin-right:-5px; padding-left:24px; font-size:18px; @include fontSB; overflow:hidden;
+                &::before { content:''; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(45deg); width:10px; height:2px; background-color:$black; }
+                &::after { content:''; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-45deg); width:10px; height:2px; background-color:$black; }
+            }
+        }
+        .cpFooter { margin-top:10px; }
+        .cpMain { margin-top:20px; }
+    }
 }

@@ -40,6 +40,25 @@
     <link rel="stylesheet" type="text/css" href="../../js/lib/rui2.8/resources/rui_skin_blue.css" />
     <script language="JavaScript" type='text/javascript' src='../../js/lib/rui2.8/plugins/tab/rui_tab.js'></script>
     <link rel="stylesheet" type="text/css" href="../../js/lib/rui2.8/plugins/tab/rui_tab.css" />
+    <!-- RUI > form > PopupTextBox -->
+    <script language="JavaScript" type='text/javascript' src='../../js/lib/rui2.8/plugins/ui/form/LPopupTextBox.js'></script>
+    <link rel="stylesheet" type="text/css" href="../../js/lib/rui2.8/plugins/ui/form/LPopupTextBox.css" />
+    <!-- RUI > form > MonthBox -->
+    <script language="JavaScript" type='text/javascript' src='../../js/lib/rui2.8/plugins/ui/calendar/LMonthCalendar.js'></script>
+    <script language="JavaScript" type='text/javascript' src='../../js/lib/rui2.8/plugins/ui/form/LMonthBox.js'></script>
+    <link rel="stylesheet" type="text/css" href="../../js/lib/rui2.8/plugins/ui/form/LMonthBox.css" />
+    <!-- RUI > form > DateTimeBox -->
+    <script language="JavaScript" type='text/javascript' src='../../js/lib/rui2.8/plugins/ui/form/LDateTimeBox.js'></script>
+    <link rel="stylesheet" type="text/css" href="../../js/lib/rui2.8/plugins/ui/form/LDateTimeBox.css" />
+    <!-- RUI > form > FromToDateBox -->
+    <script language="JavaScript" type='text/javascript' src='../../js/lib/rui2.8/plugins/ui/calendar/LFromToCalendar.js'></script>
+    <script language="JavaScript" type='text/javascript' src='../../js/lib/rui2.8/plugins/ui/form/LFromToDateBox.js'></script>
+    <link rel="stylesheet" type="text/css" href="../../js/lib/rui2.8/plugins/ui/form/LFromToDateBox.css" />
+    <!-- RUI > form > MultiCombo -->
+    <script language="JavaScript" type='text/javascript' src='../../js/lib/rui2.8/plugins/ui/form/LMultiCombo.js'></script>
+    <link rel="stylesheet" type="text/css" href="../../js/lib/rui2.8/plugins/ui/form/LMultiCombo.css" />
+    <!-- RUI > form > ComboLoader -->
+    <script language="JavaScript" type='text/javascript' src='../../js/lib/rui2.8/plugins/ui/form/LComboLoader.js'></script>
 
     <script type="text/javascript" src="../../js/lib/rui2.8/plugins/ui/LTooltip.js"></script>
     <link rel="stylesheet" type="text/css" href="../../js/lib/rui2.8/plugins/ui/LTooltip.css" />
@@ -61,45 +80,55 @@
     <!-- ***************************************** header start ***************************************** -->
     <header class="header">
         <div class="headerInner">
-            <h1 class="logo">HI-RUN SYSTEM</h1>
+            <h1 class="logo"><a href="#void">HI-RUN SYSTEM</a></h1>
             <nav class="gnb">
                 <ul>
-                    <li><a href="/" target="_self">상담</a>
+                    
+                    <li data-active="false"><a href="/" target="_self">상담</a>
                         <div class="submenu">
                             <dl>
-                                <div>
-                                    <dt><a href="/" target="_self">상담관리</a></dt>
-                                        <dd><a href="/" target="_self">상담PORTAL(☆)</a></dd>
+                                
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">기술상담관리(☆)</a></dd>
+                                    <dt>상담관리</dt>
                                     
-                                        <dd><a href="/" target="_self">전화번호관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">상담PORTAL(☆)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">기술상담관리(☆)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">전화번호관리</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/l" target="_self">VOC관리</a></dt>
-                                        <dd><a href="/" target="_self">VOC관리</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">Claim 관리(☆)</a></dd>
+                                    <dt>VOC관리</dt>
                                     
-                                </div>
-                                
-                                <div>
-                                    <dt><a href="/l" target="_self">캠페인관리</a></dt>
-                                        <dd><a href="/" target="_self">캠페인실시</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">VOC관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">캠페인관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">Claim 관리(☆)</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/l" target="_self">상황관제</a></dt>
-                                        <dd><a href="/" target="_self">TMS모니터링 이력</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self"> 현장 마스터</a></dd>
+                                    <dt>캠페인관리</dt>
                                     
-                                        <dd><a href="/" target="_self">TTMS 고장에러/이상징후 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">캠페인실시</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">캠페인관리</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>상황관제</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">TMS모니터링 이력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self"> 현장 마스터</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">TTMS 고장에러/이상징후 관리</a></dd>
                                     
                                 </div>
                                 
@@ -107,76 +136,88 @@
                             </dl>
                         </div>
                     </li>
-                    <li><a href="/" target="_self">서비스업무</a>
+                    
+                    <li data-active="false"><a href="/" target="_self">서비스업무</a>
                         <div class="submenu">
                             <dl>
-                                <div>
-                                    <dt><a href="/" target="_self">서비스업무관리</a></dt>
-                                        <dd><a href="/" target="_self">출장이관</a></dd>
+                                
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">서비스PORTAL</a></dd>
+                                    <dt>서비스업무관리</dt>
                                     
-                                        <dd><a href="/" target="_self">접수번호조회</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">출장이관</a></dd>
                                     
-                                        <dd><a href="/" target="_self">무상부품 변경</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">서비스PORTAL</a></dd>
                                     
-                                        <dd><a href="/" target="_self">수리비환불(유지보수무상)</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">접수번호조회</a></dd>
                                     
-                                        <dd><a href="/" target="_self">고객수리이력</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">무상부품 변경</a></dd>
                                     
-                                        <dd><a href="/" target="_self">PUSH메시지 전송</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">수리비환불(유지보수무상)</a></dd>
                                     
-                                        <dd><a href="/" target="_self">PUSH메시지 조회</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">고객수리이력</a></dd>
                                     
-                                        <dd><a href="/" target="_self">사전견적&amp;거래명세서 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">PUSH메시지 전송</a></dd>
                                     
-                                        <dd><a href="/" target="_self">한국서비스 접수번호조회</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">PUSH메시지 조회</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">사전견적&amp;거래명세서 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">한국서비스 접수번호조회</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/l" target="_self">일정관리</a></dt>
-                                        <dd><a href="/" target="_self">지역관리</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">운영스케줄관리</a></dd>
+                                    <dt>일정관리</dt>
                                     
-                                        <dd><a href="/" target="_self">기사별 서비스건수 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">지역관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">기사별 서비스 건수관리(pilot)</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">운영스케줄관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">당직일정 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">기사별 서비스건수 관리</a></dd>
                                     
-                                </div>
-                                
-                                <div>
-                                    <dt><a href="/l" target="_self">보상관리</a></dt>
-                                        <dd><a href="/" target="_self">PL포털(☆)</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">기사별 서비스 건수관리(pilot)</a></dd>
                                     
-                                        <dd><a href="/" target="_self">대리점환입</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">당직일정 관리</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/l" target="_self">칠러서비스관리</a></dt>
-                                        <dd><a href="/" target="_self">칠러PORTAL</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">납품스케쥴</a></dd>
+                                    <dt>보상관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">PL포털(☆)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">대리점환입</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/l" target="_self">총무성관리</a></dt>
-                                        <dd><a href="/" target="_self">보유아이템관리</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">신청결재관리</a></dd>
+                                    <dt>칠러서비스관리</dt>
                                     
-                                        <dd><a href="/" target="_self">운행일지목록</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">칠러PORTAL</a></dd>
                                     
-                                        <dd><a href="/" target="_self">정기유니폼관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">납품스케쥴</a></dd>
                                     
-                                        <dd><a href="/" target="_self">아이템현황</a></dd>
+                                </div>
+                                
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">통합결재</a></dd>
+                                    <dt>총무성관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">보유아이템관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">신청결재관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">운행일지목록</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">정기유니폼관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">아이템현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">통합결재</a></dd>
                                     
                                 </div>
                                 
@@ -184,94 +225,106 @@
                             </dl>
                         </div>
                     </li>
-                    <li><a href="/" target="_self">자재</a>
+                    
+                    <li data-active="false"><a href="/" target="_self">자재</a>
                         <div class="submenu">
                             <dl>
-                                <div>
-                                    <dt><a href="/" target="_self">주문관리</a></dt>
-                                        <dd><a href="/" target="_self">자재PORTAL</a></dd>
+                                
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">약속관리</a></dd>
+                                    <dt>주문관리</dt>
                                     
-                                        <dd><a href="/" target="_self">PO진도관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">자재PORTAL</a></dd>
                                     
-                                        <dd><a href="/" target="_self">일괄PO요청</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">약속관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">판매내역관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">PO진도관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">통합발주관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">일괄PO요청</a></dd>
                                     
-                                        <dd><a href="/" target="_self">시중구매출하관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">판매내역관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">자동발주관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">통합발주관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">자재정보</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">시중구매출하관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">자동발주관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">자재정보</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/l" target="_self">입출고관리</a></dt>
-                                        <dd><a href="/" target="_self">사업부적자반품</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">차용관리</a></dd>
+                                    <dt>입출고관리</dt>
                                     
-                                        <dd><a href="/" target="_self">출고관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">사업부적자반품</a></dd>
                                     
-                                        <dd><a href="/" target="_self">회수품출고</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">차용관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">입고관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">출고관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">A급 차용자재 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">회수품출고</a></dd>
                                     
-                                        <dd><a href="/" target="_self">SE별 A급 차용자재 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">입고관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">SE별 A급 자재 차용자재 신청</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">A급 차용자재 관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">A급자재 승인</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">SE별 A급 차용자재 관리</a></dd>
                                     
-                                </div>
-                                
-                                <div>
-                                    <dt><a href="/l" target="_self">재고관리</a></dt>
-                                        <dd><a href="/" target="_self">적치장소재고관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">SE별 A급 자재 차용자재 신청</a></dd>
                                     
-                                        <dd><a href="/" target="_self">폐기관리</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">재물조사</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">폐기승인</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">재고관리리스트</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">자재 실사 조회</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">자재실사 결재</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">A급자재 승인</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/l" target="_self">서브원주문</a></dt>
-                                        <dd><a href="/" target="_self">서브원부품주문</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">서브원주문관리</a></dd>
+                                    <dt>재고관리</dt>
                                     
-                                        <dd><a href="/" target="_self">서브원출하관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">적치장소재고관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">서브원부품등록</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">폐기관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">재물조사</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">폐기승인</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">재고관리리스트</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">자재 실사 조회</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">자재실사 결재</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/l" target="_self">서비스지정점 주문</a></dt>
-                                        <dd><a href="/" target="_self">전문점 현장관리 Master</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">서비스지정점 부품요청</a></dd>
+                                    <dt>서브원주문</dt>
                                     
-                                        <dd><a href="/" target="_self">부품요청내역</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">서브원부품주문</a></dd>
                                     
-                                        <dd><a href="/" target="_self">서비스결과입력</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">서브원주문관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">서비스결과내역</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">서브원출하관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서브원부품등록</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>서비스지정점 주문</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">전문점 현장관리 Master</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서비스지정점 부품요청</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">부품요청내역</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서비스결과입력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서비스결과내역</a></dd>
                                     
                                 </div>
                                 
@@ -279,38 +332,44 @@
                             </dl>
                         </div>
                     </li>
-                    <li><a href="/" target="_self">메인재경터넌스</a>
+                    
+                    <li data-active="false"><a href="/" target="_self">메인재경터넌스</a>
                         <div class="submenu">
                             <dl>
-                                <div>
-                                    <dt><a href="/" target="_self">대행료관리</a></dt>
-                                        <dd><a href="/" target="_self">칠러 대행료청구</a></dd>
+                                
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">외주비정산관리</a></dd>
+                                    <dt>대행료관리</dt>
                                     
-                                        <dd><a href="/" target="_self">외주비지급조회</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">칠러 대행료청구</a></dd>
                                     
-                                        <dd><a href="/" target="_self">센터 재료비/외주비 품의요청(신규)</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">외주비정산관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">본사 외주비 품의요청 (신규)</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">외주비지급조회</a></dd>
                                     
-                                        <dd><a href="/" target="_self">외주비 품의 결재 (신규)</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">센터 재료비/외주비 품의요청(신규)</a></dd>
                                     
-                                        <dd><a href="/" target="_self">외주비 AP전송 (신규)</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">본사 외주비 품의요청 (신규)</a></dd>
                                     
-                                        <dd><a href="/" target="_self">무상대행료청구(신규)</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">외주비 품의 결재 (신규)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">외주비 AP전송 (신규)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">무상대행료청구(신규)</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/" target="_self">매출/수금</a></dt>
-                                        <dd><a href="/" target="_self">수금관리</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">AR확정관리</a></dd>
+                                    <dt>매출/수금</dt>
                                     
-                                        <dd><a href="/" target="_self">AR확정/확정취소조회</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">수금관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">AR확정취소 품의관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">AR확정관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">AR확정/확정취소조회</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">AR확정취소 품의관리</a></dd>
                                     
                                 </div>
                                 
@@ -318,86 +377,98 @@
                             </dl>
                         </div>
                     </li>
-                    <li><a href="/" target="_self">메인터넌스</a>
+                    
+                    <li data-active="false"><a href="/" target="_self">메인터넌스</a>
                         <div class="submenu">
                             <dl>
-                                <div>
-                                    <dt><a href="/" target="_self">다지점 관리</a></dt>
-                                        <dd><a href="/" target="_self">다지점 Master</a></dd>
+                                
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">다지점 서비스/세척 관리</a></dd>
+                                    <dt>다지점 관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">다지점 Master</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">다지점 서비스/세척 관리</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/" target="_self">칠러전담현장 관리</a></dt>
-                                        <dd><a href="/" target="_self">칠러전담PORTAL</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">활동내역</a></dd>
+                                    <dt>칠러전담현장 관리</dt>
                                     
-                                        <dd><a href="/" target="_self">전담일정달력</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">칠러전담PORTAL</a></dd>
                                     
-                                        <dd><a href="/" target="_self">계획대비방문실적</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">활동내역</a></dd>
                                     
-                                </div>
-                                
-                                <div>
-                                    <dt><a href="/" target="_self">전담현장 관리</a></dt>
-                                        <dd><a href="/" target="_self">전담 PORTAL</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">전담일정달력</a></dd>
                                     
-                                        <dd><a href="/" target="_self">활동이력</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">일일활동내역</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">계획대비방문실적</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">전담방문일정</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">일정변경이력</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">유지보수 점검내역</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">계획대비방문실적</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/" target="_self">계약/매출관리</a></dt>
-                                        <dd><a href="/" target="_self">메인터넌스PORTAL</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">매출관리</a></dd>
+                                    <dt>전담현장 관리</dt>
                                     
-                                        <dd><a href="/" target="_self">계약리스트 조회</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">전담 PORTAL</a></dd>
                                     
-                                        <dd><a href="/" target="_self">AMC 정기점검 진척관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">활동이력</a></dd>
                                     
-                                        <dd><a href="/" target="_self">고객마스터</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">일일활동내역</a></dd>
                                     
-                                        <dd><a href="/" target="_self">Target 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">계획대비방문실적</a></dd>
                                     
-                                        <dd><a href="/" target="_self">소형패키지 마스터 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">전담방문일정</a></dd>
                                     
-                                        <dd><a href="/" target="_self">소형패키지 현장 상세정보</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">일정변경이력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">유지보수 점검내역</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/" target="_self">세척오더관리</a></dt>
-                                        <dd><a href="/" target="_self">세척오더달력</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">세척오더조회및승인</a></dd>
+                                    <dt>계약/매출관리</dt>
                                     
-                                        <dd><a href="/" target="_self">세척오더등록</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">메인터넌스PORTAL</a></dd>
                                     
-                                        <dd><a href="/" target="_self">이전설치달력</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">매출관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">세척 CAPA 마스터</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">계약리스트 조회</a></dd>
                                     
-                                        <dd><a href="/" target="_self">세척 스케줄 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">AMC 정기점검 진척관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">세척 CAPA 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">고객마스터</a></dd>
                                     
-                                        <dd><a href="/" target="_self">오더관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">Target 관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">오더조회및승인</a></a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">소형패키지 마스터 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">소형패키지 현장 상세정보</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>세척오더관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척오더달력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척오더조회및승인</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척오더등록</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">이전설치달력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척 CAPA 마스터</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척 스케줄 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척 CAPA 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">오더관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">오더조회및승인</a></a></dd>
                                     
                                 </div>
                                 
@@ -405,90 +476,102 @@
                             </dl>
                         </div>
                     </li>
-                    <li><a href="/" target="_self">마스터</a>
+                    
+                    <li data-active="true"><a href="/" target="_self">마스터</a>
                         <div class="submenu">
                             <dl>
-                                <div>
-                                    <dt><a href="/" target="_self">공통영역</a></dt>
-                                        <dd><a href="/" target="_self">조직코드 관리</a></dd>
+                                
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">사용자 관리</a></dd>
+                                    <dt>공통영역</dt>
                                     
-                                        <dd><a href="/" target="_self">휴일관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">조직코드 관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">일반코드 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">사용자 관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">업무담당자관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">휴일관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">역할메뉴 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">일반코드 관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">SMS전송관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">업무담당자관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">HIM거래선관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">역할메뉴 관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">결재담당자관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">SMS전송관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">총무성아이템관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">HIM거래선관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">개인정보대량조회</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">결재담당자관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">보안서약서 양식 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">총무성아이템관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">개인정보대량조회</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">보안서약서 양식 관리</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/" target="_self">서비스영역</a></dt>
-                                        <dd><a href="/" target="_self">이관등급관리</a></dd>
+                                <div data-active="true">
                                     
-                                        <dd><a href="/" target="_self">우편번호 지역관리</a></dd>
+                                    <dt>서비스영역</dt>
                                     
-                                        <dd><a href="/" target="_self">고객정보 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">이관등급관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">카드단말기번호관리</a></dd>
+                                        <dd data-active="true"><a href="/" target="_self">우편번호 지역관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">고객정보 관리(SBC)</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">고객정보 관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">조 관리 마스터</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">카드단말기번호관리</a></dd>
                                     
-                                </div>
-                                
-                                <div>
-                                    <dt><a href="/" target="_self">기술영역</a></dt>
-                                        <dd><a href="/" target="_self">제품코드 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">고객정보 관리(SBC)</a></dd>
                                     
-                                        <dd><a href="/" target="_self">모델코드 관리</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">제조번호예외 관리</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">제품류코드 관리</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">수리코드관리</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">난수리 부품 Validation</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">조 관리 마스터</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/" target="_self">자재영역</a></dt>
-                                        <dd><a href="/" target="_self">ITEM 마스터 관리</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">부품분류코드관리</a></dd>
+                                    <dt>기술영역</dt>
                                     
-                                        <dd><a href="/" target="_self">SVC BOM 관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">제품코드 관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">시중구매SBOM 등록</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">모델코드 관리</a></dd>
                                     
-                                        <dd><a href="/" target="_self">해외 시중구매부품 등록</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">제조번호예외 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">제품류코드 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">수리코드관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">난수리 부품 Validation</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/" target="_self">메인터넌스영역</a></dt>
-                                        <dd><a href="/" target="_self">허브점관리</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">목표/수주예상 관리</a></dd>
+                                    <dt>자재영역</dt>
                                     
-                                        <dd><a href="/" target="_self">상품관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">ITEM 마스터 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">부품분류코드관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">SVC BOM 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">시중구매SBOM 등록</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">해외 시중구매부품 등록</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>메인터넌스영역</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">허브점관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">목표/수주예상 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">상품관리</a></dd>
                                     
                                 </div>
                                 
@@ -496,134 +579,148 @@
                             </dl>
                         </div>
                     </li>
-                    <li><a href="/" target="_self">재경현황</a>
+                    
+                    <li data-active="false"><a href="/" target="_self">재경현황</a>
                         <div class="submenu">
                             <dl>
-                                <div>
-                                    <dt><a href="/" target="_self">메인터넌스현황</a></dt>
-                                        <dd><a href="/" target="_self">파이프라인현황</a></dd>
+                                
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">수주잔현황</a></dd>
+                                    <dt>메인터넌스현황</dt>
                                     
-                                        <dd><a href="/" target="_self">파이프라인현황2</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">파이프라인현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">수주예상 변경이력</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">수주잔현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">파이프라인현황2</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">수주예상 변경이력</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/" target="_self">재경현황</a></dt>
-                                        <dd><a href="/" target="_self">SE별매출현황</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">현금일일시재현황</a></dd>
+                                    <dt>재경현황</dt>
                                     
-                                        <dd><a href="/" target="_self">미수채권 현황</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">SE별매출현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">사고채권</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">현금일일시재현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">외주비 현황( 신규 )</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">미수채권 현황</a></dd>
                                     
-                                </div>
-                                
-                                <div>
-                                    <dt><a href="/" target="_self">서비스현황</a></dt>
-                                        <dd><a href="/" target="_self">서비스세부리스트</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">사고채권</a></dd>
                                     
-                                        <dd><a href="/" target="_self">서비스현황</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">재고장현황</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">서비스지표현황</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">시간대별 건수</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">장기미처리 현황</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">CIC 전달 이력</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">LMS리포트현황</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">LMS리포트현황2</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">일일서비스품질지표</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">센터별일일서비스처리현황</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">개인별일일서비스처리현황</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">조별일일서비스처리현황</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">KPI지표현황</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">서비스접수 지연현황</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">KPI지표현황_2021</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">외주비 현황( 신규 )</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/" target="_self">자재현황</a></dt>
-                                        <dd><a href="/" target="_self">품절율현황</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">센터이체율</a></dd>
+                                    <dt>서비스현황</dt>
                                     
-                                        <dd><a href="/" target="_self">수불실적리스트</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">서비스세부리스트</a></dd>
                                     
-                                        <dd><a href="/" target="_self">센터입출고현황</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">서비스현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">기간별재고현황</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">재고장현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">기간별재고상세현황</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">서비스지표현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">차용관리현황</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">시간대별 건수</a></dd>
                                     
-                                        <dd><a href="/" target="_self">회수반품현황</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">장기미처리 현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">약속미사용</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">CIC 전달 이력</a></dd>
                                     
-                                        <dd><a href="/" target="_self">자재지표현황</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">LMS리포트현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">수불항번자료</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">LMS리포트현황2</a></dd>
                                     
-                                        <dd><a href="/" target="_self">사업부 자재지표</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">일일서비스품질지표</a></dd>
                                     
-                                        <dd><a href="/" target="_self">SE 부품 미사용율 현황</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">센터별일일서비스처리현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">A급 자동발주 현황</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">개인별일일서비스처리현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">A급 자재 현황</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">조별일일서비스처리현황</a></dd>
                                     
-                                </div>
-                                
-                                <div>
-                                    <dt><a href="/" target="_self">기술자료</a></dt>
-                                        <dd><a href="/" target="_self">시방정보</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">KPI지표현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">원포인트정보</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">서비스접수 지연현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">업그레이드 정보</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">기술자료 게시판</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">매뉴얼정보</a></dd>
-                                    
-                                        <dd><a href="/" target="_self">CS교육자료 게시판</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">KPI지표현황_2021</a></dd>
                                     
                                 </div>
                                 
-                                <div>
-                                    <dt><a href="/" target="_self">구분손익</a></dt>
-                                        <dd><a href="/" target="_self">사업별 구분손익 결과</a></dd>
+                                <div data-active="false">
                                     
-                                        <dd><a href="/" target="_self">배부율관리</a></dd>
+                                    <dt>자재현황</dt>
                                     
-                                        <dd><a href="/" target="_self">구분손익 코드관리</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">품절율현황</a></dd>
                                     
-                                        <dd><a href="/" target="_self">해외 구분손익 결과</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">센터이체율</a></dd>
                                     
-                                        <dd><a href="/" target="_self">해외 법인별 배부율</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">수불실적리스트</a></dd>
                                     
-                                        <dd><a href="/" target="_self">해외 법인별 환율</a></dd>
+                                        <dd data-active="false"><a href="/" target="_self">센터입출고현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">기간별재고현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">기간별재고상세현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">차용관리현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">회수반품현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">약속미사용</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">자재지표현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">수불항번자료</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">사업부 자재지표</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">SE 부품 미사용율 현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">A급 자동발주 현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">A급 자재 현황</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>기술자료</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">시방정보</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">원포인트정보</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">업그레이드 정보</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">기술자료 게시판</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">매뉴얼정보</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">CS교육자료 게시판</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>구분손익</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">사업별 구분손익 결과</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">배부율관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">구분손익 코드관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">해외 구분손익 결과</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">해외 법인별 배부율</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">해외 법인별 환율</a></dd>
                                     
                                 </div>
                                 
@@ -631,15 +728,21 @@
                             </dl>
                         </div>
                     </li>
+                    
                 </ul>
+                <div class="slider"></div>
             </nav>
             <div class="groupRight">
-                <p class="welcomeMessage">강동지역센터 <b>하이런</b>님 안녕하세요!</p>
+                
+                <p class="sectionTimer" title="해당 시간이 지나면 로그인 섹션이 종료됩니다" onclick="alarm();">30 : 00</p>
+                
                 <div class="headerUtil">
-                    <button type="button" class="btn_headerUtill img24 img_setting" title="설정">설정</button>
-                    <button type="button" class="btn_headerUtill img24 img_search" title="검색">검색</button>
-                    <button type="button" class="btn_headerUtill bg-gray img24 img_alarm" title="알람">남은시간</button>
-                    <button type="button" class="btn_headerUtill bg-primary img24 img_logout" title="로그아웃">로그아웃</button>
+                    
+                    <button type="button" class="bt_headerUtil myWork">나의 업무일정</button>
+                    <button type="button" class="bt_headerUtil workRegister">신규일정등록</button>
+                    <button type="button" class="bt_headerUtil webMessenger">웹메신저</button>
+                    <button type="button" class="bt_headerUtil integratedSearch">통합검색</button>
+                    <button type="button" class="bt_headerUtil bg-primary myProfile">프로필</button>
                 </div>
             </div>
         </div>
@@ -652,6 +755,20 @@
 
 
 </div>
-
+<div class="cp_dialog">
+    <div class="cpInner" >
+        <div class="cpHeader">
+            <div class="heading"><strong>업무일정등록</strong></div>
+            <button type="button" class="bt_close">팝업닫기</button>
+        </div>
+        <div class="cpMain">
+            내용
+        </div>
+        <div class="cpFooter bt_wrap">
+            <button type="button" class="bt_line">취소</button>
+            <button type="button" class="bt_fill cl-primary">저장</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,0 +1,56 @@
+@charset 'utf-8';
+/* ---------------------------------------------------------
+* FileName : _page.css
+* ProjectName : 하이엠솔루텍 하이런 차세대
+* Description : 페이지 스타일시트 (로그인)
+* Author : zarel
+* Date : 2024.11
+--------------------------------------------------------- */
+
+@use 'variables' as *;
+@use 'image' as *;
+
+.pj-hirun {
+
+
+    /* button --------------------------------------------------------- */
+
+    .a, a:link, a:active, a:visited { text-decoration:none; }
+    [class^='btn_'] { cursor:pointer; margin:0; padding:0; border:0 solid transparent; background-color:transparent; font-size:inherit; }
+    input { outline:none; }
+
+    .bt_headerUtil { display:inline-flex; align-items:center; position:relative; max-width:40px; height:40px; padding-left:40px; border-radius:50%; border:1px solid $gray300; white-space:nowrap; transition:border-radius .1s ease-in-out .5s, padding .1s ease-in-out .5s, max-width .6s ease-in-out; transform-origin:center right 20px; overflow:hidden; 
+        &::before { content:''; display:block; position:absolute; left:0; top:0; width:40px; height:40px; }
+        &.myWork::before { @include bg($img_myWok,24); }
+        &.workRegister::before { @include bg($img_workRegister,24); } 
+        &.webMessenger::before { @include bg($img_webMessenger,24); }
+        &.integratedSearch::before { @include bg($img_integratedSearch,24); }
+        &.myProfile::before { @include bg($img_myProfile,24,auto,64%); }
+
+        &.bg-gray { border-color:$gray300; background-color:$gray300; }
+        &.bg-primary { border-color:$primary; background-color:$primary; }
+        &:not([class*="bg-"]) {  
+            &:hover { max-width:200px; padding:0 10px 0 38px; border-radius:8px; border-color:$gray700; transition:border-radius .1s ease, padding .1s ease, max-width .6s ease; }
+        }
+        &[class*="bg-"] { transition:all .3s ease-in-out;
+            &.bg-primary:hover { background-color:$primary700; }
+        }
+        // &:hover { animation:an-headerUtil .6s ease-out; animation-fill-mode:forwards; }
+    }
+
+    .bt_close {  }
+
+
+    .bt_wrap { display:flex; justify-content:center; align-items:center; column-gap:8px;
+        a, button, .bt_fill { display:inline-flex; justify-content:center; align-items:center; min-width:78px; height:46px; padding:0 24px; border-radius:8px;
+            &:not(.ty-line) {  }
+            &.bt_line { border:1px solid currentColor; background-color:transparent; font-size:16px; @include fontR; color:$gray700; }
+            &.cl-primary { background-color:$primary; color:$white; }
+            &.cl-primary300 { border:1px solid $primary; background-color:$primary300; color:$white; }
+            &.cl-gray { background-color:$gray; color:$gray300; }
+            &.cl-gray300 { background-color:$gray300; color:$gray700; }
+        }
+    }
+
+
+}

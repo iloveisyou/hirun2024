@@ -1,0 +1,68 @@
+{% set isNotHeaderFooter = false %}
+{% set cat = 'sample' %}
+{% set page = 'initializeShipManagement' %}
+{% set title = 'Him Hi-Run System - 자재, 출고 관리' %}
+{% extends './_include/layout.html' %}
+
+
+{% block main %}
+<div class="container">
+    <h2 class="heading">출고 관리</h2>
+    <section class="cp_searchBox">
+        <div class="citem">
+            <div class="cp_form">
+                <select><option>선택</option></select>
+            </div>
+        </div>
+        <div class="citem">
+            <div class="cp_form">
+                <select><option>선택</option></select>
+            </div>
+        </div>
+        <div class="citem">
+            <div class="cp_form">
+                <input type="text" />
+            </div>
+        </div>
+        <div class="citem">
+            <div class="cp_form">
+                <input type="text" />
+            </div>
+        </div>
+
+        <div class="citem">
+            <div class="cp_form">
+                <select><option>선택</option></select>
+            </div>
+        </div>
+        <div class="citem">
+            <div class="cp_form">
+                <select><option>선택</option></select>
+            </div>
+        </div>
+        <div class="citem">
+            <div class="cp_form">
+                <input type="text" />
+            </div>
+        </div>
+        <div class="citem">
+            <div class="cp_form">
+                <button type="button" class="cl_second">초기화</button>
+                <button type="button" class="cl_default">조회</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="cp_contentBox">
+        <h3 class="heading">사전출고승인</h3>
+        <div class="lineContent">
+        </div>
+    </section>
+
+</div> 
+
+<script>
+AOS.init();
+</script>
+
+{% endblock %}

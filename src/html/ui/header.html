@@ -4,24 +4,30 @@
 {% set title = 'Hi-Run System - ui' %}
 {% extends './_include/layout.html' %}
 
+{# 현재 페이지 셋팅 #}
+{% set depth1 = '마스터' %}
+{% set depth2 = '서비스영역' %}
+{% set depth3 = '우편번호 지역관리' %}
+
 {% block wrap %}
 
 <!-- ************************************************************************************************ -->
 <!-- ***************************************** header start ***************************************** -->
 <header class="header">
     <div class="headerInner">
-        <h1 class="logo">HI-RUN SYSTEM</h1>
+        <h1 class="logo"><a href="#void">HI-RUN SYSTEM</a></h1>
         <nav class="gnb">
             <ul>
-                {%- for gnb in gnbData %}
-                <li><a href="{{ gnb.href }}" target="{{ gnb.target }}">{{ gnb.name }}</a>
+                {% for gnb in gnbData %}
+                <li data-active="{{ true if gnb.name == depth1 else false }}"><a href="{{ gnb.href }}" target="{{ gnb.target }}">{{ gnb.name }}</a>
                     <div class="submenu">
                         <dl>
-                            {%- for dt in gnb.depth1 %}
-                            <div>
-                                <dt><a href="{{dt.href}}" target="{{dt.target}}">{{dt.name}}</a></dt>
-                                {%- for dd in dt.depth2 %}
-                                    <dd><a href="{{dd.href}}" target="{{dd.target}}">{{dd.name}}</a></dd>
+                            {% for dt in gnb.depth1 %}
+                            <div data-active="{{ true if dt.name == depth2 else false }}">
+                                {# <dt><a href="{{dt.href}}" target="{{dt.target}}">{{dt.name}}</a></dt> #}
+                                <dt>{{dt.name}}</dt>
+                                {% for dd in dt.depth2 %}
+                                    <dd data-active="{{ true if dd.name == depth3 else false }}"><a href="{{dd.href}}" target="{{dd.target}}">{{dd.name}}</a></dd>
                                 {% endfor %}
                             </div>
                             {% endfor %}
@@ -29,16 +35,21 @@
                         </dl>
                     </div>
                 </li>
-                {%- endfor %}
+                {% endfor %}
             </ul>
+            <div class="slider"></div>
         </nav>
         <div class="groupRight">
-            <p class="welcomeMessage">강동지역센터 <b>하이런</b>님 안녕하세요!</p>
+            {# <p class="welcomeMessage">강동지역센터 <b>하이런</b>님 안녕하세요!</p> #}
+            <p class="sectionTimer" title="해당 시간이 지나면 로그인 섹션이 종료됩니다" onclick="alarm();">30 : 00</p>
+            {# <script>ui.sectionTimer(1800);</script> #}
             <div class="headerUtil">
-                <button type="button" class="btn_headerUtill img24 img_setting" title="설정">설정</button>
-                <button type="button" class="btn_headerUtill img24 img_search" title="검색">검색</button>
-                <button type="button" class="btn_headerUtill bg-gray img24 img_alarm" title="알람">남은시간</button>
-                <button type="button" class="btn_headerUtill bg-primary img24 img_logout" title="로그아웃">로그아웃</button>
+                {# <button type="button" class="btn_headerUtil sectionTimeer img_alarm" title="알람">남은시간</button> #}
+                <button type="button" class="bt_headerUtil myWork">나의 업무일정</button>
+                <button type="button" class="bt_headerUtil workRegister">신규일정등록</button>
+                <button type="button" class="bt_headerUtil webMessenger">웹메신저</button>
+                <button type="button" class="bt_headerUtil integratedSearch">통합검색</button>
+                <button type="button" class="bt_headerUtil bg-primary myProfile">프로필</button>
             </div>
         </div>
     </div>
@@ -46,4 +57,23 @@
 <!-- *****************************************  header end  ***************************************** -->
 <!-- ************************************************************************************************ -->
 
+{% endblock %}
+
+
+{% block body %}
+<div class="cp_dialog">
+    <div class="cpInner" >
+        <div class="cpHeader">
+            <div class="heading"><strong>업무일정등록</strong></div>
+            <button type="button" class="bt_close">팝업닫기</button>
+        </div>
+        <div class="cpMain">
+            내용
+        </div>
+        <div class="cpFooter bt_wrap">
+            <button type="button" class="bt_line">취소</button>
+            <button type="button" class="bt_fill cl-primary">저장</button>
+        </div>
+    </div>
+</div>
 {% endblock %}
