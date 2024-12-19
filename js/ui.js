@@ -318,7 +318,7 @@ $(function() {
 $(window).on('load', function(){
     ui.gnb();
     ui.tab();
-    $('.cp_dialog').addClass('is-active');
+    // $('.cp_dialog').addClass('is-active');
 });
 
 
