@@ -196,7 +196,7 @@ function server() {
 }
 
 function gh() {
-    return src(di + '/**/*') 
+    return src(di + '/**/*', { encoding: false }) 
     .pipe(ghPages( // 깃 저장소에 배포
         {branch: 'view-pages'} // 옵션 설정하지 않으면 자동으로 gh-pages 브랜치를 생성하고 배포, 브랜치명 변경시 사용
     ))
