@@ -12,10 +12,17 @@
 
 
 .pj-hirun, .pj-hirun *, .pj-hirun ::before, .pj-hirun ::after { box-sizing:border-box; }
-.pj-hirun { font-family:'LG_Smart_H2.0', sans-serif; font-size:16px; font-weight:400; letter-spacing:-0.5px; color:$gray700;
+.pj-hirun { @include font; font-size:16px; font-weight:400; letter-spacing:-0.5px; color:$gray700;
     .hirunWrap { min-width:1600px; }
     ::selection {  color:$white;  background-color:$primary;}
     a { color:inherit; }
+    input, textarea, button { @include font; color:$gray700; }
+
+    $spaceOptionList: t,r,b,l;
+    @each $space in $spaceOptionList {
+        @for $i from 0 to 21 { .m#{$space}-#{5*$i} { margin-left:5*$i+px !important; } }
+        @for $i from 0 to 21 { .p#{$space}-#{5*$i} { margin-left:5*$i+px !important; } }
+    } 
 
 }
 

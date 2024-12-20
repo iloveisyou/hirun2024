@@ -11,6 +11,9 @@
 @use 'image' as *;
 
 .pj-hirun{
+
+
+    // 로그인 폼
     .cp_login { display:flex; row-gap:10px; flex-direction:column; justify-content:stretch; width:400px;
         .loginInput { position:relative; height:46px; border:1px solid $gray300; border-radius:8px;
             // input { width:100%; height:100%; padding:0 18px; border-radius:8px; border:0 solid transparent; @include fontR; font-size:16px; }
@@ -28,6 +31,32 @@
         }
     }
 
+
+    // 통합검색
+    .cp_integratedSearch { position:absolute; left:0; top:0; height:100%; width:100%; background-color:$white; @include transition;
+        &:not(.is-active) { transform:translateY(-100%); }
+        input { display:flex; align-items:center; width:100%; height:44px; margin:8px 0; padding:0 30px; border:0 solid transparent; text-align:center; font-size:24px; @include transition;
+            &::placeholder { color:$gray300; }
+        }
+        .keyword { display:flex; justify-content:center; align-items:center; height:28px; margin-top:10px; @include transition;
+            dt { display:inline-block; margin-right:14px; font-size:14px; @include fontSB; }
+            dd { 
+                + dd { margin-left:6px; }
+            }
+        }
+        .bt_ntegratedSearch { position:absolute; right:100px;; top:50%; transform:translateY(-50%); }
+        .bt_ntegratedSearchClose { position:absolute; right:50px;; top:50%; transform:translateY(-50%); }
+        @at-root .sc-headerSmall .cp_integratedSearch input, .sc-headerSmall .cp_integratedSearch .keyword { margin-top:0; margin-bottom:0; }
+    }
+
+
+    // 뱃지
+    .cp_badge { display:inline-flex; justify-content:center; align-items:center; height:28px; padding:0 8px; border-radius:8px; border:1px solid $gray200; background-color:$gray100; font-size:12px; color:$gray; cursor:pointer; @include transition;
+        &:hover { border-color:$gray700; background-color:$gray700; color:$white; }
+    }
+
+
+    // 그리드
     .cp_grid { display:flex; width:100%;
         > * { flex:1; }
         &.isColumn { flex-direction:column; 
@@ -49,26 +78,99 @@
         &:has(:nth-child(10)) > * { flex-basis:calc(100 / 10 ); }
         &:has(:nth-child(11)) > * { flex-basis:calc(100 / 11 ); }
         &:has(:nth-child(12)) > * { flex-basis:calc(100 / 12 ); }
-
     }
 
-    .cp_dialog { position:fixed; left:0; top:0; z-index:100; width:100%; height:100%; 
-        &:not(.is-active) { 
-            &::before { @include hide; opacity:0; }
-            .cpInner { @include hide; left:50%; transform:translate(-50%, 100vh); }
+
+    // 다이알로그 (팝업)
+    .cp_dialog { position:fixed; left:0; top:0; z-index:100; width:100%; height:100%;
+        &:not(.is-active) { z-index:-1; transition:all .1s ease-in-out .6s; 
+            &::before { opacity:0; transition:opacity 3s ease-in-out; transition:all .3s ease-in-out .2s; }
+            .cpInner { display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, 100vh); transition:all .3s ease-in-out .2s; }
         }
-        &::before { content:''; display:block; width:100%; height:100%; background-color:#000000D9; color:$white; opacity:1; transition:opacity 1s ease-in-out; }
-        .cpInner { display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:650px; min-width:650px; max-width:100%; height:auto; min-height:150px; max-height:100%; padding:30px; border-radius:24px; background-color:$white; transition:transform .6s ease-in-out .2s; }
+        &::before { content:''; display:block; width:100%; height:100%; background-color:#000000D9; color:$white; opacity:1; transition:opacity .3s ease-in-out; }
+        .cpInner { display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:650px; min-width:650px; max-width:100%; height:auto; min-height:150px; max-height:100%; padding:30px; border-radius:24px; background-color:$white; transition:transform .3s ease-in-out .2s; }
         .cpHeader { display:flex; align-items:center; height:24px;
             .heading {  
                 strong { font-size:18px; @include fontSB; }
             }
-            .bt_close { position:relative; width:24px; height:24px; margin-left:auto; margin-right:-5px; padding-left:24px; font-size:18px; @include fontSB; overflow:hidden;
-                &::before { content:''; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(45deg); width:10px; height:2px; background-color:$black; }
-                &::after { content:''; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-45deg); width:10px; height:2px; background-color:$black; }
-            }
+            .bt_dialogClose { margin-left:auto; margin-right:-5px;}
         }
         .cpFooter { margin-top:10px; }
         .cpMain { margin-top:20px; }
+        &.ty-target {  
+            &::before { display:none; }
+            &:not(.is-active) { 
+                .cpInner { transform:translateY(-10%); opacity:0; transition:all .3s ease-in-out .2s; }
+            }
+            .cpInner { left:auto; left:initial; top:auto; top:initial; transform:none; box-shadow:0 4px 10px 4px #0000000d;  transition:all .3s ease-in-out .2s; }
+        }
+        &.nm-workRegister { .cpInner { width:650px; min-width:650px; min-height:150px; } } // 공통헤더 업무등록
+        // 공통헤더 웹메신저
+        &.nm-webMessenger { .cpInner { right:50px; top:80px; width:320px; min-width:320px; min-height:320px; height:640px; max-height:640px; padding:0; background-color:$gray700; 
+            .cpHeader { align-items:flex-start; margin-top:12px; padding:0 10px 0 20px;
+                .heading { display:flex; justify-content:flex-start; align-items:center; height:16px; 
+                    strong { font-size:12px; color:$gray300; @include fontL; }
+                    button { margin-left:3px; }
+                }
+                .bt_dialogClose { margin-right:0;}
+            }
+            .cpMain { height:calc(100% - 36px); margin-top:8px;
+                .received { margin-top:8px; padding:0 20px; color:$white;
+                    dt { height:16px; font-size:14px; color:inherit; }
+                    dd { display:flex; align-items:center; column-gap:6px; height:36px; margin-top:4px; font-size:16px; color:inherit;
+                        em { font-size:32px; @include fontB; color:inherit; }
+                    }
+                }
+                .contact { margin-top:16px; padding:0 20px; color:$gray;
+                    dt { font-size:12px; color:inherit; }
+                    dd { display:flex; flex-flow:row nowrap; column-gap:15px; height:58px; margin-top:6px; @include scroll(x,4,$white);
+                        button { flex-shrink:0; @include profilePhoto;
+                        }
+                    }
+                }
+                .chat { display:flex; flex-flow:column nowrap; height:calc(100% - 164px); margin-top:8px; padding:10px 0 20px 0; border-radius:24px 24px 21px 21px; background-color:$white; overflow:hidden;
+                    .search { flex-shrink:0; display:flex; align-items:center; position:relative; height:46px; margin:0 10px; padding:0 18px 0 20px; border-radius:24px; border:1px solid $gray300; 
+                        input { flex:1; width:100%; margin:0; padding:0; border:0 solid transparent; font-size:14px; color:$gray700; 
+                            &::placeholder { color:$gray; }
+                        }
+                        button { width:24px; height:24px; padding-left:24px; @include bg($img_form_search, 24); overflow:hidden; }
+                    }
+                    .chatList { margin:10px 4px 0 4px; padding:0 16px; @include scroll(y,4);
+                        ul { 
+                            li { display:flex; column-gap:10px; align-items:center; padding-top:10px; overflow:hidden; cursor:pointer;
+                                .photo { @include profilePhoto(40,2,$white); flex-shrink:0; }
+                                .content { flex:1;
+                                    .info { display:flex; align-items:center; min-height:16px; color:$gray700;
+                                        .name { font-size:14px; @include fontSB; color:initial; }
+                                        .region { margin-left:4px; font-size:12px; color:initial; }
+                                        .time { margin-left:auto; font-size:12px; color:$gray; }
+                                    }
+                                    .message { margin-top:6px; font-size:14px; color:$gray; @include ellipsis(1) }
+                                }
+                                +li { margin-top:6px; }
+                            }
+                        }
+                        .categoryDate { display:flex; column-gap:4px; align-items:center; height:16px; margin-top:20px; font-size:12px; color:$gray;
+                            b { @include fontSB; color:$gray700; }
+                        }
+                    }
+                }
+                .controll { position:absolute; right:20px; bottom:20px;  }
+            }
+        } }
+        // 공통헤더 나의 프로필 정보
+        &.nm-profile { .cpInner { right:50px; top:80px; width:400px; min-width:400px; max-height:640px;
+            .cpHeader { height:0;
+                .heading { @include hide; }
+            }
+            .cpMain { margin:0;
+                .fm_grid + .fm_grid { margin-top:10px; }
+            }
+        } }
+        
+
     }
+
+
+
 }

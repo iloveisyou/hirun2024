@@ -21,11 +21,16 @@ $primary700:#9E0736;
 // 0881bb
 
 $gray:#6C6C6C;
+$gray100:#F5F7FA;
+$gray200:#E6E9ED;
 $gray300:#DEDEDE;
 $gray700:#2A2A2A;
 
 $black:#000000;
 $white:#ffffff;
+
+$plusColor:#A0D468;
+$minusColor:#ED5565;
 
 
 
@@ -45,15 +50,40 @@ $white:#ffffff;
 /* display */
 @mixin hide { position:absolute; width:1px; height:1px; clip:rect(-1px, -1px, -1px, -1px); margin:0; padding:0; overflow:hidden; }
 @mixin show { position:static; width:auto; height:auto; clip:auto; margin:0; padding:0; overflow:visible; }
-@mixin none { display:none; }
+@mixin none { display:none !important; }
 
 
+@mixin x($wrap:24,$xw:10, $xh:2,$color:$black) { position:relative; width:$wrap+px; height:$wrap+px;  padding-left:$wrap+px; /*font-size:18px; @include fontSB;*/ overflow:hidden;
+    &::before { content:''; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(45deg); width:$xw+px; height:$xh+px; background-color:$color; }
+    &::after { content:''; display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-45deg); width:$xw+px; height:$xh+px; background-color:$color; }
+}
 
+@mixin scroll($axis:y, $size:2, $color:$gray700,$opacity:1A, $opacity2:33 ) { overflow:hidden; 
+    @if $axis == x { overflow-x:auto; } 
+    @else { overflow-y:auto; }
+    &::-webkit-scrollbar { width:$size+px; height:$size+px;  }
+    &::-webkit-scrollbar-button {  }
+    &::-webkit-scrollbar-track-piece {  }
+    &::-webkit-scrollbar-thumb { border-radius:10px; border:0 solid transparent; background-color:#{$color+'1A'}; cursor:pointer;
+        &:hover {  background-color:#{$color+'33'};  }
+    }
+}
 
+@mixin profilePhoto($size:50,$statusPosition:5,$lineColor:$gray700) { position:relative; width:$size+px; height:$size+px; border-radius:50%; background-color:$gray300; @include bg($img_profileHirun,24);
+    img { width:100%; height:100%; object-fit:cover;; border-radius:50%; overflow:hidden; }
+    &::after { content:'온라인'; display:inline-block; position:absolute; right:0; bottom:$statusPosition+px; width:10px; height:10px; padding:0 0 0 6px; border-radius:50%; border:2px solid $lineColor; background-color:$plusColor; overflow:hidden; }
+    &.is-online::after { content:'온라인'; background-color:$plusColor; }
+    &.is-offline::after { content:'오프라인'; background-color:$minusColor; }
+}
+
+@mixin ellipsis($line:1,$lineHeight:1) { display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; text-overflow:ellipsis; line-height:$lineHeight; overflow:hidden; }
+
+@mixin transition($time:.3) { transition:all $time+s ease-in-out; }
 
 
 /* form */
-@mixin inputbox { position:relative; z-index:25; width:100% !important; height:100%; padding:0 0 0 16px; background-color:transparent; }
+// @mixin inputbox { position:relative; z-index:25; width:100% !important; height:100%; padding:0 14px; border:0 solid transparent; background-color:transparent; }
+
 @mixin inputboxFocusLabel { display:inline; left:16px; top:-12px; z-index:10; height:20px; padding:2px; font-size:12px; background-color:#ffffff; line-height:20px; } 
 @mixin inputSpin {
     div.icon { position:absolute; right:0; z-index:20; width:30px; height:100%;
@@ -61,14 +91,21 @@ $white:#ffffff;
         .L-spin-down { position:absolute; right:0; bottom:0; width:30px; height:22px; }
     }    
 } 
-@mixin inputWrap { position:relative; width:100% !important; height:46px; border-radius:8px; border:1px solid $gray; 
-    label { position:absolute; left:0; top:0; z-index:10; width:fit-content; height:100%; padding:0 0 0 16px; line-height:46px; color:$gray; transition:all .3s ease-in-out; white-space:nowrap; }
+@mixin inputWrap { display:flex; position:relative; width:100% !important; height:46px; border-radius:8px; border:1px solid $gray300; font-size:16px;
+    input, textarea { position:relative; z-index:25; width:100% !important; height:100%; padding:0 14px; border:0 solid transparent; background-color:transparent; font-size:inherit; }
+    textarea { padding:14px; }
+    label { display:flex; align-items:center; position:absolute; left:0; top:0; z-index:10; width:fit-content; max-width:100%; height:100%;; padding:0 14px; line-height:100%; font-size:inherit; color:$gray; @include transition; white-space:nowrap; }
     &::before { content:''; display:block; position:absolute; left:4px; top:0; z-index:5; width:0; height:0; border-radius:8px; border:1px solid transparent; background-color:transparent; }
     &::after { content:''; display:block; position:absolute; right:4px; bottom:0; z-index:5; width:0; height:0; border-radius:8px; border:1px solid transparent; background-color:transparent;  }
-    &.is-focus, &.is-value { 
-        label { @include inputboxFocusLabel; }
+    &.is-focus, &.is-value, &:has(input:focus), &:has(textarea:focus) { 
+        input:focus + label { @include inputboxFocusLabel; }
         &::before { left:0; width:100%; height:100%; border-top-color:$gray700; border-right-color:$gray700; transition:width .25s ease-out, height .25s ease-out .25s; }
         &::after { right:0; width:100%; height:100%; border-bottom-color:$gray700; border-left-color:$gray700; transition:right .25s ease-out .75s, border-color 0s ease-out .5s, width .25s ease-out .5s, height .25s ease-out .75s; }
+    }
+    @at-root html .sz-small .fm_item:not(.ty-check, .ty-radio):has(input[type=text], input[type=date], textarea) { height:38px; font-size:14px;
+        input { padding:0 10px;  }
+        label { padding:0 10px;  }
+        textarea { padding:10px; }
     }
 }
 @mixin inputTransparent { position:relative; z-index:15; width:100% !important; height:100%; padding:0 0 0 16px; background-color:transparent; }
@@ -86,7 +123,6 @@ $white:#ffffff;
             }
         }
     }
-    
 }
 
 @mixin radioWrap { position:relative; cursor:pointer; 

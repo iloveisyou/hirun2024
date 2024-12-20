@@ -13,32 +13,34 @@
 
 /* header --------------------------------------------------------- */
 .pj-hirun.lo-default {
-    .hirunWrap { display:flex; flex-direction:column; min-width:1600px; min-height:100vh; /*overflow:hidden;*/ }
+    .hirunWrap { display:flex; flex-direction:column; min-width:1600px; min-height:100vh; /*overflow:hidden;*/ 
+        &.sc-headerSmall .header .headerInner { height:80px; }
+    }
     .header { position:sticky; left:0; top:0; z-index:50;
-        .headerInner { display:flex; column-gap:40px; justify-content:flex-start; align-items:center; position:relative; width:100%; min-width:1600px; height:100px; padding:0 40px; border-bottom:1px solid $primary; background-color:rgba(255,255,255,.85) }
+        .headerInner { display:flex; column-gap:40px; justify-content:flex-start; align-items:center; position:relative; width:100%; min-width:1600px; height:100px; padding:0 50px; border-bottom:1px solid $primary; background-color:rgba(255,255,255,.85); @include transition; }
+        
         .logo { background-color:transparent; @include fontB; font-size:24px; color:$primary; 
             a { display:inline-block; padding:10px; }
         }
         .gnb {
-            &.is-active ul li.is-active .submenu { max-height:1000px; }
+            // &.is-active ul li.is-active .submenu { max-height:1000px; }
             &>ul { display:flex; column-gap:10px;
                 &>li { 
-                    &>a { display:inline-flex; align-items:center; height:44px; padding:0 10px; @include fontSB; font-size:20px; color:$gray700; white-space:nowrap; }
-                    &.is-active { 
-                        &>a { position:relative; @include fontB; color:$primary; 
-                            // &::before { content:''; display:block; position:absolute; transform-origin:50% 50%; left:50%; top:-3px; transform:translate(-50%, -50%); width:6px; height:6px; border-radius:50%; background-color:$primary; animation:an-YBounce .6s ease-out; }
-                            &::after { content:''; display:block; position:absolute; left:0; top:100%; width:100%; height:100px; }
-                        }
-                        // .submenu { max-height:1000px; }
-                        
+                    &>a { display:inline-flex; align-items:center; height:44px; padding:0 10px; @include fontSB; font-size:20px; color:$gray700; white-space:nowrap; 
                     }
+                    &:not(:hover).is-active { 
+                        &>a { position:relative; -webkit-text-stroke:0.3px; color:$primary; 
+                            // 
+                        }
+                    }
+                    
                     .submenu { max-height:0; position:absolute; top:100%; left:0; width:100%; background-color:$primary; transition:all 0.6s; overflow:hidden;
                         dl { display:flex; column-gap:90px; padding:30px 0 30px 284px;
                             a, dt { display:inline-flex; align-items:center; padding:0 0 0 10px; color:$white; }
                             >div.is-active { 
                                 dt { -webkit-text-stroke:0.5px; }
                             }
-                            dt { height:38px; height:38px; @include fontSB; font-size:20px;
+                            dt { height:38px; @include fontSB; font-size:20px;
                                 a { height:inherit; font-weight:inherit; font-size:inherit; -webkit-text-stroke:inherit; }
                                 
                             }
@@ -46,14 +48,34 @@
                                 &:first-child { margin-top:13px; }
                                 a { position:relative; height:30px; @include fontR; font-size:16px; }
                                 &.is-active {
-                                    a { /*@include fontSB;*/ -webkit-text-stroke:0.3px;
+                                    a { -webkit-text-stroke:0.3px;
+                                        &::before { content:''; display:block; position:absolute; right:-15px; top:50%; transform:translate(-50%, -50%); width:6px; height:6px; border-radius:50%; background-color:$white; animation:an-XBounce .6s ease-out; }
+                                    }
+                                }
+                                &:hover {
+                                    a { -webkit-text-stroke:0.3px;
                                         &::before { content:''; display:block; position:absolute; right:-15px; top:50%; transform:translate(-50%, -50%); width:6px; height:6px; border-radius:50%; background-color:$white; animation:an-XBounce .6s ease-out; }
                                     }
                                 }
                             }
                         }
+                        &:has(dd:hover) {  
+                            dl dd.is-active a::before { display:none; }
+                        }
                     }
                     &:last-child .submenu dl { column-gap:60px; }
+                }
+                &:has(li:hover) {  
+                    &>li {  
+                        &.is-active > a { color:$gray700; }
+                        &:hover {
+                            
+                            &>a { position:relative; -webkit-text-stroke:0.3px; color:$primary; 
+                                &::after { content:''; display:block; position:absolute; left:0; top:100%; width:100%; height:30px; }
+                            }
+                            .submenu { max-height:1000px; }
+                        }
+                    }
                 }
             }
             .slider { position:relative; transform:translateX(0); height:0; transition:all .3s ease-in-out .1s; background-color:$primary;
@@ -65,9 +87,9 @@
                 b { @include fontB; color:$primary; }
             }
             .sectionTimer { display:inline-flex; align-items:center;
-                &::before { content:''; display:inline-block; width:24px; height:24px; margin-right:6px; margin-top:-2px; @include bg($img_sectionTimer,24); }
+                &::before { content:''; display:inline-block; width:24px; height:24px; margin-right:6px; margin-top:-2px; @include bg($img_util_sectionTimer,24); }
                 &.is-warning { color:$primary300;
-                    &::before { transform-origin:center bottom; animation:an-alarm .1s infinite alternate; @include bg($img_sectionTimer_parmary,24); }
+                    &::before { transform-origin:center bottom; animation:an-alarm .1s infinite alternate; @include bg($img_util_sectionTimer_parmary,24); }
                 }
             }
             .headerUtil { display:inline-flex; column-gap:10px;

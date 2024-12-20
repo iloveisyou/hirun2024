@@ -19,37 +19,46 @@
     [class^='btn_'] { cursor:pointer; margin:0; padding:0; border:0 solid transparent; background-color:transparent; font-size:inherit; }
     input { outline:none; }
 
-    .bt_headerUtil { display:inline-flex; align-items:center; position:relative; max-width:40px; height:40px; padding-left:40px; border-radius:50%; border:1px solid $gray300; white-space:nowrap; transition:border-radius .1s ease-in-out .5s, padding .1s ease-in-out .5s, max-width .6s ease-in-out; transform-origin:center right 20px; overflow:hidden; 
+    .bt_headerUtil { display:inline-flex; align-items:center; position:relative; max-width:40px; height:40px; padding-left:40px; border-radius:50%; border:1px solid $gray300; white-space:nowrap; transition:border-radius .2s ease-in .4s, padding .2s ease-in .4s, max-width .6s ease-in; transform-origin:center right 20px; overflow:hidden; 
         &::before { content:''; display:block; position:absolute; left:0; top:0; width:40px; height:40px; }
-        &.myWork::before { @include bg($img_myWok,24); }
-        &.workRegister::before { @include bg($img_workRegister,24); } 
-        &.webMessenger::before { @include bg($img_webMessenger,24); }
-        &.integratedSearch::before { @include bg($img_integratedSearch,24); }
-        &.myProfile::before { @include bg($img_myProfile,24,auto,64%); }
+        &.myWork::before { @include bg($img_util_myWok,24); }
+        &.workRegister::before { @include bg($img_util_workRegister,24); } 
+        &.webMessenger::before { @include bg($img_util_webMessenger,24); }
+        &.integratedSearch::before { @include bg($img_util_integratedSearch,24); }
+        &.myProfile::before { @include bg($img_util_myProfile,24,auto,64%); }
 
         &.bg-gray { border-color:$gray300; background-color:$gray300; }
         &.bg-primary { border-color:$primary; background-color:$primary; }
         &:not([class*="bg-"]) {  
-            &:hover { max-width:200px; padding:0 10px 0 38px; border-radius:8px; border-color:$gray700; transition:border-radius .1s ease, padding .1s ease, max-width .6s ease; }
+            &:hover { max-width:200px; padding:0 10px 0 38px; border-radius:8px; border-color:$gray700; transition:border-radius .1s ease-in-out, padding .1s ease-in-out, max-width .6s ease-in-out; }
         }
-        &[class*="bg-"] { transition:all .3s ease-in-out;
+        &[class*="bg-"] { @include transition;
             &.bg-primary:hover { background-color:$primary700; }
         }
         // &:hover { animation:an-headerUtil .6s ease-out; animation-fill-mode:forwards; }
     }
 
-    .bt_close {  }
+    .bt_dialogClose { @include x(24,17,2); 
+        &.cl-white {  @include x(24,17,2,$white); }
+    }
+    .bt_dialogSize { width:24px; height:24px; padding-left:24px; @include bg($img_dialogSize,24); overflow:hidden; }
+
+    .bt_newChat { width:48px; height:48px; padding-left:48px; border-radius:50%; background-color:$primary; @include bg($img_newChat,24); overflow:hidden; }
 
 
-    .bt_wrap { display:flex; justify-content:center; align-items:center; column-gap:8px;
-        a, button, .bt_fill { display:inline-flex; justify-content:center; align-items:center; min-width:78px; height:46px; padding:0 24px; border-radius:8px;
+    .bt_wrap { display:flex; justify-content:center; align-items:center; column-gap:8px; 
+        a, button, .bt_fill { display:inline-flex; justify-content:center; align-items:center; min-width:100px; height:46px; padding:0 24px; border-radius:8px; font-size:16px;
             &:not(.ty-line) {  }
-            &.bt_line { border:1px solid currentColor; background-color:transparent; font-size:16px; @include fontR; color:$gray700; }
+            &.bt_line { border:1px solid $gray300; background-color:transparent; @include fontR; color:$gray700; }
             &.cl-primary { background-color:$primary; color:$white; }
             &.cl-primary300 { border:1px solid $primary; background-color:$primary300; color:$white; }
             &.cl-gray { background-color:$gray; color:$gray300; }
             &.cl-gray300 { background-color:$gray300; color:$gray700; }
         }
+    }
+
+    [class*=bt_ntegratedSearch] {  width:40px; height:40px; padding-left:40px; border-radius:50%; background-color:$primary; @include bg($img_ntegratedSearch,24); color:$white; overflow:hidden;
+        &.bt_ntegratedSearchClose { background-color:$gray700; @include bg($img_ntegratedSearchClose,24); }
     }
 
 

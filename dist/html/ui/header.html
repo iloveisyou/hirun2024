@@ -735,40 +735,271 @@
             <div class="groupRight">
                 
                 <p class="sectionTimer" title="해당 시간이 지나면 로그인 섹션이 종료됩니다" onclick="alarm();">30 : 00</p>
-                
+                <script>uiux.sectionTimer(1800);</script>
                 <div class="headerUtil">
                     
                     <button type="button" class="bt_headerUtil myWork">나의 업무일정</button>
-                    <button type="button" class="bt_headerUtil workRegister">신규일정등록</button>
-                    <button type="button" class="bt_headerUtil webMessenger">웹메신저</button>
+                    <button type="button" class="bt_headerUtil workRegister" onclick="uiux.dialogOpen('#workRegister00');">신규일정등록</button>
+                    <button type="button" class="bt_headerUtil webMessenger" onclick="uiux.dialogOpen('#webMessenger00');">웹메신저</button>
                     <button type="button" class="bt_headerUtil integratedSearch">통합검색</button>
-                    <button type="button" class="bt_headerUtil bg-primary myProfile">프로필</button>
+                    <button type="button" class="bt_headerUtil bg-primary myProfile" onclick="uiux.dialogOpen('#profile00');">프로필</button>
                 </div>
+            </div>
+            <div class="cp_integratedSearch">
+                <input type="text" placeholder="통합검색" />
+                <button type="button" class="bt_ntegratedSearch">검색</button>
+                <button type="button" class="bt_ntegratedSearchClose">검색영역 닫기</button>
+                <dl class="keyword">
+                    <dt>최근 검색 키워드</dt>
+                    <dd class="cp_badge ">김하이런</dd>
+                    <dd class="cp_badge ">센터장님</dd>
+                    <dd class="cp_badge ">강동 지역센터</dd>
+                    <dd class="cp_badge ">hirun</dd>
+                    <dd class="cp_badge ">제품코드 관리</dd>
+                </dl>
             </div>
         </div>
     </header>
     <!-- *****************************************  header end  ***************************************** -->
     <!-- ************************************************************************************************ -->
 
+    <style>.hirunWrap { height:200vh !important; }</style>
 
         
 
 
 </div>
-<div class="cp_dialog">
+<!-- ************************************************************************************************ -->
+<!-- *************************************** dialogArea start *************************************** -->
+
+<!-- 다이알로그 > 컨텐츠 : 업무일정등록 -->
+<div class="cp_dialog nm-workRegister" id="workRegister00">
     <div class="cpInner" >
         <div class="cpHeader">
             <div class="heading"><strong>업무일정등록</strong></div>
-            <button type="button" class="bt_close">팝업닫기</button>
+            <button type="button" class="bt_dialogClose">팝업닫기</button>
         </div>
         <div class="cpMain">
-            내용
+            <div class="fm_grid sz-small">
+                <div class="fm_item ty-date">
+                    <input type='text' id="workRegister_date" />
+                    <label for="workRegister_date">계획일자</label>
+                    <button type="button">날짜선택</button>
+                </div>
+                <div class="fm_item ty-select">
+                    <div class="select">
+                        <input type='text' id="workRegister_type" />
+                        <label for="workRegister_type">업무유형</label>
+                    </div>
+                    <div class="option">                  
+                        <ul>
+                            <li>기획자</li>
+                            <li>디자이너</li>
+                            <li>퍼블리셔</li>
+                            <li>프론트엔드 개발자</li>
+                            <li>백엔드 개발자</li>
+                            <li>DBA 개발자</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fm_item ty-input">
+                    <input type='text' id="workRegister_worker" />
+                    <label for="workRegister_worker">일정등록자</label>
+                </div>
+                <div class="fm_item ty-search">
+                    <input type='text' id="workRegister_search" />
+                    <label for="workRegister_search">홍길동</label>
+                    <button type='button'>검색</button>
+                </div>
+            </div>
+            <div class="fm_grid sz-small">
+                <div class="fm_item ty-textarea">
+                    <textarea></textarea>
+                </div>
+            </div>
         </div>
         <div class="cpFooter bt_wrap">
-            <button type="button" class="bt_line">취소</button>
+            <button type="button" class="bt_line bt_cancel" onclick="uiux.dialogClose(this);">취소</button>
             <button type="button" class="bt_fill cl-primary">저장</button>
         </div>
     </div>
 </div>
+
+<!-- 다이알로그 > 공통 : 메신저 -->
+<div class="cp_dialog ty-target nm-webMessenger" id="webMessenger00">
+    <div class="cpInner" >
+        <div class="cpHeader">
+            <div class="heading">
+            <strong>Next Generation System HIRUN</strong> 
+            <button type="button" class="bt_dialogSize" title="전체화면으로 변경합니다">창모드 변경</button>
+        </div>
+            <button type="button" class="bt_dialogClose cl-white" title="팝업을 닫습니다">닫기</button>
+        </div>
+        <div class="cpMain">
+            <dl class="received">
+                <dt>Your Received</dt>
+                <dd><em>52</em> Messages</dd>
+            </dl>
+            <dl class="contact">
+                <dt>Contact List</dt> 
+                <dd>
+                    <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile01.png" alt="프로필사진"></button>
+                    <button type="button" class="is-offline"><img src="../../images/newHiRun/sample/sample_profile02.png" alt="프로필사진"></button>
+                    <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile03.png" alt="프로필사진"></button>
+                    <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile04.png" alt="프로필사진"></button>
+                    <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile05.png" alt="프로필사진"></button>
+                    <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile01.png" alt="프로필사진"></button>
+                    <button type="button" class="is-offline"><img src="../../images/newHiRun/sample/sample_profile02.png" alt="프로필사진"></button>
+                    <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile03.png" alt="프로필사진"></button>
+                    <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile04.png" alt="프로필사진"></button>
+                    <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile05.png" alt="프로필사진"></button>
+
+                </dd>
+            </dl>
+            <div class="chat">
+                <div class="search">
+                    <input type="text" placeholder="사용자 또는 내용을 입력하세요" />
+                    <button type="button">검색</button>
+                </div>
+                <div class="chatList">
+                    <ul>
+                        <li>
+                            <div class="photo is-online"><img src="../../images/newHiRun/sample/sample_profile06.png" alt="프로필사진"></div>
+                            <div class="content">
+                                <div class="info">
+                                    <b class="name">김하이(SE)</b> <span class="region">강서지역센터</span> <span class="time">오후 3:25</span>
+                                </div>
+                                <div class="message">강서 칠러 현장 SE 1명 지원 요청</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="categoryDate"><b>어제</b> 2024.12.04</div>
+                    <ul>
+                        <li>
+                            <div class="photo is-offline"><img src="../../images/newHiRun/sample/sample_profile07.png" alt="프로필사진"></div>
+                            <div class="content">
+                                <div class="info">
+                                    <b class="name">이하이런(SE)</b> <span class="region">강동지역센터</span> <span class="time">오후 3:25</span>
+                                </div>
+                                <div class="message">강서 칠러 현장 SE 1명 지원 요청</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="photo is-offline"><img src="../../images/newHiRun/sample/sample_profile08.png" alt="프로필사진"></div>
+                            <div class="content">
+                                <div class="info">
+                                    <b class="name">하이엠(센터장)</b> <span class="region">강서지역센터</span> <span class="time">오후 3:25</span>
+                                </div>
+                                <div class="message">강서 칠러 현장 SE 1명 지원 요청강서 칠러 현장 SE 1명 지원 요청</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="photo is-online"><img src="../../images/newHiRun/sample/sample_profile09.png" alt="프로필사진"></div>
+                            <div class="content">
+                                <div class="info">
+                                    <b class="name">Gildong(SE)</b> <span class="region">강서지역센터</span> <span class="time">오후 3:25</span>
+                                </div>
+                                <div class="message">강서 칠러 현장 SE 1명 지원 요청</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="categoryDate">2024.12.03</div>
+                    <!-- default image -->
+                    <ul>
+                        <li>
+                            <div class="photo is-offline"></div>
+                            <div class="content">
+                                <div class="info">
+                                    <b class="name">이하이런(SE)</b> <span class="region">강동지역센터</span> <span class="time">오후 3:25</span>
+                                </div>
+                                <div class="message">프로필 이미지가 없으면 기본이미지가 나옵니다</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="photo is-offline"></div>
+                            <div class="content">
+                                <div class="info">
+                                    <b class="name">하이엠(센터장)</b> <span class="region">강서지역센터</span> <span class="time">오후 3:25</span>
+                                </div>
+                                <div class="message">강서 칠러 현장 SE 1명 지원 요청강서 칠러 현장 SE 1명 지원 요청</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="photo is-online"></div>
+                            <div class="content">
+                                <div class="info">
+                                    <b class="name">Gildong(SE)</b> <span class="region">강서지역센터</span> <span class="time">오후 3:25</span>
+                                </div>
+                                <div class="message">강서 칠러 현장 SE 1명 지원 요청</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="controll">
+                <button type="button" class="bt_newChat" title="새로운 채팅방을 만듭니다">새채팅</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 다이알로그 > 공통 : 프로필 -->
+<div class="cp_dialog ty-target nm-profile is-active" id="profile00">
+    <div class="cpInner" >
+        <div class="cpHeader">
+            <div class="heading"> <strong>나의 프로필 정보</strong> </div>
+            <button type="button" class="bt_dialogClose" title="팝업을 닫습니다">닫기</button>
+        </div>
+        <div class="cpMain">
+            <div class="profile">
+                <div class="photo">
+                    <img src="../../images/newHiRun/sample/sample_profile10.png" alt="프로필사진">
+                    <button class="button">사진 등록/추가</button>
+                </div>
+                <div class="info">
+                    <div class="region">강서지역센터 (SE)</div> 
+                    <div class="welcome"><b>hirun</b>님 오늘도 좋은하루 되세요!</div>
+                    <div class="date">
+                        <span>마지막 접속일시</span>
+                        <span>2024.12.01 17:32:20</span>
+                    </div>
+                </div>
+                <div class="service">
+                    <div class="fm_grid">
+                        <div class="fm_item ty-select">
+                            <div class="select">
+                                <input type='text' id="workRegister_type" />
+                                <label for="workRegister_type">업무유형</label>
+                            </div>
+                            <div class="option">                  
+                                <ul>
+                                    <li>기획자</li>
+                                    <li>디자이너</li>
+                                    <li>퍼블리셔</li>
+                                    <li>프론트엔드 개발자</li>
+                                    <li>백엔드 개발자</li>
+                                    <li>DBA 개발자</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fm_grid bt_wrap">
+                        <button type="button" class="bt_line ">나의 결재함</button>
+                        <button type="button" class="bt_line ">회원정보수정</button>
+                    </div>
+                    <div class="fm_grid bt_wrap">
+                        <button type="button" class="bt_fill cl-primary ">나의 결재함</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ***************************************  dialogArea end  *************************************** -->
+<!-- ************************************************************************************************ -->
+<!-- publish import -->
+
 </body>
 </html>
