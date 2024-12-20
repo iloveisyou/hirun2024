@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <project path="" name="rui" author="hongjh" version="1.0" copyright="" output="C:\DEVON_RUI\workspace\DevOn_RUI\WebContent\rui2\resources" source="False" source-dir="$output\source" minify="False" min-dir="$output\build" doc="False" doc-dir="$output\docs" master="false" master-file="" zip="false" zip-file="">
   <directory name="" />
   <target name="rui" file="$output\rui.css" debug="true" shorthand="true" shorthand-list="">

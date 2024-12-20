@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <project path="" name="du_core" author="hongjh" version="1.0" copyright="" output="C:\DEVON_RUI\workspace\DevOn_RUI\WebContent\dujsf2\resources\" source="False" source-dir="$output\source" minify="False" min-dir="$output\build" doc="False" doc-dir="$output\docs" min-dair="$output\build" master="false" master-file="" zip="false" zip-file="">
   <directory name="" />
   <target name="du_all" file="$output\du_skin2.css" debug="false" shorthand="false" shorthand-list="">
