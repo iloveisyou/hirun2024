@@ -28,9 +28,9 @@
 
 
 
-.pj-hirun.pg-ui { @include font; color:#515151;
+.pj-hirun.pg-ui { @include font; color:$gray700;
     .hirunWrap { min-width:100% !important; }
-    h1 { margin-left:0px; padding:3px 5px;  @include fontL; color:$white; }
+    h1 { margin-left:0px; padding:3px 5px;  @include fontL; background-color:$primary; color:$white; }
     h2 { margin:0px 0 0px 0px; padding:5px; font-size:20px; @include fontL; background-color:$gray700; color:$white; 
         &::before { content:"-"; display:inline-block; }
         + ul { padding:20px; 

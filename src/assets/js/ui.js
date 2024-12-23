@@ -190,7 +190,7 @@ function fmWrapIdChange(_jthis, _rui = false) {
 /**********************  공통 유틸  **********************/
 /*********************************************************/
 // 인뎃스 구하기
-const index=(element)=> [].indexOf.call(element.parentElement.children, element);
+const index=(element)=> element && [].indexOf.call(element?.parentElement?.children, element);
 
 
 /*********************************************************/
@@ -239,17 +239,29 @@ var uiux = (function(window, document, $) {
     
     function gnb() { // gnb 이벤트
         const _this = document.querySelector('.gnb');
-        const _slide = _this.querySelector('.slider');
+        let _slide;
+        
+        
         const gnbInit=()=> {
             _this.querySelector('li[data-active="true"]:not(.is-active)')?.classList.add('is-active');
             _this.querySelector('dd[data-active="true"]:not(.is-active)')?.classList.add('is-active');
-            gnbSlider(index(_this.querySelector('li.is-active')), _this.querySelector('li.is-active'));
+            _this.querySelector('li.is-active') && gnbSlider(index(_this.querySelector('li.is-active')), _this.querySelector('li.is-active'));
+            if((_this.querySelector('.slider')) && !(!!_this.querySelector('li.is-active'))) {
+                !(!!_this.querySelector('li.is-active')) && _slide.remove();
+            } 
+            
         };
+        
         const gnbSlider=(idx,target)=> {
             let slideX = 0;
+            
             target.closest('ul').querySelectorAll('li').forEach(function(el,i){
                 if(i < idx) { slideX += parseInt(el.getBoundingClientRect().width) + 10; }
             });
+            if(!(!!_this.querySelector('.slider'))) {
+                _this.insertAdjacentHTML('beforeend', '<div class="slider"></div>');
+            } 
+            _slide = _this.querySelector('.slider');
             _slide.style.transform = `translateX(${slideX}px)`;
             _slide.style.width = `${target.getBoundingClientRect().width}px`;
         };
@@ -261,7 +273,6 @@ var uiux = (function(window, document, $) {
             });
             el.addEventListener('mouseout', function(e){
                 gnbInit();
-                console.log('aaa')
             });
         });
     }

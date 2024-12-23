@@ -38,6 +38,8 @@
         // &:hover { animation:an-headerUtil .6s ease-out; animation-fill-mode:forwards; }
     }
 
+    [class*='bt_'] { white-space:nowrap; }
+
     .bt_dialogClose { @include x(24,17,2); 
         &.cl-white {  @include x(24,17,2,$white); }
     }
@@ -45,6 +47,15 @@
 
     .bt_newChat { width:48px; height:48px; padding-left:48px; border-radius:50%; background-color:$primary; @include bg($img_newChat,24); overflow:hidden; }
 
+    .bt_myPayment {  
+        &::before { content:''; display:inline-block; width:24px; height:24px; margin-right:8px; @include bg($img_myPayment,24); }
+    }
+    .bt_memberInfoModify {  
+        &::before { content:''; display:inline-block; width:24px; height:24px; margin-right:8px; @include bg($img_setting,24); }
+    }
+    .bt_profileLogout {  
+        &::before { content:''; display:inline-block; width:24px; height:24px; margin-right:8px; @include bg($img_profileLogout,24); }
+    }
 
     .bt_wrap { display:flex; justify-content:center; align-items:center; column-gap:8px; 
         a, button, .bt_fill { display:inline-flex; justify-content:center; align-items:center; min-width:100px; height:46px; padding:0 24px; border-radius:8px; font-size:16px;

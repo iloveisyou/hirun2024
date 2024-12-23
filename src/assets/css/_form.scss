@@ -57,7 +57,7 @@
                 &:has(input:focus) { 
                     &::before { top:40%; transform:translate(-45%, -50%) rotate(-43deg); }
                 &::after { top:40%;transform:translate(45%, -50%) rotate(43deg); }
-                    +.option { @include show; position:absolute; left:0; top:calc(100% + 2px); width:100%; border-radius:8px; border:1px solid $gray700; background-color:$white;
+                    +.option { @include show; position:absolute; left:0; top:calc(100% + 2px); z-index:50; width:100%; border-radius:8px; border:1px solid $gray700; background-color:$white; overflow:hidden;
                         ul {
                             li { display:flex; align-items:center; padding:0 14px; height:44px; cursor:pointer;
                                 &:hover { background-color:$gray100; color:$gray700; }

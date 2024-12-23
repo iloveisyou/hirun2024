@@ -24,7 +24,7 @@
         }
         // .btn_login { height:46px; border-radius:8px; border:0 solid transparent; background-color:$primary; @include fontR; font-size:16px; color:$white; }
         .option { display:flex; justify-content:flex-end;  
-            button { display:flex; align-items:center; height:38px; margin-right:auto; padding:0 18px; border-radius:8px; border:1px solid $gray700; background-color:transparent; @include fontR; font-size:16px; color:$gray700; }
+            button { display:flex; align-items:center; height:38px; margin-right:auto; padding:0 18px; border-radius:8px; border:1px solid $gray700; background-color:transparent; @include fontR; font-size:16px; }
             label { display:inline-flex; align-items:center; @include fontR; font-size:16px; color:$gray;
                 input { width:20px; height:20px; margin-right:4px; border-radius:4px; border:1px solid $gray700; }
             }
@@ -130,7 +130,7 @@
                 }
                 .chat { display:flex; flex-flow:column nowrap; height:calc(100% - 164px); margin-top:8px; padding:10px 0 20px 0; border-radius:24px 24px 21px 21px; background-color:$white; overflow:hidden;
                     .search { flex-shrink:0; display:flex; align-items:center; position:relative; height:46px; margin:0 10px; padding:0 18px 0 20px; border-radius:24px; border:1px solid $gray300; 
-                        input { flex:1; width:100%; margin:0; padding:0; border:0 solid transparent; font-size:14px; color:$gray700; 
+                        input { flex:1; width:100%; margin:0; padding:0; border:0 solid transparent; font-size:14px; 
                             &::placeholder { color:$gray; }
                         }
                         button { width:24px; height:24px; padding-left:24px; @include bg($img_form_search, 24); overflow:hidden; }
@@ -140,7 +140,7 @@
                             li { display:flex; column-gap:10px; align-items:center; padding-top:10px; overflow:hidden; cursor:pointer;
                                 .photo { @include profilePhoto(40,2,$white); flex-shrink:0; }
                                 .content { flex:1;
-                                    .info { display:flex; align-items:center; min-height:16px; color:$gray700;
+                                    .info { display:flex; align-items:center; min-height:16px; 
                                         .name { font-size:14px; @include fontSB; color:initial; }
                                         .region { margin-left:4px; font-size:12px; color:initial; }
                                         .time { margin-left:auto; font-size:12px; color:$gray; }
@@ -151,7 +151,7 @@
                             }
                         }
                         .categoryDate { display:flex; column-gap:4px; align-items:center; height:16px; margin-top:20px; font-size:12px; color:$gray;
-                            b { @include fontSB; color:$gray700; }
+                            em { @include fontSB; color:$gray700; }
                         }
                     }
                 }
@@ -163,8 +163,34 @@
             .cpHeader { height:0;
                 .heading { @include hide; }
             }
+
+            // { position:relative; width:$size+px; height:$size+px; border-radius:50%; background-color:$gray300; @include bg($img_profileHirun,24);
+            //     img { width:100%; height:100%; object-fit:cover;; border-radius:50%; overflow:hidden; }
+            //     &::after { content:'온라인'; display:inline-block; position:absolute; right:0; bottom:$statusPosition+px; width:10px; height:10px; padding:0 0 0 6px; border-radius:50%; border:2px solid $lineColor; background-color:$plusColor; overflow:hidden; }
+            //     &.is-online::after { content:'온라인'; background-color:$plusColor; }
+            //     &.is-offline::after { content:'오프라인'; background-color:$minusColor; }
+
             .cpMain { margin:0;
                 .fm_grid + .fm_grid { margin-top:10px; }
+                .profile { display:flex; column-gap:20px; align-items:center;
+                    .photo { @include profilePhoto(80); flex-shrink:0; width:80px; height:80px; background-size:44px auto;
+                        &::after { content:''; display:none; }
+                        button { position:absolute; right:0; top:-7px; width:24px; height:24px; padding-left:24px; border-radius:50%; background-color:$gray700; @include bg($img_camera,14); overflow:hidden; }
+                    }
+                    .info {
+                        .region { line-height:24px; font-size:16px; @include fontSB; }
+                        .welcome {
+                            em { @include fontB; }
+                        }
+                        .date { display:flex; align-items:center; margin-top:10px; line-height:24px; font-size:14px; color:$gray; 
+                            b {  @include fontSB; }
+                            span { display:inline-block; position:relative; padding-left:16px;
+                                &::before { content:''; display:block; position:absolute; left:8px; top:50%; transform:translateY(-50%); width:1px; height:10px; background-color:$gray300; }
+                            }
+                        }
+                    }
+                }
+                .service { margin-top:20px; }
             }
         } }
         

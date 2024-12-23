@@ -98,27 +98,34 @@
         }
     }
 
-    .footer { width:100%; margin-top:70px; background-color:$gray700; color:$white; 
+    .footer { width:100%; margin-top:70px; background-color:$gray700; color:$gray300; 
         .footerInner { display:flex; width:100%; max-width:1600px; margin:0 auto; padding:50px;
             .groupLeft { width:650px; }
             // .groupright { width:600px; margin-left:auto; }
             .info { line-height:20px;
-                div { display:inline-block; margin-right:20px; }c
+                div { display:inline-block; margin-right:20px; margin-bottom:6px; }
                 dt { display:inline-block; 
                     &::after { content:':'; display:inline-block; padding:0 8px 0 4px; }
                 }
                 dd { display:inline-block; }
             }
-            .copyright { margin-top:20px; }
+            .copyright { margin-top:50px; }
             .law { margin-top:20px; }
-            .contact { display:flex; flex-direction:column; justify-content:flex-end; width:600px; margin-left:auto; text-align:right;
-                strong { display:block; padding:7px 0;  font-weight:700; }
-                dl {  
-                    div { margin-top:7px; }
+            .contact { display:flex; flex-direction:column; justify-content:flex-start; width:600px; margin-left:auto; text-align:right;
+                .fm_item { align-self:flex-end; width:160px !important; border-color:$gray; color:$gray300; 
+                    .option { color:$gray; }
+                }
+                strong { align-self:flex-end; display:inline-block; margin-top:26px; padding:7px 0 7px 24px;  font-weight:700; @include bg($img_callCenter,20,20,0)
+                    
+                }
+                dl { margin-top:10px; line-height:18px;
+                    div + div { margin-top:6px; }
                     dt { display:inline-block; 
                         ~ dt { margin-left:10px; }
                     }
-                    dd { display:inline-block; margin-left:4px; }
+                    dd { display:inline-block; margin-left:4px; position:relative; padding-left:16px;
+                        &::before { content:''; display:block; position:absolute; left:8px; top:50%; transform:translateY(-50%); width:1px; height:10px; background-color:$gray; }
+                    }
                 }
             }
         }

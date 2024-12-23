@@ -37,10 +37,9 @@
                 </li>
                 {% endfor %}
             </ul>
-            <div class="slider"></div>
         </nav>
         <div class="groupRight">
-            {# <p class="welcomeMessage">강동지역센터 <b>하이런</b>님 안녕하세요!</p> #}
+            {# <p class="welcomeMessage">강동지역센터 <em>하이런</em>님 안녕하세요!</p> #}
             <p class="sectionTimer" title="해당 시간이 지나면 로그인 섹션이 종료됩니다" onclick="alarm();">30 : 00</p>
             <script>uiux.sectionTimer(1800);</script>
             <div class="headerUtil">
@@ -90,14 +89,14 @@
         <div class="cpMain">
             <div class="fm_grid sz-small">
                 <div class="fm_item ty-date">
-                    <input type='text' id="workRegister_date" />
-                    <label for="workRegister_date">계획일자</label>
+                    <input type='text' id="workRegister_date" placeholder="계획일자" />
+                    {# <label for="workRegister_date">계획일자</label> #}
                     <button type="button">날짜선택</button>
                 </div>
                 <div class="fm_item ty-select">
                     <div class="select">
-                        <input type='text' id="workRegister_type" />
-                        <label for="workRegister_type">업무유형</label>
+                        <input type='text' id="workRegister_type" placeholder="업무유형" />
+                        {# <label for="workRegister_type">업무유형</label> #}
                     </div>
                     <div class="option">                  
                         <ul>
@@ -111,12 +110,12 @@
                     </div>
                 </div>
                 <div class="fm_item ty-input">
-                    <input type='text' id="workRegister_worker" />
-                    <label for="workRegister_worker">일정등록자</label>
+                    <input type='text' id="workRegister_worker" placeholder="일정등록자" />
+                    {# <label for="workRegister_worker">일정등록자</label> #}
                 </div>
                 <div class="fm_item ty-search">
-                    <input type='text' id="workRegister_search" />
-                    <label for="workRegister_search">홍길동</label>
+                    <input type='text' id="workRegister_search" placeholder="홍길동" />
+                    {# <label for="workRegister_search">홍길동</label> #}
                     <button type='button'>검색</button>
                 </div>
             </div>
@@ -181,7 +180,7 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="categoryDate"><b>어제</b> 2024.12.04</div>
+                    <div class="categoryDate"><em>어제</em> 2024.12.04</div>
                     <ul>
                         <li>
                             <div class="photo is-offline"><img src="{{imgPath}}/sample/sample_profile07.png" alt="프로필사진"></div>
@@ -253,7 +252,7 @@
 
 
 <!-- 다이알로그 > 공통 : 프로필 -->
-<div class="cp_dialog ty-target nm-profile is-active" id="profile00">
+<div class="cp_dialog ty-target nm-profile" id="profile00">
     <div class="cpInner" >
         <div class="cpHeader">
             <div class="heading"> <strong>나의 프로필 정보</strong> </div>
@@ -267,38 +266,41 @@
                 </div>
                 <div class="info">
                     <div class="region">강서지역센터 (SE)</div> 
-                    <div class="welcome"><b>hirun</b>님 오늘도 좋은하루 되세요!</div>
+                    <div class="welcome"><em>hirun</em>님 오늘도 좋은하루 되세요!</div>
                     <div class="date">
-                        <span>마지막 접속일시</span>
+                        <b>마지막 접속일시</b>
                         <span>2024.12.01 17:32:20</span>
                     </div>
                 </div>
-                <div class="service">
-                    <div class="fm_grid">
-                        <div class="fm_item ty-select">
-                            <div class="select">
-                                <input type='text' id="workRegister_type" />
-                                <label for="workRegister_type">업무유형</label>
-                            </div>
-                            <div class="option">                  
-                                <ul>
-                                    <li>기획자</li>
-                                    <li>디자이너</li>
-                                    <li>퍼블리셔</li>
-                                    <li>프론트엔드 개발자</li>
-                                    <li>백엔드 개발자</li>
-                                    <li>DBA 개발자</li>
-                                </ul>
-                            </div>
+            </div>
+            <div class="service">
+                <div class="fm_grid">
+                    <div class="fm_item ty-select">
+                        <div class="select">
+                            <input type='text' id="workRegister_type" placeholder="나의 즐겨찾기 메뉴" />
+                            {# <label for="workRegister_type">나의 즐겨찾기 메뉴</label> #}
+                        </div>
+                        <div class="option">                  
+                            <ul>
+                                <li>상담PORTAL</li>
+                                <li>서비스PORTAL</li>
+                                <li>고객수리이력</li>
+                                <li>기사별 서비스건수 관리</li>
+                                <li>신청결재관리</li>
+                                <li>운행일지목록</li>
+                                <li>통합발주관리</li>
+                                <li>본사 외주비 품의요청 (신규)</li>
+                                <li>제품코드 관리</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="fm_grid bt_wrap">
-                        <button type="button" class="bt_line ">나의 결재함</button>
-                        <button type="button" class="bt_line ">회원정보수정</button>
-                    </div>
-                    <div class="fm_grid bt_wrap">
-                        <button type="button" class="bt_fill cl-primary ">나의 결재함</button>
-                    </div>
+                </div>
+                <div class="fm_grid bt_wrap">
+                    <button type="button" class="bt_line bt_myPayment">나의 결재함</button>
+                    <button type="button" class="bt_line bt_memberInfoModify">회원정보수정</button>
+                </div>
+                <div class="fm_grid bt_wrap">
+                    <button type="button" class="bt_fill cl-primary bt_profileLogout">로그아웃</button>
                 </div>
             </div>
         </div>
