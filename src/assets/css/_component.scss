@@ -104,7 +104,15 @@
             }
             .cpInner { left:auto; left:initial; top:auto; top:initial; transform:none; box-shadow:0 4px 10px 4px #0000000d;  transition:all .3s ease-in-out .2s; }
         }
-        &.nm-workRegister { .cpInner { width:650px; min-width:650px; min-height:150px; } } // 공통헤더 업무등록
+        // 공통헤더 업무등록
+        &.nm-workRegister { 
+            .cpInner { width:650px; min-width:650px; min-height:150px; } 
+            .cpMain {
+                .fm_grid:nth-child(1) .fm_item:nth-child(1) { flex:0 0 120px; }
+                .fm_grid:nth-child(1) .fm_item:nth-child(2) { flex:0 0 140px; }
+                .fm_grid:nth-child(1) .fm_item:nth-child(3) { flex:0 0 120px; }
+            }
+        }
         // 공통헤더 웹메신저
         &.nm-webMessenger { .cpInner { right:50px; top:80px; width:320px; min-width:320px; min-height:320px; height:640px; max-height:640px; padding:0; background-color:$gray700; 
             .cpHeader { align-items:flex-start; margin-top:12px; padding:0 10px 0 20px;

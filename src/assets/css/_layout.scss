@@ -13,8 +13,8 @@
 
 /* header --------------------------------------------------------- */
 .pj-hirun.lo-default {
-    .hirunWrap { display:flex; flex-direction:column; min-width:1600px; min-height:100vh; /*overflow:hidden;*/ 
-        &.sc-headerSmall .header .headerInner { height:80px; }
+    &.hirunWrap { display:flex; flex-direction:column; min-width:1600px; min-height:100vh; }
+    &.sc-headerSmall .header .headerInner { height:80px;
     }
     .header { position:sticky; left:0; top:0; z-index:50;
         .headerInner { display:flex; column-gap:40px; justify-content:flex-start; align-items:center; position:relative; width:100%; min-width:1600px; height:100px; padding:0 50px; border-bottom:1px solid $primary; background-color:rgba(255,255,255,.85); @include transition; }
@@ -98,7 +98,7 @@
         }
     }
 
-    .footer { width:100%; margin-top:70px; background-color:$gray700; color:$gray300; 
+    .footer { width:100%; min-width:1600px; margin-top:70px; background-color:$gray700; color:$gray300; 
         .footerInner { display:flex; width:100%; max-width:1600px; margin:0 auto; padding:50px;
             .groupLeft { width:650px; }
             // .groupright { width:600px; margin-left:auto; }
@@ -112,10 +112,16 @@
             .copyright { margin-top:50px; }
             .law { margin-top:20px; }
             .contact { display:flex; flex-direction:column; justify-content:flex-start; width:600px; margin-left:auto; text-align:right;
-                .fm_item { align-self:flex-end; width:160px !important; border-color:$gray; color:$gray300; 
+                .fm_item { align-self:flex-end; width:160px !important; 
+                    .fmInner { border-color:$gray; color:$gray300;  }
+                    .select { 
+                        input { color:$gray300;
+                            &::placeholder { color:$gray; } 
+                        }
+                    }
                     .option { color:$gray; }
                 }
-                strong { align-self:flex-end; display:inline-block; margin-top:26px; padding:7px 0 7px 24px;  font-weight:700; @include bg($img_callCenter,20,20,0)
+                strong { align-self:flex-end; display:inline-block; margin-top:26px; padding:7px 0 7px 24px;  font-weight:700; @include bg($img_callCenter,20,auto,0)
                     
                 }
                 dl { margin-top:10px; line-height:18px;

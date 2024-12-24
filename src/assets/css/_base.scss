@@ -50,7 +50,9 @@
                     &::before { content:' ㄴ '; display:inline-block; }
                     
                 }
+                &.sub { margin-top:15px; color:$gray; opacity:.5; }
             }
         }
     }
+    main.main { display:flex; flex-flow:column wrap; width:100% !important; min-width:100%; }
 }

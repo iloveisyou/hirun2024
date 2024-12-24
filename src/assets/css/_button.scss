@@ -71,6 +71,21 @@
     [class*=bt_ntegratedSearch] {  width:40px; height:40px; padding-left:40px; border-radius:50%; background-color:$primary; @include bg($img_ntegratedSearch,24); color:$white; overflow:hidden;
         &.bt_ntegratedSearchClose { background-color:$gray700; @include bg($img_ntegratedSearchClose,24); }
     }
+    
+    // form
+    .bt_form_clear {  @include x (20,10,2,$gray200); padding:0 0 0 16px; border-radius:50%; border:2px solid $gray200;}
+    .bt_form_date { width:24px; height:24px; padding-left:24px; @include bg($img_form_date,24); overflow:hidden; }
+    .bt_form_time { width:24px; height:24px; padding-left:24px; @include bg($img_form_time,24); overflow:hidden; }
+    .bt_form_search { width:24px; height:24px; padding-left:24px; @include bg($img_form_search,24); overflow:hidden; }
+    .bt_form_select {  }
+    .sz-small {
+        .bt_form_clear {  @include x (17,8,2,$gray200); padding:0 0 0 17px; border-radius:50%; }
+        .bt_form_date { width:20px; height:20px; padding-left:20px; @include bg($img_form_date,20); }
+        .bt_form_time { width:20px; height:20px; padding-left:20px; @include bg($img_form_time,20); }
+        .bt_form_search { width:20px; height:20px; padding-left:20px; @include bg($img_form_search,20); }
+        .bt_form_select {  }
+    }
+    
 
 
 }

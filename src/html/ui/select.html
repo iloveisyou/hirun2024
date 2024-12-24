@@ -1,0 +1,146 @@
+{% set isNotHeaderFooter = false %}
+{% set cat = 'ui' %}
+{% set page = 'ui' %}
+{% set title = 'Hi-Run System - ui' %}
+{% extends './_include/layout.html' %}
+
+{% block main %}
+<h1>FORM 요소</h1>
+<h2>select 박스</h2>
+<ul>
+    <li>커스텀된 select</li>
+    <li>직접 입력 가능한 select 형태</li>
+    <li>셀렉트 옵션으로 html tag 사용 가능</li>
+    <li>input value</li>
+</ul>
+
+
+
+<section>
+    <h3>- select 기본 형태</h3>
+    
+
+    <p>select의 가장 기본적인 타입 text : 선택 값이 없는상태 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-select">
+        <div class="fmInner">
+            <div class="select">
+                <input type='text' id="workRegister_type" placeholder="선택&입력" />
+                <label for="workRegister_type">지점선택</label>
+            </div>
+            <div class="option">                  
+                <ul>
+                    <li>강남지역센터</li>
+                    <li>강북지역센터</li>
+                    <li>강서지역센터</li>
+                    <li>서부지역센터</li>
+                    <li>중앙지역센터</li>
+                    <li>중부지역센터</li>
+                    <li>김해지역분소</li>
+                    <li>안양지역센터</li>
+                    <li>강릉지역센터</li>
+                    <li>하남지역센터</li>
+                    <li>광주지역센터</li>
+                    <li>성남지역센터</li>
+                    <li>남양주시지역센터</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-select sz-small">
+        <div class="fmInner">
+            <div class="select">
+                <input type='text' id="workRegister_type" placeholder="선택&입력" />
+                <label for="workRegister_type">지점선택</label>
+            </div>
+            <div class="option">                  
+                <ul>
+                    <li>강남지역센터</li>
+                    <li>강북지역센터</li>
+                    <li>강서지역센터</li>
+                    <li>서부지역센터</li>
+                    <li>중앙지역센터</li>
+                    <li>중부지역센터</li>
+                    <li>김해지역분소</li>
+                    <li>안양지역센터</li>
+                    <li>강릉지역센터</li>
+                    <li>하남지역센터</li>
+                    <li>광주지역센터</li>
+                    <li>성남지역센터</li>
+                    <li>남양주시지역센터</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    
+    
+    <p>select의 가장 기본적인 타입 text : 선택 값이 있는상태 (input value 입력) </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-select">
+        <div class="fmInner">
+            <div class="select">
+                <input type='text' id="workRegister_type" placeholder="선택&입력" value="중앙지역센터" />
+                <label for="workRegister_type">지점선택</label>
+            </div>
+            <div class="option">                  
+                <ul>
+                    <li>강남지역센터</li>
+                    <li>강북지역센터</li>
+                    <li>강서지역센터</li>
+                    <li>서부지역센터</li>
+                    <li>중앙지역센터</li>
+                    <li class="is-active">중부지역센터</li>
+                    <li>김해지역분소</li>
+                    <li>안양지역센터</li>
+                    <li>강릉지역센터</li>
+                    <li>하남지역센터</li>
+                    <li>광주지역센터</li>
+                    <li>성남지역센터</li>
+                    <li>남양주시지역센터</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-select sz-small">
+        <div class="fmInner">
+            <div class="select">
+                <input type='text' id="workRegister_type" placeholder="선택&입력" value="중앙지역센터" />
+                <label for="workRegister_type">지점선택</label>
+            </div>
+            <div class="option">                  
+                <ul>
+                    <li>강남지역센터</li>
+                    <li>강북지역센터</li>
+                    <li>강서지역센터</li>
+                    <li>서부지역센터</li>
+                    <li>중앙지역센터</li>
+                    <li class="is-active">중부지역센터</li>
+                    <li>김해지역분소</li>
+                    <li>안양지역센터</li>
+                    <li>강릉지역센터</li>
+                    <li>하남지역센터</li>
+                    <li>광주지역센터</li>
+                    <li>성남지역센터</li>
+                    <li>남양주시지역센터</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+</select>
+
+
+
+
+
+
+
+
+{% endblock %}

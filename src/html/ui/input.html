@@ -1,290 +1,157 @@
-{% set isNotHeaderFooter = true %}
+{% set isNotHeaderFooter = false %}
 {% set cat = 'ui' %}
 {% set page = 'ui' %}
 {% set title = 'Hi-Run System - ui' %}
 {% extends './_include/layout.html' %}
 
-{% block wrap %}
-<h1>FORM 요소</h1>
-<h2>input 박스</h2>
+{% block main %}
+<h1>FORM > input 요소</h1>
+<h2>text, date, checkbox, radio</h2>
 <ul>
-    <li>uiRUI(mui객체)함수 추가 필수</li>
-    <li>placeholder 사용하지 않음, 대신 label로 대체 (날짜선택은 제외)</li>
-    <li>날짜/시간 선택 박스(LDateTimeBox) 사용하지 않아 숨김</li>
+    <li>placeholder속성 사용안함, 대신 label태그 사용</li>
+    <li>focus시, 라운드 진하게 그려짐</li>
+    <li>focus이거나, value값 있거나,  제목(레이블) 위로 이동</li>
+    <li>스몰버전 input은 .sz-small 추가, 또는 상위에 해당 class 추가하면 적용 됨</li>
 </ul>
-<section>
-    <h3>- input [type=text] - TextBox</h3>
-
-    <p>RUI > form > TextBox / LTextBox</p>
-    <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_input" id="inputTextSample01_1"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        var inputTextSample01_1 = new Rui.ui.form.LTextBox({  
-            applyTo: 'inputTextSample01_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
-            label: '디폴트 텍스트 인풋박스',  // label 추가
-            // placeholder: '인풋텍스트샘플01박스에 입력해 주세요.',  // [옵션] 입력 값이 없을 경우 기본 표시 메시지를 설정
-            // defaultValue: '인풋텍스트샘플의 기본값',               // [옵션] 입력 값
-            // disabled: true,                                        // [옵션] 인풋박스 disabled 처리
-            // width:300,                                             // [옵션] 텍스트박스 폭을 설정
-            // mask: 9999-999,                                        // [옵션] 입력마스크를 설정 
-            // inputType: Rui.util.LString.PATTERN_TYPE_STRING,       // [옵션] 입력문자열로 영문자 입력만 허용
-            // includeChars: '한글',                                  // [옵션] 입력제한조건 중에서 지정한 문자는 입력 허용
-            // attrs: {                                               // [옵션] HTML 기본 속성(attribute) 값들을 설정 
-            //     tabIndex: 0,
-            //     maxLength: 10
-            // }
-        });
-        uiRUI(inputTextSample01_1); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
-    <!-- *****************************************  source end  ***************************************** -->
-
-    <p>RUI > form > TextBox Mask / LTextBox</p>
-    <p>텍스트박스(TextBox)에 마스크(mask)를 적용합니다.</p>
-    <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_input" id="inputTextSample02_1"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        let inputTextSample02_1 = new Rui.ui.form.LTextBox({ 
-            applyTo: 'inputTextSample02_1',
-            mask: '999-9999-9999',
-            label: '마스크 인풋박스 (휴대폰 번호)',  // label 추가
-        });
-        uiRUI(inputTextSample02_1);
-    });
-    </script>
-    <!-- *****************************************  source end  ***************************************** -->
-
-    <p>RUI > form > Textbox Auto Complete (Fixed List) json데이터 / LTextBox</p>
-    <p>텍스트박스(LTextBox)에서 고정된 목록 데이터를 이용하여 자동완성(Auto Complete) 기능을 구현합니다.</p>
-    <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_input" id="inputTextSample03_1"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        var inputTextSample03_1 = new Rui.ui.form.LTextBox({ 
-            applyTo: 'inputTextSample03_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
-            label: `자동완성 텍스트 인풋박스 ('"코드" 또는 "데이터"')`,  // label 추가
-            // width: 200,
-            // placeholder: '"코드" 또는 "데이터"',
-            autoComplete : true,
-            filterMode: 'local',
-            url: '{{ruiSample}}/sample/data/code.json'
-        });
-        uiRUI(inputTextSample03_1); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
-    <!-- *****************************************  source end  ***************************************** -->
-
-    <p>RUI > form > Textbox Auto Complete (Using filterUrl) / LTextBox</p>
-    <p>텍스트박스(LTextBox)에서 매 순간 서버에 filterUrl의 데이터를 요청하여 자동완성(Auto Complete) 기능을 구현합니다.</p>
-    <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_input" id="inputTextSample04_1"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        var inputTextSample04_1 = new Rui.ui.form.LTextBox({ 
-            id: 'inputTextSample04_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
-            applyTo: 'inputTextSample04_1',
-            label: `자동완성 텍스트 인풋박스 ('"Value"')`,  // label 추가
-            // placeholder: 'type Value..',
-            autoComplete: true,
-            filterMode: 'remote',
-            // filterUrl: 'http://www.dev-on.com/rui/rui2/sample/general/ui/form/textboxUrlFilterSample.jsp'
-            filterUrl: '{{assPath}}/json/rui2_sample_ganeral_ui_form_textboxUrlFilterSample.json'
-        });
-        uiRUI(inputTextSample04_1); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
-    <!-- *****************************************  source end  ***************************************** -->
-
-
-</section>
-
-
-
-<!-- ************************************************************************************************* -->
-<!-- ***************************************** source border ***************************************** -->
-<!-- ************************************************************************************************* -->
-
 
 
 <section>
-    <h3>- input [type=text] - PopupTextBox</h3>
-
-    <p>RUI > form > PopupTextBox / LPopupTextBox</p>
-    <p>LPopupTextBox.js / LPopupTextBox.css 별도로 추가</p>
+    <h3>- input [type=text]</h3>
+    
+    <p>input의 가장 기본적인 타입 text : value 값이 없는상태 </p>
     <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_number" id="inputPopupTextBoxSample01_1"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        let applyPopupValue;
-        let inputPopupTextBoxSample01_1 = new Rui.ui.form.LPopupTextBox({
-            applyTo: 'inputPopupTextBoxSample01_1',
-            label: '날짜입력 인풋박스',  // label 추가 
-            enterToPopup: true,
-            useHiddenValue: true,
-            editable: true
-        });
-        applyPopupValue = function(popupValue){
-            inputPopupTextBoxSample01_1.setValue(popupValue.col2);
-            inputPopupTextBoxSample01_1.setDisplayValue(popupValue.col1);
-        }
-
-        // 이벤트 처리
-        inputPopupTextBoxSample01_1.on('popup', function(e){
-            let displayValue = e.displayValue;
-            Rui.log('value : ' + e.value + ', displayValue : ' + displayValue);
-            
-            let popup = window.open('http://www.dev-on.com/rui/rui2/sample/general/ui/form/popupWindow.html?displayValue=' + displayValue, 'popup', 'width=800,height=400,toolbar=no,status=yes');
-            popup.focus();
-            inputPopupTextBoxSample01_1.blur();
-        });
-
-        uiRUI(inputPopupTextBoxSample01_1); // uiux에서 컨트롤하기 위한 fn
-    });
-
-    </script>
+    <div class="fm_item ty-input">
+        <div class="fmInner">
+            <input type="text" id="input_text_default00" />
+            <label for="input_text_default00">인풋이름00</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+    </div>
     <!-- *****************************************  source end  ***************************************** -->
-</section>
-
-
-
-<!-- ************************************************************************************************* -->
-<!-- ***************************************** source border ***************************************** -->
-<!-- ************************************************************************************************* -->
-
-
-
-<section>
-    <h3>- input [type=text] - NumberBox</h3>
-
-    <p>RUI > form > NumberBox / LNumberBox</p>
+    <p class="sub"> ㄴ small 버전 </p>
     <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_popup" id="inputNumberBoxSample01_1"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        let inputNumberBoxSample01_1 = new Rui.ui.form.LNumberBox({
-            applyTo: 'inputNumberBoxSample01_1',
-            label: '제목, -10 부터 10,000까지 입력 하세요.',  // label 추가 
-            // placeholder: '-10 부터 10,000까지 입력 하세요.',
-            minValue: -10,
-            maxValue: 10000,
-            decimalPrecision: 2,
-            // width: 210, // 사용하지앖음, 설정해도 안됨, css에서 제어
-        });
-        uiRUI(inputNumberBoxSample01_1); // uiux에서 컨트롤하기 위한 fn
-    });
-
-    </script>
+    <div class="fm_item ty-input sz-small">
+        <div class="fmInner">
+            <input type="text" id="input_text_default01" />
+            <label for="input_text_default01">인풋이름01</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+    </div>
     <!-- *****************************************  source end  ***************************************** -->
-</section>
 
-
-
-<!-- ************************************************************************************************* -->
-<!-- ***************************************** source border ***************************************** -->
-<!-- ************************************************************************************************* -->
-
-
-
-<section>
-    <h3>- input [type=text] - DateBox</h3>
-
-    <p>RUI > form > DateBox / LDateBox</p>
+    
+    <p>input의 가장 기본적인 타입 text : 포커스 된 상태(자동추가) (.is-focus) </p>
     <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_date" id="inputDateSample01_1"></div>
+    <div class="fm_item ty-input is-focus">
+        <div class="fmInner">
+            <input type="text" id="input_text_default02" />
+            <label for="input_text_default02">인풋이름02</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-input is-focus sz-small">
+        <div class="fmInner">
+            <input type="text" id="input_text_default03" />
+            <label for="input_text_default03">인풋이름03</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
 
-    <script>
-    Rui.onReady(()=>{
-        let inputDateSample01_1 = new Rui.ui.form.LDateBox({ 
-            applyTo: 'inputDateSample01_1',
-            label: '날짜선택 인풋박스',  // label 추가 
-            //mask: '99-99-9999',
-            //displayValue: '%d-%m-%Y',
-            //defaultValue: new Date(),
-            //dateType: 'string',
-        });
-        uiRUI(inputDateSample01_1); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
+    
+    <p>input의 가장 기본적인 타입 text : value 값이 입력된 상태(자동추가) (.is-value) </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-input is-value">
+        <div class="fmInner">
+            <input type="text" id="input_text_default04" value="value 값이 입력된 상태" />
+            <label for="input_text_default04">인풋이름04</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-input is-value sz-small">
+        <div class="fmInner">
+            <input type="text" id="input_text_default05" value="value 값이 입력된 상태" />
+            <label for="input_text_default05">인풋이름05</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+    </div>
     <!-- *****************************************  source end  ***************************************** -->
     
-    <p>RUI > form > TimeBox / LMonthBox</p>
-    <p>LMonthCalendar.js / LMonthBox.js / LMonthBox.css 별도로 추가</p>
-    <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_date" id="inputDateSample02_1"></div>
 
-    <script>
-    Rui.onReady(()=>{
-        let inputDateSample02_1 = new Rui.ui.form.LMonthBox({ 
-            applyTo: 'inputDateSample02_1',
-            label: '월선택 인풋박스',  // label 추가 
-            placeholder: 'yyyy-mm',
-            defaultValue: null
-        });
-        uiRUI(inputDateSample02_1); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
+    <p>input의 가장 기본적인 타입 text : value 값이 잘못 입력되거나 validation에 부적합한 요소 (.is-error) </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-input is-error">
+        <div class="fmInner">
+            <input type="text" id="input_text_default06" value="value 값이 잘못 입력된 상태" />
+            <label for="input_text_default06">인풋이름06</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+        <p class="formMessage_error">이름을 확인해주세요.</p>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-input is-error sz-small">
+        <div class="fmInner">
+            <input type="text" id="input_text_default07" value="value 값이 잘못 입력된 상태" />
+            <label for="input_text_default07">인풋이름07</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+        <p class="formMessage_error">이름을 확인해주세요.</p>
+    </div>
     <!-- *****************************************  source end  ***************************************** -->
     
-    <p>RUI > form > Timebox / LTimeBox</p>
+
+    <p>input의 가장 기본적인 타입 text : disabled 상태</p>
     <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_date" id="inputDateSample03_1"></div>
-    <script>
-    Rui.onReady(()=>{
-        let inputDateSample03_1 = new Rui.ui.form.LTimeBox({ 
-            applyTo: 'inputDateSample03_1',
-            label: '시간선택 인풋박스',  // label 추가 
-            placeholder: '시:분',
-        });
-        uiRUI(inputDateSample03_1); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
+    <div class="fm_item ty-input">
+        <div class="fmInner">
+            <input type="text" id="input_text_default08" value="value 값이 잘못 입력된 상태" disabled  />
+            <label for="input_text_default08">인풋이름08</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-input sz-small">
+        <div class="fmInner">
+            <input type="text" id="input_text_default09" value="value 값이 잘못 입력된 상태" disabled  />
+            <label for="input_text_default09">인풋이름09</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+    </div>
     <!-- *****************************************  source end  ***************************************** -->
     
-    {# <p>RUI > form > DateTimeBox / LDateTimeBox</p>
-    <p>LDateTimeBox.js / LDateTimeBox.css 별도로 추가</p>
+
+    <p>input의 가장 기본적인 타입 text : readonly 상태 </p>
     <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_date" id="inputDateSample04_1"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        let inputDateSample04_1 = new Rui.ui.form.LDateTimeBox({ 
-            applyTo: 'inputDateSample04_1',
-            label: '날짜+시간선택 인풋박스',  // label 추가 
-            placeholder: 'yyyy-MM-dd HH:mm:ss',
-        });
-        uiRUI(inputDateSample04_1); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
-    <!-- *****************************************  source end  ***************************************** --> #}
-
-    <p>RUI > form > DateTimeBox / LFromToDateBox</p>
+    <div class="fm_item ty-input">
+        <div class="fmInner">
+            <input type="text" id="input_text_default10" value="value 값이 잘못 입력된 상태" readonly />
+            <label for="input_text_default10">인풋이름10</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
     <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_date" id="inputDateSample05_1"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        let inputDateSample05_1 = new Rui.ui.form.LFromToDateBox({ 
-            applyTo: 'inputDateSample05_1',
-            label: '기간선택 인풋박스',  // label 추가 
-            // calendarConfig : {
-            //     mindate: '08/12/2018',
-            //     maxdate: '08/22/2018'
-            // },
-            startDate: new Date()
-        });
-        uiRUI(inputDateSample05_1); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
+    <div class="fm_item ty-input sz-small">
+        <div class="fmInner">
+            <input type="text" id="input_text_default11" value="value 값이 잘못 입력된 상태" readonly />
+            <label for="input_text_default11">인풋이름11</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+        </div>
+    </div>
     <!-- *****************************************  source end  ***************************************** -->
 </section>
+
 
 
 
@@ -294,70 +161,33 @@
 
 
 
+
 <section>
-    <h3>- input [type=checkbox] - Checkbox</h3>
-
-    <p>RUI > form > <b>Checkbox</b> - <b>개별제어</b>, <b>label</b> js로 입력 (html 태그에서 label 제거)</p>
-    <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
-    {# <p>그리드나 Bind와 연동하지 않으면 굳이 사용할 필요는 없습니다.</p> #}
+    <h3>- input [type=text] 검색 인풋</h3>
+    <p>input search 타입</p>
     <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_check" id="inputCheckboxSample01_1"></div>
-    <div class="fm_check" id="inputCheckboxSample01_2"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        let inputCheckboxSample01_1 = new Rui.ui.form.LCheckBox({ 
-            applyTo: 'inputCheckboxSample01_1',
-            name: 'inputCheckboxSample01',
-            label: '일반 체크박스01_1',
-            // value: '오징어'
-        });
-        uiRUI(inputCheckboxSample01_1); // uiux에서 컨트롤하기 위한 fn
-
-        let inputCheckboxSample01_2 = new Rui.ui.form.LCheckBox({ 
-            applyTo: 'inputCheckboxSample01_2',
-            name: 'inputCheckboxSample01',
-            label: '일반 체크박스01_2',
-            // value: '오징어'
-        });
-        uiRUI(inputCheckboxSample01_2); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
+    <div class="fm_item ty-search">
+        <div class="fmInner">
+            <input type="text" id="sampleInput_search00" />
+            <label for="sampleInput_search00">검색인풋00</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+            <button type="button" class="bt_form_search">검색</button>
+        </div>
+    </div>
     <!-- *****************************************  source end  ***************************************** -->
-
-    <p>RUI > form > <b>CheckBox Group</b> - <b>구룹제어</b>, <b>items(label)</b> js로 입력 (html 태그에서 label 제거)</p>
-    <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
-    <!-- <p>일반적일 경우에는 사용할 필요는 없습니다.</p> -->
+    <p class="sub"> ㄴ small 버전 </p>
     <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_checkGroup" id="inputCheckboxSample02_1"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        let inputCheckboxSample02_1 = new Rui.ui.form.LCheckBoxGroup({ 
-            applyTo: 'inputCheckboxSample02_1',
-            name: 'inputCheckboxSample02',
-            label: '일반 체크박스02_1',
-            items: [
-                {
-                    label: 'Apple',
-                    name: 'fruits',
-                    value: 'apple'
-                }, {
-                    label: 'Grape',
-                    checked: true,
-                    value: 'Grape'
-                }, {
-                    label: 'Strawberry',
-                    checked: true,
-                    value: 'Strawberry'
-                }
-            ]
-        });
-        uiRUI(inputCheckboxSample02_1); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
+    <div class="fm_item ty-search sz-small">
+        <div class="fmInner">
+            <input type="text" id="input_text_default01" />
+            <label for="input_text_default01">검색인풋01</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+            <button type="button" class="bt_form_search">검색</button>
+        </div>
+    </div>
     <!-- *****************************************  source end  ***************************************** -->
 </section>
+
 
 
 
@@ -367,68 +197,247 @@
 
 
 
+
 <section>
-    <h3>- input [type=radio] - Radio</h3>
-
-    <p>RUI > form > <b>Radio</b> - <b>개별제어</b>, <b>label</b> js로 입력 (html 태그에서 label 제거)</p>
-    <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
-    <p>하나로 사용할 경우는 없으므로 라디오그룹(RadioGroup)을 사용하세요.</p>
+    <h3>- input [type=text] 날짜선택 인풋</h3>
+    <p>input date 타입</p>
     <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_radio" id="inputRadioSample01_1"></div>
-    <div class="fm_radio" id="inputRadioSample01_2"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        let inputRadioSample01_1 = new Rui.ui.form.LRadio({ 
-            applyTo: 'inputRadioSample01_1',
-            name: 'inputRadioSample01',
-            label: '일반 라디오01_1',
-            // value: '창'
-        });
-        uiRUI(inputRadioSample01_1); // uiux에서 컨트롤하기 위한 fn
-        
-        let inputRadioSample01_2 = new Rui.ui.form.LRadio({ 
-            applyTo: 'inputRadioSample01_2',
-            name: 'inputRadioSample01',
-            label: '일반 라디오01_2',
-            // value: '창'
-        });
-        uiRUI(inputRadioSample01_2); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
+    <div class="fm_item ty-date">
+        <div class="fmInner">
+            <input type="text" id="sampleInput_date00" />
+            <label for="sampleInput_date00">날짜선택인풋00</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+            <button type="button" class="bt_form_date">날짜선택</button>
+        </div>
+    </div>
     <!-- *****************************************  source end  ***************************************** -->
-
-    <p>RUI > form > <b>Radio Group</b> - <b>구룹제어</b>, <b>items(label)</b> js로 입력 (html 태그에서 label 제거)</p>
-    <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
-    <!-- <p>그리드(Grid)의 편집기로 사용하지 않으면 HTML 기본 태그로 사용하여도 됩니다.</p> -->
+    <p class="sub"> ㄴ small 버전 </p>
     <!-- ***************************************** source start ***************************************** -->
-    <div class="fm_radioGroup" id="inputRadioSample02_1"></div>
-
-    <script>
-    Rui.onReady(()=>{
-        let inputRadioSample02_1 = new Rui.ui.form.LRadioGroup({ 
-            applyTo: 'inputRadioSample02_1',
-            name: 'inputRadioSample02',
-            items : [
-                {
-                    // label : '<font style="color:red">Rock</font>',
-                    label : 'Rock',
-                    name : 'rpsGame',
-                    value : 'rock'
-                }, {
-                    label : 'Paper',
-                    value : 'paper'
-                }, {
-                    label : 'Scissors',
-                    value : 'scissors'
-                }
-            ]
-        });
-        uiRUI(inputRadioSample02_1); // uiux에서 컨트롤하기 위한 fn
-    });
-    </script>
+    <div class="fm_item ty-date sz-small">
+        <div class="fmInner">
+            <input type="text" id="sampleInput_date01" />
+            <label for="sampleInput_date01">날짜선택인풋01</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+            <button type="button" class="bt_form_date">날짜선택</button>
+        </div>
+    </div>
     <!-- *****************************************  source end  ***************************************** -->
 </section>
+
+
+
+
+<!-- ************************************************************************************************* -->
+<!-- ***************************************** source border ***************************************** -->
+<!-- ************************************************************************************************* -->
+
+
+
+
+<section>
+    <h3>- input [type=text] 시간선택 인풋</h3>
+    <p>input time 타입</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-time">
+        <div class="fmInner">
+            <input type="text" id="sampleInput_time00" />
+            <label for="sampleInput_time00">시간선택인풋00</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+            <button type="button" class="bt_form_time">시간선택</button>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-time sz-small">
+        <div class="fmInner">
+            <input type="text" id="sampleInput_time01" />
+            <label for="sampleInput_time01">시간선택인풋01</label>
+            <button type="button" class="bt_form_clear">초기화</button>
+            <button type="button" class="bt_form_time">시간선택</button>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+</section>
+
+
+
+
+<!-- ************************************************************************************************* -->
+<!-- ***************************************** source border ***************************************** -->
+<!-- ************************************************************************************************* -->
+
+
+
+
+<section>
+    <h3>- input [type=checkbox] 체크박스</h3>
+    <p>input checkbox 타입</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-check">
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check00" />
+            <label for="sampleInput_check00">체크인풋00</label>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-check sz-small">
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check01" />
+            <label for="sampleInput_check01">체크인풋01</label>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+
+
+    <p>input checkbox 타입 : 각 상태별 형태 checked, disabled, readonly</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-check">
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check02" checked />
+            <label for="sampleInput_check02">체크인풋02 checked</label>
+        </div>
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check03" disabled />
+            <label for="sampleInput_check03">체크인풋03 disabled</label>
+        </div>
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check04" checked disabled />
+            <label for="sampleInput_check04">체크인풋04 checked disabled</label>
+        </div>
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check05" readonly />
+            <label for="sampleInput_check05">체크인풋05 readonly</label>
+        </div>
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check06" checked readonly />
+            <label for="sampleInput_check06">체크인풋06 checked readonly</label>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-check sz-small">
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check07" checked />
+            <label for="sampleInput_check07">체크인풋07 checked</label>
+        </div>
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check08" disabled />
+            <label for="sampleInput_check08">체크인풋08 disabled</label>
+        </div>
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check09" checked disabled />
+            <label for="sampleInput_check09">체크인풋09 checked disabled</label>
+        </div>
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check10" readonly />
+            <label for="sampleInput_check10">체크인풋10 readonly</label>
+        </div>
+        <div class="fmInner">
+            <input type="checkbox" id="sampleInput_check11" checked readonly />
+            <label for="sampleInput_check11">체크인풋11 checked readonly</label>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+</section>
+    
+
+
+
+<!-- ************************************************************************************************* -->
+<!-- ***************************************** source border ***************************************** -->
+<!-- ************************************************************************************************* -->
+
+
+
+
+<section>
+    <h3>- input [type=radio] 라디오</h3>
+    <p>input radio 타입</p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-radio">
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name00" id="sampleInput_radio00_1" />
+            <label for="sampleInput_radio00_1">라디오인풋00_1</label>
+        </div>
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name00" id="sampleInput_radio00_2" />
+            <label for="sampleInput_radio00_2">라디오인풋00_2</label>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-radio sz-small">
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name01" id="sampleInput_radio01_1" />
+            <label for="sampleInput_radio01_1">라디오인풋01_1</label>
+        </div>
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name01" id="sampleInput_radio01_2" />
+            <label for="sampleInput_radio01_2">라디오인풋01_2</label>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+
+
+    <p>input checkbox 타입 : 각 상태별 형태 checked, disabled, readonly </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-radio">
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name02" id="sampleInput_radio02" checked />
+            <label for="sampleInput_radio02">라디오인풋02 checked</label>
+        </div>
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name03" id="sampleInput_radio03" disabled />
+            <label for="sampleInput_radio03">라디오인풋03 disabled</label>
+        </div>
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name04" id="sampleInput_radio04" checked disabled />
+            <label for="sampleInput_radio04">라디오인풋04 checked disabled</label>
+        </div>
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name05" id="sampleInput_radio05" readonly />
+            <label for="sampleInput_radio05">라디오인풋05 readonly</label>
+        </div>
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name06" id="sampleInput_radio06" checked readonly />
+            <label for="sampleInput_radio06">라디오인풋06 checked readonly</label>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+    <p class="sub"> ㄴ small 버전 </p>
+    <!-- ***************************************** source start ***************************************** -->
+    <div class="fm_item ty-radio sz-small">
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name07" id="sampleInput_radio07" checked />
+            <label for="sampleInput_radio07">라디오인풋07 checked</label>
+        </div>
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name08" id="sampleInput_radio08" disabled />
+            <label for="sampleInput_radio08">라디오인풋08 disabled</label>
+        </div>
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name09" id="sampleInput_radio09" checked disabled />
+            <label for="sampleInput_radio09">라디오인풋09 checked disabled</label>
+        </div>
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name10" id="sampleInput_radio10" readonly />
+            <label for="sampleInput_radio10">라디오인풋10 readonly</label>
+        </div>
+        <div class="fmInner">
+            <input type="radio" name="sampleInput_radio_name11" id="sampleInput_radio11" checked readonly />
+            <label for="sampleInput_radio11">라디오인풋11 checked readonly</label>
+        </div>
+    </div>
+    <!-- *****************************************  source end  ***************************************** -->
+</section>
+
+
+
 
 
 

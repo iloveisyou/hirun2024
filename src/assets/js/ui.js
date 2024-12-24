@@ -200,18 +200,18 @@ var uiux = (function(window, document, $) {
     'use strict';
 
     // 공통 변수 설정
-    let _wrap = document.querySelector('.hirunWrap'); // 전체래퍼
+    let _html = document.querySelector('.pj-hirun'); // 전체래퍼
     let stimer, userMouse = true, userMouseTimer, userMouseStatus; // 로그인섹션 변수
     window.addEventListener('DOMContentLoaded', function(){
-        _wrap = document.querySelector('.hirunWrap');
+        _html = document.querySelector('.pj-hirun');
     });
 
     function scroll() { // 스크롤 이벤트 공통
         window.addEventListener('scroll', function(e) {
             if(window.scrollY > 20) {
-                !_wrap.classList.contains('sc-headerSmall') && _wrap.classList.add('sc-headerSmall'); 
+                !_html.classList.contains('sc-headerSmall') && _html.classList.add('sc-headerSmall'); 
             }else {
-                _wrap.classList.contains('sc-headerSmall') && _wrap.classList.remove('sc-headerSmall'); 
+                _html.classList.contains('sc-headerSmall') && _html.classList.remove('sc-headerSmall'); 
             }
         });
     }
@@ -219,6 +219,7 @@ var uiux = (function(window, document, $) {
     function integratedSearch() { // 헤더 통합검색
         let _this = document.querySelector('.cp_integratedSearch');
         let _trigger = document.querySelector('.bt_headerUtil.integratedSearch');
+        if(!_this) { return false; } 
 
         _trigger.addEventListener('click', function(e) {
             e.preventDefault();
@@ -240,14 +241,16 @@ var uiux = (function(window, document, $) {
     function gnb() { // gnb 이벤트
         const _this = document.querySelector('.gnb');
         let _slide;
-        
-        
+        if(!_this) { return false; } 
+
         const gnbInit=()=> {
             _this.querySelector('li[data-active="true"]:not(.is-active)')?.classList.add('is-active');
             _this.querySelector('dd[data-active="true"]:not(.is-active)')?.classList.add('is-active');
             _this.querySelector('li.is-active') && gnbSlider(index(_this.querySelector('li.is-active')), _this.querySelector('li.is-active'));
-            if((_this.querySelector('.slider')) && !(!!_this.querySelector('li.is-active'))) {
-                !(!!_this.querySelector('li.is-active')) && _slide.remove();
+            if((_this.querySelector('.slider')) && !_this.querySelector('li.is-active')) {
+                window.addEventListener('mouseover',e=>{
+                    !e.target.closest('.gnb') && _slide.remove();
+                });
             } 
             
         };
@@ -272,7 +275,7 @@ var uiux = (function(window, document, $) {
                 gnbSlider(i,e.currentTarget);
             });
             el.addEventListener('mouseout', function(e){
-                gnbInit();
+                gnbInit(e);
             });
         });
     }
@@ -281,6 +284,7 @@ var uiux = (function(window, document, $) {
     function tab() { // 탭 이벤트
         console.log('tab');
     }
+
 
     function sectionTimer(time,clear,callback) { // 로그인 섹션 이벤트
         let currentTime = time;
@@ -330,14 +334,14 @@ var uiux = (function(window, document, $) {
             });
         });
     }
-    function dialogOpen(target) { // 다이알로그 열기 함수
-        !document.querySelector(target)?.classList.contains('is-active') && document.querySelector(target)?.classList.add('is-active');
+    function dialogOpen(t) { // 다이알로그 열기 함수
+        !document.querySelector(t)?.classList.contains('is-active') && document.querySelector(t)?.classList.add('is-active');
     }
-    function dialogClose(target) { // 다이알로그 닫기 함수
+    function dialogClose(t) { // 다이알로그 닫기 함수
         if(typeof(target) === 'string') {
-            document.querySelector(target)?.classList.contains('is-active') && document.querySelector(target)?.classList.remove('is-active');
+            document.querySelector(t)?.classList.contains('is-active') && document.querySelector(t)?.classList.remove('is-active');
         }else {
-            target.closest('.cp_dialog')?.classList.contains('is-active') && target.closest('.cp_dialog')?.classList.remove('is-active');
+            t.closest('.cp_dialog')?.classList.contains('is-active') && t.closest('.cp_dialog')?.classList.remove('is-active');
         }
     }
 
@@ -350,6 +354,89 @@ var uiux = (function(window, document, $) {
     }
     
 
+    function form() { // 폼 이벤트
+        const _fm = '[class*="fm_"]';
+        const _this = document.querySelectorAll(_fm);
+
+        const isFocus=(e)=>{
+            e.preventDefault();
+            !e.currentTarget.closest(_fm).classList.contains('is-focus') && e.currentTarget.closest(_fm).classList.add('is-focus');
+        }
+        const isFocusout=(e)=>{
+            e.preventDefault();
+            e.currentTarget.closest(_fm).classList.contains('is-focus') && e.currentTarget.closest(_fm).classList.remove('is-focus');
+        }
+        const isActive=(e)=>{
+            // e.preventDefault();
+            const _e = e.tagName ? e : e.target;
+            !_e.closest(_fm).classList.contains('is-active') && _e.closest(_fm).classList.add('is-active');
+
+            window.addEventListener('click',(ev)=>{
+                if(ev.target.closest(_fm) != _e.closest(_fm)) {
+                    isInactive(_e);
+                } 
+            });
+        }
+        const isInactive=(e)=>{;
+            // e.preventDefault();
+            const _e = e.tagName ? e : e.target;
+            _e.closest(_fm)?.classList.contains('is-active') && _e.closest(_fm)?.classList.remove('is-active');
+        }
+        const isValue=(e)=>{
+            let _wrap = e.tagName ? e.closest(_fm) : e.currentTarget.closest(_fm), 
+                _input = e.tagName ? e : e.currentTarget;
+
+            if(_input?.value.trim()) {
+                !_wrap?.classList?.contains('is-value') && _wrap.classList.add('is-value');
+            } else {
+                _wrap?.classList?.contains('is-value') && _wrap.classList.remove('is-value');
+            }
+        }
+        const clear=(e)=>{
+            e.preventDefault();
+            let _input = e.tagName ? e.closest(_fm).querySelector('input') : e.currentTarget.closest(_fm).querySelector('input');
+
+            _input.value = '';
+            isValue(_input);
+        }
+        const select=(e)=>{
+            e.currentTarget.closest(_fm).querySelector('input').value = e.currentTarget.innerText;
+            e.currentTarget.closest(_fm).querySelector('input').value ? e.currentTarget?.closest(_fm)?.classList?.add('is-value') : e.currentTarget?.closest(_fm)?.classList?.remove('is-value');
+        }
+        _this.forEach((el,i)=>{
+            const _input = el.querySelector('input[type="text"]');
+            const _inner = el.querySelector('.fmInner');
+            const _clear = el.querySelector('.bt_form_clear');
+            if(_input) {
+                _input.value && isValue(_input);
+                _input.addEventListener('change', isValue);
+                _input.addEventListener('keyup', isValue);
+                _inner.addEventListener('focusin', isFocus);
+                _inner.addEventListener('focusout', isFocusout);
+            } 
+            if(_clear) {
+                _clear.addEventListener('click', clear)
+            }
+            if(el?.classList?.contains('ty-select')) {
+                
+                el.querySelector('.select').addEventListener('click', isActive);
+                el.querySelectorAll('.option li').forEach((li,i)=>{
+
+                    li.addEventListener('click',function(e){
+                        e.preventDefault();
+                        select(e);
+                        isInactive(e);
+                    });
+                });
+
+            }
+        });
+    }
+    function formClear(t) { // 폼 지우기
+        t.closest(_fm).querySelector('input').value = '';
+    }
+    
+
     return {
         scroll,
         gnb,
@@ -358,6 +445,7 @@ var uiux = (function(window, document, $) {
         dialog, dialogOpen, dialogClose,
         integratedSearch,
         drag,
+        form,
     }
 })(window, document, jQuery);
 
@@ -377,6 +465,7 @@ window.addEventListener('load', function(){
     uiux.dialog();
     uiux.integratedSearch();
     uiux.drag();
+    uiux.form();
     // document.querySelector('#workRegister').classList.add('is-active');
 });
 
