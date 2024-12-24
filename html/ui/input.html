@@ -76,421 +76,1442 @@
 <body>
 
 <div class="hirunWrap">
-    <h1>FORM 요소</h1>
-    <h2>input 박스</h2>
-    <ul>
-        <li>uiRUI(mui객체)함수 추가 필수</li>
-        <li>placeholder 사용하지 않음, 대신 label로 대체 (날짜선택은 제외)</li>
-        <li>날짜/시간 선택 박스(LDateTimeBox) 사용하지 않아 숨김</li>
-    </ul>
-    <section>
-        <h3>- input [type=text] - TextBox</h3>
-
-        <p>RUI > form > TextBox / LTextBox</p>
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_input" id="inputTextSample01_1"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            var inputTextSample01_1 = new Rui.ui.form.LTextBox({  
-                applyTo: 'inputTextSample01_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
-                label: '디폴트 텍스트 인풋박스',  // label 추가
-                // placeholder: '인풋텍스트샘플01박스에 입력해 주세요.',  // [옵션] 입력 값이 없을 경우 기본 표시 메시지를 설정
-                // defaultValue: '인풋텍스트샘플의 기본값',               // [옵션] 입력 값
-                // disabled: true,                                        // [옵션] 인풋박스 disabled 처리
-                // width:300,                                             // [옵션] 텍스트박스 폭을 설정
-                // mask: 9999-999,                                        // [옵션] 입력마스크를 설정 
-                // inputType: Rui.util.LString.PATTERN_TYPE_STRING,       // [옵션] 입력문자열로 영문자 입력만 허용
-                // includeChars: '한글',                                  // [옵션] 입력제한조건 중에서 지정한 문자는 입력 허용
-                // attrs: {                                               // [옵션] HTML 기본 속성(attribute) 값들을 설정 
-                //     tabIndex: 0,
-                //     maxLength: 10
-                // }
-            });
-            uiRUI(inputTextSample01_1); // uiux에서 컨트롤하기 위한 fn
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-
-        <p>RUI > form > TextBox Mask / LTextBox</p>
-        <p>텍스트박스(TextBox)에 마스크(mask)를 적용합니다.</p>
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_input" id="inputTextSample02_1"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            let inputTextSample02_1 = new Rui.ui.form.LTextBox({ 
-                applyTo: 'inputTextSample02_1',
-                mask: '999-9999-9999',
-                label: '마스크 인풋박스 (휴대폰 번호)',  // label 추가
-            });
-            uiRUI(inputTextSample02_1);
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-
-        <p>RUI > form > Textbox Auto Complete (Fixed List) json데이터 / LTextBox</p>
-        <p>텍스트박스(LTextBox)에서 고정된 목록 데이터를 이용하여 자동완성(Auto Complete) 기능을 구현합니다.</p>
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_input" id="inputTextSample03_1"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            var inputTextSample03_1 = new Rui.ui.form.LTextBox({ 
-                applyTo: 'inputTextSample03_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
-                label: `자동완성 텍스트 인풋박스 ('"코드" 또는 "데이터"')`,  // label 추가
-                // width: 200,
-                // placeholder: '"코드" 또는 "데이터"',
-                autoComplete : true,
-                filterMode: 'local',
-                url: '../../js/lib/rui2.8/sample/data/code.json'
-            });
-            uiRUI(inputTextSample03_1); // uiux에서 컨트롤하기 위한 fn
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-
-        <p>RUI > form > Textbox Auto Complete (Using filterUrl) / LTextBox</p>
-        <p>텍스트박스(LTextBox)에서 매 순간 서버에 filterUrl의 데이터를 요청하여 자동완성(Auto Complete) 기능을 구현합니다.</p>
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_input" id="inputTextSample04_1"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            var inputTextSample04_1 = new Rui.ui.form.LTextBox({ 
-                id: 'inputTextSample04_1',  // 해당 DOM Id 위치에 텍스트박스를 적용
-                applyTo: 'inputTextSample04_1',
-                label: `자동완성 텍스트 인풋박스 ('"Value"')`,  // label 추가
-                // placeholder: 'type Value..',
-                autoComplete: true,
-                filterMode: 'remote',
-                // filterUrl: 'http://www.dev-on.com/rui/rui2/sample/general/ui/form/textboxUrlFilterSample.jsp'
-                filterUrl: '../..//json/rui2_sample_ganeral_ui_form_textboxUrlFilterSample.json'
-            });
-            uiRUI(inputTextSample04_1); // uiux에서 컨트롤하기 위한 fn
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-
-
-    </section>
-
-
-
-    <!-- ************************************************************************************************* -->
-    <!-- ***************************************** source border ***************************************** -->
-    <!-- ************************************************************************************************* -->
-
-
-
-    <section>
-        <h3>- input [type=text] - PopupTextBox</h3>
-
-        <p>RUI > form > PopupTextBox / LPopupTextBox</p>
-        <p>LPopupTextBox.js / LPopupTextBox.css 별도로 추가</p>
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_number" id="inputPopupTextBoxSample01_1"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            let applyPopupValue;
-            let inputPopupTextBoxSample01_1 = new Rui.ui.form.LPopupTextBox({
-                applyTo: 'inputPopupTextBoxSample01_1',
-                label: '날짜입력 인풋박스',  // label 추가 
-                enterToPopup: true,
-                useHiddenValue: true,
-                editable: true
-            });
-            applyPopupValue = function(popupValue){
-                inputPopupTextBoxSample01_1.setValue(popupValue.col2);
-                inputPopupTextBoxSample01_1.setDisplayValue(popupValue.col1);
-            }
-
-            // 이벤트 처리
-            inputPopupTextBoxSample01_1.on('popup', function(e){
-                let displayValue = e.displayValue;
-                Rui.log('value : ' + e.value + ', displayValue : ' + displayValue);
+    <!-- ************************************************************************************************ -->
+    <!-- ***************************************** header start ***************************************** -->
+    <header class="header">
+        <div class="headerInner">
+            <h1 class="logo"><a href="#void">HI-RUN SYSTEM</a></h1>
+            <nav class="gnb">
+                <ul>
+                    
+                    <li data-active="false"><a href="/" target="_self">상담</a>
+                        <div class="submenu">
+                            <dl>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>상담관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">상담PORTAL(☆)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">기술상담관리(☆)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">전화번호관리</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>VOC관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">VOC관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">Claim 관리(☆)</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>캠페인관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">캠페인실시</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">캠페인관리</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>상황관제</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">TMS모니터링 이력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self"> 현장 마스터</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">TTMS 고장에러/이상징후 관리</a></dd>
+                                    
+                                </div>
+                                
+                                
+                            </dl>
+                        </div>
+                    </li>
+                    
+                    <li data-active="false"><a href="/" target="_self">서비스업무</a>
+                        <div class="submenu">
+                            <dl>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>서비스업무관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">출장이관</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서비스PORTAL</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">접수번호조회</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">무상부품 변경</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">수리비환불(유지보수무상)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">고객수리이력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">PUSH메시지 전송</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">PUSH메시지 조회</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">사전견적&amp;거래명세서 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">한국서비스 접수번호조회</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>일정관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">지역관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">운영스케줄관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">기사별 서비스건수 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">기사별 서비스 건수관리(pilot)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">당직일정 관리</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>보상관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">PL포털(☆)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">대리점환입</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>칠러서비스관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">칠러PORTAL</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">납품스케쥴</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>총무성관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">보유아이템관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">신청결재관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">운행일지목록</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">정기유니폼관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">아이템현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">통합결재</a></dd>
+                                    
+                                </div>
+                                
+                                
+                            </dl>
+                        </div>
+                    </li>
+                    
+                    <li data-active="false"><a href="/" target="_self">자재</a>
+                        <div class="submenu">
+                            <dl>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>주문관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">자재PORTAL</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">약속관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">PO진도관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">일괄PO요청</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">판매내역관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">통합발주관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">시중구매출하관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">자동발주관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">자재정보</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>입출고관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">사업부적자반품</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">차용관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">출고관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">회수품출고</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">입고관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">A급 차용자재 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">SE별 A급 차용자재 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">SE별 A급 자재 차용자재 신청</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">A급자재 승인</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>재고관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">적치장소재고관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">폐기관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">재물조사</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">폐기승인</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">재고관리리스트</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">자재 실사 조회</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">자재실사 결재</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>서브원주문</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서브원부품주문</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서브원주문관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서브원출하관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서브원부품등록</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>서비스지정점 주문</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">전문점 현장관리 Master</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서비스지정점 부품요청</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">부품요청내역</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서비스결과입력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서비스결과내역</a></dd>
+                                    
+                                </div>
+                                
+                                
+                            </dl>
+                        </div>
+                    </li>
+                    
+                    <li data-active="false"><a href="/" target="_self">메인재경터넌스</a>
+                        <div class="submenu">
+                            <dl>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>대행료관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">칠러 대행료청구</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">외주비정산관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">외주비지급조회</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">센터 재료비/외주비 품의요청(신규)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">본사 외주비 품의요청 (신규)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">외주비 품의 결재 (신규)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">외주비 AP전송 (신규)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">무상대행료청구(신규)</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>매출/수금</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">수금관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">AR확정관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">AR확정/확정취소조회</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">AR확정취소 품의관리</a></dd>
+                                    
+                                </div>
+                                
+                                
+                            </dl>
+                        </div>
+                    </li>
+                    
+                    <li data-active="false"><a href="/" target="_self">메인터넌스</a>
+                        <div class="submenu">
+                            <dl>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>다지점 관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">다지점 Master</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">다지점 서비스/세척 관리</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>칠러전담현장 관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">칠러전담PORTAL</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">활동내역</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">전담일정달력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">계획대비방문실적</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>전담현장 관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">전담 PORTAL</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">활동이력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">일일활동내역</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">계획대비방문실적</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">전담방문일정</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">일정변경이력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">유지보수 점검내역</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>계약/매출관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">메인터넌스PORTAL</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">매출관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">계약리스트 조회</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">AMC 정기점검 진척관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">고객마스터</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">Target 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">소형패키지 마스터 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">소형패키지 현장 상세정보</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>세척오더관리</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척오더달력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척오더조회및승인</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척오더등록</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">이전설치달력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척 CAPA 마스터</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척 스케줄 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">세척 CAPA 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">오더관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">오더조회및승인</a></a></dd>
+                                    
+                                </div>
+                                
+                                
+                            </dl>
+                        </div>
+                    </li>
+                    
+                    <li data-active="true"><a href="/" target="_self">마스터</a>
+                        <div class="submenu">
+                            <dl>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>공통영역</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">조직코드 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">사용자 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">휴일관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">일반코드 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">업무담당자관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">역할메뉴 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">SMS전송관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">HIM거래선관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">결재담당자관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">총무성아이템관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">개인정보대량조회</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">보안서약서 양식 관리</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="true">
+                                    
+                                    <dt>서비스영역</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">이관등급관리</a></dd>
+                                    
+                                        <dd data-active="true"><a href="/" target="_self">우편번호 지역관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">고객정보 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">카드단말기번호관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">고객정보 관리(SBC)</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">조 관리 마스터</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>기술영역</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">제품코드 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">모델코드 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">제조번호예외 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">제품류코드 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">수리코드관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">난수리 부품 Validation</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>자재영역</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">ITEM 마스터 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">부품분류코드관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">SVC BOM 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">시중구매SBOM 등록</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">해외 시중구매부품 등록</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>메인터넌스영역</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">허브점관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">목표/수주예상 관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">상품관리</a></dd>
+                                    
+                                </div>
+                                
+                                
+                            </dl>
+                        </div>
+                    </li>
+                    
+                    <li data-active="false"><a href="/" target="_self">재경현황</a>
+                        <div class="submenu">
+                            <dl>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>메인터넌스현황</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">파이프라인현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">수주잔현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">파이프라인현황2</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">수주예상 변경이력</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>재경현황</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">SE별매출현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">현금일일시재현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">미수채권 현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">사고채권</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">외주비 현황( 신규 )</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>서비스현황</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서비스세부리스트</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서비스현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">재고장현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서비스지표현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">시간대별 건수</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">장기미처리 현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">CIC 전달 이력</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">LMS리포트현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">LMS리포트현황2</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">일일서비스품질지표</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">센터별일일서비스처리현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">개인별일일서비스처리현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">조별일일서비스처리현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">KPI지표현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">서비스접수 지연현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">KPI지표현황_2021</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>자재현황</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">품절율현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">센터이체율</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">수불실적리스트</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">센터입출고현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">기간별재고현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">기간별재고상세현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">차용관리현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">회수반품현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">약속미사용</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">자재지표현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">수불항번자료</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">사업부 자재지표</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">SE 부품 미사용율 현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">A급 자동발주 현황</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">A급 자재 현황</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>기술자료</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">시방정보</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">원포인트정보</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">업그레이드 정보</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">기술자료 게시판</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">매뉴얼정보</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">CS교육자료 게시판</a></dd>
+                                    
+                                </div>
+                                
+                                <div data-active="false">
+                                    
+                                    <dt>구분손익</dt>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">사업별 구분손익 결과</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">배부율관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">구분손익 코드관리</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">해외 구분손익 결과</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">해외 법인별 배부율</a></dd>
+                                    
+                                        <dd data-active="false"><a href="/" target="_self">해외 법인별 환율</a></dd>
+                                    
+                                </div>
+                                
+                                
+                            </dl>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </nav>
+            <div class="groupRight">
                 
-                let popup = window.open('http://www.dev-on.com/rui/rui2/sample/general/ui/form/popupWindow.html?displayValue=' + displayValue, 'popup', 'width=800,height=400,toolbar=no,status=yes');
-                popup.focus();
-                inputPopupTextBoxSample01_1.blur();
-            });
-
-            uiRUI(inputPopupTextBoxSample01_1); // uiux에서 컨트롤하기 위한 fn
-        });
-
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-    </section>
-
-
-
-    <!-- ************************************************************************************************* -->
-    <!-- ***************************************** source border ***************************************** -->
-    <!-- ************************************************************************************************* -->
-
-
-
-    <section>
-        <h3>- input [type=text] - NumberBox</h3>
-
-        <p>RUI > form > NumberBox / LNumberBox</p>
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_popup" id="inputNumberBoxSample01_1"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            let inputNumberBoxSample01_1 = new Rui.ui.form.LNumberBox({
-                applyTo: 'inputNumberBoxSample01_1',
-                label: '제목, -10 부터 10,000까지 입력 하세요.',  // label 추가 
-                // placeholder: '-10 부터 10,000까지 입력 하세요.',
-                minValue: -10,
-                maxValue: 10000,
-                decimalPrecision: 2,
-                // width: 210, // 사용하지앖음, 설정해도 안됨, css에서 제어
-            });
-            uiRUI(inputNumberBoxSample01_1); // uiux에서 컨트롤하기 위한 fn
-        });
-
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-    </section>
+                <p class="sectionTimer" title="해당 시간이 지나면 로그인 섹션이 종료됩니다" onclick="alarm();">30 : 00</p>
+                <script>uiux.sectionTimer(1800);</script>
+                <div class="headerUtil">
+                    
+                    <button type="button" class="bt_headerUtil myWork">나의 업무일정</button>
+                    <button type="button" class="bt_headerUtil workRegister" onclick="uiux.dialogOpen('#workRegister00');">신규일정등록</button>
+                    <button type="button" class="bt_headerUtil webMessenger" onclick="uiux.dialogOpen('#webMessenger00');">웹메신저</button>
+                    <button type="button" class="bt_headerUtil integratedSearch">통합검색</button>
+                    <button type="button" class="bt_headerUtil bg-primary myProfile" onclick="uiux.dialogOpen('#profile00');">프로필</button>
+                </div>
+            </div>
+            <div class="cp_integratedSearch">
+                <input type="text" placeholder="통합검색" />
+                <button type="button" class="bt_ntegratedSearch">검색</button>
+                <button type="button" class="bt_ntegratedSearchClose">검색영역 닫기</button>
+                <dl class="keyword">
+                    <dt>최근 검색 키워드</dt>
+                    <dd class="cp_badge ">김하이런</dd>
+                    <dd class="cp_badge ">센터장님</dd>
+                    <dd class="cp_badge ">강동 지역센터</dd>
+                    <dd class="cp_badge ">hirun</dd>
+                    <dd class="cp_badge ">제품코드 관리</dd>
+                </dl>
+            </div>
+        </div>
+    </header>
+    <!-- *****************************************  header end  ***************************************** -->
+    <!-- ************************************************************************************************ -->
 
 
 
-    <!-- ************************************************************************************************* -->
-    <!-- ***************************************** source border ***************************************** -->
-    <!-- ************************************************************************************************* -->
+    <!-- ************************************************************************************************ -->
+    <!-- *************************************** dialogArea start *************************************** -->
+
+    <!-- 다이알로그 > 컨텐츠 : 업무일정등록 -->
+    <div class="cp_dialog nm-workRegister " id="workRegister00">
+        <div class="cpInner" >
+            <div class="cpHeader">
+                <div class="heading"><strong>업무일정등록</strong></div>
+                <button type="button" class="bt_dialogClose">팝업닫기</button>
+            </div>
+            <div class="cpMain">
+                <div class="fm_grid sz-small">
+                    <div class="fm_item ty-date">
+                        <div class="fmInner">
+                            <input type='text' id="workRegister_date" />
+                            <label for="workRegister_date">계획일자</label>
+                            <button type="button">날짜선택</button>
+                        </div>
+                    </div>
+                    <div class="fm_item ty-select">
+                        <div class="fmInner">
+                            <div class="select">
+                                <input type='text' id="workRegister_type" placeholder="선택&입력" />
+                                <label for="workRegister_type">업무유형</label>
+                            </div>
+                            <div class="option">                  
+                                <ul>
+                                    <li>기획자</li>
+                                    <li>디자이너</li>
+                                    <li>퍼블리셔</li>
+                                    <li>프론트엔드 개발자</li>
+                                    <li>백엔드 개발자</li>
+                                    <li>DBA 개발자</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fm_item ty-input">
+                        <div class="fmInner">
+                            <input type='text' id="workRegister_worker" />
+                            <label for="workRegister_worker">일정등록자</label>
+                        </div>
+                    </div>
+                    <div class="fm_item ty-search">
+                        <div class="fmInner">
+                            <input type='text' id="workRegister_search" />
+                            <label for="workRegister_search">홍길동</label>
+                            <button type='button'>검색</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="fm_grid sz-small">
+                    <div class="fm_item ty-textarea">
+                        <div class="fmInner">
+                            <textarea></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cpFooter bt_wrap">
+                <button type="button" class="bt_line bt_cancel" onclick="uiux.dialogClose(this);">취소</button>
+                <button type="button" class="bt_fill cl-primary">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 다이알로그 > 공통 : 메신저 -->
+    <div class="cp_dialog ty-target nm-webMessenger " id="webMessenger00">
+        <div class="cpInner" >
+            <div class="cpHeader">
+                <div class="heading">
+                <strong>Next Generation System HIRUN</strong> 
+                <button type="button" class="bt_dialogSize" title="전체화면으로 변경합니다">창모드 변경</button>
+            </div>
+                <button type="button" class="bt_dialogClose cl-white" title="팝업을 닫습니다">닫기</button>
+            </div>
+            <div class="cpMain">
+                <dl class="received">
+                    <dt>Your Received</dt>
+                    <dd><em>52</em> Messages</dd>
+                </dl>
+                <dl class="contact">
+                    <dt>Contact List</dt> 
+                    <dd>
+                        <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile01.png" alt="프로필사진"></button>
+                        <button type="button" class="is-offline"><img src="../../images/newHiRun/sample/sample_profile02.png" alt="프로필사진"></button>
+                        <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile03.png" alt="프로필사진"></button>
+                        <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile04.png" alt="프로필사진"></button>
+                        <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile05.png" alt="프로필사진"></button>
+                        <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile01.png" alt="프로필사진"></button>
+                        <button type="button" class="is-offline"><img src="../../images/newHiRun/sample/sample_profile02.png" alt="프로필사진"></button>
+                        <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile03.png" alt="프로필사진"></button>
+                        <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile04.png" alt="프로필사진"></button>
+                        <button type="button" class="is-online"><img src="../../images/newHiRun/sample/sample_profile05.png" alt="프로필사진"></button>
+
+                    </dd>
+                </dl>
+                <div class="chat">
+                    <div class="search">
+                        <input type="text" placeholder="사용자 또는 내용을 입력하세요" />
+                        <button type="button">검색</button>
+                    </div>
+                    <div class="chatList">
+                        <ul>
+                            <li>
+                                <div class="photo is-online"><img src="../../images/newHiRun/sample/sample_profile06.png" alt="프로필사진"></div>
+                                <div class="content">
+                                    <div class="info">
+                                        <b class="name">김하이(SE)</b> <span class="region">강서지역센터</span> <span class="time">오후 3:25</span>
+                                    </div>
+                                    <div class="message">강서 칠러 현장 SE 1명 지원 요청</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="categoryDate"><em>어제</em> 2024.12.04</div>
+                        <ul>
+                            <li>
+                                <div class="photo is-offline"><img src="../../images/newHiRun/sample/sample_profile07.png" alt="프로필사진"></div>
+                                <div class="content">
+                                    <div class="info">
+                                        <b class="name">이하이런(SE)</b> <span class="region">강동지역센터</span> <span class="time">오후 3:25</span>
+                                    </div>
+                                    <div class="message">강서 칠러 현장 SE 1명 지원 요청</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="photo is-offline"><img src="../../images/newHiRun/sample/sample_profile08.png" alt="프로필사진"></div>
+                                <div class="content">
+                                    <div class="info">
+                                        <b class="name">하이엠(센터장)</b> <span class="region">강서지역센터</span> <span class="time">오후 3:25</span>
+                                    </div>
+                                    <div class="message">강서 칠러 현장 SE 1명 지원 요청강서 칠러 현장 SE 1명 지원 요청</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="photo is-online"><img src="../../images/newHiRun/sample/sample_profile09.png" alt="프로필사진"></div>
+                                <div class="content">
+                                    <div class="info">
+                                        <b class="name">Gildong(SE)</b> <span class="region">강서지역센터</span> <span class="time">오후 3:25</span>
+                                    </div>
+                                    <div class="message">강서 칠러 현장 SE 1명 지원 요청</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="categoryDate">2024.12.03</div>
+                        <!-- default image -->
+                        <ul>
+                            <li>
+                                <div class="photo is-offline"></div>
+                                <div class="content">
+                                    <div class="info">
+                                        <b class="name">이하이런(SE)</b> <span class="region">강동지역센터</span> <span class="time">오후 3:25</span>
+                                    </div>
+                                    <div class="message">프로필 이미지가 없으면 기본이미지가 나옵니다</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="photo is-offline"></div>
+                                <div class="content">
+                                    <div class="info">
+                                        <b class="name">하이엠(센터장)</b> <span class="region">강서지역센터</span> <span class="time">오후 3:25</span>
+                                    </div>
+                                    <div class="message">강서 칠러 현장 SE 1명 지원 요청강서 칠러 현장 SE 1명 지원 요청</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="photo is-online"></div>
+                                <div class="content">
+                                    <div class="info">
+                                        <b class="name">Gildong(SE)</b> <span class="region">강서지역센터</span> <span class="time">오후 3:25</span>
+                                    </div>
+                                    <div class="message">강서 칠러 현장 SE 1명 지원 요청</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="controll">
+                    <button type="button" class="bt_newChat" title="새로운 채팅방을 만듭니다">새채팅</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 다이알로그 > 공통 : 프로필 -->
+    <div class="cp_dialog ty-target nm-profile " id="profile00">
+        <div class="cpInner" >
+            <div class="cpHeader">
+                <div class="heading"> <strong>나의 프로필 정보</strong> </div>
+                <button type="button" class="bt_dialogClose" title="팝업을 닫습니다">닫기</button>
+            </div>
+            <div class="cpMain">
+                <div class="profile">
+                    <div class="photo">
+                        <img src="../../images/newHiRun/sample/sample_profile10.png" alt="프로필사진">
+                        <button class="button">사진 등록/추가</button>
+                    </div>
+                    <div class="info">
+                        <div class="region">강서지역센터 (SE)</div> 
+                        <div class="welcome"><em>hirun</em>님 오늘도 좋은하루 되세요!</div>
+                        <div class="date">
+                            <b>마지막 접속일시</b>
+                            <span>2024.12.01 17:32:20</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="service">
+                    <div class="fm_grid">
+                        <div class="fm_item ty-select">
+                            <div class="fmInner">
+                                <div class="select">
+                                    <input type='text' id="workRegister_type" placeholder="선택해주세요" />
+                                    <label for="workRegister_type">나의 즐겨찾기 메뉴</label>
+                                </div>
+                                <div class="option">                  
+                                    <ul>
+                                        <li>상담PORTAL</li>
+                                        <li>서비스PORTAL</li>
+                                        <li>고객수리이력</li>
+                                        <li>기사별 서비스건수 관리</li>
+                                        <li>신청결재관리</li>
+                                        <li>운행일지목록</li>
+                                        <li>통합발주관리</li>
+                                        <li>본사 외주비 품의요청 (신규)</li>
+                                        <li>제품코드 관리</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fm_grid bt_wrap">
+                        <button type="button" class="bt_line bt_myPayment">나의 결재함</button>
+                        <button type="button" class="bt_line bt_memberInfoModify">회원정보수정</button>
+                    </div>
+                    <div class="fm_grid bt_wrap">
+                        <button type="button" class="bt_fill cl-primary bt_profileLogout">로그아웃</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ***************************************  dialogArea end  *************************************** -->
+    <!-- ************************************************************************************************ -->
 
 
 
-    <section>
-        <h3>- input [type=text] - DateBox</h3>
+    
 
-        <p>RUI > form > DateBox / LDateBox</p>
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_date" id="inputDateSample01_1"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            let inputDateSample01_1 = new Rui.ui.form.LDateBox({ 
-                applyTo: 'inputDateSample01_1',
-                label: '날짜선택 인풋박스',  // label 추가 
-                //mask: '99-99-9999',
-                //displayValue: '%d-%m-%Y',
-                //defaultValue: new Date(),
-                //dateType: 'string',
-            });
-            uiRUI(inputDateSample01_1); // uiux에서 컨트롤하기 위한 fn
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-        
-        <p>RUI > form > TimeBox / LMonthBox</p>
-        <p>LMonthCalendar.js / LMonthBox.js / LMonthBox.css 별도로 추가</p>
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_date" id="inputDateSample02_1"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            let inputDateSample02_1 = new Rui.ui.form.LMonthBox({ 
-                applyTo: 'inputDateSample02_1',
-                label: '월선택 인풋박스',  // label 추가 
-                placeholder: 'yyyy-mm',
-                defaultValue: null
-            });
-            uiRUI(inputDateSample02_1); // uiux에서 컨트롤하기 위한 fn
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-        
-        <p>RUI > form > Timebox / LTimeBox</p>
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_date" id="inputDateSample03_1"></div>
-        <script>
-        Rui.onReady(()=>{
-            let inputDateSample03_1 = new Rui.ui.form.LTimeBox({ 
-                applyTo: 'inputDateSample03_1',
-                label: '시간선택 인풋박스',  // label 추가 
-                placeholder: '시:분',
-            });
-            uiRUI(inputDateSample03_1); // uiux에서 컨트롤하기 위한 fn
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-        
-        
-
-        <p>RUI > form > DateTimeBox / LFromToDateBox</p>
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_date" id="inputDateSample05_1"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            let inputDateSample05_1 = new Rui.ui.form.LFromToDateBox({ 
-                applyTo: 'inputDateSample05_1',
-                label: '기간선택 인풋박스',  // label 추가 
-                // calendarConfig : {
-                //     mindate: '08/12/2018',
-                //     maxdate: '08/22/2018'
-                // },
-                startDate: new Date()
-            });
-            uiRUI(inputDateSample05_1); // uiux에서 컨트롤하기 위한 fn
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-    </section>
+    <!-- ************************************************************************************************ -->
+    <!-- *****************************************  main start  ***************************************** -->
+    <main class="main">
+        <h1>FORM > input 요소</h1>
+        <h2>text, date, checkbox, radio</h2>
+        <ul>
+            <li>placeholder속성 사용안함, 대신 label태그 사용</li>
+            <li>focus시, 라운드 진하게 그려짐</li>
+            <li>focus이거나, value값 있거나,  제목(레이블) 위로 이동</li>
+            <li>스몰버전 input은 .sz-small 추가, 또는 상위에 해당 class 추가하면 적용 됨</li>
+        </ul>
 
 
-
-    <!-- ************************************************************************************************* -->
-    <!-- ***************************************** source border ***************************************** -->
-    <!-- ************************************************************************************************* -->
-
-
-
-    <section>
-        <h3>- input [type=checkbox] - Checkbox</h3>
-
-        <p>RUI > form > <b>Checkbox</b> - <b>개별제어</b>, <b>label</b> js로 입력 (html 태그에서 label 제거)</p>
-        <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
-        
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_check" id="inputCheckboxSample01_1"></div>
-        <div class="fm_check" id="inputCheckboxSample01_2"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            let inputCheckboxSample01_1 = new Rui.ui.form.LCheckBox({ 
-                applyTo: 'inputCheckboxSample01_1',
-                name: 'inputCheckboxSample01',
-                label: '일반 체크박스01_1',
-                // value: '오징어'
-            });
-            uiRUI(inputCheckboxSample01_1); // uiux에서 컨트롤하기 위한 fn
-
-            let inputCheckboxSample01_2 = new Rui.ui.form.LCheckBox({ 
-                applyTo: 'inputCheckboxSample01_2',
-                name: 'inputCheckboxSample01',
-                label: '일반 체크박스01_2',
-                // value: '오징어'
-            });
-            uiRUI(inputCheckboxSample01_2); // uiux에서 컨트롤하기 위한 fn
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-
-        <p>RUI > form > <b>CheckBox Group</b> - <b>구룹제어</b>, <b>items(label)</b> js로 입력 (html 태그에서 label 제거)</p>
-        <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
-        <!-- <p>일반적일 경우에는 사용할 필요는 없습니다.</p> -->
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_checkGroup" id="inputCheckboxSample02_1"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            let inputCheckboxSample02_1 = new Rui.ui.form.LCheckBoxGroup({ 
-                applyTo: 'inputCheckboxSample02_1',
-                name: 'inputCheckboxSample02',
-                label: '일반 체크박스02_1',
-                items: [
-                    {
-                        label: 'Apple',
-                        name: 'fruits',
-                        value: 'apple'
-                    }, {
-                        label: 'Grape',
-                        checked: true,
-                        value: 'Grape'
-                    }, {
-                        label: 'Strawberry',
-                        checked: true,
-                        value: 'Strawberry'
-                    }
-                ]
-            });
-            uiRUI(inputCheckboxSample02_1); // uiux에서 컨트롤하기 위한 fn
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-    </section>
-
-
-
-    <!-- ************************************************************************************************* -->
-    <!-- ***************************************** source border ***************************************** -->
-    <!-- ************************************************************************************************* -->
-
-
-
-    <section>
-        <h3>- input [type=radio] - Radio</h3>
-
-        <p>RUI > form > <b>Radio</b> - <b>개별제어</b>, <b>label</b> js로 입력 (html 태그에서 label 제거)</p>
-        <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
-        <p>하나로 사용할 경우는 없으므로 라디오그룹(RadioGroup)을 사용하세요.</p>
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_radio" id="inputRadioSample01_1"></div>
-        <div class="fm_radio" id="inputRadioSample01_2"></div>
-
-        <script>
-        Rui.onReady(()=>{
-            let inputRadioSample01_1 = new Rui.ui.form.LRadio({ 
-                applyTo: 'inputRadioSample01_1',
-                name: 'inputRadioSample01',
-                label: '일반 라디오01_1',
-                // value: '창'
-            });
-            uiRUI(inputRadioSample01_1); // uiux에서 컨트롤하기 위한 fn
+        <section>
+            <h3>- input [type=text]</h3>
             
-            let inputRadioSample01_2 = new Rui.ui.form.LRadio({ 
-                applyTo: 'inputRadioSample01_2',
-                name: 'inputRadioSample01',
-                label: '일반 라디오01_2',
-                // value: '창'
-            });
-            uiRUI(inputRadioSample01_2); // uiux에서 컨트롤하기 위한 fn
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
+            <p>input의 가장 기본적인 타입 text : value 값이 없는상태 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default00" />
+                    <label for="input_text_default00">인풋이름00</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input sz-small">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default01" />
+                    <label for="input_text_default01">인풋이름01</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
 
-        <p>RUI > form > <b>Radio Group</b> - <b>구룹제어</b>, <b>items(label)</b> js로 입력 (html 태그에서 label 제거)</p>
-        <p>input 감싸고 있는 div에도 input에 사용하는 id과 동일하게 적용되어 있는 문제로, div에는 id는 마지막에 '_wrap' 추가</p>
-        <!-- <p>그리드(Grid)의 편집기로 사용하지 않으면 HTML 기본 태그로 사용하여도 됩니다.</p> -->
-        <!-- ***************************************** source start ***************************************** -->
-        <div class="fm_radioGroup" id="inputRadioSample02_1"></div>
+            
+            <p>input의 가장 기본적인 타입 text : 포커스 된 상태(자동추가) (.is-focus) </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input is-focus">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default02" />
+                    <label for="input_text_default02">인풋이름02</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input is-focus sz-small">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default03" />
+                    <label for="input_text_default03">인풋이름03</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
 
-        <script>
-        Rui.onReady(()=>{
-            let inputRadioSample02_1 = new Rui.ui.form.LRadioGroup({ 
-                applyTo: 'inputRadioSample02_1',
-                name: 'inputRadioSample02',
-                items : [
-                    {
-                        // label : '<font style="color:red">Rock</font>',
-                        label : 'Rock',
-                        name : 'rpsGame',
-                        value : 'rock'
-                    }, {
-                        label : 'Paper',
-                        value : 'paper'
-                    }, {
-                        label : 'Scissors',
-                        value : 'scissors'
-                    }
-                ]
-            });
-            uiRUI(inputRadioSample02_1); // uiux에서 컨트롤하기 위한 fn
-        });
-        </script>
-        <!-- *****************************************  source end  ***************************************** -->
-    </section>
+            
+            <p>input의 가장 기본적인 타입 text : value 값이 입력된 상태(자동추가) (.is-value) </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input is-value">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default04" value="value 값이 입력된 상태" />
+                    <label for="input_text_default04">인풋이름04</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input is-value sz-small">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default05" value="value 값이 입력된 상태" />
+                    <label for="input_text_default05">인풋이름05</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            
+
+            <p>input의 가장 기본적인 타입 text : value 값이 잘못 입력되거나 validation에 부적합한 요소 (.is-error) </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input is-error">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default06" value="value 값이 잘못 입력된 상태" />
+                    <label for="input_text_default06">인풋이름06</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+                <p class="formMessage_error">이름을 확인해주세요.</p>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input is-error sz-small">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default07" value="value 값이 잘못 입력된 상태" />
+                    <label for="input_text_default07">인풋이름07</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+                <p class="formMessage_error">이름을 확인해주세요.</p>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            
+
+            <p>input의 가장 기본적인 타입 text : disabled 상태</p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default08" value="value 값이 잘못 입력된 상태" disabled  />
+                    <label for="input_text_default08">인풋이름08</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input sz-small">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default09" value="value 값이 잘못 입력된 상태" disabled  />
+                    <label for="input_text_default09">인풋이름09</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            
+
+            <p>input의 가장 기본적인 타입 text : readonly 상태 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default10" value="value 값이 잘못 입력된 상태" readonly />
+                    <label for="input_text_default10">인풋이름10</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-input sz-small">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default11" value="value 값이 잘못 입력된 상태" readonly />
+                    <label for="input_text_default11">인풋이름11</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+        </section>
+
+
+
+
+        <!-- ************************************************************************************************* -->
+        <!-- ***************************************** source border ***************************************** -->
+        <!-- ************************************************************************************************* -->
+
+
+
+
+        <section>
+            <h3>- input [type=text] 검색 인풋</h3>
+            <p>input search 타입</p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-search">
+                <div class="fmInner">
+                    <input type="text" id="sampleInput_search00" />
+                    <label for="sampleInput_search00">검색인풋00</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                    <button type="button" class="bt_form_search">검색</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-search sz-small">
+                <div class="fmInner">
+                    <input type="text" id="input_text_default01" />
+                    <label for="input_text_default01">검색인풋01</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                    <button type="button" class="bt_form_search">검색</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+        </section>
+
+
+
+
+        <!-- ************************************************************************************************* -->
+        <!-- ***************************************** source border ***************************************** -->
+        <!-- ************************************************************************************************* -->
+
+
+
+
+        <section>
+            <h3>- input [type=text] 날짜선택 인풋</h3>
+            <p>input date 타입</p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-date">
+                <div class="fmInner">
+                    <input type="text" id="sampleInput_date00" />
+                    <label for="sampleInput_date00">날짜선택인풋00</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                    <button type="button" class="bt_form_date">날짜선택</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-date sz-small">
+                <div class="fmInner">
+                    <input type="text" id="sampleInput_date01" />
+                    <label for="sampleInput_date01">날짜선택인풋01</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                    <button type="button" class="bt_form_date">날짜선택</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+        </section>
+
+
+
+
+        <!-- ************************************************************************************************* -->
+        <!-- ***************************************** source border ***************************************** -->
+        <!-- ************************************************************************************************* -->
+
+
+
+
+        <section>
+            <h3>- input [type=text] 시간선택 인풋</h3>
+            <p>input time 타입</p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-time">
+                <div class="fmInner">
+                    <input type="text" id="sampleInput_time00" />
+                    <label for="sampleInput_time00">시간선택인풋00</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                    <button type="button" class="bt_form_time">시간선택</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-time sz-small">
+                <div class="fmInner">
+                    <input type="text" id="sampleInput_time01" />
+                    <label for="sampleInput_time01">시간선택인풋01</label>
+                    <button type="button" class="bt_form_clear">초기화</button>
+                    <button type="button" class="bt_form_time">시간선택</button>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+        </section>
+
+
+
+
+        <!-- ************************************************************************************************* -->
+        <!-- ***************************************** source border ***************************************** -->
+        <!-- ************************************************************************************************* -->
+
+
+
+
+        <section>
+            <h3>- input [type=checkbox] 체크박스</h3>
+            <p>input checkbox 타입</p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-check">
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check00" />
+                    <label for="sampleInput_check00">체크인풋00</label>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-check sz-small">
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check01" />
+                    <label for="sampleInput_check01">체크인풋01</label>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+
+
+            <p>input checkbox 타입 : 각 상태별 형태 checked, disabled, readonly</p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-check">
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check02" checked />
+                    <label for="sampleInput_check02">체크인풋02 checked</label>
+                </div>
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check03" disabled />
+                    <label for="sampleInput_check03">체크인풋03 disabled</label>
+                </div>
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check04" checked disabled />
+                    <label for="sampleInput_check04">체크인풋04 checked disabled</label>
+                </div>
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check05" readonly />
+                    <label for="sampleInput_check05">체크인풋05 readonly</label>
+                </div>
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check06" checked readonly />
+                    <label for="sampleInput_check06">체크인풋06 checked readonly</label>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-check sz-small">
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check07" checked />
+                    <label for="sampleInput_check07">체크인풋07 checked</label>
+                </div>
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check08" disabled />
+                    <label for="sampleInput_check08">체크인풋08 disabled</label>
+                </div>
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check09" checked disabled />
+                    <label for="sampleInput_check09">체크인풋09 checked disabled</label>
+                </div>
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check10" readonly />
+                    <label for="sampleInput_check10">체크인풋10 readonly</label>
+                </div>
+                <div class="fmInner">
+                    <input type="checkbox" id="sampleInput_check11" checked readonly />
+                    <label for="sampleInput_check11">체크인풋11 checked readonly</label>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+        </section>
+            
+
+
+
+        <!-- ************************************************************************************************* -->
+        <!-- ***************************************** source border ***************************************** -->
+        <!-- ************************************************************************************************* -->
+
+
+
+
+        <section>
+            <h3>- input [type=radio] 라디오</h3>
+            <p>input radio 타입</p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-radio">
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name00" id="sampleInput_radio00_1" />
+                    <label for="sampleInput_radio00_1">라디오인풋00_1</label>
+                </div>
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name00" id="sampleInput_radio00_2" />
+                    <label for="sampleInput_radio00_2">라디오인풋00_2</label>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-radio sz-small">
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name01" id="sampleInput_radio01_1" />
+                    <label for="sampleInput_radio01_1">라디오인풋01_1</label>
+                </div>
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name01" id="sampleInput_radio01_2" />
+                    <label for="sampleInput_radio01_2">라디오인풋01_2</label>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+
+
+            <p>input checkbox 타입 : 각 상태별 형태 checked, disabled, readonly </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-radio">
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name02" id="sampleInput_radio02" checked />
+                    <label for="sampleInput_radio02">라디오인풋02 checked</label>
+                </div>
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name03" id="sampleInput_radio03" disabled />
+                    <label for="sampleInput_radio03">라디오인풋03 disabled</label>
+                </div>
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name04" id="sampleInput_radio04" checked disabled />
+                    <label for="sampleInput_radio04">라디오인풋04 checked disabled</label>
+                </div>
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name05" id="sampleInput_radio05" readonly />
+                    <label for="sampleInput_radio05">라디오인풋05 readonly</label>
+                </div>
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name06" id="sampleInput_radio06" checked readonly />
+                    <label for="sampleInput_radio06">라디오인풋06 checked readonly</label>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+            <p class="sub"> ㄴ small 버전 </p>
+            <!-- ***************************************** source start ***************************************** -->
+            <div class="fm_item ty-radio sz-small">
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name07" id="sampleInput_radio07" checked />
+                    <label for="sampleInput_radio07">라디오인풋07 checked</label>
+                </div>
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name08" id="sampleInput_radio08" disabled />
+                    <label for="sampleInput_radio08">라디오인풋08 disabled</label>
+                </div>
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name09" id="sampleInput_radio09" checked disabled />
+                    <label for="sampleInput_radio09">라디오인풋09 checked disabled</label>
+                </div>
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name10" id="sampleInput_radio10" readonly />
+                    <label for="sampleInput_radio10">라디오인풋10 readonly</label>
+                </div>
+                <div class="fmInner">
+                    <input type="radio" name="sampleInput_radio_name11" id="sampleInput_radio11" checked readonly />
+                    <label for="sampleInput_radio11">라디오인풋11 checked readonly</label>
+                </div>
+            </div>
+            <!-- *****************************************  source end  ***************************************** -->
+        </section>
 
 
 
 
 
-        
+
+
+
+                
+    </main>
+    <!-- *****************************************   main end   ***************************************** -->
+    <!-- ************************************************************************************************ -->
+    
+    
+    <!-- ************************************************************************************************ -->
+    <!-- ***************************************** footer start ***************************************** -->
+    <footer class="footer">
+        <div class="footerInner">
+            <div class="groupLeft">
+                <dl class="info">
+                    <div><dt>회사명</dt><dd>하이엠솔루텍주식회사</dd></div>
+                    <div><dt>대표이사</dt><dd>유광열</dd></div>
+                    <div><dt>사업자등록번호</dt><dd>106-86-40809</dd></div>
+                    <div><dt>대표번호</dt><dd>02-6940-0000</dd></div>
+                    <div><dt>팩스</dt><dd>02-2675-3202~3</dd></div>
+                    <div><dt>주소</dt><dd>서울특별시 강서구 마곡중앙5로 18(KG스퀘어 빌딩) 10,11층</dd></div>
+                </dl>
+                <p class="copyright">Copyright &copy; himsolutek. All Right Reserved.</p>
+                <p class="law">본 사이트의 모든 컨텐츠는 저작권법의 보호를 받는 바, 무단 전재, 복사, 배포 등을 금합니다.</p>
+            </div>
+            <div class="contact">
+                <div class="fm_item ty-select">
+                    <div class="fmInner">
+                        <div class="select">
+                            <input type='text' id="workRegister_type" placeholder="외부 업무사이트" />
+                            
+                        </div>
+                        <div class="option">                  
+                            <ul>
+                                <li>외부 업무사이트1</li>
+                                <li>외부 업무사이트2</li>
+                                <li>외부 업무사이트3</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <strong>콜센터 연락처</strong>
+                <dl>
+                    <div>
+                        <dt>시스템에어컨</dt><dd>1544-7777</dd>
+                    </div>
+                    <div>
+                        <dt>유지보수&middot;VIP 전용</dt><dd>1544-8777</dd>
+                    </div>
+                    <div>
+                        <dt>칠러·심야보일러 CTCH&middot;FCU</dt><dd>1544-8777</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </footer>
+    <!-- *****************************************  footer end  ***************************************** -->
+    <!-- ************************************************************************************************ -->
+    
+
 
 
 </div>
